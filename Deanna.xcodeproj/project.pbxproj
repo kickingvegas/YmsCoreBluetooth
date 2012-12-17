@@ -1,0 +1,447 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D9718B46167F9F9F0001E42C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B45167F9F9F0001E42C /* UIKit.framework */; };
+		D9718B48167F9F9F0001E42C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B47167F9F9F0001E42C /* Foundation.framework */; };
+		D9718B4A167F9F9F0001E42C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B49167F9F9F0001E42C /* CoreGraphics.framework */; };
+		D9718B50167F9F9F0001E42C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9718B4E167F9F9F0001E42C /* InfoPlist.strings */; };
+		D9718B52167F9F9F0001E42C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718B51167F9F9F0001E42C /* main.m */; };
+		D9718B56167F9F9F0001E42C /* DTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718B55167F9F9F0001E42C /* DTAppDelegate.m */; };
+		D9718B58167F9FA00001E42C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D9718B57167F9F9F0001E42C /* Default.png */; };
+		D9718B5A167F9FA00001E42C /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9718B59167F9FA00001E42C /* Default@2x.png */; };
+		D9718B5C167F9FA00001E42C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9718B5B167F9FA00001E42C /* Default-568h@2x.png */; };
+		D9718B64167F9FA00001E42C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B63167F9FA00001E42C /* SenTestingKit.framework */; };
+		D9718B65167F9FA00001E42C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B45167F9F9F0001E42C /* UIKit.framework */; };
+		D9718B66167F9FA00001E42C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B47167F9F9F0001E42C /* Foundation.framework */; };
+		D9718B6E167F9FA00001E42C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9718B6C167F9FA00001E42C /* InfoPlist.strings */; };
+		D9718B71167F9FA00001E42C /* DeannaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718B70167F9FA00001E42C /* DeannaTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D9718B67167F9FA00001E42C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D9718B38167F9F9F0001E42C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D9718B40167F9F9F0001E42C;
+			remoteInfo = Deanna;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D9718B41167F9F9F0001E42C /* Deanna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Deanna.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9718B45167F9F9F0001E42C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D9718B47167F9F9F0001E42C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D9718B49167F9F9F0001E42C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D9718B4D167F9F9F0001E42C /* Deanna-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Deanna-Info.plist"; sourceTree = "<group>"; };
+		D9718B4F167F9F9F0001E42C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D9718B51167F9F9F0001E42C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D9718B53167F9F9F0001E42C /* Deanna-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Deanna-Prefix.pch"; sourceTree = "<group>"; };
+		D9718B54167F9F9F0001E42C /* DTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTAppDelegate.h; sourceTree = "<group>"; };
+		D9718B55167F9F9F0001E42C /* DTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DTAppDelegate.m; sourceTree = "<group>"; };
+		D9718B57167F9F9F0001E42C /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		D9718B59167F9FA00001E42C /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		D9718B5B167F9FA00001E42C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		D9718B62167F9FA00001E42C /* DeannaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeannaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D9718B63167F9FA00001E42C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		D9718B6B167F9FA00001E42C /* DeannaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DeannaTests-Info.plist"; sourceTree = "<group>"; };
+		D9718B6D167F9FA00001E42C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D9718B6F167F9FA00001E42C /* DeannaTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeannaTests.h; sourceTree = "<group>"; };
+		D9718B70167F9FA00001E42C /* DeannaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeannaTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D9718B3E167F9F9F0001E42C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9718B46167F9F9F0001E42C /* UIKit.framework in Frameworks */,
+				D9718B48167F9F9F0001E42C /* Foundation.framework in Frameworks */,
+				D9718B4A167F9F9F0001E42C /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9718B5E167F9FA00001E42C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9718B64167F9FA00001E42C /* SenTestingKit.framework in Frameworks */,
+				D9718B65167F9FA00001E42C /* UIKit.framework in Frameworks */,
+				D9718B66167F9FA00001E42C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D9718B36167F9F9F0001E42C = {
+			isa = PBXGroup;
+			children = (
+				D9718B4B167F9F9F0001E42C /* Deanna */,
+				D9718B69167F9FA00001E42C /* DeannaTests */,
+				D9718B44167F9F9F0001E42C /* Frameworks */,
+				D9718B42167F9F9F0001E42C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D9718B42167F9F9F0001E42C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D9718B41167F9F9F0001E42C /* Deanna.app */,
+				D9718B62167F9FA00001E42C /* DeannaTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D9718B44167F9F9F0001E42C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D9718B45167F9F9F0001E42C /* UIKit.framework */,
+				D9718B47167F9F9F0001E42C /* Foundation.framework */,
+				D9718B49167F9F9F0001E42C /* CoreGraphics.framework */,
+				D9718B63167F9FA00001E42C /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D9718B4B167F9F9F0001E42C /* Deanna */ = {
+			isa = PBXGroup;
+			children = (
+				D9718B54167F9F9F0001E42C /* DTAppDelegate.h */,
+				D9718B55167F9F9F0001E42C /* DTAppDelegate.m */,
+				D9718B4C167F9F9F0001E42C /* Supporting Files */,
+			);
+			path = Deanna;
+			sourceTree = "<group>";
+		};
+		D9718B4C167F9F9F0001E42C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D9718B4D167F9F9F0001E42C /* Deanna-Info.plist */,
+				D9718B4E167F9F9F0001E42C /* InfoPlist.strings */,
+				D9718B51167F9F9F0001E42C /* main.m */,
+				D9718B53167F9F9F0001E42C /* Deanna-Prefix.pch */,
+				D9718B57167F9F9F0001E42C /* Default.png */,
+				D9718B59167F9FA00001E42C /* Default@2x.png */,
+				D9718B5B167F9FA00001E42C /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D9718B69167F9FA00001E42C /* DeannaTests */ = {
+			isa = PBXGroup;
+			children = (
+				D9718B6F167F9FA00001E42C /* DeannaTests.h */,
+				D9718B70167F9FA00001E42C /* DeannaTests.m */,
+				D9718B6A167F9FA00001E42C /* Supporting Files */,
+			);
+			path = DeannaTests;
+			sourceTree = "<group>";
+		};
+		D9718B6A167F9FA00001E42C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D9718B6B167F9FA00001E42C /* DeannaTests-Info.plist */,
+				D9718B6C167F9FA00001E42C /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D9718B40167F9F9F0001E42C /* Deanna */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9718B74167F9FA00001E42C /* Build configuration list for PBXNativeTarget "Deanna" */;
+			buildPhases = (
+				D9718B3D167F9F9F0001E42C /* Sources */,
+				D9718B3E167F9F9F0001E42C /* Frameworks */,
+				D9718B3F167F9F9F0001E42C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Deanna;
+			productName = Deanna;
+			productReference = D9718B41167F9F9F0001E42C /* Deanna.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D9718B61167F9FA00001E42C /* DeannaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D9718B77167F9FA00001E42C /* Build configuration list for PBXNativeTarget "DeannaTests" */;
+			buildPhases = (
+				D9718B5D167F9FA00001E42C /* Sources */,
+				D9718B5E167F9FA00001E42C /* Frameworks */,
+				D9718B5F167F9FA00001E42C /* Resources */,
+				D9718B60167F9FA00001E42C /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D9718B68167F9FA00001E42C /* PBXTargetDependency */,
+			);
+			name = DeannaTests;
+			productName = DeannaTests;
+			productReference = D9718B62167F9FA00001E42C /* DeannaTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D9718B38167F9F9F0001E42C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = DT;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Yummy Melon Software";
+			};
+			buildConfigurationList = D9718B3B167F9F9F0001E42C /* Build configuration list for PBXProject "Deanna" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D9718B36167F9F9F0001E42C;
+			productRefGroup = D9718B42167F9F9F0001E42C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D9718B40167F9F9F0001E42C /* Deanna */,
+				D9718B61167F9FA00001E42C /* DeannaTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D9718B3F167F9F9F0001E42C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9718B50167F9F9F0001E42C /* InfoPlist.strings in Resources */,
+				D9718B58167F9FA00001E42C /* Default.png in Resources */,
+				D9718B5A167F9FA00001E42C /* Default@2x.png in Resources */,
+				D9718B5C167F9FA00001E42C /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9718B5F167F9FA00001E42C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9718B6E167F9FA00001E42C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D9718B60167F9FA00001E42C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D9718B3D167F9F9F0001E42C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9718B52167F9F9F0001E42C /* main.m in Sources */,
+				D9718B56167F9F9F0001E42C /* DTAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D9718B5D167F9FA00001E42C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D9718B71167F9FA00001E42C /* DeannaTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D9718B68167F9FA00001E42C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D9718B40167F9F9F0001E42C /* Deanna */;
+			targetProxy = D9718B67167F9FA00001E42C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D9718B4E167F9F9F0001E42C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D9718B4F167F9F9F0001E42C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D9718B6C167F9FA00001E42C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D9718B6D167F9FA00001E42C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D9718B72167F9FA00001E42C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D9718B73167F9FA00001E42C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D9718B75167F9FA00001E42C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Deanna/Deanna-Prefix.pch";
+				INFOPLIST_FILE = "Deanna/Deanna-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D9718B76167F9FA00001E42C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Deanna/Deanna-Prefix.pch";
+				INFOPLIST_FILE = "Deanna/Deanna-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D9718B78167F9FA00001E42C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Deanna.app/Deanna";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Deanna/Deanna-Prefix.pch";
+				INFOPLIST_FILE = "DeannaTests/DeannaTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		D9718B79167F9FA00001E42C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Deanna.app/Deanna";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Deanna/Deanna-Prefix.pch";
+				INFOPLIST_FILE = "DeannaTests/DeannaTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D9718B3B167F9F9F0001E42C /* Build configuration list for PBXProject "Deanna" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9718B72167F9FA00001E42C /* Debug */,
+				D9718B73167F9FA00001E42C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D9718B74167F9FA00001E42C /* Build configuration list for PBXNativeTarget "Deanna" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9718B75167F9FA00001E42C /* Debug */,
+				D9718B76167F9FA00001E42C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D9718B77167F9FA00001E42C /* Build configuration list for PBXNativeTarget "DeannaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9718B78167F9FA00001E42C /* Debug */,
+				D9718B79167F9FA00001E42C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D9718B38167F9F9F0001E42C /* Project object */;
+}
