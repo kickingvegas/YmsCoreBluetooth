@@ -9,6 +9,8 @@
 #ifndef Deanna_TISensorTag_h
 #define Deanna_TISensorTag_h
 
+#define kSensorTag_IDENTIFIER "9C4EEB7D-BE3A-E942-1539-CB7AD105CE5D"
+
 #define kSensorTag_BASE_ADDRESS_HI 0xF000000004514000
 #define kSensorTag_BASE_ADDRESS_LO 0xB000000000000000
 
@@ -40,5 +42,18 @@
 #define kSensorTag_GYROSCOPE_SERVICE       0xAA50
 #define kSensorTag_GYROSCOPE_DATA          0xAA51
 #define kSensorTag_GYROSCOPE_CONFIG        0xAA52
+
+typedef struct {
+    unsigned long long hi;
+    unsigned long long lo;
+} yms_u128_t;
+
+
+unsigned long long getfield64(unsigned long long s, int p, int n);
+yms_u128_t yms_u128_genOffset(int value);
+yms_u128_t yms_u128_genAddress(yms_u128_t *base, yms_u128_t *offset);
+yms_u128_t yms_u128_genAddressWithInt(yms_u128_t *base, int value);
+
+
 
 #endif
