@@ -7,6 +7,7 @@
 //
 
 #import "DTHomeViewController.h"
+#import "DTSensorTag.h"
 
 @interface DTHomeViewController ()
 
@@ -27,6 +28,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
+    //DTSensorTag *sensorService = [DTSensorTag sharedService];
+    
+    
+
 }
 
 - (void)didReceiveMemoryWarning
