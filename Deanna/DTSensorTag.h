@@ -7,7 +7,28 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreBluetooth/CoreBluetooth.h>
+#include "YMSCBUtils.h"
 
-@interface DTSensorTag : NSObject
+
+@class DTSensorConfig;
+
+
+@interface DTSensorTag : NSObject <CBPeripheralDelegate>
+
+
+@property (nonatomic, strong) NSMutableArray *peripherals;
+@property (nonatomic, strong) NSDictionary *sensorConfigs;
+@property (nonatomic, assign) yms_u128_t base;
+
+- (NSArray *)services;
+
+- (DTSensorConfig *)getConfigFromService:(CBService *)service;
+
+- (void)addPeripheralsObject:(id)object;
+
+- (void)removeObjectFromPeripheralsAtIndex:(NSUInteger)index;
+
 
 @end
+
