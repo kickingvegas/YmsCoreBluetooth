@@ -8,11 +8,16 @@
 
 #import "DTAppDelegate.h"
 #import "DTHomeViewController.h"
+#import "DTBTLEService.h"
+//#import "DTSensorTag.h"
 
 @implementation DTAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //DTSensorTag *sensorService = [DTSensorTag sharedService];
+    DTBTLEService *btleService = [DTBTLEService sharedService];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
