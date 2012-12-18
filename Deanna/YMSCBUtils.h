@@ -6,18 +6,14 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef struct {
-    unsigned long long hi;
-    unsigned long long lo;
-} yms_u128_t;
-
-
-unsigned long long getfield64(unsigned long long s, int p, int n);
-
+#include "TISensorTag.h"
 
 @interface YMSCBUtils : NSObject
 
 + (NSString *)genCBUUID:(yms_u128_t *)base withOffset:(yms_u128_t *)offset;
+
++ (NSString *)genCBUUID:(yms_u128_t *)base withIntOffset:(int)addrOffset;
+
+
 
 @end

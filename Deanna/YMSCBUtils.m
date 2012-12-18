@@ -8,36 +8,34 @@
 #import "YMSCBUtils.h"
 
 
-unsigned long long getfield64(unsigned long long s, int p, int n) {
-    unsigned long long d = s;
-    
-    d = s << (64 - (p+n));
-    d = d >> (64 - n);
-    
-    return d;
-}
-
 @implementation YMSCBUtils
 
 
 + (NSString *)genCBUUID:(yms_u128_t *)base withOffset:(yms_u128_t *)offset {
     NSString *result;
     
-    
-    yms_u128_t tempVal;
-    
-    tempVal.hi = (*base).hi | (*offset).hi;
-    tempVal.lo = (*base).lo | (*offset).lo;
+    yms_u128_t address = yms_u128_genAddress(base, offset);
     
     result = [NSString stringWithFormat:@"%08llx-%04llx-%04llx-%04llx-%012llx" ,
-              getfield64(tempVal.hi, 32, 32),
-              getfield64(tempVal.hi, 16, 16),
-              getfield64(tempVal.hi, 0, 16),
-              getfield64(tempVal.lo, 48, 16),
-              getfield64(tempVal.lo, 0, 48)
+              getfield64(address.hi, 32, 32),
+              getfield64(address.hi, 16, 16),
+              getfield64(address.hi, 0, 16),
+              getfield64(address.lo, 48, 16),
+              getfield64(address.lo, 0, 48)
               ];
 
     return result;
+}
+
++ (NSString *)genCBUUID:(yms_u128_t *)base withIntOffset:(int)addrOffset {
+    NSString *result;
+    
+    yms_u128_t offset = yms_u128_genOffset(addrOffset);
+    
+    result = [YMSCBUtils genCBUUID:base withOffset:&offset];
+    
+    return result;
+    
 }
 
 
