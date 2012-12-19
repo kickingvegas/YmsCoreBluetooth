@@ -10,7 +10,5 @@
 
 @interface DTTemperatureBTService : DTSensorBTService
 
-- (id)initWithName:(NSString *)oName;
-
 
 @end
