@@ -91,23 +91,11 @@
 
 // 9
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error {
-    
     DTSensorBTService *btService = [self findService:service];
-    
     [btService syncCharacteristics:service.characteristics];
-    
-    DTCharacteristic *dtc = btService.characteristicMap[@"data"];
-    
-    [peripheral setNotifyValue:YES forCharacteristic:dtc.characteristic];
-    
-    dtc = btService.characteristicMap[@"config"];
-
-    int8_t payload = 0x1;
-    NSData *data = [NSData dataWithBytes:&payload length:1];
-
-    [peripheral writeValue:data forCharacteristic:dtc.characteristic type:CBCharacteristicWriteWithResponse];
-    
- }
+    [btService setNotifyValue:YES forCharacteristicName:@"data"];
+    [btService writeByte:0x1 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
+}
     
 
 // 11
@@ -117,58 +105,69 @@
     DTSensorBTService *btService = [self findService:characteristic.service];
     DTCharacteristic *dtc = [btService findCharacteristic:characteristic];
 
-    
     if ([btService.name isEqualToString:@"temperature"]) {
 
         if ([dtc.name isEqualToString:@"data"]) {
-            NSData *data = characteristic.value;
-            char val[data.length];
-            [data getBytes:&val length:data.length];
+            DTTemperatureBTService *ts = (DTTemperatureBTService *)btService;
             
+            [ts updateTemperature];
             
-            int16_t amb = ((val[2] & 0xff)| ((val[3] << 8) & 0xff00));
-            
-            int16_t objT = ((val[0] & 0xff)| ((val[1] << 8) & 0xff00));
-            
-            NSLog(@"didUpdateValue: %@ data: amb: %d obj: %d", btService.name, amb, objT);
-
+//            NSLog(@"didUpdateValue: %@ data: amb: %@ obj: %@",
+//                  ts.name,
+//                  ts.ambientTemp,
+//                  ts.objectTemp);
         }
     }
                              
     else if ([btService.name isEqualToString:@"accelerometer"]) {
-        
-        
         if ([dtc.name isEqualToString:@"data"]) {
             
-            NSData *data = characteristic.value;
-            char val[data.length];
-            [data getBytes:&val length:data.length];
+            DTAccelerometerBTService *as = (DTAccelerometerBTService *)btService;
             
-            int16_t x = val[0];
-            int16_t y = val[1];
-            int16_t z = val[2];
+            [as updateAcceleration];
             
-            NSLog(@"didUpdateValue: %@ data: %d %d %d", btService.name, x, y, z);
-
+//            NSLog(@"didUpdateValue: %@ data: (x, y, z) : (%@, %@, %@)",
+//                  as.name,
+//                  as.x,
+//                  as.y,
+//                  as.z);
         }
     }
 }
 
- 
     
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {
     
 }
     
+
+
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+    
+}
+    
+
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+    
+}
+
+
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error {
+    
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+    
+    DTSensorBTService *btService = [self findService:characteristic.service];
+    DTCharacteristic *dtc = [btService findCharacteristic:characteristic];
+    
+    NSLog(@"hey I wrote this: %@ %@", btService.name, dtc.name);
     
     
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didWriteValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error {
     
-    
-
-
-
-
-
-
+}
 
 @end
