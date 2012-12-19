@@ -12,11 +12,9 @@
 @implementation DTTemperatureBTService
 
 - (id)initWithName:(NSString *)oName {
-    self = [super init];
+    self = [super initWithName:oName];
     
     if (self) {
-        self.name = oName;
-        
         [self addCharacteristic:@"service" withOffset:kSensorTag_TEMPERATURE_SERVICE];
         [self addCharacteristic:@"data" withOffset:kSensorTag_TEMPERATURE_DATA];
         [self addCharacteristic:@"config" withOffset:kSensorTag_TEMPERATURE_CONFIG];
