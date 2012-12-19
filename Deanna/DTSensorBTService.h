@@ -22,6 +22,7 @@
 // Contains DTCharacteristic values
 @property (nonatomic, strong) NSMutableDictionary *characteristicMap;
 
+- (id)initWithName:(NSString *)oName;
 
 - (void)addCharacteristic:(NSString *)cname withOffset:(int)addrOffset;
 

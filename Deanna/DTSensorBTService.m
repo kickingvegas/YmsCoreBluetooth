@@ -27,6 +27,15 @@
     return self;
 }
 
+- (id)initWithName:(NSString *)oName {
+    // THIS METHOD MUST BE OVERRIDDEN TO CONFIGURE ADDRESS MAP
+    self = [super init];
+    if (self) {
+        _name = oName;
+    }
+    return self;
+}
+
 - (void)addCharacteristic:(NSString *)cname withOffset:(int)addrOffset {
     DTCharacteristic *dtc;
     
