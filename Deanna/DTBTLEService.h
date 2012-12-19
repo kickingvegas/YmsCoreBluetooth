@@ -14,8 +14,9 @@
 @interface DTBTLEService : NSObject <CBCentralManagerDelegate>
 
 @property (nonatomic, strong) CBCentralManager *manager;
-//@property (nonatomic, strong) NSMutableArray *peripherals;
 @property (nonatomic, strong) DTSensorTag *sensorTag;
+@property (nonatomic, assign) BOOL sensorTagEnabled;
+
 
 + (DTBTLEService *)sharedService;
 
