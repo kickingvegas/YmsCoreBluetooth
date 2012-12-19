@@ -6,15 +6,9 @@
 //  Copyright (c) 2012 Yummy Melon Software. All rights reserved.
 //
 
-#include "TISensorTag.h"
-
 #import "DTSensorTag.h"
-#import "YMSCBUtils.h"
-//#import "DTSensorConfig.h"
-//#import "DTTemperatureConfig.h"
-//#import "DTAccelerometerConfig.h"
-
 #import "DTTemperatureBTService.h"
+#import "DTAccelerometerBTService.h"
 #import "DTCharacteristic.h"
 
 
@@ -35,32 +29,14 @@
         DTTemperatureBTService *ts = [[DTTemperatureBTService alloc] initWithName:@"temperature"];
         tempDict[ts.name] = ts;
         
+        DTAccelerometerBTService *as = [[DTAccelerometerBTService alloc] initWithName:@"accelerometer"];
+        tempDict[as.name] = as;
+        
         _sensorServices = tempDict;
     }
     
     return self;
 }
-
-
-//- (void)addPeripheralsObject:(id)object {
-//    [self.peripherals addObject:object];
-//    
-//    for (id key in self.sensorConfigs) {
-//        DTSensorConfig *config = self.sensorConfigs[key];
-//        config.peripheral = object;
-//    }
-//}
-//
-//
-//- (void)removeObjectFromPeripheralsAtIndex:(NSUInteger)index {
-//    for (id key in self.sensorConfigs) {
-//        DTSensorConfig *config = self.sensorConfigs[key];
-//        config.peripheral = nil;
-//    }
-//    
-//    [self.peripherals removeObjectAtIndex:index];
-//}
-
 
 
 - (NSArray *)services {
@@ -178,64 +154,7 @@
     }
 }
 
-    //12
-    //[peripheral setNotifyValue: forCharacteristic:];
-    
-    
-    
-//    for (NSString *key in self.sensorConfigs) {
-//        DTSensorConfig *sensor = (DTSensorConfig *)[self.sensorConfigs objectForKey:key];
-//        CBService *service = characteristic.service;
-//
-//        if ([sensor isMatchToService:service]) {
-//            
-//            if ([key isEqualToString:@"temperature"]) {
-//                
-//                if ([sensor isMatchToCharacteristic:characteristic withKey:@"data"]) {
-//                    
-//                    NSData *data = characteristic.value;
-//                    char val[data.length];
-//                    [data getBytes:&val length:data.length];
-//                    
-//                    
-//                    
-//                    int16_t amb = ((val[2] & 0xff)| ((val[3] << 8) & 0xff00));
-//
-//                    int16_t objT = ((val[0] & 0xff)| ((val[1] << 8) & 0xff00));
-//
-//
-//                    NSLog(@"didUpdateValue: %@ data: amb: %d obj: %d", sensor.name, amb, objT);
-//                }
-//                
-//            }
-//            
-//            else if ([key isEqualToString:@"accelerometer"]) {
-//                //NSLog(@"didUpdateValue: accelerometer");
-//                
-//                if ([sensor isMatchToCharacteristic:characteristic withKey:@"data"]) {
-//                    
-//                    NSData *data = characteristic.value;
-//                    char val[data.length];
-//                    [data getBytes:&val length:data.length];
-//                    
-//                    int16_t x = val[0];
-//                    int16_t y = val[1];
-//                    int16_t z = val[2];
-//                    
-//                    
-//                    NSLog(@"didUpdateValue: %@ data: %d %d %d", sensor.name, x, y, z);
-//                }
-//
-//            }
-//            
-//        }
-//        
-//    }
-//}
-
-
-
-
+ 
     
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {
     

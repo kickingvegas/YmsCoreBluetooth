@@ -10,15 +10,9 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #include "YMSCBUtils.h"
 
-
-//@class DTSensorConfig;
-
 @class DTSensorBTService;
 
-
-
 @interface DTSensorTag : NSObject <CBPeripheralDelegate>
-
 
 @property (nonatomic, strong) NSMutableArray *peripherals;
 @property (nonatomic, strong) NSDictionary *sensorServices;
@@ -26,16 +20,7 @@
 
 - (NSArray *)services;
 
-//- (DTSensorConfig *)getConfigFromService:(CBService *)service;
-
-//- (void)addPeripheralsObject:(id)object;
-//
-//- (void)removeObjectFromPeripheralsAtIndex:(NSUInteger)index;
-
-
 - (DTSensorBTService *)findService:(CBService *)service;
-
-
 
 @end
 
