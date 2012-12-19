@@ -11,23 +11,30 @@
 #include "YMSCBUtils.h"
 
 
-@class DTSensorConfig;
+//@class DTSensorConfig;
+
+@class DTSensorBTService;
+
 
 
 @interface DTSensorTag : NSObject <CBPeripheralDelegate>
 
 
 @property (nonatomic, strong) NSMutableArray *peripherals;
-@property (nonatomic, strong) NSDictionary *sensorConfigs;
+@property (nonatomic, strong) NSDictionary *sensorServices;
 @property (nonatomic, assign) yms_u128_t base;
 
 - (NSArray *)services;
 
-- (DTSensorConfig *)getConfigFromService:(CBService *)service;
+//- (DTSensorConfig *)getConfigFromService:(CBService *)service;
 
-- (void)addPeripheralsObject:(id)object;
+//- (void)addPeripheralsObject:(id)object;
+//
+//- (void)removeObjectFromPeripheralsAtIndex:(NSUInteger)index;
 
-- (void)removeObjectFromPeripheralsAtIndex:(NSUInteger)index;
+
+- (DTSensorBTService *)findService:(CBService *)service;
+
 
 
 @end

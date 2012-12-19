@@ -10,9 +10,12 @@
 
 #import "DTSensorTag.h"
 #import "YMSCBUtils.h"
-#import "DTSensorConfig.h"
-#import "DTTemperatureConfig.h"
-#import "DTAccelerometerConfig.h"
+//#import "DTSensorConfig.h"
+//#import "DTTemperatureConfig.h"
+//#import "DTAccelerometerConfig.h"
+
+#import "DTTemperatureBTService.h"
+#import "DTCharacteristic.h"
 
 
 @implementation DTSensorTag
@@ -29,38 +32,34 @@
         
         NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
         
-        DTTemperatureConfig *ts = [[DTTemperatureConfig alloc] initWithBase:&_base];
+        DTTemperatureBTService *ts = [[DTTemperatureBTService alloc] initWithName:@"temperature"];
         tempDict[ts.name] = ts;
         
-        DTAccelerometerConfig *as = [[DTAccelerometerConfig alloc] initWithBase:&_base];
-        tempDict[as.name] = as;
-    
-        
-        _sensorConfigs = tempDict;
+        _sensorServices = tempDict;
     }
     
     return self;
 }
 
 
-- (void)addPeripheralsObject:(id)object {
-    [self.peripherals addObject:object];
-    
-    for (id key in self.sensorConfigs) {
-        DTSensorConfig *config = self.sensorConfigs[key];
-        config.peripheral = object;
-    }
-}
-
-
-- (void)removeObjectFromPeripheralsAtIndex:(NSUInteger)index {
-    for (id key in self.sensorConfigs) {
-        DTSensorConfig *config = self.sensorConfigs[key];
-        config.peripheral = nil;
-    }
-    
-    [self.peripherals removeObjectAtIndex:index];
-}
+//- (void)addPeripheralsObject:(id)object {
+//    [self.peripherals addObject:object];
+//    
+//    for (id key in self.sensorConfigs) {
+//        DTSensorConfig *config = self.sensorConfigs[key];
+//        config.peripheral = object;
+//    }
+//}
+//
+//
+//- (void)removeObjectFromPeripheralsAtIndex:(NSUInteger)index {
+//    for (id key in self.sensorConfigs) {
+//        DTSensorConfig *config = self.sensorConfigs[key];
+//        config.peripheral = nil;
+//    }
+//    
+//    [self.peripherals removeObjectAtIndex:index];
+//}
 
 
 
@@ -69,218 +68,172 @@
     
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     
-    for (NSString *key in self.sensorConfigs) {
-        DTSensorConfig *config = [self.sensorConfigs objectForKey:key];
-        [tempArray addObject:[CBUUID UUIDWithString:config.service]];
+    for (NSString *key in self.sensorServices) {
+        DTSensorBTService *service = self.sensorServices[key];
+        DTCharacteristic *ct = service.characteristicMap[@"service"];
+        
+        [tempArray addObject:ct.uuid];
     }
     
     result = tempArray;
-    
     return result;
 }
 
-- (DTSensorConfig *)getConfigFromService:(CBService *)service {
-    DTSensorConfig *sensor;
+- (DTSensorBTService *)findService:(CBService *)service {
+    DTSensorBTService *result;
     
-    for (NSString *key in self.sensorConfigs) {
-        sensor = (DTSensorConfig *)[self.sensorConfigs objectForKey:key];
-        if ([sensor isMatchToService:service])
+    for (NSString *key in self.sensorServices) {
+        DTSensorBTService *btService = self.sensorServices[key];
+        DTCharacteristic *ct = btService.characteristicMap[@"service"];
+        
+        if ([service.UUID isEqual:ct.uuid]) {
+            result = btService;
             break;
+        }
+        
     }
-    
-    return sensor;
+    return result;
 }
+
 
 
 // 7
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error {
-    // 8
-    for (CBService *svc in peripheral.services) {
-        DTSensorConfig *config = [self getConfigFromService:svc];
-        [peripheral discoverCharacteristics:[config genCharacteristics] forService:svc];
+    
+    for (CBService *service in peripheral.services) {
+        DTSensorBTService *btService = [self findService:service];
+        
+        if (btService != nil) {
+            if (btService.service == nil) {
+                btService.service = service;
+            }
+        }
+        [peripheral discoverCharacteristics:[btService characteristics] forService:service];
     }
 }
 
 
 // 9
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error {
-    // 10
-    //[peripheral readValueForCharacteristic:];
     
-//    DTSensorConfig *config = [self getConfigFromService:service];
-//    
-//    for (CBCharacteristic *ct in service.characteristics) {
-//
-//        for (CBUUID *configct in [config genCharacteristics]) {
-//            if ([ct.UUID isEqual:configct]) {
-//                [peripheral readValueForCharacteristic:ct];
-//            }
-//        }
-//        
-//        
-//        
-//        for (NSString *key in [config genCharacteristics]) {
-//            if ([config isMatchToCharacteristic:ct withKey:key]) {
-//                [peripheral readValueForCharacteristic:ct];
-//            }
-//            
-//            if ([key isEqualToString:@"data"]) {
-//                [peripheral setNotifyValue:YES forCharacteristic:ct];
-//            }
-//            
-//            else if ([key isEqualToString:@"config"]) {
-//                int8_t payload = 0x1;
-//                NSData *data = [NSData dataWithBytes:&payload length:1];
-//                
-//                [peripheral writeValue:data forCharacteristic:ct type:CBCharacteristicWriteWithResponse];
-//
-//            }
-//        }
-//    }
+    DTSensorBTService *btService = [self findService:service];
     
+    [btService syncCharacteristics:service.characteristics];
     
-    for (id key in self.sensorConfigs) {
-        DTSensorConfig *sensor = (DTSensorConfig *)[self.sensorConfigs objectForKey:key];
-        if ([sensor isMatchToService:service]) {
-            
-            for (CBCharacteristic *c in service.characteristics) {
-                
-                [peripheral readValueForCharacteristic:c];
-                
-                if ([sensor isMatchToCharacteristic:c withKey:@"config"]) {
-                    int8_t payload = 0x1;
-                    NSData *data = [NSData dataWithBytes:&payload length:1];
-                    
-                    [peripheral writeValue:data forCharacteristic:c type:CBCharacteristicWriteWithResponse];
-                }
-                
-                
-                else if ([sensor isMatchToCharacteristic:c withKey:@"data"]) {
-                    [peripheral setNotifyValue:YES forCharacteristic:c];
-                }
-            }
-            
-        }
-        
-    }
-}
+    DTCharacteristic *dtc = btService.characteristicMap[@"data"];
+    
+    [peripheral setNotifyValue:YES forCharacteristic:dtc.characteristic];
+    
+    dtc = btService.characteristicMap[@"config"];
+
+    int8_t payload = 0x1;
+    NSData *data = [NSData dataWithBytes:&payload length:1];
+
+    [peripheral writeValue:data forCharacteristic:dtc.characteristic type:CBCharacteristicWriteWithResponse];
+    
+ }
     
 
 // 11
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+    
+    
+    DTSensorBTService *btService = [self findService:characteristic.service];
+    DTCharacteristic *dtc = [btService findCharacteristic:characteristic];
+
+    
+    if ([btService.name isEqualToString:@"temperature"]) {
+
+        if ([dtc.name isEqualToString:@"data"]) {
+            NSData *data = characteristic.value;
+            char val[data.length];
+            [data getBytes:&val length:data.length];
+            
+            
+            int16_t amb = ((val[2] & 0xff)| ((val[3] << 8) & 0xff00));
+            
+            int16_t objT = ((val[0] & 0xff)| ((val[1] << 8) & 0xff00));
+            
+            NSLog(@"didUpdateValue: %@ data: amb: %d obj: %d", btService.name, amb, objT);
+
+        }
+    }
+                             
+    else if ([btService.name isEqualToString:@"accelerometer"]) {
+        
+        
+        if ([dtc.name isEqualToString:@"data"]) {
+            
+            NSData *data = characteristic.value;
+            char val[data.length];
+            [data getBytes:&val length:data.length];
+            
+            int16_t x = val[0];
+            int16_t y = val[1];
+            int16_t z = val[2];
+            
+            NSLog(@"didUpdateValue: %@ data: %d %d %d", btService.name, x, y, z);
+
+        }
+    }
+}
+
     //12
     //[peripheral setNotifyValue: forCharacteristic:];
     
     
     
-    for (NSString *key in self.sensorConfigs) {
-        DTSensorConfig *sensor = (DTSensorConfig *)[self.sensorConfigs objectForKey:key];
-        CBService *service = characteristic.service;
-
-        if ([sensor isMatchToService:service]) {
-            
-            if ([key isEqualToString:@"temperature"]) {
-                
-                if ([sensor isMatchToCharacteristic:characteristic withKey:@"data"]) {
-                    
-                    NSData *data = characteristic.value;
-                    char val[data.length];
-                    [data getBytes:&val length:data.length];
-                    
-                    
-                    
-                    int16_t amb = ((val[2] & 0xff)| ((val[3] << 8) & 0xff00));
-
-                    int16_t objT = ((val[0] & 0xff)| ((val[1] << 8) & 0xff00));
-
-
-                    NSLog(@"didUpdateValue: %@ data: amb: %d obj: %d", sensor.name, amb, objT);
-                }
-                
-            }
-            
-            else if ([key isEqualToString:@"accelerometer"]) {
-                //NSLog(@"didUpdateValue: accelerometer");
-                
-                if ([sensor isMatchToCharacteristic:characteristic withKey:@"data"]) {
-                    
-                    NSData *data = characteristic.value;
-                    char val[data.length];
-                    [data getBytes:&val length:data.length];
-                    
-                    int16_t x = val[0];
-                    int16_t y = val[1];
-                    int16_t z = val[2];
-                    
-                    
-                    NSLog(@"didUpdateValue: %@ data: %d %d %d", sensor.name, x, y, z);
-                }
-
-            }
-            
-        }
-        
-    }
-}
-
-    
-
-//    for (id key in self.sensorConfigs) {
+//    for (NSString *key in self.sensorConfigs) {
 //        DTSensorConfig *sensor = (DTSensorConfig *)[self.sensorConfigs objectForKey:key];
-//        
-//        if ([sensor.name isEqualToString:@"temperature"]) {
-//            if ([characteristic.UUID isEqual:[sensor genCBUUID:@"config"]]) {
-//                NSData *data = characteristic.value;
-//                char val[data.length];
-//                [data getBytes:&val length:data.length];
-//                int8_t foo = val[0];
+//        CBService *service = characteristic.service;
+//
+//        if ([sensor isMatchToService:service]) {
+//            
+//            if ([key isEqualToString:@"temperature"]) {
 //                
-//                NSLog(@"didUpdateValue: %@ config: %d", sensor.name, foo);
-//                
-//                if (foo == 0) {
-//                    int8_t newData = 0x1;
-//                    [peripheral writeValue:[NSData dataWithBytes:&newData length:1] forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
+//                if ([sensor isMatchToCharacteristic:characteristic withKey:@"data"]) {
+//                    
+//                    NSData *data = characteristic.value;
+//                    char val[data.length];
+//                    [data getBytes:&val length:data.length];
+//                    
+//                    
+//                    
+//                    int16_t amb = ((val[2] & 0xff)| ((val[3] << 8) & 0xff00));
+//
+//                    int16_t objT = ((val[0] & 0xff)| ((val[1] << 8) & 0xff00));
+//
+//
+//                    NSLog(@"didUpdateValue: %@ data: amb: %d obj: %d", sensor.name, amb, objT);
 //                }
-//                
-//                
-//                     
-//                
-//                
 //                
 //            }
 //            
-//            else if ([characteristic.UUID isEqual:[sensor genCBUUID:@"data"]]) {
-//                NSData *data = characteristic.value;
-//                char val[data.length];
-//                [data getBytes:&val length:data.length];
+//            else if ([key isEqualToString:@"accelerometer"]) {
+//                //NSLog(@"didUpdateValue: accelerometer");
 //                
-//                int16_t foo;
-//                
-//                foo = ((val[2] & 0xff)| ((val[3] << 8) & 0xff00));
-//                
-//                NSLog(@"didUpdateValue: %@ data: %d", sensor.name, foo);
-//                
-//            }
+//                if ([sensor isMatchToCharacteristic:characteristic withKey:@"data"]) {
+//                    
+//                    NSData *data = characteristic.value;
+//                    char val[data.length];
+//                    [data getBytes:&val length:data.length];
+//                    
+//                    int16_t x = val[0];
+//                    int16_t y = val[1];
+//                    int16_t z = val[2];
+//                    
+//                    
+//                    NSLog(@"didUpdateValue: %@ data: %d %d %d", sensor.name, x, y, z);
+//                }
 //
-//            break;
-//
-//        }
-    
-        //        for (CBUUID *cbuuid in [sensor genCharacteristics]) {
-//            if ([characteristic.UUID isEqual:cbuuid]) {
-//                
-//                NSData *data = characteristic.value;
-//                
-//                char val[data.length];
-//                
-//                [data getBytes:&val length:data.length];
-//                
-//                NSLog(@"didUpdateValue: %@: %s", sensor.name, val);
-//                breakOuter = YES;
-//                break;
 //            }
+//            
 //        }
-        
+//        
+//    }
+//}
+
+
 
 
     
