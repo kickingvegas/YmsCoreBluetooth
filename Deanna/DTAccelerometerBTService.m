@@ -7,6 +7,7 @@
 //
 
 #import "DTAccelerometerBTService.h"
+#import "DTCharacteristic.h"
 
 @implementation DTAccelerometerBTService
 
@@ -22,5 +23,36 @@
     }
     return self;
 }
+
+- (NSArray *)characteristics {
+    
+    NSArray *result = @[
+    [(DTCharacteristic *)(self.characteristicMap[@"data"]) uuid],
+    [(DTCharacteristic *)(self.characteristicMap[@"config"]) uuid],
+    [(DTCharacteristic *)(self.characteristicMap[@"period"]) uuid]
+    ];
+    
+    return result;
+}
+
+
+- (void)updateAcceleration {
+    DTCharacteristic *dtc = self.characteristicMap[@"data"];
+    NSData *data = dtc.characteristic.value;
+    
+    char val[data.length];
+    [data getBytes:&val length:data.length];
+    
+    int16_t xx = val[0];
+    int16_t yy = val[1];
+    int16_t zz = val[2];
+    
+    
+    self.x = [NSNumber numberWithInt:xx];
+    self.y = [NSNumber numberWithInt:yy];
+    self.z = [NSNumber numberWithInt:zz];
+}
+
+
 
 @end

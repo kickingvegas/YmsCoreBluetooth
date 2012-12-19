@@ -10,4 +10,10 @@
 
 @interface DTAccelerometerBTService : DTSensorBTService
 
+@property (nonatomic, strong) NSNumber *x;
+@property (nonatomic, strong) NSNumber *y;
+@property (nonatomic, strong) NSNumber *z;
+
+- (void)updateAcceleration;
+
 @end

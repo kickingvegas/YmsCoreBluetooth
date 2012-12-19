@@ -11,4 +11,11 @@
 @interface DTTemperatureBTService : DTSensorBTService
 
 
+@property (nonatomic, strong) NSNumber *ambientTemp;
+@property (nonatomic, strong) NSNumber *objectTemp;
+
+
+- (void)updateTemperature;
+
+
 @end
