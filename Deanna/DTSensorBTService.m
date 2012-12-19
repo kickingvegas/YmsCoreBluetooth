@@ -28,10 +28,10 @@
 }
 
 - (id)initWithName:(NSString *)oName {
-    // THIS METHOD MUST BE OVERRIDDEN TO CONFIGURE ADDRESS MAP
-    self = [super init];
+    // Classes which inherit from this class must invoke this method via super.
+    self = [self init];
     if (self) {
-        _name = oName;
+        self.name = oName;
     }
     return self;
 }
