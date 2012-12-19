@@ -39,4 +39,24 @@
 }
 
 
++ (CBUUID *)createCBUUID:(yms_u128_t *)base withIntOffset:(int)addrOffset {
+    CBUUID *result;
+    
+    NSString *uuidString = [YMSCBUtils genCBUUID:base withIntOffset:addrOffset];
+    
+    result = [CBUUID UUIDWithString:uuidString];
+    return result;
+}
+
+
++ (CBUUID *)createCBUUID:(yms_u128_t *)base withOffset:(yms_u128_t *)offset {
+    CBUUID *result;
+    
+    NSString *uuidString = [YMSCBUtils genCBUUID:base withOffset:offset];
+    
+    result = [CBUUID UUIDWithString:uuidString];
+    return result;
+}
+
+
 @end
