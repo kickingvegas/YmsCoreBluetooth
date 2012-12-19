@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 Yummy Melon Software. All rights reserved.
 //
 #include "TISensorTag.h"
-
 #import "DTBTLEService.h"
 #import "DTSensorTag.h"
 
@@ -33,6 +32,21 @@ static DTBTLEService *sharedBTLEService;
     
     return self;
 }
+
+
+- (BOOL)isSensorTagPeripheral:(CBPeripheral *)peripheral {
+    BOOL result = NO;
+    
+    CBUUID *test = [CBUUID UUIDWithString:@"" kSensorTag_IDENTIFIER];
+    CBUUID *control = [CBUUID UUIDWithCFUUID:peripheral.UUID];
+    
+    result = [test isEqual:control];
+    return result;
+}
+
+
+
+#pragma mark CBCentralManagerDelegate Protocol Methods
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
     switch (central.state) {
@@ -84,6 +98,8 @@ static DTBTLEService *sharedBTLEService;
         [central connectPeripheral:peripheral options:nil];
         
         [self.manager stopScan];
+        
+        self.sensorTagEnabled = YES;
     }
 
     
@@ -103,16 +119,27 @@ static DTBTLEService *sharedBTLEService;
 }
 
 
-- (BOOL)isSensorTagPeripheral:(CBPeripheral *)peripheral {
-    BOOL result = NO;
+
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
+    NSLog(@"centralManager didDisconnectePeripheral");
     
-    CBUUID *test = [CBUUID UUIDWithString:@"" kSensorTag_IDENTIFIER];
-    CBUUID *control = [CBUUID UUIDWithCFUUID:peripheral.UUID];
+    [self.manager scanForPeripheralsWithServices:nil options:nil];
     
-    result = [test isEqual:control];
-    return result;
+    
 }
 
+- (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
+    NSLog(@"centralManager didFailToConnectPeripheral");
+}
+
+- (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals {
+    NSLog(@"centralManager didRetrieveConnectedPeripheral");
+    
+}
+
+- (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals {
+    NSLog(@"centralManager didRetrievePeripherals");
+}
 
 
 @end
