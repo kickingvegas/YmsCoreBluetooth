@@ -88,4 +88,44 @@
     return result;
 }
 
+
+- (void)setNotifyValue:(BOOL)notifyValue forCharacteristic:(CBCharacteristic *)characteristic {
+    [self.service.peripheral setNotifyValue:notifyValue
+                          forCharacteristic:characteristic];
+    
+}
+
+- (void)setNotifyValue:(BOOL)notifyValue forCharacteristicName:(NSString *)cname {
+    DTCharacteristic *dtc = self.characteristicMap[cname];
+    [self.service.peripheral setNotifyValue:notifyValue forCharacteristic:dtc.characteristic];
+}
+
+
+- (void)writeValue:(NSData *)data forCharacteristic:(CBCharacteristic *)characteristic type:(CBCharacteristicWriteType)type {
+    
+    [self.service.peripheral writeValue:data forCharacteristic:characteristic type:type];
+}
+
+- (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname type:(CBCharacteristicWriteType)type {
+    DTCharacteristic *dtc = self.characteristicMap[cname];
+    [self.service.peripheral writeValue:data forCharacteristic:dtc.characteristic type:type];
+}
+
+- (void)writeByte:(int8_t)val forCharacteristicName:(NSString *)cname type:(CBCharacteristicWriteType)type {
+    DTCharacteristic *dtc = self.characteristicMap[cname];
+    NSData *data = [NSData dataWithBytes:&val length:1];
+    [self.service.peripheral writeValue:data forCharacteristic:dtc.characteristic type:type];
+}
+
+- (void)readValueForCharacteristic:(CBCharacteristic *)characteristic {
+    [self.service.peripheral readValueForCharacteristic:characteristic];
+    
+}
+
+- (void)readValueForCharacteristicName:(NSString *)cname {
+    DTCharacteristic *dtc = self.characteristicMap[cname];
+    [self.service.peripheral readValueForCharacteristic:dtc.characteristic];
+}
+
+
 @end
