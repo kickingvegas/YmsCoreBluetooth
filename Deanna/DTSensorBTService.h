@@ -32,4 +32,23 @@
 
 - (DTCharacteristic *)findCharacteristic:(CBCharacteristic *)ct;
 
+
+- (void)setNotifyValue:(BOOL)notifyValue forCharacteristic:(CBCharacteristic *)characteristic;
+
+- (void)setNotifyValue:(BOOL)notifyValue forCharacteristicName:(NSString *)cname;
+
+
+- (void)writeValue:(NSData *)data forCharacteristic:(CBCharacteristic *)characteristic type:(CBCharacteristicWriteType)type;
+
+- (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname type:(CBCharacteristicWriteType)type;
+
+- (void)writeByte:(int8_t)val forCharacteristicName:(NSString *)cname type:(CBCharacteristicWriteType)type;
+
+- (void)readValueForCharacteristic:(CBCharacteristic *)characteristic;
+- (void)readValueForCharacteristicName:(NSString *)cname;
+
+
+
+
+
 @end
