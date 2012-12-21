@@ -93,8 +93,21 @@
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error {
     DTSensorBTService *btService = [self findService:service];
     [btService syncCharacteristics:service.characteristics];
-    [btService setNotifyValue:YES forCharacteristicName:@"data"];
-    [btService writeByte:0x1 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
+    
+    //DTCharacteristic *dataCharacteristic = btService.characteristicMap[@"data"];
+    //CBCharacteristic *dataCharacteristic = (CBCharacteristic *)(btService.characteristicMap[@"data"]);
+    //if (!dataCharacteristic.isNotifying) {
+        //[btService setNotifyValue:YES forCharacteristicName:@"data"];
+    //}
+    
+    
+    // Test if service is enabled
+    //[btService readValueForCharacteristicName:@"config"];
+    
+
+    //[btService writeByte:0x1 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
+    
+    [btService requestConfig];
 }
     
 
@@ -104,6 +117,21 @@
     
     DTSensorBTService *btService = [self findService:characteristic.service];
     DTCharacteristic *dtc = [btService findCharacteristic:characteristic];
+    
+    if ([dtc.name isEqualToString:@"config"]) {
+        NSData *data = [btService responseConfig];
+
+        if ([YMSCBUtils dataToByte:data] == 0x1) {
+            btService.isEnabled = YES;
+        }
+        else {
+            btService.isEnabled = NO;
+        }
+        
+
+        
+    }
+    
 
     if ([btService.name isEqualToString:@"temperature"]) {
 
