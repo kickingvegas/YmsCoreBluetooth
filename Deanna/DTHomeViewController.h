@@ -14,5 +14,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *accelXLabel;
 @property (strong, nonatomic) IBOutlet UILabel *accelYLabel;
 @property (strong, nonatomic) IBOutlet UILabel *accelZLabel;
+@property (strong, nonatomic) IBOutlet UISwitch *temperatureSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *accelSwitch;
+
+
+- (IBAction)enableAction:(id)sender;
 
 @end
