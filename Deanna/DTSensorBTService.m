@@ -10,6 +10,7 @@
 #import "YMSCBUtils.h"
 #import "DTCharacteristic.h"
 
+
 @implementation DTSensorBTService
 
 
@@ -20,8 +21,6 @@
         _characteristicMap = [[NSMutableDictionary alloc] init];
         _base.hi = kSensorTag_BASE_ADDRESS_HI;
         _base.lo = kSensorTag_BASE_ADDRESS_LO;
-        
-        
     }
     
     return self;
@@ -125,6 +124,28 @@
 - (void)readValueForCharacteristicName:(NSString *)cname {
     DTCharacteristic *dtc = self.characteristicMap[cname];
     [self.service.peripheral readValueForCharacteristic:dtc.characteristic];
+}
+
+
+- (void)requestConfig {
+    [self readValueForCharacteristicName:@"config"];
+    //[self writeByte:0x1 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
+}
+
+- (NSData *)responseConfig {
+    DTCharacteristic *dtc = self.characteristicMap[@"config"];
+    NSData *data = dtc.characteristic.value;
+    return data;
+}
+
+- (void)turnOff {
+    [self writeByte:0x0 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
+    [self setNotifyValue:NO forCharacteristicName:@"data"];
+}
+
+- (void)turnOn {
+    [self writeByte:0x1 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
+    [self setNotifyValue:YES forCharacteristicName:@"data"];
 }
 
 

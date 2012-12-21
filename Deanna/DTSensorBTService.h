@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) CBService *service;
 @property (nonatomic, assign) yms_u128_t base;
+@property (nonatomic, assign) BOOL isEnabled;
 
 // Contains DTCharacteristic values
 @property (nonatomic, strong) NSMutableDictionary *characteristicMap;
@@ -47,6 +48,12 @@
 - (void)readValueForCharacteristic:(CBCharacteristic *)characteristic;
 - (void)readValueForCharacteristicName:(NSString *)cname;
 
+- (void)requestConfig;
+- (NSData *)responseConfig;
+
+
+- (void)turnOn;
+- (void)turnOff;
 
 
 
