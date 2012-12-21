@@ -126,11 +126,17 @@
         
 
         if ([keyPath isEqualToString:@"ambientTemp"]) {
-            self.ambientTemperatureLabel.text = [NSString stringWithFormat:@"%d", [ts.ambientTemp intValue]];
+            double temperatureC = [ts.ambientTemp doubleValue];
+            float temperatureF = (float)temperatureC * 9.0/5.0 + 32.0;
+            temperatureF = roundf(100 * temperatureF)/100.0;
+            self.ambientTemperatureLabel.text = [NSString stringWithFormat:@"%0.2f ℉", temperatureF];
             
         }
         else if ([keyPath isEqualToString:@"objectTemp"]) {
-            self.objectTemperatureLabel.text = [NSString stringWithFormat:@"%d", [ts.objectTemp intValue]];
+            double temperatureC = [ts.objectTemp doubleValue];
+            float temperatureF = (float)temperatureC * 9.0/5.0 + 32.0;
+            temperatureF = roundf(100 * temperatureF)/100.0;
+            self.objectTemperatureLabel.text = [NSString stringWithFormat:@"%0.2f ℉", temperatureF];
 
         }
         else if ([keyPath isEqualToString:@"isEnabled"]) {
@@ -140,16 +146,16 @@
     
     else if (object == as) {
         if ([keyPath isEqualToString:@"x"]) {
-            self.accelXLabel.text = [NSString stringWithFormat:@"%d", [as.x intValue]];
+            self.accelXLabel.text = [NSString stringWithFormat:@"%0.2f", [as.x floatValue]];
             
         }
         else if ([keyPath isEqualToString:@"y"]) {
-            self.accelYLabel.text = [NSString stringWithFormat:@"%d", [as.y intValue]];
+            self.accelYLabel.text = [NSString stringWithFormat:@"%0.2f", [as.y floatValue]];
             
         }
         
         else if ([keyPath isEqualToString:@"z"]) {
-            self.accelZLabel.text = [NSString stringWithFormat:@"%d", [as.z intValue]];
+            self.accelZLabel.text = [NSString stringWithFormat:@"%0.2f", [as.z floatValue]];
             
         }
         else if ([keyPath isEqualToString:@"isEnabled"]) {
