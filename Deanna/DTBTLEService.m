@@ -29,17 +29,6 @@ NSString * const DTBTLEServicePowerOffNotification = @"com.yummymelon.btleservic
     if (self) {
         _peripherals = [[NSMutableArray alloc] init];
         _manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-        
-        //[_manager scanForPeripheralsWithServices:nil options:nil];
-        
-//        yms_u128_t base;
-//        
-//        base.hi = kSensorTag_BASE_ADDRESS_HI;
-//        base.lo = kSensorTag_BASE_ADDRESS_LO;
-//
-//        NSArray *services = @[[YMSCBUtils createCBUUID:&base withIntOffset:kSensorTag_GAP_SERVICE_UUID]];
-//        
-//        [_manager scanForPeripheralsWithServices:services options:nil];
     }
     
     return self;
@@ -213,8 +202,11 @@ NSString * const DTBTLEServicePowerOffNotification = @"com.yummymelon.btleservic
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     NSLog(@"centralManager didDisconnectePeripheral");
     
-    [self.manager scanForPeripheralsWithServices:nil options:nil];
+    // TODO: need to figure out mechanism to to remove the UI bindings from this object.
     
+    self.sensorTag = nil;
+    [self.peripherals removeObject:peripheral];
+    [self loadPeripherals];
     
 }
 
