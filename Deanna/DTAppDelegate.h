@@ -12,4 +12,9 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+- (void)initializeUserDefaults;
+
+- (void)initializeAppServices;
+
+
 @end
