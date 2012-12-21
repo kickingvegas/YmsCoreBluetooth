@@ -14,6 +14,9 @@
 
 @interface DTHomeViewController ()
 
+- (void)btleOffHandler:(NSNotification *)notification;
+    
+
 @end
 
 @implementation DTHomeViewController
@@ -29,6 +32,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(btleOffHandler:) name:DTBTLEServicePowerOffNotification object:nil];
+    
 
     DTBTLEService *btleService = [DTBTLEService sharedService];
     
@@ -37,7 +44,23 @@
                      options:NSKeyValueObservingOptionNew
                      context:NULL];
     
+    
+    
+    
 }
+
+
+- (void)btleOffHandler:(NSNotification *)notification {
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BTLE is off"
+                                                    message:@"yo turn it on!"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"Dismiss"
+                                          otherButtonTitles:nil];
+    
+    [alert show];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
