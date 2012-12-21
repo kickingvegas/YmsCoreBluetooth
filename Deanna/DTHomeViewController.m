@@ -102,6 +102,18 @@
                      forKeyPath:@"z"
                         options:NSKeyValueObservingOptionNew
                         context:NULL];
+                
+
+                [ts addObserver:self
+                     forKeyPath:@"isEnabled"
+                        options:NSKeyValueObservingOptionNew
+                        context:NULL];
+                
+                [as addObserver:self
+                     forKeyPath:@"isEnabled"
+                        options:NSKeyValueObservingOptionNew
+                        context:NULL];
+                
 
                 
 
@@ -121,6 +133,9 @@
             self.objectTemperatureLabel.text = [NSString stringWithFormat:@"%d", [ts.objectTemp intValue]];
 
         }
+        else if ([keyPath isEqualToString:@"isEnabled"]) {
+            [self.accelSwitch setOn:ts.isEnabled animated:YES];
+        }
     }
     
     else if (object == as) {
@@ -137,6 +152,9 @@
             self.accelZLabel.text = [NSString stringWithFormat:@"%d", [as.z intValue]];
             
         }
+        else if ([keyPath isEqualToString:@"isEnabled"]) {
+            [self.accelSwitch setOn:as.isEnabled animated:YES];
+        }
 
 
     }
@@ -145,4 +163,34 @@
 }
 
 
+- (IBAction)enableAction:(id)sender {
+    
+    DTBTLEService *btleService = [DTBTLEService sharedService];
+    DTSensorTag *sensorTag = btleService.sensorTag;
+    
+    if (sensorTag != nil) {
+    
+        NSString *sensorName;
+
+        UISwitch *enableSwitch = (UISwitch *)sender;
+        
+        if (sender == self.accelSwitch) {
+            sensorName = @"accelerometer";
+        }
+        else {
+            sensorName= @"temperature";
+        }
+        
+        DTSensorBTService *btService = sensorTag.sensorServices[sensorName];
+
+        
+        if (enableSwitch.isOn)
+            [btService turnOn];
+        else
+            [btService turnOff];
+
+    }
+
+    
+}
 @end
