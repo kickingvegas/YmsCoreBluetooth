@@ -9,6 +9,13 @@
 #import "DTAccelerometerBTService.h"
 #import "DTCharacteristic.h"
 
+
+float calcAccel(int16_t rawV) {
+    float v;
+    v = ((float)rawV + 1.0) / (256.0/4.0);
+    return v;
+}
+
 @implementation DTAccelerometerBTService
 
 
@@ -48,9 +55,9 @@
     int16_t zz = val[2];
     
     
-    self.x = [NSNumber numberWithInt:xx];
-    self.y = [NSNumber numberWithInt:yy];
-    self.z = [NSNumber numberWithInt:zz];
+    self.x = [NSNumber numberWithFloat:calcAccel(xx)];
+    self.y = [NSNumber numberWithFloat:calcAccel(yy)];
+    self.z = [NSNumber numberWithFloat:calcAccel(zz)];
 }
 
 
