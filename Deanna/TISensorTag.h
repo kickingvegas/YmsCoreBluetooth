@@ -14,6 +14,9 @@
 #define kSensorTag_BASE_ADDRESS_HI 0xF000000004514000
 #define kSensorTag_BASE_ADDRESS_LO 0xB000000000000000
 
+#define kSensorTag_GAP_SERVICE_UUID        0x1800
+#define kSensorTag_GATT_SERVICE_UUID       0x1801
+
 #define kSensorTag_TEMPERATURE_SERVICE     0xAA00
 #define kSensorTag_TEMPERATURE_DATA        0xAA01
 #define kSensorTag_TEMPERATURE_CONFIG      0xAA02
