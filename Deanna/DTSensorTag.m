@@ -9,6 +9,7 @@
 #import "DTSensorTag.h"
 #import "DTTemperatureBTService.h"
 #import "DTAccelerometerBTService.h"
+#import "DTSimpleKeysBTService.h"
 #import "DTCharacteristic.h"
 
 
@@ -31,6 +32,12 @@
         
         DTAccelerometerBTService *as = [[DTAccelerometerBTService alloc] initWithName:@"accelerometer"];
         tempDict[as.name] = as;
+        
+        /**
+         * TODO: Support for 1.3 firmware
+        DTSimpleKeysBTService *sks = [[DTSimpleKeysBTService alloc] initWithName:@"simplekeys"];
+        tempDict[sks.name] = sks;
+         */
         
         _sensorServices = tempDict;
     }
@@ -94,18 +101,12 @@
     DTSensorBTService *btService = [self findService:service];
     [btService syncCharacteristics:service.characteristics];
     
-    //DTCharacteristic *dataCharacteristic = btService.characteristicMap[@"data"];
-    //CBCharacteristic *dataCharacteristic = (CBCharacteristic *)(btService.characteristicMap[@"data"]);
-    //if (!dataCharacteristic.isNotifying) {
-        //[btService setNotifyValue:YES forCharacteristicName:@"data"];
-    //}
-    
-    
-    // Test if service is enabled
-    //[btService readValueForCharacteristicName:@"config"];
-    
-
-    //[btService writeByte:0x1 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
+    /**
+     * TODO: Support for 1.3 firmware
+    if ([btService.name isEqualToString:@"simplekeys"]) {
+        [btService setNotifyValue:YES forCharacteristicName:@"data"];
+    }
+    */
     
     [btService requestConfig];
 }
@@ -127,40 +128,34 @@
         else {
             btService.isEnabled = NO;
         }
-        
-
-        
     }
-    
+
 
     if ([btService.name isEqualToString:@"temperature"]) {
 
         if ([dtc.name isEqualToString:@"data"]) {
             DTTemperatureBTService *ts = (DTTemperatureBTService *)btService;
-            
             [ts updateTemperature];
-            
-//            NSLog(@"didUpdateValue: %@ data: amb: %@ obj: %@",
-//                  ts.name,
-//                  ts.ambientTemp,
-//                  ts.objectTemp);
-        }
+         }
     }
                              
     else if ([btService.name isEqualToString:@"accelerometer"]) {
         if ([dtc.name isEqualToString:@"data"]) {
             
             DTAccelerometerBTService *as = (DTAccelerometerBTService *)btService;
-            
             [as updateAcceleration];
             
-//            NSLog(@"didUpdateValue: %@ data: (x, y, z) : (%@, %@, %@)",
-//                  as.name,
-//                  as.x,
-//                  as.y,
-//                  as.z);
         }
     }
+    
+    /**
+     * Support for 1.3 firmware
+    else if ([btService.name isEqualToString:@"simplekeys"]) {
+        if ([dtc.name isEqualToString:@"data"]) {
+            NSLog(@"hit a key");
+        }
+    }
+    */
 }
 
     
@@ -189,7 +184,7 @@
     DTSensorBTService *btService = [self findService:characteristic.service];
     DTCharacteristic *dtc = [btService findCharacteristic:characteristic];
     
-    NSLog(@"hey I wrote this: %@ %@", btService.name, dtc.name);
+    NSLog(@"write to service.characteristic: %@.%@", btService.name, dtc.name);
     
     
 }
