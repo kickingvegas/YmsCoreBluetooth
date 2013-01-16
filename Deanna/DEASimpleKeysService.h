@@ -12,6 +12,4 @@
 
 @property (nonatomic, strong) NSNumber *keyValue;
 
-- (void)updateKeyPress;
-
 @end

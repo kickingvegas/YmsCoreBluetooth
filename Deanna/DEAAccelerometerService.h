@@ -14,6 +14,4 @@
 @property (nonatomic, strong) NSNumber *y;
 @property (nonatomic, strong) NSNumber *z;
 
-- (void)updateAcceleration;
-
 @end

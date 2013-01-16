@@ -36,7 +36,7 @@
 
 
 
-- (void)updateKeyPress {
+- (void)update {
     DEACharacteristic *dtc = self.characteristicMap[@"data"];
     NSData *data = dtc.characteristic.value;
     

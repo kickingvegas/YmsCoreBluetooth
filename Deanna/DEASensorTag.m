@@ -128,36 +128,12 @@
             btService.isEnabled = NO;
         }
     }
-
-
-    if ([btService.name isEqualToString:@"temperature"]) {
-
-        if ([dtc.name isEqualToString:@"data"]) {
-            DEATemperatureService *ts = (DEATemperatureService *)btService;
-            [ts updateTemperature];
-         }
-    }
-                             
-    else if ([btService.name isEqualToString:@"accelerometer"]) {
-        if ([dtc.name isEqualToString:@"data"]) {
-            
-            DEAAccelerometerService *as = (DEAAccelerometerService *)btService;
-            [as updateAcceleration];
-            
-        }
-    }
     
-    //* Support for 1.3 firmware
-    else if ([btService.name isEqualToString:@"simplekeys"]) {
-        if ([dtc.name isEqualToString:@"data"]) {
-            NSLog(@"hit a key");
-            
-            DEASimpleKeysService *sts = (DEASimpleKeysService *)btService;
-            [sts updateKeyPress];
-            
-        }
+    else if ([dtc.name isEqualToString:@"data"]) {
+        [btService update];
     }
-    //*/
+
+
 }
 
     

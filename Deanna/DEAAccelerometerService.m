@@ -43,7 +43,7 @@ float calcAccel(int16_t rawV) {
 }
 
 
-- (void)updateAcceleration {
+- (void)update {
     DEACharacteristic *dtc = self.characteristicMap[@"data"];
     NSData *data = dtc.characteristic.value;
     

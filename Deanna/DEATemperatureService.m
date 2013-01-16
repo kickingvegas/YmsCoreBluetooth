@@ -51,7 +51,7 @@ double calcTmpTarget(int16_t objT, double m_tempAmb) {
     return self;
 }
 
-- (void)updateTemperature {
+- (void)update {
     DEACharacteristic *dtc = self.characteristicMap[@"data"];
     NSData *data = dtc.characteristic.value;
     
