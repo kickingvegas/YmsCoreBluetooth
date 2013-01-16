@@ -38,10 +38,8 @@ NSString * const DTBTLEServicePowerOffNotification = @"com.yummymelon.btleservic
 - (BOOL)isSensorTagPeripheral:(CBPeripheral *)peripheral {
     BOOL result = NO;
     
-    CBUUID *test = [CBUUID UUIDWithString:@"" kSensorTag_IDENTIFIER];
-    CBUUID *control = [CBUUID UUIDWithCFUUID:peripheral.UUID];
+    result = [peripheral.name isEqualToString:@"TI BLE Sensor Tag"];
     
-    result = [test isEqual:control];
     return result;
 }
 
@@ -154,9 +152,12 @@ NSString * const DTBTLEServicePowerOffNotification = @"com.yummymelon.btleservic
  didDiscoverPeripheral:(CBPeripheral *)peripheral
      advertisementData:(NSDictionary *)advertisementData
                   RSSI:(NSNumber *)RSSI {
+    
+    NSLog(@"%@", peripheral);
+    
     if (![self.peripherals containsObject:peripheral]) {
         if ([self isSensorTagPeripheral:peripheral]) {
-            if (!peripheral.isConnected) {
+            if (peripheral.isConnected == NO) {
                 if (self.sensorTag == nil)
                     self.sensorTag = [[DTSensorTag alloc] init];
                 [self.peripherals addObject:peripheral];
@@ -168,6 +169,7 @@ NSString * const DTBTLEServicePowerOffNotification = @"com.yummymelon.btleservic
             }
         }
     }
+
     
 //    if (![self.peripherals containsObject:peripheral]) {
 //        if ([self isSensorTagPeripheral:peripheral]) {
@@ -189,9 +191,7 @@ NSString * const DTBTLEServicePowerOffNotification = @"com.yummymelon.btleservic
     // 6
     
     if ([self isSensorTagPeripheral:peripheral]) {
-        
         [peripheral discoverServices:[self.sensorTag services]];
-
     }
     
 
@@ -227,7 +227,7 @@ NSString * const DTBTLEServicePowerOffNotification = @"com.yummymelon.btleservic
     for (CBPeripheral *peripheral in peripherals) {
         if (![self.peripherals containsObject:peripheral]) {
             if ([self isSensorTagPeripheral:peripheral]) {
-                if (!peripheral.isConnected) {
+                if (peripheral.isConnected == NO) {
                     if (self.sensorTag == nil)
                         self.sensorTag = [[DTSensorTag alloc] init];
                     [self.peripherals addObject:peripheral];
