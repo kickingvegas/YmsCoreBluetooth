@@ -7,9 +7,9 @@
 //
 
 #import "DEASensorTag.h"
-#import "DTTemperatureBTService.h"
-#import "DTAccelerometerBTService.h"
-#import "DTSimpleKeysBTService.h"
+#import "DEATemperatureService.h"
+#import "DEAAccelerometerService.h"
+#import "DEASimpleKeysService.h"
 #import "DEACharacteristic.h"
 
 
@@ -27,16 +27,16 @@
         
         NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] init];
         
-        DTTemperatureBTService *ts = [[DTTemperatureBTService alloc] initWithName:@"temperature"];
+        DEATemperatureService *ts = [[DEATemperatureService alloc] initWithName:@"temperature"];
         tempDict[ts.name] = ts;
         
-        DTAccelerometerBTService *as = [[DTAccelerometerBTService alloc] initWithName:@"accelerometer"];
+        DEAAccelerometerService *as = [[DEAAccelerometerService alloc] initWithName:@"accelerometer"];
         tempDict[as.name] = as;
         
         /**
          * TODO: Support for 1.3 firmware
                   */
-        DTSimpleKeysBTService *sks = [[DTSimpleKeysBTService alloc] initWithName:@"simplekeys"];
+        DEASimpleKeysService *sks = [[DEASimpleKeysService alloc] initWithName:@"simplekeys"];
         [sks turnOn];
         tempDict[sks.name] = sks;
         
@@ -53,7 +53,7 @@
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     
     for (NSString *key in self.sensorServices) {
-        DEABaseCBService *service = self.sensorServices[key];
+        DEABaseService *service = self.sensorServices[key];
         DEACharacteristic *ct = service.characteristicMap[@"service"];
         
         [tempArray addObject:ct.uuid];
@@ -63,11 +63,11 @@
     return result;
 }
 
-- (DEABaseCBService *)findService:(CBService *)service {
-    DEABaseCBService *result;
+- (DEABaseService *)findService:(CBService *)service {
+    DEABaseService *result;
     
     for (NSString *key in self.sensorServices) {
-        DEABaseCBService *btService = self.sensorServices[key];
+        DEABaseService *btService = self.sensorServices[key];
         DEACharacteristic *ct = btService.characteristicMap[@"service"];
         
         if ([service.UUID isEqual:ct.uuid]) {
@@ -85,7 +85,7 @@
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error {
     
     for (CBService *service in peripheral.services) {
-        DEABaseCBService *btService = [self findService:service];
+        DEABaseService *btService = [self findService:service];
         
         if (btService != nil) {
             if (btService.service == nil) {
@@ -99,7 +99,7 @@
 
 // 9
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error {
-    DEABaseCBService *btService = [self findService:service];
+    DEABaseService *btService = [self findService:service];
     [btService syncCharacteristics:service.characteristics];
     
     if ([btService.name isEqualToString:@"simplekeys"]) {
@@ -115,7 +115,7 @@
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     
     
-    DEABaseCBService *btService = [self findService:characteristic.service];
+    DEABaseService *btService = [self findService:characteristic.service];
     DEACharacteristic *dtc = [btService findCharacteristic:characteristic];
     
     if ([dtc.name isEqualToString:@"config"]) {
@@ -133,7 +133,7 @@
     if ([btService.name isEqualToString:@"temperature"]) {
 
         if ([dtc.name isEqualToString:@"data"]) {
-            DTTemperatureBTService *ts = (DTTemperatureBTService *)btService;
+            DEATemperatureService *ts = (DEATemperatureService *)btService;
             [ts updateTemperature];
          }
     }
@@ -141,7 +141,7 @@
     else if ([btService.name isEqualToString:@"accelerometer"]) {
         if ([dtc.name isEqualToString:@"data"]) {
             
-            DTAccelerometerBTService *as = (DTAccelerometerBTService *)btService;
+            DEAAccelerometerService *as = (DEAAccelerometerService *)btService;
             [as updateAcceleration];
             
         }
@@ -152,7 +152,7 @@
         if ([dtc.name isEqualToString:@"data"]) {
             NSLog(@"hit a key");
             
-            DTSimpleKeysBTService *sts = (DTSimpleKeysBTService *)btService;
+            DEASimpleKeysService *sts = (DEASimpleKeysService *)btService;
             [sts updateKeyPress];
             
         }
@@ -183,7 +183,7 @@
 
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     
-    DEABaseCBService *btService = [self findService:characteristic.service];
+    DEABaseService *btService = [self findService:characteristic.service];
     DEACharacteristic *dtc = [btService findCharacteristic:characteristic];
     
     NSLog(@"write to service.characteristic: %@.%@", btService.name, dtc.name);

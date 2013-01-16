@@ -10,7 +10,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #include "YMSCBUtils.h"
 
-@class DEABaseCBService;
+@class DEABaseService;
 
 @interface DEASensorTag : NSObject <CBPeripheralDelegate>
 
@@ -20,7 +20,7 @@
 
 - (NSArray *)services;
 
-- (DEABaseCBService *)findService:(CBService *)service;
+- (DEABaseService *)findService:(CBService *)service;
 
 @end
 
