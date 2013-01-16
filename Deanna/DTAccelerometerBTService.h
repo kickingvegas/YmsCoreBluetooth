@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Yummy Melon Software. All rights reserved.
 //
 
-#import "DEABaseCBService.h"
+#import "DEABaseService.h"
 
-@interface DTAccelerometerBTService : DEABaseCBService
+@interface DTAccelerometerBTService : DEABaseService
 
 @property (nonatomic, strong) NSNumber *x;
 @property (nonatomic, strong) NSNumber *y;

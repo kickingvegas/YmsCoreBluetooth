@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Yummy Melon Software. All rights reserved.
 //
 
-#import "DEABaseCBService.h"
+#import "DEABaseService.h"
 
-@interface DTTemperatureBTService : DEABaseCBService
+@interface DTTemperatureBTService : DEABaseService
 
 
 @property (nonatomic, strong) NSNumber *ambientTemp;
