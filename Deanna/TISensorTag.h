@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Yummy Melon Software. All rights reserved.
 //
 
+#include "YMS128.h"
+
 #ifndef Deanna_TISensorTag_h
 #define Deanna_TISensorTag_h
 
@@ -54,19 +56,6 @@
 #define kSensorTag_TEST_SERVICE            0xAA60
 #define kSensorTag_TEST_DATA               0xAA61
 #define kSensorTag_TEST_CONFIG             0xAA62
-
-
-typedef struct {
-    unsigned long long hi;
-    unsigned long long lo;
-} yms_u128_t;
-
-
-unsigned long long getfield64(unsigned long long s, int p, int n);
-yms_u128_t yms_u128_genOffset(int value);
-yms_u128_t yms_u128_genAddress(yms_u128_t *base, yms_u128_t *offset);
-yms_u128_t yms_u128_genAddressWithInt(yms_u128_t *base, int value);
-
 
 
 #endif
