@@ -35,9 +35,10 @@
         
         /**
          * TODO: Support for 1.3 firmware
+                  */
         DTSimpleKeysBTService *sks = [[DTSimpleKeysBTService alloc] initWithName:@"simplekeys"];
+        [sks turnOn];
         tempDict[sks.name] = sks;
-         */
         
         _sensorServices = tempDict;
     }
@@ -101,16 +102,14 @@
     DTSensorBTService *btService = [self findService:service];
     [btService syncCharacteristics:service.characteristics];
     
-    /**
-     * TODO: Support for 1.3 firmware
     if ([btService.name isEqualToString:@"simplekeys"]) {
         [btService setNotifyValue:YES forCharacteristicName:@"data"];
     }
-    */
-    
-    [btService requestConfig];
+    else {
+        [btService requestConfig];
+    }
 }
-    
+
 
 // 11
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
@@ -148,14 +147,17 @@
         }
     }
     
-    /**
-     * Support for 1.3 firmware
+    //* Support for 1.3 firmware
     else if ([btService.name isEqualToString:@"simplekeys"]) {
         if ([dtc.name isEqualToString:@"data"]) {
             NSLog(@"hit a key");
+            
+            DTSimpleKeysBTService *sts = (DTSimpleKeysBTService *)btService;
+            [sts updateKeyPress];
+            
         }
     }
-    */
+    //*/
 }
 
     
