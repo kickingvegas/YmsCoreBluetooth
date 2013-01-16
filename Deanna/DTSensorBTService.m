@@ -49,6 +49,20 @@
     [self.characteristicMap setObject:dtc forKey:cname];
 }
 
+- (void)addCharacteristic:(NSString *)cname withAddress:(int)addr {
+    
+    DTCharacteristic *dtc;
+    NSString *addrString = [NSString stringWithFormat:@"%x", addr];
+    
+    
+    CBUUID *uuid = [CBUUID UUIDWithString:addrString];
+    dtc = [[DTCharacteristic alloc] initWithName:cname
+                                            uuid:uuid
+                                          offset:addr];
+    
+    [self.characteristicMap setObject:dtc forKey:cname];
+}
+
 
 
 - (NSArray *)characteristics {

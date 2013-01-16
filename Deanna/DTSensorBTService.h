@@ -27,6 +27,8 @@
 
 - (void)addCharacteristic:(NSString *)cname withOffset:(int)addrOffset;
 
+- (void)addCharacteristic:(NSString *)cname withAddress:(int)addr;
+
 - (NSArray *)characteristics;
 
 - (void)syncCharacteristics:(NSArray *)foundCharacteristics;
