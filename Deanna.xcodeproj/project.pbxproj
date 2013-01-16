@@ -32,6 +32,7 @@
 		D9718B8F167FA5140001E42C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B8E167FA5140001E42C /* CoreBluetooth.framework */; };
 		D9718BA716804ED70001E42C /* TISensorTag.c in Sources */ = {isa = PBXBuildFile; fileRef = D9718BA616804ED70001E42C /* TISensorTag.c */; };
 		D9718BAD16805E820001E42C /* DTBTLEService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718BAC16805E820001E42C /* DTBTLEService.m */; };
+		D9D8316D168449FE00F51E42 /* DTSimpleKeysBTService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D8316C168449FD00F51E42 /* DTSimpleKeysBTService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,8 @@
 		D9718BA616804ED70001E42C /* TISensorTag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TISensorTag.c; sourceTree = "<group>"; };
 		D9718BAB16805E810001E42C /* DTBTLEService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTBTLEService.h; sourceTree = "<group>"; };
 		D9718BAC16805E820001E42C /* DTBTLEService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTBTLEService.m; sourceTree = "<group>"; };
+		D9D8316B168449FD00F51E42 /* DTSimpleKeysBTService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTSimpleKeysBTService.h; sourceTree = "<group>"; };
+		D9D8316C168449FD00F51E42 /* DTSimpleKeysBTService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTSimpleKeysBTService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,14 +117,16 @@
 		D911705716814D4100E2D19A /* SensorTag Services */ = {
 			isa = PBXGroup;
 			children = (
-				D911704E1681214700E2D19A /* DTCharacteristic.h */,
-				D911704F1681214700E2D19A /* DTCharacteristic.m */,
 				D911704A1681131000E2D19A /* DTSensorBTService.h */,
 				D911704B1681131000E2D19A /* DTSensorBTService.m */,
+				D911704E1681214700E2D19A /* DTCharacteristic.h */,
+				D911704F1681214700E2D19A /* DTCharacteristic.m */,
 				D91170511681251900E2D19A /* DTTemperatureBTService.h */,
 				D91170521681251900E2D19A /* DTTemperatureBTService.m */,
 				D91170541681461300E2D19A /* DTAccelerometerBTService.h */,
 				D91170551681461300E2D19A /* DTAccelerometerBTService.m */,
+				D9D8316B168449FD00F51E42 /* DTSimpleKeysBTService.h */,
+				D9D8316C168449FD00F51E42 /* DTSimpleKeysBTService.m */,
 			);
 			name = "SensorTag Services";
 			sourceTree = "<group>";
@@ -366,6 +371,7 @@
 				D91170501681214700E2D19A /* DTCharacteristic.m in Sources */,
 				D91170531681251900E2D19A /* DTTemperatureBTService.m in Sources */,
 				D91170561681461300E2D19A /* DTAccelerometerBTService.m in Sources */,
+				D9D8316D168449FE00F51E42 /* DTSimpleKeysBTService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
