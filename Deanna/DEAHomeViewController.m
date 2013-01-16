@@ -6,20 +6,20 @@
 //  Copyright (c) 2012 Yummy Melon Software. All rights reserved.
 //
 
-#import "DTHomeViewController.h"
-#import "DTBTLEService.h"
-#import "DTSensorTag.h"
+#import "DEAHomeViewController.h"
+#import "DEABluetoothService.h"
+#import "DEASensorTag.h"
 #import "DTTemperatureBTService.h"
 #import "DTAccelerometerBTService.h"
 
-@interface DTHomeViewController ()
+@interface DEAHomeViewController ()
 
 - (void)btleOffHandler:(NSNotification *)notification;
     
 
 @end
 
-@implementation DTHomeViewController
+@implementation DEAHomeViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -37,7 +37,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(btleOffHandler:) name:DTBTLEServicePowerOffNotification object:nil];
     
 
-    DTBTLEService *btleService = [DTBTLEService sharedService];
+    DEABluetoothService *btleService = [DEABluetoothService sharedService];
     
     [btleService addObserver:self
                   forKeyPath:@"sensorTagEnabled"
@@ -70,8 +70,8 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
-    DTBTLEService *btleService = [DTBTLEService sharedService];
-    DTSensorTag *sensorTag = btleService.sensorTag;
+    DEABluetoothService *btleService = [DEABluetoothService sharedService];
+    DEASensorTag *sensorTag = btleService.sensorTag;
     
     DTTemperatureBTService *ts = sensorTag.sensorServices[@"temperature"];
     DTAccelerometerBTService *as = sensorTag.sensorServices[@"accelerometer"];
@@ -171,8 +171,8 @@
 
 - (IBAction)enableAction:(id)sender {
     
-    DTBTLEService *btleService = [DTBTLEService sharedService];
-    DTSensorTag *sensorTag = btleService.sensorTag;
+    DEABluetoothService *btleService = [DEABluetoothService sharedService];
+    DEASensorTag *sensorTag = btleService.sensorTag;
     
     if (sensorTag != nil) {
     
@@ -187,7 +187,7 @@
             sensorName= @"temperature";
         }
         
-        DTSensorBTService *btService = sensorTag.sensorServices[sensorName];
+        DEABaseCBService *btService = sensorTag.sensorServices[sensorName];
 
         
         if (enableSwitch.isOn)

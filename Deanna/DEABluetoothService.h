@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
-@class DTSensorTag;
+@class DEASensorTag;
 
 /**
  NSNotifications
@@ -24,16 +24,16 @@ extern NSString * const DTBTLEServicePowerOffNotification;
 
 @end
 
-@interface DTBTLEService : NSObject <CBCentralManagerDelegate>
+@interface DEABluetoothService : NSObject <CBCentralManagerDelegate>
 
 @property (nonatomic, assign) id<DTSensorTagDelegate> delegate;
 
 @property (nonatomic, strong) CBCentralManager *manager;
-@property (nonatomic, strong) DTSensorTag *sensorTag;
+@property (nonatomic, strong) DEASensorTag *sensorTag;
 @property (nonatomic, assign) BOOL sensorTagEnabled;
 @property (nonatomic, strong) NSMutableArray *peripherals;
 
-+ (DTBTLEService *)sharedService;
++ (DEABluetoothService *)sharedService;
 
 - (BOOL)isSensorTagPeripheral:(CBPeripheral *)peripheral;
 

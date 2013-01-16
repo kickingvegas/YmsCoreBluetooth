@@ -6,14 +6,14 @@
 //  Copyright (c) 2012 Yummy Melon Software. All rights reserved.
 //
 
-#import "DTSensorTag.h"
+#import "DEASensorTag.h"
 #import "DTTemperatureBTService.h"
 #import "DTAccelerometerBTService.h"
 #import "DTSimpleKeysBTService.h"
-#import "DTCharacteristic.h"
+#import "DEACharacteristic.h"
 
 
-@implementation DTSensorTag
+@implementation DEASensorTag
 
 
 - (id)init {
@@ -53,8 +53,8 @@
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     
     for (NSString *key in self.sensorServices) {
-        DTSensorBTService *service = self.sensorServices[key];
-        DTCharacteristic *ct = service.characteristicMap[@"service"];
+        DEABaseCBService *service = self.sensorServices[key];
+        DEACharacteristic *ct = service.characteristicMap[@"service"];
         
         [tempArray addObject:ct.uuid];
     }
@@ -63,12 +63,12 @@
     return result;
 }
 
-- (DTSensorBTService *)findService:(CBService *)service {
-    DTSensorBTService *result;
+- (DEABaseCBService *)findService:(CBService *)service {
+    DEABaseCBService *result;
     
     for (NSString *key in self.sensorServices) {
-        DTSensorBTService *btService = self.sensorServices[key];
-        DTCharacteristic *ct = btService.characteristicMap[@"service"];
+        DEABaseCBService *btService = self.sensorServices[key];
+        DEACharacteristic *ct = btService.characteristicMap[@"service"];
         
         if ([service.UUID isEqual:ct.uuid]) {
             result = btService;
@@ -85,7 +85,7 @@
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error {
     
     for (CBService *service in peripheral.services) {
-        DTSensorBTService *btService = [self findService:service];
+        DEABaseCBService *btService = [self findService:service];
         
         if (btService != nil) {
             if (btService.service == nil) {
@@ -99,7 +99,7 @@
 
 // 9
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error {
-    DTSensorBTService *btService = [self findService:service];
+    DEABaseCBService *btService = [self findService:service];
     [btService syncCharacteristics:service.characteristics];
     
     if ([btService.name isEqualToString:@"simplekeys"]) {
@@ -115,8 +115,8 @@
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     
     
-    DTSensorBTService *btService = [self findService:characteristic.service];
-    DTCharacteristic *dtc = [btService findCharacteristic:characteristic];
+    DEABaseCBService *btService = [self findService:characteristic.service];
+    DEACharacteristic *dtc = [btService findCharacteristic:characteristic];
     
     if ([dtc.name isEqualToString:@"config"]) {
         NSData *data = [btService responseConfig];
@@ -183,8 +183,8 @@
 
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     
-    DTSensorBTService *btService = [self findService:characteristic.service];
-    DTCharacteristic *dtc = [btService findCharacteristic:characteristic];
+    DEABaseCBService *btService = [self findService:characteristic.service];
+    DEACharacteristic *dtc = [btService findCharacteristic:characteristic];
     
     NSLog(@"write to service.characteristic: %@.%@", btService.name, dtc.name);
     

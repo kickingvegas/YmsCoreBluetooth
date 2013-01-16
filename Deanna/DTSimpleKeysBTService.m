@@ -7,7 +7,7 @@
 //
 
 #import "DTSimpleKeysBTService.h"
-#import "DTCharacteristic.h"
+#import "DEACharacteristic.h"
 
 @implementation DTSimpleKeysBTService
 
@@ -25,7 +25,7 @@
 - (NSArray *)characteristics {
     
     NSArray *result = @[
-    [(DTCharacteristic *)(self.characteristicMap[@"data"]) uuid]
+    [(DEACharacteristic *)(self.characteristicMap[@"data"]) uuid]
     ];
     
     return result;
@@ -37,7 +37,7 @@
 
 
 - (void)updateKeyPress {
-    DTCharacteristic *dtc = self.characteristicMap[@"data"];
+    DEACharacteristic *dtc = self.characteristicMap[@"data"];
     NSData *data = dtc.characteristic.value;
     
     char val[data.length];

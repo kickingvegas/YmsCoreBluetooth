@@ -6,16 +6,16 @@
 //  Copyright (c) 2012 Yummy Melon Software. All rights reserved.
 //
 #include "TISensorTag.h"
-#import "DTBTLEService.h"
-#import "DTSensorTag.h"
+#import "DEABluetoothService.h"
+#import "DEASensorTag.h"
 
-static DTBTLEService *sharedBTLEService;
+static DEABluetoothService *sharedBTLEService;
 
 NSString * const DTBTLEServicePowerOffNotification = @"com.yummymelon.btleservice.power.off";
 
-@implementation DTBTLEService
+@implementation DEABluetoothService
 
-+ (DTBTLEService *)sharedService {
++ (DEABluetoothService *)sharedService {
     if (sharedBTLEService == nil) {
         sharedBTLEService = [[super allocWithZone:NULL] init];
     }
@@ -159,7 +159,7 @@ NSString * const DTBTLEServicePowerOffNotification = @"com.yummymelon.btleservic
         if ([self isSensorTagPeripheral:peripheral]) {
             if (peripheral.isConnected == NO) {
                 if (self.sensorTag == nil)
-                    self.sensorTag = [[DTSensorTag alloc] init];
+                    self.sensorTag = [[DEASensorTag alloc] init];
                 [self.peripherals addObject:peripheral];
                 peripheral.delegate = self.sensorTag;
                 [central connectPeripheral:peripheral options:nil];
@@ -229,7 +229,7 @@ NSString * const DTBTLEServicePowerOffNotification = @"com.yummymelon.btleservic
             if ([self isSensorTagPeripheral:peripheral]) {
                 if (peripheral.isConnected == NO) {
                     if (self.sensorTag == nil)
-                        self.sensorTag = [[DTSensorTag alloc] init];
+                        self.sensorTag = [[DEASensorTag alloc] init];
                     [self.peripherals addObject:peripheral];
                     peripheral.delegate = self.sensorTag;
                     [central connectPeripheral:peripheral options:nil];

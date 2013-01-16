@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Yummy Melon Software. All rights reserved.
 //
 
-#import "DTSensorBTService.h"
+#import "DEABaseCBService.h"
 
-@interface DTSimpleKeysBTService : DTSensorBTService
+@interface DTSimpleKeysBTService : DEABaseCBService
 
 @property (nonatomic, strong) NSNumber *keyValue;
 

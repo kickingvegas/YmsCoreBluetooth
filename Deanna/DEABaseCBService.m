@@ -6,12 +6,12 @@
 //  Copyright (c) 2012 Yummy Melon Software. All rights reserved.
 //
 
-#import "DTSensorBTService.h"
+#import "DEABaseCBService.h"
 #import "YMSCBUtils.h"
-#import "DTCharacteristic.h"
+#import "DEACharacteristic.h"
 
 
-@implementation DTSensorBTService
+@implementation DEABaseCBService
 
 
 - (id)init {
@@ -36,13 +36,13 @@
 }
 
 - (void)addCharacteristic:(NSString *)cname withOffset:(int)addrOffset {
-    DTCharacteristic *dtc;
+    DEACharacteristic *dtc;
     
     yms_u128_t pbase = self.base;
     
     CBUUID *uuid = [YMSCBUtils createCBUUID:&pbase withIntOffset:addrOffset];
     
-    dtc = [[DTCharacteristic alloc] initWithName:cname
+    dtc = [[DEACharacteristic alloc] initWithName:cname
                                             uuid:uuid
                                           offset:addrOffset];
     
@@ -51,12 +51,12 @@
 
 - (void)addCharacteristic:(NSString *)cname withAddress:(int)addr {
     
-    DTCharacteristic *dtc;
+    DEACharacteristic *dtc;
     NSString *addrString = [NSString stringWithFormat:@"%x", addr];
     
     
     CBUUID *uuid = [CBUUID UUIDWithString:addrString];
-    dtc = [[DTCharacteristic alloc] initWithName:cname
+    dtc = [[DEACharacteristic alloc] initWithName:cname
                                             uuid:uuid
                                           offset:addr];
     
@@ -68,8 +68,8 @@
 - (NSArray *)characteristics {
     
     NSArray *result = @[
-    [(DTCharacteristic *)(self.characteristicMap[@"data"]) uuid],
-    [(DTCharacteristic *)(self.characteristicMap[@"config"]) uuid],
+    [(DEACharacteristic *)(self.characteristicMap[@"data"]) uuid],
+    [(DEACharacteristic *)(self.characteristicMap[@"config"]) uuid],
     ];
 
     return result;
@@ -78,7 +78,7 @@
 
 - (void)syncCharacteristics:(NSArray *)foundCharacteristics {
     for (NSString *key in self.characteristicMap) {
-        DTCharacteristic *dtc = self.characteristicMap[key];
+        DEACharacteristic *dtc = self.characteristicMap[key];
         for (CBCharacteristic *ct in foundCharacteristics) {
             if ([dtc.uuid isEqual:ct.UUID]) {
                 dtc.characteristic = ct;
@@ -88,10 +88,10 @@
     }
 }
 
-- (DTCharacteristic *)findCharacteristic:(CBCharacteristic *)ct {
-    DTCharacteristic *result;
+- (DEACharacteristic *)findCharacteristic:(CBCharacteristic *)ct {
+    DEACharacteristic *result;
     for (NSString *key in self.characteristicMap) {
-        DTCharacteristic *dtc = self.characteristicMap[key];
+        DEACharacteristic *dtc = self.characteristicMap[key];
             
         if ([dtc.characteristic.UUID isEqual:ct.UUID]) {
             result = dtc;
@@ -109,7 +109,7 @@
 }
 
 - (void)setNotifyValue:(BOOL)notifyValue forCharacteristicName:(NSString *)cname {
-    DTCharacteristic *dtc = self.characteristicMap[cname];
+    DEACharacteristic *dtc = self.characteristicMap[cname];
     [self.service.peripheral setNotifyValue:notifyValue forCharacteristic:dtc.characteristic];
 }
 
@@ -120,12 +120,12 @@
 }
 
 - (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname type:(CBCharacteristicWriteType)type {
-    DTCharacteristic *dtc = self.characteristicMap[cname];
+    DEACharacteristic *dtc = self.characteristicMap[cname];
     [self.service.peripheral writeValue:data forCharacteristic:dtc.characteristic type:type];
 }
 
 - (void)writeByte:(int8_t)val forCharacteristicName:(NSString *)cname type:(CBCharacteristicWriteType)type {
-    DTCharacteristic *dtc = self.characteristicMap[cname];
+    DEACharacteristic *dtc = self.characteristicMap[cname];
     NSData *data = [NSData dataWithBytes:&val length:1];
     [self.service.peripheral writeValue:data forCharacteristic:dtc.characteristic type:type];
 }
@@ -136,7 +136,7 @@
 }
 
 - (void)readValueForCharacteristicName:(NSString *)cname {
-    DTCharacteristic *dtc = self.characteristicMap[cname];
+    DEACharacteristic *dtc = self.characteristicMap[cname];
     [self.service.peripheral readValueForCharacteristic:dtc.characteristic];
 }
 
@@ -147,7 +147,7 @@
 }
 
 - (NSData *)responseConfig {
-    DTCharacteristic *dtc = self.characteristicMap[@"config"];
+    DEACharacteristic *dtc = self.characteristicMap[@"config"];
     NSData *data = dtc.characteristic.value;
     return data;
 }

@@ -7,7 +7,7 @@
 //
 
 #import "DTTemperatureBTService.h"
-#import "DTCharacteristic.h"
+#import "DEACharacteristic.h"
 
 double calcTmpLocal(int16_t rawT) {
     double m_tempAmb = (double)rawT / 128.0;
@@ -52,7 +52,7 @@ double calcTmpTarget(int16_t objT, double m_tempAmb) {
 }
 
 - (void)updateTemperature {
-    DTCharacteristic *dtc = self.characteristicMap[@"data"];
+    DEACharacteristic *dtc = self.characteristicMap[@"data"];
     NSData *data = dtc.characteristic.value;
     
     char val[data.length];

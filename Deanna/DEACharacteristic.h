@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
-@interface DTCharacteristic : NSObject
+@interface DEACharacteristic : NSObject
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) CBUUID *uuid;

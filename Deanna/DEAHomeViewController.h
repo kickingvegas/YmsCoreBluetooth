@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DTHomeViewController : UIViewController
+@interface DEAHomeViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UILabel *ambientTemperatureLabel;
 @property (strong, nonatomic) IBOutlet UILabel *objectTemperatureLabel;
 @property (strong, nonatomic) IBOutlet UILabel *accelXLabel;

@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Yummy Melon Software. All rights reserved.
 //
 
-#import "DTCharacteristic.h"
+#import "DEACharacteristic.h"
 
-@implementation DTCharacteristic
+@implementation DEACharacteristic
 
 
 - (id)initWithName:(NSString *)oName uuid:(CBUUID *)oUUID offset:(int)addrOffset {

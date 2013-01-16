@@ -11,9 +11,9 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "YMSCBUtils.h"
 
-@class DTCharacteristic;
+@class DEACharacteristic;
 
-@interface DTSensorBTService : NSObject
+@interface DEABaseCBService : NSObject
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) CBService *service;
@@ -33,7 +33,7 @@
 
 - (void)syncCharacteristics:(NSArray *)foundCharacteristics;
 
-- (DTCharacteristic *)findCharacteristic:(CBCharacteristic *)ct;
+- (DEACharacteristic *)findCharacteristic:(CBCharacteristic *)ct;
 
 
 - (void)setNotifyValue:(BOOL)notifyValue forCharacteristic:(CBCharacteristic *)characteristic;

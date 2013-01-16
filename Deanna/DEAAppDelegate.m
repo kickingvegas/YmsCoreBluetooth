@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 Yummy Melon Software. All rights reserved.
 //
 
-#import "DTAppDelegate.h"
-#import "DTHomeViewController.h"
-#import "DTBTLEService.h"
+#import "DEAAppDelegate.h"
+#import "DEAHomeViewController.h"
+#import "DEABluetoothService.h"
 
-@implementation DTAppDelegate
+@implementation DEAAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self initializeUserDefaults];
@@ -20,7 +20,7 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
-    DTHomeViewController *vc = [[DTHomeViewController alloc] initWithNibName:@"DTHomeViewController" bundle:nil];
+    DEAHomeViewController *vc = [[DEAHomeViewController alloc] initWithNibName:@"DTHomeViewController" bundle:nil];
     
     self.window.rootViewController = vc;
     
@@ -37,7 +37,7 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
-    DTBTLEService *btleService = [DTBTLEService sharedService];
+    DEABluetoothService *btleService = [DEABluetoothService sharedService];
     [btleService persistPeripherals];
     
 }
@@ -63,7 +63,7 @@
 }
 
 - (void)initializeAppServices {
-    [DTBTLEService sharedService];
+    [DEABluetoothService sharedService];
 }
 
 @end
