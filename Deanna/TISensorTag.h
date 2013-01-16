@@ -9,6 +9,7 @@
 #ifndef Deanna_TISensorTag_h
 #define Deanna_TISensorTag_h
 
+// Is this unique?
 #define kSensorTag_IDENTIFIER "9C4EEB7D-BE3A-E942-1539-CB7AD105CE5D"
 
 #define kSensorTag_BASE_ADDRESS_HI 0xF000000004514000
@@ -16,6 +17,11 @@
 
 #define kSensorTag_GAP_SERVICE_UUID        0x1800
 #define kSensorTag_GATT_SERVICE_UUID       0x1801
+#define kSensorTag_DEVINFO_SERV_UUID       0x180A
+
+
+#define kSensorTag_SIMPLEKEYS_SERVICE      0xFFE0
+#define kSensorTag_SIMPLEKEYS_DATA         0xFFE1
 
 #define kSensorTag_TEMPERATURE_SERVICE     0xAA00
 #define kSensorTag_TEMPERATURE_DATA        0xAA01
@@ -35,7 +41,6 @@
 #define kSensorTag_MAGNETOMETER_CONFIG     0xAA32
 #define kSensorTag_MAGNETOMETER_PERIOD     0xAA33
 
-
 #define kSensorTag_BAROMETER_SERVICE       0xAA40
 #define kSensorTag_BAROMETER_DATA          0xAA41
 #define kSensorTag_BAROMETER_CONFIG        0xAA42
@@ -45,6 +50,11 @@
 #define kSensorTag_GYROSCOPE_SERVICE       0xAA50
 #define kSensorTag_GYROSCOPE_DATA          0xAA51
 #define kSensorTag_GYROSCOPE_CONFIG        0xAA52
+
+#define kSensorTag_TEST_SERVICE            0xAA60
+#define kSensorTag_TEST_DATA               0xAA61
+#define kSensorTag_TEST_CONFIG             0xAA62
+
 
 typedef struct {
     unsigned long long hi;
