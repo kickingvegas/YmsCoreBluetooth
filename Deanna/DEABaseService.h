@@ -20,7 +20,7 @@
 @property (nonatomic, assign) yms_u128_t base;
 @property (nonatomic, assign) BOOL isEnabled;
 
-// Contains DTCharacteristic values
+// Contains DEACharacteristic values
 @property (nonatomic, strong) NSMutableDictionary *characteristicMap;
 
 - (id)initWithName:(NSString *)oName;
