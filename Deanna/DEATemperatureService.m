@@ -59,9 +59,15 @@ double calcTmpTarget(int16_t objT, double m_tempAmb) {
     [data getBytes:&val length:data.length];
     
     
-    int16_t amb = ((val[2] & 0xff)| ((val[3] << 8) & 0xff00));
+    int16_t v0 = val[0];
+    int16_t v1 = val[1];
+    int16_t v2 = val[2];
+    int16_t v3 = val[3];
     
-    int16_t objT = ((val[0] & 0xff)| ((val[1] << 8) & 0xff00));
+    
+    int16_t amb = ((v2 & 0xff)| ((v3 << 8) & 0xff00));
+    
+    int16_t objT = ((v0 & 0xff)| ((v1 << 8) & 0xff00));
     
     double tempAmb = calcTmpLocal(amb);
     
