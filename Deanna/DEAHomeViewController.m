@@ -9,8 +9,8 @@
 #import "DEAHomeViewController.h"
 #import "DEABluetoothService.h"
 #import "DEASensorTag.h"
-#import "DTTemperatureBTService.h"
-#import "DTAccelerometerBTService.h"
+#import "DEATemperatureService.h"
+#import "DEAAccelerometerService.h"
 
 @interface DEAHomeViewController ()
 
@@ -73,8 +73,8 @@
     DEABluetoothService *btleService = [DEABluetoothService sharedService];
     DEASensorTag *sensorTag = btleService.sensorTag;
     
-    DTTemperatureBTService *ts = sensorTag.sensorServices[@"temperature"];
-    DTAccelerometerBTService *as = sensorTag.sensorServices[@"accelerometer"];
+    DEATemperatureService *ts = sensorTag.sensorServices[@"temperature"];
+    DEAAccelerometerService *as = sensorTag.sensorServices[@"accelerometer"];
 
     if (object == btleService) {
         if ([keyPath isEqualToString:@"sensorTagEnabled"]) {
@@ -187,7 +187,7 @@
             sensorName= @"temperature";
         }
         
-        DEABaseCBService *btService = sensorTag.sensorServices[sensorName];
+        DEABaseService *btService = sensorTag.sensorServices[sensorName];
 
         
         if (enableSwitch.isOn)
