@@ -10,4 +10,8 @@
 
 @interface DTSimpleKeysBTService : DTSensorBTService
 
+@property (nonatomic, strong) NSNumber *keyValue;
+
+- (void)updateKeyPress;
+
 @end

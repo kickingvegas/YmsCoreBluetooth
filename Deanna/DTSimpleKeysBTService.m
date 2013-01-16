@@ -7,6 +7,7 @@
 //
 
 #import "DTSimpleKeysBTService.h"
+#import "DTCharacteristic.h"
 
 @implementation DTSimpleKeysBTService
 
@@ -15,14 +16,27 @@
     self = [super initWithName:oName];
     
     if (self) {
-        [self addCharacteristic:@"service" withOffset:kSensorTag_SIMPLEKEYS_SERVICE];
-        [self addCharacteristic:@"data" withOffset:kSensorTag_SIMPLEKEYS_DATA];
+        [self addCharacteristic:@"service" withAddress:kSensorTag_SIMPLEKEYS_SERVICE];
+        [self addCharacteristic:@"data" withAddress:kSensorTag_SIMPLEKEYS_DATA];
     }
     return self;
 }
 
-/*
-- (void)updateTemperature {
+- (NSArray *)characteristics {
+    
+    NSArray *result = @[
+    [(DTCharacteristic *)(self.characteristicMap[@"data"]) uuid]
+    ];
+    
+    return result;
+}
+
+
+
+
+
+
+- (void)updateKeyPress {
     DTCharacteristic *dtc = self.characteristicMap[@"data"];
     NSData *data = dtc.characteristic.value;
     
@@ -30,15 +44,15 @@
     [data getBytes:&val length:data.length];
     
     
-    int16_t amb = ((val[2] & 0xff)| ((val[3] << 8) & 0xff00));
+    int16_t value = val[0];
     
-    int16_t objT = ((val[0] & 0xff)| ((val[1] << 8) & 0xff00));
     
-    double tempAmb = calcTmpLocal(amb);
+    self.keyValue = [NSNumber numberWithInt:value];
     
-    self.ambientTemp = [NSNumber numberWithDouble:tempAmb];
-    self.objectTemp = [NSNumber numberWithDouble:calcTmpTarget(objT, tempAmb)];
+    NSLog(@"key value: %@", self.keyValue);
     
+
+
 }
-*/
+
 @end
