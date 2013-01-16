@@ -57,7 +57,6 @@
 - (void)turnOn;
 - (void)turnOff;
 
-
-
+- (void)update;
 
 @end
