@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D911704C1681131000E2D19A /* DEABaseCBService.m in Sources */ = {isa = PBXBuildFile; fileRef = D911704B1681131000E2D19A /* DEABaseCBService.m */; };
+		D911704C1681131000E2D19A /* DEABaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = D911704B1681131000E2D19A /* DEABaseService.m */; };
 		D91170501681214700E2D19A /* DEACharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = D911704F1681214700E2D19A /* DEACharacteristic.m */; };
-		D91170531681251900E2D19A /* DTTemperatureBTService.m in Sources */ = {isa = PBXBuildFile; fileRef = D91170521681251900E2D19A /* DTTemperatureBTService.m */; };
-		D91170561681461300E2D19A /* DTAccelerometerBTService.m in Sources */ = {isa = PBXBuildFile; fileRef = D91170551681461300E2D19A /* DTAccelerometerBTService.m */; };
+		D91170531681251900E2D19A /* DEATemperatureService.m in Sources */ = {isa = PBXBuildFile; fileRef = D91170521681251900E2D19A /* DEATemperatureService.m */; };
+		D91170561681461300E2D19A /* DEAAccelerometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = D91170551681461300E2D19A /* DEAAccelerometerService.m */; };
 		D9718B46167F9F9F0001E42C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B45167F9F9F0001E42C /* UIKit.framework */; };
 		D9718B48167F9F9F0001E42C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B47167F9F9F0001E42C /* Foundation.framework */; };
 		D9718B4A167F9F9F0001E42C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B49167F9F9F0001E42C /* CoreGraphics.framework */; };
@@ -30,9 +30,9 @@
 		D9718B81167FA0BF0001E42C /* DEAHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9718B7F167FA0BF0001E42C /* DEAHomeViewController.xib */; };
 		D9718B8D167FA2C00001E42C /* DEASensorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718B8C167FA2C00001E42C /* DEASensorTag.m */; };
 		D9718B8F167FA5140001E42C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B8E167FA5140001E42C /* CoreBluetooth.framework */; };
-		D9718BA716804ED70001E42C /* TISensorTag.c in Sources */ = {isa = PBXBuildFile; fileRef = D9718BA616804ED70001E42C /* TISensorTag.c */; };
 		D9718BAD16805E820001E42C /* DEABluetoothService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718BAC16805E820001E42C /* DEABluetoothService.m */; };
-		D9D8316D168449FE00F51E42 /* DTSimpleKeysBTService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D8316C168449FD00F51E42 /* DTSimpleKeysBTService.m */; };
+		D9CB2C0A16A72D6C00279DDA /* YMS128.c in Sources */ = {isa = PBXBuildFile; fileRef = D9CB2C0916A72D6C00279DDA /* YMS128.c */; };
+		D9D8316D168449FE00F51E42 /* DEASimpleKeysService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D8316C168449FD00F51E42 /* DEASimpleKeysService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,14 +46,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D911704A1681131000E2D19A /* DEABaseCBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEABaseCBService.h; sourceTree = "<group>"; };
-		D911704B1681131000E2D19A /* DEABaseCBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEABaseCBService.m; sourceTree = "<group>"; };
+		D911704A1681131000E2D19A /* DEABaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEABaseService.h; sourceTree = "<group>"; };
+		D911704B1681131000E2D19A /* DEABaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEABaseService.m; sourceTree = "<group>"; };
 		D911704E1681214700E2D19A /* DEACharacteristic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEACharacteristic.h; sourceTree = "<group>"; };
 		D911704F1681214700E2D19A /* DEACharacteristic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEACharacteristic.m; sourceTree = "<group>"; };
-		D91170511681251900E2D19A /* DTTemperatureBTService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTTemperatureBTService.h; sourceTree = "<group>"; };
-		D91170521681251900E2D19A /* DTTemperatureBTService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTTemperatureBTService.m; sourceTree = "<group>"; };
-		D91170541681461300E2D19A /* DTAccelerometerBTService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTAccelerometerBTService.h; sourceTree = "<group>"; };
-		D91170551681461300E2D19A /* DTAccelerometerBTService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTAccelerometerBTService.m; sourceTree = "<group>"; };
+		D91170511681251900E2D19A /* DEATemperatureService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEATemperatureService.h; sourceTree = "<group>"; };
+		D91170521681251900E2D19A /* DEATemperatureService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEATemperatureService.m; sourceTree = "<group>"; };
+		D91170541681461300E2D19A /* DEAAccelerometerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAAccelerometerService.h; sourceTree = "<group>"; };
+		D91170551681461300E2D19A /* DEAAccelerometerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAAccelerometerService.m; sourceTree = "<group>"; };
 		D9718B41167F9F9F0001E42C /* Deanna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Deanna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9718B45167F9F9F0001E42C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D9718B47167F9F9F0001E42C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -82,11 +82,12 @@
 		D9718B8C167FA2C00001E42C /* DEASensorTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASensorTag.m; sourceTree = "<group>"; };
 		D9718B8E167FA5140001E42C /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D9718B94167FA91F0001E42C /* TISensorTag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TISensorTag.h; sourceTree = "<group>"; };
-		D9718BA616804ED70001E42C /* TISensorTag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TISensorTag.c; sourceTree = "<group>"; };
 		D9718BAB16805E810001E42C /* DEABluetoothService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEABluetoothService.h; sourceTree = "<group>"; };
 		D9718BAC16805E820001E42C /* DEABluetoothService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEABluetoothService.m; sourceTree = "<group>"; };
-		D9D8316B168449FD00F51E42 /* DTSimpleKeysBTService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTSimpleKeysBTService.h; sourceTree = "<group>"; };
-		D9D8316C168449FD00F51E42 /* DTSimpleKeysBTService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTSimpleKeysBTService.m; sourceTree = "<group>"; };
+		D9CB2C0916A72D6C00279DDA /* YMS128.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = YMS128.c; sourceTree = "<group>"; };
+		D9CB2C0B16A72D8F00279DDA /* YMS128.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YMS128.h; sourceTree = "<group>"; };
+		D9D8316B168449FD00F51E42 /* DEASimpleKeysService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASimpleKeysService.h; sourceTree = "<group>"; };
+		D9D8316C168449FD00F51E42 /* DEASimpleKeysService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASimpleKeysService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +153,7 @@
 				D9718B55167F9F9F0001E42C /* DEAAppDelegate.m */,
 				D9718B83167FA1400001E42C /* Services */,
 				D9CB2C0316A71F7800279DDA /* CoreBluetooth Peripherals */,
+				D9CB2C0816A725A000279DDA /* Deanna Framework */,
 				D9718B82167FA1360001E42C /* Controllers */,
 				D9718B84167FA1450001E42C /* UI */,
 				D9718B85167FA1870001E42C /* Utils */,
@@ -222,6 +224,8 @@
 		D9718B85167FA1870001E42C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				D9CB2C0B16A72D8F00279DDA /* YMS128.h */,
+				D9CB2C0916A72D6C00279DDA /* YMS128.c */,
 				D9718B7A167FA0430001E42C /* YMSCBUtils.h */,
 				D9718B7B167FA0430001E42C /* YMSCBUtils.m */,
 			);
@@ -240,7 +244,6 @@
 			isa = PBXGroup;
 			children = (
 				D9718B94167FA91F0001E42C /* TISensorTag.h */,
-				D9718BA616804ED70001E42C /* TISensorTag.c */,
 				D9718B8B167FA2C00001E42C /* DEASensorTag.h */,
 				D9718B8C167FA2C00001E42C /* DEASensorTag.m */,
 				D9CB2C0716A71FC300279DDA /* Services */,
@@ -251,18 +254,25 @@
 		D9CB2C0716A71FC300279DDA /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				D911704A1681131000E2D19A /* DEABaseCBService.h */,
-				D911704B1681131000E2D19A /* DEABaseCBService.m */,
-				D911704E1681214700E2D19A /* DEACharacteristic.h */,
-				D911704F1681214700E2D19A /* DEACharacteristic.m */,
-				D91170511681251900E2D19A /* DTTemperatureBTService.h */,
-				D91170521681251900E2D19A /* DTTemperatureBTService.m */,
-				D91170541681461300E2D19A /* DTAccelerometerBTService.h */,
-				D91170551681461300E2D19A /* DTAccelerometerBTService.m */,
-				D9D8316B168449FD00F51E42 /* DTSimpleKeysBTService.h */,
-				D9D8316C168449FD00F51E42 /* DTSimpleKeysBTService.m */,
+				D91170511681251900E2D19A /* DEATemperatureService.h */,
+				D91170521681251900E2D19A /* DEATemperatureService.m */,
+				D91170541681461300E2D19A /* DEAAccelerometerService.h */,
+				D91170551681461300E2D19A /* DEAAccelerometerService.m */,
+				D9D8316B168449FD00F51E42 /* DEASimpleKeysService.h */,
+				D9D8316C168449FD00F51E42 /* DEASimpleKeysService.m */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		D9CB2C0816A725A000279DDA /* Deanna Framework */ = {
+			isa = PBXGroup;
+			children = (
+				D911704A1681131000E2D19A /* DEABaseService.h */,
+				D911704B1681131000E2D19A /* DEABaseService.m */,
+				D911704E1681214700E2D19A /* DEACharacteristic.h */,
+				D911704F1681214700E2D19A /* DEACharacteristic.m */,
+			);
+			name = "Deanna Framework";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,13 +391,13 @@
 				D9718B7C167FA0430001E42C /* YMSCBUtils.m in Sources */,
 				D9718B80167FA0BF0001E42C /* DEAHomeViewController.m in Sources */,
 				D9718B8D167FA2C00001E42C /* DEASensorTag.m in Sources */,
-				D9718BA716804ED70001E42C /* TISensorTag.c in Sources */,
 				D9718BAD16805E820001E42C /* DEABluetoothService.m in Sources */,
-				D911704C1681131000E2D19A /* DEABaseCBService.m in Sources */,
+				D911704C1681131000E2D19A /* DEABaseService.m in Sources */,
 				D91170501681214700E2D19A /* DEACharacteristic.m in Sources */,
-				D91170531681251900E2D19A /* DTTemperatureBTService.m in Sources */,
-				D91170561681461300E2D19A /* DTAccelerometerBTService.m in Sources */,
-				D9D8316D168449FE00F51E42 /* DTSimpleKeysBTService.m in Sources */,
+				D91170531681251900E2D19A /* DEATemperatureService.m in Sources */,
+				D91170561681461300E2D19A /* DEAAccelerometerService.m in Sources */,
+				D9D8316D168449FE00F51E42 /* DEASimpleKeysService.m in Sources */,
+				D9CB2C0A16A72D6C00279DDA /* YMS128.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
