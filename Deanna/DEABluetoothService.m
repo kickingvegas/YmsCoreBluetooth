@@ -9,9 +9,9 @@
 #import "DEABluetoothService.h"
 #import "DEASensorTag.h"
 
-static DEABluetoothService *sharedBluetoothService;
-
 NSString * const DTBTLEServicePowerOffNotification = @"com.yummymelon.btleservice.power.off";
+
+static DEABluetoothService *sharedBluetoothService;
 
 @implementation DEABluetoothService
 
@@ -89,7 +89,6 @@ NSString * const DTBTLEServicePowerOffNotification = @"com.yummymelon.btleservic
         [self.manager retrievePeripherals:peripheralUUIDList];
     }
     else {
-        //[self.manager scanForPeripheralsWithServices:nil options:nil];
         [self startScan];
     }
 }
@@ -177,9 +176,6 @@ NSString * const DTBTLEServicePowerOffNotification = @"com.yummymelon.btleservic
                 [self.peripherals addObject:peripheral];
                 peripheral.delegate = self.sensorTag;
                 [central connectPeripheral:peripheral options:nil];
-                
-                //[self.manager stopScan];
-                //self.sensorTagEnabled = YES;
             }
         }
     }
