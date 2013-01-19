@@ -27,7 +27,7 @@ static DEABluetoothService *sharedBluetoothService;
     self = [super init];
     
     if (self) {
-        _peripherals = [[NSMutableArray alloc] init];
+        _ymsPeripherals = [[NSMutableArray alloc] init];
         _manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     }
     
@@ -48,7 +48,7 @@ static DEABluetoothService *sharedBluetoothService;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSMutableArray *devices = [[NSMutableArray alloc] init];
     
-    for (CBPeripheral *p in self.peripherals) {
+    for (CBPeripheral *p in self.ymsPeripherals) {
         CFStringRef uuidString = NULL;
         
         uuidString = CFUUIDCreateString(NULL, p.UUID);
@@ -167,38 +167,63 @@ static DEABluetoothService *sharedBluetoothService;
     oldManagerState = central.state;
 }
 
-- (void)handleFoundPeripheral:(CBPeripheral *)peripheral withCentral:(CBCentralManager *)central {
-    if (![self.peripherals containsObject:peripheral]) {
-        if ([self isSensorTagPeripheral:peripheral]) {
-            if (peripheral.isConnected == NO) {
-                if (self.sensorTag == nil)
-                    self.sensorTag = [[DEASensorTag alloc] init];
-                [self.peripherals addObject:peripheral];
-                peripheral.delegate = self.sensorTag;
-                [central connectPeripheral:peripheral options:nil];
+
+
+- (DEASensorTag *)findYmsPeripheral:(CBPeripheral *)peripheral {
+    
+    DEASensorTag *result;
+    
+    if ([self.ymsPeripherals count] == 0) {
+        result = nil;
+    }
+    
+    else {
+        for (DEASensorTag *sensorTag in self.ymsPeripherals) {
+            if (sensorTag.cbPeriperheral == peripheral) {
+                result = sensorTag;
+                break;
             }
         }
     }
 
+    return result;
 }
 
 
 
-- (void)connectPeripheral {
+- (void)handleFoundPeripheral:(CBPeripheral *)peripheral withCentral:(CBCentralManager *)central {
     
-    if ([self.peripherals count] > 0) {
-        [self.manager connectPeripheral:self.peripherals[0] options:nil];
+    DEASensorTag *sensorTag;
+    
+    sensorTag = [self findYmsPeripheral:peripheral];
+    
+    if (sensorTag == nil) {
+        sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral];
+        
+        [self.ymsPeripherals addObject:sensorTag];
+        
+        if (peripheral.isConnected == NO) {
+            [central connectPeripheral:peripheral options:nil];
+        }
+    }
+}
+
+
+
+- (void)connectPeripheral:(NSUInteger)index {
+    if ([self.ymsPeripherals count] > 0) {
+        DEASensorTag *sensorTag = self.ymsPeripherals[index];
+        [self.manager connectPeripheral:sensorTag.cbPeriperheral options:nil];
     }
 
 }
 
-- (void)disconnectPeripheral {
-    if ([self.peripherals count] > 0) {
-        [self.manager cancelPeripheralConnection:self.peripherals[0]];
+- (void)disconnectPeripheral:(NSUInteger)index {
+    if ([self.ymsPeripherals count] > 0) {
+        DEASensorTag *sensorTag = self.ymsPeripherals[index];
+        [self.manager cancelPeripheralConnection:sensorTag.cbPeriperheral];
     }
 }
-
-
 
 
 - (void)centralManager:(CBCentralManager *)central
@@ -230,10 +255,14 @@ didRetrievePeripherals:(NSArray *)peripherals {
     // 6
 
     if ([self isSensorTagPeripheral:peripheral]) {
-        [peripheral discoverServices:[self.sensorTag services]];
+        DEASensorTag *sensorTag = [self findYmsPeripheral:peripheral];
+        
+        if (sensorTag != nil) {
+            [peripheral discoverServices:[sensorTag services]];
+        }
+        
     }
     
-    //self.sensorTagEnabled = YES;
     self.isConnected = YES;
     
     if (self.delegate != nil) {
@@ -251,11 +280,10 @@ didRetrievePeripherals:(NSArray *)peripherals {
         [self.delegate didDisconnectPeripheral:self];
     }
     
-    self.sensorTag = nil;
-    [self.peripherals removeObject:peripheral];
-    self.isConnected = NO;
-    //[self loadPeripherals];
+    DEASensorTag *sensorTag = [self findYmsPeripheral:peripheral];
+    [self.ymsPeripherals removeObject:sensorTag];
     
+    self.isConnected = NO;
 }
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
