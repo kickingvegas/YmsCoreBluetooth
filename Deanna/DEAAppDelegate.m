@@ -20,7 +20,7 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
-    DEAHomeViewController *vc = [[DEAHomeViewController alloc] initWithNibName:@"DTHomeViewController" bundle:nil];
+    DEAHomeViewController *vc = [[DEAHomeViewController alloc] initWithNibName:@"DEAHomeViewController" bundle:nil];
     
     self.window.rootViewController = vc;
     
