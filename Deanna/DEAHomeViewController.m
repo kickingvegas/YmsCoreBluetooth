@@ -45,6 +45,13 @@
                      context:NULL];
     
     
+    [btleService addObserver:self
+                  forKeyPath:@"sensorTagConnected"
+                     options:NSKeyValueObservingOptionNew
+                     context:NULL];
+    
+    
+    
     
     
 }
@@ -117,6 +124,14 @@
 
                 
 
+            }
+        }
+        else if ([keyPath isEqualToString:@"sensorTagConnected"]) {
+            if ([btleService sensorTagConnected] == YES) {
+                self.connectedLabel.text = @"C";
+            }
+            else {
+                self.connectedLabel.text = @"NC";
             }
         }
     }
