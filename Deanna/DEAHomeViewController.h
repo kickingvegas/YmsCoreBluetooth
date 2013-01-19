@@ -10,7 +10,7 @@
 
 #import "DEABluetoothService.h"
 
-@interface DEAHomeViewController : UIViewController <DTSensorTagDelegate>
+@interface DEAHomeViewController : UIViewController <DEABluetoothServiceDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *ambientTemperatureLabel;
 @property (strong, nonatomic) IBOutlet UILabel *objectTemperatureLabel;
 @property (strong, nonatomic) IBOutlet UILabel *accelXLabel;

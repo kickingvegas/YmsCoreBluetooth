@@ -36,6 +36,10 @@
 
     self.title = @"Deanna";
     
+//    NSDictionary *navbarAttributes = @{ UITextAttributeTextColor : [UIColor redColor] };
+//    self.navigationController.navigationBar.titleTextAttributes = navbarAttributes;
+
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(btleOffHandler:) name:DTBTLEServicePowerOffNotification object:nil];
 
     DEABluetoothService *btleService = [DEABluetoothService sharedService];
@@ -108,6 +112,10 @@
     
     self.connectButton.title = @"Disconnect";
     
+//    NSDictionary *navbarAttributes = @{ UITextAttributeTextColor : [UIColor blueColor] };
+//    self.navigationController.navigationBar.titleTextAttributes = navbarAttributes;
+//    [self.navigationController.view setNeedsDisplay];
+
     DEABluetoothService *btleService = [DEABluetoothService sharedService];
     
     DEASensorTag *sensorTag = btleService.sensorTag;
@@ -161,7 +169,10 @@
 - (void)didDisconnectPeripheral:(id)delegate {
     DEABluetoothService *btleService = [DEABluetoothService sharedService];
 
-
+//    NSDictionary *navbarAttributes = @{ UITextAttributeTextColor : [UIColor whiteColor] };
+//    self.navigationController.navigationBar.titleTextAttributes = navbarAttributes;
+//    [self.navigationController.navigationBar setNeedsDisplay];
+    
     DEASensorTag *sensorTag = btleService.sensorTag;
     
     DEATemperatureService *ts = sensorTag.sensorServices[@"temperature"];
