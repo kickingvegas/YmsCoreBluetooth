@@ -7,7 +7,7 @@
 //
 
 #import "DEAAccelerometerService.h"
-#import "DEACharacteristic.h"
+#import "YMSCBCharacteristic.h"
 
 
 float calcAccel(int16_t rawV) {
@@ -34,9 +34,9 @@ float calcAccel(int16_t rawV) {
 - (NSArray *)characteristics {
     
     NSArray *result = @[
-    [(DEACharacteristic *)(self.characteristicMap[@"data"]) uuid],
-    [(DEACharacteristic *)(self.characteristicMap[@"config"]) uuid],
-    [(DEACharacteristic *)(self.characteristicMap[@"period"]) uuid]
+    [(YMSCBCharacteristic *)(self.characteristicMap[@"data"]) uuid],
+    [(YMSCBCharacteristic *)(self.characteristicMap[@"config"]) uuid],
+    [(YMSCBCharacteristic *)(self.characteristicMap[@"period"]) uuid]
     ];
     
     return result;
@@ -44,7 +44,7 @@ float calcAccel(int16_t rawV) {
 
 
 - (void)update {
-    DEACharacteristic *dtc = self.characteristicMap[@"data"];
+    YMSCBCharacteristic *dtc = self.characteristicMap[@"data"];
     NSData *data = dtc.characteristic.value;
     
     char val[data.length];

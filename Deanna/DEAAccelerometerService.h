@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Yummy Melon Software. All rights reserved.
 //
 
-#import "DEABaseService.h"
+#import "YMSCBService.h"
 
-@interface DEAAccelerometerService : DEABaseService
+@interface DEAAccelerometerService : YMSCBService
 
 @property (nonatomic, strong) NSNumber *x;
 @property (nonatomic, strong) NSNumber *y;

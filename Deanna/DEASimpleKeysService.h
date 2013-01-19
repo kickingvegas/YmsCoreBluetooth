@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Yummy Melon Software. All rights reserved.
 //
 
-#import "DEABaseService.h"
+#import "YMSCBService.h"
 
-@interface DEASimpleKeysService : DEABaseService
+@interface DEASimpleKeysService : YMSCBService
 
 @property (nonatomic, strong) NSNumber *keyValue;
 

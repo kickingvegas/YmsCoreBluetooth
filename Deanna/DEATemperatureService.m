@@ -7,7 +7,7 @@
 //
 
 #import "DEATemperatureService.h"
-#import "DEACharacteristic.h"
+#import "YMSCBCharacteristic.h"
 
 double calcTmpLocal(int16_t rawT) {
     double m_tempAmb = (double)rawT / 128.0;
@@ -52,7 +52,7 @@ double calcTmpTarget(int16_t objT, double m_tempAmb) {
 }
 
 - (void)update {
-    DEACharacteristic *dtc = self.characteristicMap[@"data"];
+    YMSCBCharacteristic *dtc = self.characteristicMap[@"data"];
     NSData *data = dtc.characteristic.value;
     
     char val[data.length];

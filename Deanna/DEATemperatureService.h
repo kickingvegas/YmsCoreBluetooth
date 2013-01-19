@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Yummy Melon Software. All rights reserved.
 //
 
-#import "DEABaseService.h"
+#import "YMSCBService.h"
 
-@interface DEATemperatureService : DEABaseService
+@interface DEATemperatureService : YMSCBService
 
 
 @property (nonatomic, strong) NSNumber *ambientTemp;

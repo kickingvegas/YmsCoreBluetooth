@@ -7,7 +7,7 @@
 //
 
 #import "DEASimpleKeysService.h"
-#import "DEACharacteristic.h"
+#import "YMSCBCharacteristic.h"
 
 @implementation DEASimpleKeysService
 
@@ -25,19 +25,15 @@
 - (NSArray *)characteristics {
     
     NSArray *result = @[
-    [(DEACharacteristic *)(self.characteristicMap[@"data"]) uuid]
+    [(YMSCBCharacteristic *)(self.characteristicMap[@"data"]) uuid]
     ];
     
     return result;
 }
 
 
-
-
-
-
 - (void)update {
-    DEACharacteristic *dtc = self.characteristicMap[@"data"];
+    YMSCBCharacteristic *dtc = self.characteristicMap[@"data"];
     NSData *data = dtc.characteristic.value;
     
     char val[data.length];
