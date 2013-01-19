@@ -22,7 +22,10 @@
     
     DEAHomeViewController *vc = [[DEAHomeViewController alloc] initWithNibName:@"DEAHomeViewController" bundle:nil];
     
-    self.window.rootViewController = vc;
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    
+    
+    self.window.rootViewController = nvc;
     
     [self.window makeKeyAndVisible];
     return YES;
