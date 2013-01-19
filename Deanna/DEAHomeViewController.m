@@ -282,7 +282,7 @@
             sensorName= @"temperature";
         }
         
-        DEABaseService *btService = sensorTag.sensorServices[sensorName];
+        YMSCBService *btService = sensorTag.sensorServices[sensorName];
 
         
         if (enableSwitch.isOn)
