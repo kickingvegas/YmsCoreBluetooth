@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D911704C1681131000E2D19A /* DEABaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = D911704B1681131000E2D19A /* DEABaseService.m */; };
-		D91170501681214700E2D19A /* DEACharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = D911704F1681214700E2D19A /* DEACharacteristic.m */; };
+		D911704C1681131000E2D19A /* YMSCBService.m in Sources */ = {isa = PBXBuildFile; fileRef = D911704B1681131000E2D19A /* YMSCBService.m */; };
+		D91170501681214700E2D19A /* YMSCBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = D911704F1681214700E2D19A /* YMSCBCharacteristic.m */; };
 		D91170531681251900E2D19A /* DEATemperatureService.m in Sources */ = {isa = PBXBuildFile; fileRef = D91170521681251900E2D19A /* DEATemperatureService.m */; };
 		D91170561681461300E2D19A /* DEAAccelerometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = D91170551681461300E2D19A /* DEAAccelerometerService.m */; };
 		D9718B46167F9F9F0001E42C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B45167F9F9F0001E42C /* UIKit.framework */; };
@@ -46,10 +46,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D911704A1681131000E2D19A /* DEABaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEABaseService.h; sourceTree = "<group>"; };
-		D911704B1681131000E2D19A /* DEABaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEABaseService.m; sourceTree = "<group>"; };
-		D911704E1681214700E2D19A /* DEACharacteristic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEACharacteristic.h; sourceTree = "<group>"; };
-		D911704F1681214700E2D19A /* DEACharacteristic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEACharacteristic.m; sourceTree = "<group>"; };
+		D911704A1681131000E2D19A /* YMSCBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBService.h; sourceTree = "<group>"; };
+		D911704B1681131000E2D19A /* YMSCBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBService.m; sourceTree = "<group>"; };
+		D911704E1681214700E2D19A /* YMSCBCharacteristic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBCharacteristic.h; sourceTree = "<group>"; };
+		D911704F1681214700E2D19A /* YMSCBCharacteristic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBCharacteristic.m; sourceTree = "<group>"; };
 		D91170511681251900E2D19A /* DEATemperatureService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEATemperatureService.h; sourceTree = "<group>"; };
 		D91170521681251900E2D19A /* DEATemperatureService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEATemperatureService.m; sourceTree = "<group>"; };
 		D91170541681461300E2D19A /* DEAAccelerometerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAAccelerometerService.h; sourceTree = "<group>"; };
@@ -267,10 +267,10 @@
 		D9CB2C0816A725A000279DDA /* Deanna Framework */ = {
 			isa = PBXGroup;
 			children = (
-				D911704A1681131000E2D19A /* DEABaseService.h */,
-				D911704B1681131000E2D19A /* DEABaseService.m */,
-				D911704E1681214700E2D19A /* DEACharacteristic.h */,
-				D911704F1681214700E2D19A /* DEACharacteristic.m */,
+				D911704A1681131000E2D19A /* YMSCBService.h */,
+				D911704B1681131000E2D19A /* YMSCBService.m */,
+				D911704E1681214700E2D19A /* YMSCBCharacteristic.h */,
+				D911704F1681214700E2D19A /* YMSCBCharacteristic.m */,
 			);
 			name = "Deanna Framework";
 			sourceTree = "<group>";
@@ -392,8 +392,8 @@
 				D9718B80167FA0BF0001E42C /* DEAHomeViewController.m in Sources */,
 				D9718B8D167FA2C00001E42C /* DEASensorTag.m in Sources */,
 				D9718BAD16805E820001E42C /* DEABluetoothService.m in Sources */,
-				D911704C1681131000E2D19A /* DEABaseService.m in Sources */,
-				D91170501681214700E2D19A /* DEACharacteristic.m in Sources */,
+				D911704C1681131000E2D19A /* YMSCBService.m in Sources */,
+				D91170501681214700E2D19A /* YMSCBCharacteristic.m in Sources */,
 				D91170531681251900E2D19A /* DEATemperatureService.m in Sources */,
 				D91170561681461300E2D19A /* DEAAccelerometerService.m in Sources */,
 				D9D8316D168449FE00F51E42 /* DEASimpleKeysService.m in Sources */,
