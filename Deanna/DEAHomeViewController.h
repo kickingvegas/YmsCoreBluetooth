@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "DEABluetoothService.h"
+#import "YMSBluetoothService.h"
 
 @interface DEAHomeViewController : UIViewController <DEABluetoothServiceDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *ambientTemperatureLabel;
