@@ -15,6 +15,8 @@
 @interface DEAHomeViewController ()
 
 - (void)btleOffHandler:(NSNotification *)notification;
+- (void)scanButtonAction:(id)sender;
+- (void)connectButtonAction:(id)sender;
     
 
 @end
@@ -33,27 +35,66 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.title = @"Deanna";
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(btleOffHandler:) name:DTBTLEServicePowerOffNotification object:nil];
     
 
     DEABluetoothService *btleService = [DEABluetoothService sharedService];
     
-    [btleService addObserver:self
-                  forKeyPath:@"sensorTagEnabled"
-                     options:NSKeyValueObservingOptionNew
-                     context:NULL];
+//    [btleService addObserver:self
+//                  forKeyPath:@"sensorTagEnabled"
+//                     options:NSKeyValueObservingOptionNew
+//                     context:NULL];
+    
+
+    btleService.delegate = self;
+
+    
+    [self.navigationController setToolbarHidden:NO];
     
     
-    [btleService addObserver:self
-                  forKeyPath:@"sensorTagConnected"
-                     options:NSKeyValueObservingOptionNew
-                     context:NULL];
+    self.scanButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Scanning" style:UIBarButtonItemStyleBordered target:self action:@selector(scanButtonAction:)];
+    
+    self.connectButton = [[UIBarButtonItem alloc] initWithTitle:@"Connect" style:UIBarButtonItemStyleBordered target:self action:@selector(connectButtonAction:)];
+
+    self.toolbarItems = @[self.scanButton, self.connectButton];
     
     
     
+}
+
+- (void)scanButtonAction:(id)sender {
+    NSLog(@"scanButtonAction");
     
+    DEABluetoothService *btleService = [DEABluetoothService sharedService];
     
+    if (btleService.isScanning == NO) {
+        [btleService startScan];
+    }
+    else {
+        [btleService stopScan];
+    }
+}
+
+
+- (void)connectButtonAction:(id)sender {
+    NSLog(@"connectButtonAction");
+    
+    DEABluetoothService *btleService = [DEABluetoothService sharedService];
+    
+    if (btleService.isConnected == YES) {
+        [btleService disconnectPeripheral];
+        
+        self.temperatureSwitch.on = NO;
+        self.accelSwitch.on = NO;
+        
+    }
+    else {
+        [btleService loadPeripherals];
+    }
+
 }
 
 
@@ -66,6 +107,87 @@
                                           otherButtonTitles:nil];
     
     [alert show];
+}
+
+
+- (void)hasStartedScanning:(id)delegate {
+    self.scanButton.title = @"Stop Scanning";
+}
+
+- (void)hasStoppedScanning:(id)delegate {
+    self.scanButton.title = @"Start Scanning";
+}
+
+
+- (void)didConnectPeripheral:(id)delegate {
+    
+    self.connectButton.title = @"Disconnect";
+    
+    DEABluetoothService *btleService = [DEABluetoothService sharedService];
+    
+    DEASensorTag *sensorTag = btleService.sensorTag;
+    
+    DEATemperatureService *ts = sensorTag.sensorServices[@"temperature"];
+    DEAAccelerometerService *as = sensorTag.sensorServices[@"accelerometer"];
+
+    [ts addObserver:self
+         forKeyPath:@"ambientTemp"
+            options:NSKeyValueObservingOptionNew
+            context:NULL];
+    
+    [ts addObserver:self
+         forKeyPath:@"objectTemp"
+            options:NSKeyValueObservingOptionNew
+            context:NULL];
+    
+    [ts addObserver:self
+         forKeyPath:@"isEnabled"
+            options:NSKeyValueObservingOptionNew
+            context:NULL];
+
+    
+    [as addObserver:self
+         forKeyPath:@"x"
+            options:NSKeyValueObservingOptionNew
+            context:NULL];
+    [as addObserver:self
+         forKeyPath:@"y"
+            options:NSKeyValueObservingOptionNew
+            context:NULL];
+    
+    [as addObserver:self
+         forKeyPath:@"z"
+            options:NSKeyValueObservingOptionNew
+            context:NULL];
+    
+    [as addObserver:self
+         forKeyPath:@"isEnabled"
+            options:NSKeyValueObservingOptionNew
+            context:NULL];
+}
+
+
+- (void)didDisconnectPeripheral:(id)delegate {
+    DEABluetoothService *btleService = [DEABluetoothService sharedService];
+
+
+    DEASensorTag *sensorTag = btleService.sensorTag;
+    
+    DEATemperatureService *ts = sensorTag.sensorServices[@"temperature"];
+    DEAAccelerometerService *as = sensorTag.sensorServices[@"accelerometer"];
+
+    self.connectButton.title = @"Connect";
+    
+    [ts removeObserver:self forKeyPath:@"ambientTemp"];
+    [ts removeObserver:self forKeyPath:@"objectTemp"];
+    [ts removeObserver:self forKeyPath:@"isEnabled"];
+    
+    [as removeObserver:self forKeyPath:@"x"];
+    [as removeObserver:self forKeyPath:@"y"];
+    [as removeObserver:self forKeyPath:@"z"];
+    [as removeObserver:self forKeyPath:@"isEnabled"];
+    
+    
 }
 
 
@@ -83,59 +205,50 @@
     DEATemperatureService *ts = sensorTag.sensorServices[@"temperature"];
     DEAAccelerometerService *as = sensorTag.sensorServices[@"accelerometer"];
 
-    if (object == btleService) {
-        if ([keyPath isEqualToString:@"sensorTagEnabled"]) {
-            if (btleService.sensorTagEnabled) {
-                [ts addObserver:self
-                     forKeyPath:@"ambientTemp"
-                        options:NSKeyValueObservingOptionNew
-                        context:NULL];
-                
-                [ts addObserver:self
-                     forKeyPath:@"objectTemp"
-                        options:NSKeyValueObservingOptionNew
-                        context:NULL];
-                
-                [as addObserver:self
-                     forKeyPath:@"x"
-                        options:NSKeyValueObservingOptionNew
-                        context:NULL];
-                [as addObserver:self
-                     forKeyPath:@"y"
-                        options:NSKeyValueObservingOptionNew
-                        context:NULL];
-                
-                [as addObserver:self
-                     forKeyPath:@"z"
-                        options:NSKeyValueObservingOptionNew
-                        context:NULL];
-                
-
-                [ts addObserver:self
-                     forKeyPath:@"isEnabled"
-                        options:NSKeyValueObservingOptionNew
-                        context:NULL];
-                
-                [as addObserver:self
-                     forKeyPath:@"isEnabled"
-                        options:NSKeyValueObservingOptionNew
-                        context:NULL];
-                
-
-                
-
-            }
-        }
-        else if ([keyPath isEqualToString:@"sensorTagConnected"]) {
-            if ([btleService sensorTagConnected] == YES) {
-                self.connectedLabel.text = @"C";
-            }
-            else {
-                self.connectedLabel.text = @"NC";
-            }
-        }
-    }
-    
+//    if (object == btleService) {
+//        if ([keyPath isEqualToString:@"sensorTagEnabled"]) {
+//            if (btleService.sensorTagEnabled) {
+//                [ts addObserver:self
+//                     forKeyPath:@"ambientTemp"
+//                        options:NSKeyValueObservingOptionNew
+//                        context:NULL];
+//                
+//                [ts addObserver:self
+//                     forKeyPath:@"objectTemp"
+//                        options:NSKeyValueObservingOptionNew
+//                        context:NULL];
+//                
+//                [as addObserver:self
+//                     forKeyPath:@"x"
+//                        options:NSKeyValueObservingOptionNew
+//                        context:NULL];
+//                [as addObserver:self
+//                     forKeyPath:@"y"
+//                        options:NSKeyValueObservingOptionNew
+//                        context:NULL];
+//                
+//                [as addObserver:self
+//                     forKeyPath:@"z"
+//                        options:NSKeyValueObservingOptionNew
+//                        context:NULL];
+//                
+//
+//                [ts addObserver:self
+//                     forKeyPath:@"isEnabled"
+//                        options:NSKeyValueObservingOptionNew
+//                        context:NULL];
+//                
+//                [as addObserver:self
+//                     forKeyPath:@"isEnabled"
+//                        options:NSKeyValueObservingOptionNew
+//                        context:NULL];
+//                
+//
+//                
+//
+//            }
+//        }
+//    }
     
     if (object == ts) {
         

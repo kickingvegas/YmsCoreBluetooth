@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DEAHomeViewController : UIViewController
+#import "DEABluetoothService.h"
+
+@interface DEAHomeViewController : UIViewController <DTSensorTagDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *ambientTemperatureLabel;
 @property (strong, nonatomic) IBOutlet UILabel *objectTemperatureLabel;
 @property (strong, nonatomic) IBOutlet UILabel *accelXLabel;
@@ -17,6 +19,9 @@
 @property (strong, nonatomic) IBOutlet UISwitch *temperatureSwitch;
 @property (strong, nonatomic) IBOutlet UISwitch *accelSwitch;
 @property (strong, nonatomic) IBOutlet UILabel *connectedLabel;
+
+@property (strong, nonatomic) UIBarButtonItem *scanButton;
+@property (strong, nonatomic) UIBarButtonItem *connectButton;
 
 
 - (IBAction)enableAction:(id)sender;
