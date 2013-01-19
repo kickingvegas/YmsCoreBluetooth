@@ -78,7 +78,7 @@
     DEABluetoothService *btleService = [DEABluetoothService sharedService];
     
     if (btleService.isConnected == YES) {
-        [btleService disconnectPeripheral];
+        [btleService disconnectPeripheral:0];
     }
     else {
         [btleService loadPeripherals];
@@ -112,14 +112,19 @@
     
     self.connectButton.title = @"Disconnect";
     
-//    NSDictionary *navbarAttributes = @{ UITextAttributeTextColor : [UIColor blueColor] };
-//    self.navigationController.navigationBar.titleTextAttributes = navbarAttributes;
-//    [self.navigationController.view setNeedsDisplay];
 
     DEABluetoothService *btleService = [DEABluetoothService sharedService];
     
-    DEASensorTag *sensorTag = btleService.sensorTag;
+    DEASensorTag *sensorTag;
     
+    if ([btleService.ymsPeripherals count] > 0) {
+        sensorTag = btleService.ymsPeripherals[0];
+    }
+    else {
+        return;
+    }
+    
+
     DEATemperatureService *ts = sensorTag.sensorServices[@"temperature"];
     DEAAccelerometerService *as = sensorTag.sensorServices[@"accelerometer"];
 
@@ -168,12 +173,14 @@
 
 - (void)didDisconnectPeripheral:(id)delegate {
     DEABluetoothService *btleService = [DEABluetoothService sharedService];
-
-//    NSDictionary *navbarAttributes = @{ UITextAttributeTextColor : [UIColor whiteColor] };
-//    self.navigationController.navigationBar.titleTextAttributes = navbarAttributes;
-//    [self.navigationController.navigationBar setNeedsDisplay];
+    DEASensorTag *sensorTag;
     
-    DEASensorTag *sensorTag = btleService.sensorTag;
+    if ([btleService.ymsPeripherals count] > 0) {
+        sensorTag = btleService.ymsPeripherals[0];
+    }
+    else {
+        return;
+    }
     
     DEATemperatureService *ts = sensorTag.sensorServices[@"temperature"];
     DEAAccelerometerService *as = sensorTag.sensorServices[@"accelerometer"];
@@ -204,7 +211,7 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
     DEABluetoothService *btleService = [DEABluetoothService sharedService];
-    DEASensorTag *sensorTag = btleService.sensorTag;
+    DEASensorTag *sensorTag = btleService.ymsPeripherals[0];
     
     DEATemperatureService *ts = sensorTag.sensorServices[@"temperature"];
     DEAAccelerometerService *as = sensorTag.sensorServices[@"accelerometer"];
@@ -260,7 +267,7 @@
 - (IBAction)enableAction:(id)sender {
     
     DEABluetoothService *btleService = [DEABluetoothService sharedService];
-    DEASensorTag *sensorTag = btleService.sensorTag;
+    DEASensorTag *sensorTag = btleService.ymsPeripherals[0];
     
     if (sensorTag != nil) {
     
