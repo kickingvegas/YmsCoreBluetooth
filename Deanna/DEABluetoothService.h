@@ -31,6 +31,7 @@ extern NSString * const DTBTLEServicePowerOffNotification;
 @property (nonatomic, strong) CBCentralManager *manager;
 @property (nonatomic, strong) DEASensorTag *sensorTag;
 @property (nonatomic, assign) BOOL sensorTagEnabled;
+@property (nonatomic, assign) BOOL sensorTagConnected;
 @property (nonatomic, strong) NSMutableArray *peripherals;
 
 + (DEABluetoothService *)sharedService;
@@ -39,6 +40,9 @@ extern NSString * const DTBTLEServicePowerOffNotification;
 
 - (void)persistPeripherals;
 - (void)loadPeripherals;
+
+
+- (void)handleFoundPeripheral:(CBPeripheral *)peripheral withCentral:(CBCentralManager *)central;
 
 
 @end
