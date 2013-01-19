@@ -14,12 +14,12 @@
 
 @interface DEASensorTag : NSObject <CBPeripheralDelegate>
 
-//@property (nonatomic, strong) NSMutableArray *peripherals;
-@property (nonatomic, strong) NSDictionary *sensorServices;
 @property (nonatomic, assign) yms_u128_t base;
+@property (nonatomic, strong) NSDictionary *sensorServices;
+@property (nonatomic, strong) CBPeripheral *cbPeriperheral;
 
+- (id)initWithPeripheral:(CBPeripheral *)peripheral;
 - (NSArray *)services;
-
 - (DEABaseService *)findService:(CBService *)service;
 
 @end

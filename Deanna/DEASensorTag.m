@@ -16,12 +16,11 @@
 @implementation DEASensorTag
 
 
-- (id)init {
+- (id)initWithPeripheral:(CBPeripheral *)peripheral {
     self = [super init];
     
     if (self) {
         
-        //_peripherals = [[NSMutableArray alloc] init];
         _base.hi = kSensorTag_BASE_ADDRESS_HI;
         _base.lo = kSensorTag_BASE_ADDRESS_LO;
         
@@ -38,6 +37,9 @@
         tempDict[sks.name] = sks;
         
         _sensorServices = tempDict;
+        
+        _cbPeriperheral = peripheral;
+        peripheral.delegate = self;
     }
     
     return self;
