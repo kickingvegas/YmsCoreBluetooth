@@ -89,10 +89,31 @@ NSString * const DTBTLEServicePowerOffNotification = @"com.yummymelon.btleservic
         [self.manager retrievePeripherals:peripheralUUIDList];
     }
     else {
-        [self.manager scanForPeripheralsWithServices:nil options:nil];
+        //[self.manager scanForPeripheralsWithServices:nil options:nil];
+        [self startScan];
     }
 }
 
+
+- (void)startScan {
+    [self.manager scanForPeripheralsWithServices:nil options:nil];
+    self.isScanning = YES;
+    
+    if (self.delegate != nil) {
+        [self.delegate hasStartedScanning:self];
+    }
+}
+
+
+- (void)stopScan {
+    [self.manager stopScan];
+    self.isScanning = NO;
+    
+    if (self.delegate != nil) {
+        [self.delegate hasStoppedScanning:self];
+    }
+
+}
 
 
 #pragma mark CBCentralManagerDelegate Protocol Methods
@@ -132,7 +153,7 @@ NSString * const DTBTLEServicePowerOffNotification = @"com.yummymelon.btleservic
             break;
             
         case CBCentralManagerStateUnsupported: {
-            NSLog(@"cbcm unauthorized");
+            NSLog(@"cbcm unsupported");
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
                                                             message:@""
                                                            delegate:nil
@@ -157,13 +178,32 @@ NSString * const DTBTLEServicePowerOffNotification = @"com.yummymelon.btleservic
                 peripheral.delegate = self.sensorTag;
                 [central connectPeripheral:peripheral options:nil];
                 
-                [self.manager stopScan];
+                //[self.manager stopScan];
                 //self.sensorTagEnabled = YES;
             }
         }
     }
 
 }
+
+
+
+- (void)connectPeripheral {
+    
+    if ([self.peripherals count] > 0) {
+        [self.manager connectPeripheral:self.peripherals[0] options:nil];
+    }
+
+}
+
+- (void)disconnectPeripheral {
+    if ([self.peripherals count] > 0) {
+        [self.manager cancelPeripheralConnection:self.peripherals[0]];
+    }
+}
+
+
+
 
 - (void)centralManager:(CBCentralManager *)central
  didDiscoverPeripheral:(CBPeripheral *)peripheral
@@ -174,20 +214,6 @@ NSString * const DTBTLEServicePowerOffNotification = @"com.yummymelon.btleservic
     
     [self handleFoundPeripheral:peripheral withCentral:central];
     
-//    if (![self.peripherals containsObject:peripheral]) {
-//        if ([self isSensorTagPeripheral:peripheral]) {
-//            if (peripheral.isConnected == NO) {
-//                if (self.sensorTag == nil)
-//                    self.sensorTag = [[DEASensorTag alloc] init];
-//                [self.peripherals addObject:peripheral];
-//                peripheral.delegate = self.sensorTag;
-//                [central connectPeripheral:peripheral options:nil];
-//                
-//                [self.manager stopScan];
-//                //self.sensorTagEnabled = YES;
-//            }
-//        }
-//    }
 
 }
 
@@ -200,22 +226,6 @@ didRetrievePeripherals:(NSArray *)peripherals {
         [self handleFoundPeripheral:peripheral withCentral:central];
     }
 
-//    for (CBPeripheral *peripheral in peripherals) {
-//        if (![self.peripherals containsObject:peripheral]) {
-//            if ([self isSensorTagPeripheral:peripheral]) {
-//                if (peripheral.isConnected == NO) {
-//                    if (self.sensorTag == nil)
-//                        self.sensorTag = [[DEASensorTag alloc] init];
-//                    [self.peripherals addObject:peripheral];
-//                    peripheral.delegate = self.sensorTag;
-//                    [central connectPeripheral:peripheral options:nil];
-//                    
-//                    [self.manager stopScan];
-//                    //self.sensorTagEnabled = YES;
-//                }
-//            }
-//        }
-//    }
     
 }
 
@@ -227,8 +237,12 @@ didRetrievePeripherals:(NSArray *)peripherals {
         [peripheral discoverServices:[self.sensorTag services]];
     }
     
-    self.sensorTagEnabled = YES;
-    self.sensorTagConnected = YES;
+    //self.sensorTagEnabled = YES;
+    self.isConnected = YES;
+    
+    if (self.delegate != nil) {
+        [self.delegate didConnectPeripheral:self];
+    }
 
 }
 
@@ -237,11 +251,14 @@ didRetrievePeripherals:(NSArray *)peripherals {
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     NSLog(@"centralManager didDisconnectePeripheral");
     
-    // TODO: need to figure out mechanism to to remove the UI bindings from this object.
+    if (self.delegate != nil) {
+        [self.delegate didDisconnectPeripheral:self];
+    }
     
     self.sensorTag = nil;
     [self.peripherals removeObject:peripheral];
-    [self loadPeripherals];
+    self.isConnected = NO;
+    //[self loadPeripherals];
     
 }
 

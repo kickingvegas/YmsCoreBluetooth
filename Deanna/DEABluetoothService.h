@@ -22,17 +22,25 @@ extern NSString * const DTBTLEServicePowerOffNotification;
  */
 @protocol DTSensorTagDelegate <NSObject>
 
+- (void)hasStoppedScanning:(id)delegate;
+- (void)hasStartedScanning:(id)delegate;
+- (void)didConnectPeripheral:(id)delegate;
+- (void)didDisconnectPeripheral:(id)delegate;
+
+
 @end
+
 
 @interface DEABluetoothService : NSObject <CBCentralManagerDelegate>
 
-@property (nonatomic, assign) id<DTSensorTagDelegate> delegate;
+@property (nonatomic, weak) id<DTSensorTagDelegate> delegate;
 
 @property (nonatomic, strong) CBCentralManager *manager;
 @property (nonatomic, strong) DEASensorTag *sensorTag;
-@property (nonatomic, assign) BOOL sensorTagEnabled;
-@property (nonatomic, assign) BOOL sensorTagConnected;
+//@property (nonatomic, assign) BOOL sensorTagEnabled;
+@property (nonatomic, assign) BOOL isConnected;
 @property (nonatomic, strong) NSMutableArray *peripherals;
+@property (nonatomic, assign) BOOL isScanning;
 
 + (DEABluetoothService *)sharedService;
 
@@ -44,5 +52,13 @@ extern NSString * const DTBTLEServicePowerOffNotification;
 
 - (void)handleFoundPeripheral:(CBPeripheral *)peripheral withCentral:(CBCentralManager *)central;
 
+- (void)startScan;
+- (void)stopScan;
+- (void)connectPeripheral;
+- (void)disconnectPeripheral;
 
 @end
+
+
+
+
