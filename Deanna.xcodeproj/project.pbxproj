@@ -31,6 +31,8 @@
 		D9718B8D167FA2C00001E42C /* DEASensorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718B8C167FA2C00001E42C /* DEASensorTag.m */; };
 		D9718B8F167FA5140001E42C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B8E167FA5140001E42C /* CoreBluetooth.framework */; };
 		D9718BAD16805E820001E42C /* YMSBluetoothService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718BAC16805E820001E42C /* YMSBluetoothService.m */; };
+		D9C5012216AB37DD001D4D4F /* DEAPeripheralsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C5012016AB37DD001D4D4F /* DEAPeripheralsViewController.m */; };
+		D9C5012316AB37DD001D4D4F /* DEAPeripheralsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9C5012116AB37DD001D4D4F /* DEAPeripheralsViewController.xib */; };
 		D9CB2C0A16A72D6C00279DDA /* YMS128.c in Sources */ = {isa = PBXBuildFile; fileRef = D9CB2C0916A72D6C00279DDA /* YMS128.c */; };
 		D9D8316D168449FE00F51E42 /* DEASimpleKeysService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D8316C168449FD00F51E42 /* DEASimpleKeysService.m */; };
 /* End PBXBuildFile section */
@@ -84,6 +86,9 @@
 		D9718B94167FA91F0001E42C /* TISensorTag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TISensorTag.h; sourceTree = "<group>"; };
 		D9718BAB16805E810001E42C /* YMSBluetoothService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSBluetoothService.h; sourceTree = "<group>"; };
 		D9718BAC16805E820001E42C /* YMSBluetoothService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSBluetoothService.m; sourceTree = "<group>"; };
+		D9C5011F16AB37DD001D4D4F /* DEAPeripheralsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAPeripheralsViewController.h; sourceTree = "<group>"; };
+		D9C5012016AB37DD001D4D4F /* DEAPeripheralsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAPeripheralsViewController.m; sourceTree = "<group>"; };
+		D9C5012116AB37DD001D4D4F /* DEAPeripheralsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEAPeripheralsViewController.xib; sourceTree = "<group>"; };
 		D9CB2C0916A72D6C00279DDA /* YMS128.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = YMS128.c; sourceTree = "<group>"; };
 		D9CB2C0B16A72D8F00279DDA /* YMS128.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YMS128.h; sourceTree = "<group>"; };
 		D9D8316B168449FD00F51E42 /* DEASimpleKeysService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASimpleKeysService.h; sourceTree = "<group>"; };
@@ -200,6 +205,8 @@
 			children = (
 				D9718B7D167FA0BF0001E42C /* DEAHomeViewController.h */,
 				D9718B7E167FA0BF0001E42C /* DEAHomeViewController.m */,
+				D9C5011F16AB37DD001D4D4F /* DEAPeripheralsViewController.h */,
+				D9C5012016AB37DD001D4D4F /* DEAPeripheralsViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -217,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				D9718B7F167FA0BF0001E42C /* DEAHomeViewController.xib */,
+				D9C5012116AB37DD001D4D4F /* DEAPeripheralsViewController.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -352,6 +360,7 @@
 				D9718B5A167F9FA00001E42C /* Default@2x.png in Resources */,
 				D9718B5C167F9FA00001E42C /* Default-568h@2x.png in Resources */,
 				D9718B81167FA0BF0001E42C /* DEAHomeViewController.xib in Resources */,
+				D9C5012316AB37DD001D4D4F /* DEAPeripheralsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,6 +407,7 @@
 				D91170561681461300E2D19A /* DEAAccelerometerService.m in Sources */,
 				D9D8316D168449FE00F51E42 /* DEASimpleKeysService.m in Sources */,
 				D9CB2C0A16A72D6C00279DDA /* YMS128.c in Sources */,
+				D9C5012216AB37DD001D4D4F /* DEAPeripheralsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
