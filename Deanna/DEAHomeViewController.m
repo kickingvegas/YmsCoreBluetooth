@@ -33,37 +33,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
+
     self.title = @"Deanna";
     
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(btleOffHandler:) name:DTBTLEServicePowerOffNotification object:nil];
-    
 
     DEABluetoothService *btleService = [DEABluetoothService sharedService];
-    
-//    [btleService addObserver:self
-//                  forKeyPath:@"sensorTagEnabled"
-//                     options:NSKeyValueObservingOptionNew
-//                     context:NULL];
-    
-
     btleService.delegate = self;
 
     
     [self.navigationController setToolbarHidden:NO];
-    
+
     
     self.scanButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Scanning" style:UIBarButtonItemStyleBordered target:self action:@selector(scanButtonAction:)];
     
     self.connectButton = [[UIBarButtonItem alloc] initWithTitle:@"Connect" style:UIBarButtonItemStyleBordered target:self action:@selector(connectButtonAction:)];
 
     self.toolbarItems = @[self.scanButton, self.connectButton];
-    
-    
-    
 }
+
+
 
 - (void)scanButtonAction:(id)sender {
     NSLog(@"scanButtonAction");
@@ -86,10 +75,6 @@
     
     if (btleService.isConnected == YES) {
         [btleService disconnectPeripheral];
-        
-        self.temperatureSwitch.on = NO;
-        self.accelSwitch.on = NO;
-        
     }
     else {
         [btleService loadPeripherals];
@@ -164,6 +149,12 @@
          forKeyPath:@"isEnabled"
             options:NSKeyValueObservingOptionNew
             context:NULL];
+    
+//    self.temperatureSwitch.on = YES;
+//    self.accelSwitch.on = YES;
+//    
+//    [self enableAction:self.temperatureSwitch];
+//    [self enableAction:self.accelSwitch];
 }
 
 
@@ -188,6 +179,8 @@
     [as removeObserver:self forKeyPath:@"isEnabled"];
     
     
+    self.temperatureSwitch.on = NO;
+    self.accelSwitch.on = NO;
 }
 
 
@@ -205,50 +198,6 @@
     DEATemperatureService *ts = sensorTag.sensorServices[@"temperature"];
     DEAAccelerometerService *as = sensorTag.sensorServices[@"accelerometer"];
 
-//    if (object == btleService) {
-//        if ([keyPath isEqualToString:@"sensorTagEnabled"]) {
-//            if (btleService.sensorTagEnabled) {
-//                [ts addObserver:self
-//                     forKeyPath:@"ambientTemp"
-//                        options:NSKeyValueObservingOptionNew
-//                        context:NULL];
-//                
-//                [ts addObserver:self
-//                     forKeyPath:@"objectTemp"
-//                        options:NSKeyValueObservingOptionNew
-//                        context:NULL];
-//                
-//                [as addObserver:self
-//                     forKeyPath:@"x"
-//                        options:NSKeyValueObservingOptionNew
-//                        context:NULL];
-//                [as addObserver:self
-//                     forKeyPath:@"y"
-//                        options:NSKeyValueObservingOptionNew
-//                        context:NULL];
-//                
-//                [as addObserver:self
-//                     forKeyPath:@"z"
-//                        options:NSKeyValueObservingOptionNew
-//                        context:NULL];
-//                
-//
-//                [ts addObserver:self
-//                     forKeyPath:@"isEnabled"
-//                        options:NSKeyValueObservingOptionNew
-//                        context:NULL];
-//                
-//                [as addObserver:self
-//                     forKeyPath:@"isEnabled"
-//                        options:NSKeyValueObservingOptionNew
-//                        context:NULL];
-//                
-//
-//                
-//
-//            }
-//        }
-//    }
     
     if (object == ts) {
         
