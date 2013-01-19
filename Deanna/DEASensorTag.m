@@ -21,7 +21,7 @@
     
     if (self) {
         
-        _peripherals = [[NSMutableArray alloc] init];
+        //_peripherals = [[NSMutableArray alloc] init];
         _base.hi = kSensorTag_BASE_ADDRESS_HI;
         _base.lo = kSensorTag_BASE_ADDRESS_LO;
         
@@ -33,9 +33,6 @@
         DEAAccelerometerService *as = [[DEAAccelerometerService alloc] initWithName:@"accelerometer"];
         tempDict[as.name] = as;
         
-        /**
-         * TODO: Support for 1.3 firmware
-                  */
         DEASimpleKeysService *sks = [[DEASimpleKeysService alloc] initWithName:@"simplekeys"];
         [sks turnOn];
         tempDict[sks.name] = sks;
