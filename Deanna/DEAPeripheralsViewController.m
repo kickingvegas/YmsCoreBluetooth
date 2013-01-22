@@ -139,6 +139,8 @@
     UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     [self configureCell:cell atIndexPath:indexPath];
@@ -162,11 +164,6 @@
     
     cell.textLabel.text = sensorTag.cbPeriperheral.name;
     
-    
-    
-    
-
-    
 }
 
 
@@ -186,11 +183,17 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"Selected");
+
     
+}
+
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
     
     DEASensorTag *sensorTag = (DEASensorTag *)[btleService.ymsPeripherals objectAtIndex:indexPath.row];
-
+    
     
     DEAHomeViewController *hvc = [[DEAHomeViewController alloc] initWithNibName:@"DEAHomeViewController" bundle:nil];
     
