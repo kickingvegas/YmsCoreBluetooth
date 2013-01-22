@@ -20,7 +20,7 @@ extern NSString * const YMSCBPowerOffNotification;
 /**
  Protocols
  */
-@protocol DEABluetoothServiceDelegate <NSObject>
+@protocol YMSBluetoothServiceDelegate <NSObject>
 
 - (void)hasStoppedScanning:(id)delegate;
 - (void)hasStartedScanning:(id)delegate;
@@ -33,7 +33,7 @@ extern NSString * const YMSCBPowerOffNotification;
 
 @interface YMSBluetoothService : NSObject <CBCentralManagerDelegate>
 
-@property (nonatomic, weak) id<DEABluetoothServiceDelegate> delegate;
+@property (nonatomic, weak) id<YMSBluetoothServiceDelegate> delegate;
 
 @property (nonatomic, strong) CBCentralManager *manager;
 @property (nonatomic, strong) NSMutableArray *ymsPeripherals;
