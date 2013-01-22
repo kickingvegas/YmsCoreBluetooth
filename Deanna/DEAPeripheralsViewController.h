@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YMSBluetoothService.h"
 
-@interface DEAPeripheralsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface DEAPeripheralsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, YMSBluetoothServiceDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *peripheralsTableView;
+
+@property (strong, nonatomic) UIBarButtonItem *scanButton;
+@property (strong, nonatomic) UIBarButtonItem *connectButton;
+
 
 @end

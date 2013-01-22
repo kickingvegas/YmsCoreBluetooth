@@ -15,8 +15,8 @@
 @interface DEAHomeViewController ()
 
 - (void)btleOffHandler:(NSNotification *)notification;
-- (void)scanButtonAction:(id)sender;
-- (void)connectButtonAction:(id)sender;
+//- (void)scanButtonAction:(id)sender;
+//- (void)connectButtonAction:(id)sender;
     
 
 @end
@@ -38,95 +38,63 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(btleOffHandler:) name:YMSCBPowerOffNotification object:nil];
 
+        
+
+
+
+    
+//    [self.navigationController setToolbarHidden:NO];
+//
+//    
+//    self.scanButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Scanning" style:UIBarButtonItemStyleBordered target:self action:@selector(scanButtonAction:)];
+//    
+//    self.connectButton = [[UIBarButtonItem alloc] initWithTitle:@"Connect" style:UIBarButtonItemStyleBordered target:self action:@selector(connectButtonAction:)];
+//
+//    self.toolbarItems = @[self.scanButton, self.connectButton];
+}
+
+
+
+//- (void)scanButtonAction:(id)sender {
+//    NSLog(@"scanButtonAction");
+//    
+//    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+//    
+//    if (btleService.isScanning == NO) {
+//        [btleService startScan];
+//    }
+//    else {
+//        [btleService stopScan];
+//    }
+//}
+//
+//
+//- (void)connectButtonAction:(id)sender {
+//    NSLog(@"connectButtonAction");
+//    
+//    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+//    
+//    
+//    // TODO: handle N case
+//    
+//    if (btleService.isConnected == YES) {
+//        [btleService disconnectPeripheral:0];
+//    }
+//    else {
+//        [btleService loadPeripherals];
+//    }
+//
+//}
+
+- (void)viewWillAppear:(BOOL)animated {
+
     YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
     btleService.delegate = self;
 
     
-    [self.navigationController setToolbarHidden:NO];
-
+    DEATemperatureService *ts = self.sensorTag.sensorServices[@"temperature"];
+    DEAAccelerometerService *as = self.sensorTag.sensorServices[@"accelerometer"];
     
-    self.scanButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Scanning" style:UIBarButtonItemStyleBordered target:self action:@selector(scanButtonAction:)];
-    
-    self.connectButton = [[UIBarButtonItem alloc] initWithTitle:@"Connect" style:UIBarButtonItemStyleBordered target:self action:@selector(connectButtonAction:)];
-
-    self.toolbarItems = @[self.scanButton, self.connectButton];
-}
-
-
-
-- (void)scanButtonAction:(id)sender {
-    NSLog(@"scanButtonAction");
-    
-    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
-    
-    if (btleService.isScanning == NO) {
-        [btleService startScan];
-    }
-    else {
-        [btleService stopScan];
-    }
-}
-
-
-- (void)connectButtonAction:(id)sender {
-    NSLog(@"connectButtonAction");
-    
-    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
-    
-    
-    // TODO: handle N case
-    
-    if (btleService.isConnected == YES) {
-        [btleService disconnectPeripheral:0];
-    }
-    else {
-        [btleService loadPeripherals];
-    }
-
-}
-
-
-- (void)btleOffHandler:(NSNotification *)notification {
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BTLE is off"
-                                                    message:@"yo turn it on!"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"Dismiss"
-                                          otherButtonTitles:nil];
-    
-    [alert show];
-}
-
-
-- (void)hasStartedScanning:(id)delegate {
-    self.scanButton.title = @"Stop Scanning";
-}
-
-- (void)hasStoppedScanning:(id)delegate {
-    self.scanButton.title = @"Start Scanning";
-}
-
-
-- (void)didConnectPeripheral:(id)delegate {
-    
-    self.connectButton.title = @"Disconnect";
-    
-
-    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
-    
-    DEASensorTag *sensorTag;
-    
-    if ([btleService.ymsPeripherals count] > 0) {
-        sensorTag = btleService.ymsPeripherals[0];
-    }
-    else {
-        return;
-    }
-    
-
-    DEATemperatureService *ts = sensorTag.sensorServices[@"temperature"];
-    DEAAccelerometerService *as = sensorTag.sensorServices[@"accelerometer"];
-
     [ts addObserver:self
          forKeyPath:@"ambientTemp"
             options:NSKeyValueObservingOptionNew
@@ -141,7 +109,7 @@
          forKeyPath:@"isEnabled"
             options:NSKeyValueObservingOptionNew
             context:NULL];
-
+    
     
     [as addObserver:self
          forKeyPath:@"x"
@@ -161,30 +129,16 @@
          forKeyPath:@"isEnabled"
             options:NSKeyValueObservingOptionNew
             context:NULL];
+
     
-//    self.temperatureSwitch.on = YES;
-//    self.accelSwitch.on = YES;
-//    
-//    [self enableAction:self.temperatureSwitch];
-//    [self enableAction:self.accelSwitch];
 }
 
-
-- (void)didDisconnectPeripheral:(id)delegate {
-    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
-    DEASensorTag *sensorTag;
+- (void)viewWillDisappear:(BOOL)animated {
     
-    if ([btleService.ymsPeripherals count] > 0) {
-        sensorTag = btleService.ymsPeripherals[0];
-    }
-    else {
-        return;
-    }
+    DEATemperatureService *ts = self.sensorTag.sensorServices[@"temperature"];
+    DEAAccelerometerService *as = self.sensorTag.sensorServices[@"accelerometer"];
     
-    DEATemperatureService *ts = sensorTag.sensorServices[@"temperature"];
-    DEAAccelerometerService *as = sensorTag.sensorServices[@"accelerometer"];
-
-    self.connectButton.title = @"Connect";
+    //self.connectButton.title = @"Connect";
     
     [ts removeObserver:self forKeyPath:@"ambientTemp"];
     [ts removeObserver:self forKeyPath:@"objectTemp"];
@@ -194,10 +148,121 @@
     [as removeObserver:self forKeyPath:@"y"];
     [as removeObserver:self forKeyPath:@"z"];
     [as removeObserver:self forKeyPath:@"isEnabled"];
+
+}
+
+- (void)btleOffHandler:(NSNotification *)notification {
     
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BTLE is off"
+                                                    message:@"yo turn it on!"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"Dismiss"
+                                          otherButtonTitles:nil];
     
-    self.temperatureSwitch.on = NO;
-    self.accelSwitch.on = NO;
+    [alert show];
+}
+
+
+- (void)hasStartedScanning:(id)delegate {
+//    self.scanButton.title = @"Stop Scanning";
+}
+
+- (void)hasStoppedScanning:(id)delegate {
+//    self.scanButton.title = @"Start Scanning";
+}
+
+
+- (void)didConnectPeripheral:(id)delegate {
+    
+//    self.connectButton.title = @"Disconnect";
+    
+
+//    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+//    
+//    DEASensorTag *sensorTag;
+//    
+//    if ([btleService.ymsPeripherals count] > 0) {
+//        sensorTag = btleService.ymsPeripherals[0];
+//    }
+//    else {
+//        return;
+//    }
+//    
+//
+//    DEATemperatureService *ts = sensorTag.sensorServices[@"temperature"];
+//    DEAAccelerometerService *as = sensorTag.sensorServices[@"accelerometer"];
+//
+//    [ts addObserver:self
+//         forKeyPath:@"ambientTemp"
+//            options:NSKeyValueObservingOptionNew
+//            context:NULL];
+//    
+//    [ts addObserver:self
+//         forKeyPath:@"objectTemp"
+//            options:NSKeyValueObservingOptionNew
+//            context:NULL];
+//    
+//    [ts addObserver:self
+//         forKeyPath:@"isEnabled"
+//            options:NSKeyValueObservingOptionNew
+//            context:NULL];
+//
+//    
+//    [as addObserver:self
+//         forKeyPath:@"x"
+//            options:NSKeyValueObservingOptionNew
+//            context:NULL];
+//    [as addObserver:self
+//         forKeyPath:@"y"
+//            options:NSKeyValueObservingOptionNew
+//            context:NULL];
+//    
+//    [as addObserver:self
+//         forKeyPath:@"z"
+//            options:NSKeyValueObservingOptionNew
+//            context:NULL];
+//    
+//    [as addObserver:self
+//         forKeyPath:@"isEnabled"
+//            options:NSKeyValueObservingOptionNew
+//            context:NULL];
+//    
+//    self.temperatureSwitch.on = YES;
+//    self.accelSwitch.on = YES;
+//    
+//    [self enableAction:self.temperatureSwitch];
+//    [self enableAction:self.accelSwitch];
+}
+
+
+- (void)didDisconnectPeripheral:(id)delegate {
+//    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+//    DEASensorTag *sensorTag;
+//    
+//    if ([btleService.ymsPeripherals count] > 0) {
+//        sensorTag = btleService.ymsPeripherals[0];
+//    }
+//    else {
+//        return;
+//    }
+//    
+//    DEATemperatureService *ts = sensorTag.sensorServices[@"temperature"];
+//    DEAAccelerometerService *as = sensorTag.sensorServices[@"accelerometer"];
+//
+//    //self.connectButton.title = @"Connect";
+//    
+//    [ts removeObserver:self forKeyPath:@"ambientTemp"];
+//    [ts removeObserver:self forKeyPath:@"objectTemp"];
+//    [ts removeObserver:self forKeyPath:@"isEnabled"];
+//    
+//    [as removeObserver:self forKeyPath:@"x"];
+//    [as removeObserver:self forKeyPath:@"y"];
+//    [as removeObserver:self forKeyPath:@"z"];
+//    [as removeObserver:self forKeyPath:@"isEnabled"];
+//    
+//    
+//    self.temperatureSwitch.on = NO;
+//    self.accelSwitch.on = NO;
 }
 
 
@@ -209,11 +274,11 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
-    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
-    DEASensorTag *sensorTag = btleService.ymsPeripherals[0];
+    //YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+    //DEASensorTag *sensorTag = btleService.ymsPeripherals[0];
     
-    DEATemperatureService *ts = sensorTag.sensorServices[@"temperature"];
-    DEAAccelerometerService *as = sensorTag.sensorServices[@"accelerometer"];
+    DEATemperatureService *ts = self.sensorTag.sensorServices[@"temperature"];
+    DEAAccelerometerService *as = self.sensorTag.sensorServices[@"accelerometer"];
 
     
     if (object == ts) {
@@ -265,10 +330,10 @@
 
 - (IBAction)enableAction:(id)sender {
     
-    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
-    DEASensorTag *sensorTag = btleService.ymsPeripherals[0];
+    //YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+    //DEASensorTag *sensorTag = btleService.ymsPeripherals[0];
     
-    if (sensorTag != nil) {
+    if (self.sensorTag != nil) {
     
         NSString *sensorName;
 
@@ -281,7 +346,7 @@
             sensorName= @"temperature";
         }
         
-        YMSCBService *btService = sensorTag.sensorServices[sensorName];
+        YMSCBService *btService = self.sensorTag.sensorServices[sensorName];
 
         
         if (enableSwitch.isOn)

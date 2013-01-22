@@ -7,8 +7,11 @@
 //
 
 #import "DEAPeripheralsViewController.h"
+#import "DEASensorTag.h"
+#import "DEAHomeViewController.h"
 
 @interface DEAPeripheralsViewController ()
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -23,10 +26,32 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    self.title = @"Peripherals";
+    
+    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+    btleService.delegate = self;
+    
+    
+    [self.navigationController setToolbarHidden:NO];
+    
+    
+    self.scanButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Scanning" style:UIBarButtonItemStyleBordered target:self action:@selector(scanButtonAction:)];
+    
+    self.connectButton = [[UIBarButtonItem alloc] initWithTitle:@"Connect" style:UIBarButtonItemStyleBordered target:self action:@selector(connectButtonAction:)];
+    
+    self.toolbarItems = @[self.scanButton, self.connectButton];
+    
+    
+    [self.peripheralsTableView reloadData];
+    
+    
+    
+
+    
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,5 +59,147 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+- (void)scanButtonAction:(id)sender {
+    NSLog(@"scanButtonAction");
+    
+    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+    
+    if (btleService.isScanning == NO) {
+        [btleService startScan];
+    }
+    else {
+        [btleService stopScan];
+    }
+}
+
+
+- (void)connectButtonAction:(id)sender {
+    NSLog(@"connectButtonAction");
+    
+    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+    
+    
+    // TODO: handle N case
+    
+    if (btleService.isConnected == YES) {
+        [btleService disconnectPeripheral:0];
+    }
+    else {
+        [btleService loadPeripherals];
+    }
+    
+}
+
+
+- (void)btleOffHandler:(NSNotification *)notification {
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BTLE is off"
+                                                    message:@"yo turn it on!"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"Dismiss"
+                                          otherButtonTitles:nil];
+    
+    [alert show];
+}
+
+
+- (void)hasStartedScanning:(id)delegate {
+    self.scanButton.title = @"Stop Scanning";
+}
+
+- (void)hasStoppedScanning:(id)delegate {
+    self.scanButton.title = @"Start Scanning";
+}
+
+- (void)didConnectPeripheral:(id)delegate {
+    NSLog(@"didConnectPeripheral:");
+    
+    [self.peripheralsTableView reloadData];
+
+    
+}
+
+- (void)didDisconnectPeripheral:(id)delegate {
+    NSLog(@"didDisconnectPeripheral:");
+    
+    [self.peripheralsTableView reloadData];
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    
+    [self configureCell:cell atIndexPath:indexPath];
+    return cell;
+
+}
+
+
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    
+    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+    
+    DEASensorTag *sensorTag = (DEASensorTag *)[btleService.ymsPeripherals objectAtIndex:indexPath.row];
+    
+    if (sensorTag.cbPeriperheral.isConnected) {
+        cell.detailTextLabel.text = @"Connected";
+    }
+    else {
+        cell.detailTextLabel.text = @"Unconnected";
+    }
+    
+    cell.textLabel.text = sensorTag.cbPeriperheral.name;
+    
+    
+    
+    
+
+    
+}
+
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+    
+    NSInteger result;
+    
+    result = [btleService.ymsPeripherals count];
+    
+    return result;
+    
+    
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+    
+    DEASensorTag *sensorTag = (DEASensorTag *)[btleService.ymsPeripherals objectAtIndex:indexPath.row];
+
+    
+    DEAHomeViewController *hvc = [[DEAHomeViewController alloc] initWithNibName:@"DEAHomeViewController" bundle:nil];
+    
+    hvc.sensorTag = sensorTag;
+    
+    [self.navigationController pushViewController:hvc animated:YES];
+    
+    
+}
+
 
 @end
