@@ -8,6 +8,7 @@
 
 #import "DEAAppDelegate.h"
 #import "DEAHomeViewController.h"
+#import "DEAPeripheralsViewController.h"
 #import "YMSBluetoothService.h"
 
 @implementation DEAAppDelegate
@@ -20,9 +21,10 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
-    DEAHomeViewController *vc = [[DEAHomeViewController alloc] initWithNibName:@"DEAHomeViewController" bundle:nil];
+    //DEAHomeViewController *vc = [[DEAHomeViewController alloc] initWithNibName:@"DEAHomeViewController" bundle:nil];
+    DEAPeripheralsViewController *pvc = [[DEAPeripheralsViewController alloc] initWithNibName:@"DEAPeripheralsViewController" bundle:nil];
     
-    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
+    UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:pvc];
     
     
     self.window.rootViewController = nvc;
