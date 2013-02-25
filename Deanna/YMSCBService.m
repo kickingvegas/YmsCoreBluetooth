@@ -155,11 +155,13 @@
 - (void)turnOff {
     [self writeByte:0x0 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
     [self setNotifyValue:NO forCharacteristicName:@"data"];
+    self.isEnabled = NO;
 }
 
 - (void)turnOn {
     [self writeByte:0x1 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
     [self setNotifyValue:YES forCharacteristicName:@"data"];
+    self.isEnabled = YES;
 }
 
 
