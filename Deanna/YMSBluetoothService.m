@@ -195,6 +195,8 @@ static YMSBluetoothService *sharedBluetoothService;
     
     DEASensorTag *sensorTag;
     
+    [self stopScan];
+    
     sensorTag = [self findYmsPeripheral:peripheral];
     
     if (sensorTag == nil) {
@@ -231,9 +233,14 @@ static YMSBluetoothService *sharedBluetoothService;
      advertisementData:(NSDictionary *)advertisementData
                   RSSI:(NSNumber *)RSSI {
     
-    NSLog(@"%@", peripheral);
+    NSLog(@"%@, %@, %@", peripheral, peripheral.name, RSSI);
+
     
-    [self handleFoundPeripheral:peripheral withCentral:central];
+    if (peripheral.name != nil) {
+        //if ([peripheral.name isEqualToString:@"SensorTag"]) {
+            [self handleFoundPeripheral:peripheral withCentral:central];
+        //}
+    }
     
 
 }
