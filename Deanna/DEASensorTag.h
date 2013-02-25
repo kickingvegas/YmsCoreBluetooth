@@ -21,6 +21,7 @@
 - (id)initWithPeripheral:(CBPeripheral *)peripheral;
 - (NSArray *)services;
 - (YMSCBService *)findService:(CBService *)service;
+- (void)updateRSSI;
 
 @end
 

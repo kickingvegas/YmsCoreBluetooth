@@ -40,6 +40,10 @@
         
         _cbPeriperheral = peripheral;
         peripheral.delegate = self;
+        
+        [peripheral readRSSI];
+        
+
     }
     
     return self;
@@ -118,6 +122,7 @@
     YMSCBCharacteristic *dtc = [btService findCharacteristic:characteristic];
     
     if ([dtc.name isEqualToString:@"config"]) {
+        /*
         NSData *data = [btService responseConfig];
 
         if ([YMSCBUtils dataToByte:data] == 0x1) {
@@ -126,6 +131,7 @@
         else {
             btService.isEnabled = NO;
         }
+         */
     }
     
     else if ([dtc.name isEqualToString:@"data"]) {
@@ -135,8 +141,16 @@
 
 }
 
+- (void)updateRSSI {
+    [self.cbPeriperheral readRSSI];
+    
+}
     
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {
+    NSLog(@"RSSI: %@", peripheral.RSSI);
+    
+    
+    [self performSelector:@selector(updateRSSI) withObject:self afterDelay:5];
     
 }
     
