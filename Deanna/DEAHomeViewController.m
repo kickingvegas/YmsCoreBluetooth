@@ -38,53 +38,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(btleOffHandler:) name:YMSCBPowerOffNotification object:nil];
 
-        
-
-
-
-    
-//    [self.navigationController setToolbarHidden:NO];
-//
-//    
-//    self.scanButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Scanning" style:UIBarButtonItemStyleBordered target:self action:@selector(scanButtonAction:)];
-//    
-//    self.connectButton = [[UIBarButtonItem alloc] initWithTitle:@"Connect" style:UIBarButtonItemStyleBordered target:self action:@selector(connectButtonAction:)];
-//
-//    self.toolbarItems = @[self.scanButton, self.connectButton];
 }
 
-
-
-//- (void)scanButtonAction:(id)sender {
-//    NSLog(@"scanButtonAction");
-//    
-//    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
-//    
-//    if (btleService.isScanning == NO) {
-//        [btleService startScan];
-//    }
-//    else {
-//        [btleService stopScan];
-//    }
-//}
-//
-//
-//- (void)connectButtonAction:(id)sender {
-//    NSLog(@"connectButtonAction");
-//    
-//    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
-//    
-//    
-//    // TODO: handle N case
-//    
-//    if (btleService.isConnected == YES) {
-//        [btleService disconnectPeripheral:0];
-//    }
-//    else {
-//        [btleService loadPeripherals];
-//    }
-//
-//}
 
 - (void)viewWillAppear:(BOOL)animated {
 
@@ -129,6 +84,21 @@
          forKeyPath:@"isEnabled"
             options:NSKeyValueObservingOptionNew
             context:NULL];
+    
+    if (ts.isEnabled) {
+        self.temperatureSwitch.on = YES;
+    }
+    else {
+        self.temperatureSwitch.on = NO;
+    }
+    
+    if (as.isEnabled) {
+        self.accelSwitch.on = YES;
+    }
+    else {
+        self.accelSwitch.on = NO;
+    }
+        
 
     
 }
@@ -173,96 +143,10 @@
 
 
 - (void)didConnectPeripheral:(id)delegate {
-    
-//    self.connectButton.title = @"Disconnect";
-    
-
-//    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
-//    
-//    DEASensorTag *sensorTag;
-//    
-//    if ([btleService.ymsPeripherals count] > 0) {
-//        sensorTag = btleService.ymsPeripherals[0];
-//    }
-//    else {
-//        return;
-//    }
-//    
-//
-//    DEATemperatureService *ts = sensorTag.sensorServices[@"temperature"];
-//    DEAAccelerometerService *as = sensorTag.sensorServices[@"accelerometer"];
-//
-//    [ts addObserver:self
-//         forKeyPath:@"ambientTemp"
-//            options:NSKeyValueObservingOptionNew
-//            context:NULL];
-//    
-//    [ts addObserver:self
-//         forKeyPath:@"objectTemp"
-//            options:NSKeyValueObservingOptionNew
-//            context:NULL];
-//    
-//    [ts addObserver:self
-//         forKeyPath:@"isEnabled"
-//            options:NSKeyValueObservingOptionNew
-//            context:NULL];
-//
-//    
-//    [as addObserver:self
-//         forKeyPath:@"x"
-//            options:NSKeyValueObservingOptionNew
-//            context:NULL];
-//    [as addObserver:self
-//         forKeyPath:@"y"
-//            options:NSKeyValueObservingOptionNew
-//            context:NULL];
-//    
-//    [as addObserver:self
-//         forKeyPath:@"z"
-//            options:NSKeyValueObservingOptionNew
-//            context:NULL];
-//    
-//    [as addObserver:self
-//         forKeyPath:@"isEnabled"
-//            options:NSKeyValueObservingOptionNew
-//            context:NULL];
-//    
-//    self.temperatureSwitch.on = YES;
-//    self.accelSwitch.on = YES;
-//    
-//    [self enableAction:self.temperatureSwitch];
-//    [self enableAction:self.accelSwitch];
 }
 
 
 - (void)didDisconnectPeripheral:(id)delegate {
-//    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
-//    DEASensorTag *sensorTag;
-//    
-//    if ([btleService.ymsPeripherals count] > 0) {
-//        sensorTag = btleService.ymsPeripherals[0];
-//    }
-//    else {
-//        return;
-//    }
-//    
-//    DEATemperatureService *ts = sensorTag.sensorServices[@"temperature"];
-//    DEAAccelerometerService *as = sensorTag.sensorServices[@"accelerometer"];
-//
-//    //self.connectButton.title = @"Connect";
-//    
-//    [ts removeObserver:self forKeyPath:@"ambientTemp"];
-//    [ts removeObserver:self forKeyPath:@"objectTemp"];
-//    [ts removeObserver:self forKeyPath:@"isEnabled"];
-//    
-//    [as removeObserver:self forKeyPath:@"x"];
-//    [as removeObserver:self forKeyPath:@"y"];
-//    [as removeObserver:self forKeyPath:@"z"];
-//    [as removeObserver:self forKeyPath:@"isEnabled"];
-//    
-//    
-//    self.temperatureSwitch.on = NO;
-//    self.accelSwitch.on = NO;
 }
 
 
@@ -299,7 +183,7 @@
 
         }
         else if ([keyPath isEqualToString:@"isEnabled"]) {
-            [self.accelSwitch setOn:ts.isEnabled animated:YES];
+            [self.temperatureSwitch setOn:ts.isEnabled animated:YES];
         }
     }
     
