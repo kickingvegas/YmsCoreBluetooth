@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D906E5F116DCAC55001D7932 /* DEACBAppService.m in Sources */ = {isa = PBXBuildFile; fileRef = D906E5F016DCAC55001D7932 /* DEACBAppService.m */; };
+		D90C0C3A16DD6297002D3FFD /* DEABaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D90C0C3916DD6297002D3FFD /* DEABaseViewController.m */; };
 		D911704C1681131000E2D19A /* YMSCBService.m in Sources */ = {isa = PBXBuildFile; fileRef = D911704B1681131000E2D19A /* YMSCBService.m */; };
 		D91170501681214700E2D19A /* YMSCBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = D911704F1681214700E2D19A /* YMSCBCharacteristic.m */; };
 		D91170531681251900E2D19A /* DEATemperatureService.m in Sources */ = {isa = PBXBuildFile; fileRef = D91170521681251900E2D19A /* DEATemperatureService.m */; };
@@ -53,6 +54,8 @@
 /* Begin PBXFileReference section */
 		D906E5EF16DCAC55001D7932 /* DEACBAppService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEACBAppService.h; sourceTree = "<group>"; };
 		D906E5F016DCAC55001D7932 /* DEACBAppService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEACBAppService.m; sourceTree = "<group>"; };
+		D90C0C3816DD6297002D3FFD /* DEABaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEABaseViewController.h; sourceTree = "<group>"; };
+		D90C0C3916DD6297002D3FFD /* DEABaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEABaseViewController.m; sourceTree = "<group>"; };
 		D911704A1681131000E2D19A /* YMSCBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBService.h; sourceTree = "<group>"; };
 		D911704B1681131000E2D19A /* YMSCBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBService.m; sourceTree = "<group>"; };
 		D911704E1681214700E2D19A /* YMSCBCharacteristic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBCharacteristic.h; sourceTree = "<group>"; };
@@ -209,10 +212,12 @@
 		D9718B82167FA1360001E42C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				D9718B7D167FA0BF0001E42C /* DEAHomeViewController.h */,
-				D9718B7E167FA0BF0001E42C /* DEAHomeViewController.m */,
+				D90C0C3816DD6297002D3FFD /* DEABaseViewController.h */,
+				D90C0C3916DD6297002D3FFD /* DEABaseViewController.m */,
 				D9C5011F16AB37DD001D4D4F /* DEAPeripheralsViewController.h */,
 				D9C5012016AB37DD001D4D4F /* DEAPeripheralsViewController.m */,
+				D9718B7D167FA0BF0001E42C /* DEAHomeViewController.h */,
+				D9718B7E167FA0BF0001E42C /* DEAHomeViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -408,6 +413,7 @@
 				D906E5F116DCAC55001D7932 /* DEACBAppService.m in Sources */,
 				D988A5C616DD26A100D7D392 /* DEASensorTag.m in Sources */,
 				D988A5C816DD464A00D7D392 /* TISensorTag.c in Sources */,
+				D90C0C3A16DD6297002D3FFD /* DEABaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
