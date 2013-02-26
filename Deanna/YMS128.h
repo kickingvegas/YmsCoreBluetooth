@@ -14,15 +14,14 @@
  Struct to hold 128-bit value
  */
 typedef struct {
-    unsigned long long hi;
-    unsigned long long lo;
+    __uint64_t hi;
+    __uint64_t lo;
 } yms_u128_t;
 
 
 
-unsigned long long getfield64(unsigned long long s, int p, int n);
-yms_u128_t yms_u128_genOffset(int value);
+__uint64_t getfield64(__uint64_t s, int p, int n);
 yms_u128_t yms_u128_genAddress(yms_u128_t *base, yms_u128_t *offset);
-yms_u128_t yms_u128_genAddressWithInt(yms_u128_t *base, int value);
+
 
 #endif
