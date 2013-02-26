@@ -37,7 +37,9 @@ yms_u128_t yms_u128_genAddress(yms_u128_t *base, yms_u128_t *offset) {
     return result;
 }
 
-
+/**
+ This code is SensorTag specific
+ */
 yms_u128_t yms_u128_genAddressWithInt(yms_u128_t *base, int value) {
     
     yms_u128_t offset = yms_u128_genOffset(value);
