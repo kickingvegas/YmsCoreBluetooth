@@ -14,7 +14,7 @@
 
 
 /**
- TI SensorTag object.
+ Container class for CBPeripheral. 
  */
 @interface YMSCBPeripheral : NSObject <CBPeripheralDelegate>
 
@@ -27,16 +27,36 @@
 /// Pointer to CBPeripheral instance of a sensor tag.
 @property (nonatomic, strong) CBPeripheral *cbPeriperheral;
 
+/// If ON, enable updates of RSSI.
 @property (nonatomic, assign) BOOL shouldPingRSSI;
 
+/**
+ Constructor 
+ 
+ @param peripheral class
+ */
 - (id)initWithPeripheral:(CBPeripheral *)peripheral;
 
 /**
  Generate array of CBUUID for all SensorTag CoreBluetooth services.
+ 
+ The output of this method is to be passed to [CBPeripheral discoverServices:]
+ 
  @return array of CBUUID services
  */
 - (NSArray *)services;
+
+/**
+ Find YMSCBService given its corresponding CBService.
+ 
+ @param service this thing
+ @return YMSCBService
+ */
 - (YMSCBService *)findService:(CBService *)service;
+
+/**
+ Request RSSI update from CBPeripheral.
+ */
 - (void)updateRSSI;
 
 @end
