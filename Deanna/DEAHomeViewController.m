@@ -50,56 +50,55 @@
     DEATemperatureService *ts = self.sensorTag.sensorServices[@"temperature"];
     DEAAccelerometerService *as = self.sensorTag.sensorServices[@"accelerometer"];
     
-    [ts addObserver:self
-         forKeyPath:@"ambientTemp"
-            options:NSKeyValueObservingOptionNew
-            context:NULL];
-    
-    [ts addObserver:self
-         forKeyPath:@"objectTemp"
-            options:NSKeyValueObservingOptionNew
-            context:NULL];
-    
-    [ts addObserver:self
-         forKeyPath:@"isEnabled"
-            options:NSKeyValueObservingOptionNew
-            context:NULL];
-    
-    
-    [as addObserver:self
-         forKeyPath:@"x"
-            options:NSKeyValueObservingOptionNew
-            context:NULL];
-    [as addObserver:self
-         forKeyPath:@"y"
-            options:NSKeyValueObservingOptionNew
-            context:NULL];
-    
-    [as addObserver:self
-         forKeyPath:@"z"
-            options:NSKeyValueObservingOptionNew
-            context:NULL];
-    
-    [as addObserver:self
-         forKeyPath:@"isEnabled"
-            options:NSKeyValueObservingOptionNew
-            context:NULL];
-    
-    if (ts.isEnabled) {
-        self.temperatureSwitch.on = YES;
-    }
-    else {
-        self.temperatureSwitch.on = NO;
+    for (NSString *key in @[@"ambientTemp", @"objectTemp", @"isOn", @"isEnabled"]) {
+        [ts addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
     }
     
-    if (as.isEnabled) {
-        self.accelSwitch.on = YES;
+    for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled"]) {
+        [as addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
     }
-    else {
-        self.accelSwitch.on = NO;
-    }
-        
 
+    
+//    [ts addObserver:self
+//         forKeyPath:@"ambientTemp"
+//            options:NSKeyValueObservingOptionNew
+//            context:NULL];
+//    
+//    [ts addObserver:self
+//         forKeyPath:@"objectTemp"
+//            options:NSKeyValueObservingOptionNew
+//            context:NULL];
+//    
+//    [ts addObserver:self
+//         forKeyPath:@"isOn"
+//            options:NSKeyValueObservingOptionNew
+//            context:NULL];
+    
+    
+//    [as addObserver:self
+//         forKeyPath:@"x"
+//            options:NSKeyValueObservingOptionNew
+//            context:NULL];
+//    [as addObserver:self
+//         forKeyPath:@"y"
+//            options:NSKeyValueObservingOptionNew
+//            context:NULL];
+//    
+//    [as addObserver:self
+//         forKeyPath:@"z"
+//            options:NSKeyValueObservingOptionNew
+//            context:NULL];
+//    
+//    [as addObserver:self
+//         forKeyPath:@"isOn"
+//            options:NSKeyValueObservingOptionNew
+//            context:NULL];
+    
+    [self.temperatureSwitch setOn:ts.isOn animated:YES];
+    [self.temperatureSwitch setEnabled:ts.isEnabled];
+    
+    [self.accelSwitch setOn:as.isOn animated:YES];
+    [self.accelSwitch setEnabled:as.isEnabled];
     
 }
 
@@ -110,15 +109,24 @@
     
     //self.connectButton.title = @"Connect";
     
-    [ts removeObserver:self forKeyPath:@"ambientTemp"];
-    [ts removeObserver:self forKeyPath:@"objectTemp"];
-    [ts removeObserver:self forKeyPath:@"isEnabled"];
+    for (NSString *key in @[@"ambientTemp", @"objectTemp", @"isOn", @"isEnabled"]) {
+        [ts removeObserver:self forKeyPath:key];
+    }
     
-    [as removeObserver:self forKeyPath:@"x"];
-    [as removeObserver:self forKeyPath:@"y"];
-    [as removeObserver:self forKeyPath:@"z"];
-    [as removeObserver:self forKeyPath:@"isEnabled"];
+    for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled"]) {
+        [as removeObserver:self forKeyPath:key];
+    }
 
+//    
+//    [ts removeObserver:self forKeyPath:@"ambientTemp"];
+//    [ts removeObserver:self forKeyPath:@"objectTemp"];
+//    [ts removeObserver:self forKeyPath:@"isOn"];
+//    
+//    [as removeObserver:self forKeyPath:@"x"];
+//    [as removeObserver:self forKeyPath:@"y"];
+//    [as removeObserver:self forKeyPath:@"z"];
+//    [as removeObserver:self forKeyPath:@"isOn"];
+//
 }
 
 - (void)btleOffHandler:(NSNotification *)notification {
@@ -182,9 +190,14 @@
             self.objectTemperatureLabel.text = [NSString stringWithFormat:@"%0.2f ℉", temperatureF];
 
         }
-        else if ([keyPath isEqualToString:@"isEnabled"]) {
-            [self.temperatureSwitch setOn:ts.isEnabled animated:YES];
+        else if ([keyPath isEqualToString:@"isOn"]) {
+            [self.temperatureSwitch setOn:ts.isOn animated:YES];
         }
+        else if ([keyPath isEqualToString:@"isEnabled"]) {
+            [self.temperatureSwitch setEnabled:ts.isEnabled];
+        }
+
+
     }
     
     else if (object == as) {
@@ -201,8 +214,11 @@
             self.accelZLabel.text = [NSString stringWithFormat:@"%0.2f", [as.z floatValue]];
             
         }
+        else if ([keyPath isEqualToString:@"isOn"]) {
+            [self.accelSwitch setOn:as.isOn animated:YES];
+        }
         else if ([keyPath isEqualToString:@"isEnabled"]) {
-            [self.accelSwitch setOn:as.isEnabled animated:YES];
+            [self.accelSwitch setEnabled:as.isEnabled];
         }
 
 
