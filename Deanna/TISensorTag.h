@@ -58,4 +58,8 @@
 #define kSensorTag_TEST_CONFIG             0xAA62
 
 
+yms_u128_t yms_u128_genOffset(int value);
+yms_u128_t yms_u128_genAddressWithInt(yms_u128_t *base, int value);
+
+
 #endif
