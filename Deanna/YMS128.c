@@ -18,6 +18,9 @@ unsigned long long getfield64(unsigned long long s, int p, int n) {
     return d;
 }
 
+/**
+ This code is SensorTag specific.
+ */
 yms_u128_t yms_u128_genOffset(int value) {
     yms_u128_t offset = {0, 0};
     offset.hi = (unsigned long long)value << 32;

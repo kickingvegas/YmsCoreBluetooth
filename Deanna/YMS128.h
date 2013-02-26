@@ -9,10 +9,15 @@
 #ifndef Deanna_YMS128_h
 #define Deanna_YMS128_h
 
+
+/**
+ Struct to hold 128-bit value
+ */
 typedef struct {
     unsigned long long hi;
     unsigned long long lo;
 } yms_u128_t;
+
 
 
 unsigned long long getfield64(unsigned long long s, int p, int n);
