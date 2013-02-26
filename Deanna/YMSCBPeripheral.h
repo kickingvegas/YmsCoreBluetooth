@@ -34,6 +34,7 @@
  Constructor 
  
  @param peripheral class
+ @return instance of this class
  */
 - (id)initWithPeripheral:(CBPeripheral *)peripheral;
 
