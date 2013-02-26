@@ -158,7 +158,7 @@
 				D9718B55167F9F9F0001E42C /* DEAAppDelegate.m */,
 				D9718B83167FA1400001E42C /* Services */,
 				D9CB2C0316A71F7800279DDA /* CoreBluetooth Peripherals */,
-				D9CB2C0816A725A000279DDA /* YMSCB Framework */,
+				D9CB2C0816A725A000279DDA /* YMS CoreBluetooth Framework */,
 				D9718B82167FA1360001E42C /* Controllers */,
 				D9718B84167FA1450001E42C /* UI */,
 				D9718B85167FA1870001E42C /* Utils */,
@@ -272,7 +272,7 @@
 			name = Services;
 			sourceTree = "<group>";
 		};
-		D9CB2C0816A725A000279DDA /* YMSCB Framework */ = {
+		D9CB2C0816A725A000279DDA /* YMS CoreBluetooth Framework */ = {
 			isa = PBXGroup;
 			children = (
 				D911704A1681131000E2D19A /* YMSCBService.h */,
@@ -280,7 +280,7 @@
 				D911704E1681214700E2D19A /* YMSCBCharacteristic.h */,
 				D911704F1681214700E2D19A /* YMSCBCharacteristic.m */,
 			);
-			name = "YMSCB Framework";
+			name = "YMS CoreBluetooth Framework";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
