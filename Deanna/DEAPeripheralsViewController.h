@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "DEACBAppService.h"
+#import "DEABaseViewController.h"
 
 /**
  View Controller for listing of TI SensorTags available.
  */
 
-@interface DEAPeripheralsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, YMSCBAppServiceDelegate>
+@interface DEAPeripheralsViewController : DEABaseViewController <UITableViewDataSource, UITableViewDelegate, YMSCBAppServiceDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *peripheralsTableView;
 

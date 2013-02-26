@@ -93,17 +93,6 @@
 }
 
 
-- (void)btleOffHandler:(NSNotification *)notification {
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BTLE is off"
-                                                    message:@"yo turn it on!"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"Dismiss"
-                                          otherButtonTitles:nil];
-    
-    [alert show];
-}
-
 
 - (void)hasStartedScanning:(id)delegate {
     self.scanButton.title = @"Stop Scanning";
@@ -169,16 +158,10 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
     DEACBAppService *btleService = [DEACBAppService sharedService];
-    
     NSInteger result;
-    
     result = [btleService.ymsPeripherals count];
-    
     return result;
-    
-    
 }
 
 
