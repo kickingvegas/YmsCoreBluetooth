@@ -7,7 +7,7 @@
 //
 
 #import "DEAPeripheralsViewController.h"
-#import "DEASensorTag.h"
+#import "YMSCBPeripheral.h"
 #import "DEAHomeViewController.h"
 
 @interface DEAPeripheralsViewController ()
@@ -153,7 +153,7 @@
     
     DEACBAppService *btleService = [DEACBAppService sharedService];
     
-    DEASensorTag *sensorTag = (DEASensorTag *)[btleService.ymsPeripherals objectAtIndex:indexPath.row];
+    YMSCBPeripheral *sensorTag = (YMSCBPeripheral *)[btleService.ymsPeripherals objectAtIndex:indexPath.row];
     
     if (sensorTag.cbPeriperheral.isConnected) {
         cell.detailTextLabel.text = @"Connected";
@@ -192,7 +192,7 @@
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     DEACBAppService *btleService = [DEACBAppService sharedService];
     
-    DEASensorTag *sensorTag = (DEASensorTag *)[btleService.ymsPeripherals objectAtIndex:indexPath.row];
+    YMSCBPeripheral *sensorTag = (YMSCBPeripheral *)[btleService.ymsPeripherals objectAtIndex:indexPath.row];
     
     
     DEAHomeViewController *hvc = [[DEAHomeViewController alloc] initWithNibName:@"DEAHomeViewController" bundle:nil];

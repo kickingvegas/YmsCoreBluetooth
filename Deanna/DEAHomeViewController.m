@@ -8,7 +8,7 @@
 
 #import "DEAHomeViewController.h"
 #import "DEACBAppService.h"
-#import "DEASensorTag.h"
+#import "YMSCBPeripheral.h"
 #import "DEATemperatureService.h"
 #import "DEAAccelerometerService.h"
 
