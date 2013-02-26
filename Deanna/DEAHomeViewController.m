@@ -47,8 +47,8 @@
     btleService.delegate = self;
 
     
-    DEATemperatureService *ts = self.sensorTag.sensorServices[@"temperature"];
-    DEAAccelerometerService *as = self.sensorTag.sensorServices[@"accelerometer"];
+    DEATemperatureService *ts = self.sensorTag.serviceDict[@"temperature"];
+    DEAAccelerometerService *as = self.sensorTag.serviceDict[@"accelerometer"];
     
     for (NSString *key in @[@"ambientTemp", @"objectTemp", @"isOn", @"isEnabled"]) {
         [ts addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
@@ -70,8 +70,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     
-    DEATemperatureService *ts = self.sensorTag.sensorServices[@"temperature"];
-    DEAAccelerometerService *as = self.sensorTag.sensorServices[@"accelerometer"];
+    DEATemperatureService *ts = self.sensorTag.serviceDict[@"temperature"];
+    DEAAccelerometerService *as = self.sensorTag.serviceDict[@"accelerometer"];
     
     for (NSString *key in @[@"ambientTemp", @"objectTemp", @"isOn", @"isEnabled"]) {
         [ts removeObserver:self forKeyPath:key];
@@ -123,8 +123,8 @@
     //YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
     //DEASensorTag *sensorTag = btleService.ymsPeripherals[0];
     
-    DEATemperatureService *ts = self.sensorTag.sensorServices[@"temperature"];
-    DEAAccelerometerService *as = self.sensorTag.sensorServices[@"accelerometer"];
+    DEATemperatureService *ts = self.sensorTag.serviceDict[@"temperature"];
+    DEAAccelerometerService *as = self.sensorTag.serviceDict[@"accelerometer"];
 
     
     if (object == ts) {
@@ -192,7 +192,7 @@
             sensorName= @"temperature";
         }
         
-        YMSCBService *btService = self.sensorTag.sensorServices[sensorName];
+        YMSCBService *btService = self.sensorTag.serviceDict[sensorName];
 
         
         if (enableSwitch.isOn)
