@@ -13,8 +13,12 @@
 /**
  NSNotifications
  */
-extern NSString * const YMSCBPowerOffNotification;
-
+extern NSString * const YMSCBUnknownNotification;
+extern NSString * const YMSCBResettingNotification;
+extern NSString * const YMSCBUnsupportedNotification;
+extern NSString * const YMSCBUnauthorizedNotification;
+extern NSString * const YMSCBPoweredOffNotification;
+extern NSString * const YMSCBPoweredOnNotification;
 
 /**
  Protocols

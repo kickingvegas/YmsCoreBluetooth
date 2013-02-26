@@ -11,7 +11,13 @@
 #import "YMSCBService.h"
 #import "YMSCBCharacteristic.h"
 
-NSString * const YMSCBPowerOffNotification = @"com.yummymelon.btleservice.power.off";
+NSString * const YMSCBUnknownNotification = @"com.yummymelon.ymscb.unknown";
+NSString * const YMSCBResettingNotification = @"com.yummymelon.ymscb.resetting";
+NSString * const YMSCBUnsupportedNotification = @"com.yummymelon.ymscb.unsupported";
+NSString * const YMSCBUnauthorizedNotification = @"com.yummymelon.ymscb.unauthorized";
+NSString * const YMSCBPoweredOffNotification = @"com.yummymelon.ymscb.poweredoff";
+NSString * const YMSCBPoweredOnNotification = @"com.yummymelon.ymscb.poweredon";
+
 
 @implementation YMSCBAppService
 
@@ -119,46 +125,34 @@ NSString * const YMSCBPowerOffNotification = @"com.yummymelon.btleservice.power.
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
     static CBCentralManagerState oldManagerState = -1;
     
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     
     switch (central.state) {
         case CBCentralManagerStatePoweredOn:
-            NSLog(@"cbcm powered on");
-            //[self.manager scanForPeripheralsWithServices:nil options:nil];
             [self loadPeripherals];
-            
+            [defaultCenter postNotificationName:YMSCBPoweredOnNotification object:self];
             break;
             
         case CBCentralManagerStateUnknown:
-            NSLog(@"cbcm unknown");
+            [defaultCenter postNotificationName:YMSCBUnknownNotification object:self];
             break;
             
         case CBCentralManagerStatePoweredOff:
-            NSLog(@"cbcm powered off");
-
             if (oldManagerState != -1) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:YMSCBPowerOffNotification
-                                                                    object:self];
-                
+                [defaultCenter postNotificationName:YMSCBPoweredOffNotification object:self];
             }
             break;
             
         case CBCentralManagerStateResetting:
-            NSLog(@"cbcm resetting");
+            [defaultCenter postNotificationName:YMSCBResettingNotification object:self];
             break;
             
         case CBCentralManagerStateUnauthorized:
-            NSLog(@"cbcm unauthorized");
+            [defaultCenter postNotificationName:YMSCBUnauthorizedNotification object:self];
             break;
             
         case CBCentralManagerStateUnsupported: {
-            NSLog(@"cbcm unsupported");
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
-                                                            message:@""
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Dismiss"
-                                                  otherButtonTitles:nil];
-            
-            [alert show];
+            [defaultCenter postNotificationName:YMSCBUnsupportedNotification object:self];
             break;
         }
     }
