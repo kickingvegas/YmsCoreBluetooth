@@ -73,6 +73,13 @@
  */
 - (void)syncCharacteristics:(NSArray *)foundCharacteristics;
 
+
+/**
+ Find characteristic container for CBCharacteristic.
+ 
+ @param ct 
+ @return container of ct
+ */
 - (YMSCBCharacteristic *)findCharacteristic:(CBCharacteristic *)ct;
 
 

@@ -81,7 +81,7 @@
         YMSCBCharacteristic *yc = self.characteristicMap[key];
         for (CBCharacteristic *ct in foundCharacteristics) {
             if ([yc.uuid isEqual:ct.UUID]) {
-                yc.characteristic = ct;
+                yc.cbCharacteristic = ct;
                 break;
             }
         }
@@ -95,7 +95,7 @@
     for (NSString *key in self.characteristicMap) {
         YMSCBCharacteristic *yc = self.characteristicMap[key];
             
-        if ([yc.characteristic.UUID isEqual:ct.UUID]) {
+        if ([yc.cbCharacteristic.UUID isEqual:ct.UUID]) {
             result = yc;
             break;
         }
@@ -112,7 +112,7 @@
 
 - (void)setNotifyValue:(BOOL)notifyValue forCharacteristicName:(NSString *)cname {
     YMSCBCharacteristic *yc = self.characteristicMap[cname];
-    [self.cbService.peripheral setNotifyValue:notifyValue forCharacteristic:yc.characteristic];
+    [self.cbService.peripheral setNotifyValue:notifyValue forCharacteristic:yc.cbCharacteristic];
 }
 
 
@@ -123,13 +123,13 @@
 
 - (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname type:(CBCharacteristicWriteType)type {
     YMSCBCharacteristic *yc = self.characteristicMap[cname];
-    [self.cbService.peripheral writeValue:data forCharacteristic:yc.characteristic type:type];
+    [self.cbService.peripheral writeValue:data forCharacteristic:yc.cbCharacteristic type:type];
 }
 
 - (void)writeByte:(int8_t)val forCharacteristicName:(NSString *)cname type:(CBCharacteristicWriteType)type {
     YMSCBCharacteristic *yc = self.characteristicMap[cname];
     NSData *data = [NSData dataWithBytes:&val length:1];
-    [self.cbService.peripheral writeValue:data forCharacteristic:yc.characteristic type:type];
+    [self.cbService.peripheral writeValue:data forCharacteristic:yc.cbCharacteristic type:type];
 }
 
 - (void)readValueForCharacteristic:(CBCharacteristic *)characteristic {
@@ -139,7 +139,7 @@
 
 - (void)readValueForCharacteristicName:(NSString *)cname {
     YMSCBCharacteristic *yc = self.characteristicMap[cname];
-    [self.cbService.peripheral readValueForCharacteristic:yc.characteristic];
+    [self.cbService.peripheral readValueForCharacteristic:yc.cbCharacteristic];
 }
 
 
@@ -150,7 +150,7 @@
 
 - (NSData *)responseConfig {
     YMSCBCharacteristic *yc = self.characteristicMap[@"config"];
-    NSData *data = yc.characteristic.value;
+    NSData *data = yc.cbCharacteristic.value;
     return data;
 }
 

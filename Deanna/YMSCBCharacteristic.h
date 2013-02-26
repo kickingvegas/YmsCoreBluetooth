@@ -17,7 +17,7 @@
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) CBUUID *uuid;
-@property (nonatomic, strong) CBCharacteristic *characteristic;
+@property (nonatomic, strong) CBCharacteristic *cbCharacteristic;
 @property (nonatomic, strong) NSNumber *offset;
 
 
