@@ -41,6 +41,8 @@
         _cbPeriperheral = peripheral;
         peripheral.delegate = self;
         
+        
+        _shouldPingRSSI = YES;
         [peripheral readRSSI];
         
 
@@ -149,8 +151,9 @@
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {
     NSLog(@"RSSI: %@", peripheral.RSSI);
     
-    
-    [self performSelector:@selector(updateRSSI) withObject:self afterDelay:5];
+    if (self.shouldPingRSSI) {
+        [self performSelector:@selector(updateRSSI) withObject:self afterDelay:5];
+    }
     
 }
     
