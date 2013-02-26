@@ -25,11 +25,9 @@ extern NSString * const YMSCBPoweredOnNotification;
  */
 @protocol YMSCBAppServiceDelegate <NSObject>
 
-- (void)hasStoppedScanning:(id)delegate;
-- (void)hasStartedScanning:(id)delegate;
 - (void)didConnectPeripheral:(id)delegate;
-- (void)didDisconnectPeripheral:(id)delegate;
 
+- (void)didDisconnectPeripheral:(id)delegate;
 
 @end
 
@@ -57,13 +55,8 @@ extern NSString * const YMSCBPoweredOnNotification;
  
 @property (nonatomic, strong) NSArray *peripheralSearchNames;
 
-/// flag to determine if connected. is this used? TODO
-@property (nonatomic, assign) BOOL isConnected;
-
-/// flag to determine if scanning. is this used? TODO
+/// flag to determine if scanning.
 @property (nonatomic, assign) BOOL isScanning;
-
-
 
 /**
  Determines if peripheral is to be managed by this app service.
@@ -121,9 +114,9 @@ extern NSString * const YMSCBPoweredOnNotification;
 - (void)disconnectPeripheral:(NSUInteger)index;
 
 /**
- Find DEASensorTag instance matching peripheral
- @param peripheral peripheral corresponding with DEASensorTag
- @return instance of DEASensorTag
+ Find YMSCBPeripheral instance matching peripheral
+ @param peripheral peripheral corresponding with YMSCBPeripheral
+ @return instance of YMSCBPeripheral
  */
 - (YMSCBPeripheral *)findYmsPeripheral:(CBPeripheral *)peripheral;
 
