@@ -10,9 +10,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "YMSCBUtils.h"
-
 @class YMSCBCharacteristic;
-
 
 /**
  Base class for TI SensorTag CoreBluetooth service definition.
@@ -38,7 +36,7 @@
 ///
 
 /// Holds (key, value pairs of (NSString, YMSCBCharacteristic) instances
-@property (nonatomic, strong) NSMutableDictionary *characteristicMap;
+@property (nonatomic, strong) NSMutableDictionary *characteristicDict;
 
 /**
  Initialize class instance.
@@ -62,7 +60,7 @@
 - (void)addCharacteristic:(NSString *)cname withAddress:(int)addr;
 
 /**
- Return array of YMSCBCharacteristic instances.
+ Return array of CBUUIDs for all YMSCBCharacteristic instances in characteristicDict.
  */
 - (NSArray *)characteristics;
 
@@ -77,7 +75,7 @@
 /**
  Find characteristic container for CBCharacteristic.
  
- @param ct 
+ @param ct CBCharacteristic 
  @return container of ct
  */
 - (YMSCBCharacteristic *)findCharacteristic:(CBCharacteristic *)ct;

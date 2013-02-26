@@ -18,7 +18,7 @@
     self = [super init];
     
     if (self) {
-        _characteristicMap = [[NSMutableDictionary alloc] init];
+        _characteristicDict = [[NSMutableDictionary alloc] init];
         _base.hi = kSensorTag_BASE_ADDRESS_HI;
         _base.lo = kSensorTag_BASE_ADDRESS_LO;
     }
@@ -46,7 +46,7 @@
                                             uuid:uuid
                                           offset:addrOffset];
     
-    [self.characteristicMap setObject:yc forKey:cname];
+    [self.characteristicDict setObject:yc forKey:cname];
 }
 
 - (void)addCharacteristic:(NSString *)cname withAddress:(int)addr {
@@ -60,7 +60,7 @@
                                             uuid:uuid
                                           offset:addr];
     
-    [self.characteristicMap setObject:yc forKey:cname];
+    [self.characteristicDict setObject:yc forKey:cname];
 }
 
 
@@ -68,8 +68,8 @@
 - (NSArray *)characteristics {
     
     NSArray *result = @[
-    [(YMSCBCharacteristic *)(self.characteristicMap[@"data"]) uuid],
-    [(YMSCBCharacteristic *)(self.characteristicMap[@"config"]) uuid],
+    [(YMSCBCharacteristic *)(self.characteristicDict[@"data"]) uuid],
+    [(YMSCBCharacteristic *)(self.characteristicDict[@"config"]) uuid],
     ];
 
     return result;
@@ -77,8 +77,8 @@
 
 
 - (void)syncCharacteristics:(NSArray *)foundCharacteristics {
-    for (NSString *key in self.characteristicMap) {
-        YMSCBCharacteristic *yc = self.characteristicMap[key];
+    for (NSString *key in self.characteristicDict) {
+        YMSCBCharacteristic *yc = self.characteristicDict[key];
         for (CBCharacteristic *ct in foundCharacteristics) {
             if ([yc.uuid isEqual:ct.UUID]) {
                 yc.cbCharacteristic = ct;
@@ -92,8 +92,8 @@
 
 - (YMSCBCharacteristic *)findCharacteristic:(CBCharacteristic *)ct {
     YMSCBCharacteristic *result;
-    for (NSString *key in self.characteristicMap) {
-        YMSCBCharacteristic *yc = self.characteristicMap[key];
+    for (NSString *key in self.characteristicDict) {
+        YMSCBCharacteristic *yc = self.characteristicDict[key];
             
         if ([yc.cbCharacteristic.UUID isEqual:ct.UUID]) {
             result = yc;
@@ -111,7 +111,7 @@
 }
 
 - (void)setNotifyValue:(BOOL)notifyValue forCharacteristicName:(NSString *)cname {
-    YMSCBCharacteristic *yc = self.characteristicMap[cname];
+    YMSCBCharacteristic *yc = self.characteristicDict[cname];
     [self.cbService.peripheral setNotifyValue:notifyValue forCharacteristic:yc.cbCharacteristic];
 }
 
@@ -122,12 +122,12 @@
 }
 
 - (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname type:(CBCharacteristicWriteType)type {
-    YMSCBCharacteristic *yc = self.characteristicMap[cname];
+    YMSCBCharacteristic *yc = self.characteristicDict[cname];
     [self.cbService.peripheral writeValue:data forCharacteristic:yc.cbCharacteristic type:type];
 }
 
 - (void)writeByte:(int8_t)val forCharacteristicName:(NSString *)cname type:(CBCharacteristicWriteType)type {
-    YMSCBCharacteristic *yc = self.characteristicMap[cname];
+    YMSCBCharacteristic *yc = self.characteristicDict[cname];
     NSData *data = [NSData dataWithBytes:&val length:1];
     [self.cbService.peripheral writeValue:data forCharacteristic:yc.cbCharacteristic type:type];
 }
@@ -138,7 +138,7 @@
 }
 
 - (void)readValueForCharacteristicName:(NSString *)cname {
-    YMSCBCharacteristic *yc = self.characteristicMap[cname];
+    YMSCBCharacteristic *yc = self.characteristicDict[cname];
     [self.cbService.peripheral readValueForCharacteristic:yc.cbCharacteristic];
 }
 
@@ -149,7 +149,7 @@
 }
 
 - (NSData *)responseConfig {
-    YMSCBCharacteristic *yc = self.characteristicMap[@"config"];
+    YMSCBCharacteristic *yc = self.characteristicDict[@"config"];
     NSData *data = yc.cbCharacteristic.value;
     return data;
 }
