@@ -10,7 +10,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 
 //TODO Need to create YMSCBPeripheral
-@class DEASensorTag;
+@class YMSCBPeripheral;
 
 /**
  NSNotifications
@@ -123,7 +123,7 @@ extern NSString * const YMSCBPowerOffNotification;
  @param peripheral peripheral corresponding with DEASensorTag
  @return instance of DEASensorTag
  */
-- (DEASensorTag *)findYmsPeripheral:(CBPeripheral *)peripheral;
+- (YMSCBPeripheral *)findYmsPeripheral:(CBPeripheral *)peripheral;
 
 @end
 

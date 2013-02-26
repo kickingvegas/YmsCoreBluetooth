@@ -7,7 +7,7 @@
 //
 #include "TISensorTag.h"
 #import "YMSCBAppService.h"
-#import "DEASensorTag.h"
+#import "YMSCBPeripheral.h"
 #import "YMSCBService.h"
 #import "YMSCBCharacteristic.h"
 
@@ -32,7 +32,7 @@ NSString * const YMSCBPowerOffNotification = @"com.yummymelon.btleservice.power.
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSMutableArray *devices = [[NSMutableArray alloc] init];
     
-    for (DEASensorTag *sensorTag in self.ymsPeripherals) {
+    for (YMSCBPeripheral *sensorTag in self.ymsPeripherals) {
         CBPeripheral *p = sensorTag.cbPeriperheral;
         CFStringRef uuidString = NULL;
         
@@ -168,16 +168,16 @@ NSString * const YMSCBPowerOffNotification = @"com.yummymelon.btleservice.power.
 
 
 
-- (DEASensorTag *)findYmsPeripheral:(CBPeripheral *)peripheral {
+- (YMSCBPeripheral *)findYmsPeripheral:(CBPeripheral *)peripheral {
     
-    DEASensorTag *result;
+    YMSCBPeripheral *result;
     
     if ([self.ymsPeripherals count] == 0) {
         result = nil;
     }
     
     else {
-        for (DEASensorTag *sensorTag in self.ymsPeripherals) {
+        for (YMSCBPeripheral *sensorTag in self.ymsPeripherals) {
             if (sensorTag.cbPeriperheral == peripheral) {
                 result = sensorTag;
                 break;
@@ -192,14 +192,14 @@ NSString * const YMSCBPowerOffNotification = @"com.yummymelon.btleservice.power.
 
 - (void)handleFoundPeripheral:(CBPeripheral *)peripheral withCentral:(CBCentralManager *)central {
     
-    DEASensorTag *sensorTag;
+    YMSCBPeripheral *sensorTag;
     
     [self stopScan];
     
     sensorTag = [self findYmsPeripheral:peripheral];
     
     if (sensorTag == nil) {
-        sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral];
+        sensorTag = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral];
         
         [self.ymsPeripherals addObject:sensorTag];
         
@@ -213,7 +213,7 @@ NSString * const YMSCBPowerOffNotification = @"com.yummymelon.btleservice.power.
 
 - (void)connectPeripheral:(NSUInteger)index {
     if ([self.ymsPeripherals count] > 0) {
-        DEASensorTag *sensorTag = self.ymsPeripherals[index];
+        YMSCBPeripheral *sensorTag = self.ymsPeripherals[index];
         [self.manager connectPeripheral:sensorTag.cbPeriperheral options:nil];
     }
 
@@ -221,7 +221,7 @@ NSString * const YMSCBPowerOffNotification = @"com.yummymelon.btleservice.power.
 
 - (void)disconnectPeripheral:(NSUInteger)index {
     if ([self.ymsPeripherals count] > 0) {
-        DEASensorTag *sensorTag = self.ymsPeripherals[index];
+        YMSCBPeripheral *sensorTag = self.ymsPeripherals[index];
         [self.manager cancelPeripheralConnection:sensorTag.cbPeriperheral];
     }
 }
@@ -262,7 +262,7 @@ didRetrievePeripherals:(NSArray *)peripherals {
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
     // 6
     if ([self isAppServicePeripheral:peripheral]) {
-        DEASensorTag *sensorTag = [self findYmsPeripheral:peripheral];
+        YMSCBPeripheral *sensorTag = [self findYmsPeripheral:peripheral];
         
         if (sensorTag != nil) {
             NSArray *services = [sensorTag services];
@@ -289,7 +289,7 @@ didRetrievePeripherals:(NSArray *)peripherals {
         [self.delegate didDisconnectPeripheral:self];
     }
     
-    DEASensorTag *sensorTag = [self findYmsPeripheral:peripheral];
+    YMSCBPeripheral *sensorTag = [self findYmsPeripheral:peripheral];
     [self.ymsPeripherals removeObject:sensorTag];
     
     self.isConnected = NO;
