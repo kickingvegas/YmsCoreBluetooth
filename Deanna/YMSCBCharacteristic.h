@@ -1,5 +1,5 @@
 //
-//  DTCharacteristic.h
+//  YMSCBCharacteristic.h
 //  Deanna
 //
 //  Created by Charles Choi on 12/18/12.
@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
+
+/**
+ Base class for TI SensorTag CoreBluetooth characteristic
+ */
 @interface YMSCBCharacteristic : NSObject
 
 @property (nonatomic, strong) NSString *name;
@@ -18,6 +22,5 @@
 
 
 - (id)initWithName:(NSString *)oName uuid:(CBUUID *)oUUID offset:(int)addrOffset;
-
 
 @end
