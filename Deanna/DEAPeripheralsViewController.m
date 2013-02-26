@@ -31,7 +31,7 @@
     
     self.title = @"Peripherals";
     
-    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+    YMSCBAppService *btleService = [YMSCBAppService sharedService];
     btleService.delegate = self;
     
     
@@ -64,7 +64,7 @@
 - (void)scanButtonAction:(id)sender {
     NSLog(@"scanButtonAction");
     
-    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+    YMSCBAppService *btleService = [YMSCBAppService sharedService];
     
     if (btleService.isScanning == NO) {
         [btleService startScan];
@@ -78,7 +78,7 @@
 - (void)connectButtonAction:(id)sender {
     NSLog(@"connectButtonAction");
     
-    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+    YMSCBAppService *btleService = [YMSCBAppService sharedService];
     
     
     // TODO: handle N case
@@ -151,7 +151,7 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
-    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+    YMSCBAppService *btleService = [YMSCBAppService sharedService];
     
     DEASensorTag *sensorTag = (DEASensorTag *)[btleService.ymsPeripherals objectAtIndex:indexPath.row];
     
@@ -170,7 +170,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+    YMSCBAppService *btleService = [YMSCBAppService sharedService];
     
     NSInteger result;
     
@@ -190,7 +190,7 @@
 
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+    YMSCBAppService *btleService = [YMSCBAppService sharedService];
     
     DEASensorTag *sensorTag = (DEASensorTag *)[btleService.ymsPeripherals objectAtIndex:indexPath.row];
     

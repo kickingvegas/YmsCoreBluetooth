@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "YMSBluetoothService.h"
+#import "YMSCBAppService.h"
 #import "DEASensorTag.h"
 
 /**

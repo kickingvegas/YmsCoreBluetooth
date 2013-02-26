@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "YMSBluetoothService.h"
+#import "YMSCBAppService.h"
 
 /**
  View Controller for listing of TI SensorTags available.

@@ -9,7 +9,7 @@
 #import "DEAAppDelegate.h"
 #import "DEAHomeViewController.h"
 #import "DEAPeripheralsViewController.h"
-#import "YMSBluetoothService.h"
+#import "YMSCBAppService.h"
 
 @implementation DEAAppDelegate
 
@@ -42,7 +42,7 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
-    YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
+    YMSCBAppService *btleService = [YMSCBAppService sharedService];
     [btleService persistPeripherals];
     
 }
@@ -68,7 +68,7 @@
 }
 
 - (void)initializeAppServices {
-    [YMSBluetoothService sharedService];
+    [YMSCBAppService sharedService];
 }
 
 @end
