@@ -13,12 +13,6 @@
 #import "DEAAccelerometerService.h"
 
 @interface DEAHomeViewController ()
-
-- (void)btleOffHandler:(NSNotification *)notification;
-//- (void)scanButtonAction:(id)sender;
-//- (void)connectButtonAction:(id)sender;
-    
-
 @end
 
 @implementation DEAHomeViewController
@@ -36,7 +30,7 @@
 
     self.title = @"Deanna";
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(btleOffHandler:) name:YMSCBPowerOffNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(btleOffHandler:) name:YMSCBPoweredOffNotification object:nil];
 
 }
 
@@ -81,17 +75,6 @@
         [as removeObserver:self forKeyPath:key];
     }
 
-}
-
-- (void)btleOffHandler:(NSNotification *)notification {
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BTLE is off"
-                                                    message:@"yo turn it on!"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"Dismiss"
-                                          otherButtonTitles:nil];
-    
-    [alert show];
 }
 
 

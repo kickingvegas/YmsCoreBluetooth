@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "YMSCBAppService.h"
+#import "DEABaseViewController.h"
 
 @class DEASensorTag;
 
@@ -16,7 +17,8 @@
  View Controller for TI Sensor Tag instance.
  */
 
-@interface DEAHomeViewController : UIViewController <YMSCBAppServiceDelegate>
+@interface DEAHomeViewController : DEABaseViewController <YMSCBAppServiceDelegate>
+
 @property (strong, nonatomic) IBOutlet UILabel *ambientTemperatureLabel;
 @property (strong, nonatomic) IBOutlet UILabel *objectTemperatureLabel;
 @property (strong, nonatomic) IBOutlet UILabel *accelXLabel;
