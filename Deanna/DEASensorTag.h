@@ -8,6 +8,11 @@
 
 #import "YMSCBPeripheral.h"
 
+/**
+ TI SensorTag Peripheral Class.
+ 
+ This class maps to an instance of a CBPeripheral associated with a found TI SensorTag.
+ */
 @interface DEASensorTag : YMSCBPeripheral
 
 @end
