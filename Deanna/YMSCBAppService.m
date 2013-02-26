@@ -1,5 +1,5 @@
 //
-//  YMSBluetoothService.m
+//  YMSCBAppService.m
 //  Deanna
 //
 //  Created by Charles Choi on 12/18/12.

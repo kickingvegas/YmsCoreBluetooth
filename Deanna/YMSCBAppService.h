@@ -1,5 +1,5 @@
 //
-//  YMSBluetoothService.h
+//  YMSCBAppService.h
 //  Deanna
 //
 //  Created by Charles Choi on 12/18/12.
@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
-
-//TODO Need to create YMSCBPeripheral
 @class YMSCBPeripheral;
 
 /**
