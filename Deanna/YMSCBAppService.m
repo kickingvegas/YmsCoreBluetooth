@@ -190,23 +190,9 @@ NSString * const YMSCBPowerOffNotification = @"com.yummymelon.btleservice.power.
 
 
 
+
 - (void)handleFoundPeripheral:(CBPeripheral *)peripheral withCentral:(CBCentralManager *)central {
-    
-    YMSCBPeripheral *sensorTag;
-    
-    [self stopScan];
-    
-    sensorTag = [self findYmsPeripheral:peripheral];
-    
-    if (sensorTag == nil) {
-        sensorTag = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral];
-        
-        [self.ymsPeripherals addObject:sensorTag];
-        
-        if (peripheral.isConnected == NO) {
-            [central connectPeripheral:peripheral options:nil];
-        }
-    }
+    // THIS METHOD IS TO BE OVERRIDDEN
 }
 
 
