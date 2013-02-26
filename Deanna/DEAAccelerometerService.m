@@ -34,9 +34,9 @@ float calcAccel(int16_t rawV) {
 - (NSArray *)characteristics {
     
     NSArray *result = @[
-    [(YMSCBCharacteristic *)(self.characteristicMap[@"data"]) uuid],
-    [(YMSCBCharacteristic *)(self.characteristicMap[@"config"]) uuid],
-    [(YMSCBCharacteristic *)(self.characteristicMap[@"period"]) uuid]
+    [(YMSCBCharacteristic *)(self.characteristicDict[@"data"]) uuid],
+    [(YMSCBCharacteristic *)(self.characteristicDict[@"config"]) uuid],
+    [(YMSCBCharacteristic *)(self.characteristicDict[@"period"]) uuid]
     ];
     
     return result;
@@ -44,7 +44,7 @@ float calcAccel(int16_t rawV) {
 
 
 - (void)update {
-    YMSCBCharacteristic *dtc = self.characteristicMap[@"data"];
+    YMSCBCharacteristic *dtc = self.characteristicDict[@"data"];
     NSData *data = dtc.cbCharacteristic.value;
     
     char val[data.length];

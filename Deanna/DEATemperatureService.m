@@ -52,7 +52,7 @@ double calcTmpTarget(int16_t objT, double m_tempAmb) {
 }
 
 - (void)update {
-    YMSCBCharacteristic *dtc = self.characteristicMap[@"data"];
+    YMSCBCharacteristic *dtc = self.characteristicDict[@"data"];
     NSData *data = dtc.cbCharacteristic.value;
     
     char val[data.length];

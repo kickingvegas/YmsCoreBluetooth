@@ -25,7 +25,7 @@
 - (NSArray *)characteristics {
     
     NSArray *result = @[
-    [(YMSCBCharacteristic *)(self.characteristicMap[@"data"]) uuid]
+    [(YMSCBCharacteristic *)(self.characteristicDict[@"data"]) uuid]
     ];
     
     return result;
@@ -33,7 +33,7 @@
 
 
 - (void)update {
-    YMSCBCharacteristic *dtc = self.characteristicMap[@"data"];
+    YMSCBCharacteristic *dtc = self.characteristicDict[@"data"];
     NSData *data = dtc.cbCharacteristic.value;
     
     char val[data.length];
