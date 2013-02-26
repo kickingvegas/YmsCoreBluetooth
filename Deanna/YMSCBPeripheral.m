@@ -132,9 +132,9 @@
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     
     YMSCBService *btService = [self findService:characteristic.service];
-    YMSCBCharacteristic *dtc = [btService findCharacteristic:characteristic];
+    YMSCBCharacteristic *yc = [btService findCharacteristic:characteristic];
     
-    NSLog(@"write to service.characteristic: %@.%@", btService.name, dtc.name);
+    NSLog(@"write to service.characteristic: %@.%@", btService.name, yc.name);
     
     
 }
