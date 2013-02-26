@@ -8,7 +8,7 @@
 
 #import "DEAHomeViewController.h"
 #import "DEACBAppService.h"
-#import "YMSCBPeripheral.h"
+#import "DEASensorTag.h"
 #import "DEATemperatureService.h"
 #import "DEAAccelerometerService.h"
 
@@ -59,40 +59,6 @@
     }
 
     
-//    [ts addObserver:self
-//         forKeyPath:@"ambientTemp"
-//            options:NSKeyValueObservingOptionNew
-//            context:NULL];
-//    
-//    [ts addObserver:self
-//         forKeyPath:@"objectTemp"
-//            options:NSKeyValueObservingOptionNew
-//            context:NULL];
-//    
-//    [ts addObserver:self
-//         forKeyPath:@"isOn"
-//            options:NSKeyValueObservingOptionNew
-//            context:NULL];
-    
-    
-//    [as addObserver:self
-//         forKeyPath:@"x"
-//            options:NSKeyValueObservingOptionNew
-//            context:NULL];
-//    [as addObserver:self
-//         forKeyPath:@"y"
-//            options:NSKeyValueObservingOptionNew
-//            context:NULL];
-//    
-//    [as addObserver:self
-//         forKeyPath:@"z"
-//            options:NSKeyValueObservingOptionNew
-//            context:NULL];
-//    
-//    [as addObserver:self
-//         forKeyPath:@"isOn"
-//            options:NSKeyValueObservingOptionNew
-//            context:NULL];
     
     [self.temperatureSwitch setOn:ts.isOn animated:YES];
     [self.temperatureSwitch setEnabled:ts.isEnabled];
@@ -107,8 +73,6 @@
     DEATemperatureService *ts = self.sensorTag.sensorServices[@"temperature"];
     DEAAccelerometerService *as = self.sensorTag.sensorServices[@"accelerometer"];
     
-    //self.connectButton.title = @"Connect";
-    
     for (NSString *key in @[@"ambientTemp", @"objectTemp", @"isOn", @"isEnabled"]) {
         [ts removeObserver:self forKeyPath:key];
     }
@@ -117,16 +81,6 @@
         [as removeObserver:self forKeyPath:key];
     }
 
-//    
-//    [ts removeObserver:self forKeyPath:@"ambientTemp"];
-//    [ts removeObserver:self forKeyPath:@"objectTemp"];
-//    [ts removeObserver:self forKeyPath:@"isOn"];
-//    
-//    [as removeObserver:self forKeyPath:@"x"];
-//    [as removeObserver:self forKeyPath:@"y"];
-//    [as removeObserver:self forKeyPath:@"z"];
-//    [as removeObserver:self forKeyPath:@"isOn"];
-//
 }
 
 - (void)btleOffHandler:(NSNotification *)notification {
@@ -203,16 +157,12 @@
     else if (object == as) {
         if ([keyPath isEqualToString:@"x"]) {
             self.accelXLabel.text = [NSString stringWithFormat:@"%0.2f", [as.x floatValue]];
-            
         }
         else if ([keyPath isEqualToString:@"y"]) {
             self.accelYLabel.text = [NSString stringWithFormat:@"%0.2f", [as.y floatValue]];
-            
         }
-        
         else if ([keyPath isEqualToString:@"z"]) {
             self.accelZLabel.text = [NSString stringWithFormat:@"%0.2f", [as.z floatValue]];
-            
         }
         else if ([keyPath isEqualToString:@"isOn"]) {
             [self.accelSwitch setOn:as.isOn animated:YES];
@@ -220,11 +170,7 @@
         else if ([keyPath isEqualToString:@"isEnabled"]) {
             [self.accelSwitch setEnabled:as.isEnabled];
         }
-
-
     }
-    
-
 }
 
 

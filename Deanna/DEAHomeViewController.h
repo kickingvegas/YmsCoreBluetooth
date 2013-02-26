@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 #import "YMSCBAppService.h"
-#import "YMSCBPeripheral.h"
+
+@class DEASensorTag;
 
 /**
  View Controller for TI Sensor Tag instance.
@@ -27,7 +28,7 @@
 //@property (strong, nonatomic) UIBarButtonItem *scanButton;
 //@property (strong, nonatomic) UIBarButtonItem *connectButton;
 
-@property (strong, nonatomic) YMSCBPeripheral *sensorTag;
+@property (strong, nonatomic) DEASensorTag *sensorTag;
 
 - (IBAction)enableAction:(id)sender;
 

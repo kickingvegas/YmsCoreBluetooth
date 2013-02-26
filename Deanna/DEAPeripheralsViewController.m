@@ -7,7 +7,7 @@
 //
 
 #import "DEAPeripheralsViewController.h"
-#import "YMSCBPeripheral.h"
+#import "DEASensorTag.h"
 #import "DEAHomeViewController.h"
 
 @interface DEAPeripheralsViewController ()
@@ -192,7 +192,7 @@
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     DEACBAppService *btleService = [DEACBAppService sharedService];
     
-    YMSCBPeripheral *sensorTag = (YMSCBPeripheral *)[btleService.ymsPeripherals objectAtIndex:indexPath.row];
+    DEASensorTag *sensorTag = (DEASensorTag *)[btleService.ymsPeripherals objectAtIndex:indexPath.row];
     
     
     DEAHomeViewController *hvc = [[DEAHomeViewController alloc] initWithNibName:@"DEAHomeViewController" bundle:nil];
