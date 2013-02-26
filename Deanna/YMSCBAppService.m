@@ -102,21 +102,12 @@ NSString * const YMSCBPoweredOnNotification = @"com.yummymelon.ymscb.poweredon";
 - (void)startScan {
     [self.manager scanForPeripheralsWithServices:nil options:nil];
     self.isScanning = YES;
-    
-    if (self.delegate != nil) {
-        [self.delegate hasStartedScanning:self];
-    }
 }
 
 
 - (void)stopScan {
     [self.manager stopScan];
     self.isScanning = NO;
-    
-    if (self.delegate != nil) {
-        [self.delegate hasStoppedScanning:self];
-    }
-
 }
 
 
@@ -224,10 +215,8 @@ NSString * const YMSCBPoweredOnNotification = @"com.yummymelon.ymscb.poweredon";
 
 }
 
-- (void)centralManager:(CBCentralManager *)central
-didRetrievePeripherals:(NSArray *)peripherals {
+- (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals {
     NSLog(@"centralManager didRetrievePeripherals");
-    
 
     for (CBPeripheral *peripheral in peripherals) {
         if ([self isAppServicePeripheral:peripheral]) {
@@ -240,19 +229,16 @@ didRetrievePeripherals:(NSArray *)peripherals {
 
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
-    // 6
     if ([self isAppServicePeripheral:peripheral]) {
-        YMSCBPeripheral *sensorTag = [self findYmsPeripheral:peripheral];
+        YMSCBPeripheral *yp = [self findYmsPeripheral:peripheral];
         
-        if (sensorTag != nil) {
-            NSArray *services = [sensorTag services];
+        if (yp != nil) {
+            NSArray *services = [yp services];
             [peripheral discoverServices:services];
         }
-
         
     }
     
-    self.isConnected = YES;
     
     if (self.delegate != nil) {
         [self.delegate didConnectPeripheral:self];
@@ -272,7 +258,6 @@ didRetrievePeripherals:(NSArray *)peripherals {
     YMSCBPeripheral *sensorTag = [self findYmsPeripheral:peripheral];
     [self.ymsPeripherals removeObject:sensorTag];
     
-    self.isConnected = NO;
 }
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
