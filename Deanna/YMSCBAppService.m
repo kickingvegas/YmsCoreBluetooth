@@ -13,18 +13,7 @@
 
 NSString * const YMSCBPowerOffNotification = @"com.yummymelon.btleservice.power.off";
 
-
-static YMSCBAppService *sharedBluetoothService;
-
 @implementation YMSCBAppService
-
-+ (YMSCBAppService *)sharedService {
-    if (sharedBluetoothService == nil) {
-        sharedBluetoothService = [[super allocWithZone:NULL] init];
-    }
-    return sharedBluetoothService;
-}
-
 
 - (id)init {
     self = [super init];
@@ -37,15 +26,6 @@ static YMSCBAppService *sharedBluetoothService;
     return self;
 }
 
-
-- (BOOL)isSensorTagPeripheral:(CBPeripheral *)peripheral {
-    BOOL result = NO;
-    
-    result = ([peripheral.name isEqualToString:@"TI BLE Sensor Tag"] ||
-              [peripheral.name isEqualToString:@"SensorTag"]);
-    
-    return result;
-}
 
 
 - (void)persistPeripherals {
@@ -63,16 +43,6 @@ static YMSCBAppService *sharedBluetoothService;
         
     }
     
-//    for (CBPeripheral *p in self.ymsPeripherals) {
-//        CFStringRef uuidString = NULL;
-//        
-//        uuidString = CFUUIDCreateString(NULL, p.UUID);
-//        if (uuidString) {
-//            [devices addObject:(NSString *)CFBridgingRelease(uuidString)];
-//        }
-//    }
-
-
     [userDefaults setObject:devices forKey:@"storedPeripherals"];
     [userDefaults synchronize];
 }
@@ -109,6 +79,19 @@ static YMSCBAppService *sharedBluetoothService;
     }
 }
 
+
+- (BOOL)isAppServicePeripheral:(CBPeripheral *)peripheral {
+    BOOL result = NO;
+    
+    for (NSString *key in self.peripheralSearchNames) {
+        result = result || [peripheral.name isEqualToString:key];
+        if (result) {
+            break;
+        }
+    }
+    
+    return result;
+}
 
 - (void)startScan {
     [self.manager scanForPeripheralsWithServices:nil options:nil];
@@ -253,7 +236,7 @@ static YMSCBAppService *sharedBluetoothService;
 
     
     if (peripheral.name != nil) {
-        if ([self isSensorTagPeripheral:peripheral]) {
+        if ([self isAppServicePeripheral:peripheral]) {
             [self handleFoundPeripheral:peripheral withCentral:central];
         }
     }
@@ -267,7 +250,7 @@ didRetrievePeripherals:(NSArray *)peripherals {
     
 
     for (CBPeripheral *peripheral in peripherals) {
-        if ([self isSensorTagPeripheral:peripheral]) {
+        if ([self isAppServicePeripheral:peripheral]) {
             [self handleFoundPeripheral:peripheral withCentral:central];
         }
     }
@@ -278,8 +261,7 @@ didRetrievePeripherals:(NSArray *)peripherals {
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
     // 6
-
-    if ([self isSensorTagPeripheral:peripheral]) {
+    if ([self isAppServicePeripheral:peripheral]) {
         DEASensorTag *sensorTag = [self findYmsPeripheral:peripheral];
         
         if (sensorTag != nil) {

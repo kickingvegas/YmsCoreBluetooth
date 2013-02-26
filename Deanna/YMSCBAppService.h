@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
+//TODO Need to create YMSCBPeripheral
 @class DEASensorTag;
 
 /**
@@ -20,7 +21,7 @@ extern NSString * const YMSCBPowerOffNotification;
 /**
  Protocols
  */
-@protocol YMSBluetoothServiceDelegate <NSObject>
+@protocol YMSCBAppServiceDelegate <NSObject>
 
 - (void)hasStoppedScanning:(id)delegate;
 - (void)hasStartedScanning:(id)delegate;
@@ -38,7 +39,7 @@ extern NSString * const YMSCBPowerOffNotification;
 @interface YMSCBAppService : NSObject <CBCentralManagerDelegate>
 
 /// pointer to delegate
-@property (nonatomic, weak) id<YMSBluetoothServiceDelegate> delegate;
+@property (nonatomic, weak) id<YMSCBAppServiceDelegate> delegate;
 
 /// pointer to CBCentralManager
 @property (nonatomic, strong) CBCentralManager *manager;
@@ -46,24 +47,32 @@ extern NSString * const YMSCBPowerOffNotification;
 /// array of DEASensorTag peripherals
 @property (nonatomic, strong) NSMutableArray *ymsPeripherals;
 
+/**
+ array of NSStrings to search to match CBPeripheral instances
+ 
+ Used in conjunction with [isAppServicePeripheral:]
+ */
+ 
+@property (nonatomic, strong) NSArray *peripheralSearchNames;
+
 /// flag to determine if connected. is this used? TODO
 @property (nonatomic, assign) BOOL isConnected;
 
 /// flag to determine if scanning. is this used? TODO
 @property (nonatomic, assign) BOOL isScanning;
 
-/**
- Return singleton instance.
- */
-+ (YMSCBAppService *)sharedService;
+
 
 /**
- Return if peripheral is a TI SensorTag.
+ Determines if peripheral is to be managed by this app service.
+ Used in conjunction with peripheralSearchNames.
  
- @param peripheral peripheral instance to test if TI SensorTag.
- 
+ @param peripheral found or retrieved peripheral
+ @return YES is peripheral is to be managed by this app service.
  */
-- (BOOL)isSensorTagPeripheral:(CBPeripheral *)peripheral;
+
+- (BOOL)isAppServicePeripheral:(CBPeripheral *)peripheral;
+
 
 /**
  Persist peripheral UUIDs.
