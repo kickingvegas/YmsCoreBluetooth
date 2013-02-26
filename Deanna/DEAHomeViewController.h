@@ -11,6 +11,10 @@
 #import "YMSBluetoothService.h"
 #import "DEASensorTag.h"
 
+/**
+ View Controller for TI Sensor Tag instance.
+ */
+
 @interface DEAHomeViewController : UIViewController <YMSBluetoothServiceDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *ambientTemperatureLabel;
 @property (strong, nonatomic) IBOutlet UILabel *objectTemperatureLabel;
