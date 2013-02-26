@@ -29,7 +29,7 @@
 		D9718B7C167FA0430001E42C /* YMSCBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718B7B167FA0430001E42C /* YMSCBUtils.m */; };
 		D9718B80167FA0BF0001E42C /* DEAHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718B7E167FA0BF0001E42C /* DEAHomeViewController.m */; };
 		D9718B81167FA0BF0001E42C /* DEAHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9718B7F167FA0BF0001E42C /* DEAHomeViewController.xib */; };
-		D9718B8D167FA2C00001E42C /* DEASensorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718B8C167FA2C00001E42C /* DEASensorTag.m */; };
+		D9718B8D167FA2C00001E42C /* YMSCBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718B8C167FA2C00001E42C /* YMSCBPeripheral.m */; };
 		D9718B8F167FA5140001E42C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B8E167FA5140001E42C /* CoreBluetooth.framework */; };
 		D9718BAD16805E820001E42C /* YMSCBAppService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718BAC16805E820001E42C /* YMSCBAppService.m */; };
 		D9C5012216AB37DD001D4D4F /* DEAPeripheralsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C5012016AB37DD001D4D4F /* DEAPeripheralsViewController.m */; };
@@ -83,8 +83,8 @@
 		D9718B7D167FA0BF0001E42C /* DEAHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAHomeViewController.h; sourceTree = "<group>"; };
 		D9718B7E167FA0BF0001E42C /* DEAHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAHomeViewController.m; sourceTree = "<group>"; };
 		D9718B7F167FA0BF0001E42C /* DEAHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEAHomeViewController.xib; sourceTree = "<group>"; };
-		D9718B8B167FA2C00001E42C /* DEASensorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASensorTag.h; sourceTree = "<group>"; };
-		D9718B8C167FA2C00001E42C /* DEASensorTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASensorTag.m; sourceTree = "<group>"; };
+		D9718B8B167FA2C00001E42C /* YMSCBPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBPeripheral.h; sourceTree = "<group>"; };
+		D9718B8C167FA2C00001E42C /* YMSCBPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBPeripheral.m; sourceTree = "<group>"; };
 		D9718B8E167FA5140001E42C /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D9718B94167FA91F0001E42C /* TISensorTag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TISensorTag.h; sourceTree = "<group>"; };
 		D9718BAB16805E810001E42C /* YMSCBAppService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBAppService.h; sourceTree = "<group>"; };
@@ -160,7 +160,6 @@
 				D9718B54167F9F9F0001E42C /* DEAAppDelegate.h */,
 				D9718B55167F9F9F0001E42C /* DEAAppDelegate.m */,
 				D9718B83167FA1400001E42C /* Services */,
-				D9CB2C0316A71F7800279DDA /* CoreBluetooth Peripherals */,
 				D9CB2C0816A725A000279DDA /* YMS CoreBluetooth Framework */,
 				D9718B82167FA1360001E42C /* Controllers */,
 				D9718B84167FA1450001E42C /* UI */,
@@ -218,6 +217,7 @@
 			children = (
 				D906E5EF16DCAC55001D7932 /* DEACBAppService.h */,
 				D906E5F016DCAC55001D7932 /* DEACBAppService.m */,
+				D9CB2C0616A71F8E00279DDA /* SensorTag */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -231,20 +231,10 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
-		D9CB2C0316A71F7800279DDA /* CoreBluetooth Peripherals */ = {
-			isa = PBXGroup;
-			children = (
-				D9CB2C0616A71F8E00279DDA /* SensorTag */,
-			);
-			name = "CoreBluetooth Peripherals";
-			sourceTree = "<group>";
-		};
 		D9CB2C0616A71F8E00279DDA /* SensorTag */ = {
 			isa = PBXGroup;
 			children = (
 				D9718B94167FA91F0001E42C /* TISensorTag.h */,
-				D9718B8B167FA2C00001E42C /* DEASensorTag.h */,
-				D9718B8C167FA2C00001E42C /* DEASensorTag.m */,
 				D9CB2C0716A71FC300279DDA /* Services */,
 			);
 			name = SensorTag;
@@ -270,6 +260,8 @@
 				D9718BAC16805E820001E42C /* YMSCBAppService.m */,
 				D911704A1681131000E2D19A /* YMSCBService.h */,
 				D911704B1681131000E2D19A /* YMSCBService.m */,
+				D9718B8B167FA2C00001E42C /* YMSCBPeripheral.h */,
+				D9718B8C167FA2C00001E42C /* YMSCBPeripheral.m */,
 				D911704E1681214700E2D19A /* YMSCBCharacteristic.h */,
 				D911704F1681214700E2D19A /* YMSCBCharacteristic.m */,
 				D9CB2C0B16A72D8F00279DDA /* YMS128.h */,
@@ -396,7 +388,7 @@
 				D9718B56167F9F9F0001E42C /* DEAAppDelegate.m in Sources */,
 				D9718B7C167FA0430001E42C /* YMSCBUtils.m in Sources */,
 				D9718B80167FA0BF0001E42C /* DEAHomeViewController.m in Sources */,
-				D9718B8D167FA2C00001E42C /* DEASensorTag.m in Sources */,
+				D9718B8D167FA2C00001E42C /* YMSCBPeripheral.m in Sources */,
 				D9718BAD16805E820001E42C /* YMSCBAppService.m in Sources */,
 				D911704C1681131000E2D19A /* YMSCBService.m in Sources */,
 				D91170501681214700E2D19A /* YMSCBCharacteristic.m in Sources */,
