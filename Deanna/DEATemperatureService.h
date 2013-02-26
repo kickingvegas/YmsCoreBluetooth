@@ -8,6 +8,9 @@
 
 #import "YMSCBService.h"
 
+/**
+ TI SensorTag CoreBluetooth service definition for thermometer.
+ */
 @interface DEATemperatureService : YMSCBService
 
 

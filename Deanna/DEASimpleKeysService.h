@@ -8,6 +8,9 @@
 
 #import "YMSCBService.h"
 
+/**
+ TI SensorTag CoreBluetooth service definition for simple keys service.
+ */
 @interface DEASimpleKeysService : YMSCBService
 
 @property (nonatomic, strong) NSNumber *keyValue;

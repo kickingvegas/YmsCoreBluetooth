@@ -8,6 +8,9 @@
 
 #import "YMSCBService.h"
 
+/**
+ TI SensorTag CoreBluetooth service definition for accelerometer.
+ */
 @interface DEAAccelerometerService : YMSCBService
 
 @property (nonatomic, strong) NSNumber *x;
