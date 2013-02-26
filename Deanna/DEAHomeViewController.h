@@ -15,7 +15,7 @@
  View Controller for TI Sensor Tag instance.
  */
 
-@interface DEAHomeViewController : UIViewController <YMSBluetoothServiceDelegate>
+@interface DEAHomeViewController : UIViewController <YMSCBAppServiceDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *ambientTemperatureLabel;
 @property (strong, nonatomic) IBOutlet UILabel *objectTemperatureLabel;
 @property (strong, nonatomic) IBOutlet UILabel *accelXLabel;

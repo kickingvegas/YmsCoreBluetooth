@@ -31,7 +31,7 @@
     
     self.title = @"Peripherals";
     
-    YMSCBAppService *btleService = [YMSCBAppService sharedService];
+    DEACBAppService *btleService = [DEACBAppService sharedService];
     btleService.delegate = self;
     
     
@@ -64,7 +64,7 @@
 - (void)scanButtonAction:(id)sender {
     NSLog(@"scanButtonAction");
     
-    YMSCBAppService *btleService = [YMSCBAppService sharedService];
+    DEACBAppService *btleService = [DEACBAppService sharedService];
     
     if (btleService.isScanning == NO) {
         [btleService startScan];
@@ -78,7 +78,7 @@
 - (void)connectButtonAction:(id)sender {
     NSLog(@"connectButtonAction");
     
-    YMSCBAppService *btleService = [YMSCBAppService sharedService];
+    DEACBAppService *btleService = [DEACBAppService sharedService];
     
     
     // TODO: handle N case
@@ -151,7 +151,7 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
-    YMSCBAppService *btleService = [YMSCBAppService sharedService];
+    DEACBAppService *btleService = [DEACBAppService sharedService];
     
     DEASensorTag *sensorTag = (DEASensorTag *)[btleService.ymsPeripherals objectAtIndex:indexPath.row];
     
@@ -170,7 +170,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    YMSCBAppService *btleService = [YMSCBAppService sharedService];
+    DEACBAppService *btleService = [DEACBAppService sharedService];
     
     NSInteger result;
     
@@ -190,7 +190,7 @@
 
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    YMSCBAppService *btleService = [YMSCBAppService sharedService];
+    DEACBAppService *btleService = [DEACBAppService sharedService];
     
     DEASensorTag *sensorTag = (DEASensorTag *)[btleService.ymsPeripherals objectAtIndex:indexPath.row];
     

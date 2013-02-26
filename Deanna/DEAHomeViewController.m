@@ -7,7 +7,7 @@
 //
 
 #import "DEAHomeViewController.h"
-#import "YMSCBAppService.h"
+#import "DEACBAppService.h"
 #import "DEASensorTag.h"
 #import "DEATemperatureService.h"
 #import "DEAAccelerometerService.h"
@@ -43,7 +43,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 
-    YMSCBAppService *btleService = [YMSCBAppService sharedService];
+    DEACBAppService *btleService = [DEACBAppService sharedService];
     btleService.delegate = self;
 
     

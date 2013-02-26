@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "YMSCBAppService.h"
+#import "DEACBAppService.h"
 
 /**
  View Controller for listing of TI SensorTags available.
  */
 
-@interface DEAPeripheralsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, YMSBluetoothServiceDelegate>
+@interface DEAPeripheralsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, YMSCBAppServiceDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *peripheralsTableView;
 
