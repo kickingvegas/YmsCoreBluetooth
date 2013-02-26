@@ -8,6 +8,14 @@
 
 #import "YMSCBAppService.h"
 
+/**
+ Deanna TI SensorTag CoreBluetooth Application Service.
+ 
+ This class defines a singleton application service instance which manages access to
+ the TI SensorTag via the CoreBluetooth API. 
+ 
+ THIS IS NOT A COREBLUETOOTH SERVICE.
+ */
 @interface DEACBAppService : YMSCBAppService
 
 /**
