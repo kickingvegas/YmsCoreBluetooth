@@ -34,7 +34,7 @@
 
 - (void)update {
     YMSCBCharacteristic *dtc = self.characteristicMap[@"data"];
-    NSData *data = dtc.characteristic.value;
+    NSData *data = dtc.cbCharacteristic.value;
     
     char val[data.length];
     [data getBytes:&val length:data.length];
