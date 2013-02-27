@@ -1,6 +1,6 @@
 # YmsCoreBluetooth
 
-A framework for building CoreBluetooth applications.
+A framework for building CoreBluetooth applications. Includes Deanna, an iOS application using YmsCoreBluetooth to communicate with a TI SensorTag.
 
 **THIS IS PRE-PRODUCTION CODE. IT IS NOT READY FOR DISTRIBUTION.**
 
