@@ -251,12 +251,13 @@ NSString * const YMSCBPoweredOnNotification = @"com.yummymelon.ymscb.poweredon";
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     NSLog(@"centralManager didDisconnectePeripheral");
     
-    if (self.delegate != nil) {
-        [self.delegate didDisconnectPeripheral:self];
-    }
     
     YMSCBPeripheral *sensorTag = [self findYmsPeripheral:peripheral];
     [self.ymsPeripherals removeObject:sensorTag];
+    
+    if (self.delegate != nil) {
+        [self.delegate didDisconnectPeripheral:self];
+    }
     
 }
 
