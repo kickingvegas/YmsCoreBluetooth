@@ -13,6 +13,9 @@
 #import "DEAAccelerometerService.h"
 
 @interface DEAHomeViewController ()
+
+- (void)connectButtonAction:(id)sender;
+
 @end
 
 @implementation DEAHomeViewController
@@ -29,16 +32,15 @@
     [super viewDidLoad];
 
     self.title = @"Deanna";
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(btleOffHandler:) name:YMSCBPoweredOffNotification object:nil];
 
 }
 
 
+
 - (void)viewWillAppear:(BOOL)animated {
 
-    DEACBAppService *btleService = [DEACBAppService sharedService];
-    btleService.delegate = self;
+    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    cbAppService.delegate = self;
 
     
     DEATemperatureService *ts = self.sensorTag.serviceDict[@"temperature"];
@@ -51,14 +53,28 @@
     for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled"]) {
         [as addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
     }
-
-    
     
     [self.temperatureSwitch setOn:ts.isOn animated:YES];
     [self.temperatureSwitch setEnabled:ts.isEnabled];
     
     [self.accelSwitch setOn:as.isOn animated:YES];
     [self.accelSwitch setEnabled:as.isEnabled];
+    
+}
+
+- (void)connectButtonAction:(id)sender {
+    
+    NSLog(@"connectButtonAction:");
+    
+    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    
+    
+    if (self.sensorTag.cbPeriperheral.isConnected) {
+        [cbAppService.manager cancelPeripheralConnection:self.sensorTag.cbPeriperheral];
+    }
+    else {
+        [cbAppService.manager connectPeripheral:self.sensorTag.cbPeriperheral options:nil];
+    }
     
 }
 
@@ -103,64 +119,52 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
-    //YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
-    //DEASensorTag *sensorTag = btleService.ymsPeripherals[0];
+    //YMSBluetoothService *cbAppService = [YMSBluetoothService sharedService];
+    //DEASensorTag *sensorTag = cbAppService.ymsPeripherals[0];
     
     DEATemperatureService *ts = self.sensorTag.serviceDict[@"temperature"];
     DEAAccelerometerService *as = self.sensorTag.serviceDict[@"accelerometer"];
 
-    
     if (object == ts) {
-        
-
         if ([keyPath isEqualToString:@"ambientTemp"]) {
             double temperatureC = [ts.ambientTemp doubleValue];
             float temperatureF = (float)temperatureC * 9.0/5.0 + 32.0;
             temperatureF = roundf(100 * temperatureF)/100.0;
             self.ambientTemperatureLabel.text = [NSString stringWithFormat:@"%0.2f ℉", temperatureF];
             
-        }
-        else if ([keyPath isEqualToString:@"objectTemp"]) {
+        } else if ([keyPath isEqualToString:@"objectTemp"]) {
             double temperatureC = [ts.objectTemp doubleValue];
             float temperatureF = (float)temperatureC * 9.0/5.0 + 32.0;
             temperatureF = roundf(100 * temperatureF)/100.0;
             self.objectTemperatureLabel.text = [NSString stringWithFormat:@"%0.2f ℉", temperatureF];
 
-        }
-        else if ([keyPath isEqualToString:@"isOn"]) {
+        } else if ([keyPath isEqualToString:@"isOn"]) {
             [self.temperatureSwitch setOn:ts.isOn animated:YES];
-        }
-        else if ([keyPath isEqualToString:@"isEnabled"]) {
+
+        } else if ([keyPath isEqualToString:@"isEnabled"]) {
             [self.temperatureSwitch setEnabled:ts.isEnabled];
         }
 
 
-    }
-    
-    else if (object == as) {
+    } else if (object == as) {
         if ([keyPath isEqualToString:@"x"]) {
             self.accelXLabel.text = [NSString stringWithFormat:@"%0.2f", [as.x floatValue]];
-        }
-        else if ([keyPath isEqualToString:@"y"]) {
+        } else if ([keyPath isEqualToString:@"y"]) {
             self.accelYLabel.text = [NSString stringWithFormat:@"%0.2f", [as.y floatValue]];
-        }
-        else if ([keyPath isEqualToString:@"z"]) {
+        } else if ([keyPath isEqualToString:@"z"]) {
             self.accelZLabel.text = [NSString stringWithFormat:@"%0.2f", [as.z floatValue]];
-        }
-        else if ([keyPath isEqualToString:@"isOn"]) {
+        } else if ([keyPath isEqualToString:@"isOn"]) {
             [self.accelSwitch setOn:as.isOn animated:YES];
-        }
-        else if ([keyPath isEqualToString:@"isEnabled"]) {
+        } else if ([keyPath isEqualToString:@"isEnabled"]) {
             [self.accelSwitch setEnabled:as.isEnabled];
         }
     }
+    
+    
 }
 
 
 - (IBAction)enableAction:(id)sender {
-    
-    //YMSBluetoothService *btleService = [YMSBluetoothService sharedService];
-    //DEASensorTag *sensorTag = btleService.ymsPeripherals[0];
     
     if (self.sensorTag != nil) {
     
@@ -175,13 +179,12 @@
             sensorName= @"temperature";
         }
         
-        YMSCBService *btService = self.sensorTag.serviceDict[sensorName];
+        YMSCBService *yService = self.sensorTag.serviceDict[sensorName];
 
-        
         if (enableSwitch.isOn)
-            [btService turnOn];
+            [yService turnOn];
         else
-            [btService turnOff];
+            [yService turnOff];
 
     }
 
