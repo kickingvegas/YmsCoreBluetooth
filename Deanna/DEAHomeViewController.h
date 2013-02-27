@@ -26,6 +26,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *accelZLabel;
 @property (strong, nonatomic) IBOutlet UISwitch *temperatureSwitch;
 @property (strong, nonatomic) IBOutlet UISwitch *accelSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch *humiditySwitch;
+@property (strong, nonatomic) IBOutlet UILabel *humidityLabel;
+@property (strong, nonatomic) IBOutlet UILabel *humidityTemperature;
 
 
 @property (strong, nonatomic) DEASensorTag *sensorTag;

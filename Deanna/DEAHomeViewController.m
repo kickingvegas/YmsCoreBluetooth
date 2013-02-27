@@ -11,6 +11,7 @@
 #import "DEASensorTag.h"
 #import "DEATemperatureService.h"
 #import "DEAAccelerometerService.h"
+#import "DEAHumidityService.h"
 
 @interface DEAHomeViewController ()
 
@@ -32,7 +33,6 @@
     [super viewDidLoad];
 
     self.title = @"Deanna";
-
 }
 
 
@@ -45,6 +45,7 @@
     
     DEATemperatureService *ts = self.sensorTag.serviceDict[@"temperature"];
     DEAAccelerometerService *as = self.sensorTag.serviceDict[@"accelerometer"];
+    DEAHumidityService *hs = self.sensorTag.serviceDict[@"humidity"];
     
     for (NSString *key in @[@"ambientTemp", @"objectTemp", @"isOn", @"isEnabled"]) {
         [ts addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
@@ -54,11 +55,20 @@
         [as addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
     }
     
+    for (NSString *key in @[@"ambientTemp", @"relativeHumidity", @"isOn", @"isEnabled"]) {
+        [hs addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
+    }
+    
+    
+    
     [self.temperatureSwitch setOn:ts.isOn animated:YES];
     [self.temperatureSwitch setEnabled:ts.isEnabled];
     
     [self.accelSwitch setOn:as.isOn animated:YES];
     [self.accelSwitch setEnabled:as.isEnabled];
+    
+    [self.humiditySwitch setOn:hs.isOn animated:YES];
+    [self.humiditySwitch setEnabled:hs.isEnabled];
     
 }
 
@@ -82,6 +92,7 @@
     
     DEATemperatureService *ts = self.sensorTag.serviceDict[@"temperature"];
     DEAAccelerometerService *as = self.sensorTag.serviceDict[@"accelerometer"];
+    DEAHumidityService *hs = self.sensorTag.serviceDict[@"humidity"];
     
     for (NSString *key in @[@"ambientTemp", @"objectTemp", @"isOn", @"isEnabled"]) {
         [ts removeObserver:self forKeyPath:key];
@@ -89,6 +100,10 @@
     
     for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled"]) {
         [as removeObserver:self forKeyPath:key];
+    }
+    
+    for (NSString *key in @[@"ambientTemp", @"relativeHumidity", @"isOn", @"isEnabled"]) {
+        [hs removeObserver:self forKeyPath:key];
     }
 
 }
@@ -124,7 +139,8 @@
     
     DEATemperatureService *ts = self.sensorTag.serviceDict[@"temperature"];
     DEAAccelerometerService *as = self.sensorTag.serviceDict[@"accelerometer"];
-
+    DEAHumidityService *hs = self.sensorTag.serviceDict[@"humidity"];
+    
     if (object == ts) {
         if ([keyPath isEqualToString:@"ambientTemp"]) {
             double temperatureC = [ts.ambientTemp doubleValue];
@@ -158,7 +174,28 @@
         } else if ([keyPath isEqualToString:@"isEnabled"]) {
             [self.accelSwitch setEnabled:as.isEnabled];
         }
+        
+        
+    } else if (object == hs) {
+        if ([keyPath isEqualToString:@"ambientTemp"]) {
+            double temperatureC = [hs.ambientTemp doubleValue];
+            float temperatureF = (float)temperatureC * 9.0/5.0 + 32.0;
+            temperatureF = roundf(100 * temperatureF)/100.0;
+            self.humidityTemperature.text = [NSString stringWithFormat:@"%0.2f ℉", temperatureF];
+            
+        } else if ([keyPath isEqualToString:@"relativeHumidity"]) {
+            double relativeHumidity = [hs.relativeHumidity doubleValue];
+            self.humidityLabel.text = [NSString stringWithFormat:@"%0.2f", relativeHumidity];
+            
+        } else if ([keyPath isEqualToString:@"isOn"]) {
+            [self.humiditySwitch setOn:hs.isOn animated:YES];
+            
+        } else if ([keyPath isEqualToString:@"isEnabled"]) {
+            [self.humiditySwitch setEnabled:hs.isEnabled];
+        }
+
     }
+
     
     
 }
@@ -174,9 +211,10 @@
         
         if (sender == self.accelSwitch) {
             sensorName = @"accelerometer";
-        }
-        else {
+        } else if (sender == self.temperatureSwitch) {
             sensorName= @"temperature";
+        } else if (sender == self.humiditySwitch) {
+            sensorName= @"humidity";
         }
         
         YMSCBService *yService = self.sensorTag.serviceDict[sensorName];
@@ -189,5 +227,11 @@
     }
 
     
+}
+- (void)viewDidUnload {
+    [self setHumiditySwitch:nil];
+    [self setHumidityLabel:nil];
+    [self setHumidityTemperature:nil];
+    [super viewDidUnload];
 }
 @end
