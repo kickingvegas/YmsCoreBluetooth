@@ -27,8 +27,6 @@
 @property (strong, nonatomic) IBOutlet UISwitch *temperatureSwitch;
 @property (strong, nonatomic) IBOutlet UISwitch *accelSwitch;
 
-//@property (strong, nonatomic) UIBarButtonItem *scanButton;
-//@property (strong, nonatomic) UIBarButtonItem *connectButton;
 
 @property (strong, nonatomic) DEASensorTag *sensorTag;
 
