@@ -75,16 +75,11 @@
         if ([keyPath isEqualToString:@"isScanning"]) {
             if (cbAppService.isScanning) {
                 self.scanButton.title = @"Scanning";
-            }
-            else {
+            } else {
                 self.scanButton.title = @"Scan";
             }
-        } else if ([keyPath isEqualToString:@"isConnected"]) {
         }
     }
-    
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
