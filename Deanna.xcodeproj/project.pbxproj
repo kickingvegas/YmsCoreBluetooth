@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D906E5F116DCAC55001D7932 /* DEACBAppService.m in Sources */ = {isa = PBXBuildFile; fileRef = D906E5F016DCAC55001D7932 /* DEACBAppService.m */; };
 		D90C0C3A16DD6297002D3FFD /* DEABaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D90C0C3916DD6297002D3FFD /* DEABaseViewController.m */; };
+		D90C0C3D16DD9133002D3FFD /* DEAHumidityService.m in Sources */ = {isa = PBXBuildFile; fileRef = D90C0C3C16DD9133002D3FFD /* DEAHumidityService.m */; };
 		D911704C1681131000E2D19A /* YMSCBService.m in Sources */ = {isa = PBXBuildFile; fileRef = D911704B1681131000E2D19A /* YMSCBService.m */; };
 		D91170501681214700E2D19A /* YMSCBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = D911704F1681214700E2D19A /* YMSCBCharacteristic.m */; };
 		D91170531681251900E2D19A /* DEATemperatureService.m in Sources */ = {isa = PBXBuildFile; fileRef = D91170521681251900E2D19A /* DEATemperatureService.m */; };
@@ -56,6 +57,8 @@
 		D906E5F016DCAC55001D7932 /* DEACBAppService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEACBAppService.m; sourceTree = "<group>"; };
 		D90C0C3816DD6297002D3FFD /* DEABaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEABaseViewController.h; sourceTree = "<group>"; };
 		D90C0C3916DD6297002D3FFD /* DEABaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEABaseViewController.m; sourceTree = "<group>"; };
+		D90C0C3B16DD9133002D3FFD /* DEAHumidityService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAHumidityService.h; sourceTree = "<group>"; };
+		D90C0C3C16DD9133002D3FFD /* DEAHumidityService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAHumidityService.m; sourceTree = "<group>"; };
 		D911704A1681131000E2D19A /* YMSCBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBService.h; sourceTree = "<group>"; };
 		D911704B1681131000E2D19A /* YMSCBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBService.m; sourceTree = "<group>"; };
 		D911704E1681214700E2D19A /* YMSCBCharacteristic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBCharacteristic.h; sourceTree = "<group>"; };
@@ -262,6 +265,8 @@
 				D91170551681461300E2D19A /* DEAAccelerometerService.m */,
 				D9D8316B168449FD00F51E42 /* DEASimpleKeysService.h */,
 				D9D8316C168449FD00F51E42 /* DEASimpleKeysService.m */,
+				D90C0C3B16DD9133002D3FFD /* DEAHumidityService.h */,
+				D90C0C3C16DD9133002D3FFD /* DEAHumidityService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -414,6 +419,7 @@
 				D988A5C616DD26A100D7D392 /* DEASensorTag.m in Sources */,
 				D988A5C816DD464A00D7D392 /* TISensorTag.c in Sources */,
 				D90C0C3A16DD6297002D3FFD /* DEABaseViewController.m in Sources */,
+				D90C0C3D16DD9133002D3FFD /* DEAHumidityService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
