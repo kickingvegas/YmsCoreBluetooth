@@ -23,4 +23,7 @@ doc:
 	--company-id 'com.yummymelon' \
 	--logformat xcode \
         --exit-threshold 2 \
-	Deanna
+	--output docs \
+	Deanna \
+	YmsCoreBluetooth
+
