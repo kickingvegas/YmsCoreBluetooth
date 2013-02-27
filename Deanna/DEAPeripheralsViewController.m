@@ -32,7 +32,7 @@
     self.title = @"Peripherals";
     
     DEACBAppService *cbAppService = [DEACBAppService sharedService];
-    cbAppService.delegate = self;
+    
     
     
     [self.navigationController setToolbarHidden:NO];
@@ -55,6 +55,16 @@
     [self.connectButton setEnabled:NO];
 
 
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    cbAppService.delegate = self;
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
