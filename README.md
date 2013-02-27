@@ -2,8 +2,7 @@
 
 A framework for building CoreBluetooth applications.
 
-
-
+**THIS IS PRE-PRODUCTION CODE. IT IS NOT READY FOR DISTRIBUTION.**
 
 ## License
 
