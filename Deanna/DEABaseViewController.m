@@ -77,14 +77,22 @@
  
     } else if ([notification.name isEqualToString:YMSCBUnsupportedNotification]) {
      
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Dang."
+                                                        message:@"Unfortunately this device can not talk to Bluetooth Smart (Low Energy) devices."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Dismiss"
+                                              otherButtonTitles:nil];
+        
+        [alert show];
+
     } else if ([notification.name isEqualToString:YMSCBUnauthorizedNotification]) {
 
     } else if ([notification.name isEqualToString:YMSCBPoweredOnNotification]) {
         
     } else if ([notification.name isEqualToString:YMSCBPoweredOffNotification]) {
 
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"BTLE is off"
-                                                        message:@"yo turn it on!"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Turn it on."
+                                                        message:@"Please launch Settings and turn on Bluetooth. Then return to this app."
                                                        delegate:nil
                                               cancelButtonTitle:@"Dismiss"
                                               otherButtonTitles:nil];
