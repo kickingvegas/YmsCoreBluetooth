@@ -31,15 +31,14 @@
     
     self.title = @"Peripherals";
     
-    DEACBAppService *btleService = [DEACBAppService sharedService];
-    btleService.delegate = self;
+    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    cbAppService.delegate = self;
     
     
     [self.navigationController setToolbarHidden:NO];
     
     
     self.scanButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Scanning" style:UIBarButtonItemStyleBordered target:self action:@selector(scanButtonAction:)];
-    
     self.connectButton = [[UIBarButtonItem alloc] initWithTitle:@"Connect" style:UIBarButtonItemStyleBordered target:self action:@selector(connectButtonAction:)];
     
     self.toolbarItems = @[self.scanButton, self.connectButton];
@@ -48,14 +47,37 @@
     [self.peripheralsTableView reloadData];
     
     
+    [cbAppService addObserver:self
+                  forKeyPath:@"isScanning"
+                     options:NSKeyValueObservingOptionNew
+                     context:NULL];
     
+    [self.connectButton setEnabled:NO];
 
-    
 
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
+    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    
+    if (object == cbAppService) {
+        if ([keyPath isEqualToString:@"isScanning"]) {
+            if (cbAppService.isScanning) {
+                self.scanButton.title = @"Scanning";
+            }
+            else {
+                self.scanButton.title = @"Scan";
+            }
+        } else if ([keyPath isEqualToString:@"isConnected"]) {
+        }
+    }
+    
+    
+    
+}
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -64,13 +86,13 @@
 - (void)scanButtonAction:(id)sender {
     NSLog(@"scanButtonAction");
     
-    DEACBAppService *btleService = [DEACBAppService sharedService];
+    DEACBAppService *cbAppService = [DEACBAppService sharedService];
     
-    if (btleService.isScanning == NO) {
-        [btleService startScan];
+    if (cbAppService.isScanning == NO) {
+        [cbAppService startScan];
     }
     else {
-        [btleService stopScan];
+        [cbAppService stopScan];
     }
 }
 
@@ -78,29 +100,23 @@
 - (void)connectButtonAction:(id)sender {
     NSLog(@"connectButtonAction");
     
-    DEACBAppService *btleService = [DEACBAppService sharedService];
     
+    DEACBAppService *cbAppService = [DEACBAppService sharedService];
     
-    // TODO: handle N case
+    NSIndexPath *indexPath = [self.peripheralsTableView indexPathForSelectedRow];
+    DEASensorTag *sensorTag = (DEASensorTag *)[cbAppService.ymsPeripherals objectAtIndex:indexPath.row];
     
-    if (btleService.isConnected == YES) {
-        [btleService disconnectPeripheral:0];
+    [self.connectButton setEnabled:YES];
+    
+    if (sensorTag.cbPeriperheral.isConnected) {
+        [cbAppService disconnectPeripheral:indexPath.row];
+    } else {
+        [cbAppService loadPeripherals];
     }
-    else {
-        [btleService loadPeripherals];
-    }
-    
 }
 
 
 
-- (void)hasStartedScanning:(id)delegate {
-    self.scanButton.title = @"Stop Scanning";
-}
-
-- (void)hasStoppedScanning:(id)delegate {
-    self.scanButton.title = @"Start Scanning";
-}
 
 - (void)didConnectPeripheral:(id)delegate {
     NSLog(@"didConnectPeripheral:");
@@ -112,6 +128,10 @@
 
 - (void)didDisconnectPeripheral:(id)delegate {
     NSLog(@"didDisconnectPeripheral:");
+    
+    self.connectButton.title = @"Connect";
+    [self.connectButton setEnabled:NO];
+    
     
     [self.peripheralsTableView reloadData];
 }
@@ -140,9 +160,8 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
-    DEACBAppService *btleService = [DEACBAppService sharedService];
-    
-    YMSCBPeripheral *sensorTag = (YMSCBPeripheral *)[btleService.ymsPeripherals objectAtIndex:indexPath.row];
+    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    DEASensorTag *sensorTag = (DEASensorTag *)[cbAppService.ymsPeripherals objectAtIndex:indexPath.row];
     
     if (sensorTag.cbPeriperheral.isConnected) {
         cell.detailTextLabel.text = @"Connected";
@@ -152,30 +171,43 @@
     }
     
     cell.textLabel.text = sensorTag.cbPeriperheral.name;
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+
     
 }
 
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    DEACBAppService *btleService = [DEACBAppService sharedService];
+    DEACBAppService *cbAppService = [DEACBAppService sharedService];
     NSInteger result;
-    result = [btleService.ymsPeripherals count];
+    result = [cbAppService.ymsPeripherals count];
     return result;
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"Selected");
-
     
+    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    DEASensorTag *sensorTag = (DEASensorTag *)[cbAppService.ymsPeripherals objectAtIndex:indexPath.row];
+    
+    [self.connectButton setEnabled:YES];
+    
+    if (sensorTag.cbPeriperheral.isConnected) {
+        self.connectButton.title = @"Disconnect";
+        
+    } else {
+        self.connectButton.title = @"Connect";
+    }
+
 }
 
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    DEACBAppService *btleService = [DEACBAppService sharedService];
+    DEACBAppService *cbAppService = [DEACBAppService sharedService];
     
-    DEASensorTag *sensorTag = (DEASensorTag *)[btleService.ymsPeripherals objectAtIndex:indexPath.row];
+    DEASensorTag *sensorTag = (DEASensorTag *)[cbAppService.ymsPeripherals objectAtIndex:indexPath.row];
     
     
     DEAHomeViewController *hvc = [[DEAHomeViewController alloc] initWithNibName:@"DEAHomeViewController" bundle:nil];
