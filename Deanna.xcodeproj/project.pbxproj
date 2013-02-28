@@ -32,8 +32,6 @@
 		D9718B66167F9FA00001E42C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B47167F9F9F0001E42C /* Foundation.framework */; };
 		D9718B6E167F9FA00001E42C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9718B6C167F9FA00001E42C /* InfoPlist.strings */; };
 		D9718B71167F9FA00001E42C /* DeannaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718B70167F9FA00001E42C /* DeannaTests.m */; };
-		D9718B80167FA0BF0001E42C /* DEAHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718B7E167FA0BF0001E42C /* DEAHomeViewController.m */; };
-		D9718B81167FA0BF0001E42C /* DEAHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9718B7F167FA0BF0001E42C /* DEAHomeViewController.xib */; };
 		D9718B8F167FA5140001E42C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B8E167FA5140001E42C /* CoreBluetooth.framework */; };
 		D988A5C616DD26A100D7D392 /* DEASensorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = D988A5C516DD26A100D7D392 /* DEASensorTag.m */; };
 		D988A5C816DD464A00D7D392 /* TISensorTag.c in Sources */ = {isa = PBXBuildFile; fileRef = D988A5C716DD464A00D7D392 /* TISensorTag.c */; };
@@ -100,9 +98,6 @@
 		D9718B6D167F9FA00001E42C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D9718B6F167F9FA00001E42C /* DeannaTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeannaTests.h; sourceTree = "<group>"; };
 		D9718B70167F9FA00001E42C /* DeannaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeannaTests.m; sourceTree = "<group>"; };
-		D9718B7D167FA0BF0001E42C /* DEAHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAHomeViewController.h; sourceTree = "<group>"; };
-		D9718B7E167FA0BF0001E42C /* DEAHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAHomeViewController.m; sourceTree = "<group>"; };
-		D9718B7F167FA0BF0001E42C /* DEAHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEAHomeViewController.xib; sourceTree = "<group>"; };
 		D9718B8E167FA5140001E42C /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D9718B94167FA91F0001E42C /* TISensorTag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TISensorTag.h; sourceTree = "<group>"; };
 		D988A5C416DD26A100D7D392 /* DEASensorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASensorTag.h; sourceTree = "<group>"; };
@@ -255,8 +250,6 @@
 				D90C0C3916DD6297002D3FFD /* DEABaseViewController.m */,
 				D9C5011F16AB37DD001D4D4F /* DEAPeripheralsViewController.h */,
 				D9C5012016AB37DD001D4D4F /* DEAPeripheralsViewController.m */,
-				D9718B7D167FA0BF0001E42C /* DEAHomeViewController.h */,
-				D9718B7E167FA0BF0001E42C /* DEAHomeViewController.m */,
 				D9F412ED16DED0030094FEFA /* DEASensorTagViewController.h */,
 				D9F412EE16DED0030094FEFA /* DEASensorTagViewController.m */,
 				D9F412F216DED7510094FEFA /* DEATemperatureViewCell.h */,
@@ -286,7 +279,6 @@
 			children = (
 				D9C5012116AB37DD001D4D4F /* DEAPeripheralsViewController.xib */,
 				D9F412EF16DED0030094FEFA /* DEASensorTagViewController.xib */,
-				D9718B7F167FA0BF0001E42C /* DEAHomeViewController.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -394,7 +386,6 @@
 				D9718B58167F9FA00001E42C /* Default.png in Resources */,
 				D9718B5A167F9FA00001E42C /* Default@2x.png in Resources */,
 				D9718B5C167F9FA00001E42C /* Default-568h@2x.png in Resources */,
-				D9718B81167FA0BF0001E42C /* DEAHomeViewController.xib in Resources */,
 				D9C5012316AB37DD001D4D4F /* DEAPeripheralsViewController.xib in Resources */,
 				D9F412F116DED0030094FEFA /* DEASensorTagViewController.xib in Resources */,
 			);
@@ -433,7 +424,6 @@
 			files = (
 				D9718B52167F9F9F0001E42C /* main.m in Sources */,
 				D9718B56167F9F9F0001E42C /* DEAAppDelegate.m in Sources */,
-				D9718B80167FA0BF0001E42C /* DEAHomeViewController.m in Sources */,
 				D91170531681251900E2D19A /* DEATemperatureService.m in Sources */,
 				D91170561681461300E2D19A /* DEAAccelerometerService.m in Sources */,
 				D9D8316D168449FE00F51E42 /* DEASimpleKeysService.m in Sources */,
