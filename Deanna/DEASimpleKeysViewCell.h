@@ -20,14 +20,28 @@
 @class DEASimpleKeysService;
 @class DEASensorTag;
 
+/**
+ View and control logic for the SensorTag simple keys service.
+ */
 @interface DEASimpleKeysViewCell : UITableViewCell
 
+/// Pointer to simple keys service
 @property (strong, nonatomic) DEASimpleKeysService *service;
 
+/// Button 1
 @property (strong, nonatomic) IBOutlet UIButton *button1;
+
+/// Button 2
 @property (strong, nonatomic) IBOutlet UIButton *button2;
 
+/**
+ Bind UI components to service of interest in sensorTag. 
+ */
 - (void)configureWithSensorTag:(DEASensorTag *)sensorTag;
+
+/**
+ Unbind UI components to service.
+ */
 - (void)deconfigure;
 
 @end

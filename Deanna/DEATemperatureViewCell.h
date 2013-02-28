@@ -20,12 +20,20 @@
 @class DEATemperatureService;
 @class DEASensorTag;
 
+/**
+ View and control logic for the SensorTag temperature service.
+ */
 @interface DEATemperatureViewCell : UITableViewCell
 
 @property (strong, nonatomic) DEATemperatureService *service;
 
+/// Enable notification
 @property (strong, nonatomic) IBOutlet UISwitch *notifySwitch;
+
+/// Display ambient temperature
 @property (strong, nonatomic) IBOutlet UILabel *ambientTemperatureLabel;
+
+/// Display object temperature
 @property (strong, nonatomic) IBOutlet UILabel *objectTemperatureLabel;
 
 - (IBAction)notifySwitchAction:(id)sender;

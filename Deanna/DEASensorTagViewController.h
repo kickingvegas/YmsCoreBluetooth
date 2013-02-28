@@ -34,6 +34,6 @@
 @property (strong, nonatomic) IBOutlet DEATemperatureViewCell *temperatureViewCell;
 @property (strong, nonatomic) IBOutlet DEAAccelerometerViewCell *accelerometerViewCell;
 @property (strong, nonatomic) IBOutlet DEAHumidityViewCell *humidityViewCell;
-@property (strong, nonatomic) IBOutlet DEASimpleKeysViewCell *simpleKeysViewCell;
+@property (strong, nonatomic) IBOutlet DEASimpleKeysViewCell *simplekeysViewCell;
 
 @end

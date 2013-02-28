@@ -23,8 +23,10 @@
  */
 @interface DEAHumidityService : YMSCBService
 
-
+/// Ambient temperature
 @property (nonatomic, strong) NSNumber *ambientTemp;
+
+/// Relative humidity
 @property (nonatomic, strong) NSNumber *relativeHumidity;
 
 @end

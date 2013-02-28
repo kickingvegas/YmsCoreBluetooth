@@ -21,12 +21,20 @@
 @class DEAHumidityService;
 @class DEASensorTag;
 
+/**
+ View and control logic for the SensorTag humidity service.
+ */
 @interface DEAHumidityViewCell : UITableViewCell
 
 @property (strong, nonatomic) DEAHumidityService *service;
 
+/// Enable notification
 @property (strong, nonatomic) IBOutlet UISwitch *notifySwitch;
+
+/// Display ambient temperature
 @property (strong, nonatomic) IBOutlet UILabel *ambientTemperatureLabel;
+
+/// Display relative humidity
 @property (strong, nonatomic) IBOutlet UILabel *relativeHumidityLabel;
 
 - (IBAction)notifySwitchAction:(id)sender;

@@ -20,6 +20,9 @@
 @class DEAAccelerometerService;
 @class DEASensorTag;
 
+/**
+ View and control logic for the SensorTag accelerometer service.
+ */
 @interface DEAAccelerometerViewCell : UITableViewCell
 
 @property (strong, nonatomic) DEAAccelerometerService *service;

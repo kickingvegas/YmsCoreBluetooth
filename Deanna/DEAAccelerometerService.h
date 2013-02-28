@@ -24,8 +24,11 @@
  */
 @interface DEAAccelerometerService : YMSCBService
 
+/// x value
 @property (nonatomic, strong) NSNumber *x;
+/// y value
 @property (nonatomic, strong) NSNumber *y;
+/// z value
 @property (nonatomic, strong) NSNumber *z;
 
 @end

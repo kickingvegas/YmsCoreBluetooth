@@ -18,6 +18,9 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ Base view controller class of Deanna.
+ */
 @interface DEABaseViewController : UIViewController
 
 @end

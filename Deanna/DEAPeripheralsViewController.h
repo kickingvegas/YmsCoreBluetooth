@@ -26,10 +26,13 @@
 
 @interface DEAPeripheralsViewController : DEABaseViewController <UITableViewDataSource, UITableViewDelegate, YMSCBAppServiceDelegate>
 
+/// TableView for found peripherals
 @property (strong, nonatomic) IBOutlet UITableView *peripheralsTableView;
 
+/// Button to enable Bluetooth scanner
 @property (strong, nonatomic) UIBarButtonItem *scanButton;
-@property (strong, nonatomic) UIBarButtonItem *connectButton;
 
+/// Button to disconnect peripheral
+@property (strong, nonatomic) UIBarButtonItem *connectButton;
 
 @end

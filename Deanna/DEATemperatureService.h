@@ -24,7 +24,10 @@
 @interface DEATemperatureService : YMSCBService
 
 
+/// Ambient temperature
 @property (nonatomic, strong) NSNumber *ambientTemp;
+
+/// Object temperature
 @property (nonatomic, strong) NSNumber *objectTemp;
 
 @end
