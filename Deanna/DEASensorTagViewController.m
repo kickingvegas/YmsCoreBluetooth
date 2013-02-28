@@ -55,7 +55,7 @@
     [self setTemperatureViewCell:nil];
     [self setAccelerometerViewCell:nil];
     [self setHumidityViewCell:nil];
-    [self setSimpleKeysViewCell:nil];
+    [self setSimplekeysViewCell:nil];
     [super viewDidUnload];
 }
 
@@ -68,7 +68,7 @@
     [self.temperatureViewCell configureWithSensorTag:self.sensorTag];
     [self.accelerometerViewCell configureWithSensorTag:self.sensorTag];
     [self.humidityViewCell configureWithSensorTag:self.sensorTag];
-    [self.simpleKeysViewCell configureWithSensorTag:self.sensorTag];
+    [self.simplekeysViewCell configureWithSensorTag:self.sensorTag];
 }
 
 
@@ -76,7 +76,7 @@
     [self.temperatureViewCell deconfigure];
     [self.accelerometerViewCell deconfigure];
     [self.humidityViewCell deconfigure];
-    [self.simpleKeysViewCell deconfigure];
+    [self.simplekeysViewCell deconfigure];
 }
 
 
@@ -93,7 +93,7 @@
         cell = self.humidityViewCell;
 
     } else if (indexPath.section == 3) {
-        cell = self.simpleKeysViewCell;
+        cell = self.simplekeysViewCell;
     }
 
 
@@ -131,7 +131,7 @@
         result = self.humidityViewCell.bounds.size.height;
     }
     else if (indexPath.section == 3) {
-        result = self.simpleKeysViewCell.bounds.size.height;
+        result = self.simplekeysViewCell.bounds.size.height;
     }
 
     
