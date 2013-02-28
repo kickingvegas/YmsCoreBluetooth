@@ -22,6 +22,7 @@
 #import "DEATemperatureViewCell.h"
 #import "DEAAccelerometerViewCell.h"
 #import "DEAHumidityViewCell.h"
+#import "DEASimpleKeysViewCell.h"
 
 @interface DEASensorTagViewController ()
 
@@ -33,7 +34,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        _cbServiceCells = @[@"temperature", @"accelerometer", @"humidity"];
+        _cbServiceCells = @[@"temperature", @"accelerometer", @"humidity", @"simplekeys"];
     }
     return self;
 }
@@ -54,6 +55,7 @@
     [self setTemperatureViewCell:nil];
     [self setAccelerometerViewCell:nil];
     [self setHumidityViewCell:nil];
+    [self setSimpleKeysViewCell:nil];
     [super viewDidUnload];
 }
 
@@ -66,7 +68,7 @@
     [self.temperatureViewCell configureWithSensorTag:self.sensorTag];
     [self.accelerometerViewCell configureWithSensorTag:self.sensorTag];
     [self.humidityViewCell configureWithSensorTag:self.sensorTag];
-
+    [self.simpleKeysViewCell configureWithSensorTag:self.sensorTag];
 }
 
 
@@ -74,6 +76,7 @@
     [self.temperatureViewCell deconfigure];
     [self.accelerometerViewCell deconfigure];
     [self.humidityViewCell deconfigure];
+    [self.simpleKeysViewCell deconfigure];
 }
 
 
@@ -88,7 +91,11 @@
     
     } else if (indexPath.section == 2) {
         cell = self.humidityViewCell;
+
+    } else if (indexPath.section == 3) {
+        cell = self.simpleKeysViewCell;
     }
+
 
 
     return cell;
@@ -122,6 +129,9 @@
     }
     else if (indexPath.section == 2) {
         result = self.humidityViewCell.bounds.size.height;
+    }
+    else if (indexPath.section == 3) {
+        result = self.simpleKeysViewCell.bounds.size.height;
     }
 
     
