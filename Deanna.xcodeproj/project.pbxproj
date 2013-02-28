@@ -40,6 +40,12 @@
 		D9C5012216AB37DD001D4D4F /* DEAPeripheralsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C5012016AB37DD001D4D4F /* DEAPeripheralsViewController.m */; };
 		D9C5012316AB37DD001D4D4F /* DEAPeripheralsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9C5012116AB37DD001D4D4F /* DEAPeripheralsViewController.xib */; };
 		D9D8316D168449FE00F51E42 /* DEASimpleKeysService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D8316C168449FD00F51E42 /* DEASimpleKeysService.m */; };
+		D9F412F016DED0030094FEFA /* DEASensorTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F412EE16DED0030094FEFA /* DEASensorTagViewController.m */; };
+		D9F412F116DED0030094FEFA /* DEASensorTagViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9F412EF16DED0030094FEFA /* DEASensorTagViewController.xib */; };
+		D9F412F416DED7510094FEFA /* DEATemperatureViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F412F316DED7510094FEFA /* DEATemperatureViewCell.m */; };
+		D9F412F716DEE76C0094FEFA /* DEAAccelerometerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F412F616DEE76C0094FEFA /* DEAAccelerometerViewCell.m */; };
+		D9F412FA16DEF6140094FEFA /* DEAHumidityViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F412F916DEF6130094FEFA /* DEAHumidityViewCell.m */; };
+		D9F412FD16DEFA510094FEFA /* DEASimpleKeysViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F412FC16DEFA510094FEFA /* DEASimpleKeysViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +113,17 @@
 		D9C5012116AB37DD001D4D4F /* DEAPeripheralsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEAPeripheralsViewController.xib; sourceTree = "<group>"; };
 		D9D8316B168449FD00F51E42 /* DEASimpleKeysService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASimpleKeysService.h; sourceTree = "<group>"; };
 		D9D8316C168449FD00F51E42 /* DEASimpleKeysService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASimpleKeysService.m; sourceTree = "<group>"; };
+		D9F412ED16DED0030094FEFA /* DEASensorTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASensorTagViewController.h; sourceTree = "<group>"; };
+		D9F412EE16DED0030094FEFA /* DEASensorTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASensorTagViewController.m; sourceTree = "<group>"; };
+		D9F412EF16DED0030094FEFA /* DEASensorTagViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEASensorTagViewController.xib; sourceTree = "<group>"; };
+		D9F412F216DED7510094FEFA /* DEATemperatureViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEATemperatureViewCell.h; sourceTree = "<group>"; };
+		D9F412F316DED7510094FEFA /* DEATemperatureViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEATemperatureViewCell.m; sourceTree = "<group>"; };
+		D9F412F516DEE76C0094FEFA /* DEAAccelerometerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAAccelerometerViewCell.h; sourceTree = "<group>"; };
+		D9F412F616DEE76C0094FEFA /* DEAAccelerometerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAAccelerometerViewCell.m; sourceTree = "<group>"; };
+		D9F412F816DEF6130094FEFA /* DEAHumidityViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAHumidityViewCell.h; sourceTree = "<group>"; };
+		D9F412F916DEF6130094FEFA /* DEAHumidityViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAHumidityViewCell.m; sourceTree = "<group>"; };
+		D9F412FB16DEFA500094FEFA /* DEASimpleKeysViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASimpleKeysViewCell.h; sourceTree = "<group>"; };
+		D9F412FC16DEFA510094FEFA /* DEASimpleKeysViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASimpleKeysViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +257,16 @@
 				D9C5012016AB37DD001D4D4F /* DEAPeripheralsViewController.m */,
 				D9718B7D167FA0BF0001E42C /* DEAHomeViewController.h */,
 				D9718B7E167FA0BF0001E42C /* DEAHomeViewController.m */,
+				D9F412ED16DED0030094FEFA /* DEASensorTagViewController.h */,
+				D9F412EE16DED0030094FEFA /* DEASensorTagViewController.m */,
+				D9F412F216DED7510094FEFA /* DEATemperatureViewCell.h */,
+				D9F412F316DED7510094FEFA /* DEATemperatureViewCell.m */,
+				D9F412F516DEE76C0094FEFA /* DEAAccelerometerViewCell.h */,
+				D9F412F616DEE76C0094FEFA /* DEAAccelerometerViewCell.m */,
+				D9F412F816DEF6130094FEFA /* DEAHumidityViewCell.h */,
+				D9F412F916DEF6130094FEFA /* DEAHumidityViewCell.m */,
+				D9F412FB16DEFA500094FEFA /* DEASimpleKeysViewCell.h */,
+				D9F412FC16DEFA510094FEFA /* DEASimpleKeysViewCell.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -257,8 +284,9 @@
 		D9718B84167FA1450001E42C /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				D9718B7F167FA0BF0001E42C /* DEAHomeViewController.xib */,
 				D9C5012116AB37DD001D4D4F /* DEAPeripheralsViewController.xib */,
+				D9F412EF16DED0030094FEFA /* DEASensorTagViewController.xib */,
+				D9718B7F167FA0BF0001E42C /* DEAHomeViewController.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -368,6 +396,7 @@
 				D9718B5C167F9FA00001E42C /* Default-568h@2x.png in Resources */,
 				D9718B81167FA0BF0001E42C /* DEAHomeViewController.xib in Resources */,
 				D9C5012316AB37DD001D4D4F /* DEAPeripheralsViewController.xib in Resources */,
+				D9F412F116DED0030094FEFA /* DEASensorTagViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +449,11 @@
 				D933CED216DDAFA700EDDAD6 /* YMSCBPeripheral.m in Sources */,
 				D933CED316DDAFA700EDDAD6 /* YMSCBService.m in Sources */,
 				D933CED416DDAFA700EDDAD6 /* YMSCBUtils.m in Sources */,
+				D9F412F016DED0030094FEFA /* DEASensorTagViewController.m in Sources */,
+				D9F412F416DED7510094FEFA /* DEATemperatureViewCell.m in Sources */,
+				D9F412F716DEE76C0094FEFA /* DEAAccelerometerViewCell.m in Sources */,
+				D9F412FA16DEF6140094FEFA /* DEAHumidityViewCell.m in Sources */,
+				D9F412FD16DEFA510094FEFA /* DEASimpleKeysViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
