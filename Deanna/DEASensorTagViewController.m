@@ -21,6 +21,7 @@
 #import "DEACBAppService.h"
 #import "DEATemperatureViewCell.h"
 #import "DEAAccelerometerViewCell.h"
+#import "DEAHumidityViewCell.h"
 
 @interface DEASensorTagViewController ()
 
@@ -32,7 +33,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        _cbServiceCells = @[@"temperature", @"accelerometer"];
+        _cbServiceCells = @[@"temperature", @"accelerometer", @"humidity"];
     }
     return self;
 }
@@ -52,6 +53,7 @@
     [self setSensorTableView:nil];
     [self setTemperatureViewCell:nil];
     [self setAccelerometerViewCell:nil];
+    [self setHumidityViewCell:nil];
     [super viewDidUnload];
 }
 
@@ -63,41 +65,15 @@
 
     [self.temperatureViewCell configureWithSensorTag:self.sensorTag];
     [self.accelerometerViewCell configureWithSensorTag:self.sensorTag];
+    [self.humidityViewCell configureWithSensorTag:self.sensorTag];
 
-    
-//    DEATemperatureService *ts = self.sensorTag.serviceDict[@"temperature"];
-//    DEAAccelerometerService *as = self.sensorTag.serviceDict[@"accelerometer"];
-//    DEAHumidityService *hs = self.sensorTag.serviceDict[@"humidity"];
-//    
-//    for (NSString *key in @[@"ambientTemp", @"objectTemp", @"isOn", @"isEnabled"]) {
-//        [ts addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
-//    }
-//    
-//    for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled"]) {
-//        [as addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
-//    }
-//    
-//    for (NSString *key in @[@"ambientTemp", @"relativeHumidity", @"isOn", @"isEnabled"]) {
-//        [hs addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
-//    }
-//    
-//    
-//    
-//    [self.temperatureSwitch setOn:ts.isOn animated:YES];
-//    [self.temperatureSwitch setEnabled:ts.isEnabled];
-//    
-//    [self.accelSwitch setOn:as.isOn animated:YES];
-//    [self.accelSwitch setEnabled:as.isEnabled];
-//    
-//    [self.humiditySwitch setOn:hs.isOn animated:YES];
-//    [self.humiditySwitch setEnabled:hs.isEnabled];
-    
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated {
     [self.temperatureViewCell deconfigure];
     [self.accelerometerViewCell deconfigure];
+    [self.humidityViewCell deconfigure];
 }
 
 
@@ -109,13 +85,17 @@
         
     } else if (indexPath.section == 1) {
         cell = self.accelerometerViewCell;
-    }
     
+    } else if (indexPath.section == 2) {
+        cell = self.humidityViewCell;
+    }
+
+
     return cell;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return [self.cbServiceCells count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -140,6 +120,10 @@
     else if (indexPath.section == 1) {
         result = self.accelerometerViewCell.bounds.size.height;
     }
+    else if (indexPath.section == 2) {
+        result = self.humidityViewCell.bounds.size.height;
+    }
+
     
     return result;
 }

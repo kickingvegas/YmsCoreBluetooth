@@ -22,6 +22,7 @@
 @class DEASensorTag;
 @class DEATemperatureViewCell;
 @class DEAAccelerometerViewCell;
+@class DEAHumidityViewCell;
 
 @interface DEASensorTagViewController : DEABaseViewController <UITableViewDelegate, UITableViewDataSource, YMSCBAppServiceDelegate>
 
@@ -31,5 +32,6 @@
 @property (strong, nonatomic) IBOutlet UITableView *sensorTableView;
 @property (strong, nonatomic) IBOutlet DEATemperatureViewCell *temperatureViewCell;
 @property (strong, nonatomic) IBOutlet DEAAccelerometerViewCell *accelerometerViewCell;
+@property (strong, nonatomic) IBOutlet DEAHumidityViewCell *humidityViewCell;
 
 @end
