@@ -18,7 +18,7 @@
 
 #import "DEAPeripheralsViewController.h"
 #import "DEASensorTag.h"
-#import "DEAHomeViewController.h"
+#import "DEASensorTagViewController.h"
 
 @interface DEAPeripheralsViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -224,12 +224,11 @@
     
     DEASensorTag *sensorTag = (DEASensorTag *)[cbAppService.ymsPeripherals objectAtIndex:indexPath.row];
     
+    DEASensorTagViewController *stvc = [[DEASensorTagViewController alloc] initWithNibName:@"DEASensorTagViewController" bundle:nil];
+    stvc.sensorTag = sensorTag;
+
     
-    DEAHomeViewController *hvc = [[DEAHomeViewController alloc] initWithNibName:@"DEAHomeViewController" bundle:nil];
-    
-    hvc.sensorTag = sensorTag;
-    
-    [self.navigationController pushViewController:hvc animated:YES];
+    [self.navigationController pushViewController:stvc animated:YES];
     
     
 }
