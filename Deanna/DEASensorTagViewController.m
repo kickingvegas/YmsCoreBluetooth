@@ -34,7 +34,11 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        _cbServiceCells = @[@"temperature", @"accelerometer", @"humidity", @"simplekeys"];
+        _cbServiceCells = @[@"simplekeys"
+                            , @"temperature"
+                            , @"accelerometer"
+                            , @"humidity"
+                            ];
     }
     return self;
 }
@@ -64,40 +68,32 @@
     
     DEACBAppService *cbAppService = [DEACBAppService sharedService];
     cbAppService.delegate = self;
+    
+    for (NSString *prefix in self.cbServiceCells) {
+        NSString *key = [[NSString alloc] initWithFormat:@"%@ViewCell", prefix];
+        UITableViewCell *cell = (UITableViewCell *)[self valueForKey:key];
+        [cell performSelector:@selector(configureWithSensorTag:) withObject:self.sensorTag];
+    }
 
-    [self.temperatureViewCell configureWithSensorTag:self.sensorTag];
-    [self.accelerometerViewCell configureWithSensorTag:self.sensorTag];
-    [self.humidityViewCell configureWithSensorTag:self.sensorTag];
-    [self.simplekeysViewCell configureWithSensorTag:self.sensorTag];
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [self.temperatureViewCell deconfigure];
-    [self.accelerometerViewCell deconfigure];
-    [self.humidityViewCell deconfigure];
-    [self.simplekeysViewCell deconfigure];
+    
+    for (NSString *prefix in self.cbServiceCells) {
+        NSString *key = [[NSString alloc] initWithFormat:@"%@ViewCell", prefix];
+        UITableViewCell *cell = (UITableViewCell *)[self valueForKey:key];
+        [cell performSelector:@selector(deconfigure)];
+    }
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
     
-    if (indexPath.section == 0) {
-        cell = self.temperatureViewCell;
-        
-    } else if (indexPath.section == 1) {
-        cell = self.accelerometerViewCell;
-    
-    } else if (indexPath.section == 2) {
-        cell = self.humidityViewCell;
-
-    } else if (indexPath.section == 3) {
-        cell = self.simplekeysViewCell;
-    }
-
-
-
+    NSString *prefix = (NSString *)[self.cbServiceCells objectAtIndex:indexPath.section];
+    NSString *key = [[NSString alloc] initWithFormat:@"%@ViewCell", prefix];
+    cell = (UITableViewCell *)[self valueForKey:key];
     return cell;
 }
 
@@ -121,19 +117,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat result = 44.0;
     
-    if (indexPath.section == 0) {
-        result = self.temperatureViewCell.bounds.size.height;
-    }
-    else if (indexPath.section == 1) {
-        result = self.accelerometerViewCell.bounds.size.height;
-    }
-    else if (indexPath.section == 2) {
-        result = self.humidityViewCell.bounds.size.height;
-    }
-    else if (indexPath.section == 3) {
-        result = self.simplekeysViewCell.bounds.size.height;
-    }
-
+    NSString *prefix = (NSString *)[self.cbServiceCells objectAtIndex:indexPath.section];
+    NSString *key = [[NSString alloc] initWithFormat:@"%@ViewCell", prefix];
+    UITableViewCell *cell = (UITableViewCell *)[self valueForKey:key];
+    result = cell.bounds.size.height;
     
     return result;
 }
