@@ -193,6 +193,7 @@
 								<reference key="IBUITextColor" ref="954523431"/>
 								<reference key="IBUIHighlightedColor" ref="791311617"/>
 								<int key="IBUIBaselineAdjustment">0</int>
+								<int key="IBUITextAlignment">1</int>
 								<reference key="IBUIFontDescription" ref="661877529"/>
 								<reference key="IBUIFont" ref="448278756"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -215,6 +216,7 @@
 								<reference key="IBUITextColor" ref="954523431"/>
 								<reference key="IBUIHighlightedColor" ref="791311617"/>
 								<int key="IBUIBaselineAdjustment">0</int>
+								<int key="IBUITextAlignment">1</int>
 								<reference key="IBUIFontDescription" ref="661877529"/>
 								<reference key="IBUIFont" ref="448278756"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -353,6 +355,7 @@
 								<reference key="IBUITextColor" ref="954523431"/>
 								<reference key="IBUIHighlightedColor" ref="791311617"/>
 								<int key="IBUIBaselineAdjustment">0</int>
+								<int key="IBUITextAlignment">1</int>
 								<reference key="IBUIFontDescription" ref="661877529"/>
 								<reference key="IBUIFont" ref="448278756"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -375,6 +378,7 @@
 								<reference key="IBUITextColor" ref="954523431"/>
 								<reference key="IBUIHighlightedColor" ref="791311617"/>
 								<int key="IBUIBaselineAdjustment">0</int>
+								<int key="IBUITextAlignment">1</int>
 								<reference key="IBUIFontDescription" ref="661877529"/>
 								<reference key="IBUIFont" ref="448278756"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -397,6 +401,7 @@
 								<reference key="IBUITextColor" ref="954523431"/>
 								<reference key="IBUIHighlightedColor" ref="791311617"/>
 								<int key="IBUIBaselineAdjustment">0</int>
+								<int key="IBUITextAlignment">1</int>
 								<reference key="IBUIFontDescription" ref="661877529"/>
 								<reference key="IBUIFont" ref="448278756"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -510,6 +515,7 @@
 								<reference key="IBUITextColor" ref="954523431"/>
 								<reference key="IBUIHighlightedColor" ref="791311617"/>
 								<int key="IBUIBaselineAdjustment">0</int>
+								<int key="IBUITextAlignment">1</int>
 								<reference key="IBUIFontDescription" ref="661877529"/>
 								<reference key="IBUIFont" ref="448278756"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -532,6 +538,7 @@
 								<reference key="IBUITextColor" ref="954523431"/>
 								<reference key="IBUIHighlightedColor" ref="791311617"/>
 								<int key="IBUIBaselineAdjustment">0</int>
+								<int key="IBUITextAlignment">1</int>
 								<reference key="IBUIFontDescription" ref="661877529"/>
 								<reference key="IBUIFont" ref="448278756"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -561,7 +568,7 @@
 				<real value="76" key="IBUIRowHeight"/>
 			</object>
 			<object class="IBUITableViewCell" id="733681745">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIView" id="1027545307">
@@ -579,7 +586,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 44}</string>
-				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="1027545307"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -718,11 +724,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">simpleKeysViewCell</string>
+						<string key="label">simplekeysViewCell</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="146875736"/>
 					</object>
-					<int key="connectionID">60</int>
+					<int key="connectionID">63</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -1085,7 +1091,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">62</int>
+			<int key="maxID">63</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1185,7 +1191,7 @@
 						<string key="accelerometerViewCell">DEAAccelerometerViewCell</string>
 						<string key="humidityViewCell">DEAHumidityViewCell</string>
 						<string key="sensorTableView">UITableView</string>
-						<string key="simpleKeysViewCell">DEASimpleKeysViewCell</string>
+						<string key="simplekeysViewCell">DEASimpleKeysViewCell</string>
 						<string key="temperatureViewCell">DEATemperatureViewCell</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -1201,8 +1207,8 @@
 							<string key="name">sensorTableView</string>
 							<string key="candidateClassName">UITableView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="simpleKeysViewCell">
-							<string key="name">simpleKeysViewCell</string>
+						<object class="IBToOneOutletInfo" key="simplekeysViewCell">
+							<string key="name">simplekeysViewCell</string>
 							<string key="candidateClassName">DEASimpleKeysViewCell</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="temperatureViewCell">
