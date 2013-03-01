@@ -143,6 +143,7 @@
     YMSCBCharacteristic *yc = [btService findCharacteristic:characteristic];
     
     NSLog(@"write to service.characteristic: %@.%@", btService.name, yc.name);
+    [btService updateCharacteristic:yc];
     
     
 }
