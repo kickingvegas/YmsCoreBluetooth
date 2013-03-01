@@ -176,9 +176,8 @@
     self.isOn = YES;
 }
 
-
-- (void)update {
-    // To override
+- (void)updateCharacteristic:(YMSCBCharacteristic *)yc {
+    // OVERRIDE THIS METHOD
 }
 
 @end

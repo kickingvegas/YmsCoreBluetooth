@@ -112,6 +112,6 @@
 - (void)turnOn;
 - (void)turnOff;
 
-- (void)update;
+- (void)updateCharacteristic:(YMSCBCharacteristic *)yc;
 
 @end

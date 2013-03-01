@@ -108,9 +108,7 @@
     YMSCBService *btService = [self findService:characteristic.service];
     YMSCBCharacteristic *yc = [btService findCharacteristic:characteristic];
     
-    if ([yc.name isEqualToString:@"data"]) {
-        [btService update];
-    }
+    [btService updateCharacteristic:yc];
 }
 
 - (void)updateRSSI {
