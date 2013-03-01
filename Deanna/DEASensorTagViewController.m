@@ -38,6 +38,7 @@
                             , @"temperature"
                             , @"accelerometer"
                             , @"humidity"
+                            , @"barometer"
                             ];
     }
     return self;
@@ -60,6 +61,7 @@
     [self setAccelerometerViewCell:nil];
     [self setHumidityViewCell:nil];
     [self setSimplekeysViewCell:nil];
+    [self setBarometerViewCell:nil];
     [super viewDidUnload];
 }
 
@@ -72,7 +74,10 @@
     for (NSString *prefix in self.cbServiceCells) {
         NSString *key = [[NSString alloc] initWithFormat:@"%@ViewCell", prefix];
         UITableViewCell *cell = (UITableViewCell *)[self valueForKey:key];
-        [cell performSelector:@selector(configureWithSensorTag:) withObject:self.sensorTag];
+        
+        if ([cell respondsToSelector:@selector(configureWithSensorTag:)]) {
+            [cell performSelector:@selector(configureWithSensorTag:) withObject:self.sensorTag];
+        }
     }
 
 }
@@ -83,7 +88,9 @@
     for (NSString *prefix in self.cbServiceCells) {
         NSString *key = [[NSString alloc] initWithFormat:@"%@ViewCell", prefix];
         UITableViewCell *cell = (UITableViewCell *)[self valueForKey:key];
-        [cell performSelector:@selector(deconfigure)];
+        if ([cell respondsToSelector:@selector(deconfigure)]) {
+            [cell performSelector:@selector(deconfigure)];
+        }
     }
 }
 

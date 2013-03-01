@@ -24,6 +24,7 @@
 @class DEAAccelerometerViewCell;
 @class DEAHumidityViewCell;
 @class DEASimpleKeysViewCell;
+@class DEABarometerViewCell;
 
 @interface DEASensorTagViewController : DEABaseViewController <UITableViewDelegate, UITableViewDataSource, YMSCBAppServiceDelegate>
 
@@ -35,5 +36,6 @@
 @property (strong, nonatomic) IBOutlet DEAAccelerometerViewCell *accelerometerViewCell;
 @property (strong, nonatomic) IBOutlet DEAHumidityViewCell *humidityViewCell;
 @property (strong, nonatomic) IBOutlet DEASimpleKeysViewCell *simplekeysViewCell;
+@property (strong, nonatomic) IBOutlet DEABarometerViewCell *barometerViewCell;
 
 @end
