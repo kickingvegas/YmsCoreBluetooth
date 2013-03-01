@@ -27,3 +27,17 @@ doc:
 	Deanna \
 	YmsCoreBluetooth
 
+
+html:
+	appledoc \
+	-h \
+	--project-name "YMS CoreBluetooth Framework + Deanna" \
+	--project-company 'Yummy Melon Software LLC' \
+	--company-id 'com.yummymelon' \
+        --exit-threshold 2 \
+	--output docs \
+	--no-create-docset \
+	Deanna \
+	YmsCoreBluetooth
+
+
