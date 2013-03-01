@@ -23,6 +23,9 @@
  */
 @interface DEABarometerService : YMSCBService
 
+@property (nonatomic, assign) BOOL isCalibrating;
+@property (nonatomic, strong) NSData *calibrationData;
+
 /// Pressure measurement
 @property (nonatomic, strong) NSNumber *pressure;
 
