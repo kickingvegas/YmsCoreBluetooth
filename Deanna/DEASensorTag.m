@@ -21,6 +21,7 @@
 #import "DEASimpleKeysService.h"
 #import "DEAAccelerometerService.h"
 #import "DEAHumidityService.h"
+#import "DEABarometerService.h"
 #import "YMSCBCharacteristic.h"
 
 @implementation DEASensorTag
@@ -40,11 +41,14 @@
         [sks turnOn];
         
         DEAHumidityService *hs = [[DEAHumidityService alloc] initWithName:@"humidity"];
+        DEABarometerService *bs = [[DEABarometerService alloc] initWithName:@"barometer"];
+
         
         self.serviceDict = @{@"temperature": ts,
                              @"accelerometer": as,
                              @"simplekeys": sks,
-                             @"humidity": hs};
+                             @"humidity": hs,
+                             @"barometer": bs};
         
     }
     return self;
