@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D906E5F116DCAC55001D7932 /* DEACBAppService.m in Sources */ = {isa = PBXBuildFile; fileRef = D906E5F016DCAC55001D7932 /* DEACBAppService.m */; };
+		D907A76B16E0393300EA8D5B /* DEABarometerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D907A76A16E0393300EA8D5B /* DEABarometerViewCell.m */; };
 		D90C0C3A16DD6297002D3FFD /* DEABaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D90C0C3916DD6297002D3FFD /* DEABaseViewController.m */; };
 		D90C0C3D16DD9133002D3FFD /* DEAHumidityService.m in Sources */ = {isa = PBXBuildFile; fileRef = D90C0C3C16DD9133002D3FFD /* DEAHumidityService.m */; };
 		D91170531681251900E2D19A /* DEATemperatureService.m in Sources */ = {isa = PBXBuildFile; fileRef = D91170521681251900E2D19A /* DEATemperatureService.m */; };
@@ -38,6 +39,7 @@
 		D9C5012216AB37DD001D4D4F /* DEAPeripheralsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C5012016AB37DD001D4D4F /* DEAPeripheralsViewController.m */; };
 		D9C5012316AB37DD001D4D4F /* DEAPeripheralsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9C5012116AB37DD001D4D4F /* DEAPeripheralsViewController.xib */; };
 		D9D8316D168449FE00F51E42 /* DEASimpleKeysService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D8316C168449FD00F51E42 /* DEASimpleKeysService.m */; };
+		D9DE671116E0223E00F1B15C /* DEABarometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DE671016E0223E00F1B15C /* DEABarometerService.m */; };
 		D9F412F016DED0030094FEFA /* DEASensorTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F412EE16DED0030094FEFA /* DEASensorTagViewController.m */; };
 		D9F412F116DED0030094FEFA /* DEASensorTagViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9F412EF16DED0030094FEFA /* DEASensorTagViewController.xib */; };
 		D9F412F416DED7510094FEFA /* DEATemperatureViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F412F316DED7510094FEFA /* DEATemperatureViewCell.m */; };
@@ -59,6 +61,8 @@
 /* Begin PBXFileReference section */
 		D906E5EF16DCAC55001D7932 /* DEACBAppService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEACBAppService.h; sourceTree = "<group>"; };
 		D906E5F016DCAC55001D7932 /* DEACBAppService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEACBAppService.m; sourceTree = "<group>"; };
+		D907A76916E0393300EA8D5B /* DEABarometerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEABarometerViewCell.h; sourceTree = "<group>"; };
+		D907A76A16E0393300EA8D5B /* DEABarometerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEABarometerViewCell.m; sourceTree = "<group>"; };
 		D90C0C3816DD6297002D3FFD /* DEABaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEABaseViewController.h; sourceTree = "<group>"; };
 		D90C0C3916DD6297002D3FFD /* DEABaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEABaseViewController.m; sourceTree = "<group>"; };
 		D90C0C3B16DD9133002D3FFD /* DEAHumidityService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAHumidityService.h; sourceTree = "<group>"; };
@@ -108,6 +112,8 @@
 		D9C5012116AB37DD001D4D4F /* DEAPeripheralsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEAPeripheralsViewController.xib; sourceTree = "<group>"; };
 		D9D8316B168449FD00F51E42 /* DEASimpleKeysService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASimpleKeysService.h; sourceTree = "<group>"; };
 		D9D8316C168449FD00F51E42 /* DEASimpleKeysService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASimpleKeysService.m; sourceTree = "<group>"; };
+		D9DE670F16E0223E00F1B15C /* DEABarometerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEABarometerService.h; sourceTree = "<group>"; };
+		D9DE671016E0223E00F1B15C /* DEABarometerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEABarometerService.m; sourceTree = "<group>"; };
 		D9F412ED16DED0030094FEFA /* DEASensorTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASensorTagViewController.h; sourceTree = "<group>"; };
 		D9F412EE16DED0030094FEFA /* DEASensorTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASensorTagViewController.m; sourceTree = "<group>"; };
 		D9F412EF16DED0030094FEFA /* DEASensorTagViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEASensorTagViewController.xib; sourceTree = "<group>"; };
@@ -252,14 +258,7 @@
 				D9C5012016AB37DD001D4D4F /* DEAPeripheralsViewController.m */,
 				D9F412ED16DED0030094FEFA /* DEASensorTagViewController.h */,
 				D9F412EE16DED0030094FEFA /* DEASensorTagViewController.m */,
-				D9F412F216DED7510094FEFA /* DEATemperatureViewCell.h */,
-				D9F412F316DED7510094FEFA /* DEATemperatureViewCell.m */,
-				D9F412F516DEE76C0094FEFA /* DEAAccelerometerViewCell.h */,
-				D9F412F616DEE76C0094FEFA /* DEAAccelerometerViewCell.m */,
-				D9F412F816DEF6130094FEFA /* DEAHumidityViewCell.h */,
-				D9F412F916DEF6130094FEFA /* DEAHumidityViewCell.m */,
-				D9F412FB16DEFA500094FEFA /* DEASimpleKeysViewCell.h */,
-				D9F412FC16DEFA510094FEFA /* DEASimpleKeysViewCell.m */,
+				D9DE671216E036C100F1B15C /* Sensors */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -306,8 +305,27 @@
 				D9D8316C168449FD00F51E42 /* DEASimpleKeysService.m */,
 				D90C0C3B16DD9133002D3FFD /* DEAHumidityService.h */,
 				D90C0C3C16DD9133002D3FFD /* DEAHumidityService.m */,
+				D9DE670F16E0223E00F1B15C /* DEABarometerService.h */,
+				D9DE671016E0223E00F1B15C /* DEABarometerService.m */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		D9DE671216E036C100F1B15C /* Sensors */ = {
+			isa = PBXGroup;
+			children = (
+				D9F412F216DED7510094FEFA /* DEATemperatureViewCell.h */,
+				D9F412F316DED7510094FEFA /* DEATemperatureViewCell.m */,
+				D9F412F516DEE76C0094FEFA /* DEAAccelerometerViewCell.h */,
+				D9F412F616DEE76C0094FEFA /* DEAAccelerometerViewCell.m */,
+				D9F412F816DEF6130094FEFA /* DEAHumidityViewCell.h */,
+				D9F412F916DEF6130094FEFA /* DEAHumidityViewCell.m */,
+				D9F412FB16DEFA500094FEFA /* DEASimpleKeysViewCell.h */,
+				D9F412FC16DEFA510094FEFA /* DEASimpleKeysViewCell.m */,
+				D907A76916E0393300EA8D5B /* DEABarometerViewCell.h */,
+				D907A76A16E0393300EA8D5B /* DEABarometerViewCell.m */,
+			);
+			name = Sensors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -444,6 +462,8 @@
 				D9F412F716DEE76C0094FEFA /* DEAAccelerometerViewCell.m in Sources */,
 				D9F412FA16DEF6140094FEFA /* DEAHumidityViewCell.m in Sources */,
 				D9F412FD16DEFA510094FEFA /* DEASimpleKeysViewCell.m in Sources */,
+				D9DE671116E0223E00F1B15C /* DEABarometerService.m in Sources */,
+				D907A76B16E0393300EA8D5B /* DEABarometerViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
