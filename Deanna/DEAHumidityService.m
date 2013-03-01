@@ -47,28 +47,28 @@ double calcHumRel(int16_t rawH) {
 }
 
 
-- (void)update {
-    YMSCBCharacteristic *yc = self.characteristicDict[@"data"];
-    NSData *data = yc.cbCharacteristic.value;
-    
-    char val[data.length];
+- (void)updateCharacteristic:(YMSCBCharacteristic *)yc {
+    if ([yc.name isEqualToString:@"data"]) {
+        NSData *data = yc.cbCharacteristic.value;
+        
+        char val[data.length];
+        
+        [data getBytes:&val length:data.length];
+        
+        int16_t v0 = val[0];
+        int16_t v1 = val[1];
+        int16_t v2 = val[2];
+        int16_t v3 = val[3];
+        
+        
+        int16_t rawHumidity = ((v2 & 0xff)| ((v3 << 8) & 0xff00));
+        int16_t rawTemperature = ((v0 & 0xff)| ((v1 << 8) & 0xff00));
+        
+        self.ambientTemp = [NSNumber numberWithDouble:calcHumTmp(rawTemperature)];
+        self.relativeHumidity = [NSNumber numberWithDouble:calcHumRel(rawHumidity)];
 
-    [data getBytes:&val length:data.length];
-    
-    int16_t v0 = val[0];
-    int16_t v1 = val[1];
-    int16_t v2 = val[2];
-    int16_t v3 = val[3];
-
-    
-    int16_t rawHumidity = ((v2 & 0xff)| ((v3 << 8) & 0xff00));
-    int16_t rawTemperature = ((v0 & 0xff)| ((v1 << 8) & 0xff00));
-    
-    self.ambientTemp = [NSNumber numberWithDouble:calcHumTmp(rawTemperature)];
-    self.relativeHumidity = [NSNumber numberWithDouble:calcHumRel(rawHumidity)];
-    
-    NSLog(@"at: %@  hum: %@", self.ambientTemp, self.relativeHumidity);
-
+    }
 }
+
 
 @end

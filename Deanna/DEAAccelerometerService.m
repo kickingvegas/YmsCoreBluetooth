@@ -52,23 +52,25 @@ float calcAccel(int16_t rawV) {
     return result;
 }
 
-
-- (void)update {
-    YMSCBCharacteristic *dtc = self.characteristicDict[@"data"];
-    NSData *data = dtc.cbCharacteristic.value;
-    
-    char val[data.length];
-    [data getBytes:&val length:data.length];
-    
-    int16_t xx = val[0];
-    int16_t yy = val[1];
-    int16_t zz = val[2];
-    
-    
-    self.x = [NSNumber numberWithFloat:calcAccel(xx)];
-    self.y = [NSNumber numberWithFloat:calcAccel(yy)];
-    self.z = [NSNumber numberWithFloat:calcAccel(zz)];
+- (void)updateCharacteristic:(YMSCBCharacteristic *)yc {
+    if ([yc.name isEqualToString:@"data"]) {
+        NSData *data = yc.cbCharacteristic.value;
+        
+        char val[data.length];
+        [data getBytes:&val length:data.length];
+        
+        int16_t xx = val[0];
+        int16_t yy = val[1];
+        int16_t zz = val[2];
+        
+        
+        self.x = [NSNumber numberWithFloat:calcAccel(xx)];
+        self.y = [NSNumber numberWithFloat:calcAccel(yy)];
+        self.z = [NSNumber numberWithFloat:calcAccel(zz)];
+        
+    }
 }
+
 
 
 

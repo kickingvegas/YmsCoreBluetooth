@@ -61,29 +61,30 @@ double calcTmpTarget(int16_t objT, double m_tempAmb) {
     return self;
 }
 
-- (void)update {
-    YMSCBCharacteristic *dtc = self.characteristicDict[@"data"];
-    NSData *data = dtc.cbCharacteristic.value;
-    
-    char val[data.length];
-    [data getBytes:&val length:data.length];
-    
-    
-    int16_t v0 = val[0];
-    int16_t v1 = val[1];
-    int16_t v2 = val[2];
-    int16_t v3 = val[3];
-    
-    
-    int16_t amb = ((v2 & 0xff)| ((v3 << 8) & 0xff00));
-    
-    int16_t objT = ((v0 & 0xff)| ((v1 << 8) & 0xff00));
-    
-    double tempAmb = calcTmpLocal(amb);
-    
-    self.ambientTemp = [NSNumber numberWithDouble:tempAmb];
-    self.objectTemp = [NSNumber numberWithDouble:calcTmpTarget(objT, tempAmb)];
-
+- (void)updateCharacteristic:(YMSCBCharacteristic *)yc {
+    if ([yc.name isEqualToString:@"data"]) {
+        NSData *data = yc.cbCharacteristic.value;
+        
+        char val[data.length];
+        [data getBytes:&val length:data.length];
+        
+        
+        int16_t v0 = val[0];
+        int16_t v1 = val[1];
+        int16_t v2 = val[2];
+        int16_t v3 = val[3];
+        
+        
+        int16_t amb = ((v2 & 0xff)| ((v3 << 8) & 0xff00));
+        
+        int16_t objT = ((v0 & 0xff)| ((v1 << 8) & 0xff00));
+        
+        double tempAmb = calcTmpLocal(amb);
+        
+        self.ambientTemp = [NSNumber numberWithDouble:tempAmb];
+        self.objectTemp = [NSNumber numberWithDouble:calcTmpTarget(objT, tempAmb)];
+    }
 }
+
 
 @end
