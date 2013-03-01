@@ -25,6 +25,7 @@
  */
 @interface DEATemperatureViewCell : UITableViewCell
 
+/// Pointer to service
 @property (strong, nonatomic) DEATemperatureService *service;
 
 /// Enable notification
