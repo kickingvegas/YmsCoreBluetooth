@@ -28,5 +28,12 @@
 @property (nonatomic, assign) float lastPitch;
 @property (nonatomic, assign) float lastYaw;
 
+@property (nonatomic, assign) float cRoll;
+@property (nonatomic, assign) float cPitch;
+@property (nonatomic, assign) float cYaw;
+
+
+- (void)calibrate;
+
 
 @end

@@ -19,10 +19,10 @@
 #import "DEAGyroscopeService.h"
 #import "YMSCBCharacteristic.h"
 
-double calcGyro(int16_t v, int16_t d) {
-    double result;
+float calcGyro(int16_t v, float c, int16_t d) {
+    float result;
     
-    result = (((double)v * d) / (65536/500.0));
+    result = (((float)v * d) / (65536/500.0)) - c;
     
     return result;
 }
@@ -36,6 +36,12 @@ double calcGyro(int16_t v, int16_t d) {
         [self addCharacteristic:@"service" withOffset:kSensorTag_GYROSCOPE_SERVICE];
         [self addCharacteristic:@"data" withOffset:kSensorTag_GYROSCOPE_DATA];
         [self addCharacteristic:@"config" withOffset:kSensorTag_GYROSCOPE_CONFIG];
+        _lastPitch = 0.0;
+        _lastRoll = 0.0;
+        _lastYaw = 0.0;
+        _cPitch = 0.0;
+        _cRoll = 0.0;
+        _cYaw = 0.0;
     }
     return self;
 }
@@ -58,12 +64,22 @@ double calcGyro(int16_t v, int16_t d) {
         uint16_t yy = yms_u16_build(v2, v3);
         uint16_t zz = yms_u16_build(v4, v5);
         
-        self.roll = [NSNumber numberWithFloat:calcGyro(zz, 1)];
-        self.pitch = [NSNumber numberWithFloat:calcGyro(yy, -1)];
-        self.yaw = [NSNumber numberWithFloat:calcGyro(xx, 1)];
+        self.lastRoll = calcGyro(zz, self.cRoll, 1);
+        self.lastPitch = calcGyro(yy, self.cPitch, -1);
+        self.lastYaw = calcGyro(xx, self.cYaw, 1);
+        
+        self.roll = [NSNumber numberWithFloat:self.lastRoll];
+        self.pitch = [NSNumber numberWithFloat:self.lastPitch];
+        self.yaw = [NSNumber numberWithFloat:self.lastYaw];
     }
 }
 
+
+- (void)calibrate {
+    self.cRoll = self.lastRoll;
+    self.cPitch = self.lastPitch;
+    self.cYaw = self.lastYaw;
+}
 
 - (void)turnOn {
     [self writeByte:0x7 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
