@@ -74,6 +74,10 @@ float calcMag(int16_t v, float c, int16_t d) {
         self.x = [NSNumber numberWithFloat:self.lastX];
         self.y = [NSNumber numberWithFloat:self.lastY];
         self.z = [NSNumber numberWithFloat:self.lastZ];
+        
+        
+    } else if ([yc.name isEqualToString:@"config"]) {
+        
     }
 }
 

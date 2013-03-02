@@ -71,7 +71,15 @@ float calcGyro(int16_t v, float c, int16_t d) {
         self.roll = [NSNumber numberWithFloat:self.lastRoll];
         self.pitch = [NSNumber numberWithFloat:self.lastPitch];
         self.yaw = [NSNumber numberWithFloat:self.lastYaw];
+        
+    } else if ([yc.name isEqualToString:@"config"]) {
+//        NSData *data = yc.cbCharacteristic.value;
+//        
+//        char val[data.length];
+//        [data getBytes:&val length:data.length];
+        
     }
+
 }
 
 
