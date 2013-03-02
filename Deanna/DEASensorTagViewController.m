@@ -38,6 +38,7 @@
         _cbServiceCells = @[@"simplekeys"
                             , @"temperature"
                             , @"accelerometer"
+                            , @"magnetometer"
                             , @"gyroscope"
                             , @"humidity"
                             , @"barometer"
@@ -71,6 +72,7 @@
     [self setSimplekeysViewCell:nil];
     [self setBarometerViewCell:nil];
     [self setGyroscopeViewCell:nil];
+    [self setMagnetometerViewCell:nil];
      */
     [super viewDidUnload];
 }
