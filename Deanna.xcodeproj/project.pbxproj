@@ -19,6 +19,8 @@
 		D933CED216DDAFA700EDDAD6 /* YMSCBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = D933CECA16DDAFA700EDDAD6 /* YMSCBPeripheral.m */; };
 		D933CED316DDAFA700EDDAD6 /* YMSCBService.m in Sources */ = {isa = PBXBuildFile; fileRef = D933CECC16DDAFA700EDDAD6 /* YMSCBService.m */; };
 		D933CED416DDAFA700EDDAD6 /* YMSCBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D933CECE16DDAFA700EDDAD6 /* YMSCBUtils.m */; };
+		D93EAC5016E18711008B1BD3 /* DEAGyroscopeService.m in Sources */ = {isa = PBXBuildFile; fileRef = D93EAC4F16E18711008B1BD3 /* DEAGyroscopeService.m */; };
+		D93EAC5316E18748008B1BD3 /* DEAGyroscopeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D93EAC5216E18748008B1BD3 /* DEAGyroscopeViewCell.m */; };
 		D9718B46167F9F9F0001E42C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B45167F9F9F0001E42C /* UIKit.framework */; };
 		D9718B48167F9F9F0001E42C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B47167F9F9F0001E42C /* Foundation.framework */; };
 		D9718B4A167F9F9F0001E42C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B49167F9F9F0001E42C /* CoreGraphics.framework */; };
@@ -83,6 +85,10 @@
 		D933CECC16DDAFA700EDDAD6 /* YMSCBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBService.m; sourceTree = "<group>"; };
 		D933CECD16DDAFA700EDDAD6 /* YMSCBUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBUtils.h; sourceTree = "<group>"; };
 		D933CECE16DDAFA700EDDAD6 /* YMSCBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBUtils.m; sourceTree = "<group>"; };
+		D93EAC4E16E18711008B1BD3 /* DEAGyroscopeService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAGyroscopeService.h; sourceTree = "<group>"; };
+		D93EAC4F16E18711008B1BD3 /* DEAGyroscopeService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAGyroscopeService.m; sourceTree = "<group>"; };
+		D93EAC5116E18748008B1BD3 /* DEAGyroscopeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAGyroscopeViewCell.h; sourceTree = "<group>"; };
+		D93EAC5216E18748008B1BD3 /* DEAGyroscopeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAGyroscopeViewCell.m; sourceTree = "<group>"; };
 		D9718B41167F9F9F0001E42C /* Deanna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Deanna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9718B45167F9F9F0001E42C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D9718B47167F9F9F0001E42C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -155,8 +161,8 @@
 		D933CEC216DDAFA700EDDAD6 /* YmsCoreBluetooth */ = {
 			isa = PBXGroup;
 			children = (
-				D933CEC316DDAFA700EDDAD6 /* YMS128.c */,
 				D933CEC416DDAFA700EDDAD6 /* YMS128.h */,
+				D933CEC316DDAFA700EDDAD6 /* YMS128.c */,
 				D933CEC516DDAFA700EDDAD6 /* YMSCBAppService.h */,
 				D933CEC616DDAFA700EDDAD6 /* YMSCBAppService.m */,
 				D933CEC716DDAFA700EDDAD6 /* YMSCBCharacteristic.h */,
@@ -307,6 +313,8 @@
 				D90C0C3C16DD9133002D3FFD /* DEAHumidityService.m */,
 				D9DE670F16E0223E00F1B15C /* DEABarometerService.h */,
 				D9DE671016E0223E00F1B15C /* DEABarometerService.m */,
+				D93EAC4E16E18711008B1BD3 /* DEAGyroscopeService.h */,
+				D93EAC4F16E18711008B1BD3 /* DEAGyroscopeService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -324,6 +332,8 @@
 				D9F412FC16DEFA510094FEFA /* DEASimpleKeysViewCell.m */,
 				D907A76916E0393300EA8D5B /* DEABarometerViewCell.h */,
 				D907A76A16E0393300EA8D5B /* DEABarometerViewCell.m */,
+				D93EAC5116E18748008B1BD3 /* DEAGyroscopeViewCell.h */,
+				D93EAC5216E18748008B1BD3 /* DEAGyroscopeViewCell.m */,
 			);
 			name = Sensors;
 			sourceTree = "<group>";
@@ -464,6 +474,8 @@
 				D9F412FD16DEFA510094FEFA /* DEASimpleKeysViewCell.m in Sources */,
 				D9DE671116E0223E00F1B15C /* DEABarometerService.m in Sources */,
 				D907A76B16E0393300EA8D5B /* DEABarometerViewCell.m in Sources */,
+				D93EAC5016E18711008B1BD3 /* DEAGyroscopeService.m in Sources */,
+				D93EAC5316E18748008B1BD3 /* DEAGyroscopeViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
