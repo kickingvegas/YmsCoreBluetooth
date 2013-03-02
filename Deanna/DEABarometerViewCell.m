@@ -94,9 +94,9 @@
         
     } else if ([keyPath isEqualToString:@"pressure"]) {
         double pressure = [bs.pressure doubleValue];
-        float pressureRound = roundf(pressure/1.01325E5);
+        double pressureRound = pressure/1.01325E5;
         
-        self.pressureLabel.text = [NSString stringWithFormat:@"%0.3f atm", pressureRound];
+        self.pressureLabel.text = [NSString stringWithFormat:@"%0.4f atm", pressureRound];
         
     } else if ([keyPath isEqualToString:@"isOn"]) {
         [self.notifySwitch setOn:bs.isOn animated:YES];
