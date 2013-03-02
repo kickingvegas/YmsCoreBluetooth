@@ -25,6 +25,7 @@
 @class DEAHumidityViewCell;
 @class DEASimpleKeysViewCell;
 @class DEABarometerViewCell;
+@class DEAGyroscopeViewCell;
 
 @interface DEASensorTagViewController : DEABaseViewController <UITableViewDelegate, UITableViewDataSource, YMSCBAppServiceDelegate>
 
@@ -37,5 +38,6 @@
 @property (strong, nonatomic) IBOutlet DEAHumidityViewCell *humidityViewCell;
 @property (strong, nonatomic) IBOutlet DEASimpleKeysViewCell *simplekeysViewCell;
 @property (strong, nonatomic) IBOutlet DEABarometerViewCell *barometerViewCell;
+@property (strong, nonatomic) IBOutlet DEAGyroscopeViewCell *gyroscopeViewCell;
 
 @end

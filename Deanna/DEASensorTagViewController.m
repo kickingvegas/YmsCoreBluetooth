@@ -23,6 +23,7 @@
 #import "DEAAccelerometerViewCell.h"
 #import "DEAHumidityViewCell.h"
 #import "DEASimpleKeysViewCell.h"
+#import "DEAGyroscopeViewCell.h"
 
 @interface DEASensorTagViewController ()
 
@@ -37,6 +38,7 @@
         _cbServiceCells = @[@"simplekeys"
                             , @"temperature"
                             , @"accelerometer"
+                            , @"gyroscope"
                             , @"humidity"
                             , @"barometer"
                             ];
@@ -57,11 +59,19 @@
 
 - (void)viewDidUnload {
     [self setSensorTableView:nil];
+    
+    for (NSString *prefix in self.cbServiceCells) {
+        NSString *key = [[NSString alloc] initWithFormat:@"%@ViewCell", prefix];
+        [self setValue:nil forKey:key];
+    }
+    /*
     [self setTemperatureViewCell:nil];
     [self setAccelerometerViewCell:nil];
     [self setHumidityViewCell:nil];
     [self setSimplekeysViewCell:nil];
     [self setBarometerViewCell:nil];
+    [self setGyroscopeViewCell:nil];
+     */
     [super viewDidUnload];
 }
 
