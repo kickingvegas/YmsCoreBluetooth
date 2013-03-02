@@ -16,10 +16,9 @@
 //  Author: Charles Y. Choi <charles.choi@yummymelon.com>
 //
 
-
 #import <UIKit/UIKit.h>
-#import "DEAGyroscopeService.h"
-#import "DEASensorTag.h"
+@class DEASensorTag;
+@class DEAGyroscopeService;
 
 @interface DEAGyroscopeViewCell : UITableViewCell
 
