@@ -43,8 +43,8 @@
         [self.service addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
     }
     
-    //[self.notifySwitch setOn:self.service.isOn animated:YES];
-    //[self.notifySwitch setEnabled:self.service.isEnabled];
+    [self.button1 setEnabled:self.service.isEnabled];
+    [self.button2 setEnabled:self.service.isEnabled];
 }
 
 - (void)deconfigure {
@@ -81,7 +81,8 @@
         //[self.notifySwitch setOn:ts.isOn animated:YES];
         
     } else if ([keyPath isEqualToString:@"isEnabled"]) {
-        //[self.notifySwitch setEnabled:ts.isEnabled];
+        [self.button1 setEnabled:self.service.isEnabled];
+        [self.button2 setEnabled:self.service.isEnabled];
     }
     
     
