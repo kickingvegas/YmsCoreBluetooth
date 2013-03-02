@@ -19,13 +19,13 @@
 #import "DEAHumidityService.h"
 #import "YMSCBCharacteristic.h"
 
-double calcHumTmp(int16_t rawT) {
+double calcHumTmp(uint16_t rawT) {
     double v;
     v = -46.85 + 175.72/65536 *(double)rawT;
     return v;
 }
 
-double calcHumRel(int16_t rawH) {
+double calcHumRel(uint16_t rawH) {
     double v;
     v = -6.0 + (125.0/65536.0) * (double)rawH;
     return v;
@@ -55,14 +55,13 @@ double calcHumRel(int16_t rawH) {
         
         [data getBytes:&val length:data.length];
         
-        int16_t v0 = val[0];
-        int16_t v1 = val[1];
-        int16_t v2 = val[2];
-        int16_t v3 = val[3];
+        uint16_t v0 = val[0];
+        uint16_t v1 = val[1];
+        uint16_t v2 = val[2];
+        uint16_t v3 = val[3];
         
-        
-        int16_t rawHumidity = ((v2 & 0xff)| ((v3 << 8) & 0xff00));
-        int16_t rawTemperature = ((v0 & 0xff)| ((v1 << 8) & 0xff00));
+        uint16_t rawTemperature = yms_u16_build(v0, v1);
+        uint16_t rawHumidity = yms_u16_build(v2, v3);
         
         self.ambientTemp = [NSNumber numberWithDouble:calcHumTmp(rawTemperature)];
         self.relativeHumidity = [NSNumber numberWithDouble:calcHumRel(rawHumidity)];
