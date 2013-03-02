@@ -22,19 +22,21 @@
 
 @implementation DEABarometerService
 
-double calcBarTmp(int16_t rawT, uint16_t c1, uint16_t c2) {
-    int64_t temp, val;
-    val = (int64_t)(c1 * rawT) * 100;
-    temp = val >> 24;
-    val = c2 * 100;
-    temp += (val >> 10);
+double calcBarTmp(int16_t t_r, uint16_t c1, uint16_t c2) {
+    int32_t t_a;
     
-    return (double)temp / 100.0;
+    
+    t_a = (((((int32_t)c1 * t_r)/0x100) +
+            ((int32_t)c2 * 0x40))*100
+           ) / 0x10000;
+     
+
+    return (double)t_a/100.0;
 }
 
 
-double calcBarPress(int16_t Pr,
-                    int16_t Tr,
+double calcBarPress(int16_t t_r,
+                    uint16_t p_r,
                     uint16_t c3,
                     uint16_t c4,
                     int16_t c5,
@@ -42,24 +44,15 @@ double calcBarPress(int16_t Pr,
                     int16_t c7,
                     int16_t c8) {
     
-    int64_t s, o, pres, val;
+    int32_t p_a, S, O;
     
-    s = (int64_t)c3;
-    val = (int64_t)c4 + Tr;
-    s += (val >> 17);
-    val = (int64_t)c5 * Tr * Tr;
-    s += (val >> 34);
+    //calculate pressure
+    S=c3+(((int32_t)c4*t_r)/0x20000)+(((((int32_t)c5*t_r)/0x8000)*t_r)/0x80000);
+    O=c6*0x4000+(((int32_t)c7*t_r)/8)+(((((int32_t)c8*t_r)/0x8000)*t_r)/16);
+    p_a=(S*p_r+O)/0x4000;
     
-    o = (int64_t)c6 << 14;
-    val = (int64_t)c7 * Tr;
-    o += (val >> 3);
-    val = (int64_t)c8 * Tr * Tr;
-    o += (val >> 19);
-    
-    pres = ((int64_t)(s * Pr) + o) >> 14;
-    
-    return (double)pres / 100;
-
+    // Unit: Pascal (Pa)
+    return (double)p_a;
 }
                     
 
@@ -79,27 +72,9 @@ double calcBarPress(int16_t Pr,
 - (void)updateCharacteristic:(YMSCBCharacteristic *)yc {
     NSLog(@"barometer characteristic: %@", yc.name);
     if ([yc.name isEqualToString:@"data"]) {
-        
-        // First get calibration data
-        
-        if (self.calibrationData == nil) {
+
+        if (self.isCalibrated == NO) {
             return;
-        }
-        
-        char rawVal[self.calibrationData.length];
-        uint16_t c[self.calibrationData.length/2];
-        
-        [self.calibrationData getBytes:&rawVal length:self.calibrationData.length];
-        
-        int i = 0;
-        while (i < self.calibrationData.length) {
-            uint16_t lo = rawVal[i];
-            uint16_t hi = rawVal[i+1];
-            int index = i/2;
-            c[index] = ((lo & 0xff)| ((hi << 8) & 0xff00));
-            
-            //NSLog(@"%d %d", index, c[index]);
-            i = i + 2;
         }
 
         NSData *data = yc.cbCharacteristic.value;
@@ -114,24 +89,21 @@ double calcBarPress(int16_t Pr,
         int16_t v3 = val[3];
         
         
-        int16_t rawP = ((v2 & 0xff)| ((v3 << 8) & 0xff00));
+        int16_t p_r = ((v2 & 0xff)| ((v3 << 8) & 0xff00));
         
-        int16_t ambT = ((v0 & 0xff)| ((v1 << 8) & 0xff00));
+        int16_t t_r = ((v0 & 0xff)| ((v1 << 8) & 0xff00));
         
-        
-        self.ambientTemp = [NSNumber numberWithDouble:calcBarTmp(ambT, c[0], c[1])];
-        self.pressure = [NSNumber numberWithDouble:calcBarPress(rawP,
-                                                                ambT,
-                                                                c[2],
-                                                                c[3],
-                                                                c[4],
-                                                                c[5],
-                                                                c[6],
-                                                                c[7])];
-        
+        self.ambientTemp = [NSNumber numberWithDouble:calcBarTmp(t_r, _c1, _c2)];
+        self.pressure = [NSNumber numberWithDouble:calcBarPress(t_r,
+                                                                p_r,
+                                                                _c3,
+                                                                _c4,
+                                                                _c5,
+                                                                _c6,
+                                                                _c7,
+                                                                _c8)];
         
         
-
     } else if ([yc.name isEqualToString:@"config"]) {
         if (self.isCalibrating) {
             [self readValueForCharacteristicName:@"calibration"];
@@ -142,28 +114,33 @@ double calcBarPress(int16_t Pr,
         self.isCalibrating = NO;
         NSData *data = yc.cbCharacteristic.value;
         
-        self.calibrationData = [[NSData alloc] initWithData:data];
-        
-        char val[self.calibrationData.length];
-        [data getBytes:&val length:self.calibrationData.length];
+        char val[data.length];
+        [data getBytes:&val length:data.length];
         
         int i = 0;
-        while (i < self.calibrationData.length) {
+        while (i < data.length) {
             uint16_t lo = val[i];
             uint16_t hi = val[i+1];
             uint16_t cx = ((lo & 0xff)| ((hi << 8) & 0xff00));
+            int index = i/2 + 1;
+
+            NSLog(@"%d %d", index, cx);            
+
+            if (index == 1) self.c1 = cx;
+            else if (index == 2) self.c2 = cx;
+            else if (index == 3) self.c3 = cx;
+            else if (index == 4) self.c4 = cx;
+            else if (index == 5) self.c5 = cx;
+            else if (index == 6) self.c6 = cx;
+            else if (index == 7) self.c7 = cx;
+            else if (index == 8) self.c8 = cx;
             
-            NSLog(@"%d %d", i/2, cx);
             i = i + 2;
         }
+
+        self.isCalibrated = YES;
     }
 }
-
-
-
-
-
-
 
 
 @end

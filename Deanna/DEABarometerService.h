@@ -24,7 +24,25 @@
 @interface DEABarometerService : YMSCBService
 
 @property (nonatomic, assign) BOOL isCalibrating;
-@property (nonatomic, strong) NSData *calibrationData;
+
+@property (nonatomic, assign) BOOL isCalibrated;
+
+/// Calibration point
+@property (nonatomic, assign) uint16_t c1;
+/// Calibration point
+@property (nonatomic, assign) uint16_t c2;
+/// Calibration point
+@property (nonatomic, assign) uint16_t c3;
+/// Calibration point
+@property (nonatomic, assign) uint16_t c4;
+/// Calibration point
+@property (nonatomic, assign) int16_t c5;
+/// Calibration point
+@property (nonatomic, assign) int16_t c6;
+/// Calibration point
+@property (nonatomic, assign) int16_t c7;
+/// Calibration point
+@property (nonatomic, assign) int16_t c8;
 
 /// Pressure measurement
 @property (nonatomic, strong) NSNumber *pressure;
