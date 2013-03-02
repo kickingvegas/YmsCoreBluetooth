@@ -23,6 +23,7 @@
 #import "DEAHumidityService.h"
 #import "DEABarometerService.h"
 #import "DEAGyroscopeService.h"
+#import "DEAMagnetometerService.h"
 #import "YMSCBCharacteristic.h"
 
 @implementation DEASensorTag
@@ -39,20 +40,20 @@
         DEATemperatureService *ts = [[DEATemperatureService alloc] initWithName:@"temperature"];
         DEAAccelerometerService *as = [[DEAAccelerometerService alloc] initWithName:@"accelerometer"];
         DEASimpleKeysService *sks = [[DEASimpleKeysService alloc] initWithName:@"simplekeys"];
-        [sks turnOn];
-        
         DEAHumidityService *hs = [[DEAHumidityService alloc] initWithName:@"humidity"];
         DEABarometerService *bs = [[DEABarometerService alloc] initWithName:@"barometer"];
         DEAGyroscopeService *gs = [[DEAGyroscopeService alloc] initWithName:@"gyroscope"];
-
+        DEAMagnetometerService *ms = [[DEAMagnetometerService alloc] initWithName:@"magnetometer"];
         
         self.serviceDict = @{@"temperature": ts,
                              @"accelerometer": as,
                              @"simplekeys": sks,
                              @"humidity": hs,
+                             @"magnetometer": ms,
                              @"gyroscope": gs,
                              @"barometer": bs};
-        
+
+        [sks turnOn];
     }
     return self;
 
