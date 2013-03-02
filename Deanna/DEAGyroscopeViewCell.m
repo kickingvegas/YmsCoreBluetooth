@@ -96,4 +96,9 @@
 
 
 
+- (IBAction)calibrateButtonAction:(id)sender {
+    [self.service calibrate];
+
+}
+
 @end

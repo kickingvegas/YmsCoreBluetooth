@@ -32,12 +32,14 @@
 @property (strong, nonatomic) IBOutlet UILabel *rollLabel;
 @property (strong, nonatomic) IBOutlet UILabel *pitchLabel;
 @property (strong, nonatomic) IBOutlet UILabel *yawLabel;
-
+@property (strong, nonatomic) IBOutlet UIButton *calibrateButton;
 
 - (IBAction)notifySwitchAction:(id)sender;
+- (IBAction)calibrateButtonAction:(id)sender;
 
 - (void)configureWithSensorTag:(DEASensorTag *)sensorTag;
 - (void)deconfigure;
+
 
 
 @end
