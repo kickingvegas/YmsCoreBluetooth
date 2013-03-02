@@ -32,6 +32,7 @@ typedef struct {
 
 __uint64_t getfield64(__uint64_t s, int p, int n);
 yms_u128_t yms_u128_genAddress(yms_u128_t *base, yms_u128_t *offset);
+__uint16_t yms_u16_build(__uint16_t lo, __uint16_t hi);
 
 
 #endif
