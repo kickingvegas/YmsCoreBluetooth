@@ -21,6 +21,8 @@
 		D933CED416DDAFA700EDDAD6 /* YMSCBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D933CECE16DDAFA700EDDAD6 /* YMSCBUtils.m */; };
 		D93EAC5016E18711008B1BD3 /* DEAGyroscopeService.m in Sources */ = {isa = PBXBuildFile; fileRef = D93EAC4F16E18711008B1BD3 /* DEAGyroscopeService.m */; };
 		D93EAC5316E18748008B1BD3 /* DEAGyroscopeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D93EAC5216E18748008B1BD3 /* DEAGyroscopeViewCell.m */; };
+		D93EAC5616E1DAC8008B1BD3 /* DEAMagnetometerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D93EAC5516E1DAC8008B1BD3 /* DEAMagnetometerViewCell.m */; };
+		D93EAC5916E1DAF5008B1BD3 /* DEAMagnetometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = D93EAC5816E1DAF5008B1BD3 /* DEAMagnetometerService.m */; };
 		D9718B46167F9F9F0001E42C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B45167F9F9F0001E42C /* UIKit.framework */; };
 		D9718B48167F9F9F0001E42C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B47167F9F9F0001E42C /* Foundation.framework */; };
 		D9718B4A167F9F9F0001E42C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B49167F9F9F0001E42C /* CoreGraphics.framework */; };
@@ -89,6 +91,10 @@
 		D93EAC4F16E18711008B1BD3 /* DEAGyroscopeService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAGyroscopeService.m; sourceTree = "<group>"; };
 		D93EAC5116E18748008B1BD3 /* DEAGyroscopeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAGyroscopeViewCell.h; sourceTree = "<group>"; };
 		D93EAC5216E18748008B1BD3 /* DEAGyroscopeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAGyroscopeViewCell.m; sourceTree = "<group>"; };
+		D93EAC5416E1DAC8008B1BD3 /* DEAMagnetometerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAMagnetometerViewCell.h; sourceTree = "<group>"; };
+		D93EAC5516E1DAC8008B1BD3 /* DEAMagnetometerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAMagnetometerViewCell.m; sourceTree = "<group>"; };
+		D93EAC5716E1DAF5008B1BD3 /* DEAMagnetometerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAMagnetometerService.h; sourceTree = "<group>"; };
+		D93EAC5816E1DAF5008B1BD3 /* DEAMagnetometerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAMagnetometerService.m; sourceTree = "<group>"; };
 		D9718B41167F9F9F0001E42C /* Deanna.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Deanna.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9718B45167F9F9F0001E42C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D9718B47167F9F9F0001E42C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -315,6 +321,8 @@
 				D9DE671016E0223E00F1B15C /* DEABarometerService.m */,
 				D93EAC4E16E18711008B1BD3 /* DEAGyroscopeService.h */,
 				D93EAC4F16E18711008B1BD3 /* DEAGyroscopeService.m */,
+				D93EAC5716E1DAF5008B1BD3 /* DEAMagnetometerService.h */,
+				D93EAC5816E1DAF5008B1BD3 /* DEAMagnetometerService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -334,6 +342,8 @@
 				D907A76A16E0393300EA8D5B /* DEABarometerViewCell.m */,
 				D93EAC5116E18748008B1BD3 /* DEAGyroscopeViewCell.h */,
 				D93EAC5216E18748008B1BD3 /* DEAGyroscopeViewCell.m */,
+				D93EAC5416E1DAC8008B1BD3 /* DEAMagnetometerViewCell.h */,
+				D93EAC5516E1DAC8008B1BD3 /* DEAMagnetometerViewCell.m */,
 			);
 			name = Sensors;
 			sourceTree = "<group>";
@@ -476,6 +486,8 @@
 				D907A76B16E0393300EA8D5B /* DEABarometerViewCell.m in Sources */,
 				D93EAC5016E18711008B1BD3 /* DEAGyroscopeService.m in Sources */,
 				D93EAC5316E18748008B1BD3 /* DEAGyroscopeViewCell.m in Sources */,
+				D93EAC5616E1DAC8008B1BD3 /* DEAMagnetometerViewCell.m in Sources */,
+				D93EAC5916E1DAF5008B1BD3 /* DEAMagnetometerService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
