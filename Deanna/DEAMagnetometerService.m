@@ -47,16 +47,6 @@ float calcMag(int16_t v, float c, int16_t d) {
     return self;
 }
 
-- (NSArray *)characteristics {
-    
-    NSArray *result = @[
-                        [(YMSCBCharacteristic *)(self.characteristicDict[@"data"]) uuid],
-                        [(YMSCBCharacteristic *)(self.characteristicDict[@"config"]) uuid],
-                        [(YMSCBCharacteristic *)(self.characteristicDict[@"period"]) uuid]
-                        ];
-    
-    return result;
-}
 
 
 - (void)updateCharacteristic:(YMSCBCharacteristic *)yc {

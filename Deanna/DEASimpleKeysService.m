@@ -32,14 +32,7 @@
     return self;
 }
 
-- (NSArray *)characteristics {
-    
-    NSArray *result = @[
-    [(YMSCBCharacteristic *)(self.characteristicDict[@"data"]) uuid]
-    ];
-    
-    return result;
-}
+
 
 
 - (void)updateCharacteristic:(YMSCBCharacteristic *)yc {

@@ -41,16 +41,6 @@ float calcAccel(int16_t rawV) {
     return self;
 }
 
-- (NSArray *)characteristics {
-    
-    NSArray *result = @[
-    [(YMSCBCharacteristic *)(self.characteristicDict[@"data"]) uuid],
-    [(YMSCBCharacteristic *)(self.characteristicDict[@"config"]) uuid],
-    [(YMSCBCharacteristic *)(self.characteristicDict[@"period"]) uuid]
-    ];
-    
-    return result;
-}
 
 - (void)updateCharacteristic:(YMSCBCharacteristic *)yc {
     if ([yc.name isEqualToString:@"data"]) {

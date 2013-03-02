@@ -74,14 +74,15 @@
 }
 
 
-
 - (NSArray *)characteristics {
+    NSArray *tempArray = [self.characteristicDict allValues];
     
-    NSArray *result = @[
-    [(YMSCBCharacteristic *)(self.characteristicDict[@"data"]) uuid],
-    [(YMSCBCharacteristic *)(self.characteristicDict[@"config"]) uuid],
-    ];
-
+    NSMutableArray *result = [[NSMutableArray alloc] initWithCapacity:[self.characteristicDict count]];
+    
+    for (YMSCBCharacteristic *yc in tempArray) {
+        [result addObject:yc.uuid];
+    }
+    
     return result;
 }
 
