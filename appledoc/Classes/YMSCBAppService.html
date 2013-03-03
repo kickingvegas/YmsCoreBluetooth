@@ -1,0 +1,1074 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>YMSCBAppService Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<meta name="viewport" content="width=550" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.1 (build 858)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">YMS CoreBluetooth Framework + Deanna </a></h1>
+				<a id="developerHome" href="../index.html">Yummy Melon Software LLC</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">YMSCBAppService Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/delegate">&nbsp;&nbsp;&nbsp;&nbsp;delegate</option>
+	
+	<option value="//api/name/isScanning">&nbsp;&nbsp;&nbsp;&nbsp;isScanning</option>
+	
+	<option value="//api/name/manager">&nbsp;&nbsp;&nbsp;&nbsp;manager</option>
+	
+	<option value="//api/name/peripheralSearchNames">&nbsp;&nbsp;&nbsp;&nbsp;peripheralSearchNames</option>
+	
+	<option value="//api/name/ymsPeripherals">&nbsp;&nbsp;&nbsp;&nbsp;ymsPeripherals</option>
+	
+	
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/connectPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- connectPeripheral:</option>
+	
+	<option value="//api/name/disconnectPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- disconnectPeripheral:</option>
+	
+	<option value="//api/name/findYmsPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- findYmsPeripheral:</option>
+	
+	<option value="//api/name/handleFoundPeripheral:withCentral:">&nbsp;&nbsp;&nbsp;&nbsp;- handleFoundPeripheral:withCentral:</option>
+	
+	<option value="//api/name/isAppServicePeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- isAppServicePeripheral:</option>
+	
+	<option value="//api/name/loadPeripherals">&nbsp;&nbsp;&nbsp;&nbsp;- loadPeripherals</option>
+	
+	<option value="//api/name/persistPeripherals">&nbsp;&nbsp;&nbsp;&nbsp;- persistPeripherals</option>
+	
+	<option value="//api/name/startScan">&nbsp;&nbsp;&nbsp;&nbsp;- startScan</option>
+	
+	<option value="//api/name/stopScan">&nbsp;&nbsp;&nbsp;&nbsp;- stopScan</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/delegate">delegate</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isScanning">isScanning</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/manager">manager</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/peripheralSearchNames">peripheralSearchNames</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/ymsPeripherals">ymsPeripherals</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/connectPeripheral:">connectPeripheral:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/disconnectPeripheral:">disconnectPeripheral:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/findYmsPeripheral:">findYmsPeripheral:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/handleFoundPeripheral:withCentral:">handleFoundPeripheral:withCentral:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isAppServicePeripheral:">isAppServicePeripheral:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/loadPeripherals">loadPeripherals</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/persistPeripherals">persistPeripherals</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/startScan">startScan</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/stopScan">stopScan</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="YMSCBAppService Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">YMSCBAppService Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value">CBCentralManagerDelegate</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">YMSCBAppService.h<br />YMSCBAppService.m</td>
+</tr>
+						</tbody></table></div>
+					
+					
+					
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>Application service definition for a CoreBluetooth service.</p>
+
+<p>Typically instantiated as a singleton.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+		<span class="tooltip"><p>pointer to delegate</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/manager">&nbsp;&nbsp;manager</a></code>
+		<span class="tooltip"><p>pointer to CBCentralManager</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/ymsPeripherals">&nbsp;&nbsp;ymsPeripherals</a></code>
+		<span class="tooltip"><p>array of <a href="../Classes/DEASensorTag.html">DEASensorTag</a> peripherals</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/peripheralSearchNames">&nbsp;&nbsp;peripheralSearchNames</a></code>
+		<span class="tooltip"><p>array of NSStrings to search to match CBPeripheral instances</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isScanning">&nbsp;&nbsp;isScanning</a></code>
+		<span class="tooltip"><p>flag to determine if scanning.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isAppServicePeripheral:">&ndash;&nbsp;isAppServicePeripheral:</a></code>
+		<span class="tooltip"><p>Determines if peripheral is to be managed by this app service.
+Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralSearchNames</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/persistPeripherals">&ndash;&nbsp;persistPeripherals</a></code>
+		<span class="tooltip"><p>Persist peripheral UUIDs.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/loadPeripherals">&ndash;&nbsp;loadPeripherals</a></code>
+		<span class="tooltip"><p>Load peripheral UUIDs.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/handleFoundPeripheral:withCentral:">&ndash;&nbsp;handleFoundPeripheral:withCentral:</a></code>
+		<span class="tooltip"><p>Handler for discovered or found peripheral.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/startScan">&ndash;&nbsp;startScan</a></code>
+		<span class="tooltip"><p>Start CoreBluetooth scan for peripherals.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/stopScan">&ndash;&nbsp;stopScan</a></code>
+		<span class="tooltip"><p>Stop CoreBluetooth scan for peripherals.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/connectPeripheral:">&ndash;&nbsp;connectPeripheral:</a></code>
+		<span class="tooltip"><p>Connect peripheral.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/disconnectPeripheral:">&ndash;&nbsp;disconnectPeripheral:</a></code>
+		<span class="tooltip"><p>Disconnect peripheral.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/findYmsPeripheral:">&ndash;&nbsp;findYmsPeripheral:</a></code>
+		<span class="tooltip"><p>Find <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a> instance matching peripheral</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="subsubtitle method-title">delegate</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>pointer to delegate</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, weak) id&lt;YMSCBAppServiceDelegate&gt; delegate</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>pointer to delegate</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isScanning" title="isScanning"></a>
+	<h3 class="subsubtitle method-title">isScanning</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>flag to determine if scanning.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL isScanning</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>flag to determine if scanning.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/manager" title="manager"></a>
+	<h3 class="subsubtitle method-title">manager</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>pointer to CBCentralManager</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) CBCentralManager *manager</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>pointer to CBCentralManager</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/peripheralSearchNames" title="peripheralSearchNames"></a>
+	<h3 class="subsubtitle method-title">peripheralSearchNames</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>array of NSStrings to search to match CBPeripheral instances</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSArray *peripheralSearchNames</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>array of NSStrings to search to match CBPeripheral instances</p>
+
+<p>Used in conjunction with [isAppServicePeripheral:]</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/ymsPeripherals" title="ymsPeripherals"></a>
+	<h3 class="subsubtitle method-title">ymsPeripherals</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>array of <a href="../Classes/DEASensorTag.html">DEASensorTag</a> peripherals</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSMutableArray *ymsPeripherals</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>array of <a href="../Classes/DEASensorTag.html">DEASensorTag</a> peripherals</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/connectPeripheral:" title="connectPeripheral:"></a>
+	<h3 class="subsubtitle method-title">connectPeripheral:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Connect peripheral.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)connectPeripheral:(NSUInteger)<em>index</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>index</em></dt>
+			<dd><p>index value of peripheral in <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Connect peripheral.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/disconnectPeripheral:" title="disconnectPeripheral:"></a>
+	<h3 class="subsubtitle method-title">disconnectPeripheral:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Disconnect peripheral.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)disconnectPeripheral:(NSUInteger)<em>index</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>index</em></dt>
+			<dd><p>index value of peripheral in <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Disconnect peripheral.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/findYmsPeripheral:" title="findYmsPeripheral:"></a>
+	<h3 class="subsubtitle method-title">findYmsPeripheral:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Find <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a> instance matching peripheral</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (YMSCBPeripheral *)findYmsPeripheral:(CBPeripheral *)<em>peripheral</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>peripheral</em></dt>
+			<dd><p>peripheral corresponding with <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a></p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>instance of <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a></p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Find <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a> instance matching peripheral</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/handleFoundPeripheral:withCentral:" title="handleFoundPeripheral:withCentral:"></a>
+	<h3 class="subsubtitle method-title">handleFoundPeripheral:withCentral:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Handler for discovered or found peripheral.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)handleFoundPeripheral:(CBPeripheral *)<em>peripheral</em> withCentral:(CBCentralManager *)<em>central</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>peripheral</em></dt>
+			<dd><p>CoreBluetooth peripheral instance</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>central</em></dt>
+			<dd><p>CoreBluetooth central <a href="../Classes/YMSCBAppService.html#//api/name/manager">manager</a> instance</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Handler for discovered or found peripheral.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isAppServicePeripheral:" title="isAppServicePeripheral:"></a>
+	<h3 class="subsubtitle method-title">isAppServicePeripheral:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Determines if peripheral is to be managed by this app service.
+Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralSearchNames</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (BOOL)isAppServicePeripheral:(CBPeripheral *)<em>peripheral</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>peripheral</em></dt>
+			<dd><p>found or retrieved peripheral</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES is peripheral is to be managed by this app service.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Determines if peripheral is to be managed by this app service.
+Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralSearchNames</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/loadPeripherals" title="loadPeripherals"></a>
+	<h3 class="subsubtitle method-title">loadPeripherals</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Load peripheral UUIDs.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)loadPeripherals</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Load peripheral UUIDs.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/persistPeripherals" title="persistPeripherals"></a>
+	<h3 class="subsubtitle method-title">persistPeripherals</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Persist peripheral UUIDs.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)persistPeripherals</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Persist peripheral UUIDs.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/startScan" title="startScan"></a>
+	<h3 class="subsubtitle method-title">startScan</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Start CoreBluetooth scan for peripherals.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)startScan</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Start CoreBluetooth scan for peripherals.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/stopScan" title="stopScan"></a>
+	<h3 class="subsubtitle method-title">stopScan</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Stop CoreBluetooth scan for peripherals.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)stopScan</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Stop CoreBluetooth scan for peripherals.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-03-03)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
+		</script>
+	</body>
+</html>
