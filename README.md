@@ -2,7 +2,9 @@
 
 A framework for building CoreBluetooth applications. Includes Deanna, an iOS application using YmsCoreBluetooth to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag).
 
-**THIS IS PRE-PRODUCTION CODE. IT IS NOT READY FOR DISTRIBUTION.**
+[YmsCoreBluetooth API Reference](http://kickingvegas.github.com/YmsCoreBluetooth/appledoc/)
+
+* [Class Hierarchy](http://kickingvegas.github.com/YmsCoreBluetooth/appledoc/hierarchy.html)
 
 ## License
 
