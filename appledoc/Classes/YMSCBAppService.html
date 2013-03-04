@@ -175,9 +175,33 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>Application service definition for a CoreBluetooth service.</p>
+						<p>Base class for defining a CoreBluetooth application service.</p>
 
-<p>Typically instantiated as a singleton.</p>
+<p>Note that is not to be confused with a CoreBluetooth <em>service</em> where the term <em>service</em>
+has its own semantic definition with the context of the CoreBluetooth framework. Rather,
+an <em>application service</em> is meant here to define a set of functionality which is to be
+considered a sub-system of the application.</p>
+
+<p>YMSCBAppService is to be typically subclassed as a singleton instance.</p>
+
+<h2>Global Constants</h2>
+
+<pre><code> extern NSString * const YMSCBUnknownNotification;
+ extern NSString * const YMSCBResettingNotification;
+ extern NSString * const YMSCBUnsupportedNotification;
+ extern NSString * const YMSCBUnauthorizedNotification;
+ extern NSString * const YMSCBPoweredOffNotification;
+ extern NSString * const YMSCBPoweredOnNotification;
+</code></pre>
+
+<h3>Constants</h3>
+
+<p><code>YMSCBUnknownNotification</code> &ndash; notification for <code>CBCentralManagerStateUnknown</code><br/>
+<code>YMSCBResettingNotification</code> &ndash; notification for <code>CBCentralManagerStateResetting</code><br/>
+<code>YMSCBUnsupportedNotification</code> &ndash; notification for <code>CBCentralManagerStateUnsupported</code><br/>
+<code>YMSCBUnauthorizedNotification</code> &ndash; notification for <code>CBCentralManagerStateUnauthorized</code><br/>
+<code>YMSCBPoweredOffNotification</code> &ndash; notification for <code>CBCentralManagerStatePoweredOff</code><br/>
+<code>YMSCBPoweredOnNotification</code> &ndash; notification for <code>CBCentralManagerStatePoweredOn</code></p>
 					</div>
 					
 					
@@ -196,35 +220,35 @@
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
-		<span class="tooltip"><p>pointer to delegate</p></span>
+		<span class="tooltip"><p>Pointer to delegate.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/manager">&nbsp;&nbsp;manager</a></code>
-		<span class="tooltip"><p>pointer to CBCentralManager</p></span>
+		<span class="tooltip"><p>Pointer to CBCentralManager.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/ymsPeripherals">&nbsp;&nbsp;ymsPeripherals</a></code>
-		<span class="tooltip"><p>array of <a href="../Classes/DEASensorTag.html">DEASensorTag</a> peripherals</p></span>
+		<span class="tooltip"><p>Array of <a href="../Classes/DEASensorTag.html">DEASensorTag</a> peripherals.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/peripheralSearchNames">&nbsp;&nbsp;peripheralSearchNames</a></code>
-		<span class="tooltip"><p>array of NSStrings to search to match CBPeripheral instances</p></span>
+		<span class="tooltip"><p>Array of NSStrings to search to match CBPeripheral instances.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/isScanning">&nbsp;&nbsp;isScanning</a></code>
-		<span class="tooltip"><p>flag to determine if scanning.</p></span>
+		<span class="tooltip"><p>Flag to determine if scanning.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -312,7 +336,7 @@ Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralS
 	
 	
 	<div class="method-subsection brief-description">
-		<p>pointer to delegate</p>
+		<p>Pointer to delegate.</p>
 	</div>		
 	
     
@@ -329,7 +353,7 @@ Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralS
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>pointer to delegate</p>
+		<p>Pointer to delegate.</p>
 	</div>
 	
 	
@@ -353,7 +377,7 @@ Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralS
 	
 	
 	<div class="method-subsection brief-description">
-		<p>flag to determine if scanning.</p>
+		<p>Flag to determine if scanning.</p>
 	</div>		
 	
     
@@ -370,7 +394,7 @@ Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralS
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>flag to determine if scanning.</p>
+		<p>Flag to determine if scanning.</p>
 	</div>
 	
 	
@@ -394,7 +418,7 @@ Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralS
 	
 	
 	<div class="method-subsection brief-description">
-		<p>pointer to CBCentralManager</p>
+		<p>Pointer to CBCentralManager.</p>
 	</div>		
 	
     
@@ -411,7 +435,7 @@ Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralS
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>pointer to CBCentralManager</p>
+		<p>Pointer to CBCentralManager.</p>
 	</div>
 	
 	
@@ -435,7 +459,7 @@ Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralS
 	
 	
 	<div class="method-subsection brief-description">
-		<p>array of NSStrings to search to match CBPeripheral instances</p>
+		<p>Array of NSStrings to search to match CBPeripheral instances.</p>
 	</div>		
 	
     
@@ -452,7 +476,7 @@ Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralS
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>array of NSStrings to search to match CBPeripheral instances</p>
+		<p>Array of NSStrings to search to match CBPeripheral instances.</p>
 
 <p>Used in conjunction with [isAppServicePeripheral:]</p>
 	</div>
@@ -478,7 +502,7 @@ Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralS
 	
 	
 	<div class="method-subsection brief-description">
-		<p>array of <a href="../Classes/DEASensorTag.html">DEASensorTag</a> peripherals</p>
+		<p>Array of <a href="../Classes/DEASensorTag.html">DEASensorTag</a> peripherals.</p>
 	</div>		
 	
     
@@ -495,7 +519,7 @@ Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralS
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>array of <a href="../Classes/DEASensorTag.html">DEASensorTag</a> peripherals</p>
+		<p>Array of <a href="../Classes/DEASensorTag.html">DEASensorTag</a> peripherals.</p>
 	</div>
 	
 	

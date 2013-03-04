@@ -27,6 +27,8 @@
 					<select id="jumpTo">
 	<option value="top">Jump To&#133;</option>
 	
+	<option value="overview">Overview</option>
+	
 	
 	
 	
@@ -38,11 +40,30 @@
 	
 	<option value="properties">Properties</option>
 	
+	<option value="//api/name/calibrateButton">&nbsp;&nbsp;&nbsp;&nbsp;calibrateButton</option>
+	
 	<option value="//api/name/notifySwitch">&nbsp;&nbsp;&nbsp;&nbsp;notifySwitch</option>
 	
+	<option value="//api/name/pitchLabel">&nbsp;&nbsp;&nbsp;&nbsp;pitchLabel</option>
+	
+	<option value="//api/name/rollLabel">&nbsp;&nbsp;&nbsp;&nbsp;rollLabel</option>
+	
+	<option value="//api/name/yawLabel">&nbsp;&nbsp;&nbsp;&nbsp;yawLabel</option>
 	
 	
 	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/calibrateButtonAction:">&nbsp;&nbsp;&nbsp;&nbsp;- calibrateButtonAction:</option>
+	
+	<option value="//api/name/configureWithSensorTag:">&nbsp;&nbsp;&nbsp;&nbsp;- configureWithSensorTag:</option>
+	
+	<option value="//api/name/deconfigure">&nbsp;&nbsp;&nbsp;&nbsp;- deconfigure</option>
+	
+	<option value="//api/name/notifySwitchAction:">&nbsp;&nbsp;&nbsp;&nbsp;- notifySwitchAction:</option>
 	
 	
 	
@@ -53,6 +74,8 @@
 		<nav id="tocContainer" class="isShowingTOC">
 			<ul id="toc" role="tree">
 				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
 
 
 
@@ -66,13 +89,33 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/calibrateButton">calibrateButton</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/notifySwitch">notifySwitch</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pitchLabel">pitchLabel</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/rollLabel">rollLabel</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/yawLabel">yawLabel</a></span></li>
 	
 </ul></li>
 
 
 
 
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/calibrateButtonAction:">calibrateButtonAction:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/configureWithSensorTag:">configureWithSensorTag:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/deconfigure">deconfigure</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/notifySwitchAction:">notifySwitchAction:</a></span></li>
+	
+</ul></li>
 
 
 			</ul>
@@ -106,6 +149,14 @@
 					
 					
 					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>View and control logic for the SensorTag gyroscope service.</p>
+					</div>
+					
+					
+					
 					
 					
 					<div class="section section-tasks">
@@ -124,6 +175,62 @@
 	</span>
 	<span class="task-item-suffix">property</span>
 	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/rollLabel">&nbsp;&nbsp;rollLabel</a></code>
+		<span class="tooltip"><p>Roll label</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/pitchLabel">&nbsp;&nbsp;pitchLabel</a></code>
+		<span class="tooltip"><p>Pitch label</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/yawLabel">&nbsp;&nbsp;yawLabel</a></code>
+		<span class="tooltip"><p>Yaw label</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/calibrateButton">&nbsp;&nbsp;calibrateButton</a></code>
+		<span class="tooltip"><p>Calibrate button</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/notifySwitchAction:">&ndash;&nbsp;notifySwitchAction:</a></code>
+		<span class="tooltip"><p>Action method to handle <a href="#//api/name/notifySwitch">notifySwitch</a> toggle.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/calibrateButtonAction:">&ndash;&nbsp;calibrateButtonAction:</a></code>
+		<span class="tooltip"><p>Action method to handle <a href="#//api/name/calibrateButton">calibrateButton</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/configureWithSensorTag:">&ndash;&nbsp;configureWithSensorTag:</a></code>
+		<span class="tooltip"><p>Configure this class to use sensorTag.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/deconfigure">&ndash;&nbsp;deconfigure</a></code>
+		<span class="tooltip"><p>Deconfigure this class to not use sensorTag.</p></span>
+	</span>
+	
+	
 </li>
 						</ul>
 						
@@ -136,6 +243,47 @@
 					<div class="section section-methods">
 						<a title="Properties" name="properties"></a>
 						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/calibrateButton" title="calibrateButton"></a>
+	<h3 class="subsubtitle method-title">calibrateButton</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Calibrate button</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (strong, nonatomic) IBOutlet UIButton *calibrateButton</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Calibrate button</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DEAGyroscopeViewCell.h</code><br />
+	</div>				
+	
+	
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/notifySwitch" title="notifySwitch"></a>
@@ -178,11 +326,334 @@
 	
 </div>
 						
+						<div class="section-method">
+	<a name="//api/name/pitchLabel" title="pitchLabel"></a>
+	<h3 class="subsubtitle method-title">pitchLabel</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Pitch label</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (strong, nonatomic) IBOutlet UILabel *pitchLabel</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Pitch label</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DEAGyroscopeViewCell.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/rollLabel" title="rollLabel"></a>
+	<h3 class="subsubtitle method-title">rollLabel</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Roll label</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (strong, nonatomic) IBOutlet UILabel *rollLabel</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Roll label</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DEAGyroscopeViewCell.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/yawLabel" title="yawLabel"></a>
+	<h3 class="subsubtitle method-title">yawLabel</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Yaw label</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (strong, nonatomic) IBOutlet UILabel *yawLabel</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Yaw label</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DEAGyroscopeViewCell.h</code><br />
+	</div>				
+	
+	
+</div>
+						
 					</div>
 					
 					
 					
 					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/calibrateButtonAction:" title="calibrateButtonAction:"></a>
+	<h3 class="subsubtitle method-title">calibrateButtonAction:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Action method to handle <a href="#//api/name/calibrateButton">calibrateButton</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (IBAction)calibrateButtonAction:(id)<em>sender</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>sender</em></dt>
+			<dd><p><a href="#//api/name/calibrateButton">calibrateButton</a></p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Action method to handle <a href="#//api/name/calibrateButton">calibrateButton</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DEAGyroscopeViewCell.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/configureWithSensorTag:" title="configureWithSensorTag:"></a>
+	<h3 class="subsubtitle method-title">configureWithSensorTag:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Configure this class to use sensorTag.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)configureWithSensorTag:(DEASensorTag *)<em>sensorTag</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>sensorTag</em></dt>
+			<dd><p>Peripheral containing service to be used by this UI component.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Configure this class to use sensorTag.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DEAGyroscopeViewCell.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/deconfigure" title="deconfigure"></a>
+	<h3 class="subsubtitle method-title">deconfigure</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Deconfigure this class to not use sensorTag.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)deconfigure</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Deconfigure this class to not use sensorTag.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DEAGyroscopeViewCell.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/notifySwitchAction:" title="notifySwitchAction:"></a>
+	<h3 class="subsubtitle method-title">notifySwitchAction:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Action method to handle <a href="#//api/name/notifySwitch">notifySwitch</a> toggle.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (IBAction)notifySwitchAction:(id)<em>sender</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>sender</em></dt>
+			<dd><p><a href="#//api/name/notifySwitch">notifySwitch</a> UI component.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Action method to handle <a href="#//api/name/notifySwitch">notifySwitch</a> toggle.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DEAGyroscopeViewCell.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
 					
 					
 				</div>
