@@ -21,16 +21,30 @@
 
 
 /**
- Base class for TI SensorTag CoreBluetooth characteristic
+ Container class for TI SensorTag CoreBluetooth characteristic.
  */
 @interface YMSCBCharacteristic : NSObject
 
+/// Characteristic name.
 @property (nonatomic, strong) NSString *name;
+
+/// Characterisic CBUUID.
 @property (nonatomic, strong) CBUUID *uuid;
+
+/// Pointer to actual CBCharacterisic
 @property (nonatomic, strong) CBCharacteristic *cbCharacteristic;
+
+/// Offset address value, if applicable.
 @property (nonatomic, strong) NSNumber *offset;
 
 
+/**
+ Class contructor.
+
+ @param oName characteristic name
+ @param oUUID characteristic CBUUID
+ @param addrOffset characteristic address offset
+ */
 - (id)initWithName:(NSString *)oName uuid:(CBUUID *)oUUID offset:(int)addrOffset;
 
 @end

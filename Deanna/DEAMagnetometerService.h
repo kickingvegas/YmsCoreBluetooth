@@ -18,6 +18,9 @@
 
 #import "YMSCBService.h"
 
+/**
+ TI SensorTag CoreBluetooth service definition for magnetometer.
+ */
 @interface DEAMagnetometerService : YMSCBService
 
 @property (nonatomic, strong) NSNumber *x;

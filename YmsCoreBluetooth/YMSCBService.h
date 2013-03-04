@@ -43,8 +43,6 @@
 /** CoreBluetooth characteristics are synchronized */
 @property (nonatomic, assign) BOOL isEnabled;
 
-///
-
 /// Holds (key, value pairs of (NSString, YMSCBCharacteristic) instances
 @property (nonatomic, strong) NSMutableDictionary *characteristicDict;
 
@@ -91,27 +89,105 @@
 - (YMSCBCharacteristic *)findCharacteristic:(CBCharacteristic *)ct;
 
 
+/**
+ Set notification value with respect to characteristic.
+ 
+ @param notifyValue Set notification enable.
+ @param characteristic CBCharacteristic to be notified of.
+ 
+ */
 - (void)setNotifyValue:(BOOL)notifyValue forCharacteristic:(CBCharacteristic *)characteristic;
 
+/**
+ Set notification value with respect to characteristic name.
+ 
+ @param notifyValue Set notification enable.
+ @param cname Name of CBCharacteristic to be notified of.
+ */
 - (void)setNotifyValue:(BOOL)notifyValue forCharacteristicName:(NSString *)cname;
 
-
+/**
+ Write value with respect to characteristic.
+ 
+ @param data Data to be written.
+ @param characteristic CBCharacteristic to be notified of.
+ @param type The type of write to be executed.
+ */
 - (void)writeValue:(NSData *)data forCharacteristic:(CBCharacteristic *)characteristic type:(CBCharacteristicWriteType)type;
 
+/**
+ Write value with respect to characteristic name.
+ 
+ @param data Data to be written.
+ @param cname Name of CBCharacteristic to be notified of.
+ @param type The type of write to be executed.
+ */
 - (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname type:(CBCharacteristicWriteType)type;
 
+/**
+ Write byte with respect to characteristic name.
+ 
+ @param val Byte value to be written.
+ @param cname Name of CBCharacteristic to be notified of.
+ @param type The type of write to be executed.
+ */
 - (void)writeByte:(int8_t)val forCharacteristicName:(NSString *)cname type:(CBCharacteristicWriteType)type;
 
+/**
+ Read value with respect to characteristic.
+ 
+ @param characteristic CBCharacteristic to be notified of.
+ */
 - (void)readValueForCharacteristic:(CBCharacteristic *)characteristic;
+
+/**
+ Read value with respect to characteristic name.
+ 
+ @param cname Name of CBCharacteristic to be notified of.
+ */
 - (void)readValueForCharacteristicName:(NSString *)cname;
 
+/**
+ Request a read of the *config* characteristic.
+ */
 - (void)requestConfig;
+
+/**
+ Return value of the *config* characteristic.
+
+ @returns data of *config* characteristic.
+ */
 - (NSData *)responseConfig;
 
-
+/**
+ Turn on CoreBluetooth peripheral service.
+ 
+ This method turns on the service by:
+ 
+ *  writing to *config* characteristic to enable service.
+ *  writing to *data* characteristic to enable notification.
+ 
+ */
 - (void)turnOn;
+
+
+/**
+ Turn off CoreBluetooth peripheral service.
+ 
+ This method turns off the service by:
+ 
+ *  writing to *config* characteristic to disable service.
+ *  writing to *data* characteristic to disable notification.
+ 
+ */
 - (void)turnOff;
 
+/**
+ Method to handle response update for a prior read or write request to a characteristic. **This method is to be overridden**.
+
+ @param yc Characteristic receiving update.
+ 
+ */
 - (void)updateCharacteristic:(YMSCBCharacteristic *)yc;
 
 @end

@@ -21,6 +21,9 @@
 @class DEASensorTag;
 @class DEAMagnetometerService;
 
+/**
+ View and control logic for the SensorTag magenetometer service.
+ */
 @interface DEAMagnetometerViewCell : UITableViewCell
 
 @property (strong, nonatomic) DEAMagnetometerService *service;
@@ -28,16 +31,37 @@
 /// Enable notification
 @property (strong, nonatomic) IBOutlet UISwitch *notifySwitch;
 
-
+/// X label
 @property (strong, nonatomic) IBOutlet UILabel *xLabel;
+/// Y label
 @property (strong, nonatomic) IBOutlet UILabel *yLabel;
+/// Z label
 @property (strong, nonatomic) IBOutlet UILabel *zLabel;
+/// Calibration button
 @property (strong, nonatomic) IBOutlet UIButton *calibrateButton;
 
+/**
+ Action method to handle notifySwitch toggle.
+ 
+ @param sender notifySwitch UI component.
+ */
 - (IBAction)notifySwitchAction:(id)sender;
+
+/**
+ Action method to handle calibrateButton
+ */
 - (IBAction)calibrateButtonAction:(id)sender;
 
+/**
+ Configure this class to use sensorTag.
+ 
+ @param sensorTag Peripheral containing service to be used by this UI component.
+ */
 - (void)configureWithSensorTag:(DEASensorTag *)sensorTag;
+
+/**
+ Deconfigure this class to not use sensorTag.
+ */
 - (void)deconfigure;
 
 

@@ -28,18 +28,33 @@
 @class DEAGyroscopeViewCell;
 @class DEAMagnetometerViewCell;
 
+/**
+ ViewController for TI SensorTag peripheral.
+ */
 @interface DEASensorTagViewController : DEABaseViewController <UITableViewDelegate, UITableViewDataSource, YMSCBAppServiceDelegate>
 
+/// Array of names of service cells.
 @property (strong, nonatomic) NSArray *cbServiceCells;
+
+/// Instance of DEASensorTag.
 @property (strong, nonatomic) DEASensorTag *sensorTag;
 
+/// TableView holding UI controls for all SensorTag services.
 @property (strong, nonatomic) IBOutlet UITableView *sensorTableView;
+
+/// UI for temperature service.
 @property (strong, nonatomic) IBOutlet DEATemperatureViewCell *temperatureViewCell;
+/// UI for accelerometer service.
 @property (strong, nonatomic) IBOutlet DEAAccelerometerViewCell *accelerometerViewCell;
+/// UI for humidity service.
 @property (strong, nonatomic) IBOutlet DEAHumidityViewCell *humidityViewCell;
+/// UI for simple keys service.
 @property (strong, nonatomic) IBOutlet DEASimpleKeysViewCell *simplekeysViewCell;
+/// UI for barometer  service.
 @property (strong, nonatomic) IBOutlet DEABarometerViewCell *barometerViewCell;
+/// UI for gyroscope service.
 @property (strong, nonatomic) IBOutlet DEAGyroscopeViewCell *gyroscopeViewCell;
+/// UI for magnetometer service.
 @property (strong, nonatomic) IBOutlet DEAMagnetometerViewCell *magnetometerViewCell;
 
 @end

@@ -25,15 +25,34 @@
  */
 @interface DEAAccelerometerViewCell : UITableViewCell
 
+/// Pointer to service for this UI control
 @property (strong, nonatomic) DEAAccelerometerService *service;
+/// Notification enable switch
 @property (strong, nonatomic) IBOutlet UISwitch *notifySwitch;
+/// X label
 @property (strong, nonatomic) IBOutlet UILabel *accelXLabel;
+/// Y label
 @property (strong, nonatomic) IBOutlet UILabel *accelYLabel;
+/// Z label
 @property (strong, nonatomic) IBOutlet UILabel *accelZLabel;
 
+/**
+ Action method to handle notifySwitch toggle.
+
+ @param sender notifySwitch UI component.
+ */
 - (IBAction)notifySwitchAction:(id)sender;
 
+/**
+ Configure this class to use sensorTag.
+
+ @param sensorTag Peripheral containing service to be used by this UI component.
+ */
 - (void)configureWithSensorTag:(DEASensorTag *)sensorTag;
+
+/**
+ Deconfigure this class to not use sensorTag.
+ */
 - (void)deconfigure;
 
 

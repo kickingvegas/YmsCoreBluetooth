@@ -35,7 +35,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *button2;
 
 /**
- Bind UI components to service of interest in sensorTag. 
+ Bind UI components to service of interest in sensorTag.
+ 
+ @param sensorTag Peripheral instance of SensorTag.
  */
 - (void)configureWithSensorTag:(DEASensorTag *)sensorTag;
 

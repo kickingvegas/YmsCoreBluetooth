@@ -29,10 +29,31 @@ typedef struct {
 } yms_u128_t;
 
 
+/**
+ Extract field from 64-bit word s.
 
+ Code derived from original routine published in "The MIPS Programmer's Handbook" by Erin Farquhar and Philip Bunce.
+
+ @param s 64-bit word
+ @param p start position of field to extract
+ @param n length of field to extract
+ */
 __uint64_t getfield64(__uint64_t s, int p, int n);
-yms_u128_t yms_u128_genAddress(yms_u128_t *base, yms_u128_t *offset);
-__uint16_t yms_u16_build(__uint16_t lo, __uint16_t hi);
 
+/**
+ Generate 128-bit address given base and offset.
+
+ @param base 128-bit struct
+ @param offset 128-bit struct
+ */
+yms_u128_t yms_u128_genAddress(yms_u128_t *base, yms_u128_t *offset);
+
+/**
+ Build 16-bit number given lo and hi byte values.
+
+ @param lo low byte
+ @param hi high byte
+ */
+__uint16_t yms_u16_build(__uint16_t lo, __uint16_t hi);
 
 #endif

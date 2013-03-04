@@ -20,6 +20,9 @@
 @class DEASensorTag;
 @class DEAGyroscopeService;
 
+/**
+ View and control logic for the SensorTag gyroscope service.
+ */
 @interface DEAGyroscopeViewCell : UITableViewCell
 
 @property (strong, nonatomic) DEAGyroscopeService *service;
@@ -27,18 +30,40 @@
 /// Enable notification
 @property (strong, nonatomic) IBOutlet UISwitch *notifySwitch;
 
-
+/// Roll label
 @property (strong, nonatomic) IBOutlet UILabel *rollLabel;
+/// Pitch label
 @property (strong, nonatomic) IBOutlet UILabel *pitchLabel;
+/// Yaw label
 @property (strong, nonatomic) IBOutlet UILabel *yawLabel;
+
+/// Calibrate button
 @property (strong, nonatomic) IBOutlet UIButton *calibrateButton;
 
+
+/**
+ Action method to handle notifySwitch toggle.
+ 
+ @param sender notifySwitch UI component.
+ */
 - (IBAction)notifySwitchAction:(id)sender;
+
+/**
+ Action method to handle calibrateButton.
+ */
 - (IBAction)calibrateButtonAction:(id)sender;
 
+/**
+ Configure this class to use sensorTag.
+ 
+ @param sensorTag Peripheral containing service to be used by this UI component.
+ */
 - (void)configureWithSensorTag:(DEASensorTag *)sensorTag;
-- (void)deconfigure;
 
+/**
+ Deconfigure this class to not use sensorTag.
+ */
+- (void)deconfigure;
 
 
 @end

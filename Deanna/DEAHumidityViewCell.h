@@ -37,9 +37,23 @@
 /// Display relative humidity
 @property (strong, nonatomic) IBOutlet UILabel *relativeHumidityLabel;
 
+/**
+ Action method to handle notifySwitch toggle.
+ 
+ @param sender notifySwitch UI component.
+ */
 - (IBAction)notifySwitchAction:(id)sender;
 
+/**
+ Configure this class to use sensorTag.
+ 
+ @param sensorTag Peripheral containing service to be used by this UI component.
+ */
 - (void)configureWithSensorTag:(DEASensorTag *)sensorTag;
+
+/**
+ Deconfigure this class to not use sensorTag.
+ */
 - (void)deconfigure;
 
 @end

@@ -18,6 +18,9 @@
 
 #import "YMSCBService.h"
 
+/**
+ TI SensorTag CoreBluetooth service definition for gyroscope.
+ */
 @interface DEAGyroscopeService : YMSCBService
 
 @property (nonatomic, strong) NSNumber *roll;
