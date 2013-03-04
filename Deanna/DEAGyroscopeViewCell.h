@@ -50,6 +50,8 @@
 
 /**
  Action method to handle calibrateButton.
+ 
+ @param sender calibrateButton
  */
 - (IBAction)calibrateButtonAction:(id)sender;
 
