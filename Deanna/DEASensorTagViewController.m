@@ -24,6 +24,7 @@
 #import "DEAHumidityViewCell.h"
 #import "DEASimpleKeysViewCell.h"
 #import "DEAGyroscopeViewCell.h"
+#import "DEASensorTag.h"
 
 @interface DEASensorTagViewController ()
 
@@ -51,6 +52,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"Deanna";
+    
+    self.rssiButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+
+    self.toolbarItems = @[flexSpace, self.rssiButton];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
+    if ([keyPath isEqualToString:@"RSSI"]) {
+        self.rssiButton.title = [NSString stringWithFormat:@"%@", change[@"new"]];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,20 +75,13 @@
 
 - (void)viewDidUnload {
     [self setSensorTableView:nil];
+    [self setRssiButton:nil];
     
     for (NSString *prefix in self.cbServiceCells) {
         NSString *key = [[NSString alloc] initWithFormat:@"%@ViewCell", prefix];
         [self setValue:nil forKey:key];
     }
-    /*
-    [self setTemperatureViewCell:nil];
-    [self setAccelerometerViewCell:nil];
-    [self setHumidityViewCell:nil];
-    [self setSimplekeysViewCell:nil];
-    [self setBarometerViewCell:nil];
-    [self setGyroscopeViewCell:nil];
-    [self setMagnetometerViewCell:nil];
-     */
+
     [super viewDidUnload];
 }
 
@@ -91,11 +99,18 @@
             [cell performSelector:@selector(configureWithSensorTag:) withObject:self.sensorTag];
         }
     }
+    
+    [self.sensorTag.cbPeripheral addObserver:self
+                                  forKeyPath:@"RSSI"
+                                     options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
+                                     context:NULL];
 
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated {
+    
+    [self.sensorTag.cbPeripheral removeObserver:self forKeyPath:@"RSSI"];
     
     for (NSString *prefix in self.cbServiceCells) {
         NSString *key = [[NSString alloc] initWithFormat:@"%@ViewCell", prefix];

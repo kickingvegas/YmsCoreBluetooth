@@ -39,6 +39,9 @@
 /// Instance of DEASensorTag.
 @property (strong, nonatomic) DEASensorTag *sensorTag;
 
+/// BarButtonItem to display RSSI
+@property (strong, nonatomic) UIBarButtonItem *rssiButton;
+
 /// TableView holding UI controls for all SensorTag services.
 @property (strong, nonatomic) IBOutlet UITableView *sensorTableView;
 
