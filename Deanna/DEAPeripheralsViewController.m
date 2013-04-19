@@ -43,26 +43,21 @@
     
     DEACBAppService *cbAppService = [DEACBAppService sharedService];
     
-    
-    
+
     [self.navigationController setToolbarHidden:NO];
-    
-    
+
+
     self.scanButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Scanning" style:UIBarButtonItemStyleBordered target:self action:@selector(scanButtonAction:)];
-    self.connectButton = [[UIBarButtonItem alloc] initWithTitle:@"Connect" style:UIBarButtonItemStyleBordered target:self action:@selector(connectButtonAction:)];
     
-    self.toolbarItems = @[self.scanButton, self.connectButton];
-    
+    self.toolbarItems = @[self.scanButton];
     
     [self.peripheralsTableView reloadData];
-    
     
     [cbAppService addObserver:self
                   forKeyPath:@"isScanning"
                      options:NSKeyValueObservingOptionNew
                      context:NULL];
     
-    [self.connectButton setEnabled:NO];
 
 
 }
@@ -108,26 +103,6 @@
     }
     else {
         [cbAppService stopScan];
-    }
-}
-
-
-- (void)connectButtonAction:(id)sender {
-    NSLog(@"connectButtonAction");
-    
-    
-    DEACBAppService *cbAppService = [DEACBAppService sharedService];
-    
-    NSIndexPath *indexPath = [self.peripheralsTableView indexPathForSelectedRow];
-    DEASensorTag *sensorTag = (DEASensorTag *)[cbAppService.ymsPeripherals objectAtIndex:indexPath.row];
-    
-    [self.connectButton setEnabled:YES];
-    
-    if (sensorTag.cbPeriperheral.isConnected) {
-        [cbAppService disconnectPeripheral:indexPath.row];
-    } else {
-        //[cbAppService loadPeripherals];
-        [cbAppService connectPeripheral:indexPath.row];
     }
 }
 
@@ -199,7 +174,7 @@
 
     [cell configureWithSensorTag:sensorTag];
     
-    cell.nameLabel.text = sensorTag.cbPeriperheral.name;
+    cell.nameLabel.text = sensorTag.cbPeripheral.name;
 
     
 }

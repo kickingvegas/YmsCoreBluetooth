@@ -35,7 +35,4 @@
 /// Button to enable Bluetooth scanner
 @property (strong, nonatomic) UIBarButtonItem *scanButton;
 
-/// Button to disconnect peripheral
-@property (strong, nonatomic) UIBarButtonItem *connectButton;
-
 @end
