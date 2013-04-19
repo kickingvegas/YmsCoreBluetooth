@@ -121,8 +121,6 @@
 }
     
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {
-    NSLog(@"RSSI: %@", peripheral.RSSI);
-    
     if (self.willPingRSSI) {
         [self performSelector:@selector(updateRSSI) withObject:self afterDelay:self.rssiPingPeriod];
     }
@@ -146,7 +144,7 @@
     YMSCBService *btService = [self findService:characteristic.service];
     YMSCBCharacteristic *yc = [btService findCharacteristic:characteristic];
     
-    NSLog(@"write to service.characteristic: %@.%@", btService.name, yc.name);
+    //NSLog(@"write to service.characteristic: %@.%@", btService.name, yc.name);
     [btService updateCharacteristic:yc];
     
     
