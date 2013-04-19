@@ -19,10 +19,10 @@
 #import "DEAPeripheralsViewController.h"
 #import "DEASensorTag.h"
 #import "DEASensorTagViewController.h"
+#import "DEAPeripheralTableViewCell.h"
 
 @interface DEAPeripheralsViewController ()
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
-
+- (void)configureCell:(DEAPeripheralTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
 
 @implementation DEAPeripheralsViewController
@@ -126,46 +126,64 @@
     if (sensorTag.cbPeriperheral.isConnected) {
         [cbAppService disconnectPeripheral:indexPath.row];
     } else {
-        [cbAppService loadPeripherals];
+        //[cbAppService loadPeripherals];
+        [cbAppService connectPeripheral:indexPath.row];
     }
 }
 
 
 
+#pragma mark - CBCentralManagerDelegate Methods
 
-- (void)didConnectPeripheral:(id)delegate {
-    NSLog(@"didConnectPeripheral:");
-    
-    [self.peripheralsTableView reloadData];
 
-    
-}
-
-- (void)didDisconnectPeripheral:(id)delegate {
-    NSLog(@"didDisconnectPeripheral:");
-    
-    self.connectButton.title = @"Connect";
-    [self.connectButton setEnabled:NO];
-    
-    
+- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
     [self.peripheralsTableView reloadData];
 }
 
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
+    [self.peripheralsTableView reloadData];
+}
+
+- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
+    [self.peripheralsTableView reloadData];
+}
+
+
+- (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals {
+    [self.peripheralsTableView reloadData];
+
+}
+
+
+- (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals {
+    [self.peripheralsTableView reloadData];
+}
+
+
+
+#pragma mark - UITableViewDelegate and UITableViewDataSource methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
     
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 107.0;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    DEAPeripheralTableViewCell *cell = (DEAPeripheralTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [[NSBundle mainBundle] loadNibNamed:@"DEAPeripheralTableViewCell" owner:self options:nil];
+        cell = self.tvCell;
+        self.tvCell = nil;
+        
     }
+
     
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
@@ -173,20 +191,15 @@
 }
 
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(DEAPeripheralTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     DEACBAppService *cbAppService = [DEACBAppService sharedService];
     DEASensorTag *sensorTag = (DEASensorTag *)[cbAppService.ymsPeripherals objectAtIndex:indexPath.row];
     
-    if (sensorTag.cbPeriperheral.isConnected) {
-        cell.detailTextLabel.text = @"Connected";
-    }
-    else {
-        cell.detailTextLabel.text = @"Unconnected";
-    }
+
+    [cell configureWithSensorTag:sensorTag];
     
-    cell.textLabel.text = sensorTag.cbPeriperheral.name;
-    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    cell.nameLabel.text = sensorTag.cbPeriperheral.name;
 
     
 }
@@ -198,24 +211,6 @@
     NSInteger result;
     result = [cbAppService.ymsPeripherals count];
     return result;
-}
-
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Selected");
-    
-    DEACBAppService *cbAppService = [DEACBAppService sharedService];
-    DEASensorTag *sensorTag = (DEASensorTag *)[cbAppService.ymsPeripherals objectAtIndex:indexPath.row];
-    
-    [self.connectButton setEnabled:YES];
-    
-    if (sensorTag.cbPeriperheral.isConnected) {
-        self.connectButton.title = @"Disconnect";
-        
-    } else {
-        self.connectButton.title = @"Connect";
-    }
-
 }
 
 
@@ -234,4 +229,9 @@
 }
 
 
+- (void)viewDidUnload {
+    [self setTvCell:nil];
+    [self setTvCell:nil];
+    [super viewDidUnload];
+}
 @end

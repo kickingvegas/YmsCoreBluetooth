@@ -20,11 +20,14 @@
 #import "DEACBAppService.h"
 #import "DEABaseViewController.h"
 
+@class DEAPeripheralTableViewCell;
+
 /**
  View Controller for listing of TI SensorTags available.
  */
+@interface DEAPeripheralsViewController : DEABaseViewController <UITableViewDataSource, UITableViewDelegate>
 
-@interface DEAPeripheralsViewController : DEABaseViewController <UITableViewDataSource, UITableViewDelegate, YMSCBAppServiceDelegate>
+@property (strong, nonatomic) IBOutlet DEAPeripheralTableViewCell *tvCell;
 
 /// TableView for found peripherals
 @property (strong, nonatomic) IBOutlet UITableView *peripheralsTableView;
