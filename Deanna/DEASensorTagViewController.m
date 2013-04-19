@@ -51,7 +51,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"Deanna";
+    self.title = self.sensorTag.cbPeripheral.name;
     
     self.rssiButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
@@ -122,6 +122,8 @@
 }
 
 
+#pragma mark - UITableViewDelegate & UITableViewDataSource Methods
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
     
@@ -158,6 +160,21 @@
     
     return result;
 }
+
+
+#pragma mark - CBCentralManagerDelegate Methods
+
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Disconnected"
+                                                    message:@"This peripheral has been disconnected."
+                                                   delegate:nil
+                                          cancelButtonTitle:@"Dismiss"
+                                          otherButtonTitles:nil];
+    
+    [alert show];
+}
+
 
 
 
