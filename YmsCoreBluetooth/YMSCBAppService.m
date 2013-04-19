@@ -22,13 +22,6 @@
 #import "YMSCBService.h"
 #import "YMSCBCharacteristic.h"
 
-NSString * const YMSCBUnknownNotification = @"com.yummymelon.ymscb.unknown";
-NSString * const YMSCBResettingNotification = @"com.yummymelon.ymscb.resetting";
-NSString * const YMSCBUnsupportedNotification = @"com.yummymelon.ymscb.unsupported";
-NSString * const YMSCBUnauthorizedNotification = @"com.yummymelon.ymscb.unauthorized";
-NSString * const YMSCBPoweredOffNotification = @"com.yummymelon.ymscb.poweredoff";
-NSString * const YMSCBPoweredOnNotification = @"com.yummymelon.ymscb.poweredon";
-
 
 @implementation YMSCBAppService
 
@@ -38,6 +31,7 @@ NSString * const YMSCBPoweredOnNotification = @"com.yummymelon.ymscb.poweredon";
     if (self) {
         _ymsPeripherals = [[NSMutableArray alloc] init];
         _manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+        _currentManagerState = -1;
     }
     
     return self;
@@ -91,9 +85,6 @@ NSString * const YMSCBPoweredOnNotification = @"com.yummymelon.ymscb.poweredon";
     if ([peripheralUUIDList count] > 0) {
         [self.manager retrievePeripherals:peripheralUUIDList];
     }
-    else {
-        [self startScan];
-    }
 }
 
 
@@ -122,90 +113,77 @@ NSString * const YMSCBPoweredOnNotification = @"com.yummymelon.ymscb.poweredon";
 }
 
 
-#pragma mark CBCentralManagerDelegate Protocol Methods
-
-- (void)centralManagerDidUpdateState:(CBCentralManager *)central {
-    static CBCentralManagerState oldManagerState = -1;
+- (YMSCBPeripheral *)findPeripheral:(CBPeripheral *)peripheral {
     
-    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    YMSCBPeripheral *result = nil;
     
-    switch (central.state) {
-        case CBCentralManagerStatePoweredOn:
-            [self loadPeripherals];
-            [defaultCenter postNotificationName:YMSCBPoweredOnNotification object:self];
-            break;
-            
-        case CBCentralManagerStateUnknown:
-            [defaultCenter postNotificationName:YMSCBUnknownNotification object:self];
-            break;
-            
-        case CBCentralManagerStatePoweredOff:
-            if (oldManagerState != -1) {
-                [defaultCenter postNotificationName:YMSCBPoweredOffNotification object:self];
-            }
-            break;
-            
-        case CBCentralManagerStateResetting:
-            [defaultCenter postNotificationName:YMSCBResettingNotification object:self];
-            break;
-            
-        case CBCentralManagerStateUnauthorized:
-            [defaultCenter postNotificationName:YMSCBUnauthorizedNotification object:self];
-            break;
-            
-        case CBCentralManagerStateUnsupported: {
-            [defaultCenter postNotificationName:YMSCBUnsupportedNotification object:self];
+    for (YMSCBPeripheral *yPeripheral in self.ymsPeripherals) {
+        if (yPeripheral.cbPeriperheral == peripheral) {
+            result = yPeripheral;
             break;
         }
     }
     
-    oldManagerState = central.state;
-}
-
-
-
-- (YMSCBPeripheral *)findYmsPeripheral:(CBPeripheral *)peripheral {
-    
-    YMSCBPeripheral *result;
-    
-    if ([self.ymsPeripherals count] == 0) {
-        result = nil;
-    }
-    
-    else {
-        for (YMSCBPeripheral *sensorTag in self.ymsPeripherals) {
-            if (sensorTag.cbPeriperheral == peripheral) {
-                result = sensorTag;
-                break;
-            }
-        }
-    }
-
     return result;
 }
 
 
 
-
-- (void)handleFoundPeripheral:(CBPeripheral *)peripheral withCentral:(CBCentralManager *)central {
+- (void)handleFoundPeripheral:(CBPeripheral *)peripheral {
     // THIS METHOD IS TO BE OVERRIDDEN
 }
 
 
-
 - (void)connectPeripheral:(NSUInteger)index {
     if ([self.ymsPeripherals count] > 0) {
-        YMSCBPeripheral *sensorTag = self.ymsPeripherals[index];
-        [self.manager connectPeripheral:sensorTag.cbPeriperheral options:nil];
+        YMSCBPeripheral *yPeripheral = self.ymsPeripherals[index];
+        [self.manager connectPeripheral:yPeripheral.cbPeriperheral options:nil];
     }
 
 }
 
 - (void)disconnectPeripheral:(NSUInteger)index {
     if ([self.ymsPeripherals count] > 0) {
-        YMSCBPeripheral *sensorTag = self.ymsPeripherals[index];
-        [self.manager cancelPeripheralConnection:sensorTag.cbPeriperheral];
+        YMSCBPeripheral *yPeripheral = self.ymsPeripherals[index];
+        [self.manager cancelPeripheralConnection:yPeripheral.cbPeriperheral];
     }
+}
+
+
+#pragma mark CBCentralManagerDelegate Protocol Methods
+
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central {
+
+    switch (central.state) {
+        case CBCentralManagerStatePoweredOn:
+            [self loadPeripherals];
+            break;
+            
+        case CBCentralManagerStateUnknown:
+            break;
+            
+        case CBCentralManagerStatePoweredOff:
+            if (_currentManagerState != -1) {
+            }
+            break;
+            
+        case CBCentralManagerStateResetting:
+            break;
+            
+        case CBCentralManagerStateUnauthorized:
+            break;
+            
+        case CBCentralManagerStateUnsupported: {
+            break;
+        }
+    }
+    
+    _currentManagerState = central.state;
+    
+    if ([self.delegate respondsToSelector:@selector(centralManagerDidUpdateState:)]) {
+        [self.delegate centralManagerDidUpdateState:central];
+    }
+
 }
 
 
@@ -215,71 +193,106 @@ NSString * const YMSCBPoweredOnNotification = @"com.yummymelon.ymscb.poweredon";
                   RSSI:(NSNumber *)RSSI {
     
     NSLog(@"%@, %@, %@", peripheral, peripheral.name, RSSI);
-
     
-    if (peripheral.name != nil) {
-        if ([self isAppServicePeripheral:peripheral]) {
-            [self handleFoundPeripheral:peripheral withCentral:central];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    NSArray *existingDevices = [userDefaults objectForKey:@"storedPeripherals"];
+    NSMutableArray *devices;
+    CFStringRef uuidString = NULL;
+    uuidString = CFUUIDCreateString(NULL, peripheral.UUID);
+    
+    if (existingDevices != nil) {
+        devices = [[NSMutableArray alloc] initWithArray:existingDevices];
+        
+        if (uuidString) {
+            BOOL test = YES;
+            
+            for (NSString *obj in existingDevices) {
+                if ([obj isEqualToString:(NSString *)CFBridgingRelease(uuidString)]) {
+                    test = NO;
+                    break;
+                }
+            }
+            
+            if (test) {
+                [devices addObject:(NSString *)CFBridgingRelease(uuidString)];
+            }
         }
     }
+    else {
+        devices = [[NSMutableArray alloc] init];
+        [devices addObject:(NSString *)CFBridgingRelease(uuidString)];
+    }
     
+    [userDefaults setObject:devices forKey:@"storedPeripherals"];
+    [userDefaults synchronize];
+    
+    [self handleFoundPeripheral:peripheral];
 
+    if ([self.delegate respondsToSelector:@selector(centralManager:didDiscoverPeripheral:advertisementData:RSSI:        )]) {
+        [self.delegate centralManager:central didDiscoverPeripheral:peripheral advertisementData:advertisementData RSSI:RSSI];
+    }
+    
+    
 }
+
+
 
 - (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals {
-    NSLog(@"centralManager didRetrievePeripherals");
 
     for (CBPeripheral *peripheral in peripherals) {
-        if ([self isAppServicePeripheral:peripheral]) {
-            [self handleFoundPeripheral:peripheral withCentral:central];
-        }
+        [self handleFoundPeripheral:peripheral];
     }
-
     
+    if ([self.delegate respondsToSelector:@selector(centralManager:didRetrievePeripherals:)]) {
+        [self.delegate centralManager:central didRetrievePeripherals:peripherals];
+    }
 }
 
+- (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals {
+    
+    for (CBPeripheral *peripheral in peripherals) {
+        [self handleFoundPeripheral:peripheral];
+    }
+
+    if ([self.delegate respondsToSelector:@selector(centralManager:didRetrieveConnectedPeripherals:)]) {
+        [self.delegate centralManager:central didRetrieveConnectedPeripherals:peripherals];
+    }
+    
+}
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
     if ([self isAppServicePeripheral:peripheral]) {
-        YMSCBPeripheral *yp = [self findYmsPeripheral:peripheral];
+        YMSCBPeripheral *yp = [self findPeripheral:peripheral];
         
         if (yp != nil) {
             NSArray *services = [yp services];
             [peripheral discoverServices:services];
+            
         }
-        
     }
     
-    
-    if (self.delegate != nil) {
-        [self.delegate didConnectPeripheral:self];
+    if ([self.delegate respondsToSelector:@selector(centralManager:didConnectPeripheral:)]) {
+        [self.delegate centralManager:central didConnectPeripheral:peripheral];
     }
-
 }
 
 
-
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
-    NSLog(@"centralManager didDisconnectePeripheral");
     
-    
-    YMSCBPeripheral *sensorTag = [self findYmsPeripheral:peripheral];
-    [self.ymsPeripherals removeObject:sensorTag];
-    
-    if (self.delegate != nil) {
-        [self.delegate didDisconnectPeripheral:self];
+    if ([self.delegate respondsToSelector:@selector(centralManager:didDisconnectPeripheral:error:)]) {
+        [self.delegate centralManager:central didDisconnectPeripheral:peripheral error:error];
     }
     
 }
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
-    NSLog(@"centralManager didFailToConnectPeripheral");
-}
-
-- (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals {
-    NSLog(@"centralManager didRetrieveConnectedPeripheral");
+    if ([self.delegate respondsToSelector:@selector(centralManager:didFailToConnectPeripheral:error:)]) {
+        [self.delegate centralManager:central didFailToConnectPeripheral:peripheral error:error];
+    }
     
 }
+
 
 
 @end

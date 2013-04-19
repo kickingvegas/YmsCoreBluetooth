@@ -19,35 +19,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 @class YMSCBPeripheral;
+@class YMSCBAppService;
 
-/**
- NSNotifications
- */
-
-/// Notification for CBCentralManager unknown state.
-extern NSString * const YMSCBUnknownNotification;
-extern NSString * const YMSCBResettingNotification;
-extern NSString * const YMSCBUnsupportedNotification;
-extern NSString * const YMSCBUnauthorizedNotification;
-extern NSString * const YMSCBPoweredOffNotification;
-extern NSString * const YMSCBPoweredOnNotification;
-
-/**
- Protocols
- */
-@protocol YMSCBAppServiceDelegate <NSObject>
-
-/**
- Delegate method for when peripheral has been connected.
- */
-- (void)didConnectPeripheral:(id)delegate;
-
-/**
- Delegate method fo when peripheral has been disconnected.
- */
-- (void)didDisconnectPeripheral:(id)delegate;
-
-@end
 
 /**
  Base class for defining a CoreBluetooth application service.
@@ -59,35 +32,16 @@ extern NSString * const YMSCBPoweredOnNotification;
  
  YMSCBAppService is to be typically subclassed as a singleton instance.
 
-
- ## Global Constants
-
-     extern NSString * const YMSCBUnknownNotification;
-     extern NSString * const YMSCBResettingNotification;
-     extern NSString * const YMSCBUnsupportedNotification;
-     extern NSString * const YMSCBUnauthorizedNotification;
-     extern NSString * const YMSCBPoweredOffNotification;
-     extern NSString * const YMSCBPoweredOnNotification;
-
- ### Constants
-
- `YMSCBUnknownNotification` - notification for `CBCentralManagerStateUnknown`<br/>
- `YMSCBResettingNotification` - notification for `CBCentralManagerStateResetting`<br/>
- `YMSCBUnsupportedNotification` - notification for `CBCentralManagerStateUnsupported`<br/>
- `YMSCBUnauthorizedNotification` - notification for `CBCentralManagerStateUnauthorized`<br/>
- `YMSCBPoweredOffNotification` - notification for `CBCentralManagerStatePoweredOff`<br/>
- `YMSCBPoweredOnNotification` - notification for `CBCentralManagerStatePoweredOn`
- 
  */
 @interface YMSCBAppService : NSObject <CBCentralManagerDelegate>
 
 /// Pointer to delegate.
-@property (nonatomic, weak) id<YMSCBAppServiceDelegate> delegate;
+@property (nonatomic, weak) id<CBCentralManagerDelegate> delegate;
 
 /// Pointer to CBCentralManager. 
 @property (nonatomic, strong) CBCentralManager *manager;
 
-/// Array of DEASensorTag peripherals.
+/// Array of YMSCBPeripheral instances.
 @property (nonatomic, strong) NSMutableArray *ymsPeripherals;
 
 /**
@@ -99,6 +53,13 @@ extern NSString * const YMSCBPoweredOnNotification;
 
 /// Flag to determine if scanning.
 @property (nonatomic, assign) BOOL isScanning;
+
+/**
+ Hold current manager state. This is a workaround for CoreBluetooth bug of raising alert
+ if Bluetooth is turned off in Settings.
+ */
+@property (nonatomic, assign) CBCentralManagerState currentManagerState;
+
 
 /**
  Determines if peripheral is to be managed by this app service.
@@ -126,9 +87,8 @@ extern NSString * const YMSCBPoweredOnNotification;
  Handler for discovered or found peripheral.
  
  @param peripheral CoreBluetooth peripheral instance
- @param central CoreBluetooth central manager instance
  */
-- (void)handleFoundPeripheral:(CBPeripheral *)peripheral withCentral:(CBCentralManager *)central;
+- (void)handleFoundPeripheral:(CBPeripheral *)peripheral;
 
 /**
  Start CoreBluetooth scan for peripherals.
@@ -159,7 +119,7 @@ extern NSString * const YMSCBPoweredOnNotification;
  @param peripheral peripheral corresponding with YMSCBPeripheral
  @return instance of YMSCBPeripheral
  */
-- (YMSCBPeripheral *)findYmsPeripheral:(CBPeripheral *)peripheral;
+- (YMSCBPeripheral *)findPeripheral:(CBPeripheral *)peripheral;
 
 @end
 
