@@ -92,6 +92,10 @@
 								<int key="IBUIButtonType">1</int>
 								<string key="IBUINormalTitle">Disconnect</string>
 								<reference key="IBUIHighlightedTitleColor" ref="355732309"/>
+								<object class="NSColor" key="IBUIDisabledTitleColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC44IDAuOCAwLjgAA</bytes>
+								</object>
 								<object class="NSColor" key="IBUINormalTitleColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MC4xOTYwNzg0MzE0IDAuMzA5ODAzOTIxNiAwLjUyMTU2ODYyNzUAA</bytes>
@@ -318,6 +322,7 @@
 				<string key="28.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="0.0" key="9.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
