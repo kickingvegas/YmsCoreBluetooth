@@ -101,8 +101,20 @@
     return result;
 }
 
+
 - (void)startScan {
-    [self.manager scanForPeripheralsWithServices:nil options:nil];
+    /*
+     * THIS METHOD IS TO BE OVERRIDDEN
+     */
+    
+    NSAssert(NO, @"[YMSCBAppService startScan] must be be overridden and include call to [self scanForPeripherals:options:]");
+    
+    //[self scanForPeripheralsWithServices:nil options:nil];
+}
+
+
+- (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs options:(NSDictionary *)options {
+    [self.manager scanForPeripheralsWithServices:serviceUUIDs options:options];
     self.isScanning = YES;
 }
 
@@ -130,7 +142,12 @@
 
 
 - (void)handleFoundPeripheral:(CBPeripheral *)peripheral {
-    // THIS METHOD IS TO BE OVERRIDDEN
+    /*
+     * THIS METHOD IS TO BE OVERRIDDEN
+     */
+    
+    NSAssert(NO, @"[YMSCBAppService handleFoundPeripheral:] must be be overridden.");
+
 }
 
 
@@ -192,7 +209,7 @@
      advertisementData:(NSDictionary *)advertisementData
                   RSSI:(NSNumber *)RSSI {
     
-    NSLog(@"%@, %@, %@", peripheral, peripheral.name, RSSI);
+    NSLog(@"%@, %@, %@ db", peripheral, peripheral.name, RSSI);
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
@@ -229,7 +246,7 @@
     
     [self handleFoundPeripheral:peripheral];
 
-    if ([self.delegate respondsToSelector:@selector(centralManager:didDiscoverPeripheral:advertisementData:RSSI:        )]) {
+    if ([self.delegate respondsToSelector:@selector(centralManager:didDiscoverPeripheral:advertisementData:RSSI:)]) {
         [self.delegate centralManager:central didDiscoverPeripheral:peripheral advertisementData:advertisementData RSSI:RSSI];
     }
     
