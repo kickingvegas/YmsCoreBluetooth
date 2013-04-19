@@ -40,7 +40,6 @@
 
 
 - (IBAction)notifySwitchAction:(id)sender {
-    NSLog(@"notifySwitch");
     if (self.notifySwitch.isOn) {
         [self.service turnOn];
     } else {
