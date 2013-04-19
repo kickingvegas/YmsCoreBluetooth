@@ -276,7 +276,6 @@
 				D9C5012016AB37DD001D4D4F /* DEAPeripheralsViewController.m */,
 				D9F412ED16DED0030094FEFA /* DEASensorTagViewController.h */,
 				D9F412EE16DED0030094FEFA /* DEASensorTagViewController.m */,
-				D9DE671216E036C100F1B15C /* Sensors */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -304,6 +303,7 @@
 		D9971AEB1720AA5600B1A068 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D9DE671216E036C100F1B15C /* Sensors */,
 				D9971AEC1720AA7E00B1A068 /* DEAPeripheralTableViewCell.h */,
 				D9971AED1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m */,
 			);
