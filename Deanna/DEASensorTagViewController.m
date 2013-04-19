@@ -63,7 +63,7 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
     if ([keyPath isEqualToString:@"RSSI"]) {
-        self.rssiButton.title = [NSString stringWithFormat:@"%@", change[@"new"]];
+        self.rssiButton.title = [NSString stringWithFormat:@"%@ db", change[@"new"]];
     }
     
 }
