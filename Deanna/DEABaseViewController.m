@@ -21,8 +21,6 @@
 
 @interface DEABaseViewController ()
 
-- (void)cbManagerHandler:(NSNotification *)notification;
-
 @end
 
 @implementation DEABaseViewController
@@ -41,65 +39,61 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 
-    NSArray *keys = @[YMSCBUnknownNotification,
-                      YMSCBResettingNotification,
-                      YMSCBUnsupportedNotification,
-                      YMSCBUnauthorizedNotification,
-                      YMSCBPoweredOffNotification,
-                      YMSCBPoweredOnNotification];
-    
-    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
-    for (NSString *key in keys) {
-        [defaultCenter addObserver:self
-                          selector:@selector(cbManagerHandler:)
-                              name:key
-                            object:nil];
-        
-        
-    }
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-- (void)cbManagerHandler:(NSNotification *)notification {
-    NSLog(@"notification: %@", notification.name);
+
+#pragma mark - CBCentralManagerDelegate Methods
+
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central {
     
-    if ([notification.name isEqualToString:YMSCBUnknownNotification]) {
-        
-    } else if ([notification.name isEqualToString:YMSCBResettingNotification]) {
- 
-    } else if ([notification.name isEqualToString:YMSCBUnsupportedNotification]) {
-     
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Dang."
-                                                        message:@"Unfortunately this device can not talk to Bluetooth Smart (Low Energy) devices."
-                                                       delegate:nil
-                                              cancelButtonTitle:@"Dismiss"
-                                              otherButtonTitles:nil];
-        
-        [alert show];
+    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    
+    switch (central.state) {
+        case CBCentralManagerStatePoweredOn:
+            break;
+        case CBCentralManagerStatePoweredOff:
+            
+            if (cbAppService.currentManagerState != -1) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Turn it on."
+                                                                message:@"Please launch settings and turn on Bluetooth"
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Dismiss"
+                                                      otherButtonTitles:nil];
+                
+                [alert show];
+            }
+            
+            
+            
+            
+            break;
+            
+        case CBCentralManagerStateUnsupported: {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Dang."
+                                                            message:@"Unfortunately this device can not talk to Bluetooth Smart (Low Energy) Devices"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Dismiss"
+                                                  otherButtonTitles:nil];
+            
+            [alert show];
 
-    } else if ([notification.name isEqualToString:YMSCBUnauthorizedNotification]) {
+            
+            break;
+        }
 
-    } else if ([notification.name isEqualToString:YMSCBPoweredOnNotification]) {
-        
-    } else if ([notification.name isEqualToString:YMSCBPoweredOffNotification]) {
-
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Turn it on."
-                                                        message:@"Please launch Settings and turn on Bluetooth. Then return to this app."
-                                                       delegate:nil
-                                              cancelButtonTitle:@"Dismiss"
-                                              otherButtonTitles:nil];
-        
-        [alert show];
+            
+        default:
+            break;
     }
     
+    
+    
 }
+
 
 @end

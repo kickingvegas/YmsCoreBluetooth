@@ -17,10 +17,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreBluetooth/CoreBluetooth.h>
+
 
 /**
  Base view controller class of Deanna.
  */
-@interface DEABaseViewController : UIViewController
+@interface DEABaseViewController : UIViewController<CBCentralManagerDelegate>
 
 @end
