@@ -44,7 +44,7 @@
     NSMutableArray *devices = [[NSMutableArray alloc] init];
     
     for (YMSCBPeripheral *sensorTag in self.ymsPeripherals) {
-        CBPeripheral *p = sensorTag.cbPeriperheral;
+        CBPeripheral *p = sensorTag.cbPeripheral;
         CFStringRef uuidString = NULL;
         
         uuidString = CFUUIDCreateString(NULL, p.UUID);
@@ -118,7 +118,7 @@
     YMSCBPeripheral *result = nil;
     
     for (YMSCBPeripheral *yPeripheral in self.ymsPeripherals) {
-        if (yPeripheral.cbPeriperheral == peripheral) {
+        if (yPeripheral.cbPeripheral == peripheral) {
             result = yPeripheral;
             break;
         }
@@ -137,7 +137,7 @@
 - (void)connectPeripheral:(NSUInteger)index {
     if ([self.ymsPeripherals count] > 0) {
         YMSCBPeripheral *yPeripheral = self.ymsPeripherals[index];
-        [self.manager connectPeripheral:yPeripheral.cbPeriperheral options:nil];
+        [self.manager connectPeripheral:yPeripheral.cbPeripheral options:nil];
     }
 
 }
@@ -145,7 +145,7 @@
 - (void)disconnectPeripheral:(NSUInteger)index {
     if ([self.ymsPeripherals count] > 0) {
         YMSCBPeripheral *yPeripheral = self.ymsPeripherals[index];
-        [self.manager cancelPeripheralConnection:yPeripheral.cbPeriperheral];
+        [self.manager cancelPeripheralConnection:yPeripheral.cbPeripheral];
     }
 }
 
