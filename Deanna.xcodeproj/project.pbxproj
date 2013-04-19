@@ -40,6 +40,8 @@
 		D9718B8F167FA5140001E42C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B8E167FA5140001E42C /* CoreBluetooth.framework */; };
 		D988A5C616DD26A100D7D392 /* DEASensorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = D988A5C516DD26A100D7D392 /* DEASensorTag.m */; };
 		D988A5C816DD464A00D7D392 /* TISensorTag.c in Sources */ = {isa = PBXBuildFile; fileRef = D988A5C716DD464A00D7D392 /* TISensorTag.c */; };
+		D9971AEA1720A9A100B1A068 /* DEAPeripheralTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9971AE91720A9A100B1A068 /* DEAPeripheralTableViewCell.xib */; };
+		D9971AEE1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9971AED1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m */; };
 		D9C5012216AB37DD001D4D4F /* DEAPeripheralsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C5012016AB37DD001D4D4F /* DEAPeripheralsViewController.m */; };
 		D9C5012316AB37DD001D4D4F /* DEAPeripheralsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9C5012116AB37DD001D4D4F /* DEAPeripheralsViewController.xib */; };
 		D9D8316D168449FE00F51E42 /* DEASimpleKeysService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D8316C168449FD00F51E42 /* DEASimpleKeysService.m */; };
@@ -119,6 +121,9 @@
 		D988A5C416DD26A100D7D392 /* DEASensorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASensorTag.h; sourceTree = "<group>"; };
 		D988A5C516DD26A100D7D392 /* DEASensorTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASensorTag.m; sourceTree = "<group>"; };
 		D988A5C716DD464A00D7D392 /* TISensorTag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TISensorTag.c; sourceTree = "<group>"; };
+		D9971AE91720A9A100B1A068 /* DEAPeripheralTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEAPeripheralTableViewCell.xib; sourceTree = "<group>"; };
+		D9971AEC1720AA7E00B1A068 /* DEAPeripheralTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAPeripheralTableViewCell.h; sourceTree = "<group>"; };
+		D9971AED1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAPeripheralTableViewCell.m; sourceTree = "<group>"; };
 		D9C5011F16AB37DD001D4D4F /* DEAPeripheralsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAPeripheralsViewController.h; sourceTree = "<group>"; };
 		D9C5012016AB37DD001D4D4F /* DEAPeripheralsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAPeripheralsViewController.m; sourceTree = "<group>"; };
 		D9C5012116AB37DD001D4D4F /* DEAPeripheralsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEAPeripheralsViewController.xib; sourceTree = "<group>"; };
@@ -222,7 +227,8 @@
 				D9718B55167F9F9F0001E42C /* DEAAppDelegate.m */,
 				D9718B83167FA1400001E42C /* Services */,
 				D9718B82167FA1360001E42C /* Controllers */,
-				D9718B84167FA1450001E42C /* UI */,
+				D9971AEB1720AA5600B1A068 /* UI */,
+				D9718B84167FA1450001E42C /* XIBs */,
 				D9718B4C167F9F9F0001E42C /* Supporting Files */,
 			);
 			path = Deanna;
@@ -285,11 +291,21 @@
 			name = Services;
 			sourceTree = "<group>";
 		};
-		D9718B84167FA1450001E42C /* UI */ = {
+		D9718B84167FA1450001E42C /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
 				D9C5012116AB37DD001D4D4F /* DEAPeripheralsViewController.xib */,
 				D9F412EF16DED0030094FEFA /* DEASensorTagViewController.xib */,
+				D9971AE91720A9A100B1A068 /* DEAPeripheralTableViewCell.xib */,
+			);
+			name = XIBs;
+			sourceTree = "<group>";
+		};
+		D9971AEB1720AA5600B1A068 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D9971AEC1720AA7E00B1A068 /* DEAPeripheralTableViewCell.h */,
+				D9971AED1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -426,6 +442,7 @@
 				D9718B5C167F9FA00001E42C /* Default-568h@2x.png in Resources */,
 				D9C5012316AB37DD001D4D4F /* DEAPeripheralsViewController.xib in Resources */,
 				D9F412F116DED0030094FEFA /* DEASensorTagViewController.xib in Resources */,
+				D9971AEA1720A9A100B1A068 /* DEAPeripheralTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +505,7 @@
 				D93EAC5316E18748008B1BD3 /* DEAGyroscopeViewCell.m in Sources */,
 				D93EAC5616E1DAC8008B1BD3 /* DEAMagnetometerViewCell.m in Sources */,
 				D93EAC5916E1DAF5008B1BD3 /* DEAMagnetometerService.m in Sources */,
+				D9971AEE1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
