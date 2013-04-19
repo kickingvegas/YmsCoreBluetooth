@@ -44,26 +44,22 @@ static DEACBAppService *sharedCBAppService;
 }
 
 
-- (void)handleFoundPeripheral:(CBPeripheral *)peripheral withCentral:(CBCentralManager *)central {
-    
+
+
+- (void)handleFoundPeripheral:(CBPeripheral *)peripheral {
     DEASensorTag *sensorTag;
     
-    [self stopScan];
-    
-    sensorTag = (DEASensorTag *)[self findYmsPeripheral:peripheral];
+    sensorTag = (DEASensorTag *)[self findPeripheral:peripheral];
     
     if (sensorTag == nil) {
         sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
                                                       baseHi:kSensorTag_BASE_ADDRESS_HI
                                                       baseLo:kSensorTag_BASE_ADDRESS_LO
                                                   updateRSSI:YES];
-
-        [self.ymsPeripherals addObject:sensorTag];
         
-        if (peripheral.isConnected == NO) {
-            [central connectPeripheral:peripheral options:nil];
-        }
+        [self.ymsPeripherals addObject:sensorTag];
     }
+    
 }
 
 
