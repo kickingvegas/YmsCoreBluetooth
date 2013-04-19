@@ -22,6 +22,17 @@
 
 /**
  Container class for TI SensorTag CoreBluetooth characteristic.
+ 
+ The reason for this class not being a subclass of `CBCharacteristic` is that
+ you know ahead of time the `name` and the `UUID` of the characteristic.
+ 
+ `CBCharacteristic` instances are returned by discovery from `CBPeripheral` which for
+ the purposes of this framework is too late. `YmsCoreBluetooth` presumes that you 
+ initially know what characteristics exist in a device (captured by this class)
+ and then upon discovery, pairs the found `CBCharacteristic` with it. This pairing is done
+ in `YMSCBService`.
+
+ 
  */
 @interface YMSCBCharacteristic : NSObject
 
