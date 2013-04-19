@@ -75,29 +75,5 @@
     
 }
 
-- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
-    
-    [super peripheral:peripheral didUpdateValueForCharacteristic:characteristic error:&*error];
-
-    YMSCBService *btService = [self findService:characteristic.service];
-    YMSCBCharacteristic *dtc = [btService findCharacteristic:characteristic];
-    
-    if ([dtc.name isEqualToString:@"config"]) {
-        
-        // TODO: need to handle this
-        /*
-         NSData *data = [btService responseConfig];
-         
-         if ([YMSCBUtils dataToByte:data] == 0x1) {
-         btService.isEnabled = YES;
-         }
-         else {
-         btService.isEnabled = NO;
-         }
-         */
-    }
-    
-}
-
 
 @end
