@@ -32,18 +32,18 @@
     
     DEACBAppService *cbAppService = [DEACBAppService sharedService];
 
-    BOOL isConnected = self.sensorTag.cbPeriperheral.isConnected;
+    BOOL isConnected = self.sensorTag.cbPeripheral.isConnected;
     
     if (isConnected) {
-        [cbAppService.manager cancelPeripheralConnection:self.sensorTag.cbPeriperheral];
+        [cbAppService.manager cancelPeripheralConnection:self.sensorTag.cbPeripheral];
     } else {
-        [cbAppService.manager connectPeripheral:self.sensorTag.cbPeriperheral options:nil];
+        [cbAppService.manager connectPeripheral:self.sensorTag.cbPeripheral options:nil];
     }
 
 }
 
 - (void)dealloc {
-    [self.sensorTag.cbPeriperheral removeObserver:self forKeyPath:@"RSSI"];
+    [self.sensorTag.cbPeripheral removeObserver:self forKeyPath:@"RSSI"];
 
 }
 
@@ -52,13 +52,13 @@
     
     self.sensorTag = sensorTag;
     
-    [sensorTag.cbPeriperheral addObserver:self
+    [sensorTag.cbPeripheral addObserver:self
                                forKeyPath:@"RSSI"
                                   options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
                                   context:NULL];
 
 
-    if (sensorTag.cbPeriperheral.isConnected) {
+    if (sensorTag.cbPeripheral.isConnected) {
         self.connectButton.titleLabel.text = @"Disconnect";
         self.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
         [self.connectButton setNeedsDisplay];
@@ -67,11 +67,9 @@
     } else {
         self.connectButton.titleLabel.text = @"Connect";
         self.accessoryType = UITableViewCellAccessoryNone;
+        self.rssiLabel.text = @"";
     }
     
-    self.rssiLabel.text = @"";
-
-
 
 }
 
@@ -79,8 +77,6 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
     if ([keyPath isEqualToString:@"RSSI"]) {
-        NSLog(@"TableViewCell RSSI: %@ %@", change[@"new"], change[@"old"]);
-        
         self.rssiLabel.text = [NSString stringWithFormat:@"%@", change[@"new"]];
         
     }
