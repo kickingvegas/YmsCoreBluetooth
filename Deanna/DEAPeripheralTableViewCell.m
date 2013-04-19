@@ -59,15 +59,20 @@
 
 
     if (sensorTag.cbPeripheral.isConnected) {
+        self.connectButton.titleLabel.textAlignment = UITextAlignmentCenter;
         self.connectButton.titleLabel.text = @"Disconnect";
+        
         self.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
         [self.connectButton setNeedsDisplay];
+        self.dbLabel.hidden = NO;
         
         
     } else {
+        self.connectButton.titleLabel.textAlignment = UITextAlignmentCenter;
         self.connectButton.titleLabel.text = @"Connect";
         self.accessoryType = UITableViewCellAccessoryNone;
         self.rssiLabel.text = @"";
+        self.dbLabel.hidden = YES;
     }
     
 

@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *rssiLabel;
 @property (strong, nonatomic) IBOutlet UIButton *connectButton;
+@property (strong, nonatomic) IBOutlet UILabel *dbLabel;
 
 - (IBAction)connectButtonAction:(id)sender;
 
