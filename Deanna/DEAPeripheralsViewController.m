@@ -39,7 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"Peripherals";
+    self.title = @"Deanna";
     
     DEACBAppService *cbAppService = [DEACBAppService sharedService];
     
