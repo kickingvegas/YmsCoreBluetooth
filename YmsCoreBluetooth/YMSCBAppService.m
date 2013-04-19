@@ -209,14 +209,14 @@
      advertisementData:(NSDictionary *)advertisementData
                   RSSI:(NSNumber *)RSSI {
     
-    NSLog(@"%@, %@, %@ db", peripheral, peripheral.name, RSSI);
+    //NSLog(@"%@, %@, %@ db", peripheral, peripheral.name, RSSI);
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     NSArray *existingDevices = [userDefaults objectForKey:@"storedPeripherals"];
     NSMutableArray *devices;
-    CFStringRef uuidString = NULL;
-    uuidString = CFUUIDCreateString(NULL, peripheral.UUID);
+    NSString *uuidString = nil;
+    uuidString = (NSString *)CFBridgingRelease(CFUUIDCreateString(NULL, peripheral.UUID));
     
     if (existingDevices != nil) {
         devices = [[NSMutableArray alloc] initWithArray:existingDevices];
@@ -225,20 +225,21 @@
             BOOL test = YES;
             
             for (NSString *obj in existingDevices) {
-                if ([obj isEqualToString:(NSString *)CFBridgingRelease(uuidString)]) {
+                if ([obj isEqualToString:uuidString]) {
                     test = NO;
                     break;
                 }
             }
             
             if (test) {
-                [devices addObject:(NSString *)CFBridgingRelease(uuidString)];
+                [devices addObject:uuidString];
             }
         }
     }
     else {
         devices = [[NSMutableArray alloc] init];
-        [devices addObject:(NSString *)CFBridgingRelease(uuidString)];
+        [devices addObject:uuidString];
+
     }
     
     [userDefaults setObject:devices forKey:@"storedPeripherals"];
