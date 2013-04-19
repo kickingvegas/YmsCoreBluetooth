@@ -277,7 +277,7 @@
 				D9F412ED16DED0030094FEFA /* DEASensorTagViewController.h */,
 				D9F412EE16DED0030094FEFA /* DEASensorTagViewController.m */,
 			);
-			name = Controllers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		D9718B83167FA1400001E42C /* Services */ = {
@@ -287,7 +287,7 @@
 				D906E5F016DCAC55001D7932 /* DEACBAppService.m */,
 				D9CB2C0616A71F8E00279DDA /* SensorTag */,
 			);
-			name = Services;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		D9718B84167FA1450001E42C /* XIBs */ = {
@@ -297,7 +297,7 @@
 				D9F412EF16DED0030094FEFA /* DEASensorTagViewController.xib */,
 				D9971AE91720A9A100B1A068 /* DEAPeripheralTableViewCell.xib */,
 			);
-			name = XIBs;
+			path = XIBs;
 			sourceTree = "<group>";
 		};
 		D9971AEB1720AA5600B1A068 /* UI */ = {
@@ -307,7 +307,7 @@
 				D9971AEC1720AA7E00B1A068 /* DEAPeripheralTableViewCell.h */,
 				D9971AED1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m */,
 			);
-			name = UI;
+			path = UI;
 			sourceTree = "<group>";
 		};
 		D9CB2C0616A71F8E00279DDA /* SensorTag */ = {
@@ -319,7 +319,7 @@
 				D988A5C516DD26A100D7D392 /* DEASensorTag.m */,
 				D9CB2C0716A71FC300279DDA /* Services */,
 			);
-			name = SensorTag;
+			path = SensorTag;
 			sourceTree = "<group>";
 		};
 		D9CB2C0716A71FC300279DDA /* Services */ = {
@@ -340,7 +340,7 @@
 				D93EAC5716E1DAF5008B1BD3 /* DEAMagnetometerService.h */,
 				D93EAC5816E1DAF5008B1BD3 /* DEAMagnetometerService.m */,
 			);
-			name = Services;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		D9DE671216E036C100F1B15C /* Sensors */ = {
@@ -361,7 +361,7 @@
 				D93EAC5416E1DAC8008B1BD3 /* DEAMagnetometerViewCell.h */,
 				D93EAC5516E1DAC8008B1BD3 /* DEAMagnetometerViewCell.m */,
 			);
-			name = Sensors;
+			path = Sensors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
