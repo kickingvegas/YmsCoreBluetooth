@@ -70,7 +70,6 @@ double calcBarPress(int16_t t_r,
 }
 
 - (void)updateCharacteristic:(YMSCBCharacteristic *)yc {
-    NSLog(@"barometer characteristic: %@", yc.name);
     if ([yc.name isEqualToString:@"data"]) {
 
         if (self.isCalibrated == NO) {
@@ -110,7 +109,6 @@ double calcBarPress(int16_t t_r,
         }
         
     } else if ([yc.name isEqualToString:@"calibration"]) {
-        NSLog(@"barometer calibration");
         self.isCalibrating = NO;
         NSData *data = yc.cbCharacteristic.value;
         
@@ -123,8 +121,6 @@ double calcBarPress(int16_t t_r,
             uint16_t hi = val[i+1];
             uint16_t cx = ((lo & 0xff)| ((hi << 8) & 0xff00));
             int index = i/2 + 1;
-
-            NSLog(@"%d %d", index, cx);            
 
             if (index == 1) self.c1 = cx;
             else if (index == 2) self.c2 = cx;
