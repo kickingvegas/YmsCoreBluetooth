@@ -42,11 +42,13 @@
 	
 	<option value="//api/name/base">&nbsp;&nbsp;&nbsp;&nbsp;base</option>
 	
-	<option value="//api/name/cbPeriperheral">&nbsp;&nbsp;&nbsp;&nbsp;cbPeriperheral</option>
+	<option value="//api/name/cbPeripheral">&nbsp;&nbsp;&nbsp;&nbsp;cbPeripheral</option>
+	
+	<option value="//api/name/rssiPingPeriod">&nbsp;&nbsp;&nbsp;&nbsp;rssiPingPeriod</option>
 	
 	<option value="//api/name/serviceDict">&nbsp;&nbsp;&nbsp;&nbsp;serviceDict</option>
 	
-	<option value="//api/name/shouldPingRSSI">&nbsp;&nbsp;&nbsp;&nbsp;shouldPingRSSI</option>
+	<option value="//api/name/willPingRSSI">&nbsp;&nbsp;&nbsp;&nbsp;willPingRSSI</option>
 	
 	
 	
@@ -89,11 +91,13 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/base">base</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/cbPeriperheral">cbPeriperheral</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/cbPeripheral">cbPeripheral</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/rssiPingPeriod">rssiPingPeriod</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/serviceDict">serviceDict</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/shouldPingRSSI">shouldPingRSSI</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/willPingRSSI">willPingRSSI</a></span></li>
 	
 </ul></li>
 
@@ -153,7 +157,7 @@
 						<h2 class="subtitle subtitle-overview">Overview</h2>
 						<p>YMS CoreBluetooth representation of a peripheral.</p>
 
-<p>This is effectively a container class which manages an instance of CBPeripheral
+<p>This is a container class which manages an instance of CBPeripheral
 and its associated delegate callbacks.</p>
 					</div>
 					
@@ -186,15 +190,22 @@ and its associated delegate callbacks.</p>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/cbPeriperheral">&nbsp;&nbsp;cbPeriperheral</a></code>
+		<code><a href="#//api/name/cbPeripheral">&nbsp;&nbsp;cbPeripheral</a></code>
 		<span class="tooltip"><p>Pointer to CBPeripheral instance of a sensor tag.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/shouldPingRSSI">&nbsp;&nbsp;shouldPingRSSI</a></code>
+		<code><a href="#//api/name/willPingRSSI">&nbsp;&nbsp;willPingRSSI</a></code>
 		<span class="tooltip"><p>If ON, enable updates of RSSI.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/rssiPingPeriod">&nbsp;&nbsp;rssiPingPeriod</a></code>
+		<span class="tooltip"><p>Time period between RSSI pings. Default is 2 seconds.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -281,8 +292,8 @@ and its associated delegate callbacks.</p>
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/cbPeriperheral" title="cbPeriperheral"></a>
-	<h3 class="subsubtitle method-title">cbPeriperheral</h3>
+	<a name="//api/name/cbPeripheral" title="cbPeripheral"></a>
+	<h3 class="subsubtitle method-title">cbPeripheral</h3>
 	
 	
 	
@@ -292,7 +303,7 @@ and its associated delegate callbacks.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) CBPeripheral *cbPeriperheral</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) CBPeripheral *cbPeripheral</code></div>
 
     
 	
@@ -305,6 +316,47 @@ and its associated delegate callbacks.</p>
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Pointer to CBPeripheral instance of a sensor tag.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBPeripheral.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/rssiPingPeriod" title="rssiPingPeriod"></a>
+	<h3 class="subsubtitle method-title">rssiPingPeriod</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Time period between RSSI pings. Default is 2 seconds.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) NSTimeInterval rssiPingPeriod</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Time period between RSSI pings. Default is 2 seconds.</p>
 	</div>
 	
 	
@@ -363,8 +415,8 @@ and its associated delegate callbacks.</p>
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/shouldPingRSSI" title="shouldPingRSSI"></a>
-	<h3 class="subsubtitle method-title">shouldPingRSSI</h3>
+	<a name="//api/name/willPingRSSI" title="willPingRSSI"></a>
+	<h3 class="subsubtitle method-title">willPingRSSI</h3>
 	
 	
 	
@@ -374,7 +426,7 @@ and its associated delegate callbacks.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL shouldPingRSSI</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL willPingRSSI</code></div>
 
     
 	
@@ -642,7 +694,7 @@ and its associated delegate callbacks.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-03-03)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-04-18)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

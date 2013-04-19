@@ -49,7 +49,9 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/handleFoundPeripheral:withCentral:">&nbsp;&nbsp;&nbsp;&nbsp;- handleFoundPeripheral:withCentral:</option>
+	<option value="//api/name/handleFoundPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- handleFoundPeripheral:</option>
+	
+	<option value="//api/name/startScan">&nbsp;&nbsp;&nbsp;&nbsp;- startScan</option>
 	
 	
 	
@@ -85,7 +87,9 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/handleFoundPeripheral:withCentral:">handleFoundPeripheral:withCentral:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/handleFoundPeripheral:">handleFoundPeripheral:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/startScan">startScan</a></span></li>
 	
 </ul></li>
 
@@ -162,8 +166,15 @@ the TI SensorTag via the CoreBluetooth API.</p>
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/handleFoundPeripheral:withCentral:">&ndash;&nbsp;handleFoundPeripheral:withCentral:</a></code>
-		<span class="tooltip"><p>Handler for discovered or found peripheral.</p></span>
+		<code><a href="#//api/name/startScan">&ndash;&nbsp;startScan</a></code>
+		<span class="tooltip"><p>Start CoreBluetooth scan for peripherals. This method is to be overridden.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/handleFoundPeripheral:">&ndash;&nbsp;handleFoundPeripheral:</a></code>
+		<span class="tooltip"><p>Handler for discovered or found peripheral. This method is to be overridden.</p></span>
 	</span>
 	
 	
@@ -232,18 +243,18 @@ the TI SensorTag via the CoreBluetooth API.</p>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/handleFoundPeripheral:withCentral:" title="handleFoundPeripheral:withCentral:"></a>
-	<h3 class="subsubtitle method-title">handleFoundPeripheral:withCentral:</h3>
+	<a name="//api/name/handleFoundPeripheral:" title="handleFoundPeripheral:"></a>
+	<h3 class="subsubtitle method-title">handleFoundPeripheral:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Handler for discovered or found peripheral.</p>
+		<p>Handler for discovered or found peripheral. This method is to be overridden.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)handleFoundPeripheral:(CBPeripheral *)<em>peripheral</em> withCentral:(CBCentralManager *)<em>central</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)handleFoundPeripheral:(CBPeripheral *)<em>peripheral</em></code></div>
 
     
 	
@@ -253,11 +264,6 @@ the TI SensorTag via the CoreBluetooth API.</p>
 		<dl class="argument-def parameter-def">
 			<dt><em>peripheral</em></dt>
 			<dd><p>CoreBluetooth peripheral instance</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>central</em></dt>
-			<dd><p>CoreBluetooth central <a href="../Classes/YMSCBAppService.html#//api/name/manager">manager</a> instance</p></dd>
 		</dl>
 		
 	</div>
@@ -270,7 +276,51 @@ the TI SensorTag via the CoreBluetooth API.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Handler for discovered or found peripheral.</p>
+		<p>Handler for discovered or found peripheral. This method is to be overridden.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/startScan" title="startScan"></a>
+	<h3 class="subsubtitle method-title">startScan</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Start CoreBluetooth scan for peripherals. This method is to be overridden.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)startScan</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Start CoreBluetooth scan for peripherals. This method is to be overridden.</p>
+
+<p>The implementation of this method in a subclass must include the call to
+[self scanForPeripheralsWithServices:options:]</p>
 	</div>
 	
 	
@@ -300,7 +350,7 @@ the TI SensorTag via the CoreBluetooth API.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-03-03)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-04-18)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

@@ -52,6 +52,8 @@
 	
 	<option value="//api/name/magnetometerViewCell">&nbsp;&nbsp;&nbsp;&nbsp;magnetometerViewCell</option>
 	
+	<option value="//api/name/rssiButton">&nbsp;&nbsp;&nbsp;&nbsp;rssiButton</option>
+	
 	<option value="//api/name/sensorTableView">&nbsp;&nbsp;&nbsp;&nbsp;sensorTableView</option>
 	
 	<option value="//api/name/sensorTag">&nbsp;&nbsp;&nbsp;&nbsp;sensorTag</option>
@@ -63,13 +65,6 @@
 	
 	
 	
-	
-	
-	<option value="instance_methods">Instance Methods</option>
-	
-	<option value="//api/name/didConnectPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- didConnectPeripheral:</option>
-	
-	<option value="//api/name/didDisconnectPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- didDisconnectPeripheral:</option>
 	
 	
 	
@@ -107,6 +102,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/magnetometerViewCell">magnetometerViewCell</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/rssiButton">rssiButton</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/sensorTableView">sensorTableView</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/sensorTag">sensorTag</a></span></li>
@@ -120,14 +117,6 @@
 
 
 
-
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/didConnectPeripheral:">didConnectPeripheral:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/didDisconnectPeripheral:">didDisconnectPeripheral:</a></span></li>
-	
-</ul></li>
 
 
 			</ul>
@@ -154,7 +143,7 @@
 	<td class="specification-value"><a href="../Classes/DEABaseViewController.html">DEABaseViewController</a> : UIViewController</td>
 </tr><tr>
 	<td class="specification-title">Conforms to</td>
-	<td class="specification-value">UITableViewDataSource<br />UITableViewDelegate<br /><a href="../Protocols/YMSCBAppServiceDelegate.html">YMSCBAppServiceDelegate</a></td>
+	<td class="specification-value">UITableViewDataSource<br />UITableViewDelegate</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
 	<td class="specification-value">DEASensorTagViewController.h<br />DEASensorTagViewController.m</td>
@@ -180,7 +169,7 @@
 						
 						
 						
-						<h3 class="subsubtitle task-title">Other Methods</h3>
+						
 
 						<ul class="task-list">
 							<li>
@@ -194,6 +183,13 @@
 	<span class="tooltip">
 		<code><a href="#//api/name/sensorTag">&nbsp;&nbsp;sensorTag</a></code>
 		<span class="tooltip"><p>Instance of <a href="../Classes/DEASensorTag.html">DEASensorTag</a>.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/rssiButton">&nbsp;&nbsp;rssiButton</a></code>
+		<span class="tooltip"><p>BarButtonItem to display RSSI</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -252,28 +248,6 @@
 		<span class="tooltip"><p>UI for magnetometer service.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
-	
-</li>
-						</ul>
-						
-						
-						
-						<h3 class="subsubtitle task-title">Other Methods</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/didConnectPeripheral:">&ndash;&nbsp;didConnectPeripheral:</a></code>
-		<span class="tooltip"><p>Delegate method for when peripheral has been connected.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/didDisconnectPeripheral:">&ndash;&nbsp;didDisconnectPeripheral:</a></code>
-		<span class="tooltip"><p>Delegate method fo when peripheral has been disconnected.</p></span>
-	</span>
-	
 	
 </li>
 						</ul>
@@ -535,6 +509,47 @@
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/rssiButton" title="rssiButton"></a>
+	<h3 class="subsubtitle method-title">rssiButton</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>BarButtonItem to display RSSI</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (strong, nonatomic) UIBarButtonItem *rssiButton</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>BarButtonItem to display RSSI</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DEASensorTagViewController.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/sensorTableView" title="sensorTableView"></a>
 	<h3 class="subsubtitle method-title">sensorTableView</h3>
 	
@@ -704,94 +719,6 @@
 					
 					
 					
-					<div class="section section-methods">
-						<a title="Instance Methods" name="instance_methods"></a>
-						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
-						
-						<div class="section-method">
-	<a name="//api/name/didConnectPeripheral:" title="didConnectPeripheral:"></a>
-	<h3 class="subsubtitle method-title">didConnectPeripheral:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Delegate method for when peripheral has been connected.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)didConnectPeripheral:(id)<em>delegate</em></code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Delegate method for when peripheral has been connected.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/didDisconnectPeripheral:" title="didDisconnectPeripheral:"></a>
-	<h3 class="subsubtitle method-title">didDisconnectPeripheral:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Delegate method fo when peripheral has been disconnected.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)didDisconnectPeripheral:(id)<em>delegate</em></code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Delegate method fo when peripheral has been disconnected.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-					</div>
-					
 					
 				</div>
 				<div class="main-navigation navigation-bottom">
@@ -803,7 +730,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-03-03)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-04-18)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						
