@@ -31,7 +31,7 @@
 /**
  ViewController for TI SensorTag peripheral.
  */
-@interface DEASensorTagViewController : DEABaseViewController <UITableViewDelegate, UITableViewDataSource, YMSCBAppServiceDelegate>
+@interface DEASensorTagViewController : DEABaseViewController <UITableViewDelegate, UITableViewDataSource>
 
 /// Array of names of service cells.
 @property (strong, nonatomic) NSArray *cbServiceCells;
