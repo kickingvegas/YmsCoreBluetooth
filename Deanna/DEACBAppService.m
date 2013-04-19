@@ -45,6 +45,14 @@ static DEACBAppService *sharedCBAppService;
 
 
 
+- (void)startScan {
+    NSDictionary *options = @{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES };
+    // TODO: Don't know what service UUIDs are required to work with TI SensorTag.
+    //NSArray *services = @[[CBUUID UUIDWithString:@"F000AA00-0451-4000-B000-000000000000"]];
+
+    [self scanForPeripheralsWithServices:nil options:options];
+}
+
 
 - (void)handleFoundPeripheral:(CBPeripheral *)peripheral {
     DEASensorTag *sensorTag;
