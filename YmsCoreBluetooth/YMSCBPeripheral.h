@@ -25,7 +25,7 @@
 /**
  YMS CoreBluetooth representation of a peripheral. 
  
- This is effectively a container class which manages an instance of CBPeripheral 
+ This is a container class which manages an instance of CBPeripheral
  and its associated delegate callbacks.
 
  */
@@ -41,7 +41,7 @@
 @property (nonatomic, strong) CBPeripheral *cbPeriperheral;
 
 /// If ON, enable updates of RSSI.
-@property (nonatomic, assign) BOOL shouldPingRSSI;
+@property (nonatomic, assign) BOOL willPingRSSI;
 
 ///**
 // Constructor 

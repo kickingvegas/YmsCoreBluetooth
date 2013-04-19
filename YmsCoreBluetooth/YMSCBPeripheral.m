@@ -37,7 +37,7 @@
         _cbPeriperheral = peripheral;
         peripheral.delegate = self;
 
-        _shouldPingRSSI = update;
+        _willPingRSSI = update;
         if (update == YES) {
             [peripheral readRSSI];
         }
@@ -86,10 +86,9 @@
         YMSCBService *btService = [self findService:service];
         
         if (btService != nil) {
-            if (btService.cbService == nil) {
-                btService.cbService = service;
-            }
+            btService.cbService = service;
         }
+
         [peripheral discoverCharacteristics:[btService characteristics] forService:service];
     }
 }
@@ -119,7 +118,7 @@
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {
     NSLog(@"RSSI: %@", peripheral.RSSI);
     
-    if (self.shouldPingRSSI) {
+    if (self.willPingRSSI) {
         [self performSelector:@selector(updateRSSI) withObject:self afterDelay:5];
     }
     
