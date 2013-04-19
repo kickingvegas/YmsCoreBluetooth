@@ -48,8 +48,6 @@
         
         self.keyValue = [NSNumber numberWithInt:value];
         
-        NSLog(@"key value: %@", self.keyValue);
-
     }
     
 }
