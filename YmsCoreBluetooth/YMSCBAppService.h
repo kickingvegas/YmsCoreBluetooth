@@ -84,16 +84,25 @@
 
 
 /**
- Handler for discovered or found peripheral.
- 
+ Handler for discovered or found peripheral. This method is to be overridden.
+
  @param peripheral CoreBluetooth peripheral instance
  */
 - (void)handleFoundPeripheral:(CBPeripheral *)peripheral;
 
 /**
- Start CoreBluetooth scan for peripherals.
+ Start CoreBluetooth scan for peripherals. This method is to be overridden.
+ 
+ The implementation of this method in a subclass must include the call to 
+ [self scanForPeripheralsWithServices:options:]
+ 
  */
 - (void)startScan;
+
+/**
+ Wrapper around [CBCentralManager scanForPeripheralWithServices:options:]
+ */
+- (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs options:(NSDictionary *)options;
 
 /**
  Stop CoreBluetooth scan for peripherals.
