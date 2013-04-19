@@ -79,9 +79,9 @@
     if (object == cbAppService) {
         if ([keyPath isEqualToString:@"isScanning"]) {
             if (cbAppService.isScanning) {
-                self.scanButton.title = @"Scanning";
+                self.scanButton.title = @"Stop Scanning";
             } else {
-                self.scanButton.title = @"Scan";
+                self.scanButton.title = @"Start Scan";
             }
         }
     }
@@ -94,8 +94,6 @@
 
 
 - (void)scanButtonAction:(id)sender {
-    NSLog(@"scanButtonAction");
-    
     DEACBAppService *cbAppService = [DEACBAppService sharedService];
     
     if (cbAppService.isScanning == NO) {
