@@ -144,14 +144,6 @@
     return result;
 }
 
-- (void)didConnectPeripheral:(id)delegate {
-}
-
-
-- (void)didDisconnectPeripheral:(id)delegate {
-}
-
-
 
 
 
