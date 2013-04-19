@@ -34,13 +34,18 @@
         _base.hi = kSensorTag_BASE_ADDRESS_HI;
         _base.lo = kSensorTag_BASE_ADDRESS_LO;
         
-        _cbPeriperheral = peripheral;
+        _cbPeripheral = peripheral;
         peripheral.delegate = self;
+        
+        
+        _rssiPingPeriod = 2.0;
 
         _willPingRSSI = update;
         if (update == YES) {
             [peripheral readRSSI];
         }
+        
+
 
     }
 
@@ -111,7 +116,7 @@
 }
 
 - (void)updateRSSI {
-    [self.cbPeriperheral readRSSI];
+    [self.cbPeripheral readRSSI];
     
 }
     
@@ -119,7 +124,7 @@
     NSLog(@"RSSI: %@", peripheral.RSSI);
     
     if (self.willPingRSSI) {
-        [self performSelector:@selector(updateRSSI) withObject:self afterDelay:5];
+        [self performSelector:@selector(updateRSSI) withObject:self afterDelay:self.rssiPingPeriod];
     }
     
 }

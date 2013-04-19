@@ -38,10 +38,13 @@
 @property (nonatomic, strong) NSDictionary *serviceDict;
 
 /// Pointer to CBPeripheral instance of a sensor tag.
-@property (nonatomic, strong) CBPeripheral *cbPeriperheral;
+@property (nonatomic, strong) CBPeripheral *cbPeripheral;
 
 /// If ON, enable updates of RSSI.
 @property (nonatomic, assign) BOOL willPingRSSI;
+
+/// Time period between RSSI pings. Default is 2 seconds.
+@property (nonatomic, assign) NSTimeInterval rssiPingPeriod;
 
 ///**
 // Constructor 
