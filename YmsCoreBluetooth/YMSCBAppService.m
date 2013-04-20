@@ -298,6 +298,16 @@
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     
+    YMSCBPeripheral *yp = [self findPeripheral:peripheral];
+    
+    for (id key in yp.serviceDict) {
+        YMSCBService *service = yp.serviceDict[key];
+        service.cbService = nil;
+        service.isOn = NO;
+        service.isEnabled = NO;
+    }
+    
+    
     if ([self.delegate respondsToSelector:@selector(centralManager:didDisconnectPeripheral:error:)]) {
         [self.delegate centralManager:central didDisconnectPeripheral:peripheral error:error];
     }
