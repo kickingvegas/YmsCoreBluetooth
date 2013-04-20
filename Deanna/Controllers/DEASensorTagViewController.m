@@ -173,6 +173,12 @@
                                           otherButtonTitles:nil];
     
     [alert show];
+    
+    
+    // Quick and dirty hack! But good enough to let the previous view controller that the disconnection happened.
+    
+    [self.navigationController.viewControllers[0] centralManager:central didDisconnectPeripheral:peripheral error:error];
+    
 }
 
 
