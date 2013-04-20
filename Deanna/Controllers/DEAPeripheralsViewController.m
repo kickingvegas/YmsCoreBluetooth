@@ -84,7 +84,14 @@
                 self.scanButton.title = @"Start Scan";
             }
         }
-    }
+    } else if ([keyPath isEqualToString:@"RSSI"]) {
+        for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+            if (cell.sensorTag.cbPeripheral == object) {
+                cell.rssiLabel.text = [NSString stringWithFormat:@"%@", change[@"new"]];
+                break;
+            }
+        }
+   }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -98,6 +105,8 @@
     
     if (cbAppService.isScanning == NO) {
         [cbAppService startScan];
+        
+        //[cbAppService performSelectorInBackground:@selector(startScan) withObject:nil];
     }
     else {
         [cbAppService stopScan];
@@ -110,26 +119,117 @@
 
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
-    [self.peripheralsTableView reloadData];
+    
+    [peripheral addObserver:self
+                 forKeyPath:@"RSSI"
+                    options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
+                    context:NULL];
+
+    
+    for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+        [cell updateDisplay:peripheral];
+    }
+    
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
-    [self.peripheralsTableView reloadData];
+
+    [peripheral removeObserver:self forKeyPath:@"RSSI"];
+
+    
+    for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+        [cell updateDisplay:peripheral];
+    }
+   
+    
 }
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
-    [self.peripheralsTableView reloadData];
+    
+    BOOL test = YES;
+    
+    for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+        if (cell.sensorTag.cbPeripheral == peripheral) {
+            test = NO;
+            break;
+        }
+    }
+    
+    if (test) {
+        [self.peripheralsTableView reloadData];
+    }
+    
+    
+    
 }
 
 
 - (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals {
-    [self.peripheralsTableView reloadData];
+    BOOL test = YES;
+    
+    for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+        for (CBPeripheral *peripheral in peripherals) {
+        
+            if (cell.sensorTag.cbPeripheral == peripheral) {
+                test = NO;
+                break;
+            }
+        }
+        
+        if (!test) {
+            break;
+        }
+        
+    }
+    
+    if (test) {
+        for (CBPeripheral *peripheral in peripherals) {
+            if (peripheral.isConnected) {
+                [peripheral addObserver:self
+                             forKeyPath:@"RSSI"
+                                options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
+                                context:NULL];
+            }
+            
+        }
+
+        [self.peripheralsTableView reloadData];
+    }
+    
 
 }
 
 
 - (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals {
-    [self.peripheralsTableView reloadData];
+    BOOL test = YES;
+    
+    for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+        for (CBPeripheral *peripheral in peripherals) {
+            
+            if (cell.sensorTag.cbPeripheral == peripheral) {
+                test = NO;
+                break;
+            }
+        }
+        
+        if (!test) {
+            break;
+        }
+        
+    }
+    
+    if (test) {
+        for (CBPeripheral *peripheral in peripherals) {
+            [peripheral addObserver:self
+                         forKeyPath:@"RSSI"
+                            options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
+                            context:NULL];
+
+        }
+        
+        [self.peripheralsTableView reloadData];
+    }
+
 }
 
 
