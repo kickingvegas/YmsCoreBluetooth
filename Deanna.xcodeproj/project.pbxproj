@@ -317,9 +317,9 @@
 		D9971AEB1720AA5600B1A068 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				D9DE671216E036C100F1B15C /* Sensors */,
 				D9971AEC1720AA7E00B1A068 /* DEAPeripheralTableViewCell.h */,
 				D9971AED1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m */,
+				D9DE671216E036C100F1B15C /* Sensors */,
 			);
 			path = UI;
 			sourceTree = "<group>";
