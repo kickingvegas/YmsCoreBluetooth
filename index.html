@@ -37,30 +37,34 @@
 
 <p><a href="http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/hierarchy.html">YmsCoreBluetooth API Reference</a></p>
 
-<h1>Changes</h1>
+<h2>Changes</h2>
 
-<p><em>Thu Apr 18 23:15:42 PDT 2013 - Major Revision</em></p>
+<h3>Sat Apr 20 2013</h3>
 
 <ul>
-<li>
-<p>Refactored <code>DECBAppService</code> to support:</p>
+<li>Bugfix <a href="https://github.com/kickingvegas/YmsCoreBluetooth/issues/15">15</a> where connect button is blocked when scanning.</li>
+<li>Bugfixes on handling peripheral disconnects.</li>
+</ul><h3>Thu Apr 18 2013 - Major Revision</h3>
+
+<ul>
+<li>Refactored <code>DECBAppService</code> to support:
 
 <ul>
 <li>Separation of peripheral discovery by scanning from peripheral retrieval via stored UUID.</li>
 <li>Removed <code>NSNotification</code> messages to use <code>CBCentralManagerDelegate</code> methods instead.</li>
 </ul>
 </li>
-<li><p>Reorganized physical file directory structure to match that of Xcode project group structure.</p></li>
-<li><p>Added RSSI display to both peripheral screen and SensorTag screen.</p></li>
-<li><p>Added connect button per peripherals discovered.</p></li>
-<li><p>Initial support for multiple SensorTags. (This has not yet been tested, due to the fact that I have only 1 SensorTag to test.)</p></li>
-</ul><p><em>Sun Mar  3 18:57:23 PST 2013</em> </p>
+<li>Reorganized physical file directory structure to match that of Xcode project group structure.</li>
+<li>Added RSSI display to both peripheral screen and SensorTag screen.</li>
+<li>Added connect button per peripherals discovered.</li>
+<li>Initial support for multiple SensorTags. (This has not yet been tested, due to the fact that I have only 1 SensorTag to test.)</li>
+</ul><h3>Sun Mar 3 2013</h3>
 
 <ul>
 <li>First stable release.</li>
 <li>Support for communication with all sensors/services on a SensorTag.</li>
 <li>Initial documentation for YmsCoreBluetooth API and Deanna source code.</li>
-</ul><h1>Notes</h1>
+</ul><h2>Notes</h2>
 
 <p>Despite my efforts to make it work, I've chosen to stop supporting the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator <a href="http://developer.apple.com/library/ios/#technotes/tn2295/_index.html">TN2295</a>, I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.</p>
 
@@ -68,7 +72,7 @@
 
 <ul>
 <li>iPhone 4S, iOS 6.1.3</li>
-</ul><h2>License</h2>
+</ul><h3>License</h3>
 
 <pre><code>Copyright 2013 Yummy Melon Software LLC
 
