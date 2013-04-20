@@ -6,10 +6,11 @@ A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS applicat
 
 ## Changes
 
-### Sat Apr 20 15:23:27 PDT 2013
+### Sat Apr 20 2013
 * Bugfix [15](https://github.com/kickingvegas/YmsCoreBluetooth/issues/15) where connect button is blocked when scanning.
+* Bugfixes on handling peripheral disconnects.
 
-### Thu Apr 18 23:15:42 PDT 2013 - Major Revision
+### Thu Apr 18 2013 - Major Revision
 * Refactored `DECBAppService` to support:
     * Separation of peripheral discovery by scanning from peripheral retrieval via stored UUID.
     * Removed `NSNotification` messages to use `CBCentralManagerDelegate` methods instead.
@@ -18,7 +19,7 @@ A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS applicat
 * Added connect button per peripherals discovered.
 * Initial support for multiple SensorTags. (This has not yet been tested, due to the fact that I have only 1 SensorTag to test.)
 
-### Sun Mar  3 18:57:23 PST 2013
+### Sun Mar 3 2013
 * First stable release.
 * Support for communication with all sensors/services on a SensorTag.
 * Initial documentation for YmsCoreBluetooth API and Deanna source code.
