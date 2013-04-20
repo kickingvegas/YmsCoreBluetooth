@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class DEASensorTag;
+@class CBPeripheral;
 
 @interface DEAPeripheralTableViewCell : UITableViewCell
 
@@ -22,6 +23,8 @@
 - (IBAction)connectButtonAction:(id)sender;
 
 - (void)configureWithSensorTag:(DEASensorTag *)sensorTag;
+
+- (void)updateDisplay:(CBPeripheral *)peripheral;
 
 
 @end
