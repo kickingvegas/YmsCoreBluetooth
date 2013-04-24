@@ -17,7 +17,7 @@
 //
 
 #import "YMSCBPeripheral.h"
-#import "DEASimpleKeysService.h"
+#import "YMSCBService.h"
 #import "YMSCBCharacteristic.h"
 
 
