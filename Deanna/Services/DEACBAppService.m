@@ -59,22 +59,25 @@ static DEACBAppService *sharedCBAppService;
     YMSCBPeripheral *yp = [self findPeripheral:peripheral];
 
     if (yp == nil) {
-        if ([peripheral.name isEqualToString:@"SensorTag"] ||
-            [peripheral.name isEqualToString:@"TI BLE SensorTag"]) {
-            DEASensorTag *sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
-                                                                        baseHi:kSensorTag_BASE_ADDRESS_HI
-                                                                        baseLo:kSensorTag_BASE_ADDRESS_LO
-                                                                    updateRSSI:YES];
-            [self.ymsPeripherals addObject:sensorTag];
+        BOOL isUnknownPeripheral = YES;
+        for (NSString *pname in self.peripheralSearchNames) {
+            if ([pname isEqualToString:peripheral.name]) {
+                DEASensorTag *sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
+                                                                            baseHi:kSensorTag_BASE_ADDRESS_HI
+                                                                            baseLo:kSensorTag_BASE_ADDRESS_LO
+                                                                        updateRSSI:YES];
+                [self.ymsPeripherals addObject:sensorTag];
+                isUnknownPeripheral = NO;
+                break;
+                
+            }
+            
         }
         
-        else {
-            DEASensorTag *sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
-                                                                        baseHi:kSensorTag_BASE_ADDRESS_HI
-                                                                        baseLo:kSensorTag_BASE_ADDRESS_LO
-                                                                    updateRSSI:YES];
-            [self.ymsPeripherals addObject:sensorTag];
-            
+        if (isUnknownPeripheral) {
+            //TODO: Handle unknown peripheral
+            yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral baseHi:0 baseLo:0 updateRSSI:NO];
+            [self.ymsPeripherals addObject:yp];
         }
     }
     
