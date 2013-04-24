@@ -60,6 +60,8 @@
  */
 @property (nonatomic, assign) CBCentralManagerState currentManagerState;
 
+/// Count of ymsPeripherals.
+@property (nonatomic, readonly, assign) NSUInteger count;
 
 /**
  Constructor with array of known peripheral names.
@@ -106,6 +108,11 @@
  */
 - (void)startScan;
 
+/**
+ Returns the YSMCBPeripheral instance from ymsPeripherals at index.
+ @param index An index within the bounds of ymsPeripherals.
+ */
+- (YMSCBPeripheral *)peripheralAtIndex:(NSUInteger)index;
 
 /**
  Add YMSCBPeripheral instance to ymsPeripherals.

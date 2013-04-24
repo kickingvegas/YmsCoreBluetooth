@@ -25,7 +25,6 @@
 
 @implementation YMSCBAppService
 
-
 - (id)initWithKnownPeripheralNames:(NSArray *)nameList queue:(dispatch_queue_t)queue {
     self = [super init];
     
@@ -87,6 +86,16 @@
     if ([peripheralUUIDList count] > 0) {
         [self.manager retrievePeripherals:peripheralUUIDList];
     }
+}
+
+- (YMSCBPeripheral *)peripheralAtIndex:(NSUInteger)index {
+    YMSCBPeripheral *result;
+    result = (YMSCBPeripheral *)[self.ymsPeripherals objectAtIndex:index];
+    return result;
+}
+
+- (NSUInteger)count {
+    return  [self.ymsPeripherals count];
 }
 
 - (void)addPeripheral:(YMSCBPeripheral *)yperipheral {
