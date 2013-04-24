@@ -25,13 +25,15 @@
 
 @implementation YMSCBAppService
 
-- (id)init {
+
+- (id)initWithKnownPeripheralNames:(NSArray *)nameList queue:(dispatch_queue_t)queue {
     self = [super init];
     
     if (self) {
         _ymsPeripherals = [[NSMutableArray alloc] init];
-        _manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+        _manager = [[CBCentralManager alloc] initWithDelegate:self queue:queue];
         _currentManagerState = -1;
+        _knownPeripheralNames = nameList;
     }
     
     return self;
@@ -87,11 +89,22 @@
     }
 }
 
+- (void)addPeripheral:(YMSCBPeripheral *)yperipheral {
+    [self.ymsPeripherals addObject:yperipheral];
+}
 
-- (BOOL)isAppServicePeripheral:(CBPeripheral *)peripheral {
+- (void)removePeripheral:(YMSCBPeripheral *)yperipheral {
+    [self.ymsPeripherals removeObject:yperipheral];
+}
+
+- (void)removePeripheralAtIndex:(NSUInteger)index {
+    [self.ymsPeripherals removeObjectAtIndex:index];
+}
+
+- (BOOL)isKnownPeripheral:(CBPeripheral *)peripheral {
     BOOL result = NO;
     
-    for (NSString *key in self.peripheralSearchNames) {
+    for (NSString *key in self.knownPeripheralNames) {
         result = result || [peripheral.name isEqualToString:key];
         if (result) {
             break;
@@ -281,7 +294,7 @@
 }
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
-    if ([self isAppServicePeripheral:peripheral]) {
+    if ([self isKnownPeripheral:peripheral]) {
         YMSCBPeripheral *yp = [self findPeripheral:peripheral];
         
         if (yp != nil) {

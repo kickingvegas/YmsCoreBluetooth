@@ -49,7 +49,7 @@
  
  Used in conjunction with [isAppServicePeripheral:]
  */
-@property (nonatomic, strong) NSArray *peripheralSearchNames;
+@property (nonatomic, strong) NSArray *knownPeripheralNames;
 
 /// Flag to determine if scanning.
 @property (nonatomic, assign) BOOL isScanning;
@@ -62,14 +62,21 @@
 
 
 /**
- Determines if peripheral is to be managed by this app service.
- Used in conjunction with peripheralSearchNames.
+ Constructor with array of known peripheral names.
+ @param nameList Array of peripheral names of type NSString.
+ @param queue The dispatch queue to use to dispatch the central role events. If its value is nil, the central manager dispatches central role events using the main queue.
+ */
+- (id)initWithKnownPeripheralNames:(NSArray *)nameList queue:(dispatch_queue_t)queue;
+
+/**
+ Determines if peripheral is known by this app service.
+ Used in conjunction with knownPeripheralNames.
  
  @param peripheral found or retrieved peripheral
  @return YES is peripheral is to be managed by this app service.
  */
 
-- (BOOL)isAppServicePeripheral:(CBPeripheral *)peripheral;
+- (BOOL)isKnownPeripheral:(CBPeripheral *)peripheral;
 
 
 /**
@@ -94,13 +101,36 @@
  Start CoreBluetooth scan for peripherals. This method is to be overridden.
  
  The implementation of this method in a subclass must include the call to 
- [self scanForPeripheralsWithServices:options:]
+ scanForPeripheralsWithServices:options:
  
  */
 - (void)startScan;
 
+
+/**
+ Add YMSCBPeripheral instance to ymsPeripherals.
+ @param yperipheral Instance of YMSCBPeripheral
+ */
+- (void)addPeripheral:(YMSCBPeripheral *)yperipheral;
+
+/**
+ Remove all occurrences of yperipheral in ymsPeripherals.
+ @param yperipheral Instance of YMSCBPeripheral
+ */
+- (void)removePeripheral:(YMSCBPeripheral *)yperipheral;
+
+/**
+ Remove YMSCBPeripheral instance at index
+ @param index The index from which to remove the object in ymsPeripherals. The value must not exceed the bounds of the array.
+ */
+- (void)removePeripheralAtIndex:(NSUInteger)index;
+
+
+
 /**
  Wrapper around [CBCentralManager scanForPeripheralWithServices:options:]
+ @param serviceUUIDs An array of CBUUIDs the app is interested in.
+ @param options A dictionary to customize the scan, see CBCentralManagerScanOptionAllowDuplicatesKey.
  */
 - (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs options:(NSDictionary *)options;
 
