@@ -55,17 +55,27 @@ static DEACBAppService *sharedCBAppService;
 
 
 - (void)handleFoundPeripheral:(CBPeripheral *)peripheral {
-    DEASensorTag *sensorTag;
     
-    sensorTag = (DEASensorTag *)[self findPeripheral:peripheral];
-    
-    if (sensorTag == nil) {
-        sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
-                                                      baseHi:kSensorTag_BASE_ADDRESS_HI
-                                                      baseLo:kSensorTag_BASE_ADDRESS_LO
-                                                  updateRSSI:YES];
+    YMSCBPeripheral *yp = [self findPeripheral:peripheral];
+
+    if (yp == nil) {
+        if ([peripheral.name isEqualToString:@"SensorTag"] ||
+            [peripheral.name isEqualToString:@"TI BLE SensorTag"]) {
+            DEASensorTag *sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
+                                                                        baseHi:kSensorTag_BASE_ADDRESS_HI
+                                                                        baseLo:kSensorTag_BASE_ADDRESS_LO
+                                                                    updateRSSI:YES];
+            [self.ymsPeripherals addObject:sensorTag];
+        }
         
-        [self.ymsPeripherals addObject:sensorTag];
+        else {
+            DEASensorTag *sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
+                                                                        baseHi:kSensorTag_BASE_ADDRESS_HI
+                                                                        baseLo:kSensorTag_BASE_ADDRESS_LO
+                                                                    updateRSSI:YES];
+            [self.ymsPeripherals addObject:sensorTag];
+            
+        }
     }
     
 }
