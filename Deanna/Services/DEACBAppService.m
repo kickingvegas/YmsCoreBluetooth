@@ -25,24 +25,14 @@ static DEACBAppService *sharedCBAppService;
 @implementation DEACBAppService
 
 
-- (id)init {
-    self = [super init];
-    
-    if (self) {
-        self.peripheralSearchNames = @[@"TI BLE Sensor Tag", @"SensorTag"];
-    }
-    
-    return self;
-}
-
-
 + (DEACBAppService *)sharedService {
     if (sharedCBAppService == nil) {
-        sharedCBAppService = [[super allocWithZone:NULL] init];
+        NSArray *nameList = @[@"TI BLE Sensor Tag", @"SensorTag"];
+        sharedCBAppService = [[super allocWithZone:NULL] initWithKnownPeripheralNames:nameList
+                                                                                queue:nil];
     }
     return sharedCBAppService;
 }
-
 
 
 - (void)startScan {
@@ -60,7 +50,7 @@ static DEACBAppService *sharedCBAppService;
 
     if (yp == nil) {
         BOOL isUnknownPeripheral = YES;
-        for (NSString *pname in self.peripheralSearchNames) {
+        for (NSString *pname in self.knownPeripheralNames) {
             if ([pname isEqualToString:peripheral.name]) {
                 DEASensorTag *sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
                                                                             baseHi:kSensorTag_BASE_ADDRESS_HI
