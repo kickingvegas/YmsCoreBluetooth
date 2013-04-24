@@ -209,49 +209,50 @@
      advertisementData:(NSDictionary *)advertisementData
                   RSSI:(NSNumber *)RSSI {
     
-    //NSLog(@"%@, %@, %@ db", peripheral, peripheral.name, RSSI);
+    NSLog(@"%@, %@, %@ db", peripheral, peripheral.name, RSSI);
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     NSArray *existingDevices = [userDefaults objectForKey:@"storedPeripherals"];
     NSMutableArray *devices;
     NSString *uuidString = nil;
-    uuidString = (NSString *)CFBridgingRelease(CFUUIDCreateString(NULL, peripheral.UUID));
-    
-    if (existingDevices != nil) {
-        devices = [[NSMutableArray alloc] initWithArray:existingDevices];
+    if (peripheral.UUID != nil) {
+        uuidString = (NSString *)CFBridgingRelease(CFUUIDCreateString(NULL, peripheral.UUID));
         
-        if (uuidString) {
-            BOOL test = YES;
+        if (existingDevices != nil) {
+            devices = [[NSMutableArray alloc] initWithArray:existingDevices];
             
-            for (NSString *obj in existingDevices) {
-                if ([obj isEqualToString:uuidString]) {
-                    test = NO;
-                    break;
+            if (uuidString) {
+                BOOL test = YES;
+                
+                for (NSString *obj in existingDevices) {
+                    if ([obj isEqualToString:uuidString]) {
+                        test = NO;
+                        break;
+                    }
+                }
+                
+                if (test) {
+                    [devices addObject:uuidString];
                 }
             }
-            
-            if (test) {
-                [devices addObject:uuidString];
-            }
         }
+        else {
+            devices = [[NSMutableArray alloc] init];
+            [devices addObject:uuidString];
+            
+        }
+        
+        [userDefaults setObject:devices forKey:@"storedPeripherals"];
+        [userDefaults synchronize];
     }
-    else {
-        devices = [[NSMutableArray alloc] init];
-        [devices addObject:uuidString];
 
-    }
-    
-    [userDefaults setObject:devices forKey:@"storedPeripherals"];
-    [userDefaults synchronize];
-    
     [self handleFoundPeripheral:peripheral];
 
     if ([self.delegate respondsToSelector:@selector(centralManager:didDiscoverPeripheral:advertisementData:RSSI:)]) {
         [self.delegate centralManager:central didDiscoverPeripheral:peripheral advertisementData:advertisementData RSSI:RSSI];
     }
-    
-    
+
 }
 
 
