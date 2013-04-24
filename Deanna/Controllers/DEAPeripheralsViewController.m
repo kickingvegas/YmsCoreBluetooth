@@ -124,23 +124,26 @@
                  forKeyPath:@"RSSI"
                     options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
                     context:NULL];
-
     
-    for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
-        [cell updateDisplay:peripheral];
+    
+    for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+        if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
+            DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)cell;
+            [pcell updateDisplay:peripheral];
+        }
     }
-    
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
 
     [peripheral removeObserver:self forKeyPath:@"RSSI"];
 
-    
-    for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
-        [cell updateDisplay:peripheral];
+    for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+        if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
+            DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)cell;
+            [pcell updateDisplay:peripheral];
+        }
     }
-   
     
 }
 
@@ -148,10 +151,13 @@
     
     BOOL test = YES;
     
-    for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
-        if (cell.sensorTag.cbPeripheral == peripheral) {
-            test = NO;
-            break;
+    for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+        if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
+            DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)cell;
+            if (pcell.sensorTag.cbPeripheral == peripheral) {
+                test = NO;
+                break;
+            }
         }
     }
     
@@ -167,12 +173,14 @@
 - (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals {
     BOOL test = YES;
     
-    for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+    for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
         for (CBPeripheral *peripheral in peripherals) {
-        
-            if (cell.sensorTag.cbPeripheral == peripheral) {
-                test = NO;
-                break;
+            if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
+                DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)cell;
+                if (pcell.sensorTag.cbPeripheral == peripheral) {
+                    test = NO;
+                    break;
+                }
             }
         }
         
@@ -203,12 +211,14 @@
 - (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals {
     BOOL test = YES;
     
-    for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+    for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
         for (CBPeripheral *peripheral in peripherals) {
-            
-            if (cell.sensorTag.cbPeripheral == peripheral) {
-                test = NO;
-                break;
+            if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
+                DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)cell;
+                if (pcell.sensorTag.cbPeripheral == peripheral) {
+                    test = NO;
+                    break;
+                }
             }
         }
         
@@ -242,23 +252,50 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 107.0;
+    CGFloat result;
+    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    YMSCBPeripheral *yp = [cbAppService peripheralAtIndex:indexPath.row];
+    if ([cbAppService isKnownPeripheral:yp.cbPeripheral]) {
+        result = 107.0;
+    } else {
+        result = 44.0;
+    }
+    return result;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
-    
-    DEAPeripheralTableViewCell *cell = (DEAPeripheralTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (cell == nil) {
-        [[NSBundle mainBundle] loadNibNamed:@"DEAPeripheralTableViewCell" owner:self options:nil];
-        cell = self.tvCell;
-        self.tvCell = nil;
-        
-    }
+    static NSString *SensorTagCellIdentifier = @"SensorTagCell";
+    static NSString *UnknownPeripheralCellIdentifier = @"UnknownPeripheralCell";
 
+    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    YMSCBPeripheral *yp = [cbAppService peripheralAtIndex:indexPath.row];
     
-    [self configureCell:cell atIndexPath:indexPath];
+    UITableViewCell *cell = nil;
+    
+    if ([cbAppService isKnownPeripheral:yp.cbPeripheral]) {
+        DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)[tableView dequeueReusableCellWithIdentifier:SensorTagCellIdentifier];
+        
+        if (pcell == nil) {
+            [[NSBundle mainBundle] loadNibNamed:@"DEAPeripheralTableViewCell" owner:self options:nil];
+            pcell = self.tvCell;
+            self.tvCell = nil;
+        }
+        
+        [pcell configureWithSensorTag:(DEASensorTag *)yp];
+        
+        pcell.nameLabel.text = yp.cbPeripheral.name;
+        cell = pcell;
+        
+    } else {
+        
+        cell = [tableView dequeueReusableCellWithIdentifier:UnknownPeripheralCellIdentifier];
+        
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:UnknownPeripheralCellIdentifier];
+        }
+        cell.textLabel.text = yp.cbPeripheral.name;
+    }
+    
     return cell;
 
 }
@@ -282,7 +319,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     DEACBAppService *cbAppService = [DEACBAppService sharedService];
     NSInteger result;
-    result = [cbAppService.ymsPeripherals count];
+    result = cbAppService.count;
     return result;
 }
 
