@@ -31,8 +31,8 @@
     self = [super init];
     
     if (self) {
-        _base.hi = kSensorTag_BASE_ADDRESS_HI;
-        _base.lo = kSensorTag_BASE_ADDRESS_LO;
+        _base.hi = hi;
+        _base.lo = lo;
         
         _cbPeripheral = peripheral;
         peripheral.delegate = self;
