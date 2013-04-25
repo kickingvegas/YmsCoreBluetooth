@@ -22,7 +22,7 @@
 #import "DEAPeripheralTableViewCell.h"
 
 @interface DEAPeripheralsViewController ()
-- (void)configureCell:(DEAPeripheralTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void)editButtonAction:(id)sender;
 @end
 
 @implementation DEAPeripheralsViewController
@@ -58,6 +58,10 @@
                      options:NSKeyValueObservingOptionNew
                      context:NULL];
     
+    
+    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonAction:)];
+    
+    self.navigationItem.rightBarButtonItem = editButton;
 
 
 }
@@ -85,10 +89,13 @@
             }
         }
     } else if ([keyPath isEqualToString:@"RSSI"]) {
-        for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
-            if (cell.sensorTag.cbPeripheral == object) {
-                cell.rssiLabel.text = [NSString stringWithFormat:@"%@", change[@"new"]];
-                break;
+        for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+            if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
+                DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)cell;
+                if (pcell.sensorTag.cbPeripheral == object) {
+                    pcell.rssiLabel.text = [NSString stringWithFormat:@"%@", change[@"new"]];
+                    break;
+                }
             }
         }
    }
@@ -114,6 +121,20 @@
 }
 
 
+- (void)editButtonAction:(id)sender {
+    UIBarButtonItem *button = nil;
+    
+    [self.peripheralsTableView setEditing:(!self.peripheralsTableView.editing) animated:YES];
+    
+    if (self.peripheralsTableView.editing) {
+        button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editButtonAction:)];
+    } else {
+        button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonAction:)];
+        
+    }
+    self.navigationItem.rightBarButtonItem = button;
+        
+}
 
 #pragma mark - CBCentralManagerDelegate Methods
 
@@ -294,6 +315,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:UnknownPeripheralCellIdentifier];
         }
         cell.textLabel.text = yp.cbPeripheral.name;
+        cell.detailTextLabel.text = @"Unknown Peripheral";
     }
     
     return cell;
@@ -301,17 +323,38 @@
 }
 
 
-- (void)configureCell:(DEAPeripheralTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    
-    DEACBAppService *cbAppService = [DEACBAppService sharedService];
-    DEASensorTag *sensorTag = (DEASensorTag *)[cbAppService.ymsPeripherals objectAtIndex:indexPath.row];
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
 
-    [cell configureWithSensorTag:sensorTag];
-    
-    cell.nameLabel.text = sensorTag.cbPeripheral.name;
-
-    
+    switch (editingStyle) {
+        case UITableViewCellEditingStyleDelete: {
+            DEACBAppService *cbAppService = [DEACBAppService sharedService];
+            YMSCBPeripheral *yp = [cbAppService peripheralAtIndex:indexPath.row];
+            if ([yp isKindOfClass:[DEASensorTag class]]) {
+                if (yp.cbPeripheral.isConnected) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                    message:@"Disconnect the peripheral before deleting."
+                                                                   delegate:nil cancelButtonTitle:@"Dismiss"
+                                                          otherButtonTitles:nil];
+                    
+                    [alert show];
+                    
+                    break;
+                }
+            }
+            [cbAppService removePeripheral:yp];
+            
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            break;
+        }
+            
+        case UITableViewCellEditingStyleInsert:
+        case UITableViewCellEditingStyleNone:
+            break;
+            
+        default:
+            break;
+    }
 }
 
 
@@ -340,7 +383,6 @@
 
 
 - (void)viewDidUnload {
-    [self setTvCell:nil];
     [self setTvCell:nil];
     [super viewDidUnload];
 }
