@@ -40,15 +40,17 @@
 	
 	<option value="properties">Properties</option>
 	
+	<option value="//api/name/count">&nbsp;&nbsp;&nbsp;&nbsp;count</option>
+	
 	<option value="//api/name/currentManagerState">&nbsp;&nbsp;&nbsp;&nbsp;currentManagerState</option>
 	
 	<option value="//api/name/delegate">&nbsp;&nbsp;&nbsp;&nbsp;delegate</option>
 	
 	<option value="//api/name/isScanning">&nbsp;&nbsp;&nbsp;&nbsp;isScanning</option>
 	
-	<option value="//api/name/manager">&nbsp;&nbsp;&nbsp;&nbsp;manager</option>
+	<option value="//api/name/knownPeripheralNames">&nbsp;&nbsp;&nbsp;&nbsp;knownPeripheralNames</option>
 	
-	<option value="//api/name/peripheralSearchNames">&nbsp;&nbsp;&nbsp;&nbsp;peripheralSearchNames</option>
+	<option value="//api/name/manager">&nbsp;&nbsp;&nbsp;&nbsp;manager</option>
 	
 	<option value="//api/name/ymsPeripherals">&nbsp;&nbsp;&nbsp;&nbsp;ymsPeripherals</option>
 	
@@ -59,6 +61,8 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
+	<option value="//api/name/addPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- addPeripheral:</option>
+	
 	<option value="//api/name/connectPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- connectPeripheral:</option>
 	
 	<option value="//api/name/disconnectPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- disconnectPeripheral:</option>
@@ -67,11 +71,19 @@
 	
 	<option value="//api/name/handleFoundPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- handleFoundPeripheral:</option>
 	
-	<option value="//api/name/isAppServicePeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- isAppServicePeripheral:</option>
+	<option value="//api/name/initWithKnownPeripheralNames:queue:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithKnownPeripheralNames:queue:</option>
+	
+	<option value="//api/name/isKnownPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- isKnownPeripheral:</option>
 	
 	<option value="//api/name/loadPeripherals">&nbsp;&nbsp;&nbsp;&nbsp;- loadPeripherals</option>
 	
+	<option value="//api/name/peripheralAtIndex:">&nbsp;&nbsp;&nbsp;&nbsp;- peripheralAtIndex:</option>
+	
 	<option value="//api/name/persistPeripherals">&nbsp;&nbsp;&nbsp;&nbsp;- persistPeripherals</option>
+	
+	<option value="//api/name/removePeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- removePeripheral:</option>
+	
+	<option value="//api/name/removePeripheralAtIndex:">&nbsp;&nbsp;&nbsp;&nbsp;- removePeripheralAtIndex:</option>
 	
 	<option value="//api/name/scanForPeripheralsWithServices:options:">&nbsp;&nbsp;&nbsp;&nbsp;- scanForPeripheralsWithServices:options:</option>
 	
@@ -103,15 +115,17 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/count">count</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/currentManagerState">currentManagerState</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/delegate">delegate</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isScanning">isScanning</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/manager">manager</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/knownPeripheralNames">knownPeripheralNames</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/peripheralSearchNames">peripheralSearchNames</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/manager">manager</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/ymsPeripherals">ymsPeripherals</a></span></li>
 	
@@ -123,6 +137,8 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/addPeripheral:">addPeripheral:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/connectPeripheral:">connectPeripheral:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/disconnectPeripheral:">disconnectPeripheral:</a></span></li>
@@ -131,11 +147,19 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/handleFoundPeripheral:">handleFoundPeripheral:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isAppServicePeripheral:">isAppServicePeripheral:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithKnownPeripheralNames:queue:">initWithKnownPeripheralNames:queue:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isKnownPeripheral:">isKnownPeripheral:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/loadPeripherals">loadPeripherals</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/peripheralAtIndex:">peripheralAtIndex:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/persistPeripherals">persistPeripherals</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/removePeripheral:">removePeripheral:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/removePeripheralAtIndex:">removePeripheralAtIndex:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/scanForPeripheralsWithServices:options:">scanForPeripheralsWithServices:options:</a></span></li>
 	
@@ -229,7 +253,7 @@ considered a sub-system of the application.</p>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/peripheralSearchNames">&nbsp;&nbsp;peripheralSearchNames</a></code>
+		<code><a href="#//api/name/knownPeripheralNames">&nbsp;&nbsp;knownPeripheralNames</a></code>
 		<span class="tooltip"><p>Array of NSStrings to search to match CBPeripheral instances.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
@@ -251,9 +275,23 @@ if Bluetooth is turned off in Settings.</p></span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/isAppServicePeripheral:">&ndash;&nbsp;isAppServicePeripheral:</a></code>
-		<span class="tooltip"><p>Determines if peripheral is to be managed by this app service.
-Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralSearchNames</a>.</p></span>
+		<code><a href="#//api/name/count">&nbsp;&nbsp;count</a></code>
+		<span class="tooltip"><p>Count of <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithKnownPeripheralNames:queue:">&ndash;&nbsp;initWithKnownPeripheralNames:queue:</a></code>
+		<span class="tooltip"><p>Constructor with array of known peripheral names.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isKnownPeripheral:">&ndash;&nbsp;isKnownPeripheral:</a></code>
+		<span class="tooltip"><p>Determines if peripheral is known by this app service.
+Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeripheralNames</a>.</p></span>
 	</span>
 	
 	
@@ -282,6 +320,34 @@ Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralS
 	<span class="tooltip">
 		<code><a href="#//api/name/startScan">&ndash;&nbsp;startScan</a></code>
 		<span class="tooltip"><p>Start CoreBluetooth scan for peripherals. This method is to be overridden.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/peripheralAtIndex:">&ndash;&nbsp;peripheralAtIndex:</a></code>
+		<span class="tooltip"><p>Returns the YSMCBPeripheral instance from <a href="#//api/name/ymsPeripherals">ymsPeripherals</a> at index.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addPeripheral:">&ndash;&nbsp;addPeripheral:</a></code>
+		<span class="tooltip"><p>Add <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a> instance to <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/removePeripheral:">&ndash;&nbsp;removePeripheral:</a></code>
+		<span class="tooltip"><p>Remove all occurrences of yperipheral in <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/removePeripheralAtIndex:">&ndash;&nbsp;removePeripheralAtIndex:</a></code>
+		<span class="tooltip"><p>Remove <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a> instance at index</p></span>
 	</span>
 	
 	
@@ -332,6 +398,47 @@ Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralS
 					<div class="section section-methods">
 						<a title="Properties" name="properties"></a>
 						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/count" title="count"></a>
+	<h3 class="subsubtitle method-title">count</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Count of <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly, assign) NSUInteger count</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Count of <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/currentManagerState" title="currentManagerState"></a>
@@ -459,6 +566,49 @@ if Bluetooth is turned off in Settings.</p>
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/knownPeripheralNames" title="knownPeripheralNames"></a>
+	<h3 class="subsubtitle method-title">knownPeripheralNames</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Array of NSStrings to search to match CBPeripheral instances.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSArray *knownPeripheralNames</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Array of NSStrings to search to match CBPeripheral instances.</p>
+
+<p>Used in conjunction with [isAppServicePeripheral:]</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/manager" title="manager"></a>
 	<h3 class="subsubtitle method-title">manager</h3>
 	
@@ -483,49 +633,6 @@ if Bluetooth is turned off in Settings.</p>
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Pointer to CBCentralManager.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/peripheralSearchNames" title="peripheralSearchNames"></a>
-	<h3 class="subsubtitle method-title">peripheralSearchNames</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Array of NSStrings to search to match CBPeripheral instances.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSArray *peripheralSearchNames</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Array of NSStrings to search to match CBPeripheral instances.</p>
-
-<p>Used in conjunction with [isAppServicePeripheral:]</p>
 	</div>
 	
 	
@@ -592,6 +699,57 @@ if Bluetooth is turned off in Settings.</p>
 					<div class="section section-methods">
 						<a title="Instance Methods" name="instance_methods"></a>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/addPeripheral:" title="addPeripheral:"></a>
+	<h3 class="subsubtitle method-title">addPeripheral:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Add <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a> instance to <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)addPeripheral:(YMSCBPeripheral *)<em>yperipheral</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>yperipheral</em></dt>
+			<dd><p>Instance of <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a></p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Add <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a> instance to <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/connectPeripheral:" title="connectPeripheral:"></a>
@@ -803,19 +961,75 @@ if Bluetooth is turned off in Settings.</p>
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/isAppServicePeripheral:" title="isAppServicePeripheral:"></a>
-	<h3 class="subsubtitle method-title">isAppServicePeripheral:</h3>
+	<a name="//api/name/initWithKnownPeripheralNames:queue:" title="initWithKnownPeripheralNames:queue:"></a>
+	<h3 class="subsubtitle method-title">initWithKnownPeripheralNames:queue:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Determines if peripheral is to be managed by this app service.
-Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralSearchNames</a>.</p>
+		<p>Constructor with array of known peripheral names.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (BOOL)isAppServicePeripheral:(CBPeripheral *)<em>peripheral</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)initWithKnownPeripheralNames:(NSArray *)<em>nameList</em> queue:(dispatch_queue_t)<em>queue</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>nameList</em></dt>
+			<dd><p>Array of peripheral names of type NSString.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>queue</em></dt>
+			<dd><p>The dispatch queue to use to dispatch the central role events. If its value is nil, the central <a href="#//api/name/manager">manager</a> dispatches central role events using the main queue.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Constructor with array of known peripheral names.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isKnownPeripheral:" title="isKnownPeripheral:"></a>
+	<h3 class="subsubtitle method-title">isKnownPeripheral:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Determines if peripheral is known by this app service.
+Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeripheralNames</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (BOOL)isKnownPeripheral:(CBPeripheral *)<em>peripheral</em></code></div>
 
     
 	
@@ -842,8 +1056,8 @@ Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralS
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Determines if peripheral is to be managed by this app service.
-Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralSearchNames</a>.</p>
+		<p>Determines if peripheral is known by this app service.
+Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeripheralNames</a>.</p>
 	</div>
 	
 	
@@ -902,6 +1116,57 @@ Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralS
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/peripheralAtIndex:" title="peripheralAtIndex:"></a>
+	<h3 class="subsubtitle method-title">peripheralAtIndex:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Returns the YSMCBPeripheral instance from <a href="#//api/name/ymsPeripherals">ymsPeripherals</a> at index.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (YMSCBPeripheral *)peripheralAtIndex:(NSUInteger)<em>index</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>index</em></dt>
+			<dd><p>An index within the bounds of <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Returns the YSMCBPeripheral instance from <a href="#//api/name/ymsPeripherals">ymsPeripherals</a> at index.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/persistPeripherals" title="persistPeripherals"></a>
 	<h3 class="subsubtitle method-title">persistPeripherals</h3>
 	
@@ -943,6 +1208,108 @@ Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralS
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/removePeripheral:" title="removePeripheral:"></a>
+	<h3 class="subsubtitle method-title">removePeripheral:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Remove all occurrences of yperipheral in <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)removePeripheral:(YMSCBPeripheral *)<em>yperipheral</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>yperipheral</em></dt>
+			<dd><p>Instance of <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a></p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Remove all occurrences of yperipheral in <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/removePeripheralAtIndex:" title="removePeripheralAtIndex:"></a>
+	<h3 class="subsubtitle method-title">removePeripheralAtIndex:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Remove <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a> instance at index</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)removePeripheralAtIndex:(NSUInteger)<em>index</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>index</em></dt>
+			<dd><p>The index from which to remove the object in <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>. The value must not exceed the bounds of the array.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Remove <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a> instance at index</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/scanForPeripheralsWithServices:options:" title="scanForPeripheralsWithServices:options:"></a>
 	<h3 class="subsubtitle method-title">scanForPeripheralsWithServices:options:</h3>
 	
@@ -957,6 +1324,21 @@ Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralS
 	<div class="method-subsection method-declaration"><code>- (void)scanForPeripheralsWithServices:(NSArray *)<em>serviceUUIDs</em> options:(NSDictionary *)<em>options</em></code></div>
 
     
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>serviceUUIDs</em></dt>
+			<dd><p>An array of CBUUIDs the app is interested in.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>options</em></dt>
+			<dd><p>A dictionary to customize the scan, see CBCentralManagerScanOptionAllowDuplicatesKey.</p></dd>
+		</dl>
+		
+	</div>
 	
 	
 	
@@ -1010,7 +1392,7 @@ Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralS
 		<p>Start CoreBluetooth scan for peripherals. This method is to be overridden.</p>
 
 <p>The implementation of this method in a subclass must include the call to
-[self scanForPeripheralsWithServices:options:]</p>
+<a href="#//api/name/scanForPeripheralsWithServices:options:">scanForPeripheralsWithServices:options:</a></p>
 	</div>
 	
 	
@@ -1081,7 +1463,7 @@ Used in conjunction with <a href="#//api/name/peripheralSearchNames">peripheralS
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-04-18)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-04-24)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						
