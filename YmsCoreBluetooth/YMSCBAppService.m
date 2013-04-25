@@ -103,11 +103,29 @@
 }
 
 - (void)removePeripheral:(YMSCBPeripheral *)yperipheral {
+    
+    if (yperipheral.cbPeripheral.UUID != nil) {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSArray *devices = [userDefaults arrayForKey:@"storedPeripherals"];
+        NSMutableArray *newDevices = [NSMutableArray arrayWithArray:devices];
+    
+        NSString *uuidString = (NSString *)CFBridgingRelease(CFUUIDCreateString(NULL, yperipheral.cbPeripheral.UUID));
+        
+        [newDevices removeObject:uuidString];
+        
+        [userDefaults setObject:newDevices forKey:@"storedPeripherals"];
+        [userDefaults synchronize];
+    }
+    
+    
     [self.ymsPeripherals removeObject:yperipheral];
 }
 
 - (void)removePeripheralAtIndex:(NSUInteger)index {
-    [self.ymsPeripherals removeObjectAtIndex:index];
+    
+    YMSCBPeripheral *yperipheral = [self.ymsPeripherals objectAtIndex:index];
+    
+    [self removePeripheral:yperipheral];
 }
 
 - (BOOL)isKnownPeripheral:(CBPeripheral *)peripheral {
