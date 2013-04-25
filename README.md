@@ -5,9 +5,13 @@ A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS applicat
 [YmsCoreBluetooth API Reference](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/hierarchy.html)
 
 ## Changes
+### Wed Apr 24 2013
+* Bugfix #5 to support multiple SensorTags is now in. With many thanks to Texas Instruments, a second SensorTag was donated to YmsCoreBluetooth to test for multiple peripherals.
+* Support for deleting discovered peripherals is in.
+* Support for discovering unknown peripherals is in.
 
 ### Sat Apr 20 2013
-* Bugfix [15](https://github.com/kickingvegas/YmsCoreBluetooth/issues/15) where connect button is blocked when scanning.
+* Bugfix #15 where connect button is blocked when scanning.
 * Bugfixes on handling peripheral disconnects.
 
 ### Thu Apr 18 2013 - Major Revision
