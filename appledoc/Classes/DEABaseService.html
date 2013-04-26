@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>DEAGyroscopeService Class Reference</title>
+		<title>DEABaseService Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">DEAGyroscopeService Class Reference</h1>
+				<h1 class="hideInXcode">DEABaseService Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -44,11 +44,13 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/initWithName:baseHi:baseLo:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:baseHi:baseLo:</option>
+	<option value="//api/name/requestConfig">&nbsp;&nbsp;&nbsp;&nbsp;- requestConfig</option>
+	
+	<option value="//api/name/responseConfig">&nbsp;&nbsp;&nbsp;&nbsp;- responseConfig</option>
+	
+	<option value="//api/name/turnOff">&nbsp;&nbsp;&nbsp;&nbsp;- turnOff</option>
 	
 	<option value="//api/name/turnOn">&nbsp;&nbsp;&nbsp;&nbsp;- turnOn</option>
-	
-	<option value="//api/name/updateCharacteristic:">&nbsp;&nbsp;&nbsp;&nbsp;- updateCharacteristic:</option>
 	
 	
 	
@@ -78,11 +80,13 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithName:baseHi:baseLo:">initWithName:baseHi:baseLo:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/requestConfig">requestConfig</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/responseConfig">responseConfig</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/turnOff">turnOff</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/turnOn">turnOn</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/updateCharacteristic:">updateCharacteristic:</a></span></li>
 	
 </ul></li>
 
@@ -91,7 +95,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="DEAGyroscopeService Class Reference" name="top"></a>
+				<a title="DEABaseService Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -100,7 +104,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">DEAGyroscopeService Class Reference</h1>
+						<h1 class="title title-header">DEABaseService Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -108,10 +112,10 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value"><a href="../Classes/DEABaseService.html">DEABaseService</a> : <a href="../Classes/YMSCBService.html">YMSCBService</a> : NSObject</td>
+	<td class="specification-value"><a href="../Classes/YMSCBService.html">YMSCBService</a> : NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">DEAGyroscopeService.h<br />DEAGyroscopeService.m</td>
+	<td class="specification-value">DEABaseService.h<br />DEABaseService.m</td>
 </tr>
 						</tbody></table></div>
 					
@@ -121,7 +125,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>TI SensorTag CoreBluetooth service definition for gyroscope.</p>
+						<p>Base class for defining a CoreBluetooth service for a TI SensorTag.</p>
 					</div>
 					
 					
@@ -139,15 +143,15 @@
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithName:baseHi:baseLo:">&ndash;&nbsp;initWithName:baseHi:baseLo:</a></code>
-		<span class="tooltip"><p>Initialize class instance.</p></span>
+		<code><a href="#//api/name/requestConfig">&ndash;&nbsp;requestConfig</a></code>
+		<span class="tooltip"><p>Request a read of the <em>config</em> characteristic.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/updateCharacteristic:">&ndash;&nbsp;updateCharacteristic:</a></code>
-		<span class="tooltip"><p>Method to handle response update for a prior read or write request to a characteristic.</p></span>
+		<code><a href="#//api/name/responseConfig">&ndash;&nbsp;responseConfig</a></code>
+		<span class="tooltip"><p>Return value of the <em>config</em> characteristic.</p></span>
 	</span>
 	
 	
@@ -155,6 +159,13 @@
 	<span class="tooltip">
 		<code><a href="#//api/name/turnOn">&ndash;&nbsp;turnOn</a></code>
 		<span class="tooltip"><p>Turn on CoreBluetooth peripheral service.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/turnOff">&ndash;&nbsp;turnOff</a></code>
+		<span class="tooltip"><p>Turn off CoreBluetooth peripheral service.</p></span>
 	</span>
 	
 	
@@ -176,47 +187,22 @@
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithName:baseHi:baseLo:" title="initWithName:baseHi:baseLo:"></a>
-	<h3 class="subsubtitle method-title">initWithName:baseHi:baseLo:</h3>
+	<a name="//api/name/requestConfig" title="requestConfig"></a>
+	<h3 class="subsubtitle method-title">requestConfig</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Initialize class instance.</p>
+		<p>Request a read of the <em>config</em> characteristic.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (id)initWithName:(NSString *)<em>oName</em> baseHi:(int64_t)<em>hi</em> baseLo:(int64_t)<em>lo</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)requestConfig</code></div>
 
     
 	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>oName</em></dt>
-			<dd><p><a href="#//api/name/name">name</a> of service</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>hi</em></dt>
-			<dd><p>top 64 bits of 128-bit <a href="#//api/name/base">base</a> address value</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>lo</em></dt>
-			<dd><p>bottom 64 bits of 128-bit <a href="#//api/name/base">base</a> address value</p></dd>
-		</dl>
-		
-	</div>
 	
-	
-	
-	<div class="method-subsection return">
-		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p><a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a></p>
-	</div>
 	
 	
 	
@@ -224,7 +210,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Initialize class instance.</p>
+		<p>Request a read of the <em>config</em> characteristic.</p>
 	</div>
 	
 	
@@ -235,7 +221,102 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBService.h</code><br />
+		<code class="declared-in-ref">DEABaseService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/responseConfig" title="responseConfig"></a>
+	<h3 class="subsubtitle method-title">responseConfig</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Return value of the <em>config</em> characteristic.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSData *)responseConfig</code></div>
+
+    
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>data of <em>config</em> characteristic.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Return value of the <em>config</em> characteristic.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DEABaseService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/turnOff" title="turnOff"></a>
+	<h3 class="subsubtitle method-title">turnOff</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Turn off CoreBluetooth peripheral service.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)turnOff</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Turn off CoreBluetooth peripheral service.</p>
+
+<p>This method turns off the service by:</p>
+
+<ul>
+<li>writing to <em>config</em> characteristic to disable service.</li>
+<li>writing to <em>data</em> characteristic to disable notification.</li>
+</ul>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DEABaseService.h</code><br />
 	</div>				
 	
 	
@@ -285,62 +366,6 @@
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
 		<code class="declared-in-ref">DEABaseService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/updateCharacteristic:" title="updateCharacteristic:"></a>
-	<h3 class="subsubtitle method-title">updateCharacteristic:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Method to handle response update for a prior read or write request to a characteristic.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)updateCharacteristic:(YMSCBCharacteristic *)<em>yc</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>yc</em></dt>
-			<dd><p>Characteristic receiving update.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Method to handle response update for a prior read or write request to a characteristic.</p>
-
-<p>This method is invoked by the CBPeripheralDelegate method peripheral:didUpdateValueForCharacteristic:error:
-conformed to by <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</p>
-
-<p><strong>This method must be overridden</strong>.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBService.h</code><br />
 	</div>				
 	
 	

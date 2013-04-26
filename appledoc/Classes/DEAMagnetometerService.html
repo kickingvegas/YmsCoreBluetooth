@@ -44,7 +44,7 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/initWithName:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:</option>
+	<option value="//api/name/initWithName:baseHi:baseLo:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:baseHi:baseLo:</option>
 	
 	<option value="//api/name/updateCharacteristic:">&nbsp;&nbsp;&nbsp;&nbsp;- updateCharacteristic:</option>
 	
@@ -76,7 +76,7 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithName:">initWithName:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithName:baseHi:baseLo:">initWithName:baseHi:baseLo:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/updateCharacteristic:">updateCharacteristic:</a></span></li>
 	
@@ -104,7 +104,7 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value"><a href="../Classes/YMSCBService.html">YMSCBService</a> : NSObject</td>
+	<td class="specification-value"><a href="../Classes/DEABaseService.html">DEABaseService</a> : <a href="../Classes/YMSCBService.html">YMSCBService</a> : NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
 	<td class="specification-value">DEAMagnetometerService.h<br />DEAMagnetometerService.m</td>
@@ -135,7 +135,7 @@
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithName:">&ndash;&nbsp;initWithName:</a></code>
+		<code><a href="#//api/name/initWithName:baseHi:baseLo:">&ndash;&nbsp;initWithName:baseHi:baseLo:</a></code>
 		<span class="tooltip"><p>Initialize class instance.</p></span>
 	</span>
 	
@@ -143,7 +143,7 @@
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/updateCharacteristic:">&ndash;&nbsp;updateCharacteristic:</a></code>
-		<span class="tooltip"><p>Method to handle response update for a prior read or write request to a characteristic. <strong>This method is to be overridden</strong>.</p></span>
+		<span class="tooltip"><p>Method to handle response update for a prior read or write request to a characteristic.</p></span>
 	</span>
 	
 	
@@ -165,8 +165,8 @@
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithName:" title="initWithName:"></a>
-	<h3 class="subsubtitle method-title">initWithName:</h3>
+	<a name="//api/name/initWithName:baseHi:baseLo:" title="initWithName:baseHi:baseLo:"></a>
+	<h3 class="subsubtitle method-title">initWithName:baseHi:baseLo:</h3>
 	
 	
 	
@@ -176,7 +176,7 @@
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (id)initWithName:(NSString *)<em>oName</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)initWithName:(NSString *)<em>oName</em> baseHi:(int64_t)<em>hi</em> baseLo:(int64_t)<em>lo</em></code></div>
 
     
 	
@@ -186,6 +186,16 @@
 		<dl class="argument-def parameter-def">
 			<dt><em>oName</em></dt>
 			<dd><p><a href="#//api/name/name">name</a> of service</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>hi</em></dt>
+			<dd><p>top 64 bits of 128-bit <a href="#//api/name/base">base</a> address value</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>lo</em></dt>
+			<dd><p>bottom 64 bits of 128-bit <a href="#//api/name/base">base</a> address value</p></dd>
 		</dl>
 		
 	</div>
@@ -227,7 +237,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Method to handle response update for a prior read or write request to a characteristic. <strong>This method is to be overridden</strong>.</p>
+		<p>Method to handle response update for a prior read or write request to a characteristic.</p>
 	</div>		
 	
     
@@ -254,7 +264,12 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Method to handle response update for a prior read or write request to a characteristic. <strong>This method is to be overridden</strong>.</p>
+		<p>Method to handle response update for a prior read or write request to a characteristic.</p>
+
+<p>This method is invoked by the CBPeripheralDelegate method peripheral:didUpdateValueForCharacteristic:error:
+conformed to by <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</p>
+
+<p><strong>This method must be overridden</strong>.</p>
 	</div>
 	
 	
@@ -284,7 +299,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-04-24)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-04-26)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						
