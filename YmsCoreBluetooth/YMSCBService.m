@@ -24,23 +24,15 @@
 @implementation YMSCBService
 
 
-- (id)init {
+- (id)initWithName:(NSString *)oName
+            baseHi:(int64_t)hi
+            baseLo:(int64_t)lo {
     self = [super init];
-    
     if (self) {
+        _name = oName;
+        _base.hi = hi;
+        _base.lo = lo;
         _characteristicDict = [[NSMutableDictionary alloc] init];
-        _base.hi = kSensorTag_BASE_ADDRESS_HI;
-        _base.lo = kSensorTag_BASE_ADDRESS_LO;
-    }
-    
-    return self;
-}
-
-- (id)initWithName:(NSString *)oName {
-    // Classes which inherit from this class must invoke this method via super.
-    self = [self init];
-    if (self) {
-        self.name = oName;
     }
     return self;
 }

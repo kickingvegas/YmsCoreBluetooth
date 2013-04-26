@@ -49,9 +49,13 @@
 /**
  Initialize class instance.
  @param oName name of service
+ @param hi top 64 bits of 128-bit base address value
+ @param lo bottom 64 bits of 128-bit base address value
  @return YMSCBCharacteristic
  */
-- (id)initWithName:(NSString *)oName;
+- (id)initWithName:(NSString *)oName
+            baseHi:(int64_t)hi
+            baseLo:(int64_t)lo;
 
 /**
  Add YMSCBCharacteristic instance given address offset.
@@ -183,7 +187,9 @@
 - (void)turnOff;
 
 /**
- Method to handle response update for a prior read or write request to a characteristic. **This method is to be overridden**.
+ Method to handle response update for a prior read or write request to a characteristic.  
+ This method is invoked by [YMSCBPeripheral peripheral:didUpdateValueForCharacteristic:error:]
+ **This method must be overridden**.
 
  @param yc Characteristic receiving update.
  
