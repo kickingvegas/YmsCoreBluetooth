@@ -37,9 +37,23 @@
 
 <p><a href="http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/hierarchy.html">YmsCoreBluetooth API Reference</a></p>
 
-<h2>Changes</h2>
+<h2>Notes</h2>
 
-<h3>Wed Apr 24 2013</h3>
+<p>Despite my efforts to make it work, I've chosen to stop supporting the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator <a href="http://developer.apple.com/library/ios/#technotes/tn2295/_index.html">TN2295</a>, I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.</p>
+
+<p>Code tested on:</p>
+
+<ul>
+<li>iPhone 4S, iOS 6.1.3</li>
+<li>TI SensorTag firmware 1.2, 1.3.</li>
+</ul><h2>Changes</h2>
+
+<h3>Fri Apr 26 2013</h3>
+
+<ul>
+<li>Bugfix #21 - YMSCBService now supports constructor with 128-bit base address.</li>
+<li>Issue #23 - Moved SensorTag specific methods (<code>requestConfig</code>, <code>responseConfig</code>, <code>turnOn</code>, <code>turnOff</code>) from YMSCBService.</li>
+</ul><h3>Wed Apr 24 2013</h3>
 
 <ul>
 <li>Bugfix #5 to support multiple SensorTags is now in. With many thanks to Texas Instruments, a second SensorTag was donated to YmsCoreBluetooth to test for multiple peripherals.</li>
@@ -70,14 +84,6 @@
 <li>First stable release.</li>
 <li>Support for communication with all sensors/services on a SensorTag.</li>
 <li>Initial documentation for YmsCoreBluetooth API and Deanna source code.</li>
-</ul><h2>Notes</h2>
-
-<p>Despite my efforts to make it work, I've chosen to stop supporting the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator <a href="http://developer.apple.com/library/ios/#technotes/tn2295/_index.html">TN2295</a>, I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.</p>
-
-<p>Code tested on:</p>
-
-<ul>
-<li>iPhone 4S, iOS 6.1.3</li>
 </ul><h3>License</h3>
 
 <pre><code>Copyright 2013 Yummy Melon Software LLC
