@@ -35,6 +35,7 @@
 		D9718B6E167F9FA00001E42C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9718B6C167F9FA00001E42C /* InfoPlist.strings */; };
 		D9718B71167F9FA00001E42C /* DeannaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718B70167F9FA00001E42C /* DeannaTests.m */; };
 		D9718B8F167FA5140001E42C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B8E167FA5140001E42C /* CoreBluetooth.framework */; };
+		D97EC6D0172B08AB00CAECFC /* DEABaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = D97EC6CF172B08AB00CAECFC /* DEABaseService.m */; };
 		D988A5C616DD26A100D7D392 /* DEASensorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = D988A5C516DD26A100D7D392 /* DEASensorTag.m */; };
 		D988A5C816DD464A00D7D392 /* TISensorTag.c in Sources */ = {isa = PBXBuildFile; fileRef = D988A5C716DD464A00D7D392 /* TISensorTag.c */; };
 		D9971AEA1720A9A100B1A068 /* DEAPeripheralTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9971AE91720A9A100B1A068 /* DEAPeripheralTableViewCell.xib */; };
@@ -123,6 +124,8 @@
 		D9718B70167F9FA00001E42C /* DeannaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeannaTests.m; sourceTree = "<group>"; };
 		D9718B8E167FA5140001E42C /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D9718B94167FA91F0001E42C /* TISensorTag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TISensorTag.h; sourceTree = "<group>"; };
+		D97EC6CE172B08AB00CAECFC /* DEABaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEABaseService.h; sourceTree = "<group>"; };
+		D97EC6CF172B08AB00CAECFC /* DEABaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEABaseService.m; sourceTree = "<group>"; };
 		D988A5C416DD26A100D7D392 /* DEASensorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASensorTag.h; sourceTree = "<group>"; };
 		D988A5C516DD26A100D7D392 /* DEASensorTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASensorTag.m; sourceTree = "<group>"; };
 		D988A5C716DD464A00D7D392 /* TISensorTag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TISensorTag.c; sourceTree = "<group>"; };
@@ -357,6 +360,8 @@
 		D9CB2C0716A71FC300279DDA /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				D97EC6CE172B08AB00CAECFC /* DEABaseService.h */,
+				D97EC6CF172B08AB00CAECFC /* DEABaseService.m */,
 				D91170511681251900E2D19A /* DEATemperatureService.h */,
 				D91170521681251900E2D19A /* DEATemperatureService.m */,
 				D91170541681461300E2D19A /* DEAAccelerometerService.h */,
@@ -546,6 +551,7 @@
 				D93EAC5616E1DAC8008B1BD3 /* DEAMagnetometerViewCell.m in Sources */,
 				D93EAC5916E1DAF5008B1BD3 /* DEAMagnetometerService.m in Sources */,
 				D9971AEE1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m in Sources */,
+				D97EC6D0172B08AB00CAECFC /* DEABaseService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
