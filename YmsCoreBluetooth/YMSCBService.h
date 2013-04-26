@@ -154,7 +154,10 @@
 
 /**
  Method to handle response update for a prior read or write request to a characteristic.  
- This method is invoked by [YMSCBPeripheral peripheral:didUpdateValueForCharacteristic:error:]
+ 
+ This method is invoked by the CBPeripheralDelegate method peripheral:didUpdateValueForCharacteristic:error: 
+ conformed to by YMSCBPeripheral.
+ 
  **This method must be overridden**.
 
  @param yc Characteristic receiving update.

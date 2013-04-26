@@ -27,6 +27,9 @@
  
  This is a container class which manages an instance of CBPeripheral
  and its associated delegate callbacks.
+ 
+ Note that the CBPeripheralDelegate method peripheral:didUpdateValueForCharacteristic:error: will 
+ call [YMSCBService updateCharacteristic:] to handle responses to read and writes made to that service.
 
  */
 @interface YMSCBPeripheral : NSObject <CBPeripheralDelegate>
@@ -74,7 +77,7 @@
 /**
  Generate array of CBUUID for all SensorTag CoreBluetooth services.
  
- The output of this method is to be passed to [CBPeripheral discoverServices:]
+ The output of this method is to be passed to the method discoverServices: in CBPeripheral:
  
  @return array of CBUUID services
  */
