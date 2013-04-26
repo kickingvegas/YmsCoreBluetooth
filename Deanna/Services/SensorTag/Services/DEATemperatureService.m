@@ -50,8 +50,12 @@ double calcTmpTarget(int16_t objT, double m_tempAmb) {
 
 @implementation DEATemperatureService
 
-- (id)initWithName:(NSString *)oName {
-    self = [super initWithName:oName];
+- (id)initWithName:(NSString *)oName
+            baseHi:(int64_t)hi
+            baseLo:(int64_t)lo {
+    self = [super initWithName:oName
+                        baseHi:hi
+                        baseLo:lo];
     
     if (self) {
         [self addCharacteristic:@"service" withOffset:kSensorTag_TEMPERATURE_SERVICE];

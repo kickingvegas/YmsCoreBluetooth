@@ -29,8 +29,12 @@ float calcGyro(int16_t v, float c, int16_t d) {
 
 @implementation DEAGyroscopeService
 
-- (id)initWithName:(NSString *)oName {
-    self = [super initWithName:oName];
+- (id)initWithName:(NSString *)oName
+            baseHi:(int64_t)hi
+            baseLo:(int64_t)lo {
+    self = [super initWithName:oName
+                        baseHi:hi
+                        baseLo:lo];
     
     if (self) {
         [self addCharacteristic:@"service" withOffset:kSensorTag_GYROSCOPE_SERVICE];
