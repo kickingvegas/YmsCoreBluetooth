@@ -22,8 +22,12 @@
 @implementation DEASimpleKeysService
 
 
-- (id)initWithName:(NSString *)oName {
-    self = [super initWithName:oName];
+- (id)initWithName:(NSString *)oName
+            baseHi:(int64_t)hi
+            baseLo:(int64_t)lo {
+    self = [super initWithName:oName
+                        baseHi:hi
+                        baseLo:lo];
     
     if (self) {
         [self addCharacteristic:@"service" withAddress:kSensorTag_SIMPLEKEYS_SERVICE];
@@ -50,6 +54,18 @@
         
     }
     
+}
+
+- (void)turnOff {
+    //[self writeByte:0x0 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
+    [self setNotifyValue:NO forCharacteristicName:@"data"];
+    self.isOn = NO;
+}
+
+- (void)turnOn {
+    //[self writeByte:0x1 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
+    [self setNotifyValue:YES forCharacteristicName:@"data"];
+    self.isOn = YES;
 }
 
 
