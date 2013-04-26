@@ -16,12 +16,12 @@
 //  Author: Charles Y. Choi <charles.choi@yummymelon.com>
 //
 
-#import "YMSCBService.h"
+#import "DEABaseService.h"
 
 /**
  TI SensorTag CoreBluetooth service definition for simple keys service.
  */
-@interface DEASimpleKeysService : YMSCBService
+@interface DEASimpleKeysService : DEABaseService
 
 @property (nonatomic, strong) NSNumber *keyValue;
 

@@ -16,12 +16,12 @@
 //  Author: Charles Y. Choi <charles.choi@yummymelon.com>
 //
 
-#import "YMSCBService.h"
+#import "DEABaseService.h"
 
 /**
  TI SensorTag CoreBluetooth service definition for thermometer.
  */
-@interface DEATemperatureService : YMSCBService
+@interface DEATemperatureService : DEABaseService
 
 
 /// Ambient temperature

@@ -17,12 +17,12 @@
 //
 
 
-#import "YMSCBService.h"
+#import "DEABaseService.h"
 
 /**
  TI SensorTag CoreBluetooth service definition for accelerometer.
  */
-@interface DEAAccelerometerService : YMSCBService
+@interface DEAAccelerometerService : DEABaseService
 
 /// x value
 @property (nonatomic, strong) NSNumber *x;

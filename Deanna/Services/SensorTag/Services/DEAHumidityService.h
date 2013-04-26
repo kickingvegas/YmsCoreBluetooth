@@ -16,12 +16,12 @@
 //  Author: Charles Y. Choi <charles.choi@yummymelon.com>
 //
 
-#import "YMSCBService.h"
+#import "DEABaseService.h"
 
 /**
  TI SensorTag Humidity Service
  */
-@interface DEAHumidityService : YMSCBService
+@interface DEAHumidityService : DEABaseService
 
 /// Ambient temperature
 @property (nonatomic, strong) NSNumber *ambientTemp;

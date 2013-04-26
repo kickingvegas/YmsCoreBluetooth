@@ -16,12 +16,12 @@
 //  Author: Charles Y. Choi <charles.choi@yummymelon.com>
 //
 
-#import "YMSCBService.h"
+#import "DEABaseService.h"
 
 /**
  TI SensorTag CoreBluetooth service definition for gyroscope.
  */
-@interface DEAGyroscopeService : YMSCBService
+@interface DEAGyroscopeService : DEABaseService
 
 @property (nonatomic, strong) NSNumber *roll;
 @property (nonatomic, strong) NSNumber *pitch;
