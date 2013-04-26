@@ -151,40 +151,6 @@
  */
 - (void)readValueForCharacteristicName:(NSString *)cname;
 
-/**
- Request a read of the *config* characteristic.
- */
-- (void)requestConfig;
-
-/**
- Return value of the *config* characteristic.
-
- @returns data of *config* characteristic.
- */
-- (NSData *)responseConfig;
-
-/**
- Turn on CoreBluetooth peripheral service.
- 
- This method turns on the service by:
- 
- *  writing to *config* characteristic to enable service.
- *  writing to *data* characteristic to enable notification.
- 
- */
-- (void)turnOn;
-
-
-/**
- Turn off CoreBluetooth peripheral service.
- 
- This method turns off the service by:
- 
- *  writing to *config* characteristic to disable service.
- *  writing to *data* characteristic to disable notification.
- 
- */
-- (void)turnOff;
 
 /**
  Method to handle response update for a prior read or write request to a characteristic.  

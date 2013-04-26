@@ -146,28 +146,6 @@
 }
 
 
-- (void)requestConfig {
-    [self readValueForCharacteristicName:@"config"];
-    //[self writeByte:0x1 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
-}
-
-- (NSData *)responseConfig {
-    YMSCBCharacteristic *yc = self.characteristicDict[@"config"];
-    NSData *data = yc.cbCharacteristic.value;
-    return data;
-}
-
-- (void)turnOff {
-    [self writeByte:0x0 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
-    [self setNotifyValue:NO forCharacteristicName:@"data"];
-    self.isOn = NO;
-}
-
-- (void)turnOn {
-    [self writeByte:0x1 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
-    [self setNotifyValue:YES forCharacteristicName:@"data"];
-    self.isOn = YES;
-}
 
 - (void)updateCharacteristic:(YMSCBCharacteristic *)yc {
     // OVERRIDE THIS METHOD
