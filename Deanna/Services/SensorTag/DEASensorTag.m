@@ -25,6 +25,7 @@
 #import "DEAGyroscopeService.h"
 #import "DEAMagnetometerService.h"
 #import "YMSCBCharacteristic.h"
+#import "DEABaseService.h"
 
 @implementation DEASensorTag
 
@@ -64,7 +65,7 @@
     
     [super peripheral:peripheral didDiscoverCharacteristicsForService:service error:&*error];
     
-    YMSCBService *btService = [self findService:service];
+    DEABaseService *btService = (DEABaseService *)[self findService:service];
 
     if ([btService.name isEqualToString:@"simplekeys"]) {
         [btService setNotifyValue:YES forCharacteristicName:@"data"];
