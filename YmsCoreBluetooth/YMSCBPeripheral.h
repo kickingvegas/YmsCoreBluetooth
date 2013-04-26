@@ -59,8 +59,8 @@
  Constructor
  
  @param peripheral pointer to CBPeripheral
- @param hi top 64-bit address value 
- @param lo bottom 64-bit address value
+ @param hi top 64 bits of 128-bit base address value
+ @param lo bottom 64 bits of 128-bit base address value
  @param update if YES, update the RSSI.
  @return instance of this class
  */
