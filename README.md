@@ -4,12 +4,14 @@ A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS applicat
 [YmsCoreBluetooth API Reference](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/hierarchy.html)
 
 ## Notes
-Despite my efforts to make it work, I've chosen to stop supporting the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator [TN2295](http://developer.apple.com/library/ios/#technotes/tn2295/_index.html), I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.
 
 Code tested on:
 
 * iPhone 4S, iOS 6.1.3
 * TI SensorTag firmware 1.2, 1.3.
+
+### On Using the iOS Simulator
+No support is offered for the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator [TN2295](http://developer.apple.com/library/ios/#technotes/tn2295/_index.html), I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.
 
 ## Changes
 ### Fri Apr 26 2013
