@@ -18,9 +18,12 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
+
+
 @class YMSCBPeripheral;
 @class YMSCBAppService;
 
+extern NSString *const YMSCBVersion;
 
 /**
  Base class for defining a CoreBluetooth application service.
@@ -62,6 +65,10 @@
 
 /// Count of ymsPeripherals.
 @property (nonatomic, readonly, assign) NSUInteger count;
+
+/// API version.
+@property (nonatomic, readonly, assign) NSString *version;
+        
 
 /**
  Constructor with array of known peripheral names.

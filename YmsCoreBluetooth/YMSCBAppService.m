@@ -22,6 +22,7 @@
 #import "YMSCBService.h"
 #import "YMSCBCharacteristic.h"
 
+NSString *const YMSCBVersion = @"0.9";
 
 @implementation YMSCBAppService
 
@@ -96,6 +97,10 @@
 
 - (NSUInteger)count {
     return  [self.ymsPeripherals count];
+}
+
+- (NSString *)version {
+    return YMSCBVersion;
 }
 
 - (void)addPeripheral:(YMSCBPeripheral *)yperipheral {
