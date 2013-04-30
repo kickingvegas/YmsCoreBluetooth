@@ -57,12 +57,6 @@ extern NSString *const YMSCBVersion;
 /// Flag to determine if scanning.
 @property (nonatomic, assign) BOOL isScanning;
 
-/**
- Hold current manager state. This is a workaround for CoreBluetooth bug of raising alert
- if Bluetooth is turned off in Settings.
- */
-@property (nonatomic, assign) CBCentralManagerState currentManagerState;
-
 /// Count of ymsPeripherals.
 @property (nonatomic, readonly, assign) NSUInteger count;
 

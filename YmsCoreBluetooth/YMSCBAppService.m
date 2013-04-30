@@ -32,7 +32,6 @@ NSString *const YMSCBVersion = @"0.9";
     if (self) {
         _ymsPeripherals = [[NSMutableArray alloc] init];
         _manager = [[CBCentralManager alloc] initWithDelegate:self queue:queue];
-        _currentManagerState = -1;
         _knownPeripheralNames = nameList;
     }
     
@@ -225,8 +224,6 @@ NSString *const YMSCBVersion = @"0.9";
             break;
             
         case CBCentralManagerStatePoweredOff:
-            if (_currentManagerState != -1) {
-            }
             break;
             
         case CBCentralManagerStateResetting:
@@ -239,9 +236,7 @@ NSString *const YMSCBVersion = @"0.9";
             break;
         }
     }
-    
-    _currentManagerState = central.state;
-    
+
     if ([self.delegate respondsToSelector:@selector(centralManagerDidUpdateState:)]) {
         [self.delegate centralManagerDidUpdateState:central];
     }
