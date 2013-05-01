@@ -31,6 +31,19 @@
 #define kSensorTag_GATT_SERVICE_UUID       0x1801
 #define kSensorTag_DEVINFO_SERV_UUID       0x180A
 
+#define kSensorTag_DEVINFO_SYSTEM_ID       0x2A23
+#define kSensorTag_DEVINFO_MODEL_NUMBER    0x2A24
+#define kSensorTag_DEVINFO_SERIAL_NUMBER   0x2A25
+#define kSensorTag_DEVINFO_FIRMWARE_REV    0x2A26
+#define kSensorTag_DEVINFO_HARDWARE_REV    0x2A27
+#define kSensorTag_DEVINFO_SOFTWARE_REV    0x2A28
+#define kSensorTag_DEVINFO_MANUFACTURER_NAME 0x2A29
+#define kSensorTag_DEVINFO_11073_CERT_DATA 0x2A2A
+/*
+ * TODO: Data sheet shows that PnPID address is equal to 11083_CERT_DATA.
+ * Belive this is in error.
+ */
+#define kSensorTag_DEVINFO_PNPID_DATA      0x2A2A
 
 #define kSensorTag_SIMPLEKEYS_SERVICE      0xFFE0
 #define kSensorTag_SIMPLEKEYS_DATA         0xFFE1
@@ -66,7 +79,6 @@
 #define kSensorTag_TEST_SERVICE            0xAA60
 #define kSensorTag_TEST_DATA               0xAA61
 #define kSensorTag_TEST_CONFIG             0xAA62
-
 
 yms_u128_t yms_u128_genOffset(int value);
 yms_u128_t yms_u128_genAddressWithInt(yms_u128_t *base, int value);
