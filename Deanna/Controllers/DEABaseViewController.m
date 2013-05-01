@@ -25,8 +25,7 @@
 
 @implementation DEABaseViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -34,43 +33,23 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-
 #pragma mark - CBCentralManagerDelegate Methods
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
-    
-    DEACBAppService *cbAppService = [DEACBAppService sharedService];
     
     switch (central.state) {
         case CBCentralManagerStatePoweredOn:
             break;
         case CBCentralManagerStatePoweredOff:
-            
-            if (cbAppService.currentManagerState != -1) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Turn it on."
-                                                                message:@"Please launch settings and turn on Bluetooth"
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"Dismiss"
-                                                      otherButtonTitles:nil];
-                
-                [alert show];
-            }
-            
-            
-            
-            
             break;
             
         case CBCentralManagerStateUnsupported: {
@@ -81,8 +60,6 @@
                                                   otherButtonTitles:nil];
             
             [alert show];
-
-            
             break;
         }
 
