@@ -17,6 +17,7 @@
 //
 
 #import "DEASensorTag.h"
+#import "DEABaseService.h"
 #import "DEATemperatureService.h"
 #import "DEASimpleKeysService.h"
 #import "DEAAccelerometerService.h"
@@ -24,8 +25,9 @@
 #import "DEABarometerService.h"
 #import "DEAGyroscopeService.h"
 #import "DEAMagnetometerService.h"
+#import "DEADeviceInfoService.h"
 #import "YMSCBCharacteristic.h"
-#import "DEABaseService.h"
+
 
 @implementation DEASensorTag
 
@@ -45,6 +47,7 @@
         DEABarometerService *bs = [[DEABarometerService alloc] initWithName:@"barometer" baseHi:hi baseLo:lo];
         DEAGyroscopeService *gs = [[DEAGyroscopeService alloc] initWithName:@"gyroscope" baseHi:hi baseLo:lo];
         DEAMagnetometerService *ms = [[DEAMagnetometerService alloc] initWithName:@"magnetometer" baseHi:hi baseLo:lo];
+        DEADeviceInfoService *ds = [[DEADeviceInfoService alloc] initWithName:@"devinfo" baseHi:hi baseLo:lo];
         
         self.serviceDict = @{@"temperature": ts,
                              @"accelerometer": as,
@@ -52,7 +55,8 @@
                              @"humidity": hs,
                              @"magnetometer": ms,
                              @"gyroscope": gs,
-                             @"barometer": bs};
+                             @"barometer": bs,
+                             @"devinfo": ds};
 
         [sks turnOn];
     }
@@ -69,8 +73,12 @@
 
     if ([btService.name isEqualToString:@"simplekeys"]) {
         [btService setNotifyValue:YES forCharacteristicName:@"data"];
-    }
-    else {
+        
+    } else if ([btService.name isEqualToString:@"devinfo"]) {
+        DEADeviceInfoService *ds =  (DEADeviceInfoService *)btService;
+        [ds readDeviceInfo];
+
+    } else {
         [btService requestConfig];
     }
     
