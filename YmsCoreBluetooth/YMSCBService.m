@@ -130,6 +130,11 @@
 
 - (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname type:(CBCharacteristicWriteType)type {
     YMSCBCharacteristic *yc = self.characteristicDict[cname];
+    if (yc == nil) {
+        NSString *assertString = [NSString stringWithFormat:@"YMSCBCharacteristic name '%@' is not defined.", cname];
+        NSAssert(NO, assertString);
+    }
+
     [self.cbService.peripheral writeValue:data forCharacteristic:yc.cbCharacteristic type:type];
 }
 
@@ -146,6 +151,11 @@
 
 - (void)readValueForCharacteristicName:(NSString *)cname {
     YMSCBCharacteristic *yc = self.characteristicDict[cname];
+    if (yc == nil) {
+        NSString *assertString = [NSString stringWithFormat:@"YMSCBCharacteristic name '%@' is not defined.", cname];
+        NSAssert(NO, assertString);
+    }
+    
     [self.cbService.peripheral readValueForCharacteristic:yc.cbCharacteristic];
 }
 
