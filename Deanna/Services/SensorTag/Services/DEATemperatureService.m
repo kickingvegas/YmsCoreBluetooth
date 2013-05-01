@@ -65,7 +65,11 @@ double calcTmpTarget(int16_t objT, double m_tempAmb) {
     return self;
 }
 
-- (void)updateCharacteristic:(YMSCBCharacteristic *)yc {
+- (void)updateCharacteristic:(YMSCBCharacteristic *)yc error:(NSError *)error {
+    if (error) {
+        return;
+    }
+    
     if ([yc.name isEqualToString:@"data"]) {
         NSData *data = yc.cbCharacteristic.value;
         

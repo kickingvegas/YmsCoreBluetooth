@@ -50,7 +50,11 @@ float calcGyro(int16_t v, float c, int16_t d) {
     return self;
 }
 
-- (void)updateCharacteristic:(YMSCBCharacteristic *)yc {
+- (void)updateCharacteristic:(YMSCBCharacteristic *)yc error:(NSError *)error {
+    if (error) {
+        return;
+    }
+
     if ([yc.name isEqualToString:@"data"]) {
         NSData *data = yc.cbCharacteristic.value;
         

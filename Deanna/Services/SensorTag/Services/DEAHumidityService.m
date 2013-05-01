@@ -51,7 +51,11 @@ double calcHumRel(uint16_t rawH) {
 }
 
 
-- (void)updateCharacteristic:(YMSCBCharacteristic *)yc {
+- (void)updateCharacteristic:(YMSCBCharacteristic *)yc error:(NSError *)error {
+    if (error) {
+        return;
+    }
+
     if ([yc.name isEqualToString:@"data"]) {
         NSData *data = yc.cbCharacteristic.value;
         
