@@ -22,7 +22,7 @@
 #import "YMSCBService.h"
 #import "YMSCBCharacteristic.h"
 
-NSString *const YMSCBVersion = @"0.9";
+NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 @implementation YMSCBAppService
 

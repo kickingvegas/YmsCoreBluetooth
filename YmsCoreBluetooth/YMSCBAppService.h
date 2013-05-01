@@ -19,6 +19,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
+#define kYMSCBVersion "0.91"
 
 @class YMSCBPeripheral;
 @class YMSCBAppService;
