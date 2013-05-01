@@ -21,4 +21,16 @@
 
 @interface DEADeviceInfoService : YMSCBService
 
+@property (nonatomic, strong) NSString *system_id;
+@property (nonatomic, strong) NSString *model_number;
+@property (nonatomic, strong) NSString *serial_number;
+@property (nonatomic, strong) NSString *firmware_rev;
+@property (nonatomic, strong) NSString *hardware_rev;
+@property (nonatomic, strong) NSString *software_rev;
+@property (nonatomic, strong) NSString *manufacturer_name;
+@property (nonatomic, strong) NSString *ieee11073_cert_data;
+
+
+- (void)readDeviceInfo;
+
 @end
