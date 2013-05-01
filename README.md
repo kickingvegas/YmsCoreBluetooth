@@ -1,4 +1,4 @@
-# YmsCoreBluetooth
+# YmsCoreBluetooth 0.91 (beta)
 A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS applications using the CoreBluetooth API. Includes Deanna, an iOS application using YmsCoreBluetooth to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag).
 
 [YmsCoreBluetooth API Reference](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/hierarchy.html)
@@ -10,10 +10,19 @@ Code tested on:
 * iPhone 4S, iOS 6.1.3
 * TI SensorTag firmware 1.2, 1.3.
 
-### On Using the iOS Simulator
-No support is offered for the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator [TN2295](http://developer.apple.com/library/ios/#technotes/tn2295/_index.html), I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.
+## Known Issues
+* Detailed Documentation including Tutorial. This is forthcoming.
+* No support is offered for the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator [TN2295](http://developer.apple.com/library/ios/#technotes/tn2295/_index.html), I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.
 
 ## Changes
+
+### Wed May 1 2013
+* Improved API for reads and writes using either blocks or notifications.
+* Issue #12 - Callback blocks for service requests implemented.
+* Issue #22 - Support for reading SensorTag device info implemented.
+* Issue #24 - API version implemented.
+* Bugfix #31 - Remove all UI dependencies in YmsCoreBluetooth. Handling CBCentralManager state is an application UX issue.
+
 ### Fri Apr 26 2013
 * Bugfix #21 - YMSCBService now supports constructor with 128-bit base address.
 * Issue #23 - Moved SensorTag specific methods (`requestConfig`, `responseConfig`, `turnOn`, `turnOff`) from YMSCBService.
