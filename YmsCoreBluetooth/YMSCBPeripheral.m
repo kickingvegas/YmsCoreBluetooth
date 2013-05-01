@@ -85,6 +85,13 @@
     return result;
 }
 
+
+/** @name CBPeripheralDelegate Methods */
+/**
+ Oh hai.
+ @param peripheral The peripheral that the services belong to.
+ @param error If an error occurred, the cause of the failure.
+ */
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error {
     
     for (CBService *service in peripheral.services) {
@@ -113,7 +120,7 @@
     YMSCBCharacteristic *yc = [btService findCharacteristic:characteristic];
     
     if (yc.cbCharacteristic.isNotifying) {
-        [btService updateCharacteristic:yc error:error];
+        [btService notifyCharacteristicHandler:yc error:error];
         
     } else {
         NSArray *responseBlockArray = btService.responseBlockDict[yc.name];
@@ -160,7 +167,7 @@
     if ([responseBlockArray count] > 0) {
         [btService executeBlock:yc error:error];
     } else {
-        [btService updateCharacteristic:yc error:error];
+        [btService notifyCharacteristicHandler:yc error:error];
     }
 }
 
