@@ -24,5 +24,5 @@
  Base view controller class of Deanna.
  */
 @interface DEABaseViewController : UIViewController<CBCentralManagerDelegate>
-
 @end
+
