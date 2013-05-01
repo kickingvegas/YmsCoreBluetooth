@@ -19,6 +19,9 @@
 #import "YMSCBService.h"
 #import "YMSCBUtils.h"
 #import "YMSCBCharacteristic.h"
+#import "NSMutableArray+fifoQueue.h"
+
+
 
 
 @implementation YMSCBService
@@ -33,6 +36,7 @@
         _base.hi = hi;
         _base.lo = lo;
         _characteristicDict = [[NSMutableDictionary alloc] init];
+        _responseBlockDict = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -146,9 +150,48 @@
 }
 
 
-
-- (void)updateCharacteristic:(YMSCBCharacteristic *)yc {
-    // OVERRIDE THIS METHOD
+- (void)updateCharacteristic:(YMSCBCharacteristic *)yc error:(NSError *)error {
 }
+
+
+- (void)readValueForCharacteristicName:(NSString *)cname withBlock:(void (^)(NSData *, NSError *))readHandler {
+    
+    if (self.responseBlockDict[cname] == nil) {
+        self.responseBlockDict[cname] = [[NSMutableArray alloc] init];
+    }
+    
+    NSMutableArray *responseBlockArray = (NSMutableArray *)self.responseBlockDict[cname];
+    [responseBlockArray push:readHandler];
+    [self readValueForCharacteristicName:cname];
+}
+
+- (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname withBlock:(void (^)(NSData *, NSError *))writeHandler {
+    
+    if (self.responseBlockDict[cname] == nil) {
+        self.responseBlockDict[cname] = [[NSMutableArray alloc] init];
+    }
+    
+    NSMutableArray *responseBlockArray = (NSMutableArray *)self.responseBlockDict[cname];
+    [responseBlockArray push:writeHandler];
+
+    [self writeValue:data forCharacteristicName:cname type:CBCharacteristicWriteWithResponse];
+}
+
+
+- (void)executeBlock:(YMSCBCharacteristic *)yc error:(NSError *)error {
+    
+    if (error) {
+        return;
+    }
+    
+    NSMutableArray *responseBlockArray = (NSMutableArray *)self.responseBlockDict[yc.name];
+    
+    YMSCBResponseBlockType blockHandler = [responseBlockArray pop];
+
+    blockHandler(yc.cbCharacteristic.value, nil);
+}
+
+
+
 
 @end

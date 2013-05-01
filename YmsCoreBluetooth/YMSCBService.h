@@ -20,6 +20,9 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "YMSCBUtils.h"
+
+typedef void (^YMSCBResponseBlockType)(NSData *, NSError *);
+
 @class YMSCBCharacteristic;
 
 /**
@@ -45,6 +48,9 @@
 
 /// Holds (key, value pairs of (NSString, YMSCBCharacteristic) instances
 @property (nonatomic, strong) NSMutableDictionary *characteristicDict;
+
+/// Dictionary to hold (cname, FIFO queue) for response blocks to execute for a characteristic read or write.
+@property (nonatomic, strong) NSMutableDictionary *responseBlockDict;
 
 /**
  Initialize class instance.
@@ -161,8 +167,17 @@
  **This method must be overridden**.
 
  @param yc Characteristic receiving update.
+ @param error Error object.
  
  */
-- (void)updateCharacteristic:(YMSCBCharacteristic *)yc;
+- (void)updateCharacteristic:(YMSCBCharacteristic *)yc error:(NSError *)error;
+
+
+- (void)readValueForCharacteristicName:(NSString *)cname withBlock:(void (^)(NSData *data, NSError *error))readHandler;
+
+- (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname withBlock:(void (^)(NSData *data, NSError *error))writeHandler;
+
+- (void)executeBlock:(YMSCBCharacteristic *)yc error:(NSError *)error;
+
 
 @end
