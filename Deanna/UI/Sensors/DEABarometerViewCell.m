@@ -48,6 +48,7 @@
 }
 
 - (IBAction)calibrateButtonAction:(id)sender {
+    // TODO: Push isCalibrating logic into the service to decouple UI from model.
     
     if (self.service.isCalibrating == NO) {
         [self.service writeByte:0x2
