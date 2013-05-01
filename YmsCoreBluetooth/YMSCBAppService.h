@@ -28,34 +28,57 @@ extern NSString *const YMSCBVersion;
 
 /**
  Base class for defining a CoreBluetooth application service.
-
- Note that is not to be confused with a CoreBluetooth *service* where the term *service*
- has its own semantic definition with the context of the CoreBluetooth framework. Rather,
+ 
+ Note that this class is not to be confused with a CoreBluetooth *service*. Rather,
  an *application service* is meant here to define a set of functionality which is to be
  considered a sub-system of the application.
- 
- YMSCBAppService is to be typically subclassed as a singleton instance.
 
+ YMSCBAppService manages all CoreBluetooth interactions by the parent application. The class manages
+ an an instance of the CBCentralManager (manager) and all the Bluetooth LE (BLE) peripherals discovered by
+ it.
+ 
+ YMSCBAppService is intended to be subclassed to handle the different types of BLE peripherals
+ the application is to communicate with. The implementation of handleFoundPeripheral: handles the details
+ of discovering a BLE peripheral.
+ 
+ The subclass is typically implemented (though not necessarily) as a singleton.
+ 
+ All discovered BLE peripherals are contained 
+ 
  */
 @interface YMSCBAppService : NSObject <CBCentralManagerDelegate>
 
-/// Pointer to delegate.
+/** @name Properties */
+/**
+ Pointer to delegate.
+ 
+ The delegate object will be sent CBCentralManagerDelegate messages received by manager.
+ */
 @property (nonatomic, weak) id<CBCentralManagerDelegate> delegate;
 
-/// Pointer to CBCentralManager. 
+/**
+ The CBCentralManager object.
+ 
+ In typical practice, there is only one instance of CBCentralManager and it is located in a singleton instance of YMSCBAppService.
+ This class listens to CBCentralManagerDelegate messages sent by manager, which in turn forwards those messages to delegate.
+ */
 @property (nonatomic, strong) CBCentralManager *manager;
 
-/// Array of YMSCBPeripheral instances.
+/**
+ Array of YMSCBPeripheral instances.
+ 
+ This array holds all YMSCBPeripheral instances discovered or retrieved by manager.
+ */
 @property (nonatomic, strong) NSMutableArray *ymsPeripherals;
 
 /**
  Array of NSStrings to search to match CBPeripheral instances.
  
- Used in conjunction with [isAppServicePeripheral:]
+ Used in conjunction with isKnownPeripheral:
  */
 @property (nonatomic, strong) NSArray *knownPeripheralNames;
 
-/// Flag to determine if scanning.
+/// Flag to determine if manager is scanning.
 @property (nonatomic, assign) BOOL isScanning;
 
 /// Count of ymsPeripherals.
@@ -64,7 +87,7 @@ extern NSString *const YMSCBVersion;
 /// API version.
 @property (nonatomic, readonly, assign) NSString *version;
         
-
+/** @name Initializing YMSCBAppService */
 /**
  Constructor with array of known peripheral names.
  @param nameList Array of peripheral names of type NSString.
@@ -72,6 +95,7 @@ extern NSString *const YMSCBVersion;
  */
 - (id)initWithKnownPeripheralNames:(NSArray *)nameList queue:(dispatch_queue_t)queue;
 
+/** @name Methods */
 /**
  Determines if peripheral is known by this app service.
  Used in conjunction with knownPeripheralNames.
