@@ -31,7 +31,7 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h1>YmsCoreBluetooth</h1>
+        <h1>YmsCoreBluetooth 0.91 (beta)</h1>
 
 <p>A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS applications using the CoreBluetooth API. Includes Deanna, an iOS application using YmsCoreBluetooth to communicate with a <a href="http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag">TI SensorTag</a>.</p>
 
@@ -39,16 +39,27 @@
 
 <h2>Notes</h2>
 
-<p>Despite my efforts to make it work, I've chosen to stop supporting the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator <a href="http://developer.apple.com/library/ios/#technotes/tn2295/_index.html">TN2295</a>, I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.</p>
-
 <p>Code tested on:</p>
 
 <ul>
 <li>iPhone 4S, iOS 6.1.3</li>
 <li>TI SensorTag firmware 1.2, 1.3.</li>
+</ul><h2>Known Issues</h2>
+
+<ul>
+<li>Detailed Documentation including Tutorial. This is forthcoming.</li>
+<li>No support is offered for the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator <a href="http://developer.apple.com/library/ios/#technotes/tn2295/_index.html">TN2295</a>, I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.</li>
 </ul><h2>Changes</h2>
 
-<h3>Fri Apr 26 2013</h3>
+<h3>Wed May 1 2013</h3>
+
+<ul>
+<li>Improved API for reads and writes using either blocks or notifications.</li>
+<li>Issue #12 - Callback blocks for service requests implemented.</li>
+<li>Issue #22 - Support for reading SensorTag device info implemented.</li>
+<li>Issue #24 - API version implemented.</li>
+<li>Bugfix #31 - Remove all UI dependencies in YmsCoreBluetooth. Handling CBCentralManager state is an application UX issue.</li>
+</ul><h3>Fri Apr 26 2013</h3>
 
 <ul>
 <li>Bugfix #21 - YMSCBService now supports constructor with 128-bit base address.</li>
