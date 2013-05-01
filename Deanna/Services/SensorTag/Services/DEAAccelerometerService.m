@@ -47,7 +47,7 @@ float calcAccel(int16_t rawV) {
 }
 
 
-- (void)updateCharacteristic:(YMSCBCharacteristic *)yc error:(NSError *)error {
+- (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error {
     
     if (error) {
         return;

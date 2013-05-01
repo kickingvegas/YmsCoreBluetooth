@@ -53,7 +53,7 @@ float calcMag(int16_t v, float c, int16_t d) {
 
 
 
-- (void)updateCharacteristic:(YMSCBCharacteristic *)yc error:(NSError *)error {
+- (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error {
     if (error) {
         return;
     }
