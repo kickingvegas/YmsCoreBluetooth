@@ -29,7 +29,7 @@
  and its associated delegate callbacks.
  
  Note that the CBPeripheralDelegate method peripheral:didUpdateValueForCharacteristic:error: will 
- call [YMSCBService updateCharacteristic:error:] to handle responses to read and writes made to that service.
+ call [YMSCBService notifyCharacteristicHandler:error:] to handle responses to read and writes made to that service.
  
  TODO: note API change to updateCharacteristic:error:
  */
@@ -50,14 +50,6 @@
 /// Time period between RSSI pings. Default is 2 seconds.
 @property (nonatomic, assign) NSTimeInterval rssiPingPeriod;
 
-///**
-// Constructor 
-// 
-// @param peripheral ins
-// @return instance of this class
-// */
-//- (id)initWithPeripheral:(CBPeripheral *)peripheral;
-//
 
 /**
  Constructor
