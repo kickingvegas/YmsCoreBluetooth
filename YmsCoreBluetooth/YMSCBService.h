@@ -21,7 +21,14 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "YMSCBUtils.h"
 
-typedef void (^YMSCBResponseBlockType)(NSData *, NSError *);
+typedef void (^YMSCBReadCallbackBlockType)(NSData *, NSError *);
+typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
+
+typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
+    YMSCBWriteCallbackType,
+    YMSCBReadCallbackType,
+};
+
 
 @class YMSCBCharacteristic;
 
@@ -164,18 +171,45 @@ typedef void (^YMSCBResponseBlockType)(NSData *, NSError *);
  This method is invoked by the CBPeripheralDelegate method peripheral:didUpdateValueForCharacteristic:error: 
  conformed to by YMSCBPeripheral.
  
- **This method must be overridden**.
-
+ This method is typically overridden to handle characteristics whose notification has been turned on.
+ 
  @param yc Characteristic receiving update.
  @param error Error object.
+ */
+- (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error;
+
+
+/**
+ Request read value given characteristic name and execute callback block upon response.
+ 
+ The callback block readCallback has two arguments: `data` and `error`:
+ 
+ * `data` is populated with the `value` property of [YMSCBCharacteristic cbCharacteristic].
+ * `error` is populated with the returned `error` object from the delegate method peripheral:didUpdateValueForCharacteristic:error: implemented in YMSCBPeripheral.
+ 
+ 
+ @param cname YMSCBCharacteristic name.
+ @param readCallback Callback block to execute upon response.
+ */
+- (void)readValueForCharacteristicName:(NSString *)cname
+                             withBlock:(void (^)(NSData *data, NSError *error))readCallback;
+
+
+/**
+ Request write value given characteristic name and execute callback block upon response.
+
+ The callback block readCallback has one argument: `error`:
+ 
+ * `error` is populated with the returned `error` object from the delegate method peripheral:didUpdateValueForCharacteristic:error: 
+ or peripheral:didWriteValueForCharacteristic:error: implemented in YMSCBPeripheral.
+
+ @param data The value to be written
+ @param cname YMSCBCharacteristic name.
+ @param writeCallback Callback block to execute upon response.
  
  */
-- (void)updateCharacteristic:(YMSCBCharacteristic *)yc error:(NSError *)error;
-
-
-- (void)readValueForCharacteristicName:(NSString *)cname withBlock:(void (^)(NSData *data, NSError *error))readHandler;
-
-- (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname withBlock:(void (^)(NSData *data, NSError *error))writeHandler;
+- (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname
+         withBlock:(void (^)(NSError *error))writeCallback;
 
 - (void)executeBlock:(YMSCBCharacteristic *)yc error:(NSError *)error;
 

@@ -160,30 +160,36 @@
 }
 
 
-- (void)updateCharacteristic:(YMSCBCharacteristic *)yc error:(NSError *)error {
+- (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error {
+    if (error) {
+        return;
+    }
 }
 
 
-- (void)readValueForCharacteristicName:(NSString *)cname withBlock:(void (^)(NSData *, NSError *))readHandler {
+- (void)readValueForCharacteristicName:(NSString *)cname withBlock:(void (^)(NSData *, NSError *))readCallback {
     
     if (self.responseBlockDict[cname] == nil) {
         self.responseBlockDict[cname] = [[NSMutableArray alloc] init];
     }
     
     NSMutableArray *responseBlockArray = (NSMutableArray *)self.responseBlockDict[cname];
-    [responseBlockArray push:readHandler];
+    
+    NSArray *payload = @[@(YMSCBReadCallbackType), readCallback];
+    [responseBlockArray push:payload];
     [self readValueForCharacteristicName:cname];
 }
 
-- (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname withBlock:(void (^)(NSData *, NSError *))writeHandler {
+- (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname withBlock:(void (^)(NSError *))writeCallback {
     
     if (self.responseBlockDict[cname] == nil) {
         self.responseBlockDict[cname] = [[NSMutableArray alloc] init];
     }
     
     NSMutableArray *responseBlockArray = (NSMutableArray *)self.responseBlockDict[cname];
-    [responseBlockArray push:writeHandler];
 
+    NSArray *payload = @[@(YMSCBWriteCallbackType), writeCallback];
+    [responseBlockArray push:payload];
     [self writeValue:data forCharacteristicName:cname type:CBCharacteristicWriteWithResponse];
 }
 
@@ -196,9 +202,30 @@
     
     NSMutableArray *responseBlockArray = (NSMutableArray *)self.responseBlockDict[yc.name];
     
-    YMSCBResponseBlockType blockHandler = [responseBlockArray pop];
-
-    blockHandler(yc.cbCharacteristic.value, nil);
+    
+    NSArray *payload = (NSArray *)[responseBlockArray pop];
+    
+    if (payload) {
+        if ([payload count] == 2) {
+            YMSCBCallbackTransactionType cbType = [(NSNumber *)payload[0] integerValue];
+            switch (cbType) {
+                case YMSCBWriteCallbackType: {
+                    YMSCBWriteCallbackBlockType writeCB = payload[1];
+                    writeCB(error);
+                    break;
+                }
+                    
+                case YMSCBReadCallbackType: {
+                    YMSCBReadCallbackBlockType readCB = payload[1];
+                    readCB(yc.cbCharacteristic.value, error);
+                    break;
+                }
+                    
+                default:
+                    break;
+            }
+        }
+    }
 }
 
 
