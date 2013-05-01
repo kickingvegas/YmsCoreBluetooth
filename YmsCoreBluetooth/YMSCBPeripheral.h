@@ -28,13 +28,14 @@
  This is a container class which manages an instance of CBPeripheral
  and its associated delegate callbacks.
  
- Note that the CBPeripheralDelegate method peripheral:didUpdateValueForCharacteristic:error: will 
+ Note that peripheral:didUpdateValueForCharacteristic:error: will 
  call [YMSCBService notifyCharacteristicHandler:error:] to handle responses to read and writes made to that service.
  
  TODO: note API change to updateCharacteristic:error:
  */
 @interface YMSCBPeripheral : NSObject <CBPeripheralDelegate>
 
+/** @name Properties */
 /// 128 bit address base
 @property (nonatomic, assign) yms_u128_t base;
 
@@ -51,6 +52,7 @@
 @property (nonatomic, assign) NSTimeInterval rssiPingPeriod;
 
 
+/** @name Initializing a YMSCBPeripheral */
 /**
  Constructor
  
@@ -67,6 +69,7 @@
 
 
 
+/** @name Get all CBService CBUUIDs for this peripheral  */
 /**
  Generate array of CBUUID for all SensorTag CoreBluetooth services.
  
@@ -76,6 +79,7 @@
  */
 - (NSArray *)services;
 
+/** @name Find a YMSCBService */
 /**
  Find YMSCBService given its corresponding CBService.
  
@@ -84,10 +88,12 @@
  */
 - (YMSCBService *)findService:(CBService *)service;
 
+/** @name Update the RSSI */
 /**
  Request RSSI update from CBPeripheral.
  */
 - (void)updateRSSI;
+
 
 @end
 
