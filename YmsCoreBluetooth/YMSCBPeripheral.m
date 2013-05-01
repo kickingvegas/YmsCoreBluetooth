@@ -112,7 +112,17 @@
     YMSCBService *btService = [self findService:characteristic.service];
     YMSCBCharacteristic *yc = [btService findCharacteristic:characteristic];
     
-    [btService updateCharacteristic:yc];
+    if (yc.cbCharacteristic.isNotifying) {
+        [btService updateCharacteristic:yc error:error];
+        
+    } else {
+        NSArray *responseBlockArray = btService.responseBlockDict[yc.name];
+        
+        if ([responseBlockArray count] > 0) {
+            [btService executeBlock:yc error:error];
+        }
+    }
+    
 }
 
 - (void)updateRSSI {
@@ -144,10 +154,14 @@
     YMSCBService *btService = [self findService:characteristic.service];
     YMSCBCharacteristic *yc = [btService findCharacteristic:characteristic];
     
-    //NSLog(@"write to service.characteristic: %@.%@", btService.name, yc.name);
-    [btService updateCharacteristic:yc];
+    NSArray *responseBlockArray = btService.responseBlockDict[yc.name];
     
     
+    if ([responseBlockArray count] > 0) {
+        [btService executeBlock:yc error:error];
+    } else {
+        [btService updateCharacteristic:yc error:error];
+    }
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error {
