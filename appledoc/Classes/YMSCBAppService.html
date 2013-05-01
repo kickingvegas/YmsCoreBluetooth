@@ -42,8 +42,6 @@
 	
 	<option value="//api/name/count">&nbsp;&nbsp;&nbsp;&nbsp;count</option>
 	
-	<option value="//api/name/currentManagerState">&nbsp;&nbsp;&nbsp;&nbsp;currentManagerState</option>
-	
 	<option value="//api/name/delegate">&nbsp;&nbsp;&nbsp;&nbsp;delegate</option>
 	
 	<option value="//api/name/isScanning">&nbsp;&nbsp;&nbsp;&nbsp;isScanning</option>
@@ -51,6 +49,8 @@
 	<option value="//api/name/knownPeripheralNames">&nbsp;&nbsp;&nbsp;&nbsp;knownPeripheralNames</option>
 	
 	<option value="//api/name/manager">&nbsp;&nbsp;&nbsp;&nbsp;manager</option>
+	
+	<option value="//api/name/version">&nbsp;&nbsp;&nbsp;&nbsp;version</option>
 	
 	<option value="//api/name/ymsPeripherals">&nbsp;&nbsp;&nbsp;&nbsp;ymsPeripherals</option>
 	
@@ -117,8 +117,6 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/count">count</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/currentManagerState">currentManagerState</a></span></li>
-	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/delegate">delegate</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isScanning">isScanning</a></span></li>
@@ -126,6 +124,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/knownPeripheralNames">knownPeripheralNames</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/manager">manager</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/version">version</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/ymsPeripherals">ymsPeripherals</a></span></li>
 	
@@ -267,16 +267,15 @@ considered a sub-system of the application.</p>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/currentManagerState">&nbsp;&nbsp;currentManagerState</a></code>
-		<span class="tooltip"><p>Hold current <a href="#//api/name/manager">manager</a> state. This is a workaround for CoreBluetooth bug of raising alert
-if Bluetooth is turned off in Settings.</p></span>
+		<code><a href="#//api/name/count">&nbsp;&nbsp;count</a></code>
+		<span class="tooltip"><p>Count of <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/count">&nbsp;&nbsp;count</a></code>
-		<span class="tooltip"><p>Count of <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p></span>
+		<code><a href="#//api/name/version">&nbsp;&nbsp;version</a></code>
+		<span class="tooltip"><p>API version.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -424,49 +423,6 @@ Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeriphe
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Count of <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/currentManagerState" title="currentManagerState"></a>
-	<h3 class="subsubtitle method-title">currentManagerState</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Hold current <a href="#//api/name/manager">manager</a> state. This is a workaround for CoreBluetooth bug of raising alert
-if Bluetooth is turned off in Settings.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) CBCentralManagerState currentManagerState</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Hold current <a href="#//api/name/manager">manager</a> state. This is a workaround for CoreBluetooth bug of raising alert
-if Bluetooth is turned off in Settings.</p>
 	</div>
 	
 	
@@ -633,6 +589,47 @@ if Bluetooth is turned off in Settings.</p>
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Pointer to CBCentralManager.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/version" title="version"></a>
+	<h3 class="subsubtitle method-title">version</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>API version.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly, assign) NSString *version</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>API version.</p>
 	</div>
 	
 	
@@ -1463,7 +1460,7 @@ Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeriphe
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-04-26)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-01)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

@@ -61,6 +61,8 @@
 	
 	<option value="//api/name/initWithPeripheral:baseHi:baseLo:updateRSSI:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithPeripheral:baseHi:baseLo:updateRSSI:</option>
 	
+	<option value="//api/name/peripheral:didDiscoverServices:">&nbsp;&nbsp;&nbsp;&nbsp;- peripheral:didDiscoverServices:</option>
+	
 	<option value="//api/name/services">&nbsp;&nbsp;&nbsp;&nbsp;- services</option>
 	
 	<option value="//api/name/updateRSSI">&nbsp;&nbsp;&nbsp;&nbsp;- updateRSSI</option>
@@ -80,6 +82,18 @@
 
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Properties">Properties</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Initializing a YMSCBPeripheral">Initializing a YMSCBPeripheral</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Get all CBService CBUUIDs for this peripheral">Get all CBService CBUUIDs for this peripheral</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Find a YMSCBService">Find a YMSCBService</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Update the RSSI">Update the RSSI</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_CBPeripheralDelegate Methods">CBPeripheralDelegate Methods</a></span></li>
 	
 </ul></li>
 
@@ -110,6 +124,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/findService:">findService:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithPeripheral:baseHi:baseLo:updateRSSI:">initWithPeripheral:baseHi:baseLo:updateRSSI:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/peripheral:didDiscoverServices:">peripheral:didDiscoverServices:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/services">services</a></span></li>
 	
@@ -160,8 +176,10 @@
 <p>This is a container class which manages an instance of CBPeripheral
 and its associated delegate callbacks.</p>
 
-<p>Note that the CBPeripheralDelegate method peripheral:didUpdateValueForCharacteristic:error: will
-call <a href="../Classes/YMSCBService.html#//api/name/updateCharacteristic:">[YMSCBService updateCharacteristic:]</a> to handle responses to read and writes made to that service.</p>
+<p>Note that peripheral:didUpdateValueForCharacteristic:error: will
+call <a href="../Classes/YMSCBService.html#//api/name/notifyCharacteristicHandler:error:">[YMSCBService notifyCharacteristicHandler:error:]</a> to handle responses to read and writes made to that service.</p>
+
+<p>TODO: note API change to updateCharacteristic:error:</p>
 					</div>
 					
 					
@@ -173,8 +191,8 @@ call <a href="../Classes/YMSCBService.html#//api/name/updateCharacteristic:">[YM
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						
-						
+						<a title="Properties" name="task_Properties"></a>
+						<h3 class="subsubtitle task-title">Properties</h3>
 
 						<ul class="task-list">
 							<li>
@@ -212,31 +230,78 @@ call <a href="../Classes/YMSCBService.html#//api/name/updateCharacteristic:">[YM
 	</span>
 	<span class="task-item-suffix">property</span>
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Initializing a YMSCBPeripheral" name="task_Initializing a YMSCBPeripheral"></a>
+						<h3 class="subsubtitle task-title">Initializing a YMSCBPeripheral</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/initWithPeripheral:baseHi:baseLo:updateRSSI:">&ndash;&nbsp;initWithPeripheral:baseHi:baseLo:updateRSSI:</a></code>
 		<span class="tooltip"><p>Constructor</p></span>
 	</span>
 	
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Get all CBService CBUUIDs for this peripheral" name="task_Get all CBService CBUUIDs for this peripheral"></a>
+						<h3 class="subsubtitle task-title">Get all CBService CBUUIDs for this peripheral</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/services">&ndash;&nbsp;services</a></code>
 		<span class="tooltip"><p>Generate array of CBUUID for all SensorTag CoreBluetooth services.</p></span>
 	</span>
 	
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Find a YMSCBService" name="task_Find a YMSCBService"></a>
+						<h3 class="subsubtitle task-title">Find a YMSCBService</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/findService:">&ndash;&nbsp;findService:</a></code>
 		<span class="tooltip"><p>Find <a href="../Classes/YMSCBService.html">YMSCBService</a> given its corresponding CBService.</p></span>
 	</span>
 	
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Update the RSSI" name="task_Update the RSSI"></a>
+						<h3 class="subsubtitle task-title">Update the RSSI</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/updateRSSI">&ndash;&nbsp;updateRSSI</a></code>
 		<span class="tooltip"><p>Request RSSI update from CBPeripheral.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="CBPeripheralDelegate Methods" name="task_CBPeripheralDelegate Methods"></a>
+						<h3 class="subsubtitle task-title">CBPeripheralDelegate Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/peripheral:didDiscoverServices:">&ndash;&nbsp;peripheral:didDiscoverServices:</a></code>
+		<span class="tooltip"><p>Oh hai.</p></span>
 	</span>
 	
 	
@@ -596,6 +661,62 @@ call <a href="../Classes/YMSCBService.html#//api/name/updateCharacteristic:">[YM
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/peripheral:didDiscoverServices:" title="peripheral:didDiscoverServices:"></a>
+	<h3 class="subsubtitle method-title">peripheral:didDiscoverServices:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Oh hai.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)peripheral:(CBPeripheral *)<em>peripheral</em> didDiscoverServices:(NSError *)<em>error</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>peripheral</em></dt>
+			<dd><p>The peripheral that the <a href="#//api/name/services">services</a> belong to.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>If an error occurred, the cause of the failure.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Oh hai.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBPeripheral.m</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/services" title="services"></a>
 	<h3 class="subsubtitle method-title">services</h3>
 	
@@ -697,7 +818,7 @@ call <a href="../Classes/YMSCBService.html#//api/name/updateCharacteristic:">[YM
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-04-26)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-01)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						
