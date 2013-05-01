@@ -23,10 +23,12 @@
 @class DEAPeripheralTableViewCell;
 
 /**
- View Controller for listing of TI SensorTags available.
+ View Controller for listing of Bluetooth LE Peripherals available.
  */
 @interface DEAPeripheralsViewController : DEABaseViewController <UITableViewDataSource, UITableViewDelegate>
 
+/** @name Properties */
+/// TableViewCell for a connectable peripheral.
 @property (strong, nonatomic) IBOutlet DEAPeripheralTableViewCell *tvCell;
 
 /// TableView for found peripherals
