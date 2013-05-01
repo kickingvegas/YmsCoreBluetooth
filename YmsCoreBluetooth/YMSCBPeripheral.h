@@ -29,8 +29,9 @@
  and its associated delegate callbacks.
  
  Note that the CBPeripheralDelegate method peripheral:didUpdateValueForCharacteristic:error: will 
- call [YMSCBService updateCharacteristic:] to handle responses to read and writes made to that service.
-
+ call [YMSCBService updateCharacteristic:error:] to handle responses to read and writes made to that service.
+ 
+ TODO: note API change to updateCharacteristic:error:
  */
 @interface YMSCBPeripheral : NSObject <CBPeripheralDelegate>
 
