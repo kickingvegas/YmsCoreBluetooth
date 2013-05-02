@@ -18,10 +18,21 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ FIFO queue implementation using NSMutableArray
+ */
 @interface NSMutableArray (fifoQueue)
 
+/**
+ Push object to the back of the queue.
+ @param anObject Object to push.
+ */
 - (void)push:(id)anObject;
 
+/**
+ Pop object from the front of the queue.
+ @return object from the front of the queue.
+ */
 - (id)pop;
 
 @end
