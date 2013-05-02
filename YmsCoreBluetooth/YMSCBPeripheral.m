@@ -85,10 +85,17 @@
     return result;
 }
 
+- (void)updateRSSI {
+    [self.cbPeripheral readRSSI];
+    
+}
+
+#pragma mark - CBPeripheralDelegate Methods
 
 /** @name CBPeripheralDelegate Methods */
 /**
- Oh hai.
+ CBPeripheralDelegate implementation.
+ 
  @param peripheral The peripheral that the services belong to.
  @param error If an error occurred, the cause of the failure.
  */
@@ -106,14 +113,51 @@
 }
 
 
+/**
+ CBPeripheralDelegate implementation.  Not yet supported.
 
+ @param peripheral The peripheral providing this information.
+ @param service The CBService object containing the included service.
+ @param error If an error occured, the cause of the failure.
+ */
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverIncludedServicesForService:(CBService *)service error:(NSError *)error {
+    // TBD
+}
+
+
+
+/**
+ CBPeripheralDelegate implementation.
+ 
+ @param peripheral The peripheral providing this information.
+ @param service The service that the characteristics belong to.
+ @param error If an error occured, the cause of the failure.
+ */
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error {
     YMSCBService *btService = [self findService:service];
     [btService syncCharacteristics:service.characteristics];
 }
 
 
+/**
+ CBPeripheralDelegate implementation. Not yet supported.
+ 
+ @param peripheral The peripheral providing this information.
+ @param characteristic The characteristic that the characteristic descriptors belong to.
+ @param error If an error occured, the cause of the failure.
+ */
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+    // TBD
+}
 
+
+/**
+ CBPeripheralDelegate implementation.
+ 
+ @param peripheral The peripheral providing this information.
+ @param characteristic The characteristic whose value has been retrieved.
+ @param error If an error occured, the cause of the failure.
+ */
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
 
     YMSCBService *btService = [self findService:characteristic.service];
@@ -129,33 +173,40 @@
             [btService executeBlock:yc error:error];
         }
     }
-    
+
 }
 
-- (void)updateRSSI {
-    [self.cbPeripheral readRSSI];
-    
-}
-    
-- (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {
-    if (self.willPingRSSI) {
-        [self performSelector:@selector(updateRSSI) withObject:self afterDelay:self.rssiPingPeriod];
-    }
-    
-}
-
-- (void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
-    
-}
-
-- (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
-    
-}
-
+/**
+ CBPeripheralDelegate implementation. Not yet supported.
+ 
+ @param peripheral The peripheral providing this information.
+ @param descriptor The characteristic descriptor whose value has been retrieved.
+ @param error If an error occured, the cause of the failure.
+ */
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error {
-    
+    // TBD
 }
 
+/**
+ CBPeripheralDelegate implementation. Not yet supported.
+ 
+ @param peripheral The peripheral providing this information.
+ @param characteristic The characteristic whose value has been retrieved.
+ @param error If an error occured, the cause of the failure.
+ */
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+    // TODO: Implement callback block for notification change response.
+}
+
+
+
+/**
+ CBPeripheralDelegate implementation.
+ 
+ @param peripheral The peripheral providing this information.
+ @param characteristic The characteristic whose value has been retrieved.
+ @param error If an error occured, the cause of the failure.
+ */
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     
     YMSCBService *btService = [self findService:characteristic.service];
@@ -171,8 +222,51 @@
     }
 }
 
+
+/**
+ CBPeripheralDelegate implementation. Not yet supported.
+ 
+ @param peripheral The peripheral providing this information.
+ @param descriptor The characteristic descriptor whose value has been retrieved.
+ @param error If an error occured, the cause of the failure.
+ */
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error {
+    // TBD
+}
+
+
+/**
+ CBPeripheralDelegate implementation.
+ 
+ @param peripheral The peripheral providing this information.
+ @param error If an error occured, the cause of the failure.
+ */
+- (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {
+    if (self.willPingRSSI) {
+        [self performSelector:@selector(updateRSSI) withObject:self afterDelay:self.rssiPingPeriod];
+    }
     
+}
+
+
+/**
+ CBPeripheralDelegate implementation. Not yet supported.
+ 
+ @param peripheral The peripheral providing this information.
+ */
+
+- (void)peripheralDidUpdateName:(CBPeripheral *)peripheral {
+    // TBD
+}
+
+
+/**
+ CBPeripheralDelegate implementation. Not yet supported.
+ 
+ @param peripheral The peripheral providing this information.
+ */
+- (void)peripheralDidInvalidateServices:(CBPeripheral *)peripheral {
+    // TBD
 }
 
 @end
