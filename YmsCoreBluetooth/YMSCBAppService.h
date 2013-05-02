@@ -43,7 +43,7 @@ extern NSString *const YMSCBVersion;
  
  The subclass is typically implemented (though not necessarily) as a singleton.
  
- All discovered BLE peripherals are contained 
+ All discovered BLE peripherals are stored in the array ymsPeripherals. 
  
  */
 @interface YMSCBAppService : NSObject <CBCentralManagerDelegate>
@@ -74,7 +74,8 @@ extern NSString *const YMSCBVersion;
 /**
  Array of NSStrings to search to match CBPeripheral instances.
  
- Used in conjunction with isKnownPeripheral:
+ Used in conjunction with isKnownPeripheral:.  
+ This value is typically initialized using initWithKnownPeripheralNames:queue:.
  */
 @property (nonatomic, strong) NSArray *knownPeripheralNames;
 
@@ -91,14 +92,16 @@ extern NSString *const YMSCBVersion;
 /**
  Constructor with array of known peripheral names.
  @param nameList Array of peripheral names of type NSString.
- @param queue The dispatch queue to use to dispatch the central role events. If its value is nil, the central manager dispatches central role events using the main queue.
+ @param queue The dispatch queue to use to dispatch the central role events. 
+ If its value is nil, the central manager dispatches central role events using the main queue.
  */
 - (id)initWithKnownPeripheralNames:(NSArray *)nameList queue:(dispatch_queue_t)queue;
 
 /** @name Methods */
 /**
  Determines if peripheral is known by this app service.
- Used in conjunction with knownPeripheralNames.
+
+ Used in conjunction with knownPeripheralNames. 
  
  @param peripheral found or retrieved peripheral
  @return YES is peripheral is to be managed by this app service.
