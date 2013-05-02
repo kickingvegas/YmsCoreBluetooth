@@ -45,9 +45,9 @@
 
 <h2>File Naming Conventions</h2>
 
-<p>The YmsCoreBluetooth framework is the set of files prefixed with <code>YMSCB</code>. These file are located in the folder <code>YmsCoreBluetooth</code>.</p>
+<p>The YmsCoreBluetooth framework is the set of files prefixed with <code>YMSCB</code> located in the directory <code>YmsCoreBluetooth</code>.</p>
 
-<p>The files for the iOS application <strong>Deanna</strong> are prefixed with <code>DEA</code>.</p>
+<p>The files for the iOS application <strong>Deanna</strong> are prefixed with <code>DEA</code> located in the directory <code>Deanna</code>.</p>
 
 <h2>Organizational Structure &amp; Operation</h2>
 
@@ -75,7 +75,7 @@
 
 <p>With CoreBluetooth, the API to issue read and write requests to a BLE peripheral is accomplished through the CBPeripheral class and the responses sent back are handled via CBPeripheralDelegate methods. For a BLE peripheral with multiple services, this approach requires the developer to write code to manage read/write requests to different services.</p>
 
-<p>YmsCoreBluetooth framework offers iOS developers a more natural API that is BLE service-centric: read and write requests to a BLE peripheral are done from the point of view of a BLE service. Responses can be handled using
+<p>YmsCoreBluetooth framework offers iOS developers a more natural API that is BLE service-centric: <strong>read and write requests to a BLE peripheral are done from the point of view of a BLE service</strong>. Responses can be handled using
 a callback block or via a notification handler method.</p>
 
 <h2>YmsCoreBluetooth by Example: <a href="Classes/DEATemperatureService.html">DEATemperatureService</a>, a subclass of <a href="Classes/YMSCBService.html">YMSCBService</a></h2>
