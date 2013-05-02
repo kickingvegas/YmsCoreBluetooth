@@ -157,3 +157,12 @@ Then the application service which manages all known peripherals:
 
 The [Class Hierarchy](hierarchy.html) is very instructive in showing the relationship of the above classes to the YmsCoreBluetooth framework.
 
+
+## Writing your own Bluetooth LE service with YmsCoreBluetooth
+
+Learn how to write your own Bluetooth LE service by reading the example of how its done for the TI SensorTag in the Tutorial.
+
+## Questions
+
+While quite functional, YmsCoreBluetooth is still very much in an early state and there's always room for improvement. Please submit any questions or [issues to the GitHub project for YmsCoreBluetooth](https://github.com/kickingvegas/YmsCoreBluetooth/issues?labels=&milestone=&page=1&state=open).
+
