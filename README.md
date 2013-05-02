@@ -5,9 +5,9 @@ A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS applicat
 
 ## File Naming Conventions
 
-The YmsCoreBluetooth framework is the set of files prefixed with `YMSCB`. These file are located in the folder `YmsCoreBluetooth`.
+The YmsCoreBluetooth framework is the set of files prefixed with `YMSCB` located in the directory `YmsCoreBluetooth`.
 
-The files for the iOS application **Deanna** are prefixed with `DEA`.
+The files for the iOS application **Deanna** are prefixed with `DEA` located in the directory `Deanna`.
 
 ## Organizational Structure & Operation
 
@@ -21,8 +21,7 @@ The organizational structure of the YmsCoreBluetooth framework largely mirrors t
 	     
 With CoreBluetooth, the API to issue read and write requests to a BLE peripheral is accomplished through the CBPeripheral class and the responses sent back are handled via CBPeripheralDelegate methods. For a BLE peripheral with multiple services, this approach requires the developer to write code to manage read/write requests to different services.
         
-YmsCoreBluetooth framework offers iOS developers a more natural API that is BLE service-centric: read and write requests to a BLE peripheral are done from the point of view of a BLE service. Responses can be handled using 
-a callback block or via a notification handler method.
+YmsCoreBluetooth framework offers iOS developers a more natural API that is BLE service-centric: **read and write requests to a BLE peripheral are done from the point of view of a BLE service**. Responses can be handled using a callback block or via a notification handler method.
 
 ## YmsCoreBluetooth by Example: DEATemperatureService, a subclass of YMSCBService
 
