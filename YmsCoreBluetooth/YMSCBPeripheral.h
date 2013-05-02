@@ -23,15 +23,24 @@
 
 
 /**
- YMS CoreBluetooth representation of a peripheral. 
+ Base class for defining a Bluetooth LE peripheral.
  
- This is a container class which manages an instance of CBPeripheral
- and its associated delegate callbacks.
+ YMSCBPeripheral holds an instance of CBPeripheral (cbPeripheral) and implements
+ the CBPeripheralDelegate messages sent by cbPeripheral.
  
- Note that peripheral:didUpdateValueForCharacteristic:error: will 
- call [YMSCBService notifyCharacteristicHandler:error:] to handle responses to read and writes made to that service.
+ How those CBPeripheralDelegate messages are processed is where YmsCoreBluetooth 
+ distinguishes itself from CoreBluetooth.
  
- TODO: note API change to updateCharacteristic:error:
+ In CoreBluetooth, read and write requests are issued via CBPeripheral. However, if 
+ the BLE peripheral has many services, then the application would likely prefer to use
+ an abstraction that issues read and write requests from the BLE service.
+
+ **YmsCoreBluetooth offers this abstraction**. YMSCBPeripheral and YMSCBService are designed
+ to provide a read/write API that is BLE service-centric.
+ 
+ The BLE services discovered by cbPeripheral are encapulated in instances of YMSCBService and
+ contained in the dictionary serviceDict.
+ 
  */
 @interface YMSCBPeripheral : NSObject <CBPeripheralDelegate>
 
@@ -39,23 +48,41 @@
 /// 128 bit address base
 @property (nonatomic, assign) yms_u128_t base;
 
-/// Hold (key, value) pairs of (NSString, YMSCBService) instances
+/** 
+ Dictionary of (`key`, `value`) pairs of (NSString, YMSCBService) instances.
+ 
+ The NSString `key` is typically a "human-readable" string to easily reference a YMSCBService.
+ */
 @property (nonatomic, strong) NSDictionary *serviceDict;
 
-/// Pointer to CBPeripheral instance of a sensor tag.
+/// The CBPeripheral instance.
 @property (nonatomic, strong) CBPeripheral *cbPeripheral;
 
-/// If ON, enable updates of RSSI.
+/**
+ If set to YES, enable updates of RSSI are done via updateRSSI.
+ */
 @property (nonatomic, assign) BOOL willPingRSSI;
 
-/// Time period between RSSI pings. Default is 2 seconds.
+/**
+ Time period between RSSI pings. (Default: 2 seconds)
+ 
+ This property is used by updateRSSI to determine the period between requests for the RSSI.
+ This property is only used when willPingRSSI is set to YES.
+ */
 @property (nonatomic, assign) NSTimeInterval rssiPingPeriod;
 
 
 /** @name Initializing a YMSCBPeripheral */
 /**
- Constructor
+ Constructor.
  
+ This method must be called via super in any subclass implementation.
+ 
+ The implementation of this method in a subclass will populate serviceDict with (`key`, `value`) pairs of
+ (NSString, YMSCBService) instances, where `key` is typically a "human-readable" string to easily 
+ reference a YMSCBService.
+ 
+
  @param peripheral pointer to CBPeripheral
  @param hi top 64 bits of 128-bit base address value
  @param lo bottom 64 bits of 128-bit base address value
@@ -83,14 +110,16 @@
 /**
  Find YMSCBService given its corresponding CBService.
  
- @param service this thing
- @return YMSCBService
+ @param service CBService to search for in serviceDict.
+ @return YMSCBService instance which holds *service*.
  */
 - (YMSCBService *)findService:(CBService *)service;
 
 /** @name Update the RSSI */
 /**
  Request RSSI update from CBPeripheral.
+ 
+ This method uses rssiPingPeriod for the frequency of updates.
  */
 - (void)updateRSSI;
 
