@@ -21,22 +21,19 @@
 
 
 /**
- Container class for TI SensorTag CoreBluetooth characteristic.
+ Base class for defining a Bluetooth LE characteristic.
  
- The reason for this class not being a subclass of `CBCharacteristic` is that
- you know ahead of time the `name` and the `UUID` of the characteristic.
+ YMSCBCharacteristic holds an instance of CBCharacteristic (cbCharacteristic).
  
- `CBCharacteristic` instances are returned by discovery from `CBPeripheral` which for
- the purposes of this framework is too late. `YmsCoreBluetooth` presumes that you 
- initially know what characteristics exist in a device (captured by this class)
- and then upon discovery, pairs the found `CBCharacteristic` with it. This pairing is done
- in `YMSCBService`.
-
+ This class is typically instantiated by a subclass of YMSCBService. The property
+ cbCharacteristic is set in [YMSCBService syncCharacteristics:]
+ 
  
  */
 @interface YMSCBCharacteristic : NSObject
 
-/// Characteristic name.
+/** @name Properties */
+/// Human-friendly name for this BLE characteristic.
 @property (nonatomic, strong) NSString *name;
 
 /// Characterisic CBUUID.
@@ -49,8 +46,9 @@
 @property (nonatomic, strong) NSNumber *offset;
 
 
+/** @name Initializing a YMSCBCharacteristic */
 /**
- Class contructor.
+ Constructor.
 
  @param oName characteristic name
  @param oUUID characteristic CBUUID
