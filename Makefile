@@ -16,28 +16,37 @@
 # Author: Charles Y. Choi <charles.choi@yummymelon.com>
 #
 
-doc:
+doc: cleanBackup
 	appledoc \
-	--project-name "YMS CoreBluetooth Framework + Deanna" \
+	--project-name "YmsCoreBluetooth Framework + Deanna" \
 	--project-company 'Yummy Melon Software LLC' \
 	--company-id 'com.yummymelon' \
 	--logformat xcode \
         --exit-threshold 2 \
 	--output docs \
+	--index-desc ./docs/index.md \
+	--include ./docs/tutorial \
 	Deanna \
 	YmsCoreBluetooth
 
 
-html:
+html: cleanBackup
 	appledoc \
 	-h \
-	--project-name "YMS CoreBluetooth Framework + Deanna" \
+	--project-name "YmsCoreBluetooth Framework + Deanna" \
 	--project-company 'Yummy Melon Software LLC' \
 	--company-id 'com.yummymelon' \
         --exit-threshold 2 \
 	--output docs \
+	--index-desc ./docs/index.md \
+	--include ./docs/tutorial \
 	--no-create-docset \
 	Deanna \
 	YmsCoreBluetooth
 
+cleanBackup:
+	find . -name '*~' -delete
+
+
+clean: cleanBackup
 
