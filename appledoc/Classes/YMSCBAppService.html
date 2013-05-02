@@ -12,7 +12,7 @@
 	<body>
 		<header id="top_header">
 			<div id="library" class="hideInXcode">
-				<h1><a id="libraryTitle" href="../index.html">YMS CoreBluetooth Framework + Deanna </a></h1>
+				<h1><a id="libraryTitle" href="../index.html">YmsCoreBluetooth Framework + Deanna </a></h1>
 				<a id="developerHome" href="../index.html">Yummy Melon Software LLC</a>
 			</div>
 			
@@ -106,6 +106,12 @@
 
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Properties">Properties</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Initializing YMSCBAppService">Initializing YMSCBAppService</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Methods">Methods</a></span></li>
 	
 </ul></li>
 
@@ -209,12 +215,21 @@
 						<h2 class="subtitle subtitle-overview">Overview</h2>
 						<p>Base class for defining a CoreBluetooth application service.</p>
 
-<p>Note that is not to be confused with a CoreBluetooth <em>service</em> where the term <em>service</em>
-has its own semantic definition with the context of the CoreBluetooth framework. Rather,
+<p>Note that this class is not to be confused with a CoreBluetooth <em>service</em>. Rather,
 an <em>application service</em> is meant here to define a set of functionality which is to be
 considered a sub-system of the application.</p>
 
-<p>YMSCBAppService is to be typically subclassed as a singleton instance.</p>
+<p>YMSCBAppService manages all CoreBluetooth interactions by the parent application. The class manages
+an an instance of the CBCentralManager (<a href="#//api/name/manager">manager</a>) and all the Bluetooth LE (BLE) peripherals discovered by
+it.</p>
+
+<p>YMSCBAppService is intended to be subclassed to handle the different types of BLE peripherals
+the application is to communicate with. The implementation of <a href="#//api/name/handleFoundPeripheral:">handleFoundPeripheral:</a> handles the details
+of discovering a BLE peripheral.</p>
+
+<p>The subclass is typically implemented (though not necessarily) as a singleton.</p>
+
+<p>All discovered BLE peripherals are stored in the array <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p>
 					</div>
 					
 					
@@ -226,8 +241,8 @@ considered a sub-system of the application.</p>
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						
-						
+						<a title="Properties" name="task_Properties"></a>
+						<h3 class="subsubtitle task-title">Properties</h3>
 
 						<ul class="task-list">
 							<li>
@@ -240,7 +255,7 @@ considered a sub-system of the application.</p>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/manager">&nbsp;&nbsp;manager</a></code>
-		<span class="tooltip"><p>Pointer to CBCentralManager.</p></span>
+		<span class="tooltip"><p>The CBCentralManager object.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -261,7 +276,7 @@ considered a sub-system of the application.</p>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/isScanning">&nbsp;&nbsp;isScanning</a></code>
-		<span class="tooltip"><p>Flag to determine if scanning.</p></span>
+		<span class="tooltip"><p>Flag to determine if <a href="#//api/name/manager">manager</a> is scanning.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -279,18 +294,33 @@ considered a sub-system of the application.</p>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Initializing YMSCBAppService" name="task_Initializing YMSCBAppService"></a>
+						<h3 class="subsubtitle task-title">Initializing YMSCBAppService</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/initWithKnownPeripheralNames:queue:">&ndash;&nbsp;initWithKnownPeripheralNames:queue:</a></code>
 		<span class="tooltip"><p>Constructor with array of known peripheral names.</p></span>
 	</span>
 	
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Methods" name="task_Methods"></a>
+						<h3 class="subsubtitle task-title">Methods</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/isKnownPeripheral:">&ndash;&nbsp;isKnownPeripheral:</a></code>
-		<span class="tooltip"><p>Determines if peripheral is known by this app service.
-Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeripheralNames</a>.</p></span>
+		<span class="tooltip"><p>Determines if peripheral is known by this app service.</p></span>
 	</span>
 	
 	
@@ -464,6 +494,8 @@ Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeriphe
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Pointer to delegate.</p>
+
+<p>The delegate object will be sent CBCentralManagerDelegate messages received by <a href="#//api/name/manager">manager</a>.</p>
 	</div>
 	
 	
@@ -487,7 +519,7 @@ Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeriphe
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Flag to determine if scanning.</p>
+		<p>Flag to determine if <a href="#//api/name/manager">manager</a> is scanning.</p>
 	</div>		
 	
     
@@ -504,7 +536,7 @@ Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeriphe
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Flag to determine if scanning.</p>
+		<p>Flag to determine if <a href="#//api/name/manager">manager</a> is scanning.</p>
 	</div>
 	
 	
@@ -547,7 +579,8 @@ Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeriphe
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Array of NSStrings to search to match CBPeripheral instances.</p>
 
-<p>Used in conjunction with [isAppServicePeripheral:]</p>
+<p>Used in conjunction with <a href="#//api/name/isKnownPeripheral:">isKnownPeripheral:</a>.
+This value is typically initialized using <a href="#//api/name/initWithKnownPeripheralNames:queue:">initWithKnownPeripheralNames:queue:</a>.</p>
 	</div>
 	
 	
@@ -571,7 +604,7 @@ Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeriphe
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Pointer to CBCentralManager.</p>
+		<p>The CBCentralManager object.</p>
 	</div>		
 	
     
@@ -588,7 +621,10 @@ Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeriphe
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Pointer to CBCentralManager.</p>
+		<p>The CBCentralManager object.</p>
+
+<p>In typical practice, there is only one instance of CBCentralManager and it is located in a singleton instance of YMSCBAppService.
+This class listens to CBCentralManagerDelegate messages sent by manager, which in turn forwards those messages to <a href="#//api/name/delegate">delegate</a>.</p>
 	</div>
 	
 	
@@ -671,6 +707,8 @@ Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeriphe
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Array of <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a> instances.</p>
+
+<p>This array holds all <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a> instances discovered or retrieved by <a href="#//api/name/manager">manager</a>.</p>
 	</div>
 	
 	
@@ -983,7 +1021,8 @@ Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeriphe
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>queue</em></dt>
-			<dd><p>The dispatch queue to use to dispatch the central role events. If its value is nil, the central <a href="#//api/name/manager">manager</a> dispatches central role events using the main queue.</p></dd>
+			<dd><p>The dispatch queue to use to dispatch the central role events.
+If its value is nil, the central <a href="#//api/name/manager">manager</a> dispatches central role events using the main queue.</p></dd>
 		</dl>
 		
 	</div>
@@ -1020,8 +1059,7 @@ Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeriphe
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Determines if peripheral is known by this app service.
-Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeripheralNames</a>.</p>
+		<p>Determines if peripheral is known by this app service.</p>
 	</div>		
 	
     
@@ -1053,8 +1091,9 @@ Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeriphe
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Determines if peripheral is known by this app service.
-Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeripheralNames</a>.</p>
+		<p>Determines if peripheral is known by this app service.</p>
+
+<p>Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeripheralNames</a>.</p>
 	</div>
 	
 	
@@ -1460,7 +1499,7 @@ Used in conjunction with <a href="#//api/name/knownPeripheralNames">knownPeriphe
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-01)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-02)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

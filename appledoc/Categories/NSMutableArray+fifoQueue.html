@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>DEAAppDelegate Class Reference</title>
+		<title>NSMutableArray(fifoQueue) Category Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">DEAAppDelegate Class Reference</h1>
+				<h1 class="hideInXcode">NSMutableArray(fifoQueue) Category Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -38,20 +38,15 @@
 	
 	
 	
-	<option value="properties">Properties</option>
-	
-	<option value="//api/name/window">&nbsp;&nbsp;&nbsp;&nbsp;window</option>
-	
-	
 	
 	
 	
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/initializeAppServices">&nbsp;&nbsp;&nbsp;&nbsp;- initializeAppServices</option>
+	<option value="//api/name/pop">&nbsp;&nbsp;&nbsp;&nbsp;- pop</option>
 	
-	<option value="//api/name/initializeUserDefaults">&nbsp;&nbsp;&nbsp;&nbsp;- initializeUserDefaults</option>
+	<option value="//api/name/push:">&nbsp;&nbsp;&nbsp;&nbsp;- push:</option>
 	
 	
 	
@@ -75,21 +70,15 @@
 
 
 
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/window">window</a></span></li>
-	
-</ul></li>
-
 
 
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initializeAppServices">initializeAppServices</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pop">pop</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initializeUserDefaults">initializeUserDefaults</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/push:">push:</a></span></li>
 	
 </ul></li>
 
@@ -98,7 +87,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="DEAAppDelegate Class Reference" name="top"></a>
+				<a title="NSMutableArray(fifoQueue) Category Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -107,21 +96,15 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">DEAAppDelegate Class Reference</h1>
+						<h1 class="title title-header">NSMutableArray(fifoQueue) Category Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
 					
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
-	<td class="specification-title">Inherits from</td>
-	<td class="specification-value">UIResponder</td>
-</tr><tr>
-	<td class="specification-title">Conforms to</td>
-	<td class="specification-value">UIApplicationDelegate</td>
-</tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">DEAAppDelegate.h<br />DEAAppDelegate.m</td>
+	<td class="specification-value">NSMutableArray+fifoQueue.h<br />NSMutableArray+fifoQueue.m</td>
 </tr>
 						</tbody></table></div>
 					
@@ -131,7 +114,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>AppDelegate</p>
+						<p>FIFO queue implementation using NSMutableArray</p>
 					</div>
 					
 					
@@ -149,22 +132,15 @@
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/window">&nbsp;&nbsp;window</a></code>
-		<span class="tooltip"><p>window</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/initializeUserDefaults">&ndash;&nbsp;initializeUserDefaults</a></code>
-		<span class="tooltip"><p>Initialize user defaults.</p></span>
+		<code><a href="#//api/name/push:">&ndash;&nbsp;push:</a></code>
+		<span class="tooltip"><p>Push object to the back of the queue.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initializeAppServices">&ndash;&nbsp;initializeAppServices</a></code>
-		<span class="tooltip"><p>Initialize app services.</p></span>
+		<code><a href="#//api/name/pop">&ndash;&nbsp;pop</a></code>
+		<span class="tooltip"><p>Pop object from the front of the queue.</p></span>
 	</span>
 	
 	
@@ -177,53 +153,6 @@
 					
 					
 					
-					<div class="section section-methods">
-						<a title="Properties" name="properties"></a>
-						<h2 class="subtitle subtitle-methods">Properties</h2>
-						
-						<div class="section-method">
-	<a name="//api/name/window" title="window"></a>
-	<h3 class="subsubtitle method-title">window</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>window</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (strong, nonatomic) UIWindow *window</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>window</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">DEAAppDelegate.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-					</div>
-					
 					
 					
 					
@@ -233,22 +162,27 @@
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/initializeAppServices" title="initializeAppServices"></a>
-	<h3 class="subsubtitle method-title">initializeAppServices</h3>
+	<a name="//api/name/pop" title="pop"></a>
+	<h3 class="subsubtitle method-title">pop</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Initialize app services.</p>
+		<p>Pop object from the front of the queue.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)initializeAppServices</code></div>
+	<div class="method-subsection method-declaration"><code>- (id)pop</code></div>
 
     
 	
 	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>object from the front of the queue.</p>
+	</div>
 	
 	
 	
@@ -256,7 +190,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Initialize app services.</p>
+		<p>Pop object from the front of the queue.</p>
 	</div>
 	
 	
@@ -267,27 +201,37 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">DEAAppDelegate.h</code><br />
+		<code class="declared-in-ref">NSMutableArray+fifoQueue.h</code><br />
 	</div>				
 	
 	
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/initializeUserDefaults" title="initializeUserDefaults"></a>
-	<h3 class="subsubtitle method-title">initializeUserDefaults</h3>
+	<a name="//api/name/push:" title="push:"></a>
+	<h3 class="subsubtitle method-title">push:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Initialize user defaults.</p>
+		<p>Push object to the back of the queue.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)initializeUserDefaults</code></div>
+	<div class="method-subsection method-declaration"><code>- (void)push:(id)<em>anObject</em></code></div>
 
     
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>anObject</em></dt>
+			<dd><p>Object to push.</p></dd>
+		</dl>
+		
+	</div>
 	
 	
 	
@@ -297,7 +241,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Initialize user defaults.</p>
+		<p>Push object to the back of the queue.</p>
 	</div>
 	
 	
@@ -308,7 +252,7 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">DEAAppDelegate.h</code><br />
+		<code class="declared-in-ref">NSMutableArray+fifoQueue.h</code><br />
 	</div>				
 	
 	

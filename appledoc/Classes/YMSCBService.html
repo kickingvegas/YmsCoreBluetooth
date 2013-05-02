@@ -12,7 +12,7 @@
 	<body>
 		<header id="top_header">
 			<div id="library" class="hideInXcode">
-				<h1><a id="libraryTitle" href="../index.html">YMS CoreBluetooth Framework + Deanna </a></h1>
+				<h1><a id="libraryTitle" href="../index.html">YmsCoreBluetooth Framework + Deanna </a></h1>
 				<a id="developerHome" href="../index.html">Yummy Melon Software LLC</a>
 			</div>
 			
@@ -67,6 +67,8 @@
 	
 	<option value="//api/name/characteristics">&nbsp;&nbsp;&nbsp;&nbsp;- characteristics</option>
 	
+	<option value="//api/name/executeBlock:error:">&nbsp;&nbsp;&nbsp;&nbsp;- executeBlock:error:</option>
+	
 	<option value="//api/name/findCharacteristic:">&nbsp;&nbsp;&nbsp;&nbsp;- findCharacteristic:</option>
 	
 	<option value="//api/name/initWithName:baseHi:baseLo:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:baseHi:baseLo:</option>
@@ -109,6 +111,26 @@
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Properties">Properties</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Initializing a YMSCBService">Initializing a YMSCBService</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Adding a BLE characteristic">Adding a BLE characteristic</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Retrieve CBUUIDs for all discovered characteristics">Retrieve CBUUIDs for all discovered characteristics</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Synchronize found CBCharacteristic instances with corresponding their YMSCBCharacter instance">Synchronize found CBCharacteristic instances with corresponding their YMSCBCharacter instance</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Find a YMSCBCharacteristic">Find a YMSCBCharacteristic</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_BLE Notification Methods">BLE Notification Methods</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Write Request BLE Service Methods">Write Request BLE Service Methods</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Read Request BLE Service Methods">Read Request BLE Service Methods</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Block Execution">Block Execution</a></span></li>
+	
 </ul></li>
 
 
@@ -144,6 +166,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/addCharacteristic:withOffset:">addCharacteristic:withOffset:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/characteristics">characteristics</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/executeBlock:error:">executeBlock:error:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/findCharacteristic:">findCharacteristic:</a></span></li>
 	
@@ -208,7 +232,14 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>Base class for TI SensorTag CoreBluetooth service definition.</p>
+						<p>Base class for defining a Bluetooth LE service.</p>
+
+<p>YMSCBService holds an instance of CBService (<a href="#//api/name/cbService">cbService</a>) and provides a service-centric
+read/write API to a CBPeripheral instance contained in <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</p>
+
+<p>This class is typically subclassed to map to a service in a BLE peripheral. The subclass
+typically implements <a href="#//api/name/notifyCharacteristicHandler:error:">notifyCharacteristicHandler:error:</a> to handle <a href="#//api/name/characteristics">characteristics</a> whose
+BLE notification has been enabled.</p>
 					</div>
 					
 					
@@ -220,14 +251,14 @@
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						
-						
+						<a title="Properties" name="task_Properties"></a>
+						<h3 class="subsubtitle task-title">Properties</h3>
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/name">&nbsp;&nbsp;name</a></code>
-		<span class="tooltip"><p>name of service</p></span>
+		<span class="tooltip"><p>Human-friendly name for this BLE service</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -248,7 +279,7 @@
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/isOn">&nbsp;&nbsp;isOn</a></code>
-		<span class="tooltip"><p>CoreBluetooth service is on</p></span>
+		<span class="tooltip"><p>When set to YES, the CoreBluetooth service is turned on.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -273,14 +304,30 @@
 	</span>
 	<span class="task-item-suffix">property</span>
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Initializing a YMSCBService" name="task_Initializing a YMSCBService"></a>
+						<h3 class="subsubtitle task-title">Initializing a YMSCBService</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/initWithName:baseHi:baseLo:">&ndash;&nbsp;initWithName:baseHi:baseLo:</a></code>
 		<span class="tooltip"><p>Initialize class instance.</p></span>
 	</span>
 	
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Adding a BLE characteristic" name="task_Adding a BLE characteristic"></a>
+						<h3 class="subsubtitle task-title">Adding a BLE characteristic</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/addCharacteristic:withOffset:">&ndash;&nbsp;addCharacteristic:withOffset:</a></code>
 		<span class="tooltip"><p>Add <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> instance given address offset.</p></span>
@@ -294,28 +341,60 @@
 	</span>
 	
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Retrieve CBUUIDs for all discovered characteristics" name="task_Retrieve CBUUIDs for all discovered characteristics"></a>
+						<h3 class="subsubtitle task-title">Retrieve CBUUIDs for all discovered characteristics</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/characteristics">&ndash;&nbsp;characteristics</a></code>
 		<span class="tooltip"><p>Return array of CBUUIDs for all <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> instances in <a href="#//api/name/characteristicDict">characteristicDict</a>.</p></span>
 	</span>
 	
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Synchronize found CBCharacteristic instances with corresponding their YMSCBCharacter instance" name="task_Synchronize found CBCharacteristic instances with corresponding their YMSCBCharacter instance"></a>
+						<h3 class="subsubtitle task-title">Synchronize found CBCharacteristic instances with corresponding their YMSCBCharacter instance</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/syncCharacteristics:">&ndash;&nbsp;syncCharacteristics:</a></code>
 		<span class="tooltip"><p>Synchronize found CBCharacteristics with corresponding <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> containers.</p></span>
 	</span>
 	
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Find a YMSCBCharacteristic" name="task_Find a YMSCBCharacteristic"></a>
+						<h3 class="subsubtitle task-title">Find a YMSCBCharacteristic</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/findCharacteristic:">&ndash;&nbsp;findCharacteristic:</a></code>
 		<span class="tooltip"><p>Find characteristic container for CBCharacteristic.</p></span>
 	</span>
 	
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="BLE Notification Methods" name="task_BLE Notification Methods"></a>
+						<h3 class="subsubtitle task-title">BLE Notification Methods</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/setNotifyValue:forCharacteristic:">&ndash;&nbsp;setNotifyValue:forCharacteristic:</a></code>
 		<span class="tooltip"><p>Set notification value with respect to characteristic.</p></span>
@@ -330,6 +409,21 @@
 	
 	
 </li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/notifyCharacteristicHandler:error:">&ndash;&nbsp;notifyCharacteristicHandler:error:</a></code>
+		<span class="tooltip"><p>Method to handle response update for a prior read or write request to a characteristic.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Write Request BLE Service Methods" name="task_Write Request BLE Service Methods"></a>
+						<h3 class="subsubtitle task-title">Write Request BLE Service Methods</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/writeValue:forCharacteristic:type:">&ndash;&nbsp;writeValue:forCharacteristic:type:</a></code>
 		<span class="tooltip"><p>Write value with respect to characteristic.</p></span>
@@ -352,6 +446,21 @@
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/writeValue:forCharacteristicName:withBlock:">&ndash;&nbsp;writeValue:forCharacteristicName:withBlock:</a></code>
+		<span class="tooltip"><p>Request write value given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Read Request BLE Service Methods" name="task_Read Request BLE Service Methods"></a>
+						<h3 class="subsubtitle task-title">Read Request BLE Service Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
 		<code><a href="#//api/name/readValueForCharacteristic:">&ndash;&nbsp;readValueForCharacteristic:</a></code>
 		<span class="tooltip"><p>Read value with respect to characteristic.</p></span>
 	</span>
@@ -366,22 +475,23 @@
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/notifyCharacteristicHandler:error:">&ndash;&nbsp;notifyCharacteristicHandler:error:</a></code>
-		<span class="tooltip"><p>Method to handle response update for a prior read or write request to a characteristic.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
 		<code><a href="#//api/name/readValueForCharacteristicName:withBlock:">&ndash;&nbsp;readValueForCharacteristicName:withBlock:</a></code>
 		<span class="tooltip"><p>Request read value given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p></span>
 	</span>
 	
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Block Execution" name="task_Block Execution"></a>
+						<h3 class="subsubtitle task-title">Block Execution</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/writeValue:forCharacteristicName:withBlock:">&ndash;&nbsp;writeValue:forCharacteristicName:withBlock:</a></code>
-		<span class="tooltip"><p>Request write value given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p></span>
+		<code><a href="#//api/name/executeBlock:error:">&ndash;&nbsp;executeBlock:error:</a></code>
+		<span class="tooltip"><p>Execute callback block for read or write request.</p></span>
 	</span>
 	
 	
@@ -569,7 +679,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p>CoreBluetooth service is on</p>
+		<p>When set to YES, the CoreBluetooth service is turned on.</p>
 	</div>		
 	
     
@@ -586,7 +696,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>CoreBluetooth service is on</p>
+		<p>When set to YES, the CoreBluetooth service is turned on.</p>
 	</div>
 	
 	
@@ -610,7 +720,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p>name of service</p>
+		<p>Human-friendly name for this BLE service</p>
 	</div>		
 	
     
@@ -627,7 +737,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>name of service</p>
+		<p>Human-friendly name for this BLE service</p>
 	</div>
 	
 	
@@ -832,6 +942,62 @@
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Return array of CBUUIDs for all <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> instances in <a href="#//api/name/characteristicDict">characteristicDict</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/executeBlock:error:" title="executeBlock:error:"></a>
+	<h3 class="subsubtitle method-title">executeBlock:error:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Execute callback block for read or write request.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)executeBlock:(YMSCBCharacteristic *)<em>yc</em> error:(NSError *)<em>error</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>yc</em></dt>
+			<dd><p>Characteristic to execute callback block.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>Error object if the request fails.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Execute callback block for read or write request.</p>
 	</div>
 	
 	
@@ -1625,7 +1791,7 @@ or peripheral:didWriteValueForCharacteristic:error: implemented in <a href="../C
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-01)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-02)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

@@ -12,7 +12,7 @@
 	<body>
 		<header id="top_header">
 			<div id="library" class="hideInXcode">
-				<h1><a id="libraryTitle" href="../index.html">YMS CoreBluetooth Framework + Deanna </a></h1>
+				<h1><a id="libraryTitle" href="../index.html">YmsCoreBluetooth Framework + Deanna </a></h1>
 				<a id="developerHome" href="../index.html">Yummy Melon Software LLC</a>
 			</div>
 			
@@ -72,6 +72,10 @@
 
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Properties">Properties</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Initializing a YMSCBCharacteristic">Initializing a YMSCBCharacteristic</a></span></li>
 	
 </ul></li>
 
@@ -136,16 +140,12 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>Container class for TI SensorTag CoreBluetooth characteristic.</p>
+						<p>Base class for defining a Bluetooth LE characteristic.</p>
 
-<p>The reason for this class not being a subclass of <code>CBCharacteristic</code> is that
-you know ahead of time the <a href="#//api/name/name"><code>name</code></a> and the <code>UUID</code> of the characteristic.</p>
+<p>YMSCBCharacteristic holds an instance of CBCharacteristic (cbCharacteristic).</p>
 
-<p><code>CBCharacteristic</code> instances are returned by discovery from <code>CBPeripheral</code> which for
-the purposes of this framework is too late. <code>YmsCoreBluetooth</code> presumes that you
-initially know what characteristics exist in a device (captured by this class)
-and then upon discovery, pairs the found <code>CBCharacteristic</code> with it. This pairing is done
-in <a href="../Classes/YMSCBService.html"><code>YMSCBService</code></a>.</p>
+<p>This class is typically instantiated by a subclass of YMSCBService. The property
+cbCharacteristic is set in <a href="../Classes/YMSCBService.html#//api/name/syncCharacteristics:">[YMSCBService syncCharacteristics:]</a></p>
 					</div>
 					
 					
@@ -157,14 +157,14 @@ in <a href="../Classes/YMSCBService.html"><code>YMSCBService</code></a>.</p>
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						
-						
+						<a title="Properties" name="task_Properties"></a>
+						<h3 class="subsubtitle task-title">Properties</h3>
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/name">&nbsp;&nbsp;name</a></code>
-		<span class="tooltip"><p>Characteristic name.</p></span>
+		<span class="tooltip"><p>Human-friendly name for this BLE characteristic.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -189,10 +189,18 @@ in <a href="../Classes/YMSCBService.html"><code>YMSCBService</code></a>.</p>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Initializing a YMSCBCharacteristic" name="task_Initializing a YMSCBCharacteristic"></a>
+						<h3 class="subsubtitle task-title">Initializing a YMSCBCharacteristic</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/initWithName:uuid:offset:">&ndash;&nbsp;initWithName:uuid:offset:</a></code>
-		<span class="tooltip"><p>Class contructor.</p></span>
+		<span class="tooltip"><p>Constructor.</p></span>
 	</span>
 	
 	
@@ -257,7 +265,7 @@ in <a href="../Classes/YMSCBService.html"><code>YMSCBService</code></a>.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Characteristic name.</p>
+		<p>Human-friendly name for this BLE characteristic.</p>
 	</div>		
 	
     
@@ -274,7 +282,7 @@ in <a href="../Classes/YMSCBService.html"><code>YMSCBService</code></a>.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Characteristic name.</p>
+		<p>Human-friendly name for this BLE characteristic.</p>
 	</div>
 	
 	
@@ -390,7 +398,7 @@ in <a href="../Classes/YMSCBService.html"><code>YMSCBService</code></a>.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Class contructor.</p>
+		<p>Constructor.</p>
 	</div>		
 	
     
@@ -427,7 +435,7 @@ in <a href="../Classes/YMSCBService.html"><code>YMSCBService</code></a>.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Class contructor.</p>
+		<p>Constructor.</p>
 	</div>
 	
 	
@@ -457,7 +465,7 @@ in <a href="../Classes/YMSCBService.html"><code>YMSCBService</code></a>.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-01)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-02)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

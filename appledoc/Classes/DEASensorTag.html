@@ -12,7 +12,7 @@
 	<body>
 		<header id="top_header">
 			<div id="library" class="hideInXcode">
-				<h1><a id="libraryTitle" href="../index.html">YMS CoreBluetooth Framework + Deanna </a></h1>
+				<h1><a id="libraryTitle" href="../index.html">YmsCoreBluetooth Framework + Deanna </a></h1>
 				<a id="developerHome" href="../index.html">Yummy Melon Software LLC</a>
 			</div>
 			
@@ -46,6 +46,8 @@
 	
 	<option value="//api/name/initWithPeripheral:baseHi:baseLo:updateRSSI:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithPeripheral:baseHi:baseLo:updateRSSI:</option>
 	
+	<option value="//api/name/peripheral:didDiscoverCharacteristicsForService:error:">&nbsp;&nbsp;&nbsp;&nbsp;- peripheral:didDiscoverCharacteristicsForService:error:</option>
+	
 	
 	
 </select>
@@ -75,6 +77,8 @@
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithPeripheral:baseHi:baseLo:updateRSSI:">initWithPeripheral:baseHi:baseLo:updateRSSI:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/peripheral:didDiscoverCharacteristicsForService:error:">peripheral:didDiscoverCharacteristicsForService:error:</a></span></li>
 	
 </ul></li>
 
@@ -134,7 +138,14 @@
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/initWithPeripheral:baseHi:baseLo:updateRSSI:">&ndash;&nbsp;initWithPeripheral:baseHi:baseLo:updateRSSI:</a></code>
-		<span class="tooltip"><p>Constructor</p></span>
+		<span class="tooltip"><p>Constructor.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/peripheral:didDiscoverCharacteristicsForService:error:">&ndash;&nbsp;peripheral:didDiscoverCharacteristicsForService:error:</a></code>
+		<span class="tooltip"><p>CBPeripheralDelegate implementation.</p></span>
 	</span>
 	
 	
@@ -162,7 +173,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Constructor</p>
+		<p>Constructor.</p>
 	</div>		
 	
     
@@ -209,7 +220,13 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Constructor</p>
+		<p>Constructor.</p>
+
+<p>This method must be called via super in any subclass implementation.</p>
+
+<p>The implementation of this method in a subclass will populate <a href="../Classes/YMSCBPeripheral.html#//api/name/serviceDict">serviceDict</a> with (<code>key</code>, <code>value</code>) pairs of
+(NSString, <a href="../Classes/YMSCBService.html">YMSCBService</a>) instances, where <code>key</code> is typically a &ldquo;human-readable&rdquo; string to easily
+reference a <a href="../Classes/YMSCBService.html">YMSCBService</a>.</p>
 	</div>
 	
 	
@@ -221,6 +238,67 @@
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
 		<code class="declared-in-ref">YMSCBPeripheral.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/peripheral:didDiscoverCharacteristicsForService:error:" title="peripheral:didDiscoverCharacteristicsForService:error:"></a>
+	<h3 class="subsubtitle method-title">peripheral:didDiscoverCharacteristicsForService:error:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>CBPeripheralDelegate implementation.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)peripheral:(CBPeripheral *)<em>peripheral</em> didDiscoverCharacteristicsForService:(CBService *)<em>service</em> error:(NSError *)<em>error</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>peripheral</em></dt>
+			<dd><p>The peripheral providing this information.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>service</em></dt>
+			<dd><p>The service that the characteristics belong to.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>If an error occured, the cause of the failure.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>CBPeripheralDelegate implementation.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBPeripheral.m</code><br />
 	</div>				
 	
 	
@@ -239,7 +317,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-01)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-02)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						
