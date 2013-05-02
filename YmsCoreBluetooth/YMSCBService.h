@@ -16,7 +16,6 @@
 //  Author: Charles Y. Choi <charles.choi@yummymelon.com>
 //
 
-
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "YMSCBUtils.h"
@@ -33,12 +32,23 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 @class YMSCBCharacteristic;
 
 /**
- Base class for TI SensorTag CoreBluetooth service definition.
+ Base class for defining a Bluetooth LE service.
+
+ YMSCBService holds an instance of CBService (cbService) and provides a service-centric
+ read/write API to a CBPeripheral instance contained in YMSCBPeripheral.
+ 
+ This class is typically subclassed to map to a service in a BLE peripheral. The subclass
+ typically implements notifyCharacteristicHandler:error: to handle characteristics whose
+ BLE notification has been enabled. 
+ 
+
+
  */
 
 @interface YMSCBService : NSObject
 
-/// name of service
+/** @name Properties */
+/// Human-friendly name for this BLE service
 @property (nonatomic, strong) NSString *name;
 
 /// pointer to CBService
@@ -47,7 +57,9 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 /// 128 bit base address struct
 @property (nonatomic, assign) yms_u128_t base;
 
-/** CoreBluetooth service is on */
+/**
+ When set to YES, the CoreBluetooth service is turned on.
+*/
 @property (nonatomic, assign) BOOL isOn;
 
 /** CoreBluetooth characteristics are synchronized */
@@ -59,6 +71,8 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 /// Dictionary to hold (cname, FIFO queue) for response blocks to execute for a characteristic read or write.
 @property (nonatomic, strong) NSMutableDictionary *responseBlockDict;
 
+
+/** @name Initializing a YMSCBService */
 /**
  Initialize class instance.
  @param oName name of service
@@ -70,6 +84,7 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
             baseHi:(int64_t)hi
             baseLo:(int64_t)lo;
 
+/** @name Adding a BLE characteristic */
 /**
  Add YMSCBCharacteristic instance given address offset.
  @param cname characteristic name
@@ -84,11 +99,13 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
  */
 - (void)addCharacteristic:(NSString *)cname withAddress:(int)addr;
 
+/** @name Retrieve CBUUIDs for all discovered characteristics */
 /**
  Return array of CBUUIDs for all YMSCBCharacteristic instances in characteristicDict.
  */
 - (NSArray *)characteristics;
 
+/** @name Synchronize found CBCharacteristic instances with corresponding their YMSCBCharacter instance */
 /**
  Synchronize found CBCharacteristics with corresponding YMSCBCharacteristic containers.
  
@@ -96,7 +113,7 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
  */
 - (void)syncCharacteristics:(NSArray *)foundCharacteristics;
 
-
+/** @name Find a YMSCBCharacteristic */
 /**
  Find characteristic container for CBCharacteristic.
  
@@ -105,7 +122,7 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
  */
 - (YMSCBCharacteristic *)findCharacteristic:(CBCharacteristic *)ct;
 
-
+/** @name BLE Notification Methods */
 /**
  Set notification value with respect to characteristic.
  
@@ -123,6 +140,21 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
  */
 - (void)setNotifyValue:(BOOL)notifyValue forCharacteristicName:(NSString *)cname;
 
+/**
+ Method to handle response update for a prior read or write request to a characteristic.  
+ 
+ This method is invoked by the CBPeripheralDelegate method peripheral:didUpdateValueForCharacteristic:error: 
+ conformed to by YMSCBPeripheral.
+ 
+ This method is typically overridden to handle characteristics whose notification has been turned on.
+ 
+ @param yc Characteristic receiving update.
+ @param error Error object.
+ */
+- (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error;
+
+
+/** @name Write Request BLE Service Methods */
 /**
  Write value with respect to characteristic.
  
@@ -151,6 +183,24 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 - (void)writeByte:(int8_t)val forCharacteristicName:(NSString *)cname type:(CBCharacteristicWriteType)type;
 
 /**
+ Request write value given characteristic name and execute callback block upon response.
+
+ The callback block readCallback has one argument: `error`:
+ 
+ * `error` is populated with the returned `error` object from the delegate method peripheral:didUpdateValueForCharacteristic:error: 
+ or peripheral:didWriteValueForCharacteristic:error: implemented in YMSCBPeripheral.
+
+ @param data The value to be written
+ @param cname YMSCBCharacteristic name.
+ @param writeCallback Callback block to execute upon response.
+ 
+ */
+- (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname
+         withBlock:(void (^)(NSError *error))writeCallback;
+
+
+/** @name Read Request BLE Service Methods */
+/**
  Read value with respect to characteristic.
  
  @param characteristic CBCharacteristic to be notified of.
@@ -164,19 +214,6 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
  */
 - (void)readValueForCharacteristicName:(NSString *)cname;
 
-
-/**
- Method to handle response update for a prior read or write request to a characteristic.  
- 
- This method is invoked by the CBPeripheralDelegate method peripheral:didUpdateValueForCharacteristic:error: 
- conformed to by YMSCBPeripheral.
- 
- This method is typically overridden to handle characteristics whose notification has been turned on.
- 
- @param yc Characteristic receiving update.
- @param error Error object.
- */
-- (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error;
 
 
 /**
@@ -195,22 +232,14 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
                              withBlock:(void (^)(NSData *data, NSError *error))readCallback;
 
 
+
+/** @name Block Execution */
 /**
- Request write value given characteristic name and execute callback block upon response.
+ Execute callback block for read or write request.
 
- The callback block readCallback has one argument: `error`:
- 
- * `error` is populated with the returned `error` object from the delegate method peripheral:didUpdateValueForCharacteristic:error: 
- or peripheral:didWriteValueForCharacteristic:error: implemented in YMSCBPeripheral.
-
- @param data The value to be written
- @param cname YMSCBCharacteristic name.
- @param writeCallback Callback block to execute upon response.
- 
+ @param yc Characteristic to execute callback block.
+ @param error Error object if the request fails.
  */
-- (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname
-         withBlock:(void (^)(NSError *error))writeCallback;
-
 - (void)executeBlock:(YMSCBCharacteristic *)yc error:(NSError *)error;
 
 
