@@ -1,5 +1,6 @@
 
 ### Version 0.91 (beta)
+* [Class Hierarchy](hierarchy.html)
 
 A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS applications using the CoreBluetooth API. Includes Deanna, an iOS application using YmsCoreBluetooth to communicate with a TI SensorTag.
 
@@ -24,7 +25,7 @@ With CoreBluetooth, the API to issue read and write requests to a BLE peripheral
 YmsCoreBluetooth framework offers iOS developers a more natural API that is BLE service-centric: read and write requests to a BLE peripheral are done from the point of view of a BLE service. Responses can be handled using 
 a callback block or via a notification handler method.
 
-## Example: DEATemperatureService, a subclass of YMSCBService
+## YmsCoreBluetooth by Example: DEATemperatureService, a subclass of YMSCBService
 
 To demonstrate the BLE service-centric API in action, below is the implementation of the temperature service for a TI SensorTag. 
 
