@@ -76,6 +76,39 @@
         } else {
             self.button2.titleLabel.textColor = [UIColor blackColor];
         }
+
+        
+        /*
+         This is an interim implementation of raising a local notification when a SensorTag 
+         key is pressed and the application is in the background or in an inactive state.
+         Note that this will only work when DEASensorTagViewController is in view.
+         
+         TODO: Change to have the application observe the keyValue.
+         */
+        UIApplication *app = [UIApplication sharedApplication];
+
+        if ((app.applicationState == UIApplicationStateBackground) ||
+            (app.applicationState == UIApplicationStateInactive)) {
+            
+            if (keyValue != 0) {
+                NSLog(@"Background Key Value %d", keyValue);
+            
+                UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+                if (localNotif == nil) {
+                    return;
+                }
+            
+                localNotif.soundName = UILocalNotificationDefaultSoundName;
+                localNotif.applicationIconBadgeNumber = keyValue;
+                localNotif.alertBody = [NSString stringWithFormat:@"You pressed button %d", keyValue];
+                //localNotif.alertAction = @"Deanna got something for you";
+                localNotif.hasAction = NO;
+
+                [app presentLocalNotificationNow:localNotif];
+            }
+
+        }
+        
         
     } else if ([keyPath isEqualToString:@"isOn"]) {
         //[self.notifySwitch setOn:ts.isOn animated:YES];
