@@ -23,9 +23,9 @@ Shown below is a partial file hierarchy of *Deanna* to help illustrate the organ
 
 With the above figure, let's walk through building a *SensorTag* peripheral.
 
-## Subclass `YMSCBAppService`
+## Subclass YMSCBAppService
 
-The class `DEACBAppService` in `Deanna/Services/DEACBAppService.[hm]` is an application service to manage all known peripherals as defined by you the implementer. In this case we're only concerning ourselves with *SensorTag* peripherals.
+The class DEACBAppService in `Deanna/Services/DEACBAppService.[hm]` is an application service to manage all known peripherals as defined by you the implementer. In this case we're only concerning ourselves with *SensorTag* peripherals.
 It is typically implemented as a singleton instance and contains the following three method implementations:
 
 * `sharedService`
@@ -91,7 +91,7 @@ The class implementation of `DEASensorTag` in `Deanna/Services/SensorTag/DEASens
 * `initWithPeripheral:baseHi:baseLo:updateRSSI:` - the constructor for DEASensorTag
 * `peripheral:didDiscoverCharacteristicsForService:error:` - CBPeriperhalDelegate method to handle what to do when BLE characteristics of the BLE services are discovered for a *SensorTag*.
 
-### Constructing `DEASensorTag`
+## Constructing DEASensorTag
 
 The class constructor for `DEASensorTag` is responsible for instantiating subclasses of `YMSCBService` to capture the behavior of the different BLE services offered by the *SensorTag*. The source for this constructor, `initWithPeripheral:baseHi:baseLo:updateRSSI:` is shown below:
 
@@ -240,8 +240,6 @@ When the service is turned on using the method [DEABaseService turnOn], notifica
 This document can always be improved. Please submit any comments or corrections about this document to the [issue tracker](https://github.com/kickingvegas/YmsCoreBluetooth/issues?state=open) for **YmsCoreBluetooth**.
 
 Thank you for using **YmsCoreBluetooth**!
-
-
 
 
 
