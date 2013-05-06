@@ -25,18 +25,273 @@
 			<a title="Tutorial Document" name="top"></a>
 			<div id="overview_contents" role="main">
 				<div id="container">	
-					<h1>YmsCoreBluetooth <a href="Tutorial.html">Tutorial</a></h1>
+					<p><link rel="stylesheet" type="text/css" href="css/book.css" /></p>
 
-<p>This tutorial will describe how to build a Bluetooth LE peripheral driver to work with YmsCoreBluetooth.</p>
+<h1>YmsCoreBluetooth <a href="Tutorial.html">Tutorial</a></h1>
 
-<p>This document is under construction.</p>
+<p><strong>YmsCoreBluetooth</strong> is a framework for building Bluetooth LE capability to an iOS app. It extends the CoreBluetooth framework by implementing functionality to manage BLE peripherals, their services, and the characteristics of those services.</p>
 
-<h1>Basic Operation</h1>
+<p>The communication patterns used by <strong>YmsCoreBluetooth</strong> are as follows:</p>
+
+<ul>
+<li><p>Notifications are handled by implementing a handler method.</p></li>
+<li><p>Read/Write requests are handled using callback functions implemented as ObjectiveC blocks.</p></li>
+</ul>
+
+
+<p>This tutorial will describe how to build a Bluetooth LE peripheral driver based on YmsCoreBluetooth.</p>
+
+<h1>Building a <em>SensorTag</em> Peripheral</h1>
+
+<p>Shown below is a partial file hierarchy of <em>Deanna</em> to help illustrate the organization and construction of TI SensorTag peripheral using the <strong>YmsCoreBluetooth</strong> framework. There are two directories of interest:</p>
+
+<ul>
+<li><code>YmsCoreBluetooth/</code> which contains all files for this framework</li>
+<li><code>Deanna/Services/</code> which contains an implementation of the <em>SensorTag</em> peripheral</li>
+</ul>
+
+
+<p><img src="images/ymscb_project_hierarchy.jpg" alt="YMSCB File Hierarchy" /></p>
+
+<p>With the above figure, let&rsquo;s walk through building a <em>SensorTag</em> peripheral.</p>
+
+<h2>Subclass <a href="../../Classes/YMSCBAppService.html">YMSCBAppService</a></h2>
+
+<p>The class <a href="../../Classes/DEACBAppService.html">DEACBAppService</a> in <code>Deanna/Services/</code>DEACBAppService<code>.[hm]</code> is an application service to manage all known peripherals as defined by you the implementer. In this case we&rsquo;re only concerning ourselves with <em>SensorTag</em> peripherals.
+It is typically implemented as a singleton instance and contains the following three method implementations:</p>
+
+<ul>
+<li><code>sharedService</code></li>
+<li><code>startScan</code></li>
+<li><code>handleFoundPeripheral</code></li>
+</ul>
+
+
+<p>The <code>sharedService</code> method is a singleton constructor for <code>DEACBAppService</code>. In this implementation, the property <code>[YMSCBAppService knownPeripheralNames]</code> is set using <code>initWithKnownPeripheralNames:queue:</code> to help identify and filter the peripherals you care to communicate with.</p>
+
+<pre><code>+ (DEACBAppService *)sharedService {
+    if (sharedCBAppService == nil) {
+        NSArray *nameList = @[@"TI BLE Sensor Tag", @"SensorTag"];
+        sharedCBAppService = [[super allocWithZone:NULL] initWithKnownPeripheralNames:nameList
+                                                                                queue:nil];
+    }
+    return sharedCBAppService;
+}
+</code></pre>
+
+<p>The <code>startScan</code> method lets you define how to go about scanning for peripherals. Within its implementation should be a call to <code>scanForPeripheralsWithServices:options:</code> to tell the <code>CBCentralManager</code> instance to start scanning.</p>
+
+<pre><code>- (void)startScan {
+    NSDictionary *options = @{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES };
+    [self scanForPeripheralsWithServices:nil options:options];
+}
+</code></pre>
+
+<p>The <code>handleFoundPeripheral:</code> method defines what to do once you&rsquo;ve found a peripheral via scanning. In the case of a <em>SensorTag</em> it is to instantiate <a href="../../Classes/DEASensorTag.html"><code>DEASensorTag</code></a>, a subclass of <a href="../../Classes/YMSCBPeripheral.html"><code>YMSCBPeripheral</code></a>.</p>
+
+<pre><code>- (void)handleFoundPeripheral:(CBPeripheral *)peripheral {
+
+    YMSCBPeripheral *yp = [self findPeripheral:peripheral];
+
+    if (yp == nil) {
+        BOOL isUnknownPeripheral = YES;
+        for (NSString *pname in self.knownPeripheralNames) {
+            if ([pname isEqualToString:peripheral.name]) {
+                DEASensorTag *sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
+                                                                            baseHi:kSensorTag_BASE_ADDRESS_HI
+                                                                            baseLo:kSensorTag_BASE_ADDRESS_LO
+                                                                        updateRSSI:YES];
+                [self.ymsPeripherals addObject:sensorTag];
+                isUnknownPeripheral = NO;
+                break;
+
+            }
+
+        }
+
+        if (isUnknownPeripheral) {
+            //TODO: Handle unknown peripheral
+            yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral baseHi:0 baseLo:0 updateRSSI:NO];
+            [self.ymsPeripherals addObject:yp];
+        }
+    }
+
+}
+</code></pre>
+
+<p>When a BLE peripheral is discovered it can be connected to. The method <a href="../../Classes/YMSCBAppService.html#//api/name/connectPeripheral:"><code>[YMSCBAppService connectPeripheral:]</code></a> will request this connection and the response is handled by <code>[YMSCBAppService centralManager:didConnectPeripheral:]</code>. In this last method, the call to discover the BLE services and subquently each service&rsquo;s characteristics is called.</p>
+
+<h2>Subclass <a href="../../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a></h2>
+
+<p>The class implementation of <a href="../../Classes/DEASensorTag.html"><code>DEASensorTag</code></a> in <code>Deanna/Services/SensorTag/</code>DEASensorTag<code>.[hm]</code> is where the top-level behavior of the <em>SensorTag</em> peripheral is captured. Two methods are implemented:</p>
+
+<ul>
+<li><code>initWithPeripheral:baseHi:baseLo:updateRSSI:</code> &ndash; the constructor for <a href="../../Classes/DEASensorTag.html">DEASensorTag</a></li>
+<li><code>peripheral:didDiscoverCharacteristicsForService:error:</code> &ndash; CBPeriperhalDelegate method to handle what to do when BLE characteristics of the BLE services are discovered for a <em>SensorTag</em>.</li>
+</ul>
+
+
+<h2>Constructing <a href="../../Classes/DEASensorTag.html">DEASensorTag</a></h2>
+
+<p>The class constructor for <a href="../../Classes/DEASensorTag.html"><code>DEASensorTag</code></a> is responsible for instantiating subclasses of <a href="../../Classes/YMSCBService.html"><code>YMSCBService</code></a> to capture the behavior of the different BLE services offered by the <em>SensorTag</em>. The source for this constructor, <code>initWithPeripheral:baseHi:baseLo:updateRSSI:</code> is shown below:</p>
+
+<pre><code>- (id)initWithPeripheral:(CBPeripheral *)peripheral
+                  baseHi:(int64_t)hi
+                  baseLo:(int64_t)lo
+              updateRSSI:(BOOL)update {
+
+    self = [super initWithPeripheral:peripheral baseHi:hi baseLo:lo updateRSSI:update];
+
+    if (self) {
+
+        DEATemperatureService *ts = [[DEATemperatureService alloc] initWithName:@"temperature" baseHi:hi baseLo:lo];
+        DEAAccelerometerService *as = [[DEAAccelerometerService alloc] initWithName:@"accelerometer" baseHi:hi baseLo:lo];
+        DEASimpleKeysService *sks = [[DEASimpleKeysService alloc] initWithName:@"simplekeys" baseHi:hi baseLo:lo];
+        DEAHumidityService *hs = [[DEAHumidityService alloc] initWithName:@"humidity" baseHi:hi baseLo:lo];
+        DEABarometerService *bs = [[DEABarometerService alloc] initWithName:@"barometer" baseHi:hi baseLo:lo];
+        DEAGyroscopeService *gs = [[DEAGyroscopeService alloc] initWithName:@"gyroscope" baseHi:hi baseLo:lo];
+        DEAMagnetometerService *ms = [[DEAMagnetometerService alloc] initWithName:@"magnetometer" baseHi:hi baseLo:lo];
+        DEADeviceInfoService *ds = [[DEADeviceInfoService alloc] initWithName:@"devinfo" baseHi:hi baseLo:lo];
+
+        self.serviceDict = @{@"temperature": ts,
+                             @"accelerometer": as,
+                             @"simplekeys": sks,
+                             @"humidity": hs,
+                             @"magnetometer": ms,
+                             @"gyroscope": gs,
+                             @"barometer": bs,
+                             @"devinfo": ds};
+
+        [sks turnOn];
+    }
+    return self;
+
+}
+</code></pre>
+
+<p>In this implementation, the following BLE services of the <em>SensorTag</em> are supported:</p>
+
+<ul>
+<li>Temperature Service &ndash; <a href="../../Classes/DEATemperatureService.html">DEATemperatureService</a></li>
+<li>Accelerometer Service &ndash; <a href="../../Classes/DEAAccelerometerService.html">DEAAccelerometerService</a></li>
+<li>Simple Keys Service &ndash; <a href="../../Classes/DEASimpleKeysService.html">DEASimpleKeysService</a></li>
+<li>Humidity Service &ndash; <a href="../../Classes/DEAHumidityService.html">DEAHumidityService</a></li>
+<li>Barometer Service &ndash; <a href="../../Classes/DEABarometerService.html">DEABarometerService</a></li>
+<li>Gyroscope Service &ndash; <a href="../../Classes/DEAGyroscopeService.html">DEAGyroscopeService</a></li>
+<li>Magnetometer Service &ndash; <a href="../../Classes/DEAMagnetometerService.html">DEAMagnetometerService</a></li>
+<li>Device Information Service &ndash; DEADeviceInfoService</li>
+</ul>
+
+
+<p>The instances of these classes are stored in <a href="../../Classes/YMSCBPeripheral.html#//api/name/serviceDict">[YMSCBPeripheral serviceDict]</a>.</p>
+
+<p>If you wish to perform specific actions upon the discovery of a BLE characteristic, this can be implemented in <code>peripheral:didDiscoverCharacteristicsForService:error</code> as shown below:</p>
+
+<pre><code>- (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError     *)error {
+
+    [super peripheral:peripheral didDiscoverCharacteristicsForService:service error:&amp;*error];
+
+    DEABaseService *btService = (DEABaseService *)[self findService:service];
+
+    if ([btService.name isEqualToString:@"simplekeys"]) {
+        [btService setNotifyValue:YES forCharacteristicName:@"data"];
+
+    } else if ([btService.name isEqualToString:@"devinfo"]) {
+        DEADeviceInfoService *ds =  (DEADeviceInfoService *)btService;
+        [ds readDeviceInfo];
+
+    } else {
+        [btService requestConfig];
+    }
+
+}
+</code></pre>
+
+<h2>Define BLE services of this peripheral.</h2>
+
+<p>The BLE services of a peripheral are described by using subclasses of <code>YMSCBService</code>. For the <em>SensorTag</em>, all but the device information service (<a href="../../Classes/DEADeviceInfoService.html">DEADeviceInfoService</a>) are subclassed from <code>DEABaseService</code> which has support for common configuration and turn on/off behavior.</p>
+
+<p>This subclass is responsible for implementing:</p>
+
+<ul>
+<li>Properties that are specific to the bluetooth service.</li>
+<li>The class constructor <code>[YMSCBService initWithName:baseHi:baseLo:]</code>, defining the BLE characteristics with subclasses of <code>YMSCBCharacteristic</code>.</li>
+<li><code>notifyCharacteristicHandler</code> to handle responses for characteristics whose notifications have been turned on.</li>
+<li>Any processing logic germane to the BLE service (e.g. temperature conversion, data correction/smoothing, etc.).</li>
+<li>Specific read/write transaction sequences germane to the BLE service.</li>
+</ul>
+
+
+<p>Shown below is the implementation for <a href="../../Classes/DEAAccelerometerService.html">DEAAccelerometerService</a>.</p>
+
+<pre><code>float calcAccel(int16_t rawV) {
+    float v;
+    v = ((float)rawV + 1.0) / (256.0/4.0);
+    return v;
+}
+
+@implementation DEAAccelerometerService
+
+
+- (id)initWithName:(NSString *)oName
+            baseHi:(int64_t)hi
+            baseLo:(int64_t)lo {
+    self = [super initWithName:oName
+                        baseHi:hi
+                        baseLo:lo];
+
+
+    if (self) {
+        [self addCharacteristic:@"service" withOffset:kSensorTag_ACCELEROMETER_SERVICE];
+        [self addCharacteristic:@"data" withOffset:kSensorTag_ACCELEROMETER_DATA];
+        [self addCharacteristic:@"config" withOffset:kSensorTag_ACCELEROMETER_CONFIG];
+        [self addCharacteristic:@"period" withOffset:kSensorTag_ACCELEROMETER_PERIOD];
+    }
+    return self;
+}
+
+
+- (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error {
+
+    if (error) {
+        return;
+    }
+
+    if ([yc.name isEqualToString:@"data"]) {
+        NSData *data = yc.cbCharacteristic.value;
+
+        char val[data.length];
+        [data getBytes:&amp;val length:data.length];
+
+        int16_t xx = val[0];
+        int16_t yy = val[1];
+        int16_t zz = val[2];
+
+
+        self.x = [NSNumber numberWithFloat:calcAccel(xx)];
+        self.y = [NSNumber numberWithFloat:calcAccel(yy)];
+        self.z = [NSNumber numberWithFloat:calcAccel(zz)];
+
+    }
+}
+
+@end
+</code></pre>
+
+<p>The class constructor <code>initWithName:baseHi:baseLo:</code> defines four BLE characteristics using <code>addCharacteristic:withOffset:</code> which we can reference with the following four strings: (&ldquo;service&rdquo;, &ldquo;data&rdquo;, &ldquo;config&rdquo;, &ldquo;period&rdquo;).</p>
+
+<p>When the service is turned on using the method <a href="../../Classes/DEABaseService.html#//api/name/turnOn">[DEABaseService turnOn]</a>, notifications for the &ldquo;data&rdquo; characteristic are turned on. Handling notification events sent from the <em>SensorTag</em> are handled by <code>notifyCharacteristicHandler</code>. The acceleration measurements are stored as <code>NSNumber</code> properties <code>x</code>, <code>y</code>, <code>z</code>. These properties can then be Key-Value Observed (KVO) by the application, typically to be displayed in user interface.</p>
+
+<h1>Comments</h1>
+
+<p>This document can always be improved. Please submit any comments or corrections about this document to the <a href="https://github.com/kickingvegas/YmsCoreBluetooth/issues?state=open">issue tracker</a> for <strong>YmsCoreBluetooth</strong>.</p>
+
+<p>Thank you for using <strong>YmsCoreBluetooth</strong>!</p>
 				</div>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-02)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-06)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						
