@@ -179,6 +179,10 @@ Code tested on:
 
 ## Changes
 
+### Mon May 6 2013
+* Issue #19 - First draft of Tutorial written
+* Added initial support for launching a local notification when *Deanna* app in the background. The view controller for the SensorTag must be presented before going into the background for local notifications to work.
+
 ### Wed May 2 2013
 * Issue #34 - Updated YmsCoreBluetooth Documentation
 
