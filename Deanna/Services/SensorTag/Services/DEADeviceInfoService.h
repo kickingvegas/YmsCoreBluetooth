@@ -18,6 +18,7 @@
 
 
 #import "YMSCBService.h"
+#include "TISensorTag.h"
 
 /**
  TI SensorTag CoreBluetooth service definition for device information.
