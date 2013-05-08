@@ -39,6 +39,13 @@ yms_u128_t yms_u128_genAddress(yms_u128_t *base, yms_u128_t *offset) {
 }
 
 
+yms_u128_t yms_u128_genOffset(int value) {
+    yms_u128_t offset = {0, 0};
+    offset.lo = (unsigned long long)value;
+    return offset;
+}
+
+
 __uint16_t yms_u16_build(__uint16_t lo, __uint16_t hi) {
     __uint16_t result = ((lo & 0xff)| ((hi << 8) & 0xff00));
     return result;
