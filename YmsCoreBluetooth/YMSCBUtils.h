@@ -26,7 +26,7 @@
 @interface YMSCBUtils : NSObject
 
 /**
- Generate CBUUID given base and offset of type yms_u128_t
+ Generate CBUUID string given base and offset of type yms_u128_t
 
  @param base base address
  @param offset offset value
@@ -35,7 +35,7 @@
 + (NSString *)genCBUUID:(yms_u128_t *)base withOffset:(yms_u128_t *)offset;
 
 /**
- Generate CBUUID given base of type yms_u128_t and offset of type int
+ Generate CBUUID string given base of type yms_u128_t and offset of type int
  
  @param base base address
  @param addrOffset offset value
@@ -57,7 +57,7 @@
 
  @param base base address
  @param addrOffset offset value
- @return CBUUID string
+ @return CBUUID generated from base and addOffset
  */
 + (CBUUID *)createCBUUID:(yms_u128_t *)base withIntOffset:(int)addrOffset;
 
