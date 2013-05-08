@@ -80,8 +80,8 @@
 #define kSensorTag_TEST_DATA               0xAA61
 #define kSensorTag_TEST_CONFIG             0xAA62
 
-yms_u128_t yms_u128_genOffset(int value);
-yms_u128_t yms_u128_genAddressWithInt(yms_u128_t *base, int value);
+yms_u128_t yms_u128_genSensorTagOffset(int value);
+yms_u128_t yms_u128_genSensorTagAddressWithInt(yms_u128_t *base, int value);
 
 
 #endif

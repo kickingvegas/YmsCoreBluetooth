@@ -25,7 +25,7 @@
  @param value offset value
  @return offset in 128-bit struct form
  */
-yms_u128_t yms_u128_genOffset(int value) {
+yms_u128_t yms_u128_genSensorTagOffset(int value) {
     yms_u128_t offset = {0, 0};
     offset.hi = (unsigned long long)value << 32;
     return offset;
@@ -38,9 +38,9 @@ yms_u128_t yms_u128_genOffset(int value) {
  @param value offset value
  @return address in 128-bit struct form
  */
-yms_u128_t yms_u128_genAddressWithInt(yms_u128_t *base, int value) {
+yms_u128_t yms_u128_genSensorTagAddressWithInt(yms_u128_t *base, int value) {
     
-    yms_u128_t offset = yms_u128_genOffset(value);
+    yms_u128_t offset = yms_u128_genSensorTagOffset(value);
     
     yms_u128_t result = yms_u128_genAddress(base, &offset);
     
