@@ -13,6 +13,7 @@
 		D90C0C3D16DD9133002D3FFD /* DEAHumidityService.m in Sources */ = {isa = PBXBuildFile; fileRef = D90C0C3C16DD9133002D3FFD /* DEAHumidityService.m */; };
 		D91170531681251900E2D19A /* DEATemperatureService.m in Sources */ = {isa = PBXBuildFile; fileRef = D91170521681251900E2D19A /* DEATemperatureService.m */; };
 		D91170561681461300E2D19A /* DEAAccelerometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = D91170551681461300E2D19A /* DEAAccelerometerService.m */; };
+		D9187E1D1739D3FF003AA71D /* DEASensorTagUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D9187E1C1739D3FF003AA71D /* DEASensorTagUtils.m */; };
 		D9268B4317306295009C4284 /* NSMutableArray+fifoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D9268B4217306295009C4284 /* NSMutableArray+fifoQueue.m */; };
 		D9268B46173081E2009C4284 /* DEADeviceInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9268B45173081E2009C4284 /* DEADeviceInfoService.m */; };
 		D933CECF16DDAFA700EDDAD6 /* YMS128.c in Sources */ = {isa = PBXBuildFile; fileRef = D933CEC316DDAFA700EDDAD6 /* YMS128.c */; };
@@ -89,6 +90,8 @@
 		D91170521681251900E2D19A /* DEATemperatureService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEATemperatureService.m; sourceTree = "<group>"; };
 		D91170541681461300E2D19A /* DEAAccelerometerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAAccelerometerService.h; sourceTree = "<group>"; };
 		D91170551681461300E2D19A /* DEAAccelerometerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAAccelerometerService.m; sourceTree = "<group>"; };
+		D9187E1B1739D3FF003AA71D /* DEASensorTagUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASensorTagUtils.h; sourceTree = "<group>"; };
+		D9187E1C1739D3FF003AA71D /* DEASensorTagUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASensorTagUtils.m; sourceTree = "<group>"; };
 		D9268B4117306295009C4284 /* NSMutableArray+fifoQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+fifoQueue.h"; sourceTree = "<group>"; };
 		D9268B4217306295009C4284 /* NSMutableArray+fifoQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+fifoQueue.m"; sourceTree = "<group>"; };
 		D9268B44173081E2009C4284 /* DEADeviceInfoService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEADeviceInfoService.h; sourceTree = "<group>"; };
@@ -361,6 +364,8 @@
 			children = (
 				D9718B94167FA91F0001E42C /* TISensorTag.h */,
 				D988A5C716DD464A00D7D392 /* TISensorTag.c */,
+				D9187E1B1739D3FF003AA71D /* DEASensorTagUtils.h */,
+				D9187E1C1739D3FF003AA71D /* DEASensorTagUtils.m */,
 				D988A5C416DD26A100D7D392 /* DEASensorTag.h */,
 				D988A5C516DD26A100D7D392 /* DEASensorTag.m */,
 				D9CB2C0716A71FC300279DDA /* Services */,
@@ -568,6 +573,7 @@
 				D97EC6D0172B08AB00CAECFC /* DEABaseService.m in Sources */,
 				D9268B4317306295009C4284 /* NSMutableArray+fifoQueue.m in Sources */,
 				D9268B46173081E2009C4284 /* DEADeviceInfoService.m in Sources */,
+				D9187E1D1739D3FF003AA71D /* DEASensorTagUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
