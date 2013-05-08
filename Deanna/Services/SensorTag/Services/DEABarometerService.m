@@ -110,40 +110,52 @@ double calcBarPress(int16_t t_r,
                                                                 _c6,
                                                                 _c7,
                                                                 _c8)];
-        
-        
-    } else if ([yc.name isEqualToString:@"config"]) {
-        if (self.isCalibrating) {
-            [self readValueForCharacteristicName:@"calibration"];
-        }
-        
-    } else if ([yc.name isEqualToString:@"calibration"]) {
-        self.isCalibrating = NO;
-        NSData *data = yc.cbCharacteristic.value;
-        
-        char val[data.length];
-        [data getBytes:&val length:data.length];
-        
-        int i = 0;
-        while (i < data.length) {
-            uint16_t lo = val[i];
-            uint16_t hi = val[i+1];
-            uint16_t cx = ((lo & 0xff)| ((hi << 8) & 0xff00));
-            int index = i/2 + 1;
+    }
+}
 
-            if (index == 1) self.c1 = cx;
-            else if (index == 2) self.c2 = cx;
-            else if (index == 3) self.c3 = cx;
-            else if (index == 4) self.c4 = cx;
-            else if (index == 5) self.c5 = cx;
-            else if (index == 6) self.c6 = cx;
-            else if (index == 7) self.c7 = cx;
-            else if (index == 8) self.c8 = cx;
+- (void)requestCalibration {
+    if (self.isCalibrating == NO) {
+        [self writeByte:0x2 forCharacteristicName:@"config" withBlock:^(NSError *error) {
             
-            i = i + 2;
-        }
+            if (error) {
+                NSLog(@"ERROR: write request to barometer config to start calibration failed.");
+                return;
+            }
+            
+            [self readValueForCharacteristicName:@"calibration" withBlock:^(NSData *data, NSError *error) {
+                if (error) {
+                    NSLog(@"ERROR: read request to barometer calibration failed.");
+                    return;
+                }
+                
+                self.isCalibrating = NO;
+                char val[data.length];
+                [data getBytes:&val length:data.length];
+                
+                int i = 0;
+                while (i < data.length) {
+                    uint16_t lo = val[i];
+                    uint16_t hi = val[i+1];
+                    uint16_t cx = ((lo & 0xff)| ((hi << 8) & 0xff00));
+                    int index = i/2 + 1;
+                    
+                    if (index == 1) self.c1 = cx;
+                    else if (index == 2) self.c2 = cx;
+                    else if (index == 3) self.c3 = cx;
+                    else if (index == 4) self.c4 = cx;
+                    else if (index == 5) self.c5 = cx;
+                    else if (index == 6) self.c6 = cx;
+                    else if (index == 7) self.c7 = cx;
+                    else if (index == 8) self.c8 = cx;
+                    
+                    i = i + 2;
+                }
+                
+                self.isCalibrated = YES;
 
-        self.isCalibrated = YES;
+            }];
+        }];
+        
     }
 }
 

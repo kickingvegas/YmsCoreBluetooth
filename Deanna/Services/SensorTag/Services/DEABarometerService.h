@@ -50,5 +50,11 @@
 /// Ambient temperature measurement
 @property (nonatomic, strong) NSNumber *ambientTemp;
 
+/**
+ Request calibration of barometer.
+ */
+- (void)requestCalibration;
+
+
 
 @end
