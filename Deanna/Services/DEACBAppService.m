@@ -19,6 +19,7 @@
 
 #import "DEACBAppService.h"
 #import "DEASensorTag.h"
+#include "TISensorTag.h"
 
 static DEACBAppService *sharedCBAppService;
 
