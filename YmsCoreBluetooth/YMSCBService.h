@@ -195,8 +195,22 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
  @param writeCallback Callback block to execute upon response.
  
  */
-- (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname
-         withBlock:(void (^)(NSError *error))writeCallback;
+- (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname withBlock:(void (^)(NSError *error))writeCallback;
+
+/**
+ Request write byte given characteristic name and execute callback block upon response.
+ 
+ The callback block readCallback has one argument: `error`:
+ 
+ * `error` is populated with the returned `error` object from the delegate method peripheral:didUpdateValueForCharacteristic:error:
+ or peripheral:didWriteValueForCharacteristic:error: implemented in YMSCBPeripheral.
+ 
+ @param val Byte value to be written
+ @param cname YMSCBCharacteristic name.
+ @param writeCallback Callback block to execute upon response.
+ 
+ */
+- (void)writeByte:(int8_t *)val forCharacteristicName:(NSString *)cname withBlock:(void (^)(NSError *error))writeCallback;
 
 
 /** @name Read Request BLE Service Methods */
