@@ -17,7 +17,7 @@
 //
 
 #import "YMSCBService.h"
-
+#include "TISensorTag.h"
 /**
  Base class for defining a CoreBluetooth service for a TI SensorTag. 
  */

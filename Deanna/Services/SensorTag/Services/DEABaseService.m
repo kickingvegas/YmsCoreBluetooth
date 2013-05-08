@@ -18,8 +18,24 @@
 
 #import "DEABaseService.h"
 #import "YMSCBCharacteristic.h"
+#import "DEASensorTagUtils.h"
 
 @implementation DEABaseService
+
+- (void)addCharacteristic:(NSString *)cname withOffset:(int)addrOffset {
+    YMSCBCharacteristic *yc;
+    
+    yms_u128_t pbase = self.base;
+    
+    CBUUID *uuid = [DEASensorTagUtils createCBUUID:&pbase withIntOffset:addrOffset];
+    
+    yc = [[YMSCBCharacteristic alloc] initWithName:cname
+                                              uuid:uuid
+                                            offset:addrOffset];
+    
+    [self.characteristicDict setObject:yc forKey:cname];
+}
+
 
 - (void)requestConfig {
     [self readValueForCharacteristicName:@"config"];
