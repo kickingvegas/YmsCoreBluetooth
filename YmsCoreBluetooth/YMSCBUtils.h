@@ -18,7 +18,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
-#include "TISensorTag.h"
+#include "YMS128.h"
 
 /**
  Utility class for YMS CoreBluetooth Framework
