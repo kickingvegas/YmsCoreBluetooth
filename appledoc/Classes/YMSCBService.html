@@ -89,6 +89,8 @@
 	
 	<option value="//api/name/writeByte:forCharacteristicName:type:">&nbsp;&nbsp;&nbsp;&nbsp;- writeByte:forCharacteristicName:type:</option>
 	
+	<option value="//api/name/writeByte:forCharacteristicName:withBlock:">&nbsp;&nbsp;&nbsp;&nbsp;- writeByte:forCharacteristicName:withBlock:</option>
+	
 	<option value="//api/name/writeValue:forCharacteristic:type:">&nbsp;&nbsp;&nbsp;&nbsp;- writeValue:forCharacteristic:type:</option>
 	
 	<option value="//api/name/writeValue:forCharacteristicName:type:">&nbsp;&nbsp;&nbsp;&nbsp;- writeValue:forCharacteristicName:type:</option>
@@ -188,6 +190,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/syncCharacteristics:">syncCharacteristics:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/writeByte:forCharacteristicName:type:">writeByte:forCharacteristicName:type:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/writeByte:forCharacteristicName:withBlock:">writeByte:forCharacteristicName:withBlock:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/writeValue:forCharacteristic:type:">writeValue:forCharacteristic:type:</a></span></li>
 	
@@ -448,6 +452,13 @@ BLE notification has been enabled.</p>
 	<span class="tooltip">
 		<code><a href="#//api/name/writeValue:forCharacteristicName:withBlock:">&ndash;&nbsp;writeValue:forCharacteristicName:withBlock:</a></code>
 		<span class="tooltip"><p>Request write value given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/writeByte:forCharacteristicName:withBlock:">&ndash;&nbsp;writeByte:forCharacteristicName:withBlock:</a></code>
+		<span class="tooltip"><p>Request write byte given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p></span>
 	</span>
 	
 	
@@ -882,7 +893,7 @@ BLE notification has been enabled.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>cname</em></dt>
-			<dd><p>characteristic <a href="#//api/name/name">name</a></p></dd>
+			<dd><p>characteristic <a href="../Classes/YMSCBService.html#//api/name/name">name</a></p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
@@ -1588,6 +1599,75 @@ conformed to by <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/writeByte:forCharacteristicName:withBlock:" title="writeByte:forCharacteristicName:withBlock:"></a>
+	<h3 class="subsubtitle method-title">writeByte:forCharacteristicName:withBlock:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Request write byte given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)writeByte:(int8_t *)<em>val</em> forCharacteristicName:(NSString *)<em>cname</em> withBlock:(void ( ^ ) ( NSError *error ))<em>writeCallback</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>val</em></dt>
+			<dd><p>Byte value to be written</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>cname</em></dt>
+			<dd><p><a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> <a href="#//api/name/name">name</a>.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>writeCallback</em></dt>
+			<dd><p>Callback block to execute upon response.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Request write byte given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p>
+
+<p>The callback block readCallback has one argument: <code>error</code>:</p>
+
+<ul>
+<li><code>error</code> is populated with the returned <code>error</code> object from the delegate method peripheral:didUpdateValueForCharacteristic:error:
+or peripheral:didWriteValueForCharacteristic:error: implemented in <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</li>
+</ul>
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/writeValue:forCharacteristic:type:" title="writeValue:forCharacteristic:type:"></a>
 	<h3 class="subsubtitle method-title">writeValue:forCharacteristic:type:</h3>
 	
@@ -1791,7 +1871,7 @@ or peripheral:didWriteValueForCharacteristic:error: implemented in <a href="../C
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-06)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-07)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

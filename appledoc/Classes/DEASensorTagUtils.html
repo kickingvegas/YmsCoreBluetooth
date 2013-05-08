@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>DEATemperatureService Class Reference</title>
+		<title>DEASensorTagUtils Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">DEATemperatureService Class Reference</h1>
+				<h1 class="hideInXcode">DEASensorTagUtils Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -38,22 +38,15 @@
 	
 	
 	
-	<option value="properties">Properties</option>
-	
-	<option value="//api/name/ambientTemp">&nbsp;&nbsp;&nbsp;&nbsp;ambientTemp</option>
-	
-	<option value="//api/name/objectTemp">&nbsp;&nbsp;&nbsp;&nbsp;objectTemp</option>
 	
 	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/createCBUUID:withIntOffset:">&nbsp;&nbsp;&nbsp;&nbsp;+ createCBUUID:withIntOffset:</option>
+	
+	<option value="//api/name/genCBUUID:withIntOffset:">&nbsp;&nbsp;&nbsp;&nbsp;+ genCBUUID:withIntOffset:</option>
 	
 	
-	
-	
-	<option value="instance_methods">Instance Methods</option>
-	
-	<option value="//api/name/initWithName:baseHi:baseLo:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:baseHi:baseLo:</option>
-	
-	<option value="//api/name/notifyCharacteristicHandler:error:">&nbsp;&nbsp;&nbsp;&nbsp;- notifyCharacteristicHandler:error:</option>
 	
 	
 	
@@ -77,32 +70,24 @@
 
 
 
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/ambientTemp">ambientTemp</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/createCBUUID:withIntOffset:">createCBUUID:withIntOffset:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/objectTemp">objectTemp</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/genCBUUID:withIntOffset:">genCBUUID:withIntOffset:</a></span></li>
 	
 </ul></li>
 
 
-
-
-
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithName:baseHi:baseLo:">initWithName:baseHi:baseLo:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/notifyCharacteristicHandler:error:">notifyCharacteristicHandler:error:</a></span></li>
-	
-</ul></li>
 
 
 			</ul>
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="DEATemperatureService Class Reference" name="top"></a>
+				<a title="DEASensorTagUtils Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -111,7 +96,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">DEATemperatureService Class Reference</h1>
+						<h1 class="title title-header">DEASensorTagUtils Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -119,10 +104,10 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value"><a href="../Classes/DEABaseService.html">DEABaseService</a> : <a href="../Classes/YMSCBService.html">YMSCBService</a> : NSObject</td>
+	<td class="specification-value">NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">DEATemperatureService.h<br />DEATemperatureService.m</td>
+	<td class="specification-value">DEASensorTagUtils.h<br />DEASensorTagUtils.m</td>
 </tr>
 						</tbody></table></div>
 					
@@ -132,7 +117,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>TI SensorTag CoreBluetooth service definition for thermometer.</p>
+						<p>Utility class for <a href="../Classes/DEASensorTag.html">DEASensorTag</a>.</p>
 					</div>
 					
 					
@@ -145,42 +130,20 @@
 						
 						
 						
-						<h3 class="subsubtitle task-title">Other Methods</h3>
+						
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/ambientTemp">&nbsp;&nbsp;ambientTemp</a></code>
-		<span class="tooltip"><p>Ambient temperature</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/objectTemp">&nbsp;&nbsp;objectTemp</a></code>
-		<span class="tooltip"><p>Object temperature</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li>
-						</ul>
-						
-						
-						
-						<h3 class="subsubtitle task-title">Other Methods</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/initWithName:baseHi:baseLo:">&ndash;&nbsp;initWithName:baseHi:baseLo:</a></code>
-		<span class="tooltip"><p>Initialize class instance.</p></span>
+		<code><a href="#//api/name/genCBUUID:withIntOffset:">+&nbsp;genCBUUID:withIntOffset:</a></code>
+		<span class="tooltip"><p>Generate CBUUID string given base of type yms_u128_t and offset of type int</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/notifyCharacteristicHandler:error:">&ndash;&nbsp;notifyCharacteristicHandler:error:</a></code>
-		<span class="tooltip"><p>Method to handle response update for a prior read or write request to a characteristic.</p></span>
+		<code><a href="#//api/name/createCBUUID:withIntOffset:">+&nbsp;createCBUUID:withIntOffset:</a></code>
+		<span class="tooltip"><p>Generate CBUUID given base of type yms_u128_t and offset of type int</p></span>
 	</span>
 	
 	
@@ -193,115 +156,25 @@
 					
 					
 					
-					<div class="section section-methods">
-						<a title="Properties" name="properties"></a>
-						<h2 class="subtitle subtitle-methods">Properties</h2>
-						
-						<div class="section-method">
-	<a name="//api/name/ambientTemp" title="ambientTemp"></a>
-	<h3 class="subsubtitle method-title">ambientTemp</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Ambient temperature</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSNumber *ambientTemp</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Ambient temperature</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">DEATemperatureService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/objectTemp" title="objectTemp"></a>
-	<h3 class="subsubtitle method-title">objectTemp</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Object temperature</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSNumber *objectTemp</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Object temperature</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">DEATemperatureService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-					</div>
-					
-					
-					
 					
 					
 					<div class="section section-methods">
-						<a title="Instance Methods" name="instance_methods"></a>
-						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithName:baseHi:baseLo:" title="initWithName:baseHi:baseLo:"></a>
-	<h3 class="subsubtitle method-title">initWithName:baseHi:baseLo:</h3>
+	<a name="//api/name/createCBUUID:withIntOffset:" title="createCBUUID:withIntOffset:"></a>
+	<h3 class="subsubtitle method-title">createCBUUID:withIntOffset:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Initialize class instance.</p>
+		<p>Generate CBUUID given base of type yms_u128_t and offset of type int</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (id)initWithName:(NSString *)<em>oName</em> baseHi:(int64_t)<em>hi</em> baseLo:(int64_t)<em>lo</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (CBUUID *)createCBUUID:(yms_u128_t *)<em>base</em> withIntOffset:(int)<em>addrOffset</em></code></div>
 
     
 	
@@ -309,18 +182,13 @@
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>oName</em></dt>
-			<dd><p><a href="../Classes/YMSCBService.html#//api/name/name">name</a> of service</p></dd>
+			<dt><em>base</em></dt>
+			<dd><p>base address</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>hi</em></dt>
-			<dd><p>top 64 bits of 128-bit <a href="../Classes/YMSCBService.html#//api/name/base">base</a> address value</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>lo</em></dt>
-			<dd><p>bottom 64 bits of 128-bit <a href="../Classes/YMSCBService.html#//api/name/base">base</a> address value</p></dd>
+			<dt><em>addrOffset</em></dt>
+			<dd><p>offset value</p></dd>
 		</dl>
 		
 	</div>
@@ -329,7 +197,7 @@
 	
 	<div class="method-subsection return">
 		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p><a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a></p>
+		<p>CBUUID generated from base and addOffset</p>
 	</div>
 	
 	
@@ -338,7 +206,11 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Initialize class instance.</p>
+		<p>Generate CBUUID given base of type yms_u128_t and offset of type int</p>
+
+<p>This method is used in place of <a href="../Classes/YMSCBUtils.html#//api/name/genCBUUID:withIntOffset:">[YMSCBUtils genCBUUID:withIntOffset:]</a> due to
+the peculiar way (IMHO) the TI SensorTag 128-bit address map is setup:
+Offset values are put into the 96th bit position of a 128-bit address.</p>
 	</div>
 	
 	
@@ -349,25 +221,25 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBService.h</code><br />
+		<code class="declared-in-ref">DEASensorTagUtils.h</code><br />
 	</div>				
 	
 	
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/notifyCharacteristicHandler:error:" title="notifyCharacteristicHandler:error:"></a>
-	<h3 class="subsubtitle method-title">notifyCharacteristicHandler:error:</h3>
+	<a name="//api/name/genCBUUID:withIntOffset:" title="genCBUUID:withIntOffset:"></a>
+	<h3 class="subsubtitle method-title">genCBUUID:withIntOffset:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Method to handle response update for a prior read or write request to a characteristic.</p>
+		<p>Generate CBUUID string given base of type yms_u128_t and offset of type int</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)<em>yc</em> error:(NSError *)<em>error</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (NSString *)genCBUUID:(yms_u128_t *)<em>base</em> withIntOffset:(int)<em>addrOffset</em></code></div>
 
     
 	
@@ -375,18 +247,23 @@
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>yc</em></dt>
-			<dd><p>Characteristic receiving update.</p></dd>
+			<dt><em>base</em></dt>
+			<dd><p>base address</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>error</em></dt>
-			<dd><p>Error object.</p></dd>
+			<dt><em>addrOffset</em></dt>
+			<dd><p>offset value</p></dd>
 		</dl>
 		
 	</div>
 	
 	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>CBUUID string</p>
+	</div>
 	
 	
 	
@@ -394,12 +271,11 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Method to handle response update for a prior read or write request to a characteristic.</p>
+		<p>Generate CBUUID string given base of type yms_u128_t and offset of type int</p>
 
-<p>This method is invoked by the CBPeripheralDelegate method peripheral:didUpdateValueForCharacteristic:error:
-conformed to by <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</p>
-
-<p>This method is typically overridden to handle <a href="../Classes/YMSCBService.html#//api/name/characteristics">characteristics</a> whose notification has been turned on.</p>
+<p>This method is used in place of <a href="../Classes/YMSCBUtils.html#//api/name/genCBUUID:withIntOffset:">[YMSCBUtils genCBUUID:withIntOffset:]</a> due to
+the peculiar way (IMHO) the TI SensorTag 128-bit address map is setup:
+Offset values are put into the 96th bit position of a 128-bit address.</p>
 	</div>
 	
 	
@@ -410,13 +286,15 @@ conformed to by <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBService.h</code><br />
+		<code class="declared-in-ref">DEASensorTagUtils.h</code><br />
 	</div>				
 	
 	
 </div>
 						
 					</div>
+					
+					
 					
 					
 				</div>
