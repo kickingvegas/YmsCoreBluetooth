@@ -68,6 +68,22 @@
 
 <p>YmsCoreBluetooth framework offers iOS developers a more natural API that is BLE service-centric: <strong>read and write requests to a BLE peripheral are done from the point of view of a BLE service</strong>. Responses can be handled using a callback block or via a notification handler method.</p>
 
+<h2>Recommended Code Walk Through</h2>
+
+<p>To better understand how YmsCoreBluetooth works, it is recommended to first read the source of the following BLE service implementations:</p>
+
+<ul>
+<li>DEAAccelerometerService, DEABarometerService, DEAGyroscopeService, DEAHumidityService, DEAMagnetometerService, DEASimpleKeysService, DEATemperatureService</li>
+</ul><p>Then the BLE peripheral implementation of the TI SensorTag:</p>
+
+<ul>
+<li>DEASensorTag</li>
+</ul><p>Then the application service which manages all known peripherals:</p>
+
+<ul>
+<li>DEACBAppService</li>
+</ul><p>The <a href="http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/hierarchy.html">Class Hierarchy</a> is very instructive in showing the relationship of the above classes to the YmsCoreBluetooth framework.</p>
+
 <h2>Writing your own Bluetooth LE service with YmsCoreBluetooth</h2>
 
 <p>Learn how to write your own Bluetooth LE service by reading the example of how its done for the TI SensorTag in the <a href="http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/docs/tutorial/Tutorial.html">Tutorial</a>.</p>
@@ -89,7 +105,11 @@
 <li>No support is offered for the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator <a href="http://developer.apple.com/library/ios/#technotes/tn2295/_index.html">TN2295</a>, I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.</li>
 </ul><h2>Changes</h2>
 
-<h3>Tue May 7 2013</h3>
+<h3>Wed May 8 2013</h3>
+
+<ul>
+<li>Issue #37 - UI for SensorTag Device Information Service implemented.</li>
+</ul><h3>Tue May 7 2013</h3>
 
 <ul>
 <li>Bugfixes: #41, #42</li>
