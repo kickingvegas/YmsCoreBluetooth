@@ -27,12 +27,14 @@
 @class DEABarometerViewCell;
 @class DEAGyroscopeViewCell;
 @class DEAMagnetometerViewCell;
+@class DEADeviceInfoViewCell;
 
 /**
  ViewController for TI SensorTag peripheral.
  */
 @interface DEASensorTagViewController : DEABaseViewController <UITableViewDelegate, UITableViewDataSource>
 
+/** @name Properties */
 /// Array of names of service cells.
 @property (strong, nonatomic) NSArray *cbServiceCells;
 
@@ -59,5 +61,7 @@
 @property (strong, nonatomic) IBOutlet DEAGyroscopeViewCell *gyroscopeViewCell;
 /// UI for magnetometer service.
 @property (strong, nonatomic) IBOutlet DEAMagnetometerViewCell *magnetometerViewCell;
+/// UI for device info service.
+@property (strong, nonatomic) IBOutlet DEADeviceInfoViewCell *devinfoViewCell;
 
 @end

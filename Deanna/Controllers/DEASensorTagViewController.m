@@ -43,6 +43,7 @@
                             , @"gyroscope"
                             , @"humidity"
                             , @"barometer"
+                            , @"devinfo"
                             ];
     }
     return self;
