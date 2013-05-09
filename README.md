@@ -177,6 +177,10 @@ Code tested on:
 * No support is offered for the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator [TN2295](http://developer.apple.com/library/ios/#technotes/tn2295/_index.html), I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.
 
 ## Changes
+
+### Wed May 8 2013
+* Issue #37 - UI for SensorTag Device Information Service implemented.
+
 ### Tue May 7 2013
 * Bugfixes: #41, #42
 
