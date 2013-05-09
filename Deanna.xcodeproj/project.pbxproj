@@ -42,6 +42,7 @@
 		D97EC6D2172B1B8C00CAECFC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D97EC6D1172B1B8C00CAECFC /* README.md */; };
 		D988A5C616DD26A100D7D392 /* DEASensorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = D988A5C516DD26A100D7D392 /* DEASensorTag.m */; };
 		D988A5C816DD464A00D7D392 /* TISensorTag.c in Sources */ = {isa = PBXBuildFile; fileRef = D988A5C716DD464A00D7D392 /* TISensorTag.c */; };
+		D9960A54173B0A1B0013C8E7 /* DEADeviceInfoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9960A53173B0A1B0013C8E7 /* DEADeviceInfoViewCell.m */; };
 		D9971AEA1720A9A100B1A068 /* DEAPeripheralTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9971AE91720A9A100B1A068 /* DEAPeripheralTableViewCell.xib */; };
 		D9971AEE1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9971AED1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m */; };
 		D9AC59991721216700FC786F /* app_icon_57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC598F1721216700FC786F /* app_icon_57x57.png */; };
@@ -140,6 +141,8 @@
 		D988A5C416DD26A100D7D392 /* DEASensorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASensorTag.h; sourceTree = "<group>"; };
 		D988A5C516DD26A100D7D392 /* DEASensorTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASensorTag.m; sourceTree = "<group>"; };
 		D988A5C716DD464A00D7D392 /* TISensorTag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TISensorTag.c; sourceTree = "<group>"; };
+		D9960A52173B0A1B0013C8E7 /* DEADeviceInfoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEADeviceInfoViewCell.h; sourceTree = "<group>"; };
+		D9960A53173B0A1B0013C8E7 /* DEADeviceInfoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEADeviceInfoViewCell.m; sourceTree = "<group>"; };
 		D9971AE91720A9A100B1A068 /* DEAPeripheralTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEAPeripheralTableViewCell.xib; sourceTree = "<group>"; };
 		D9971AEC1720AA7E00B1A068 /* DEAPeripheralTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAPeripheralTableViewCell.h; sourceTree = "<group>"; };
 		D9971AED1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAPeripheralTableViewCell.m; sourceTree = "<group>"; };
@@ -415,6 +418,8 @@
 				D93EAC5216E18748008B1BD3 /* DEAGyroscopeViewCell.m */,
 				D93EAC5416E1DAC8008B1BD3 /* DEAMagnetometerViewCell.h */,
 				D93EAC5516E1DAC8008B1BD3 /* DEAMagnetometerViewCell.m */,
+				D9960A52173B0A1B0013C8E7 /* DEADeviceInfoViewCell.h */,
+				D9960A53173B0A1B0013C8E7 /* DEADeviceInfoViewCell.m */,
 			);
 			path = Sensors;
 			sourceTree = "<group>";
@@ -574,6 +579,7 @@
 				D9268B4317306295009C4284 /* NSMutableArray+fifoQueue.m in Sources */,
 				D9268B46173081E2009C4284 /* DEADeviceInfoService.m in Sources */,
 				D9187E1D1739D3FF003AA71D /* DEASensorTagUtils.m in Sources */,
+				D9960A54173B0A1B0013C8E7 /* DEADeviceInfoViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
