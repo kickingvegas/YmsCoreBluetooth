@@ -21,7 +21,7 @@
 #import "DEASensorTag.h"
 #include "TISensorTag.h"
 
-//#define CALLBACK_EXAMPLE 1
+#define CALLBACK_EXAMPLE 1
 
 static DEACBAppService *sharedCBAppService;
 
