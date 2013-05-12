@@ -21,13 +21,15 @@
 
 #include "YMSCBUtils.h"
 
-
+/*
 NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
     YMSCBPeripheralConnectionStateUnknown,
+    YMSCBPeripheralConnectionStateDisconnecting,
     YMSCBPeripheralConnectionStateDisconnected,
     YMSCBPeripheralConnectionStateConnecting,
     YMSCBPeripheralConnectionStateConnected
 };
+*/
 
 @class YMSCBAppService;
 @class YMSCBService;
@@ -95,6 +97,21 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
  */
 @property (nonatomic, weak) YMSCBAppService *parent;
 
+/**
+ Watchdog timer for connection.
+ */
+@property (nonatomic, strong) NSTimer *watchdogTimer;
+
+/**
+ Watchdog timer interval in seconds. Default is 5 seconds.
+ */
+@property (nonatomic, assign) NSTimeInterval watchdogTimerInterval;
+
+///**
+// Peripheral connection state
+// */
+//@property (nonatomic, assign) enum YMSCBPeripheralConnectionState peripheralConnectionState;
+
 
 /** @name Initializing a YMSCBPeripheral */
 /**
@@ -108,7 +125,7 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
  
 
  @param peripheral Pointer to CBPeripheral
- @param parent Parent of this instance
+ @param owner Parent of this instance
  @param hi Top 64 bits of 128-bit base address value
  @param lo Bottom 64 bits of 128-bit base address value
  @param update If YES, update the RSSI.
@@ -164,5 +181,10 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
  */
 - (void)disconnect;
 
+
+/**
+ Disconnect if watchdog times out.
+ */
+- (void)watchdogDisconnect;
 @end
 

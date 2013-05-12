@@ -46,6 +46,9 @@
         if (update == YES) {
             [peripheral readRSSI];
         }
+        
+        //_peripheralConnectionState = YMSCBPeripheralConnectionStateUnknown;
+        _watchdogTimerInterval = 5.0;
     }
 
     return self;
@@ -274,17 +277,47 @@
 }
 
 
+#pragma mark - Peripheral Methods
+
 - (void)discoverServices {
     NSArray *services = [self services];
     [self.cbPeripheral discoverServices:services];
 }
 
 - (void)connect {
+    //self.peripheralConnectionState = YMSCBPeripheralConnectionStateConnecting;
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.watchdogTimerInterval
+                                                      target:self
+                                                    selector:@selector(watchdogDisconnect)
+                                                    userInfo:nil
+                                                     repeats:NO];
+    self.watchdogTimer = timer;
+    
     [self.parent connect:self];
+    
 }
 
 - (void)disconnect {
+    //self.peripheralConnectionState = YMSCBPeripheralConnectionStateDisconnecting;
+
+    if (self.watchdogTimer) {
+        [self.watchdogTimer invalidate];
+        self.watchdogTimer = nil;
+    }
     [self.parent cancelPeripheralConnection:self];
 }
+
+
+- (void)watchdogDisconnect {
+    
+    if (!self.isConnected) {
+        [self disconnect];
+    }
+    self.watchdogTimer = nil;
+
+}
+
+
 
 @end
