@@ -156,8 +156,20 @@
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
-
-    [peripheral removeObserver:self forKeyPath:@"RSSI"];
+    
+    /*
+     cchoi comment:
+     I sympathize with the notion that adding and removing observers should always be
+     strictly symmetric. However, in the case of cancelling a connection request:
+     using an exception to catch a failed attempt to remove an observer
+     is syntactically the cleanest way to go because observers are only added after
+     a successful connection.
+     */
+    @try {
+        [peripheral removeObserver:self forKeyPath:@"RSSI"];
+    }
+    @catch (NSException *exception) {
+    }
 
     for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
         if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
