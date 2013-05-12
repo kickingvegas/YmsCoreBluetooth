@@ -32,14 +32,15 @@
 @implementation DEASensorTag
 
 - (id)initWithPeripheral:(CBPeripheral *)peripheral
+                  parent:(YMSCBAppService *)owner
                   baseHi:(int64_t)hi
                   baseLo:(int64_t)lo
               updateRSSI:(BOOL)update {
+
     
-    self = [super initWithPeripheral:peripheral baseHi:hi baseLo:lo updateRSSI:update];
+    self = [super initWithPeripheral:peripheral parent:owner baseHi:hi baseLo:lo updateRSSI:update];
     
     if (self) {
-        
         DEATemperatureService *ts = [[DEATemperatureService alloc] initWithName:@"temperature" baseHi:hi baseLo:lo];
         DEAAccelerometerService *as = [[DEAAccelerometerService alloc] initWithName:@"accelerometer" baseHi:hi baseLo:lo];
         DEASimpleKeysService *sks = [[DEASimpleKeysService alloc] initWithName:@"simplekeys" baseHi:hi baseLo:lo];
