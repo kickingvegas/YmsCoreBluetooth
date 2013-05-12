@@ -31,19 +31,14 @@
 
 - (IBAction)connectButtonAction:(id)sender {
     
-    DEACBAppService *cbAppService = [DEACBAppService sharedService];
-
-    BOOL isConnected = self.sensorTag.cbPeripheral.isConnected;
-    
-    if (isConnected) {
+    if (self.sensorTag.isConnected) {
         [self.connectButton setTitle:@"Cancelling…" forState:UIControlStateNormal];
-        [cbAppService.manager cancelPeripheralConnection:self.sensorTag.cbPeripheral];
+        [self.sensorTag disconnect];
     } else {
         [self.connectButton setTitle:@"Pairing…" forState:UIControlStateNormal];
-        
-        [cbAppService.manager connectPeripheral:self.sensorTag.cbPeripheral options:nil];
-    }
+        [self.sensorTag connect];
 
+    }
 }
 
 
