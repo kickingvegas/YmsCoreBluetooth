@@ -142,17 +142,6 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
 
 
 /**
- Persist peripheral UUIDs.
- */
-- (void)persistPeripherals;
-
-/**
- Load peripheral UUIDs.
- */
-- (void)loadPeripherals;
-
-
-/**
  Handler for discovered or found peripheral. This method is to be overridden.
 
  @param peripheral CoreBluetooth peripheral instance
@@ -200,8 +189,6 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
  @return instance of YMSCBPeripheral
  */
 - (YMSCBPeripheral *)findPeripheral:(CBPeripheral *)peripheral;
-
-
 
 #pragma mark - Scan Methods
 /** @name Scanning for Peripherals */

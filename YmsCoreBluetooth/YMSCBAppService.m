@@ -27,6 +27,12 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 @implementation YMSCBAppService
 
+- (NSString *)version {
+    return YMSCBVersion;
+}
+
+#pragma mark - Constructors
+
 - (id)initWithKnownPeripheralNames:(NSArray *)nameList queue:(dispatch_queue_t)queue {
     self = [super init];
     
@@ -64,54 +70,12 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     return self;
 }
 
+#pragma mark - Peripheral Management
 
-- (void)persistPeripherals {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *devices = [[NSMutableArray alloc] init];
-    
-    for (YMSCBPeripheral *sensorTag in self.ymsPeripherals) {
-        CBPeripheral *p = sensorTag.cbPeripheral;
-        CFStringRef uuidString = NULL;
-        
-        uuidString = CFUUIDCreateString(NULL, p.UUID);
-        if (uuidString) {
-            [devices addObject:(NSString *)CFBridgingRelease(uuidString)];
-        }
-        
-    }
-    
-    [userDefaults setObject:devices forKey:@"storedPeripherals"];
-    [userDefaults synchronize];
+- (NSUInteger)count {
+    return  [self.ymsPeripherals count];
 }
 
-
-- (void)loadPeripherals {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSArray *devices = [userDefaults arrayForKey:@"storedPeripherals"];
-    NSMutableArray *peripheralUUIDList = [[NSMutableArray alloc] init];
-    
-    if (![devices isKindOfClass:[NSArray class]]) {
-        // TODO - need right error handler
-        NSLog(@"No stored array to load");
-    }
-    
-    for (id uuidString in devices) {
-        if (![uuidString isKindOfClass:[NSString class]]) {
-            continue;
-        }
-        
-        CFUUIDRef uuid = CFUUIDCreateFromString(NULL, (CFStringRef)uuidString);
-        
-        if (!uuid)
-            continue;
-        
-        [peripheralUUIDList addObject:(id)CFBridgingRelease(uuid)];
-    }
-    
-    if ([peripheralUUIDList count] > 0) {
-        [self.manager retrievePeripherals:peripheralUUIDList];
-    }
-}
 
 - (YMSCBPeripheral *)peripheralAtIndex:(NSUInteger)index {
     YMSCBPeripheral *result;
@@ -119,13 +83,6 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     return result;
 }
 
-- (NSUInteger)count {
-    return  [self.ymsPeripherals count];
-}
-
-- (NSString *)version {
-    return YMSCBVersion;
-}
 
 - (void)addPeripheral:(YMSCBPeripheral *)yperipheral {
     [self.ymsPeripherals addObject:yperipheral];
@@ -160,6 +117,7 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     return result;
 }
 
+#pragma mark - Scan Methods
 
 - (void)startScan {
     /*
@@ -224,6 +182,15 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     NSAssert(NO, @"[YMSCBAppService handleConnectedPeripheral:] must be be overridden.");
 }
 
+#pragma mark - Connect Methods
+
+- (void)connect:(YMSCBPeripheral *)peripheral {
+    NSAssert(NO, @"[YMSCBAppService connect:] must be be overridden.");
+}
+
+- (void)connectPeripheral:(YMSCBPeripheral *)peripheral options:(NSDictionary *)options {
+    [self.manager connectPeripheral:peripheral.cbPeripheral options:options];
+}
 
 - (void)connectPeripheralAtIndex:(NSUInteger)index options:(NSDictionary *)options {
     if ([self.ymsPeripherals count] > 0) {
@@ -242,22 +209,6 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     }
 }
 
-- (void)disconnectPeripheralAtIndex:(NSUInteger)index {
-    if ([self.ymsPeripherals count] > 0) {
-        YMSCBPeripheral *yPeripheral = self.ymsPeripherals[index];
-        [self.manager cancelPeripheralConnection:yPeripheral.cbPeripheral];
-    }
-}
-
-- (void)connect:(YMSCBPeripheral *)peripheral {
-    NSAssert(NO, @"[YMSCBAppService connect:] must be be overridden.");
-}
-
-
-- (void)connectPeripheral:(YMSCBPeripheral *)peripheral options:(NSDictionary *)options {
-    [self.manager connectPeripheral:peripheral.cbPeripheral options:options];
-}
-
 - (void)connectPeripheral:(YMSCBPeripheral *)peripheral options:(NSDictionary *)options withBlock:(void (^)(YMSCBPeripheral *, NSError *))connectCallback {
     
     NSString *uuidString = UUID2STRING(peripheral.cbPeripheral.UUID);
@@ -265,6 +216,20 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     self.connectionCallbackDict[uuidString] = connectCallback;
     [self connectPeripheral:peripheral options:options];
 }
+
+- (void)cancelPeripheralConnection:(YMSCBPeripheral *)peripheral {
+    [self.manager cancelPeripheralConnection:peripheral.cbPeripheral];
+}
+
+- (void)disconnectPeripheralAtIndex:(NSUInteger)index {
+    if ([self.ymsPeripherals count] > 0) {
+        YMSCBPeripheral *yPeripheral = self.ymsPeripherals[index];
+        [self.manager cancelPeripheralConnection:yPeripheral.cbPeripheral];
+    }
+}
+
+
+#pragma mark - Retrieve Methods
 
 - (void)retrieveConnectedPeripherals {
     [self.manager retrieveConnectedPeripherals];
@@ -284,11 +249,8 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     [self retrievePeripherals:peripheralUUIDs];
 }
 
-- (void)cancelPeripheralConnection:(YMSCBPeripheral *)peripheral {
-    [self.manager cancelPeripheralConnection:peripheral.cbPeripheral];
-}
 
-#pragma mark CBCentralManger state handler methods.
+#pragma mark - CBCentralManger state handler methods.
 
 - (void)managerPoweredOnHandler {
     // THIS METHOD IS TO BE OVERRIDDEN
@@ -314,7 +276,7 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     // THIS METHOD IS TO BE OVERRIDDEN
 }
 
-#pragma mark CBCentralManagerDelegate Protocol Methods
+#pragma mark - CBCentralManagerDelegate Protocol Methods
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
 
