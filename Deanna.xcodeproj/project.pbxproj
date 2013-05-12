@@ -40,6 +40,7 @@
 		D9718B8F167FA5140001E42C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B8E167FA5140001E42C /* CoreBluetooth.framework */; };
 		D97EC6D0172B08AB00CAECFC /* DEABaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = D97EC6CF172B08AB00CAECFC /* DEABaseService.m */; };
 		D97EC6D2172B1B8C00CAECFC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D97EC6D1172B1B8C00CAECFC /* README.md */; };
+		D9812904173F3804008EA8D5 /* YMSCBStoredPeripherals.m in Sources */ = {isa = PBXBuildFile; fileRef = D9812903173F3804008EA8D5 /* YMSCBStoredPeripherals.m */; };
 		D988A5C616DD26A100D7D392 /* DEASensorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = D988A5C516DD26A100D7D392 /* DEASensorTag.m */; };
 		D988A5C816DD464A00D7D392 /* TISensorTag.c in Sources */ = {isa = PBXBuildFile; fileRef = D988A5C716DD464A00D7D392 /* TISensorTag.c */; };
 		D9960A54173B0A1B0013C8E7 /* DEADeviceInfoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9960A53173B0A1B0013C8E7 /* DEADeviceInfoViewCell.m */; };
@@ -138,6 +139,8 @@
 		D97EC6CE172B08AB00CAECFC /* DEABaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEABaseService.h; sourceTree = "<group>"; };
 		D97EC6CF172B08AB00CAECFC /* DEABaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEABaseService.m; sourceTree = "<group>"; };
 		D97EC6D1172B1B8C00CAECFC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		D9812902173F3804008EA8D5 /* YMSCBStoredPeripherals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBStoredPeripherals.h; sourceTree = "<group>"; };
+		D9812903173F3804008EA8D5 /* YMSCBStoredPeripherals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBStoredPeripherals.m; sourceTree = "<group>"; };
 		D988A5C416DD26A100D7D392 /* DEASensorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASensorTag.h; sourceTree = "<group>"; };
 		D988A5C516DD26A100D7D392 /* DEASensorTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASensorTag.m; sourceTree = "<group>"; };
 		D988A5C716DD464A00D7D392 /* TISensorTag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TISensorTag.c; sourceTree = "<group>"; };
@@ -217,6 +220,8 @@
 				D933CEC816DDAFA700EDDAD6 /* YMSCBCharacteristic.m */,
 				D933CECD16DDAFA700EDDAD6 /* YMSCBUtils.h */,
 				D933CECE16DDAFA700EDDAD6 /* YMSCBUtils.m */,
+				D9812902173F3804008EA8D5 /* YMSCBStoredPeripherals.h */,
+				D9812903173F3804008EA8D5 /* YMSCBStoredPeripherals.m */,
 				D9268B4117306295009C4284 /* NSMutableArray+fifoQueue.h */,
 				D9268B4217306295009C4284 /* NSMutableArray+fifoQueue.m */,
 			);
@@ -580,6 +585,7 @@
 				D9268B46173081E2009C4284 /* DEADeviceInfoService.m in Sources */,
 				D9187E1D1739D3FF003AA71D /* DEASensorTagUtils.m in Sources */,
 				D9960A54173B0A1B0013C8E7 /* DEADeviceInfoViewCell.m in Sources */,
+				D9812904173F3804008EA8D5 /* YMSCBStoredPeripherals.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
