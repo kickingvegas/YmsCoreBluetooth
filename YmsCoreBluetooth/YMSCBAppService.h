@@ -20,7 +20,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 
 
-#define kYMSCBVersion "0.91"
+#define kYMSCBVersion "0.92"
 extern NSString *const YMSCBVersion;
 
 @class YMSCBPeripheral;
