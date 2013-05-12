@@ -1,4 +1,4 @@
-# YmsCoreBluetooth 0.91 (beta)
+# YmsCoreBluetooth 0.92 (beta)
 A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS applications using the CoreBluetooth API. Includes Deanna, an iOS application using YmsCoreBluetooth to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag).
 
 [YmsCoreBluetooth API Reference](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/index.html)
@@ -178,13 +178,18 @@ Code tested on:
 
 ## Changes
 
-## Upcoming
+### Sun May 12 2013
+* Block-based callbacks for central manager scanning, peripheral connection, and peripheral retrieval are now supported.
+* Watchdog timeout for unanswered peripheral connection requests are now supported.
+* Significant API changes to YMSCBAppService and YMSCBPeripheral detailed below.
 
-### 0.92 API Changes
+#### API 0.92 Changes
 
 <table border='1'>
 <tbody>
 <tr><td colspan='2'><code>YMSCBAppService</code></td></tr>
+<tr><td>obsolete</td><td><code>- (void)persistPeripherals</code></td><td>Replaced by YMSCBStoredPeripherals</td></tr>
+<tr><td>obsolete</td><td><code>- (void)loadPeripherals</code></td><td>Replaced by YMSCBStoredPeripherals</td></tr>
 <tr><td>new</td><td><code>- (id)initWithKnownPeripheralNames:(NSArray *)nameList queue:(dispatch_queue_t)queue useStoredPeripherals:(BOOL)useStore;</code></td><td>Add support to optionally store peripherals.</td></tr>
 <tr><td>obsolete</td><td><code>- (void)connectPeripheral:(NSUInteger)index;</code></td><td rowspan='2'>Use more accurate name</td></tr>
 <tr><td>replaced by</td><td><code>- (void)connectPeripheralAtIndex:(NSUInteger)index options:(NSDictionary *)options;</code></td></tr>
