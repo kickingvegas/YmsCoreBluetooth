@@ -16,6 +16,7 @@
 //  Author: Charles Y. Choi <charles.choi@yummymelon.com>
 //
 
+#import "YMSCBAppService.h"
 #import "YMSCBPeripheral.h"
 #import "YMSCBService.h"
 #import "YMSCBCharacteristic.h"
@@ -24,6 +25,7 @@
 @implementation YMSCBPeripheral
 
 - (id)initWithPeripheral:(CBPeripheral *)peripheral
+                  parent:(YMSCBAppService *)owner
                   baseHi:(int64_t)hi
                   baseLo:(int64_t)lo
               updateRSSI:(BOOL)update {
@@ -31,12 +33,12 @@
     self = [super init];
     
     if (self) {
+        _parent = owner;
         _base.hi = hi;
         _base.lo = lo;
         
         _cbPeripheral = peripheral;
         peripheral.delegate = self;
-        
         
         _rssiPingPeriod = 2.0;
 
@@ -44,12 +46,14 @@
         if (update == YES) {
             [peripheral readRSSI];
         }
-        
-
-
     }
 
     return self;
+}
+
+
+- (BOOL)isConnected {
+    return self.cbPeripheral.isConnected;
 }
 
 
@@ -267,6 +271,20 @@
  */
 - (void)peripheralDidInvalidateServices:(CBPeripheral *)peripheral {
     // TBD
+}
+
+
+- (void)discoverServices {
+    NSArray *services = [self services];
+    [self.cbPeripheral discoverServices:services];
+}
+
+- (void)connect {
+    [self.parent connect:self];
+}
+
+- (void)disconnect {
+    [self.parent cancelPeripheralConnection:self];
 }
 
 @end

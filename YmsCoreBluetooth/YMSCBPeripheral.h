@@ -18,9 +18,19 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
-#include "YMSCBUtils.h"
-@class YMSCBService;
 
+#include "YMSCBUtils.h"
+
+
+NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
+    YMSCBPeripheralConnectionStateUnknown,
+    YMSCBPeripheralConnectionStateDisconnected,
+    YMSCBPeripheralConnectionStateConnecting,
+    YMSCBPeripheralConnectionStateConnected
+};
+
+@class YMSCBAppService;
+@class YMSCBService;
 
 /**
  Base class for defining a Bluetooth LE peripheral.
@@ -59,6 +69,14 @@
 @property (nonatomic, strong) CBPeripheral *cbPeripheral;
 
 /**
+ A Boolean value indicating whether the peripheral is currently connected to the central manager. (read-only)
+ 
+ This value is populated with cbPeripheral.isConnected.
+ */
+@property (readonly) BOOL isConnected;
+
+
+/**
  If set to YES, enable updates of RSSI are done via updateRSSI.
  */
 @property (nonatomic, assign) BOOL willPingRSSI;
@@ -72,6 +90,12 @@
 @property (nonatomic, assign) NSTimeInterval rssiPingPeriod;
 
 
+/**
+ Parent owner of an instance of this class.
+ */
+@property (nonatomic, weak) YMSCBAppService *parent;
+
+
 /** @name Initializing a YMSCBPeripheral */
 /**
  Constructor.
@@ -83,13 +107,15 @@
  reference a YMSCBService.
  
 
- @param peripheral pointer to CBPeripheral
- @param hi top 64 bits of 128-bit base address value
- @param lo bottom 64 bits of 128-bit base address value
- @param update if YES, update the RSSI.
+ @param peripheral Pointer to CBPeripheral
+ @param parent Parent of this instance
+ @param hi Top 64 bits of 128-bit base address value
+ @param lo Bottom 64 bits of 128-bit base address value
+ @param update If YES, update the RSSI.
  @return instance of this class
  */
 - (id)initWithPeripheral:(CBPeripheral *)peripheral
+                  parent:(YMSCBAppService *)owner
                   baseHi:(int64_t)hi
                   baseLo:(int64_t)lo
               updateRSSI:(BOOL)update;
@@ -123,6 +149,20 @@
  */
 - (void)updateRSSI;
 
+/**
+ Discover the services 
+ */
+- (void)discoverServices;
+
+/**
+ Connect peripheral
+ */
+- (void)connect;
+
+/**
+ Disconnect peripheral
+ */
+- (void)disconnect;
 
 @end
 
