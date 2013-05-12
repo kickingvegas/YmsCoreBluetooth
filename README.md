@@ -178,6 +178,55 @@ Code tested on:
 
 ## Changes
 
+## Upcoming
+
+### 0.92 API Changes
+
+<table border='1'>
+<tbody>
+<tr><td colspan='2'><code>YMSCBAppService</code></td></tr>
+<tr><td>new</td><td><code>- (id)initWithKnownPeripheralNames:(NSArray *)nameList queue:(dispatch_queue_t)queue useStoredPeripherals:(BOOL)useStore;</code></td><td>Add support to optionally store peripherals.</td></tr>
+<tr><td>obsolete</td><td><code>- (void)connectPeripheral:(NSUInteger)index;</code></td><td rowspan='2'>Use more accurate name</td></tr>
+<tr><td>replaced by</td><td><code>- (void)connectPeripheralAtIndex:(NSUInteger)index options:(NSDictionary *)options;</code></td></tr>
+<tr><td>obsolete</td><td><code>- (void)disconnectPeripheral:(NSUInteger)index;</code></td><td rowspan='2'>Use more accurate name.</td></tr>
+<tr><td>replaced by</td><td><code>- (void)disconnectPeripheralAtIndex:(NSUInteger)index;</code></td></tr>
+<tr><td>new</td><td><code>- (void)connectPeripheral:(YMSCBPeripheral *)peripheral options:(NSDictionary *)options;</code></td><td>Mirror CBCentralManager method</td></tr>
+<tr><td>new</td><td><code>- (void)cancelPeripheralConnection:(YMSCBPeripheral *)peripheral;</code></td><td>Mirror CBCentralManager method</td></tr>
+<tr><td>new</td><td><code>- (void)connectPeripheral:(YMSCBPeripheral *)peripheral<br>&nbsp;&nbsp;&nbsp;options:(NSDictionary *)options<br/>&nbsp;&nbsp;&nbsp;withBlock:(void (^)(YMSCBPeripheral *yp, NSError *error))connectCallback</code></td><td>Support block based connection</td></tr>
+<tr><td>new</td><td><code>- (void)retrieveConnectedPeripherals</code></td><td>Mirror CBCentralManager method</td></tr>
+<tr><td>new</td><td><code>- (void)retrieveConnectedPeripheralsWithBlock:(void (^)(CBPeripheral *peripheral))retrieveCallback</code></td><td>Support block based connection</td></tr>
+<tr><td>new</td><td><code>- (void)retrievePeripherals:(NSArray *)peripheralUUIDs</code></td><td>Mirror CBCentralManager method</td></tr>
+<tr><td>new</td><td><code>- (void)retrievePeripherals:(NSArray *)peripheralUUIDs withBlock:(void (^)(CBPeripheral *peripheral))retrieveCallback</code></td><td>Support block based connection</td></tr>
+<tr><td>new</td><td><code>- (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs<br>&nbsp;&nbsp;&nbsp;options:(NSDictionary *)options<br>&nbsp;&nbsp;&nbsp;withCallback:(void (^)(CBPeripheral *,NSDictionary *, NSNumber *, NSError *))discoverCallback</code></td><td>Support block based connection</td></tr>
+</tbody>
+</table>
+
+<table border='1'>
+<tbody>
+<tr><td colspan='2'><code>YMSCBPeripheral</code></td></tr>
+<tr><td>obsolete</td>
+<td><code>
+- (id)initWithPeripheral:(CBPeripheral *)peripheral
+    <br>&nbsp;&nbsp;&nbsp;baseHi:(int64_t)hi
+    <br>&nbsp;&nbsp;&nbsp;baseLo:(int64_t)lo
+    <br>&nbsp;&nbsp;&nbsp;updateRSSI:(BOOL)update;
+</code></td><td rowspan='2'>Support parent property so that methods on parent can be called directly from an instance of YMSCBPeripheral.</td></tr>
+<tr><td>replaced by</td>
+<td><code>
+- (id)initWithPeripheral:(CBPeripheral *)peripheral
+    <br>&nbsp;&nbsp;&nbsp;parent:(YMSCBAppService *)owner
+    <br>&nbsp;&nbsp;&nbsp;baseHi:(int64_t)hi
+    <br>&nbsp;&nbsp;&nbsp;baseLo:(int64_t)lo
+    <br>&nbsp;&nbsp;&nbsp;updateRSSI:(BOOL)update;
+</code></td></tr>
+<tr><td>new</td><td><code>- (void)discoverServices</code></td><td>Convenience method to call behavior from YMSCBAppService</td></tr>
+<tr><td>new</td><td><code>- (void)connect</code></td><td>Convenience method to call behavior from YMSCBAppService</td></tr>
+<tr><td>new</td><td><code>- (void)disconnect</code></td><td>Convenience method to call behavior from YMSCBAppService</td></tr>
+</tbody>
+</table>
+
+
+
 ### Wed May 8 2013
 * Issue #37 - UI for SensorTag Device Information Service implemented.
 
