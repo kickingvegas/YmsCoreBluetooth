@@ -21,6 +21,8 @@
 #import "DEASensorTag.h"
 #include "TISensorTag.h"
 
+//#define CALLBACK_EXAMPLE 1
+
 static DEACBAppService *sharedCBAppService;
 
 @implementation DEACBAppService
@@ -41,46 +43,68 @@ static DEACBAppService *sharedCBAppService;
     // TODO: Don't know what service UUIDs are required to work with TI SensorTag.
     // NSArray *services = @[[CBUUID UUIDWithString:@"F000AA00-0451-4000-B000-000000000000"]];
     
+    
+    /*
+     Note that in this implementation, handleFoundPeripheral: is implemented so that it can be used via block callback or as a
+     delagate handler method. This is an implementation specific decision to handle discovered and retrieved peripherals identically.
+
+     This may not always be the case, where for example information from advertisementData and the RSSI are to be factored in.
+     */
+    
+#ifdef CALLBACK_EXAMPLE
     [self scanForPeripheralsWithServices:nil
                                  options:options
                                withBlock:^(CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI, NSError *error) {
-                                   YMSCBPeripheral *yp = [self findPeripheral:peripheral];
-                                   
-                                   if (yp == nil) {
-                                       BOOL isUnknownPeripheral = YES;
-                                       for (NSString *pname in self.knownPeripheralNames) {
-                                           if ([pname isEqualToString:peripheral.name]) {
-                                               DEASensorTag *sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
-                                                                                                           parent:self
-                                                                                                           baseHi:kSensorTag_BASE_ADDRESS_HI
-                                                                                                           baseLo:kSensorTag_BASE_ADDRESS_LO
-                                                                                                       updateRSSI:YES];
-                                               [self.ymsPeripherals addObject:sensorTag];
-                                               isUnknownPeripheral = NO;
-                                               break;
-                                               
-                                           }
-                                           
-                                       }
-                                       
-                                       if (isUnknownPeripheral) {
-                                           //TODO: Handle unknown peripheral
-                                           yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral parent:self baseHi:0 baseLo:0 updateRSSI:NO];
-                                           [self.ymsPeripherals addObject:yp];
-                                       }
+                                   if (error) {
+                                       NSLog(@"Something bad happened with scanForPeripheralWithServices:options:withBlock:");
+                                       return;
                                    }
-                                   
+                                   [self handleFoundPeripheral:peripheral];
                                }];
     
-    
-    
+#else
+    [self scanForPeripheralsWithServices:nil options:options];
+#endif
+
 }
 
+- (void)handleFoundPeripheral:(CBPeripheral *)peripheral {
+    YMSCBPeripheral *yp = [self findPeripheral:peripheral];
+    
+    if (yp == nil) {
+        BOOL isUnknownPeripheral = YES;
+        for (NSString *pname in self.knownPeripheralNames) {
+            if ([pname isEqualToString:peripheral.name]) {
+                DEASensorTag *sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
+                                                                            parent:self
+                                                                            baseHi:kSensorTag_BASE_ADDRESS_HI
+                                                                            baseLo:kSensorTag_BASE_ADDRESS_LO
+                                                                        updateRSSI:YES];
+                [self.ymsPeripherals addObject:sensorTag];
+                isUnknownPeripheral = NO;
+                break;
+                
+            }
+            
+        }
+        
+        if (isUnknownPeripheral) {
+            //TODO: Handle unknown peripheral
+            yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral parent:self baseHi:0 baseLo:0 updateRSSI:NO];
+            [self.ymsPeripherals addObject:yp];
+        }
+    }
+
+}
 
 - (void)connect:(YMSCBPeripheral *)peripheral  {
     [self connectPeripheral:peripheral
                     options:nil
                   withBlock:^(YMSCBPeripheral *yp, NSError *error) {
+                      if (error) {
+                          NSLog(@"Something bad happened with connectPeripheral:options:withBlock:");
+                          return;
+                      }
                       [peripheral discoverServices];
                   }];
 }
@@ -112,32 +136,7 @@ static DEACBAppService *sharedCBAppService;
     if ([peripheralUUIDList count] > 0) {
         [self retrievePeripherals:peripheralUUIDList
                         withBlock:^(CBPeripheral *peripheral) {
-                            YMSCBPeripheral *yp = [self findPeripheral:peripheral];
-                            
-                            if (yp == nil) {
-                                BOOL isUnknownPeripheral = YES;
-                                for (NSString *pname in self.knownPeripheralNames) {
-                                    if ([pname isEqualToString:peripheral.name]) {
-                                        DEASensorTag *sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
-                                                                                                    parent:self
-                                                                                                    baseHi:kSensorTag_BASE_ADDRESS_HI
-                                                                                                    baseLo:kSensorTag_BASE_ADDRESS_LO
-                                                                                                updateRSSI:YES];
-                                        [self.ymsPeripherals addObject:sensorTag];
-                                        isUnknownPeripheral = NO;
-                                        break;
-                                        
-                                    }
-                                    
-                                }
-                                
-                                if (isUnknownPeripheral) {
-                                    //TODO: Handle unknown peripheral
-                                    yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral parent:self baseHi:0 baseLo:0 updateRSSI:NO];
-                                    [self.ymsPeripherals addObject:yp];
-                                }
-                            }
-                            
+                            [self handleFoundPeripheral:peripheral];
                         }];
     }
 }
