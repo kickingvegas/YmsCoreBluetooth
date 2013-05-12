@@ -19,12 +19,17 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
+#define UUID2STRING(UUID) (NSString *)CFBridgingRelease(CFUUIDCreateString(NULL, UUID))
+
 #define kYMSCBVersion "0.91"
+extern NSString *const YMSCBVersion;
 
 @class YMSCBPeripheral;
 @class YMSCBAppService;
 
-extern NSString *const YMSCBVersion;
+typedef void (^YMSCBDiscoverCallbackBlockType)(CBPeripheral *, NSDictionary *, NSNumber *, NSError *);
+typedef void (^YMSCBConnectCallbackBlockType)(YMSCBPeripheral *, NSError *);
+typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
 
 /**
  Base class for defining a CoreBluetooth application service.
@@ -87,7 +92,18 @@ extern NSString *const YMSCBVersion;
 
 /// API version.
 @property (nonatomic, readonly, assign) NSString *version;
-        
+
+
+/// Peripheral Discovered Callback
+@property (nonatomic, strong) YMSCBDiscoverCallbackBlockType discoveredCallback;
+
+/// Peripheral Retreived Callback
+@property (nonatomic, strong) YMSCBRetrieveCallbackBlockType retrievedCallback;
+
+/// Peripheral Connection Callback Dictionary
+@property (nonatomic, strong) NSMutableDictionary *connectionCallbackDict;
+
+#pragma mark - Constructor
 /** @name Initializing YMSCBAppService */
 /**
  Constructor with array of known peripheral names.
@@ -97,7 +113,7 @@ extern NSString *const YMSCBVersion;
  */
 - (id)initWithKnownPeripheralNames:(NSArray *)nameList queue:(dispatch_queue_t)queue;
 
-/** @name Methods */
+/** @name Peripheral Management */
 /**
  Determines if peripheral is known by this app service.
 
@@ -128,14 +144,14 @@ extern NSString *const YMSCBVersion;
  */
 - (void)handleFoundPeripheral:(CBPeripheral *)peripheral;
 
-/**
- Start CoreBluetooth scan for peripherals. This method is to be overridden.
+/** 
+  Handler for connected peripheral. This method is to be overridden.
  
- The implementation of this method in a subclass must include the call to 
- scanForPeripheralsWithServices:options:
- 
+  @param peripheral CoreBluetooth peripheral instance
  */
-- (void)startScan;
+- (void)handleConnectedPeripheral:(CBPeripheral *)peripheral;
+
+
 
 /**
  Returns the YSMCBPeripheral instance from ymsPeripherals at index.
@@ -150,7 +166,8 @@ extern NSString *const YMSCBVersion;
 - (void)addPeripheral:(YMSCBPeripheral *)yperipheral;
 
 /**
- Remove all occurrences of yperipheral in ymsPeripherals.
+ Remove yperipheral in ymsPeripherals and from standardUserDefaults if stored.
+ 
  @param yperipheral Instance of YMSCBPeripheral
  */
 - (void)removePeripheral:(YMSCBPeripheral *)yperipheral;
@@ -162,39 +179,183 @@ extern NSString *const YMSCBVersion;
 - (void)removePeripheralAtIndex:(NSUInteger)index;
 
 
-
-/**
- Wrapper around the method scanForPeripheralWithServices:options: in CBCentralManager.
- @param serviceUUIDs An array of CBUUIDs the app is interested in.
- @param options A dictionary to customize the scan, see CBCentralManagerScanOptionAllowDuplicatesKey.
- */
-- (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs options:(NSDictionary *)options;
-
-/**
- Stop CoreBluetooth scan for peripherals.
- */
-- (void)stopScan;
-
-/**
- Connect peripheral.
- 
- @param index index value of peripheral in ymsPeripherals.
- */
-- (void)connectPeripheral:(NSUInteger)index;
-
-/**
- Disconnect peripheral.
- 
- @param index index value of peripheral in ymsPeripherals.
- */
-- (void)disconnectPeripheral:(NSUInteger)index;
-
 /**
  Find YMSCBPeripheral instance matching peripheral
  @param peripheral peripheral corresponding with YMSCBPeripheral
  @return instance of YMSCBPeripheral
  */
 - (YMSCBPeripheral *)findPeripheral:(CBPeripheral *)peripheral;
+
+
+
+#pragma mark - Scan Methods
+/** @name Scanning for Peripherals */
+/**
+ Start CoreBluetooth scan for peripherals. This method is to be overridden.
+ 
+ The implementation of this method in a subclass must include the call to
+ scanForPeripheralsWithServices:options:
+ 
+ */
+- (void)startScan;
+
+/**
+ Wrapper around the method scanForPeripheralWithServices:options: in CBCentralManager.
+ 
+ If this method is invoked without involving a callback block, you must implement handleFoundPeripheral:.
+ 
+ @param serviceUUIDs An array of CBUUIDs the app is interested in.
+ @param options A dictionary to customize the scan, see CBCentralManagerScanOptionAllowDuplicatesKey.
+ */
+- (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs options:(NSDictionary *)options;
+
+/**
+ Scans for peripherals that are advertising service(s), invoking a callback block for each peripheral
+ that is discovered.
+
+ @param serviceUUIDs An array of CBUUIDs the app is interested in.
+ @param options A dictionary to customize the scan, see CBCentralManagerScanOptionAllowDuplicatesKey.
+ @param discoverCallback Callback block to execute upon discovery of a peripheral.
+ */
+- (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs options:(NSDictionary *)options withBlock:(void (^)(CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI, NSError *error))discoverCallback;
+
+
+/**
+ Stop CoreBluetooth scan for peripherals.
+ */
+- (void)stopScan;
+
+#pragma mark - Connect Methods
+/** @name Connecting to Peripherals */
+/**
+ Connect to peripheral.
+ 
+ This method is to be overridden.
+ @param peripheral Peripheral to connect.
+ */
+- (void)connect:(YMSCBPeripheral *)peripheral;
+
+/**
+ Connect peripheral at index in ymsPeripherals.
+ 
+ @param index Index value of peripheral in ymsPeripherals.
+ @param options A dictionary to customize the behavior of the connection. See "Peripheral Connection Options" for CBCentralManager.
+ */
+- (void)connectPeripheralAtIndex:(NSUInteger)index options:(NSDictionary *)options;
+
+/**
+ Connect peripheral at index in ymsPeripherals with callback block.
+ 
+ @param index Index value of peripheral in ymsPeripherals.
+ @param options A dictionary to customize the behavior of the connection. See "Peripheral Connection Options" for CBCentralManager.
+ @param connectCallback Callback block to execute upon connection.
+ */
+- (void)connectPeripheralAtIndex:(NSUInteger)index options:(NSDictionary *)options withBlock:(void (^)(YMSCBPeripheral *yp, NSError *error))connectCallback;
+
+/**
+ Disconnect peripheral.
+ 
+ @param index index value of peripheral in ymsPeripherals to disconnect.
+ */
+- (void)disconnectPeripheralAtIndex:(NSUInteger)index;
+
+/**
+ Establishes connection to peripheral.
+ 
+ @param peripheral The peripheral to which manager is attempting to connect.
+ @param options A dictionary to customize the behavior of the connection. See "Peripheral Connection Options" for CBCentralManager.
+ */
+- (void)connectPeripheral:(YMSCBPeripheral *)peripheral options:(NSDictionary *)options;
+
+/**
+ Establishes connection to peripheral with callback block.
+ 
+ @param peripheral The peripheral to which manager is attempting to connect.
+ @param options A dictionary to customize the behavior of the connection. See "Peripheral Connection Options" for CBCentralManager.
+ @param connectCallback Callback block to handle peripheral connection.
+ */
+- (void)connectPeripheral:(YMSCBPeripheral *)peripheral
+                  options:(NSDictionary *)options
+                withBlock:(void (^)(YMSCBPeripheral *yp, NSError *error))connectCallback;
+
+
+#pragma mark - Cancel Method
+/** @name Cancelling a Connection Request */
+/**
+ Cancels an active or pending local connection to a peripheral.
+ 
+ @param peripheral The peripheral to which the central manager is either trying to connect or has already connected.
+ */
+- (void)cancelPeripheralConnection:(YMSCBPeripheral *)peripheral;
+
+
+#pragma mark - Retrieve Methods
+/** @name Retrieve Peripherals */
+
+/**
+ Retrieves a list of known peripherals by their UUIDs.
+ */
+- (void)retrieveConnectedPeripherals;
+
+/**
+ Retrieves a list of known peripherals by their UUIDs and handles them using a callback block.
+ 
+ @param retrieveCallback Callback block to handle each retrieved peripheral.
+ */
+- (void)retrieveConnectedPeripheralswithBlock:(void (^)(CBPeripheral *peripheral))retrieveCallback;
+
+/**
+ Retrieves a list of the peripherals currently connected to the system and handles them using
+ a callback block.
+ 
+ @param peripheralUUIDs An array of CFUUIDRef objects from which CBPeripheral objects can be retrieved.
+ */
+- (void)retrievePeripherals:(NSArray *)peripheralUUIDs;
+
+
+/**
+ Retrieves a list of the peripherals currently connected to the system and handles them using
+ a callback block.
+ 
+ @param peripheralUUIDs An array of CFUUIDRef objects from which CBPeripheral objects can be retrieved. 
+ @param retrieveCallback Callback block to handle each retrieved peripheral.
+ */
+- (void)retrievePeripherals:(NSArray *)peripheralUUIDs
+                  withBlock:(void (^)(CBPeripheral *peripheral))retrieveCallback;
+
+
+#pragma mark - CBCentralManager state handling methods
+/** @name CBCentralManager manager state handling methods */
+ 
+/**
+ Handler for when manager state is powered on.
+ */
+- (void)managerPoweredOnHandler;
+
+/**
+ Handler for when manager state is unknown.
+ */
+- (void)managerUnknownHandler;
+
+/**
+ Handler for when manager state is powered off
+ */
+- (void)managerPoweredOffHandler;
+
+/**
+ Handler for when manager state is resetting.
+ */
+- (void)managerResettingHandler;
+
+/**
+ Handler for when manager state is unauthorized.
+ */
+- (void)managerUnauthorizedHandler;
+
+/**
+ Handler for when manager state is unsupported.
+ */
+- (void)managerUnsupportedHandler;
 
 @end
 
