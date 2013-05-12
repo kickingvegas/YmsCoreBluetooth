@@ -69,8 +69,6 @@
 }
 
 - (void)initializeUserDefaults {
-    NSDictionary *appDefaults = @{@"storedPeripherals": @[]};
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
 }
 
 - (void)initializeAppServices {
