@@ -19,7 +19,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
-#define UUID2STRING(UUID) (NSString *)CFBridgingRelease(CFUUIDCreateString(NULL, UUID))
 
 #define kYMSCBVersion "0.91"
 extern NSString *const YMSCBVersion;
@@ -103,16 +102,32 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
 /// Peripheral Connection Callback Dictionary
 @property (nonatomic, strong) NSMutableDictionary *connectionCallbackDict;
 
-#pragma mark - Constructor
+/// If YES, then discovered peripheral UUIDs are stored in standardUserDefaults.
+@property (nonatomic, assign) BOOL useStoredPeripherals;
+
+#pragma mark - Constructors
 /** @name Initializing YMSCBAppService */
 /**
  Constructor with array of known peripheral names.
+ 
+ By default, this constructor will use stored peripherals from standardUserDefaults.
+ 
  @param nameList Array of peripheral names of type NSString.
  @param queue The dispatch queue to use to dispatch the central role events. 
  If its value is nil, the central manager dispatches central role events using the main queue.
  */
 - (id)initWithKnownPeripheralNames:(NSArray *)nameList queue:(dispatch_queue_t)queue;
 
+/**
+ Constructor with array of known peripheral names.
+ @param nameList Array of peripheral names of type NSString.
+ @param queue The dispatch queue to use to dispatch the central role events.
+ If its value is nil, the central manager dispatches central role events using the main queue.
+ @param useStore If YES, then discovered peripheral UUIDs are stored in standardUserDefaults.
+ */
+- (id)initWithKnownPeripheralNames:(NSArray *)nameList queue:(dispatch_queue_t)queue useStoredPeripherals:(BOOL)useStore;
+
+#pragma mark - Peripheral Management
 /** @name Peripheral Management */
 /**
  Determines if peripheral is known by this app service.

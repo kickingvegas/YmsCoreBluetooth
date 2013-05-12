@@ -21,6 +21,7 @@
 #import "YMSCBPeripheral.h"
 #import "YMSCBService.h"
 #import "YMSCBCharacteristic.h"
+#import "YMSCBStoredPeripherals.h"
 
 NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
@@ -36,7 +37,30 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
         _connectionCallbackDict = [NSMutableDictionary new];
         _discoveredCallback = nil;
         _retrievedCallback = nil;
+        _useStoredPeripherals = YES;
     }
+    
+    [YMSCBStoredPeripherals initializeStorage];
+    
+    return self;
+}
+
+- (id)initWithKnownPeripheralNames:(NSArray *)nameList queue:(dispatch_queue_t)queue useStoredPeripherals:(BOOL)useStore {
+
+    self = [super init];
+    
+    if (self) {
+        _ymsPeripherals = [NSMutableArray new];
+        _manager = [[CBCentralManager alloc] initWithDelegate:self queue:queue];
+        _knownPeripheralNames = nameList;
+        _connectionCallbackDict = [NSMutableDictionary new];
+        _discoveredCallback = nil;
+        _retrievedCallback = nil;
+        _useStoredPeripherals = useStore;
+    }
+    
+    [YMSCBStoredPeripherals initializeStorage];
+    
     return self;
 }
 
@@ -108,21 +132,11 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 }
 
 - (void)removePeripheral:(YMSCBPeripheral *)yperipheral {
-    
-    if (yperipheral.cbPeripheral.UUID != nil) {
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        NSArray *devices = [userDefaults arrayForKey:@"storedPeripherals"];
-        NSMutableArray *newDevices = [NSMutableArray arrayWithArray:devices];
-    
-        NSString *uuidString = (NSString *)CFBridgingRelease(CFUUIDCreateString(NULL, yperipheral.cbPeripheral.UUID));
-        
-        [newDevices removeObject:uuidString];
-        
-        [userDefaults setObject:newDevices forKey:@"storedPeripherals"];
-        [userDefaults synchronize];
+    if (self.useStoredPeripherals) {
+        if (yperipheral.cbPeripheral.UUID != nil) {
+            [YMSCBStoredPeripherals deleteUUID:yperipheral.cbPeripheral.UUID];
+        }
     }
-    
-    
     [self.ymsPeripherals removeObject:yperipheral];
 }
 
@@ -343,42 +357,8 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
      advertisementData:(NSDictionary *)advertisementData
                   RSSI:(NSNumber *)RSSI {
     
-    NSLog(@"%@, %@, %@ db", peripheral, peripheral.name, RSSI);
-    
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    
-    NSArray *existingDevices = [userDefaults objectForKey:@"storedPeripherals"];
-    NSMutableArray *devices;
-    NSString *uuidString = nil;
-    if (peripheral.UUID != nil) {
-        uuidString = UUID2STRING(peripheral.UUID);
-        
-        if (existingDevices != nil) {
-            devices = [[NSMutableArray alloc] initWithArray:existingDevices];
-            
-            if (uuidString) {
-                BOOL test = YES;
-                
-                for (NSString *obj in existingDevices) {
-                    if ([obj isEqualToString:uuidString]) {
-                        test = NO;
-                        break;
-                    }
-                }
-                
-                if (test) {
-                    [devices addObject:uuidString];
-                }
-            }
-        }
-        else {
-            devices = [[NSMutableArray alloc] init];
-            [devices addObject:uuidString];
-            
-        }
-        
-        [userDefaults setObject:devices forKey:@"storedPeripherals"];
-        [userDefaults synchronize];
+    if (self.useStoredPeripherals) {
+        [YMSCBStoredPeripherals saveUUID:peripheral.UUID];
     }
     
     if (self.discoveredCallback) {
