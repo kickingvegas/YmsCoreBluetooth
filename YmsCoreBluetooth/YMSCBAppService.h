@@ -110,7 +110,7 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
 /**
  Constructor with array of known peripheral names.
  
- By default, this constructor will use stored peripherals from standardUserDefaults.
+ By default, this constructor will not use stored peripherals from standardUserDefaults.
  
  @param nameList Array of peripheral names of type NSString.
  @param queue The dispatch queue to use to dispatch the central role events. 

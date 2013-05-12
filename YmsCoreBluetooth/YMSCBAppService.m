@@ -37,10 +37,8 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
         _connectionCallbackDict = [NSMutableDictionary new];
         _discoveredCallback = nil;
         _retrievedCallback = nil;
-        _useStoredPeripherals = YES;
+        _useStoredPeripherals = NO;
     }
-    
-    [YMSCBStoredPeripherals initializeStorage];
     
     return self;
 }
