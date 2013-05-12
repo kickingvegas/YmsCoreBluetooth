@@ -57,7 +57,9 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
         _useStoredPeripherals = useStore;
     }
     
-    [YMSCBStoredPeripherals initializeStorage];
+    if (useStore) {
+        [YMSCBStoredPeripherals initializeStorage];
+    }
     
     return self;
 }
