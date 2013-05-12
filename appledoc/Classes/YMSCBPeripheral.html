@@ -44,9 +44,17 @@
 	
 	<option value="//api/name/cbPeripheral">&nbsp;&nbsp;&nbsp;&nbsp;cbPeripheral</option>
 	
+	<option value="//api/name/isConnected">&nbsp;&nbsp;&nbsp;&nbsp;isConnected</option>
+	
+	<option value="//api/name/parent">&nbsp;&nbsp;&nbsp;&nbsp;parent</option>
+	
 	<option value="//api/name/rssiPingPeriod">&nbsp;&nbsp;&nbsp;&nbsp;rssiPingPeriod</option>
 	
 	<option value="//api/name/serviceDict">&nbsp;&nbsp;&nbsp;&nbsp;serviceDict</option>
+	
+	<option value="//api/name/watchdogTimer">&nbsp;&nbsp;&nbsp;&nbsp;watchdogTimer</option>
+	
+	<option value="//api/name/watchdogTimerInterval">&nbsp;&nbsp;&nbsp;&nbsp;watchdogTimerInterval</option>
 	
 	<option value="//api/name/willPingRSSI">&nbsp;&nbsp;&nbsp;&nbsp;willPingRSSI</option>
 	
@@ -57,9 +65,15 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
+	<option value="//api/name/connect">&nbsp;&nbsp;&nbsp;&nbsp;- connect</option>
+	
+	<option value="//api/name/disconnect">&nbsp;&nbsp;&nbsp;&nbsp;- disconnect</option>
+	
+	<option value="//api/name/discoverServices">&nbsp;&nbsp;&nbsp;&nbsp;- discoverServices</option>
+	
 	<option value="//api/name/findService:">&nbsp;&nbsp;&nbsp;&nbsp;- findService:</option>
 	
-	<option value="//api/name/initWithPeripheral:baseHi:baseLo:updateRSSI:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithPeripheral:baseHi:baseLo:updateRSSI:</option>
+	<option value="//api/name/initWithPeripheral:parent:baseHi:baseLo:updateRSSI:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithPeripheral:parent:baseHi:baseLo:updateRSSI:</option>
 	
 	<option value="//api/name/peripheral:didDiscoverCharacteristicsForService:error:">&nbsp;&nbsp;&nbsp;&nbsp;- peripheral:didDiscoverCharacteristicsForService:error:</option>
 	
@@ -88,6 +102,8 @@
 	<option value="//api/name/services">&nbsp;&nbsp;&nbsp;&nbsp;- services</option>
 	
 	<option value="//api/name/updateRSSI">&nbsp;&nbsp;&nbsp;&nbsp;- updateRSSI</option>
+	
+	<option value="//api/name/watchdogDisconnect">&nbsp;&nbsp;&nbsp;&nbsp;- watchdogDisconnect</option>
 	
 	
 	
@@ -129,9 +145,17 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/cbPeripheral">cbPeripheral</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isConnected">isConnected</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/parent">parent</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/rssiPingPeriod">rssiPingPeriod</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/serviceDict">serviceDict</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/watchdogTimer">watchdogTimer</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/watchdogTimerInterval">watchdogTimerInterval</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/willPingRSSI">willPingRSSI</a></span></li>
 	
@@ -143,9 +167,15 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/connect">connect</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/disconnect">disconnect</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/discoverServices">discoverServices</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/findService:">findService:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithPeripheral:baseHi:baseLo:updateRSSI:">initWithPeripheral:baseHi:baseLo:updateRSSI:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithPeripheral:parent:baseHi:baseLo:updateRSSI:">initWithPeripheral:parent:baseHi:baseLo:updateRSSI:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/peripheral:didDiscoverCharacteristicsForService:error:">peripheral:didDiscoverCharacteristicsForService:error:</a></span></li>
 	
@@ -174,6 +204,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/services">services</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/updateRSSI">updateRSSI</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/watchdogDisconnect">watchdogDisconnect</a></span></li>
 	
 </ul></li>
 
@@ -270,6 +302,13 @@ contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/isConnected">&nbsp;&nbsp;isConnected</a></code>
+		<span class="tooltip"><p>A Boolean value indicating whether the peripheral is currently connected to the central manager. (read-only)</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/willPingRSSI">&nbsp;&nbsp;willPingRSSI</a></code>
 		<span class="tooltip"><p>If set to YES, enable updates of RSSI are done via <a href="#//api/name/updateRSSI">updateRSSI</a>.</p></span>
 	</span>
@@ -279,6 +318,27 @@ contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</
 	<span class="tooltip">
 		<code><a href="#//api/name/rssiPingPeriod">&nbsp;&nbsp;rssiPingPeriod</a></code>
 		<span class="tooltip"><p>Time period between RSSI pings. (Default: 2 seconds)</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/parent">&nbsp;&nbsp;parent</a></code>
+		<span class="tooltip"><p>Parent owner of an instance of this class.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/watchdogTimer">&nbsp;&nbsp;watchdogTimer</a></code>
+		<span class="tooltip"><p>Watchdog timer for connection.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/watchdogTimerInterval">&nbsp;&nbsp;watchdogTimerInterval</a></code>
+		<span class="tooltip"><p>Watchdog timer interval in seconds. Default is 5 seconds.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -292,7 +352,7 @@ contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithPeripheral:baseHi:baseLo:updateRSSI:">&ndash;&nbsp;initWithPeripheral:baseHi:baseLo:updateRSSI:</a></code>
+		<code><a href="#//api/name/initWithPeripheral:parent:baseHi:baseLo:updateRSSI:">&ndash;&nbsp;initWithPeripheral:parent:baseHi:baseLo:updateRSSI:</a></code>
 		<span class="tooltip"><p>Constructor.</p></span>
 	</span>
 	
@@ -339,6 +399,34 @@ contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</
 	<span class="tooltip">
 		<code><a href="#//api/name/updateRSSI">&ndash;&nbsp;updateRSSI</a></code>
 		<span class="tooltip"><p>Request RSSI update from CBPeripheral.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/discoverServices">&ndash;&nbsp;discoverServices</a></code>
+		<span class="tooltip"><p>Discover the <a href="#//api/name/services">services</a></p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/connect">&ndash;&nbsp;connect</a></code>
+		<span class="tooltip"><p>Connect peripheral</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/disconnect">&ndash;&nbsp;disconnect</a></code>
+		<span class="tooltip"><p>Dis<a href="#//api/name/connect">connect</a> peripheral</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/watchdogDisconnect">&ndash;&nbsp;watchdogDisconnect</a></code>
+		<span class="tooltip"><p>Dis<a href="#//api/name/connect">connect</a> if watchdog times out.</p></span>
 	</span>
 	
 	
@@ -530,6 +618,90 @@ contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/isConnected" title="isConnected"></a>
+	<h3 class="subsubtitle method-title">isConnected</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>A Boolean value indicating whether the peripheral is currently connected to the central manager. (read-only)</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (readonly) BOOL isConnected</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>A Boolean value indicating whether the peripheral is currently connected to the central manager. (read-only)</p>
+
+<p>This value is populated with <a href="#//api/name/cbPeripheral">cbPeripheral</a>.isConnected.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBPeripheral.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/parent" title="parent"></a>
+	<h3 class="subsubtitle method-title">parent</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Parent owner of an instance of this class.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, weak) YMSCBAppService *parent</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Parent owner of an instance of this class.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBPeripheral.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/rssiPingPeriod" title="rssiPingPeriod"></a>
 	<h3 class="subsubtitle method-title">rssiPingPeriod</h3>
 	
@@ -617,6 +789,88 @@ This property is only used when <a href="#//api/name/willPingRSSI">willPingRSSI<
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/watchdogTimer" title="watchdogTimer"></a>
+	<h3 class="subsubtitle method-title">watchdogTimer</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Watchdog timer for connection.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSTimer *watchdogTimer</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Watchdog timer for connection.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBPeripheral.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/watchdogTimerInterval" title="watchdogTimerInterval"></a>
+	<h3 class="subsubtitle method-title">watchdogTimerInterval</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Watchdog timer interval in seconds. Default is 5 seconds.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) NSTimeInterval watchdogTimerInterval</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Watchdog timer interval in seconds. Default is 5 seconds.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBPeripheral.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/willPingRSSI" title="willPingRSSI"></a>
 	<h3 class="subsubtitle method-title">willPingRSSI</h3>
 	
@@ -666,6 +920,129 @@ This property is only used when <a href="#//api/name/willPingRSSI">willPingRSSI<
 					<div class="section section-methods">
 						<a title="Instance Methods" name="instance_methods"></a>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/connect" title="connect"></a>
+	<h3 class="subsubtitle method-title">connect</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Connect peripheral</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)connect</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Connect peripheral</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBPeripheral.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/disconnect" title="disconnect"></a>
+	<h3 class="subsubtitle method-title">disconnect</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Dis<a href="#//api/name/connect">connect</a> peripheral</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)disconnect</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Dis<a href="#//api/name/connect">connect</a> peripheral</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBPeripheral.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/discoverServices" title="discoverServices"></a>
+	<h3 class="subsubtitle method-title">discoverServices</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Discover the <a href="#//api/name/services">services</a></p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)discoverServices</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Discover the <a href="#//api/name/services">services</a></p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBPeripheral.h</code><br />
+	</div>				
+	
+	
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/findService:" title="findService:"></a>
@@ -724,8 +1101,8 @@ This property is only used when <a href="#//api/name/willPingRSSI">willPingRSSI<
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithPeripheral:baseHi:baseLo:updateRSSI:" title="initWithPeripheral:baseHi:baseLo:updateRSSI:"></a>
-	<h3 class="subsubtitle method-title">initWithPeripheral:baseHi:baseLo:updateRSSI:</h3>
+	<a name="//api/name/initWithPeripheral:parent:baseHi:baseLo:updateRSSI:" title="initWithPeripheral:parent:baseHi:baseLo:updateRSSI:"></a>
+	<h3 class="subsubtitle method-title">initWithPeripheral:parent:baseHi:baseLo:updateRSSI:</h3>
 	
 	
 	
@@ -735,7 +1112,7 @@ This property is only used when <a href="#//api/name/willPingRSSI">willPingRSSI<
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (id)initWithPeripheral:(CBPeripheral *)<em>peripheral</em> baseHi:(int64_t)<em>hi</em> baseLo:(int64_t)<em>lo</em> updateRSSI:(BOOL)<em>update</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)initWithPeripheral:(CBPeripheral *)<em>peripheral</em> parent:(YMSCBAppService *)<em>owner</em> baseHi:(int64_t)<em>hi</em> baseLo:(int64_t)<em>lo</em> updateRSSI:(BOOL)<em>update</em></code></div>
 
     
 	
@@ -744,22 +1121,27 @@ This property is only used when <a href="#//api/name/willPingRSSI">willPingRSSI<
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>peripheral</em></dt>
-			<dd><p>pointer to CBPeripheral</p></dd>
+			<dd><p>Pointer to CBPeripheral</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>owner</em></dt>
+			<dd><p>Parent of this instance</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>hi</em></dt>
-			<dd><p>top 64 bits of 128-bit <a href="../Classes/YMSCBPeripheral.html#//api/name/base">base</a> address value</p></dd>
+			<dd><p>Top 64 bits of 128-bit <a href="../Classes/YMSCBPeripheral.html#//api/name/base">base</a> address value</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>lo</em></dt>
-			<dd><p>bottom 64 bits of 128-bit <a href="../Classes/YMSCBPeripheral.html#//api/name/base">base</a> address value</p></dd>
+			<dd><p>Bottom 64 bits of 128-bit <a href="../Classes/YMSCBPeripheral.html#//api/name/base">base</a> address value</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>update</em></dt>
-			<dd><p>if YES, update the RSSI.</p></dd>
+			<dd><p>If YES, update the RSSI.</p></dd>
 		</dl>
 		
 	</div>
@@ -1593,6 +1975,47 @@ reference a <a href="../Classes/YMSCBService.html">YMSCBService</a>.</p>
 	
 </div>
 						
+						<div class="section-method">
+	<a name="//api/name/watchdogDisconnect" title="watchdogDisconnect"></a>
+	<h3 class="subsubtitle method-title">watchdogDisconnect</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Dis<a href="#//api/name/connect">connect</a> if watchdog times out.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)watchdogDisconnect</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Dis<a href="#//api/name/connect">connect</a> if watchdog times out.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBPeripheral.h</code><br />
+	</div>				
+	
+	
+</div>
+						
 					</div>
 					
 					
@@ -1606,7 +2029,7 @@ reference a <a href="../Classes/YMSCBService.html">YMSCBService</a>.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-08)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-12)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

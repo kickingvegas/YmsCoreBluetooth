@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>DEAGyroscopeService Class Reference</title>
+		<title>YMSCBStoredPeripherals Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">DEAGyroscopeService Class Reference</h1>
+				<h1 class="hideInXcode">YMSCBStoredPeripherals Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -40,15 +40,17 @@
 	
 	
 	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/deleteUUID:">&nbsp;&nbsp;&nbsp;&nbsp;+ deleteUUID:</option>
+	
+	<option value="//api/name/genPeripheralUUIDs">&nbsp;&nbsp;&nbsp;&nbsp;+ genPeripheralUUIDs</option>
+	
+	<option value="//api/name/initializeStorage">&nbsp;&nbsp;&nbsp;&nbsp;+ initializeStorage</option>
+	
+	<option value="//api/name/saveUUID:">&nbsp;&nbsp;&nbsp;&nbsp;+ saveUUID:</option>
 	
 	
-	<option value="instance_methods">Instance Methods</option>
-	
-	<option value="//api/name/initWithName:baseHi:baseLo:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:baseHi:baseLo:</option>
-	
-	<option value="//api/name/notifyCharacteristicHandler:error:">&nbsp;&nbsp;&nbsp;&nbsp;- notifyCharacteristicHandler:error:</option>
-	
-	<option value="//api/name/turnOn">&nbsp;&nbsp;&nbsp;&nbsp;- turnOn</option>
 	
 	
 	
@@ -66,32 +68,36 @@
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Methods">Methods</a></span></li>
+	
+</ul></li>
+
+
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/deleteUUID:">deleteUUID:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/genPeripheralUUIDs">genPeripheralUUIDs</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initializeStorage">initializeStorage</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/saveUUID:">saveUUID:</a></span></li>
+	
 </ul></li>
 
 
-
-
-
-
-
-
-
-<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithName:baseHi:baseLo:">initWithName:baseHi:baseLo:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/notifyCharacteristicHandler:error:">notifyCharacteristicHandler:error:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/turnOn">turnOn</a></span></li>
-	
-</ul></li>
 
 
 			</ul>
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="DEAGyroscopeService Class Reference" name="top"></a>
+				<a title="YMSCBStoredPeripherals Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -100,7 +106,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">DEAGyroscopeService Class Reference</h1>
+						<h1 class="title title-header">YMSCBStoredPeripherals Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -108,10 +114,10 @@
 					<div class="section section-specification"><table cellspacing="0"><tbody>
 						<tr>
 	<td class="specification-title">Inherits from</td>
-	<td class="specification-value"><a href="../Classes/DEABaseService.html">DEABaseService</a> : <a href="../Classes/YMSCBService.html">YMSCBService</a> : NSObject</td>
+	<td class="specification-value">NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">DEAGyroscopeService.h<br />DEAGyroscopeService.m</td>
+	<td class="specification-value">YMSCBStoredPeripherals.h<br />YMSCBStoredPeripherals.m</td>
 </tr>
 						</tbody></table></div>
 					
@@ -121,7 +127,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>TI SensorTag CoreBluetooth service definition for gyroscope.</p>
+						<p>Class to manage the storage of discovered UUIDs into [NSUserDefaults standardUserDefaults].</p>
 					</div>
 					
 					
@@ -133,28 +139,35 @@
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
+						<a title="Methods" name="task_Methods"></a>
 						
-						
-
+<h3 class="subsubtitle task-title">Methods</h3>
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithName:baseHi:baseLo:">&ndash;&nbsp;initWithName:baseHi:baseLo:</a></code>
-		<span class="tooltip"><p>Initialize class instance.</p></span>
+		<code><a href="#//api/name/initializeStorage">+&nbsp;initializeStorage</a></code>
+		<span class="tooltip"><p>Initialize array with key name <code>storedPeripherals</code> in standardUserDefaults.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/notifyCharacteristicHandler:error:">&ndash;&nbsp;notifyCharacteristicHandler:error:</a></code>
-		<span class="tooltip"><p>Method to handle response update for a prior read or write request to a characteristic.</p></span>
+		<code><a href="#//api/name/genPeripheralUUIDs">+&nbsp;genPeripheralUUIDs</a></code>
+		<span class="tooltip"><p>Generate array of CFUUIDRef objects to feed into <a href="../Classes/YMSCBAppService.html#//api/name/retrievePeripherals:">[YMSCBAppService retrievePeripherals:]</a></p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/turnOn">&ndash;&nbsp;turnOn</a></code>
-		<span class="tooltip"><p>Turn on CoreBluetooth peripheral service.</p></span>
+		<code><a href="#//api/name/saveUUID:">+&nbsp;saveUUID:</a></code>
+		<span class="tooltip"><p>Save UUID in <code>storedPeripherals</code>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/deleteUUID:">+&nbsp;deleteUUID:</a></code>
+		<span class="tooltip"><p>Delete UUID in <code>storedPeripherals</code>.</p></span>
 	</span>
 	
 	
@@ -169,25 +182,23 @@
 					
 					
 					
-					
-					
 					<div class="section section-methods">
-						<a title="Instance Methods" name="instance_methods"></a>
-						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithName:baseHi:baseLo:" title="initWithName:baseHi:baseLo:"></a>
-	<h3 class="subsubtitle method-title">initWithName:baseHi:baseLo:</h3>
+	<a name="//api/name/deleteUUID:" title="deleteUUID:"></a>
+	<h3 class="subsubtitle method-title">deleteUUID:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Initialize class instance.</p>
+		<p>Delete UUID in <code>storedPeripherals</code>.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (id)initWithName:(NSString *)<em>oName</em> baseHi:(int64_t)<em>hi</em> baseLo:(int64_t)<em>lo</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (void)deleteUUID:(CFUUIDRef)<em>UUID</em></code></div>
 
     
 	
@@ -195,28 +206,13 @@
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>oName</em></dt>
-			<dd><p><a href="../Classes/YMSCBService.html#//api/name/name">name</a> of service</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>hi</em></dt>
-			<dd><p>top 64 bits of 128-bit <a href="../Classes/YMSCBService.html#//api/name/base">base</a> address value</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>lo</em></dt>
-			<dd><p>bottom 64 bits of 128-bit <a href="../Classes/YMSCBService.html#//api/name/base">base</a> address value</p></dd>
+			<dt><em>UUID</em></dt>
+			<dd><p>peripheral UUID</p></dd>
 		</dl>
 		
 	</div>
 	
 	
-	
-	<div class="method-subsection return">
-		<h4 class="method-subtitle parameter-title">Return Value</h4>
-		<p><a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a></p>
-	</div>
 	
 	
 	
@@ -224,7 +220,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Initialize class instance.</p>
+		<p>Delete UUID in <code>storedPeripherals</code>.</p>
 	</div>
 	
 	
@@ -235,25 +231,107 @@
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBService.h</code><br />
+		<code class="declared-in-ref">YMSCBStoredPeripherals.h</code><br />
 	</div>				
 	
 	
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/notifyCharacteristicHandler:error:" title="notifyCharacteristicHandler:error:"></a>
-	<h3 class="subsubtitle method-title">notifyCharacteristicHandler:error:</h3>
+	<a name="//api/name/genPeripheralUUIDs" title="genPeripheralUUIDs"></a>
+	<h3 class="subsubtitle method-title">genPeripheralUUIDs</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Method to handle response update for a prior read or write request to a characteristic.</p>
+		<p>Generate array of CFUUIDRef objects to feed into <a href="../Classes/YMSCBAppService.html#//api/name/retrievePeripherals:">[YMSCBAppService retrievePeripherals:]</a></p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)<em>yc</em> error:(NSError *)<em>error</em></code></div>
+	<div class="method-subsection method-declaration"><code>+ (NSArray *)genPeripheralUUIDs</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Generate array of CFUUIDRef objects to feed into <a href="../Classes/YMSCBAppService.html#//api/name/retrievePeripherals:">[YMSCBAppService retrievePeripherals:]</a></p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBStoredPeripherals.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initializeStorage" title="initializeStorage"></a>
+	<h3 class="subsubtitle method-title">initializeStorage</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Initialize array with key name <code>storedPeripherals</code> in standardUserDefaults.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (void)initializeStorage</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Initialize array with key name <code>storedPeripherals</code> in standardUserDefaults.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBStoredPeripherals.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/saveUUID:" title="saveUUID:"></a>
+	<h3 class="subsubtitle method-title">saveUUID:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Save UUID in <code>storedPeripherals</code>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (void)saveUUID:(CFUUIDRef)<em>UUID</em></code></div>
 
     
 	
@@ -261,13 +339,8 @@
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>yc</em></dt>
-			<dd><p>Characteristic receiving update.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>error</em></dt>
-			<dd><p>Error object.</p></dd>
+			<dt><em>UUID</em></dt>
+			<dd><p>peripheral UUID</p></dd>
 		</dl>
 		
 	</div>
@@ -280,12 +353,7 @@
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Method to handle response update for a prior read or write request to a characteristic.</p>
-
-<p>This method is invoked by the CBPeripheralDelegate method peripheral:didUpdateValueForCharacteristic:error:
-conformed to by <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</p>
-
-<p>This method is typically overridden to handle <a href="../Classes/YMSCBService.html#//api/name/characteristics">characteristics</a> whose notification has been turned on.</p>
+		<p>Save UUID in <code>storedPeripherals</code>.</p>
 	</div>
 	
 	
@@ -296,62 +364,15 @@ conformed to by <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/turnOn" title="turnOn"></a>
-	<h3 class="subsubtitle method-title">turnOn</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Turn on CoreBluetooth peripheral service.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)turnOn</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Turn on CoreBluetooth peripheral service.</p>
-
-<p>This method turns on the service by:</p>
-
-<ul>
-<li>writing to <em>config</em> characteristic to enable service.</li>
-<li>writing to <em>data</em> characteristic to enable notification.</li>
-</ul>
-
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">DEABaseService.h</code><br />
+		<code class="declared-in-ref">YMSCBStoredPeripherals.h</code><br />
 	</div>				
 	
 	
 </div>
 						
 					</div>
+					
+					
 					
 					
 				</div>
