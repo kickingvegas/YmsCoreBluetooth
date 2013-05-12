@@ -19,7 +19,9 @@
 
 #import "DEACBAppService.h"
 #import "DEASensorTag.h"
+#import "YMSCBStoredPeripherals.h"
 #include "TISensorTag.h"
+
 
 #define CALLBACK_EXAMPLE 1
 
@@ -32,7 +34,8 @@ static DEACBAppService *sharedCBAppService;
     if (sharedCBAppService == nil) {
         NSArray *nameList = @[@"TI BLE Sensor Tag", @"SensorTag"];
         sharedCBAppService = [[super allocWithZone:NULL] initWithKnownPeripheralNames:nameList
-                                                                                queue:nil];
+                                                                                queue:nil
+                                                                 useStoredPeripherals:YES];
     }
     return sharedCBAppService;
 }
@@ -59,6 +62,8 @@ static DEACBAppService *sharedCBAppService;
                                        NSLog(@"Something bad happened with scanForPeripheralWithServices:options:withBlock:");
                                        return;
                                    }
+                                   
+                                   NSLog(@"DISCOVERED: %@, %@, %@ db", peripheral, peripheral.name, RSSI);
                                    [self handleFoundPeripheral:peripheral];
                                }];
     
@@ -110,31 +115,10 @@ static DEACBAppService *sharedCBAppService;
 }
 
 - (void)managerPoweredOnHandler {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSArray *devices = [userDefaults arrayForKey:@"storedPeripherals"];
-    NSMutableArray *peripheralUUIDList = [[NSMutableArray alloc] init];
-    
-    if (![devices isKindOfClass:[NSArray class]]) {
-        // TODO - need right error handler
-        NSLog(@"No stored array to load");
-    }
-    
-    for (id uuidString in devices) {
-        if (![uuidString isKindOfClass:[NSString class]]) {
-            continue;
-        }
-        
-        
-        CFUUIDRef uuid = CFUUIDCreateFromString(NULL, (CFStringRef)uuidString);
-        
-        if (!uuid)
-            continue;
-        
-        [peripheralUUIDList addObject:(id)CFBridgingRelease(uuid)];
-    }
-    
-    if ([peripheralUUIDList count] > 0) {
-        [self retrievePeripherals:peripheralUUIDList
+    if (self.useStoredPeripherals) {
+        NSArray *peripheralUUIDs = [YMSCBStoredPeripherals genPeripheralUUIDs];
+
+        [self retrievePeripherals:peripheralUUIDs
                         withBlock:^(CBPeripheral *peripheral) {
                             [self handleFoundPeripheral:peripheral];
                         }];
