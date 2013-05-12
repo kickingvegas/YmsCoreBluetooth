@@ -190,19 +190,19 @@ Code tested on:
 <tr><td colspan='2'><code>YMSCBAppService</code></td></tr>
 <tr><td>obsolete</td><td><code>- (void)persistPeripherals</code></td><td>Replaced by YMSCBStoredPeripherals</td></tr>
 <tr><td>obsolete</td><td><code>- (void)loadPeripherals</code></td><td>Replaced by YMSCBStoredPeripherals</td></tr>
-<tr><td>new</td><td><code>- (id)initWithKnownPeripheralNames:(NSArray *)nameList queue:(dispatch_queue_t)queue useStoredPeripherals:(BOOL)useStore;</code></td><td>Add support to optionally store peripherals.</td></tr>
+<tr><td>new</td><td><code>- (id)initWithKnownPeripheralNames:(NSArray *)nameList<br>&nbsp;&nbsp;&nbsp;queue:(dispatch_queue_t)queue<br>&nbsp;&nbsp;&nbsp;useStoredPeripherals:(BOOL)useStore;</code></td><td>Add support to optionally store peripherals.</td></tr>
 <tr><td>obsolete</td><td><code>- (void)connectPeripheral:(NSUInteger)index;</code></td><td rowspan='2'>Use more accurate name</td></tr>
-<tr><td>replaced by</td><td><code>- (void)connectPeripheralAtIndex:(NSUInteger)index options:(NSDictionary *)options;</code></td></tr>
+<tr><td>replaced by</td><td><code>- (void)connectPeripheralAtIndex:(NSUInteger)index<br>&nbsp;&nbsp;&nbsp;options:(NSDictionary *)options;</code></td></tr>
 <tr><td>obsolete</td><td><code>- (void)disconnectPeripheral:(NSUInteger)index;</code></td><td rowspan='2'>Use more accurate name.</td></tr>
 <tr><td>replaced by</td><td><code>- (void)disconnectPeripheralAtIndex:(NSUInteger)index;</code></td></tr>
-<tr><td>new</td><td><code>- (void)connectPeripheral:(YMSCBPeripheral *)peripheral options:(NSDictionary *)options;</code></td><td>Mirror CBCentralManager method</td></tr>
+<tr><td>new</td><td><code>- (void)connectPeripheral:(YMSCBPeripheral *)peripheral<br>&nbsp;&nbsp;&nbsp;options:(NSDictionary *)options;</code></td><td>Mirror CBCentralManager method</td></tr>
 <tr><td>new</td><td><code>- (void)cancelPeripheralConnection:(YMSCBPeripheral *)peripheral;</code></td><td>Mirror CBCentralManager method</td></tr>
 <tr><td>new</td><td><code>- (void)connectPeripheral:(YMSCBPeripheral *)peripheral<br>&nbsp;&nbsp;&nbsp;options:(NSDictionary *)options<br/>&nbsp;&nbsp;&nbsp;withBlock:(void (^)(YMSCBPeripheral *yp, NSError *error))connectCallback</code></td><td>Support block based connection</td></tr>
 <tr><td>new</td><td><code>- (void)retrieveConnectedPeripherals</code></td><td>Mirror CBCentralManager method</td></tr>
-<tr><td>new</td><td><code>- (void)retrieveConnectedPeripheralsWithBlock:(void (^)(CBPeripheral *peripheral))retrieveCallback</code></td><td>Support block based connection</td></tr>
+<tr><td>new</td><td><code>- (void)retrieveConnectedPeripheralsWithBlock:<br>(void (^)(CBPeripheral *peripheral))retrieveCallback</code></td><td>Support block based connection</td></tr>
 <tr><td>new</td><td><code>- (void)retrievePeripherals:(NSArray *)peripheralUUIDs</code></td><td>Mirror CBCentralManager method</td></tr>
-<tr><td>new</td><td><code>- (void)retrievePeripherals:(NSArray *)peripheralUUIDs withBlock:(void (^)(CBPeripheral *peripheral))retrieveCallback</code></td><td>Support block based connection</td></tr>
-<tr><td>new</td><td><code>- (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs<br>&nbsp;&nbsp;&nbsp;options:(NSDictionary *)options<br>&nbsp;&nbsp;&nbsp;withCallback:(void (^)(CBPeripheral *,NSDictionary *, NSNumber *, NSError *))discoverCallback</code></td><td>Support block based connection</td></tr>
+<tr><td>new</td><td><code>- (void)retrievePeripherals:(NSArray *)peripheralUUIDs<br>&nbsp;&nbsp;&nbsp;withBlock:(void (^)(CBPeripheral *peripheral))retrieveCallback</code></td><td>Support block based connection</td></tr>
+<tr><td>new</td><td><code>- (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs<br>&nbsp;&nbsp;&nbsp;options:(NSDictionary *)options<br>&nbsp;&nbsp;&nbsp;withCallback:<br>(void (^)(CBPeripheral *,NSDictionary *, NSNumber *, NSError *))discoverCallback</code></td><td>Support block based connection</td></tr>
 </tbody>
 </table>
 
