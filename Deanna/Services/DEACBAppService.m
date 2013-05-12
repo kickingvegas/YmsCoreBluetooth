@@ -51,6 +51,7 @@ static DEACBAppService *sharedCBAppService;
                                        for (NSString *pname in self.knownPeripheralNames) {
                                            if ([pname isEqualToString:peripheral.name]) {
                                                DEASensorTag *sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
+                                                                                                           parent:self
                                                                                                            baseHi:kSensorTag_BASE_ADDRESS_HI
                                                                                                            baseLo:kSensorTag_BASE_ADDRESS_LO
                                                                                                        updateRSSI:YES];
@@ -64,7 +65,7 @@ static DEACBAppService *sharedCBAppService;
                                        
                                        if (isUnknownPeripheral) {
                                            //TODO: Handle unknown peripheral
-                                           yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral baseHi:0 baseLo:0 updateRSSI:NO];
+                                           yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral parent:self baseHi:0 baseLo:0 updateRSSI:NO];
                                            [self.ymsPeripherals addObject:yp];
                                        }
                                    }
@@ -80,14 +81,9 @@ static DEACBAppService *sharedCBAppService;
     [self connectPeripheral:peripheral
                     options:nil
                   withBlock:^(YMSCBPeripheral *yp, NSError *error) {
-                      //TODO: this should be turned into a method on YMSCBPeripheral
-                      NSArray *services = [yp services];
-                      [peripheral.cbPeripheral discoverServices:services];
+                      [peripheral discoverServices];
                   }];
-    
 }
-
-
 
 - (void)managerPoweredOnHandler {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -123,6 +119,7 @@ static DEACBAppService *sharedCBAppService;
                                 for (NSString *pname in self.knownPeripheralNames) {
                                     if ([pname isEqualToString:peripheral.name]) {
                                         DEASensorTag *sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
+                                                                                                    parent:self
                                                                                                     baseHi:kSensorTag_BASE_ADDRESS_HI
                                                                                                     baseLo:kSensorTag_BASE_ADDRESS_LO
                                                                                                 updateRSSI:YES];
@@ -136,7 +133,7 @@ static DEACBAppService *sharedCBAppService;
                                 
                                 if (isUnknownPeripheral) {
                                     //TODO: Handle unknown peripheral
-                                    yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral baseHi:0 baseLo:0 updateRSSI:NO];
+                                    yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral parent:self baseHi:0 baseLo:0 updateRSSI:NO];
                                     [self.ymsPeripherals addObject:yp];
                                 }
                             }
