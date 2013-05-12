@@ -20,6 +20,10 @@
 @class DEADeviceInfoService;
 @class DEASensorTag;
 
+
+/**
+ View and control logic for the SensorTag device information service.
+ */
 @interface DEADeviceInfoViewCell : UITableViewCell
 @property (strong, nonatomic) DEADeviceInfoService *service;
 
