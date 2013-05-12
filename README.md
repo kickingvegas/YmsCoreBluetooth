@@ -202,7 +202,7 @@ Code tested on:
 <tr><td>new</td><td><code>- (void)retrieveConnectedPeripheralsWithBlock:<br>(void (^)(CBPeripheral *peripheral))retrieveCallback</code></td><td>Support block based connection</td></tr>
 <tr><td>new</td><td><code>- (void)retrievePeripherals:(NSArray *)peripheralUUIDs</code></td><td>Mirror CBCentralManager method</td></tr>
 <tr><td>new</td><td><code>- (void)retrievePeripherals:(NSArray *)peripheralUUIDs<br>&nbsp;&nbsp;&nbsp;withBlock:(void (^)(CBPeripheral *peripheral))retrieveCallback</code></td><td>Support block based connection</td></tr>
-<tr><td>new</td><td><code>- (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs<br>&nbsp;&nbsp;&nbsp;options:(NSDictionary *)options<br>&nbsp;&nbsp;&nbsp;withCallback:<br>(void (^)(CBPeripheral *,NSDictionary *, NSNumber *, NSError *))discoverCallback</code></td><td>Support block based connection</td></tr>
+<tr><td>new</td><td><code>- (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs<br>&nbsp;&nbsp;&nbsp;options:(NSDictionary *)options<br>&nbsp;&nbsp;&nbsp;withBlock:<br>(void (^)(CBPeripheral *,NSDictionary *, NSNumber *, NSError *))discoverCallback</code></td><td>Support block based connection</td></tr>
 </tbody>
 </table>
 
