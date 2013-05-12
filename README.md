@@ -178,7 +178,7 @@ Code tested on:
 
 ## Changes
 
-### Sun May 12 2013
+### Sun May 12 2013 - Moombahton Release (ver 0.92)
 * Block-based callbacks for central manager scanning, peripheral connection, and peripheral retrieval are now supported.
 * Watchdog timeout for unanswered peripheral connection requests are now supported.
 * Significant API changes to YMSCBAppService and YMSCBPeripheral detailed below.
