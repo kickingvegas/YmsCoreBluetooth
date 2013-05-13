@@ -210,7 +210,7 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
  @param writeCallback Callback block to execute upon response.
  
  */
-- (void)writeByte:(int8_t *)val forCharacteristicName:(NSString *)cname withBlock:(void (^)(NSError *error))writeCallback;
+- (void)writeByte:(int8_t)val forCharacteristicName:(NSString *)cname withBlock:(void (^)(NSError *error))writeCallback;
 
 
 /** @name Read Request BLE Service Methods */

@@ -194,9 +194,9 @@
 }
 
 
-- (void)writeByte:(int8_t *)val forCharacteristicName:(NSString *)cname withBlock:(void (^)(NSError *))writeCallback {
+- (void)writeByte:(int8_t)val forCharacteristicName:(NSString *)cname withBlock:(void (^)(NSError *))writeCallback {
     NSData *data = [NSData dataWithBytes:&val length:1];
-    
+
     [self writeValue:data forCharacteristicName:cname withBlock:writeCallback];
 }
 
