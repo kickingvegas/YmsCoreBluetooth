@@ -9,7 +9,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "DEAPeripheralTableViewCell.h"
 #import "DEASensorTag.h"
-#import "DEACBAppService.h"
+#import "DEACentralManager.h"
 
 @implementation DEAPeripheralTableViewCell
 

@@ -18,7 +18,7 @@
 
 
 #import "DEASensorTagViewController.h"
-#import "DEACBAppService.h"
+#import "DEACentralManager.h"
 #import "DEATemperatureViewCell.h"
 #import "DEAAccelerometerViewCell.h"
 #import "DEAHumidityViewCell.h"
@@ -89,7 +89,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    DEACentralManager *cbAppService = [DEACentralManager sharedService];
     cbAppService.delegate = self;
     
     for (NSString *prefix in self.cbServiceCells) {

@@ -16,25 +16,21 @@
 //  Author: Charles Y. Choi <charles.choi@yummymelon.com>
 //
 
-#import <UIKit/UIKit.h>
-#import "DEACentralManager.h"
-#import "DEABaseViewController.h"
 
-@class DEAPeripheralTableViewCell;
+#import "YMSCBCentralManager.h"
 
 /**
- View Controller for listing of Bluetooth LE Peripherals available.
+ Application CoreBluetooth central manager service for Deanna.
+ 
+ This class defines a singleton application service instance which manages access to
+ the TI SensorTag via the CoreBluetooth API. 
+ 
  */
-@interface DEAPeripheralsViewController : DEABaseViewController <UITableViewDataSource, UITableViewDelegate>
+@interface DEACentralManager : YMSCBCentralManager
 
-/** @name Properties */
-/// TableViewCell for a connectable peripheral.
-@property (strong, nonatomic) IBOutlet DEAPeripheralTableViewCell *tvCell;
-
-/// TableView for found peripherals
-@property (strong, nonatomic) IBOutlet UITableView *peripheralsTableView;
-
-/// Button to enable Bluetooth scanner
-@property (strong, nonatomic) UIBarButtonItem *scanButton;
+/**
+ Return singleton instance.
+ */
++ (DEACentralManager *)sharedService;
 
 @end

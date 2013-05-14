@@ -17,7 +17,7 @@
 //
 
 #import "DEABaseViewController.h"
-#import "DEACBAppService.h"
+#import "DEACentralManager.h"
 
 @interface DEABaseViewController ()
 

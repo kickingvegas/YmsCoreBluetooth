@@ -19,7 +19,7 @@
 
 #import "DEAAppDelegate.h"
 #import "DEAPeripheralsViewController.h"
-#import "DEACBAppService.h"
+#import "DEACentralManager.h"
 
 @implementation DEAAppDelegate
 
@@ -72,7 +72,7 @@
 }
 
 - (void)initializeAppServices {
-    [DEACBAppService sharedService];
+    [DEACentralManager sharedService];
 }
 
 @end

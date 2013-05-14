@@ -41,7 +41,7 @@
     
     self.title = @"Deanna";
     
-    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    DEACentralManager *cbAppService = [DEACentralManager sharedService];
     
 
     [self.navigationController setToolbarHidden:NO];
@@ -67,7 +67,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    DEACentralManager *cbAppService = [DEACentralManager sharedService];
     cbAppService.delegate = self;
     
 }
@@ -78,7 +78,7 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
-    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    DEACentralManager *cbAppService = [DEACentralManager sharedService];
     
     if (object == cbAppService) {
         if ([keyPath isEqualToString:@"isScanning"]) {
@@ -108,7 +108,7 @@
 
 
 - (void)scanButtonAction:(id)sender {
-    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    DEACentralManager *cbAppService = [DEACentralManager sharedService];
     
     if (cbAppService.isScanning == NO) {
         [cbAppService startScan];
@@ -286,7 +286,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat result;
-    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    DEACentralManager *cbAppService = [DEACentralManager sharedService];
     YMSCBPeripheral *yp = [cbAppService peripheralAtIndex:indexPath.row];
     if ([cbAppService isKnownPeripheral:yp.cbPeripheral]) {
         result = 107.0;
@@ -300,7 +300,7 @@
     static NSString *SensorTagCellIdentifier = @"SensorTagCell";
     static NSString *UnknownPeripheralCellIdentifier = @"UnknownPeripheralCell";
 
-    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    DEACentralManager *cbAppService = [DEACentralManager sharedService];
     YMSCBPeripheral *yp = [cbAppService peripheralAtIndex:indexPath.row];
     
     UITableViewCell *cell = nil;
@@ -340,7 +340,7 @@
 
     switch (editingStyle) {
         case UITableViewCellEditingStyleDelete: {
-            DEACBAppService *cbAppService = [DEACBAppService sharedService];
+            DEACentralManager *cbAppService = [DEACentralManager sharedService];
             YMSCBPeripheral *yp = [cbAppService peripheralAtIndex:indexPath.row];
             if ([yp isKindOfClass:[DEASensorTag class]]) {
                 if (yp.cbPeripheral.isConnected) {
@@ -372,7 +372,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    DEACentralManager *cbAppService = [DEACentralManager sharedService];
     NSInteger result;
     result = cbAppService.count;
     return result;
@@ -380,7 +380,7 @@
 
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    DEACBAppService *cbAppService = [DEACBAppService sharedService];
+    DEACentralManager *cbAppService = [DEACentralManager sharedService];
     
     DEASensorTag *sensorTag = (DEASensorTag *)[cbAppService.ymsPeripherals objectAtIndex:indexPath.row];
     
