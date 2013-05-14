@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D906E5F116DCAC55001D7932 /* DEACBAppService.m in Sources */ = {isa = PBXBuildFile; fileRef = D906E5F016DCAC55001D7932 /* DEACBAppService.m */; };
+		D906E5F116DCAC55001D7932 /* DEACentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D906E5F016DCAC55001D7932 /* DEACentralManager.m */; };
 		D907A76B16E0393300EA8D5B /* DEABarometerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D907A76A16E0393300EA8D5B /* DEABarometerViewCell.m */; };
 		D90C0C3A16DD6297002D3FFD /* DEABaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D90C0C3916DD6297002D3FFD /* DEABaseViewController.m */; };
 		D90C0C3D16DD9133002D3FFD /* DEAHumidityService.m in Sources */ = {isa = PBXBuildFile; fileRef = D90C0C3C16DD9133002D3FFD /* DEAHumidityService.m */; };
@@ -17,7 +17,7 @@
 		D9268B4317306295009C4284 /* NSMutableArray+fifoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D9268B4217306295009C4284 /* NSMutableArray+fifoQueue.m */; };
 		D9268B46173081E2009C4284 /* DEADeviceInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9268B45173081E2009C4284 /* DEADeviceInfoService.m */; };
 		D933CECF16DDAFA700EDDAD6 /* YMS128.c in Sources */ = {isa = PBXBuildFile; fileRef = D933CEC316DDAFA700EDDAD6 /* YMS128.c */; };
-		D933CED016DDAFA700EDDAD6 /* YMSCBAppService.m in Sources */ = {isa = PBXBuildFile; fileRef = D933CEC616DDAFA700EDDAD6 /* YMSCBAppService.m */; };
+		D933CED016DDAFA700EDDAD6 /* YMSCBCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D933CEC616DDAFA700EDDAD6 /* YMSCBCentralManager.m */; };
 		D933CED116DDAFA700EDDAD6 /* YMSCBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = D933CEC816DDAFA700EDDAD6 /* YMSCBCharacteristic.m */; };
 		D933CED216DDAFA700EDDAD6 /* YMSCBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = D933CECA16DDAFA700EDDAD6 /* YMSCBPeripheral.m */; };
 		D933CED316DDAFA700EDDAD6 /* YMSCBService.m in Sources */ = {isa = PBXBuildFile; fileRef = D933CECC16DDAFA700EDDAD6 /* YMSCBService.m */; };
@@ -80,8 +80,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D906E5EF16DCAC55001D7932 /* DEACBAppService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEACBAppService.h; sourceTree = "<group>"; };
-		D906E5F016DCAC55001D7932 /* DEACBAppService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEACBAppService.m; sourceTree = "<group>"; };
+		D906E5EF16DCAC55001D7932 /* DEACentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEACentralManager.h; sourceTree = "<group>"; };
+		D906E5F016DCAC55001D7932 /* DEACentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEACentralManager.m; sourceTree = "<group>"; };
 		D907A76916E0393300EA8D5B /* DEABarometerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEABarometerViewCell.h; sourceTree = "<group>"; };
 		D907A76A16E0393300EA8D5B /* DEABarometerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEABarometerViewCell.m; sourceTree = "<group>"; };
 		D90C0C3816DD6297002D3FFD /* DEABaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEABaseViewController.h; sourceTree = "<group>"; };
@@ -100,8 +100,8 @@
 		D9268B45173081E2009C4284 /* DEADeviceInfoService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEADeviceInfoService.m; sourceTree = "<group>"; };
 		D933CEC316DDAFA700EDDAD6 /* YMS128.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = YMS128.c; sourceTree = "<group>"; };
 		D933CEC416DDAFA700EDDAD6 /* YMS128.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMS128.h; sourceTree = "<group>"; };
-		D933CEC516DDAFA700EDDAD6 /* YMSCBAppService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBAppService.h; sourceTree = "<group>"; };
-		D933CEC616DDAFA700EDDAD6 /* YMSCBAppService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBAppService.m; sourceTree = "<group>"; };
+		D933CEC516DDAFA700EDDAD6 /* YMSCBCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBCentralManager.h; sourceTree = "<group>"; };
+		D933CEC616DDAFA700EDDAD6 /* YMSCBCentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBCentralManager.m; sourceTree = "<group>"; };
 		D933CEC716DDAFA700EDDAD6 /* YMSCBCharacteristic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBCharacteristic.h; sourceTree = "<group>"; };
 		D933CEC816DDAFA700EDDAD6 /* YMSCBCharacteristic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBCharacteristic.m; sourceTree = "<group>"; };
 		D933CEC916DDAFA700EDDAD6 /* YMSCBPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBPeripheral.h; sourceTree = "<group>"; };
@@ -210,8 +210,8 @@
 			children = (
 				D933CEC416DDAFA700EDDAD6 /* YMS128.h */,
 				D933CEC316DDAFA700EDDAD6 /* YMS128.c */,
-				D933CEC516DDAFA700EDDAD6 /* YMSCBAppService.h */,
-				D933CEC616DDAFA700EDDAD6 /* YMSCBAppService.m */,
+				D933CEC516DDAFA700EDDAD6 /* YMSCBCentralManager.h */,
+				D933CEC616DDAFA700EDDAD6 /* YMSCBCentralManager.m */,
 				D933CEC916DDAFA700EDDAD6 /* YMSCBPeripheral.h */,
 				D933CECA16DDAFA700EDDAD6 /* YMSCBPeripheral.m */,
 				D933CECB16DDAFA700EDDAD6 /* YMSCBService.h */,
@@ -322,8 +322,8 @@
 		D9718B83167FA1400001E42C /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				D906E5EF16DCAC55001D7932 /* DEACBAppService.h */,
-				D906E5F016DCAC55001D7932 /* DEACBAppService.m */,
+				D906E5EF16DCAC55001D7932 /* DEACentralManager.h */,
+				D906E5F016DCAC55001D7932 /* DEACentralManager.m */,
 				D9CB2C0616A71F8E00279DDA /* SensorTag */,
 			);
 			path = Services;
@@ -557,13 +557,13 @@
 				D91170561681461300E2D19A /* DEAAccelerometerService.m in Sources */,
 				D9D8316D168449FE00F51E42 /* DEASimpleKeysService.m in Sources */,
 				D9C5012216AB37DD001D4D4F /* DEAPeripheralsViewController.m in Sources */,
-				D906E5F116DCAC55001D7932 /* DEACBAppService.m in Sources */,
+				D906E5F116DCAC55001D7932 /* DEACentralManager.m in Sources */,
 				D988A5C616DD26A100D7D392 /* DEASensorTag.m in Sources */,
 				D988A5C816DD464A00D7D392 /* TISensorTag.c in Sources */,
 				D90C0C3A16DD6297002D3FFD /* DEABaseViewController.m in Sources */,
 				D90C0C3D16DD9133002D3FFD /* DEAHumidityService.m in Sources */,
 				D933CECF16DDAFA700EDDAD6 /* YMS128.c in Sources */,
-				D933CED016DDAFA700EDDAD6 /* YMSCBAppService.m in Sources */,
+				D933CED016DDAFA700EDDAD6 /* YMSCBCentralManager.m in Sources */,
 				D933CED116DDAFA700EDDAD6 /* YMSCBCharacteristic.m in Sources */,
 				D933CED216DDAFA700EDDAD6 /* YMSCBPeripheral.m in Sources */,
 				D933CED316DDAFA700EDDAD6 /* YMSCBService.m in Sources */,
