@@ -25,19 +25,19 @@
 
 #define CALLBACK_EXAMPLE 1
 
-static DEACentralManager *sharedCBAppService;
+static DEACentralManager *sharedCentralManager;
 
 @implementation DEACentralManager
 
 
 + (DEACentralManager *)sharedService {
-    if (sharedCBAppService == nil) {
+    if (sharedCentralManager == nil) {
         NSArray *nameList = @[@"TI BLE Sensor Tag", @"SensorTag"];
-        sharedCBAppService = [[super allocWithZone:NULL] initWithKnownPeripheralNames:nameList
+        sharedCentralManager = [[super allocWithZone:NULL] initWithKnownPeripheralNames:nameList
                                                                                 queue:nil
                                                                  useStoredPeripherals:YES];
     }
-    return sharedCBAppService;
+    return sharedCentralManager;
 }
 
 
