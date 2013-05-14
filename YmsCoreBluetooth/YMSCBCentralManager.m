@@ -124,7 +124,7 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
      * THIS METHOD IS TO BE OVERRIDDEN
      */
     
-    NSAssert(NO, @"[YMSCBAppService startScan] must be be overridden and include call to [self scanForPeripherals:options:]");
+    NSAssert(NO, @"[YMSCBCentralManager startScan] must be be overridden and include call to [self scanForPeripherals:options:]");
     
     //[self scanForPeripheralsWithServices:nil options:nil];
 }
@@ -170,7 +170,7 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
      * THIS METHOD IS TO BE OVERRIDDEN
      */
     
-    NSAssert(NO, @"[YMSCBAppService handleFoundPeripheral:] must be be overridden.");
+    NSAssert(NO, @"[YMSCBCentralManager handleFoundPeripheral:] must be be overridden.");
 
 }
 
@@ -179,13 +179,13 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
      * THIS METHOD IS TO BE OVERRIDDEN
      */
 
-    NSAssert(NO, @"[YMSCBAppService handleConnectedPeripheral:] must be be overridden.");
+    NSAssert(NO, @"[YMSCBCentralManager handleConnectedPeripheral:] must be be overridden.");
 }
 
 #pragma mark - Connect Methods
 
 - (void)connect:(YMSCBPeripheral *)peripheral {
-    NSAssert(NO, @"[YMSCBAppService connect:] must be be overridden.");
+    NSAssert(NO, @"[YMSCBCentralManager connect:] must be be overridden.");
 }
 
 - (void)connectPeripheral:(YMSCBPeripheral *)peripheral options:(NSDictionary *)options {

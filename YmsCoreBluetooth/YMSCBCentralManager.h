@@ -47,7 +47,7 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
 
  All discovered BLE peripherals are stored in the array ymsPeripherals.
 
- Legacy Note: This class was previously named YMSCBAppService.
+ Legacy Note: This class was previously named YMSCBCentralManager.
  */
 @interface YMSCBCentralManager : NSObject <CBCentralManagerDelegate>
 
@@ -62,7 +62,7 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
 /**
  The CBCentralManager object.
  
- In typical practice, there is only one instance of CBCentralManager and it is located in a singleton instance of YMSCBAppService.
+ In typical practice, there is only one instance of CBCentralManager and it is located in a singleton instance of YMSCBCentralManager.
  This class listens to CBCentralManagerDelegate messages sent by manager, which in turn forwards those messages to delegate.
  */
 @property (nonatomic, strong) CBCentralManager *manager;
@@ -105,7 +105,7 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
 @property (nonatomic, assign) BOOL useStoredPeripherals;
 
 #pragma mark - Constructors
-/** @name Initializing YMSCBAppService */
+/** @name Initializing YMSCBCentralManager */
 /**
  Constructor with array of known peripheral names.
  

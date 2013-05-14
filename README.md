@@ -13,7 +13,7 @@ The files for the iOS application **Deanna** are prefixed with `DEA` located in 
 
 The organizational structure of the YmsCoreBluetooth framework largely mirrors the CoreBluetooth hierarchy:
 
-* YMSCBAppService - An application service which manages multiple BLE peripherals
+* YMSCBCentralManager - An application service which manages multiple BLE peripherals
     * YMSCBPeripheral - A BLE peripheral can have multiple BLE services
         * YMSCBService - A BLE service can have multiple BLE characteristics
              * YMSCBCharacteristic 
@@ -181,13 +181,13 @@ Code tested on:
 ### Sun May 12 2013 - Moombahton Release (ver 0.92)
 * Block-based callbacks for central manager scanning, peripheral connection, and peripheral retrieval are now supported.
 * Watchdog timeout for unanswered peripheral connection requests are now supported.
-* Significant API changes to YMSCBAppService and YMSCBPeripheral detailed below.
+* Significant API changes to YMSCBCentralManager and YMSCBPeripheral detailed below.
 
 #### API 0.92 Changes
 
 <table border='1'>
 <tbody>
-<tr><td colspan='2'><code>YMSCBAppService</code></td></tr>
+<tr><td colspan='2'><code>YMSCBCentralManager</code></td></tr>
 <tr><td>obsolete</td><td><code>- (void)persistPeripherals</code></td><td>Replaced by YMSCBStoredPeripherals</td></tr>
 <tr><td>obsolete</td><td><code>- (void)loadPeripherals</code></td><td>Replaced by YMSCBStoredPeripherals</td></tr>
 <tr><td>new</td><td><code>- (id)initWithKnownPeripheralNames:(NSArray *)nameList<br>&nbsp;&nbsp;&nbsp;queue:(dispatch_queue_t)queue<br>&nbsp;&nbsp;&nbsp;useStoredPeripherals:(BOOL)useStore;</code></td><td>Add support to optionally store peripherals.</td></tr>
@@ -219,14 +219,14 @@ Code tested on:
 <tr><td>replaced by</td>
 <td><code>
 - (id)initWithPeripheral:(CBPeripheral *)peripheral
-    <br>&nbsp;&nbsp;&nbsp;parent:(YMSCBAppService *)owner
+    <br>&nbsp;&nbsp;&nbsp;parent:(YMSCBCentralManager *)owner
     <br>&nbsp;&nbsp;&nbsp;baseHi:(int64_t)hi
     <br>&nbsp;&nbsp;&nbsp;baseLo:(int64_t)lo
     <br>&nbsp;&nbsp;&nbsp;updateRSSI:(BOOL)update;
 </code></td></tr>
-<tr><td>new</td><td><code>- (void)discoverServices</code></td><td>Convenience method to call behavior from YMSCBAppService</td></tr>
-<tr><td>new</td><td><code>- (void)connect</code></td><td>Convenience method to call behavior from YMSCBAppService</td></tr>
-<tr><td>new</td><td><code>- (void)disconnect</code></td><td>Convenience method to call behavior from YMSCBAppService</td></tr>
+<tr><td>new</td><td><code>- (void)discoverServices</code></td><td>Convenience method to call behavior from YMSCBCentralManager</td></tr>
+<tr><td>new</td><td><code>- (void)connect</code></td><td>Convenience method to call behavior from YMSCBCentralManager</td></tr>
+<tr><td>new</td><td><code>- (void)disconnect</code></td><td>Convenience method to call behavior from YMSCBCentralManager</td></tr>
 </tbody>
 </table>
 

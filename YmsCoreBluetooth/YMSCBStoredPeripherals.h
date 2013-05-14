@@ -33,7 +33,7 @@
 + (void)initializeStorage;
 
 /**
- Generate array of CFUUIDRef objects to feed into [YMSCBAppService retrievePeripherals:]
+ Generate array of CFUUIDRef objects to feed into [YMSCBCentralManager retrievePeripherals:]
  */
 + (NSArray *)genPeripheralUUIDs;
 
