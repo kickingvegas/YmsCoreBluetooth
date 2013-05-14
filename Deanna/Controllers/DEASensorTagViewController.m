@@ -89,8 +89,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    DEACentralManager *cbAppService = [DEACentralManager sharedService];
-    cbAppService.delegate = self;
+    DEACentralManager *centralManager = [DEACentralManager sharedService];
+    centralManager.delegate = self;
     
     for (NSString *prefix in self.cbServiceCells) {
         NSString *key = [[NSString alloc] initWithFormat:@"%@ViewCell", prefix];
