@@ -152,7 +152,7 @@ Then the BLE peripheral implementation of the TI SensorTag:
 
 Then the application service which manages all known peripherals:
 
-* DEACBAppService
+* DEACentralManager
 
 The [Class Hierarchy](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/hierarchy.html) is very instructive in showing the relationship of the above classes to the YmsCoreBluetooth framework.
 
