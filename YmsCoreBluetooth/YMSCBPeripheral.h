@@ -31,7 +31,7 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
 };
 */
 
-@class YMSCBAppService;
+@class YMSCBCentralManager;
 @class YMSCBService;
 
 /**
@@ -95,7 +95,7 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
 /**
  Parent owner of an instance of this class.
  */
-@property (nonatomic, weak) YMSCBAppService *parent;
+@property (nonatomic, weak) YMSCBCentralManager *parent;
 
 /**
  Watchdog timer for connection.
@@ -132,7 +132,7 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
  @return instance of this class
  */
 - (id)initWithPeripheral:(CBPeripheral *)peripheral
-                  parent:(YMSCBAppService *)owner
+                  parent:(YMSCBCentralManager *)owner
                   baseHi:(int64_t)hi
                   baseLo:(int64_t)lo
               updateRSSI:(BOOL)update;

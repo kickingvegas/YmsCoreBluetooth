@@ -16,7 +16,7 @@
 //  Author: Charles Y. Choi <charles.choi@yummymelon.com>
 //
 
-#import "YMSCBAppService.h"
+#import "YMSCBCentralManager.h"
 #import "YMSCBPeripheral.h"
 #import "YMSCBService.h"
 #import "YMSCBCharacteristic.h"
@@ -25,7 +25,7 @@
 @implementation YMSCBPeripheral
 
 - (id)initWithPeripheral:(CBPeripheral *)peripheral
-                  parent:(YMSCBAppService *)owner
+                  parent:(YMSCBCentralManager *)owner
                   baseHi:(int64_t)hi
                   baseLo:(int64_t)lo
               updateRSSI:(BOOL)update {

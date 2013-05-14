@@ -17,7 +17,7 @@
 //
 
 
-#import "YMSCBAppService.h"
+#import "YMSCBCentralManager.h"
 
 /**
  Application service for CoreBluetooth operations from Deanna.
@@ -27,7 +27,7 @@
  
  THIS IS NOT TO BE CONFUSED WITH A COREBLUETOOTH SERVICE.
  */
-@interface DEACBAppService : YMSCBAppService
+@interface DEACBAppService : YMSCBCentralManager
 
 /**
  Return singleton instance.

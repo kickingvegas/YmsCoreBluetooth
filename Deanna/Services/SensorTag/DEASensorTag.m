@@ -32,7 +32,7 @@
 @implementation DEASensorTag
 
 - (id)initWithPeripheral:(CBPeripheral *)peripheral
-                  parent:(YMSCBAppService *)owner
+                  parent:(YMSCBCentralManager *)owner
                   baseHi:(int64_t)hi
                   baseLo:(int64_t)lo
               updateRSSI:(BOOL)update {
