@@ -18,7 +18,6 @@
 
 
 #import "DEABaseViewController.h"
-#import "YMSCBAppService.h"
 @class DEASensorTag;
 @class DEATemperatureViewCell;
 @class DEAAccelerometerViewCell;
