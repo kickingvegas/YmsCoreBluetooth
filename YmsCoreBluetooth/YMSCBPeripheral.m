@@ -55,6 +55,8 @@
 }
 
 
+#pragma mark - Peripheral Methods
+
 - (BOOL)isConnected {
     return self.cbPeripheral.isConnected;
 }
@@ -96,6 +98,49 @@
     [self.cbPeripheral readRSSI];
     
 }
+
+
+
+- (void)discoverServices {
+    NSArray *services = [self services];
+    [self.cbPeripheral discoverServices:services];
+}
+
+- (void)connect {
+    //self.peripheralConnectionState = YMSCBPeripheralConnectionStateConnecting;
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.watchdogTimerInterval
+                                                      target:self
+                                                    selector:@selector(watchdogDisconnect)
+                                                    userInfo:nil
+                                                     repeats:NO];
+    self.watchdogTimer = timer;
+    
+    [self.central connect:self];
+    
+}
+
+- (void)disconnect {
+    //self.peripheralConnectionState = YMSCBPeripheralConnectionStateDisconnecting;
+    
+    if (self.watchdogTimer) {
+        [self.watchdogTimer invalidate];
+        self.watchdogTimer = nil;
+    }
+    [self.central cancelPeripheralConnection:self];
+}
+
+
+- (void)watchdogDisconnect {
+    
+    if (!self.isConnected) {
+        [self disconnect];
+    }
+    self.watchdogTimer = nil;
+    
+}
+
+
 
 #pragma mark - CBPeripheralDelegate Methods
 
@@ -276,47 +321,6 @@
     // TBD
 }
 
-
-#pragma mark - Peripheral Methods
-
-- (void)discoverServices {
-    NSArray *services = [self services];
-    [self.cbPeripheral discoverServices:services];
-}
-
-- (void)connect {
-    //self.peripheralConnectionState = YMSCBPeripheralConnectionStateConnecting;
-    
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.watchdogTimerInterval
-                                                      target:self
-                                                    selector:@selector(watchdogDisconnect)
-                                                    userInfo:nil
-                                                     repeats:NO];
-    self.watchdogTimer = timer;
-    
-    [self.central connect:self];
-    
-}
-
-- (void)disconnect {
-    //self.peripheralConnectionState = YMSCBPeripheralConnectionStateDisconnecting;
-
-    if (self.watchdogTimer) {
-        [self.watchdogTimer invalidate];
-        self.watchdogTimer = nil;
-    }
-    [self.central cancelPeripheralConnection:self];
-}
-
-
-- (void)watchdogDisconnect {
-    
-    if (!self.isConnected) {
-        [self disconnect];
-    }
-    self.watchdogTimer = nil;
-
-}
 
 
 
