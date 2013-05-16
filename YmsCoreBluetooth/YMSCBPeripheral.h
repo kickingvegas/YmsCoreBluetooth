@@ -93,9 +93,9 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
 
 
 /**
- Parent owner of an instance of this class.
+ Pointer to an instance of YMSCBCentralManager.
  */
-@property (nonatomic, weak) YMSCBCentralManager *parent;
+@property (nonatomic, weak) YMSCBCentralManager *central;
 
 /**
  Watchdog timer for connection.
@@ -125,14 +125,14 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
  
 
  @param peripheral Pointer to CBPeripheral
- @param owner Parent of this instance
+ @param central Pointer to YMSCBCentralManager
  @param hi Top 64 bits of 128-bit base address value
  @param lo Bottom 64 bits of 128-bit base address value
  @param update If YES, update the RSSI.
  @return instance of this class
  */
 - (id)initWithPeripheral:(CBPeripheral *)peripheral
-                  parent:(YMSCBCentralManager *)owner
+                 central:(YMSCBCentralManager *)owner
                   baseHi:(int64_t)hi
                   baseLo:(int64_t)lo
               updateRSSI:(BOOL)update;

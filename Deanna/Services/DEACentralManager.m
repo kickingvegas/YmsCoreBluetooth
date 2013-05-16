@@ -81,7 +81,7 @@ static DEACentralManager *sharedCentralManager;
         for (NSString *pname in self.knownPeripheralNames) {
             if ([pname isEqualToString:peripheral.name]) {
                 DEASensorTag *sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
-                                                                            parent:self
+                                                                           central:self
                                                                             baseHi:kSensorTag_BASE_ADDRESS_HI
                                                                             baseLo:kSensorTag_BASE_ADDRESS_LO
                                                                         updateRSSI:YES];
@@ -95,7 +95,7 @@ static DEACentralManager *sharedCentralManager;
         
         if (isUnknownPeripheral) {
             //TODO: Handle unknown peripheral
-            yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral parent:self baseHi:0 baseLo:0 updateRSSI:NO];
+            yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral central:self baseHi:0 baseLo:0 updateRSSI:NO];
             [self.ymsPeripherals addObject:yp];
         }
     }

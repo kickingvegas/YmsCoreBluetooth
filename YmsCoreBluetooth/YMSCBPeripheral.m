@@ -25,7 +25,7 @@
 @implementation YMSCBPeripheral
 
 - (id)initWithPeripheral:(CBPeripheral *)peripheral
-                  parent:(YMSCBCentralManager *)owner
+                 central:(YMSCBCentralManager *)owner
                   baseHi:(int64_t)hi
                   baseLo:(int64_t)lo
               updateRSSI:(BOOL)update {
@@ -33,7 +33,7 @@
     self = [super init];
     
     if (self) {
-        _parent = owner;
+        _central = owner;
         _base.hi = hi;
         _base.lo = lo;
         
@@ -294,7 +294,7 @@
                                                      repeats:NO];
     self.watchdogTimer = timer;
     
-    [self.parent connect:self];
+    [self.central connect:self];
     
 }
 
@@ -305,7 +305,7 @@
         [self.watchdogTimer invalidate];
         self.watchdogTimer = nil;
     }
-    [self.parent cancelPeripheralConnection:self];
+    [self.central cancelPeripheralConnection:self];
 }
 
 
