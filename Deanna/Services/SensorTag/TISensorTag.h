@@ -18,6 +18,14 @@
 
 #include "YMS128.h"
 
+/**
+ Data pulled from the following sources:
+ 
+ * http://processors.wiki.ti.com/index.php/SensorTag_User_Guide
+ * http://processors.wiki.ti.com/index.php/File:BLE_SensorTag_GATT_Server.pdf
+ 
+ */
+
 #ifndef Deanna_TISensorTag_h
 #define Deanna_TISensorTag_h
 
