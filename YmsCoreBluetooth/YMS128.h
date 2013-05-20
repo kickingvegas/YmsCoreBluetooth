@@ -16,8 +16,8 @@
 //  Author: Charles Y. Choi <charles.choi@yummymelon.com>
 //
 
-#ifndef Deanna_YMS128_h
-#define Deanna_YMS128_h
+#ifndef YMSCB_YMS128_h
+#define YMSCB_YMS128_h
 
 
 /**
