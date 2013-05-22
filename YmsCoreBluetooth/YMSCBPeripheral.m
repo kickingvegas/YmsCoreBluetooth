@@ -22,6 +22,7 @@
 #import "YMSCBCharacteristic.h"
 
 
+
 @implementation YMSCBPeripheral
 
 - (id)initWithPeripheral:(CBPeripheral *)peripheral
@@ -106,6 +107,8 @@
     [self.cbPeripheral discoverServices:services];
 }
 
+
+/*
 - (void)connect {
     //self.peripheralConnectionState = YMSCBPeripheralConnectionStateConnecting;
     
@@ -130,6 +133,9 @@
     [self.central cancelPeripheralConnection:self];
 }
 
+*/
+
+
 
 - (void)watchdogDisconnect {
     
@@ -139,6 +145,92 @@
     self.watchdogTimer = nil;
     
 }
+
+
+- (void)connect {
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.watchdogTimerInterval
+                                                      target:self
+                                                    selector:@selector(watchdogDisconnect)
+                                                    userInfo:nil
+                                                     repeats:NO];
+    self.watchdogTimer = timer;
+
+    
+    [self connectWithOptions:nil withBlock:^(YMSCBPeripheral *yp, NSError *error) {
+        [yp discoverServices:[yp services] withBlock:^(NSArray *yservices, NSError *error) {
+            if (error) {
+                return;
+            }
+            
+            for (YMSCBService *service in yservices) {
+                [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+                    if (error) {
+                        return;
+                    }
+                    // TODO for find descriptors if necessary
+                    
+                    
+                    
+                }];
+                
+            }
+            
+        }];
+        
+        
+        
+    }];
+    
+}
+
+
+- (void)disconnect {
+    if (self.watchdogTimer) {
+        [self.watchdogTimer invalidate];
+        self.watchdogTimer = nil;
+    }
+
+    [self cancelConnection];
+}
+
+#pragma mark - Connection Methods
+
+- (void)connectWithOptions:(NSDictionary *)options withBlock:(void (^)(YMSCBPeripheral *, NSError *))connectCallback {
+    self.connectCallback = connectCallback;
+    [self.central.manager connectPeripheral:self.cbPeripheral options:options];
+}
+
+
+- (void)cancelConnection {
+    if (self.connectCallback) {
+        self.connectCallback = nil;
+    }
+    [self.central.manager cancelPeripheralConnection:self.cbPeripheral];
+}
+
+
+- (void)handleConnectionResponse:(NSError *)error {
+    if (self.connectCallback) {
+        self.connectCallback(self, error);
+        self.connectCallback = nil;
+    } else {
+        // TODO: support connectionHandler
+    }
+}
+
+- (void)defaultConnectionHandler {
+    // TODO: maybe design to be overridden.
+}
+
+#pragma mark - Services Discovery
+
+- (void)discoverServices:(NSArray *)serviceUUIDs withBlock:(void (^)(NSArray *, NSError *))callback {
+    self.discoverServicesCallback = callback;
+    
+    [self.cbPeripheral discoverServices:serviceUUIDs];
+}
+
 
 
 
@@ -153,16 +245,23 @@
  */
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error {
     
-    for (CBService *service in peripheral.services) {
-        YMSCBService *btService = [self findService:service];
+    if (self.discoverServicesCallback) {
+        NSMutableArray *services = [NSMutableArray new];
         
-        if (btService != nil) {
-            btService.cbService = service;
+        // TODO: add method syncServices
+        for (CBService *service in peripheral.services) {
+            YMSCBService *btService = [self findService:service];
+            if (btService) {
+                btService.cbService = service;
+                [services addObject:btService];
+            }
         }
-
-        [peripheral discoverCharacteristics:[btService characteristics] forService:service];
+        
+        self.discoverServicesCallback(services, error);
+        self.discoverServicesCallback = nil;
     }
 }
+
 
 
 /**
@@ -187,7 +286,9 @@
  */
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error {
     YMSCBService *btService = [self findService:service];
+    
     [btService syncCharacteristics:service.characteristics];
+    [btService handleDiscoveredCharacteristicsResponse:btService.characteristicDict withError:error];
 }
 
 

@@ -21,6 +21,14 @@
 
 #include "YMSCBUtils.h"
 
+@class YMSCBPeripheral;
+@class YMSCBCentralManager;
+@class YMSCBService;
+
+typedef void (^YMSCBPeripheralConnectCallbackBlockType)(YMSCBPeripheral *, NSError *);
+typedef void (^YMSCBPeripheralDiscoverServicesBlockType)(NSArray *, NSError *);
+//typedef void (^YMSCBPeripheralDiscoverIncludedServicesBlockType)(NSArray *, NSError *);
+
 /*
 NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
     YMSCBPeripheralConnectionStateUnknown,
@@ -31,8 +39,6 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
 };
 */
 
-@class YMSCBCentralManager;
-@class YMSCBService;
 
 /**
  Base class for defining a Bluetooth LE peripheral.
@@ -106,6 +112,13 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
  Watchdog timer interval in seconds. Default is 5 seconds.
  */
 @property (nonatomic, assign) NSTimeInterval watchdogTimerInterval;
+
+/// Holds callback for connection established.
+@property (nonatomic, strong) YMSCBPeripheralConnectCallbackBlockType connectCallback;
+
+/// Holds callback for services discovered.
+@property (nonatomic, strong) YMSCBPeripheralDiscoverServicesBlockType discoverServicesCallback;
+
 
 ///**
 // Peripheral connection state
@@ -186,5 +199,34 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
  Disconnect if watchdog times out.
  */
 - (void)watchdogDisconnect;
+
+/**
+ Establishes connection to peripheral with callback block.
+ 
+ @param options A dictionary to customize the behavior of the connection. See "Peripheral Connection Options" for CBCentralManager.
+ @param connectCallback Callback block to handle peripheral connection.
+ */
+- (void)connectWithOptions:(NSDictionary *)options withBlock:(void (^)(YMSCBPeripheral *yp, NSError *error))connectCallback;
+
+/**
+ Cancels an active or pending local connection to a peripheral.
+ */
+- (void)cancelConnection;
+
+/**
+ Executes connect callback.
+ */
+- (void)handleConnectionResponse:(NSError *)error;
+
+- (void)defaultConnectionHandler;
+
+
+/**
+ Discover services using block.
+ @param serviceUUIDs An array of CBUUID objects that you are interested in. Here, each CBUUID object represents a UUID that identifies the type of service you want to discover.
+ @param callback A 
+ */
+- (void)discoverServices:(NSArray *)serviceUUIDs withBlock:(void (^)(NSArray *services, NSError *error))callback;
+
 @end
 
