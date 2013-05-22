@@ -59,6 +59,7 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
  */
 @property (nonatomic, strong) CBService *cbService;
 
+/// Pointer to parent peripheral.
 @property (nonatomic, weak) YMSCBPeripheral *parent;
 
 /// 128 bit base address struct
