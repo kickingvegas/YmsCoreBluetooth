@@ -57,9 +57,11 @@ double calcBarPress(int16_t t_r,
                     
 
 - (id)initWithName:(NSString *)oName
+            parent:(YMSCBPeripheral *)pObj
             baseHi:(int64_t)hi
             baseLo:(int64_t)lo {
     self = [super initWithName:oName
+                        parent:pObj
                         baseHi:hi
                         baseLo:lo];
 

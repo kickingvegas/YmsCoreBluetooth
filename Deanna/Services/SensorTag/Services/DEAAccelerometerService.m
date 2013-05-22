@@ -30,9 +30,11 @@ float calcAccel(int16_t rawV) {
 
 
 - (id)initWithName:(NSString *)oName
+            parent:(YMSCBPeripheral *)pObj
             baseHi:(int64_t)hi
             baseLo:(int64_t)lo {
     self = [super initWithName:oName
+                        parent:pObj
                         baseHi:hi
                         baseLo:lo];
     

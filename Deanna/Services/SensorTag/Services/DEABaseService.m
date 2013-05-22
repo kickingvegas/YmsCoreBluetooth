@@ -30,6 +30,7 @@
     CBUUID *uuid = [DEASensorTagUtils createCBUUID:&pbase withIntOffset:addrOffset];
     
     yc = [[YMSCBCharacteristic alloc] initWithName:cname
+                                            parent:self.parent
                                               uuid:uuid
                                             offset:addrOffset];
     

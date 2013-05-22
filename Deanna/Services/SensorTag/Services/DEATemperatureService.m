@@ -51,9 +51,11 @@ double calcTmpTarget(int16_t objT, double m_tempAmb) {
 @implementation DEATemperatureService
 
 - (id)initWithName:(NSString *)oName
+            parent:(YMSCBPeripheral *)pObj
             baseHi:(int64_t)hi
             baseLo:(int64_t)lo {
     self = [super initWithName:oName
+                        parent:pObj
                         baseHi:hi
                         baseLo:lo];
     
