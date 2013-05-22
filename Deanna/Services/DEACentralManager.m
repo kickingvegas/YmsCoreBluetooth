@@ -43,10 +43,9 @@ static DEACentralManager *sharedCentralManager;
 
 - (void)startScan {
     NSDictionary *options = @{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES };
-    // TODO: Don't know what service UUIDs are required to work with TI SensorTag.
-    // NSArray *services = @[[CBUUID UUIDWithString:@"F000AA00-0451-4000-B000-000000000000"]];
-    
-    
+    // NOTE: TI SensorTag firmware does not included services in advertisementData.
+    // This prevents usage of serviceUUIDs array to filter on.
+
     /*
      Note that in this implementation, handleFoundPeripheral: is implemented so that it can be used via block callback or as a
      delagate handler method. This is an implementation specific decision to handle discovered and retrieved peripherals identically.
