@@ -21,6 +21,11 @@
 
 @class YMSCBPeripheral;
 
+/*
+typedef void (^YMSCBReadCallbackBlockType)(NSData *, NSError *);
+typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
+ */
+
 /**
  Base class for defining a Bluetooth LE characteristic.
  
@@ -40,9 +45,10 @@
 /// Characterisic CBUUID.
 @property (nonatomic, strong) CBUUID *uuid;
 
-/// Pointer to actual CBCharacterisic
+/// Pointer to actual CBCharacterisic.
 @property (nonatomic, strong) CBCharacteristic *cbCharacteristic;
 
+/// Pointer to parent peripheral.
 @property (nonatomic, weak) YMSCBPeripheral *parent;
 
 /// Offset address value, if applicable.
