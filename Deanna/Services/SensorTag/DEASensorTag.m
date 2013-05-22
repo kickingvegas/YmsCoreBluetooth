@@ -41,14 +41,14 @@
     self = [super initWithPeripheral:peripheral central:owner baseHi:hi baseLo:lo updateRSSI:update];
     
     if (self) {
-        DEATemperatureService *ts = [[DEATemperatureService alloc] initWithName:@"temperature" baseHi:hi baseLo:lo];
-        DEAAccelerometerService *as = [[DEAAccelerometerService alloc] initWithName:@"accelerometer" baseHi:hi baseLo:lo];
-        DEASimpleKeysService *sks = [[DEASimpleKeysService alloc] initWithName:@"simplekeys" baseHi:hi baseLo:lo];
-        DEAHumidityService *hs = [[DEAHumidityService alloc] initWithName:@"humidity" baseHi:hi baseLo:lo];
-        DEABarometerService *bs = [[DEABarometerService alloc] initWithName:@"barometer" baseHi:hi baseLo:lo];
-        DEAGyroscopeService *gs = [[DEAGyroscopeService alloc] initWithName:@"gyroscope" baseHi:hi baseLo:lo];
-        DEAMagnetometerService *ms = [[DEAMagnetometerService alloc] initWithName:@"magnetometer" baseHi:hi baseLo:lo];
-        DEADeviceInfoService *ds = [[DEADeviceInfoService alloc] initWithName:@"devinfo" baseHi:hi baseLo:lo];
+        DEATemperatureService *ts = [[DEATemperatureService alloc] initWithName:@"temperature" parent:self baseHi:hi baseLo:lo];
+        DEAAccelerometerService *as = [[DEAAccelerometerService alloc] initWithName:@"accelerometer" parent:self baseHi:hi baseLo:lo];
+        DEASimpleKeysService *sks = [[DEASimpleKeysService alloc] initWithName:@"simplekeys" parent:self baseHi:hi baseLo:lo];
+        DEAHumidityService *hs = [[DEAHumidityService alloc] initWithName:@"humidity" parent:self baseHi:hi baseLo:lo];
+        DEABarometerService *bs = [[DEABarometerService alloc] initWithName:@"barometer" parent:self baseHi:hi baseLo:lo];
+        DEAGyroscopeService *gs = [[DEAGyroscopeService alloc] initWithName:@"gyroscope" parent:self baseHi:hi baseLo:lo];
+        DEAMagnetometerService *ms = [[DEAMagnetometerService alloc] initWithName:@"magnetometer" parent:self baseHi:hi baseLo:lo];
+        DEADeviceInfoService *ds = [[DEADeviceInfoService alloc] initWithName:@"devinfo" parent:self baseHi:hi baseLo:lo];
         
         self.serviceDict = @{@"temperature": ts,
                              @"accelerometer": as,
@@ -58,6 +58,7 @@
                              @"gyroscope": gs,
                              @"barometer": bs,
                              @"devinfo": ds};
+        
 
         [sks turnOn];
     }
@@ -84,6 +85,7 @@
     }
     
 }
+
 
 
 @end
