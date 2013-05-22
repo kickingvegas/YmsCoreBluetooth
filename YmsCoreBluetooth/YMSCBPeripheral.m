@@ -122,14 +122,8 @@
 
 - (void)connect {
     // Watchdog aware method
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.watchdogTimerInterval
-                                                      target:self
-                                                    selector:@selector(watchdogDisconnect)
-                                                    userInfo:nil
-                                                     repeats:NO];
-    self.watchdogTimer = timer;
+    [self resetWatchdog];
 
-    
     [self connectWithOptions:nil withBlock:^(YMSCBPeripheral *yp, NSError *error) {
         [yp discoverServices:[yp services] withBlock:^(NSArray *yservices, NSError *error) {
             if (error) {
@@ -166,6 +160,20 @@
     }
 
     [self cancelConnection];
+}
+
+- (void)resetWatchdog {
+    if (self.watchdogTimer) {
+        [self.watchdogTimer invalidate];
+        self.watchdogTimer = nil;
+    }
+
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.watchdogTimerInterval
+                                                      target:self
+                                                    selector:@selector(watchdogDisconnect)
+                                                    userInfo:nil
+                                                     repeats:NO];
+    self.watchdogTimer = timer;
 }
 
 

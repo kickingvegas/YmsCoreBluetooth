@@ -200,6 +200,12 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
 
 
 /**
+ Initialize or reset watchdog timer.
+ */
+- (void)resetWatchdog;
+
+
+/**
  Disconnect if watchdog times out.
  */
 - (void)watchdogDisconnect;
