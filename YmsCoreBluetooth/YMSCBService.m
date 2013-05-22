@@ -18,21 +18,21 @@
 
 #import "YMSCBService.h"
 #import "YMSCBUtils.h"
+#import "YMSCBPeripheral.h"
 #import "YMSCBCharacteristic.h"
 #import "NSMutableArray+fifoQueue.h"
-
-
-
 
 @implementation YMSCBService
 
 
 - (id)initWithName:(NSString *)oName
+            parent:(YMSCBPeripheral *)pObj
             baseHi:(int64_t)hi
             baseLo:(int64_t)lo {
     self = [super init];
     if (self) {
         _name = oName;
+        _parent = pObj;
         _base.hi = hi;
         _base.lo = lo;
         _characteristicDict = [[NSMutableDictionary alloc] init];
@@ -49,8 +49,10 @@
     CBUUID *uuid = [YMSCBUtils createCBUUID:&pbase withIntOffset:addrOffset];
     
     yc = [[YMSCBCharacteristic alloc] initWithName:cname
+                                            parent:self.parent
                                             uuid:uuid
                                           offset:addrOffset];
+    yc.parent = self.parent;
     
     [self.characteristicDict setObject:yc forKey:cname];
 }
@@ -63,6 +65,7 @@
     
     CBUUID *uuid = [CBUUID UUIDWithString:addrString];
     yc = [[YMSCBCharacteristic alloc] initWithName:cname
+                                            parent:self.parent
                                             uuid:uuid
                                           offset:addr];
     
@@ -236,6 +239,21 @@
 }
 
 
+- (void)discoverCharacteristics:(NSArray *)characteristicUUIDs withBlock:(void (^)(NSDictionary *, NSError *))callback {
+    
+    self.discoverCharacteristicsCallback = callback;
+    
+    [self.parent.cbPeripheral discoverCharacteristics:characteristicUUIDs
+                                           forService:self.cbService];
+
+}
+
+- (void)handleDiscoveredCharacteristicsResponse:(NSDictionary *)chDict withError:(NSError *)error {
+    if (self.discoverCharacteristicsCallback) {
+        self.discoverCharacteristicsCallback(chDict, error);
+        self.discoverCharacteristicsCallback = nil;
+    }
+}
 
 
 @end

@@ -20,8 +20,10 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "YMSCBUtils.h"
 
+
 typedef void (^YMSCBReadCallbackBlockType)(NSData *, NSError *);
 typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
+typedef void (^YMSCBDiscoverCharacteristicsCallbackBlockType)(NSDictionary *, NSError *);
 
 typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
     YMSCBWriteCallbackType,
@@ -30,6 +32,7 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 
 
 @class YMSCBCharacteristic;
+@class YMSCBPeripheral;
 
 /**
  Base class for defining a Bluetooth LE service.
@@ -51,8 +54,12 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 /// Human-friendly name for this BLE service
 @property (nonatomic, strong) NSString *name;
 
-/// pointer to CBService
+/**
+ Pointer to CBService. Note that access to the peripheral is available via the `peripheral` property of cbService.
+ */
 @property (nonatomic, strong) CBService *cbService;
+
+@property (nonatomic, weak) YMSCBPeripheral *parent;
 
 /// 128 bit base address struct
 @property (nonatomic, assign) yms_u128_t base;
@@ -71,6 +78,8 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 /// Dictionary to hold (cname, FIFO queue) for response blocks to execute for a characteristic read or write.
 @property (nonatomic, strong) NSMutableDictionary *responseBlockDict;
 
+@property (nonatomic, strong) YMSCBDiscoverCharacteristicsCallbackBlockType discoverCharacteristicsCallback;
+
 
 /** @name Initializing a YMSCBService */
 /**
@@ -81,6 +90,7 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
  @return YMSCBCharacteristic
  */
 - (id)initWithName:(NSString *)oName
+            parent:(YMSCBPeripheral *)pObj
             baseHi:(int64_t)hi
             baseLo:(int64_t)lo;
 
@@ -255,6 +265,15 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
  @param error Error object if the request fails.
  */
 - (void)executeBlock:(YMSCBCharacteristic *)yc error:(NSError *)error;
+
+
+- (void)discoverCharacteristics:(NSArray *)characteristicUUIDs
+                      withBlock:(void (^)(NSDictionary *chDict, NSError *))callback;
+
+- (void)handleDiscoveredCharacteristicsResponse:(NSDictionary *)chDict withError:(NSError *)error;
+
+//- (void)defaultDiscoveredCharacteristicsHandler:(NSDictionary *)chDict withError:(NSError *)error;
+
 
 
 @end
