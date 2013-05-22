@@ -100,6 +100,15 @@
     
 }
 
+- (NSNumber *)RSSI {
+    NSNumber *result = nil;
+    
+    if (self.cbPeripheral) {
+        result = self.cbPeripheral.RSSI;
+    }
+    return result;
+}
+
 
 
 - (void)discoverServices {
@@ -108,47 +117,11 @@
 }
 
 
-/*
-- (void)connect {
-    //self.peripheralConnectionState = YMSCBPeripheralConnectionStateConnecting;
-    
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.watchdogTimerInterval
-                                                      target:self
-                                                    selector:@selector(watchdogDisconnect)
-                                                    userInfo:nil
-                                                     repeats:NO];
-    self.watchdogTimer = timer;
-    
-    [self.central connect:self];
-    
-}
 
-- (void)disconnect {
-    //self.peripheralConnectionState = YMSCBPeripheralConnectionStateDisconnecting;
-    
-    if (self.watchdogTimer) {
-        [self.watchdogTimer invalidate];
-        self.watchdogTimer = nil;
-    }
-    [self.central cancelPeripheralConnection:self];
-}
-
-*/
-
-
-
-- (void)watchdogDisconnect {
-    
-    if (!self.isConnected) {
-        [self disconnect];
-    }
-    self.watchdogTimer = nil;
-    
-}
-
+#pragma mark - Connection Methods
 
 - (void)connect {
-    
+    // Watchdog aware method
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.watchdogTimerInterval
                                                       target:self
                                                     selector:@selector(watchdogDisconnect)
@@ -186,6 +159,7 @@
 
 
 - (void)disconnect {
+    // Watchdog aware method
     if (self.watchdogTimer) {
         [self.watchdogTimer invalidate];
         self.watchdogTimer = nil;
@@ -194,7 +168,15 @@
     [self cancelConnection];
 }
 
-#pragma mark - Connection Methods
+
+- (void)watchdogDisconnect {
+    // Watchdog aware method
+    if (!self.isConnected) {
+        [self disconnect];
+    }
+    self.watchdogTimer = nil;
+    
+}
 
 - (void)connectWithOptions:(NSDictionary *)options withBlock:(void (^)(YMSCBPeripheral *, NSError *))connectCallback {
     self.connectCallback = connectCallback;
