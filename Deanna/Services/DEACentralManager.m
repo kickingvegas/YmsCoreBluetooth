@@ -102,17 +102,6 @@ static DEACentralManager *sharedCentralManager;
 
 }
 
-- (void)connect:(YMSCBPeripheral *)peripheral  {
-    [self connectPeripheral:peripheral
-                    options:nil
-                  withBlock:^(YMSCBPeripheral *yp, NSError *error) {
-                      if (error) {
-                          NSLog(@"Something bad happened with connectPeripheral:options:withBlock:");
-                          return;
-                      }
-                      [peripheral discoverServices];
-                  }];
-}
 
 - (void)managerPoweredOnHandler {
     if (self.useStoredPeripherals) {
