@@ -20,14 +20,13 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 
 
-#define kYMSCBVersion "0.92"
+#define kYMSCBVersion "0.93"
 extern NSString *const YMSCBVersion;
 
 @class YMSCBPeripheral;
 @class YMSCBCentralManager;
 
 typedef void (^YMSCBDiscoverCallbackBlockType)(CBPeripheral *, NSDictionary *, NSNumber *, NSError *);
-typedef void (^YMSCBConnectCallbackBlockType)(YMSCBPeripheral *, NSError *);
 typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
 
 /**
@@ -98,9 +97,6 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
 /// Peripheral Retreived Callback
 @property (nonatomic, strong) YMSCBRetrieveCallbackBlockType retrievedCallback;
 
-/// Peripheral Connection Callback Dictionary
-@property (nonatomic, strong) NSMutableDictionary *connectionCallbackDict;
-
 /// If YES, then discovered peripheral UUIDs are stored in standardUserDefaults.
 @property (nonatomic, assign) BOOL useStoredPeripherals;
 
@@ -146,15 +142,6 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
  @param peripheral CoreBluetooth peripheral instance
  */
 - (void)handleFoundPeripheral:(CBPeripheral *)peripheral;
-
-/** 
-  Handler for connected peripheral. This method is to be overridden.
- 
-  @param peripheral CoreBluetooth peripheral instance
- */
-- (void)handleConnectedPeripheral:(CBPeripheral *)peripheral;
-
-
 
 /**
  Returns the YSMCBPeripheral instance from ymsPeripherals at index.
@@ -225,69 +212,6 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
  Stop CoreBluetooth scan for peripherals.
  */
 - (void)stopScan;
-
-#pragma mark - Connect Methods
-/** @name Connecting to Peripherals */
-/**
- Connect to peripheral.
- 
- This method is to be overridden.
- @param peripheral Peripheral to connect.
- */
-- (void)connect:(YMSCBPeripheral *)peripheral;
-
-/**
- Connect peripheral at index in ymsPeripherals.
- 
- @param index Index value of peripheral in ymsPeripherals.
- @param options A dictionary to customize the behavior of the connection. See "Peripheral Connection Options" for CBCentralManager.
- */
-- (void)connectPeripheralAtIndex:(NSUInteger)index options:(NSDictionary *)options;
-
-/**
- Connect peripheral at index in ymsPeripherals with callback block.
- 
- @param index Index value of peripheral in ymsPeripherals.
- @param options A dictionary to customize the behavior of the connection. See "Peripheral Connection Options" for CBCentralManager.
- @param connectCallback Callback block to execute upon connection.
- */
-- (void)connectPeripheralAtIndex:(NSUInteger)index options:(NSDictionary *)options withBlock:(void (^)(YMSCBPeripheral *yp, NSError *error))connectCallback;
-
-/**
- Disconnect peripheral.
- 
- @param index index value of peripheral in ymsPeripherals to disconnect.
- */
-- (void)disconnectPeripheralAtIndex:(NSUInteger)index;
-
-/**
- Establishes connection to peripheral.
- 
- @param peripheral The peripheral to which manager is attempting to connect.
- @param options A dictionary to customize the behavior of the connection. See "Peripheral Connection Options" for CBCentralManager.
- */
-- (void)connectPeripheral:(YMSCBPeripheral *)peripheral options:(NSDictionary *)options;
-
-/**
- Establishes connection to peripheral with callback block.
- 
- @param peripheral The peripheral to which manager is attempting to connect.
- @param options A dictionary to customize the behavior of the connection. See "Peripheral Connection Options" for CBCentralManager.
- @param connectCallback Callback block to handle peripheral connection.
- */
-- (void)connectPeripheral:(YMSCBPeripheral *)peripheral
-                  options:(NSDictionary *)options
-                withBlock:(void (^)(YMSCBPeripheral *yp, NSError *error))connectCallback;
-
-
-#pragma mark - Cancel Method
-/** @name Cancelling a Connection Request */
-/**
- Cancels an active or pending local connection to a peripheral.
- 
- @param peripheral The peripheral to which the central manager is either trying to connect or has already connected.
- */
-- (void)cancelPeripheralConnection:(YMSCBPeripheral *)peripheral;
 
 
 #pragma mark - Retrieve Methods

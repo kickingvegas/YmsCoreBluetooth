@@ -16,7 +16,6 @@
 //  Author: Charles Y. Choi <charles.choi@yummymelon.com>
 //
 
-#include "TISensorTag.h"
 #import "YMSCBCentralManager.h"
 #import "YMSCBPeripheral.h"
 #import "YMSCBService.h"
@@ -40,7 +39,6 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
         _ymsPeripherals = [NSMutableArray new];
         _manager = [[CBCentralManager alloc] initWithDelegate:self queue:queue];
         _knownPeripheralNames = nameList;
-        _connectionCallbackDict = [NSMutableDictionary new];
         _discoveredCallback = nil;
         _retrievedCallback = nil;
         _useStoredPeripherals = NO;
@@ -57,7 +55,6 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
         _ymsPeripherals = [NSMutableArray new];
         _manager = [[CBCentralManager alloc] initWithDelegate:self queue:queue];
         _knownPeripheralNames = nameList;
-        _connectionCallbackDict = [NSMutableDictionary new];
         _discoveredCallback = nil;
         _retrievedCallback = nil;
         _useStoredPeripherals = useStore;
@@ -172,60 +169,6 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     
     NSAssert(NO, @"[YMSCBCentralManager handleFoundPeripheral:] must be be overridden.");
 
-}
-
-- (void)handleConnectedPeripheral:(CBPeripheral *)peripheral {
-    /*
-     * THIS METHOD IS TO BE OVERRIDDEN
-     */
-
-    NSAssert(NO, @"[YMSCBCentralManager handleConnectedPeripheral:] must be be overridden.");
-}
-
-#pragma mark - Connect Methods
-
-- (void)connect:(YMSCBPeripheral *)peripheral {
-    NSAssert(NO, @"[YMSCBCentralManager connect:] must be be overridden.");
-}
-
-- (void)connectPeripheral:(YMSCBPeripheral *)peripheral options:(NSDictionary *)options {
-    [self.manager connectPeripheral:peripheral.cbPeripheral options:options];
-}
-
-- (void)connectPeripheralAtIndex:(NSUInteger)index options:(NSDictionary *)options {
-    if ([self.ymsPeripherals count] > 0) {
-        YMSCBPeripheral *yPeripheral = self.ymsPeripherals[index];
-        [self connectPeripheral:yPeripheral options:options];
-    }
-}
-
-- (void)connectPeripheralAtIndex:(NSUInteger)index options:(NSDictionary *)options withBlock:(void (^)(YMSCBPeripheral *, NSError *))connectCallback {
-    
-    if ([self.ymsPeripherals count] > 0) {
-        YMSCBPeripheral *yPeripheral = self.ymsPeripherals[index];
-        NSString *uuidString = UUID2STRING(yPeripheral.cbPeripheral.UUID);
-        self.connectionCallbackDict[uuidString] = connectCallback;
-        [self connectPeripheral:yPeripheral options:options];
-    }
-}
-
-- (void)connectPeripheral:(YMSCBPeripheral *)peripheral options:(NSDictionary *)options withBlock:(void (^)(YMSCBPeripheral *, NSError *))connectCallback {
-    
-    NSString *uuidString = UUID2STRING(peripheral.cbPeripheral.UUID);
-    
-    self.connectionCallbackDict[uuidString] = connectCallback;
-    [self connectPeripheral:peripheral options:options];
-}
-
-- (void)cancelPeripheralConnection:(YMSCBPeripheral *)peripheral {
-    [self.manager cancelPeripheralConnection:peripheral.cbPeripheral];
-}
-
-- (void)disconnectPeripheralAtIndex:(NSUInteger)index {
-    if ([self.ymsPeripherals count] > 0) {
-        YMSCBPeripheral *yPeripheral = self.ymsPeripherals[index];
-        [self.manager cancelPeripheralConnection:yPeripheral.cbPeripheral];
-    }
 }
 
 
@@ -369,23 +312,10 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
     
-    NSString *uuidString = UUID2STRING(peripheral.UUID);
+    YMSCBPeripheral *yp = [self findPeripheral:peripheral];
     
-    if ([self isKnownPeripheral:peripheral]) {
-        YMSCBConnectCallbackBlockType cb = self.connectionCallbackDict[uuidString];
-        if (cb) {
-            YMSCBPeripheral *yp = [self findPeripheral:peripheral];
-            if (yp) {
-                cb(yp, nil);
-                [self.connectionCallbackDict removeObjectForKey:uuidString];
-            }
-        } else {
-            [self handleConnectedPeripheral:peripheral];
-        }
-        
-    }
+    [yp handleConnectionResponse:nil];
     
-
     if ([self.delegate respondsToSelector:@selector(centralManager:didConnectPeripheral:)]) {
         [self.delegate centralManager:central didConnectPeripheral:peripheral];
     }
@@ -411,15 +341,9 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     
-    NSString *uuidString = UUID2STRING(peripheral.UUID);
+    YMSCBPeripheral *yp = [self findPeripheral:peripheral];
     
-    YMSCBConnectCallbackBlockType cb = self.connectionCallbackDict[uuidString];
-    
-    if (cb) {
-        YMSCBPeripheral *yp = [self findPeripheral:peripheral];
-        cb(yp, error);
-        [self.connectionCallbackDict removeObjectForKey:uuidString];
-    }
+    [yp handleConnectionResponse:error];
     
     if ([self.delegate respondsToSelector:@selector(centralManager:didFailToConnectPeripheral:error:)]) {
         [self.delegate centralManager:central didFailToConnectPeripheral:peripheral error:error];
