@@ -23,17 +23,6 @@
  */
 @interface DEABaseService : YMSCBService
 
-/**
- Request a read of the *config* characteristic.
- */
-- (void)requestConfig;
-
-/**
- Return value of the *config* characteristic.
- 
- @returns data of *config* characteristic.
- */
-- (NSData *)responseConfig;
 
 /**
  Turn on CoreBluetooth peripheral service.

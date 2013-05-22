@@ -38,16 +38,6 @@
 }
 
 
-- (void)requestConfig {
-    [self readValueForCharacteristicName:@"config"];
-}
-
-- (NSData *)responseConfig {
-    YMSCBCharacteristic *yc = self.characteristicDict[@"config"];
-    NSData *data = yc.cbCharacteristic.value;
-    return data;
-}
-
 - (void)turnOff {
     [self writeByte:0x0 forCharacteristicName:@"config" withBlock:^(NSError *error) {
         if (error) {
