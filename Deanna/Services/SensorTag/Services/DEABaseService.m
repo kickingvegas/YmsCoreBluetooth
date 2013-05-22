@@ -40,7 +40,6 @@
 
 - (void)requestConfig {
     [self readValueForCharacteristicName:@"config"];
-    //[self writeByte:0x1 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
 }
 
 - (NSData *)responseConfig {
@@ -50,13 +49,31 @@
 }
 
 - (void)turnOff {
-    [self writeByte:0x0 forCharacteristicName:@"config" type:CBCharacteristicWriteWithoutResponse];
+    [self writeByte:0x0 forCharacteristicName:@"config" withBlock:^(NSError *error) {
+        if (error) {
+            NSLog(@"ERROR: %@", error);
+            return;
+        }
+        
+        NSLog(@"TURNED OFF: %@", self.name);
+    
+    }];
+    
     [self setNotifyValue:NO forCharacteristicName:@"data"];
     self.isOn = NO;
 }
 
 - (void)turnOn {
-    [self writeByte:0x1 forCharacteristicName:@"config" type:CBCharacteristicWriteWithoutResponse];
+    [self writeByte:0x1 forCharacteristicName:@"config" withBlock:^(NSError *error) {
+        if (error) {
+            NSLog(@"ERROR: %@", error);
+            return;
+        }
+        
+        NSLog(@"TURNED ON: %@", self.name);
+        
+    }];
+
     [self setNotifyValue:YES forCharacteristicName:@"data"];
     self.isOn = YES;
 }
