@@ -66,26 +66,45 @@
 
 }
 
-
-- (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error {
+- (void)connect {
+    // Watchdog aware method
+    [self resetWatchdog];
     
-    [super peripheral:peripheral didDiscoverCharacteristicsForService:service error:&*error];
-    
-    DEABaseService *btService = (DEABaseService *)[self findService:service];
+    [self connectWithOptions:nil withBlock:^(YMSCBPeripheral *yp, NSError *error) {
+        [yp discoverServices:[yp services] withBlock:^(NSArray *yservices, NSError *error) {
+            if (error) {
+                return;
+            }
+            
+            for (YMSCBService *service in yservices) {
+                [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+                    if (error) {
+                        return;
+                    }
+                    // TODO for find descriptors if necessary
+                    
+                    if ([service.name isEqualToString:@"simplekeys"]) {
+                        [service setNotifyValue:YES forCharacteristicName:@"data"];
 
-    if ([btService.name isEqualToString:@"simplekeys"]) {
-        [btService setNotifyValue:YES forCharacteristicName:@"data"];
+                    } else if ([service.name isEqualToString:@"devinfo"]) {
+                        DEADeviceInfoService *ds = (DEADeviceInfoService *)service;
+                        [ds readDeviceInfo];
+                    }
+                        
+                    
+                    
+                    
+                }];
+                
+            }
+            
+        }];
         
-    } else if ([btService.name isEqualToString:@"devinfo"]) {
-        DEADeviceInfoService *ds =  (DEADeviceInfoService *)btService;
-        [ds readDeviceInfo];
-
-    } else {
-        [btService requestConfig];
-    }
+        
+        
+    }];
     
 }
-
 
 
 @end
