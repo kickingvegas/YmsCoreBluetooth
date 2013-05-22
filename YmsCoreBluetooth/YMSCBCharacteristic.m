@@ -21,11 +21,13 @@
 @implementation YMSCBCharacteristic
 
 
-- (id)initWithName:(NSString *)oName uuid:(CBUUID *)oUUID offset:(int)addrOffset {
+- (id)initWithName:(NSString *)oName parent:(YMSCBPeripheral *)pObj uuid:(CBUUID *)oUUID offset:(int)addrOffset {
+
     self = [super init];
     
     if (self) {
         _name = oName;
+        _parent = pObj;
         _uuid = oUUID;
         _offset = [NSNumber numberWithInt:addrOffset];
     }

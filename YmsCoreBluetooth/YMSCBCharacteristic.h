@@ -19,6 +19,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
+@class YMSCBPeripheral;
 
 /**
  Base class for defining a Bluetooth LE characteristic.
@@ -42,6 +43,8 @@
 /// Pointer to actual CBCharacterisic
 @property (nonatomic, strong) CBCharacteristic *cbCharacteristic;
 
+@property (nonatomic, weak) YMSCBPeripheral *parent;
+
 /// Offset address value, if applicable.
 @property (nonatomic, strong) NSNumber *offset;
 
@@ -54,6 +57,6 @@
  @param oUUID characteristic CBUUID
  @param addrOffset characteristic address offset
  */
-- (id)initWithName:(NSString *)oName uuid:(CBUUID *)oUUID offset:(int)addrOffset;
+- (id)initWithName:(NSString *)oName parent:(YMSCBPeripheral *)pObj uuid:(CBUUID *)oUUID offset:(int)addrOffset;
 
 @end
