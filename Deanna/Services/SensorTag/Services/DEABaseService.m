@@ -34,7 +34,7 @@
                                               uuid:uuid
                                             offset:addrOffset];
     
-    [self.characteristicDict setObject:yc forKey:cname];
+    self.characteristicDict[cname] = yc;
 }
 
 
@@ -49,6 +49,8 @@
     
     }];
     
+    
+    //TODO: Support notification update state block callback;
     [self setNotifyValue:NO forCharacteristicName:@"data"];
     self.isOn = NO;
 }
@@ -64,6 +66,7 @@
         
     }];
 
+    //TODO: Support notification update state block callback;
     [self setNotifyValue:YES forCharacteristicName:@"data"];
     self.isOn = YES;
 }
