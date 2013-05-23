@@ -125,6 +125,9 @@
     [self resetWatchdog];
 
     [self connectWithOptions:nil withBlock:^(YMSCBPeripheral *yp, NSError *error) {
+        if (error) {
+            return;
+        }
         // NOTE: self and yp are the same.
         [yp discoverServices:[yp services] withBlock:^(NSArray *yservices, NSError *error) {
             if (error) {
