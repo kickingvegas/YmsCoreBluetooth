@@ -71,6 +71,7 @@
     [self resetWatchdog];
     
     [self connectWithOptions:nil withBlock:^(YMSCBPeripheral *yp, NSError *error) {
+        // NOTE: self and yp are the same.
         [yp discoverServices:[yp services] withBlock:^(NSArray *yservices, NSError *error) {
             if (error) {
                 return;
@@ -90,10 +91,6 @@
                         DEADeviceInfoService *ds = (DEADeviceInfoService *)service;
                         [ds readDeviceInfo];
                     }
-                        
-                    
-                    
-                    
                 }];
                 
             }
