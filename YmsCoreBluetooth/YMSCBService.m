@@ -54,7 +54,7 @@
                                           offset:addrOffset];
     yc.parent = self.parent;
     
-    [self.characteristicDict setObject:yc forKey:cname];
+    self.characteristicDict[cname] = yc;
 }
 
 - (void)addCharacteristic:(NSString *)cname withAddress:(int)addr {
@@ -68,8 +68,7 @@
                                             parent:self.parent
                                             uuid:uuid
                                           offset:addr];
-    
-    [self.characteristicDict setObject:yc forKey:cname];
+    self.characteristicDict[cname] = yc;
 }
 
 
