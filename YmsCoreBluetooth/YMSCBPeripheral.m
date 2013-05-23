@@ -100,16 +100,6 @@
     
 }
 
-- (NSNumber *)RSSI {
-    NSNumber *result = nil;
-    
-    if (self.cbPeripheral) {
-        result = self.cbPeripheral.RSSI;
-    }
-    return result;
-}
-
-
 
 - (void)discoverServices {
     NSArray *services = [self services];

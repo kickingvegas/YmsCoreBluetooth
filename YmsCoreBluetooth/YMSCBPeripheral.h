@@ -98,11 +98,6 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
 @property (nonatomic, assign) NSTimeInterval rssiPingPeriod;
 
 /**
- RSSI value of cbPeripheral.
- */
-@property (nonatomic, readonly) NSNumber *RSSI;
-
-/**
  Pointer to an instance of YMSCBCentralManager.
  */
 @property (nonatomic, weak) YMSCBCentralManager *central;
