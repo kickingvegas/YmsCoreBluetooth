@@ -100,8 +100,17 @@ float calcGyro(int16_t v, float c, int16_t d) {
 }
 
 - (void)turnOn {
-    [self writeByte:0x7 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
-    [self setNotifyValue:YES forCharacteristicName:@"data"];
+    YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
+    YMSCBCharacteristic *dataCt = self.characteristicDict[@"data"];
+    
+    [configCt writeByte:0x7 withBlock:^(NSError *error) {
+        NSLog(@"Turned On: %@", self.name);
+    }];
+    
+    [dataCt setNotifyValue:YES withBlock:^(NSError *error) {
+        NSLog(@"Notification for data of %@ turned on", self.name);
+    }];
+
     self.isOn = YES;
 }
 

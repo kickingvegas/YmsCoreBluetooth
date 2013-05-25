@@ -17,6 +17,8 @@
 //
 
 #import "YMSCBCharacteristic.h"
+#import "NSMutableArray+fifoQueue.h"
+#import "YMSCBPeripheral.h"
 
 @implementation YMSCBCharacteristic
 
@@ -30,9 +32,64 @@
         _parent = pObj;
         _uuid = oUUID;
         _offset = [NSNumber numberWithInt:addrOffset];
+        _writeCallbacks = [NSMutableArray new];
+        _readCallbacks = [NSMutableArray new];
     }
     
     return self;
+}
+
+
+- (void)setNotifyValue:(BOOL)notifyValue withBlock:(void (^)(NSError *))writeCallback {
+    if (writeCallback) {
+        self.notificationStateCallback = writeCallback;
+    }
+    [self.parent.cbPeripheral setNotifyValue:notifyValue forCharacteristic:self.cbCharacteristic];
+}
+
+- (void)executeNotificationStateCallback:(NSError *)error {
+    if (self.notificationStateCallback) {
+        self.notificationStateCallback(error);
+        self.notificationStateCallback = nil;
+    }
+}
+
+
+- (void)writeValue:(NSData *)data withBlock:(void (^)(NSError *))writeCallback {
+    if (writeCallback) {
+        [self.writeCallbacks push:writeCallback];
+        [self.parent.cbPeripheral writeValue:data
+                           forCharacteristic:self.cbCharacteristic
+                                        type:CBCharacteristicWriteWithResponse];
+    } else {
+        [self.parent.cbPeripheral writeValue:data
+                           forCharacteristic:self.cbCharacteristic
+                                        type:CBCharacteristicWriteWithoutResponse];
+    }
+}
+
+- (void)writeByte:(int8_t)val withBlock:(void (^)(NSError *))writeCallback {
+    NSData *data = [NSData dataWithBytes:&val length:1];
+    [self writeValue:data withBlock:writeCallback];
+}
+
+
+- (void)readValueWithBlock:(void (^)(NSData *, NSError *))readCallback {
+    [self.readCallbacks push:readCallback];
+    [self.parent.cbPeripheral readValueForCharacteristic:self.cbCharacteristic];
+}
+
+
+- (void)executeReadCallback:(NSData *)data error:(NSError *)error {
+    YMSCBReadCallbackBlockType readCB = [self.readCallbacks pop];
+    readCB(data, error);
+    readCB = nil;
+}
+
+- (void)executeWriteCallback:(NSError *)error {
+    YMSCBWriteCallbackBlockType writeCB = [self.writeCallbacks pop];
+    writeCB(error);
+    writeCB = nil;
 }
 
 

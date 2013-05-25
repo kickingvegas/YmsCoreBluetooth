@@ -63,14 +63,20 @@
 }
 
 - (void)turnOff {
-    //[self writeByte:0x0 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
-    [self setNotifyValue:NO forCharacteristicName:@"data"];
+    YMSCBCharacteristic *ct = self.characteristicDict[@"data"];
+    [ct setNotifyValue:NO withBlock:^(NSError *error) {
+        NSLog(@"Turned Off: %@", self.name);
+    }];
     self.isOn = NO;
+    
 }
 
 - (void)turnOn {
-    //[self writeByte:0x1 forCharacteristicName:@"config" type:CBCharacteristicWriteWithResponse];
-    [self setNotifyValue:YES forCharacteristicName:@"data"];
+    YMSCBCharacteristic *ct = self.characteristicDict[@"data"];
+    [ct setNotifyValue:YES withBlock:^(NSError *error) {
+        NSLog(@"Turned On: %@", self.name);
+
+    }];
     self.isOn = YES;
 }
 

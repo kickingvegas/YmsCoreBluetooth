@@ -36,7 +36,7 @@
         _base.hi = hi;
         _base.lo = lo;
         _characteristicDict = [[NSMutableDictionary alloc] init];
-        _responseBlockDict = [[NSMutableDictionary alloc] init];
+        //_responseBlockDict = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -113,127 +113,9 @@
 }
 
 
-- (void)setNotifyValue:(BOOL)notifyValue forCharacteristic:(CBCharacteristic *)characteristic {
-    [self.cbService.peripheral setNotifyValue:notifyValue
-                          forCharacteristic:characteristic];
-    
-}
-
-- (void)setNotifyValue:(BOOL)notifyValue forCharacteristicName:(NSString *)cname {
-    YMSCBCharacteristic *yc = self.characteristicDict[cname];
-    [self.cbService.peripheral setNotifyValue:notifyValue forCharacteristic:yc.cbCharacteristic];
-}
-
-
-- (void)writeValue:(NSData *)data forCharacteristic:(CBCharacteristic *)characteristic type:(CBCharacteristicWriteType)type {
-    
-    [self.cbService.peripheral writeValue:data forCharacteristic:characteristic type:type];
-}
-
-- (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname type:(CBCharacteristicWriteType)type {
-    YMSCBCharacteristic *yc = self.characteristicDict[cname];
-    if (yc == nil) {
-        NSString *assertString = [NSString stringWithFormat:@"YMSCBCharacteristic name '%@' is not defined.", cname];
-        NSAssert(NO, assertString);
-    }
-
-    [self.cbService.peripheral writeValue:data forCharacteristic:yc.cbCharacteristic type:type];
-}
-
-- (void)writeByte:(int8_t)val forCharacteristicName:(NSString *)cname type:(CBCharacteristicWriteType)type {
-    YMSCBCharacteristic *yc = self.characteristicDict[cname];
-    NSData *data = [NSData dataWithBytes:&val length:1];
-    [self.cbService.peripheral writeValue:data forCharacteristic:yc.cbCharacteristic type:type];
-}
-
-- (void)readValueForCharacteristic:(CBCharacteristic *)characteristic {
-    [self.cbService.peripheral readValueForCharacteristic:characteristic];
-    
-}
-
-- (void)readValueForCharacteristicName:(NSString *)cname {
-    YMSCBCharacteristic *yc = self.characteristicDict[cname];
-    if (yc == nil) {
-        NSString *assertString = [NSString stringWithFormat:@"YMSCBCharacteristic name '%@' is not defined.", cname];
-        NSAssert(NO, assertString);
-    }
-    
-    [self.cbService.peripheral readValueForCharacteristic:yc.cbCharacteristic];
-}
-
-
 - (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error {
     if (error) {
         return;
-    }
-}
-
-
-- (void)readValueForCharacteristicName:(NSString *)cname withBlock:(void (^)(NSData *, NSError *))readCallback {
-    
-    if (self.responseBlockDict[cname] == nil) {
-        self.responseBlockDict[cname] = [[NSMutableArray alloc] init];
-    }
-    
-    NSMutableArray *responseBlockArray = (NSMutableArray *)self.responseBlockDict[cname];
-    
-    NSArray *payload = @[@(YMSCBReadCallbackType), readCallback];
-    [responseBlockArray push:payload];
-    [self readValueForCharacteristicName:cname];
-}
-
-- (void)writeValue:(NSData *)data forCharacteristicName:(NSString *)cname withBlock:(void (^)(NSError *))writeCallback {
-    
-    if (self.responseBlockDict[cname] == nil) {
-        self.responseBlockDict[cname] = [[NSMutableArray alloc] init];
-    }
-    
-    NSMutableArray *responseBlockArray = (NSMutableArray *)self.responseBlockDict[cname];
-
-    NSArray *payload = @[@(YMSCBWriteCallbackType), writeCallback];
-    [responseBlockArray push:payload];
-    [self writeValue:data forCharacteristicName:cname type:CBCharacteristicWriteWithResponse];
-}
-
-
-- (void)writeByte:(int8_t)val forCharacteristicName:(NSString *)cname withBlock:(void (^)(NSError *))writeCallback {
-    NSData *data = [NSData dataWithBytes:&val length:1];
-
-    [self writeValue:data forCharacteristicName:cname withBlock:writeCallback];
-}
-
-
-- (void)executeBlock:(YMSCBCharacteristic *)yc error:(NSError *)error {
-    
-    if (error) {
-        return;
-    }
-    
-    NSMutableArray *responseBlockArray = (NSMutableArray *)self.responseBlockDict[yc.name];
-    
-    
-    NSArray *payload = (NSArray *)[responseBlockArray pop];
-    
-    if (payload) {
-        if ([payload count] == 2) {
-            YMSCBCallbackTransactionType cbType = [(NSNumber *)payload[0] integerValue];
-            switch (cbType) {
-                case YMSCBWriteCallbackType: {
-                    YMSCBWriteCallbackBlockType writeCB = payload[1];
-                    writeCB(error);
-                    break;
-                }
-                    
-                case YMSCBReadCallbackType: {
-                    YMSCBReadCallbackBlockType readCB = payload[1];
-                    readCB(yc.cbCharacteristic.value, error);
-                    break;
-                }
-                    
-                default:
-                    break;
-            }
-        }
     }
 }
 

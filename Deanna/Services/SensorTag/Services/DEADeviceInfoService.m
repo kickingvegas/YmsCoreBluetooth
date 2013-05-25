@@ -18,6 +18,7 @@
 
 
 #import "DEADeviceInfoService.h"
+#import "YMSCBCharacteristic.h"
 
 @implementation DEADeviceInfoService
 
@@ -52,9 +53,9 @@
 
 - (void)readDeviceInfo {
     
+    YMSCBCharacteristic *system_idCt = self.characteristicDict[@"system_id"];
     
-    [self readValueForCharacteristicName:@"system_id" withBlock:^(NSData *data, NSError *error) {
-        
+    [system_idCt readValueWithBlock:^(NSData *data, NSError *error) {
         NSMutableString *tmpString = [NSMutableString stringWithFormat:@""];
         unsigned char bytes[data.length];
         [data getBytes:bytes];
@@ -67,10 +68,10 @@
         
         NSLog(@"system id: %@", tmpString);
         self.system_id = tmpString;
-
     }];
     
-    [self readValueForCharacteristicName:@"model_number" withBlock:^(NSData *data, NSError *error) {
+    YMSCBCharacteristic *model_numberCt = self.characteristicDict[@"model_number"];
+    [model_numberCt readValueWithBlock:^(NSData *data, NSError *error) {
         if (error) {
             NSLog(@"ERROR: %@", error);
             return;
@@ -79,10 +80,12 @@
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
         self.model_number = payload;
         NSLog(@"model: %@", payload);
+        
     }];
     
     
-    [self readValueForCharacteristicName:@"serial_number" withBlock:^(NSData *data, NSError *error) {
+    YMSCBCharacteristic *serial_numberCt = self.characteristicDict[@"serial_number"];
+    [serial_numberCt readValueWithBlock:^(NSData *data, NSError *error) {
         if (error) {
             NSLog(@"ERROR: %@", error);
             return;
@@ -94,7 +97,8 @@
     }];
     
     
-    [self readValueForCharacteristicName:@"firmware_rev" withBlock:^(NSData *data, NSError *error) {
+    YMSCBCharacteristic *firmware_revCt = self.characteristicDict[@"firmware_rev"];
+    [firmware_revCt readValueWithBlock:^(NSData *data, NSError *error) {
         if (error) {
             NSLog(@"ERROR: %@", error);
             return;
@@ -105,7 +109,8 @@
         NSLog(@"firmware rev: %@", payload);
     }];
     
-    [self readValueForCharacteristicName:@"hardware_rev" withBlock:^(NSData *data, NSError *error) {
+    YMSCBCharacteristic *hardware_revCt = self.characteristicDict[@"hardware_rev"];
+    [hardware_revCt readValueWithBlock:^(NSData *data, NSError *error) {
         if (error) {
             NSLog(@"ERROR: %@", error);
             return;
@@ -115,8 +120,9 @@
         self.hardware_rev = payload;
         NSLog(@"hardware rev: %@", payload);
     }];
-    
-    [self readValueForCharacteristicName:@"software_rev" withBlock:^(NSData *data, NSError *error) {
+
+    YMSCBCharacteristic *software_revCt = self.characteristicDict[@"software_rev"];
+    [software_revCt readValueWithBlock:^(NSData *data, NSError *error) {
         if (error) {
             NSLog(@"ERROR: %@", error);
             return;
@@ -127,7 +133,8 @@
         NSLog(@"sw rev: %@", payload);
     }];
     
-    [self readValueForCharacteristicName:@"manufacturer_name" withBlock:^(NSData *data, NSError *error) {
+    YMSCBCharacteristic *manufacturer_nameCt = self.characteristicDict[@"manufacturer_name"];
+    [manufacturer_nameCt readValueWithBlock:^(NSData *data, NSError *error) {
         if (error) {
             NSLog(@"ERROR: %@", error);
             return;
@@ -138,7 +145,8 @@
         NSLog(@"manufacturer name: %@", payload);
     }];
     
-    [self readValueForCharacteristicName:@"ieee11073_cert_data" withBlock:^(NSData *data, NSError *error) {
+    YMSCBCharacteristic *ieeeCt = self.characteristicDict[@"ieee11073_cert_data"];
+    [ieeeCt readValueWithBlock:^(NSData *data, NSError *error) {
         if (error) {
             NSLog(@"ERROR: %@", error);
             return;

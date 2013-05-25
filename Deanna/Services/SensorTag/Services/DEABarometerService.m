@@ -117,14 +117,16 @@ double calcBarPress(int16_t t_r,
 
 - (void)requestCalibration {
     if (self.isCalibrating == NO) {
-        [self writeByte:0x2 forCharacteristicName:@"config" withBlock:^(NSError *error) {
-            
+        
+        YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
+        [configCt writeByte:0x2 withBlock:^(NSError *error) {
             if (error) {
                 NSLog(@"ERROR: write request to barometer config to start calibration failed.");
                 return;
             }
             
-            [self readValueForCharacteristicName:@"calibration" withBlock:^(NSData *data, NSError *error) {
+            YMSCBCharacteristic *calibrationCt = self.characteristicDict[@"calibration"];
+            [calibrationCt readValueWithBlock:^(NSData *data, NSError *error) {
                 if (error) {
                     NSLog(@"ERROR: read request to barometer calibration failed.");
                     return;
@@ -154,7 +156,7 @@ double calcBarPress(int16_t t_r,
                 }
                 
                 self.isCalibrated = YES;
-
+                
             }];
         }];
         

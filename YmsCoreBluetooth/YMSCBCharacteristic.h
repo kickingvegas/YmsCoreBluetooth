@@ -21,10 +21,8 @@
 
 @class YMSCBPeripheral;
 
-/*
 typedef void (^YMSCBReadCallbackBlockType)(NSData *, NSError *);
 typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
- */
 
 /**
  Base class for defining a Bluetooth LE characteristic.
@@ -54,6 +52,20 @@ typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
 /// Offset address value, if applicable.
 @property (nonatomic, strong) NSNumber *offset;
 
+/// Notification state callback
+@property (nonatomic, strong) YMSCBWriteCallbackBlockType notificationStateCallback;
+
+/// FIFO queue for reads
+@property (nonatomic, strong) NSMutableArray *readCallbacks;
+
+/// FIFO queue for reads
+@property (nonatomic, strong) NSMutableArray *writeCallbacks;
+
+
+
+- (void)executeNotificationStateCallback:(NSError *)error;
+- (void)executeReadCallback:(NSData *)data error:(NSError *)error;
+- (void)executeWriteCallback:(NSError *)error;
 
 /** @name Initializing a YMSCBCharacteristic */
 /**
@@ -64,5 +76,63 @@ typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
  @param addrOffset characteristic address offset
  */
 - (id)initWithName:(NSString *)oName parent:(YMSCBPeripheral *)pObj uuid:(CBUUID *)oUUID offset:(int)addrOffset;
+
+
+
+/** @name BLE Notification Methods */
+/**
+ Set notification value with respect to characteristic.
+ 
+ @param notifyValue Set notification enable.
+ 
+ */
+- (void)setNotifyValue:(BOOL)notifyValue withBlock:(void (^)(NSError *error))writeCallback;
+
+
+/** @name Write Request BLE Service Methods */
+/**
+ Request write value given characteristic name and execute callback block upon response.
+ 
+ The callback block readCallback has one argument: `error`:
+ 
+ * `error` is populated with the returned `error` object from the delegate method peripheral:didUpdateValueForCharacteristic:error:
+ or peripheral:didWriteValueForCharacteristic:error: implemented in YMSCBPeripheral.
+ 
+ @param data The value to be written
+ @param writeCallback Callback block to execute upon response.
+ 
+ */
+- (void)writeValue:(NSData *)data withBlock:(void (^)(NSError *error))writeCallback;
+
+/**
+ Request write byte given characteristic name and execute callback block upon response.
+ 
+ The callback block readCallback has one argument: `error`:
+ 
+ * `error` is populated with the returned `error` object from the delegate method peripheral:didUpdateValueForCharacteristic:error:
+ or peripheral:didWriteValueForCharacteristic:error: implemented in YMSCBPeripheral.
+ 
+ @param val Byte value to be written
+ @param writeCallback Callback block to execute upon response.
+ 
+ */
+- (void)writeByte:(int8_t)val withBlock:(void (^)(NSError *error))writeCallback;
+
+
+/** @name Read Request BLE Service Methods */
+/**
+ Request read value given characteristic name and execute callback block upon response.
+ 
+ The callback block readCallback has two arguments: `data` and `error`:
+ 
+ * `data` is populated with the `value` property of [YMSCBCharacteristic cbCharacteristic].
+ * `error` is populated with the returned `error` object from the delegate method peripheral:didUpdateValueForCharacteristic:error: implemented in YMSCBPeripheral.
+ 
+ 
+ @param readCallback Callback block to execute upon response.
+ */
+- (void)readValueWithBlock:(void (^)(NSData *data, NSError *error))readCallback;
+
+
 
 @end

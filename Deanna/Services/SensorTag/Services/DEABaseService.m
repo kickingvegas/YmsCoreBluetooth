@@ -39,35 +39,41 @@
 
 
 - (void)turnOff {
-    [self writeByte:0x0 forCharacteristicName:@"config" withBlock:^(NSError *error) {
+    YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
+    [configCt writeByte:0x0 withBlock:^(NSError *error) {
         if (error) {
             NSLog(@"ERROR: %@", error);
             return;
         }
         
         NSLog(@"TURNED OFF: %@", self.name);
-    
     }];
     
+    YMSCBCharacteristic *dataCt = self.characteristicDict[@"data"];
+    [dataCt setNotifyValue:NO withBlock:^(NSError *error) {
+        NSLog(@"Data notification for %@ off", self.name);
+
+    }];
     
-    //TODO: Support notification update state block callback;
-    [self setNotifyValue:NO forCharacteristicName:@"data"];
     self.isOn = NO;
 }
 
 - (void)turnOn {
-    [self writeByte:0x1 forCharacteristicName:@"config" withBlock:^(NSError *error) {
+    YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
+    [configCt writeByte:0x1 withBlock:^(NSError *error) {
         if (error) {
             NSLog(@"ERROR: %@", error);
             return;
         }
         
         NSLog(@"TURNED ON: %@", self.name);
-        
+    }];
+    
+    YMSCBCharacteristic *dataCt = self.characteristicDict[@"data"];
+    [dataCt setNotifyValue:YES withBlock:^(NSError *error) {
+        NSLog(@"Data notification for %@ on", self.name);
     }];
 
-    //TODO: Support notification update state block callback;
-    [self setNotifyValue:YES forCharacteristicName:@"data"];
     self.isOn = YES;
 }
 

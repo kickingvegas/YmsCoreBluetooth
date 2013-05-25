@@ -129,20 +129,14 @@
                     if (error) {
                         return;
                     }
-                    // TODO for find descriptors if necessary
-                    
-                    
-                    
+                    // TODO find descriptors (if necessary)
+
                 }];
                 
             }
             
         }];
-        
-        
-        
     }];
-    
 }
 
 
@@ -304,14 +298,12 @@
         [btService notifyCharacteristicHandler:yc error:error];
         
     } else {
-        NSArray *responseBlockArray = btService.responseBlockDict[yc.name];
-        
-        if ([responseBlockArray count] > 0) {
-            [btService executeBlock:yc error:error];
+        if ([yc.readCallbacks count] > 0) {
+            [yc executeReadCallback:characteristic.value error:error];
         }
     }
-
 }
+
 
 /**
  CBPeripheralDelegate implementation. Not yet supported.
@@ -333,7 +325,13 @@
  */
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     // TODO: Implement callback block for notification change response.
+    
+    YMSCBService *btService = [self findService:characteristic.service];
+    YMSCBCharacteristic *ct = [btService findCharacteristic:characteristic];
+    
+    [ct executeNotificationStateCallback:error];
 }
+
 
 
 
@@ -349,12 +347,10 @@
     YMSCBService *btService = [self findService:characteristic.service];
     YMSCBCharacteristic *yc = [btService findCharacteristic:characteristic];
     
-    NSArray *responseBlockArray = btService.responseBlockDict[yc.name];
-    
-    
-    if ([responseBlockArray count] > 0) {
-        [btService executeBlock:yc error:error];
+    if ([yc.writeCallbacks count] > 0) {
+        [yc executeWriteCallback:error];
     } else {
+        // TODO is this dangerous?
         [btService notifyCharacteristicHandler:yc error:error];
     }
 }

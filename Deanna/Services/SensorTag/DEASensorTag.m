@@ -58,9 +58,6 @@
                              @"gyroscope": gs,
                              @"barometer": bs,
                              @"devinfo": ds};
-        
-
-        [sks turnOn];
     }
     return self;
 
@@ -85,15 +82,18 @@
                     if (error) {
                         return;
                     }
-                    // TODO for find descriptors if necessary
-                    
-                    if ([service.name isEqualToString:@"simplekeys"]) {
-                        [service setNotifyValue:YES forCharacteristicName:@"data"];
 
+                    if ([service.name isEqualToString:@"simplekeys"]) {
+                        DEASimpleKeysService *sks = (DEASimpleKeysService *)service;
+                        [sks turnOn];
+                        
                     } else if ([service.name isEqualToString:@"devinfo"]) {
                         DEADeviceInfoService *ds = (DEADeviceInfoService *)service;
                         [ds readDeviceInfo];
                     }
+                    
+                    // TODO find descriptors (if necessary)
+                    
                 }];
                 
             }
