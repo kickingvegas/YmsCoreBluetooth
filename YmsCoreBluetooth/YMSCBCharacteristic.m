@@ -40,9 +40,9 @@
 }
 
 
-- (void)setNotifyValue:(BOOL)notifyValue withBlock:(void (^)(NSError *))writeCallback {
-    if (writeCallback) {
-        self.notificationStateCallback = writeCallback;
+- (void)setNotifyValue:(BOOL)notifyValue withBlock:(void (^)(NSError *))notifyStateCallback {
+    if (notifyStateCallback) {
+        self.notificationStateCallback = notifyStateCallback;
     }
     [self.parent.cbPeripheral setNotifyValue:notifyValue forCharacteristic:self.cbCharacteristic];
 }
@@ -83,13 +83,11 @@
 - (void)executeReadCallback:(NSData *)data error:(NSError *)error {
     YMSCBReadCallbackBlockType readCB = [self.readCallbacks pop];
     readCB(data, error);
-    readCB = nil;
 }
 
 - (void)executeWriteCallback:(NSError *)error {
     YMSCBWriteCallbackBlockType writeCB = [self.writeCallbacks pop];
     writeCB(error);
-    writeCB = nil;
 }
 
 
