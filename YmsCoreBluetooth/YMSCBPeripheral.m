@@ -194,11 +194,12 @@
         self.connectCallback = nil;
     } else {
         // TODO: support connectionHandler
+        [self defaultConnectionHandler];
     }
 }
 
 - (void)defaultConnectionHandler {
-    // TODO: maybe design to be overridden.
+    NSAssert(NO, @"[YMSCBPeripheral defaultConnectionHandler] must be overridden if connectCallback is nil.");
 }
 
 #pragma mark - Services Discovery

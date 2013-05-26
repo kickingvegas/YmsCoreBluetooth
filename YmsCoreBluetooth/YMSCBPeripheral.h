@@ -27,7 +27,6 @@
 
 typedef void (^YMSCBPeripheralConnectCallbackBlockType)(YMSCBPeripheral *, NSError *);
 typedef void (^YMSCBPeripheralDiscoverServicesBlockType)(NSArray *, NSError *);
-//typedef void (^YMSCBPeripheralDiscoverIncludedServicesBlockType)(NSArray *, NSError *);
 
 /*
 NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
@@ -137,7 +136,7 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
  
 
  @param peripheral Pointer to CBPeripheral
- @param central Pointer to YMSCBCentralManager
+ @param owner Pointer to YMSCBCentralManager
  @param hi Top 64 bits of 128-bit base address value
  @param lo Bottom 64 bits of 128-bit base address value
  @param update If YES, update the RSSI.
@@ -220,9 +219,18 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
 
 /**
  Executes connect callback.
+ 
+ @param error Error object.
  */
 - (void)handleConnectionResponse:(NSError *)error;
 
+/**
+ Default connection handler routine that is invoked only if connectCallback is nil.
+ 
+ This method is only invoked if a connection request to an instance of this peripheral is done without
+ a callback block defined.
+
+ */
 - (void)defaultConnectionHandler;
 
 
