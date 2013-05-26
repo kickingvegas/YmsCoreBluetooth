@@ -20,7 +20,6 @@
 #import "YMSCBUtils.h"
 #import "YMSCBPeripheral.h"
 #import "YMSCBCharacteristic.h"
-#import "NSMutableArray+fifoQueue.h"
 
 @implementation YMSCBService
 
