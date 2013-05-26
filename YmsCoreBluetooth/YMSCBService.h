@@ -20,6 +20,9 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "YMSCBUtils.h"
 
+/**
+ Callback type for discovered characteristics.
+ */
 typedef void (^YMSCBDiscoverCharacteristicsCallbackBlockType)(NSDictionary *, NSError *);
 
 typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
@@ -34,15 +37,11 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 /**
  Base class for defining a Bluetooth LE service.
 
- YMSCBService holds an instance of CBService (cbService) and provides a service-centric
- read/write API to a CBPeripheral instance contained in YMSCBPeripheral.
+ YMSCBService holds an instance of CBService (cbService).
  
  This class is typically subclassed to map to a service in a BLE peripheral. The subclass
  typically implements notifyCharacteristicHandler:error: to handle characteristics whose
  BLE notification has been enabled. 
- 
-
-
  */
 
 @interface YMSCBService : NSObject
@@ -142,7 +141,13 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 - (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error;
 
 
-
+/**
+ Discover characteristics for this service.
+ 
+ @param characteristicUUIDs An array of CBUUID objects that you are interested in. Here, each CBUUID object represents a UUID that identifies the type of a characteristic you want to discover.
+ @param callback Callback block to execute upon response for discovered characteristics.
+ 
+ */
 - (void)discoverCharacteristics:(NSArray *)characteristicUUIDs
                       withBlock:(void (^)(NSDictionary *chDict, NSError *))callback;
 
