@@ -55,13 +55,19 @@ typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
 /// Notification state callback
 @property (nonatomic, strong) YMSCBWriteCallbackBlockType notificationStateCallback;
 
-/// FIFO queue for reads
+/**
+ FIFO queue for reads.
+ 
+ Each element is a block of type YMSCBReadCallbackBlockType.
+ */
 @property (nonatomic, strong) NSMutableArray *readCallbacks;
 
-/// FIFO queue for reads
+/**
+ FIFO queue for writes.
+ 
+ Each element is a block of type YMSCBWriteCallbackBlockType.
+ */
 @property (nonatomic, strong) NSMutableArray *writeCallbacks;
-
-
 
 - (void)executeNotificationStateCallback:(NSError *)error;
 - (void)executeReadCallback:(NSData *)data error:(NSError *)error;
@@ -72,6 +78,7 @@ typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
  Constructor.
 
  @param oName characteristic name
+ @param pObj parent peripheral
  @param oUUID characteristic CBUUID
  @param addrOffset characteristic address offset
  */
@@ -79,17 +86,25 @@ typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
 
 
 
-/** @name BLE Notification Methods */
+/** @name Changing the notification state */
 /**
- Set notification value with respect to characteristic.
+ Set notification value of cbCharacteristic.
+ 
+ When notifyValue is YES, then cbCharacterisic is set to notify upon any changes to its value. 
+ When notifyValue is NO, then no notifications are sent.
+ 
+ An implementation of the method [YMSCBService notifyCharacteristicHandler:error:] is used to handle
+ updates to cbCharacteristic. Note that notification handling is done at the YMSCBService level via 
+ method handler and not by callback blocks. The reason for this is for opinion: It is more convenient to
+ write a method handler to deal with non-deterministic, asynchronous notification events than it is with blocks.
  
  @param notifyValue Set notification enable.
- 
+ @param notifyStateCallback Callback to execute upon change in notification state.
  */
-- (void)setNotifyValue:(BOOL)notifyValue withBlock:(void (^)(NSError *error))writeCallback;
+- (void)setNotifyValue:(BOOL)notifyValue withBlock:(void (^)(NSError *error))notifyStateCallback;
 
 
-/** @name Write Request BLE Service Methods */
+/** @name Issuing a Write Request */
 /**
  Request write value given characteristic name and execute callback block upon response.
  
@@ -119,7 +134,7 @@ typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
 - (void)writeByte:(int8_t)val withBlock:(void (^)(NSError *error))writeCallback;
 
 
-/** @name Read Request BLE Service Methods */
+/** @name Issuing a Read Request */
 /**
  Request read value given characteristic name and execute callback block upon response.
  
