@@ -1,5 +1,7 @@
 <link rel="stylesheet" type="text/css" href="css/book.css" />
 
+**THIS TUTORIAL IS OBSOLETE AS OF API VERSION 0.93. AN UPDATE IS ARRIVING SHORTLY.**
+
 # YmsCoreBluetooth Tutorial
 
 **YmsCoreBluetooth** is a framework for building Bluetooth LE capability to an iOS app. It extends the CoreBluetooth framework by implementing functionality to manage BLE peripherals, their services, and the characteristics of those services. 
