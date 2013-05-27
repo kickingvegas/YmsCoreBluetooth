@@ -39,9 +39,7 @@ YMSCoreBluetooth defines container classes which map to the CoreBluetooth object
     * YMSCBPeripheral - A BLE peripheral can have multiple BLE services
         * YMSCBService - A BLE service can have multiple BLE characteristics
              * YMSCBCharacteristic - A BLE characteristic can have multiple BLE descriptors
-			     * YMSCBDescriptor - A BLE descriptor (TBD)
-
-
+			     * YMSCBDescriptor - A BLE descriptor 
 
 However, they differ from CoreBluetooth in that operations are done with respect to the object type:
 
@@ -58,11 +56,12 @@ However, they differ from CoreBluetooth in that operations are done with respect
   - set notification status (on, off)
   - write value to characteristic
   - read value of characteristic
-  - discover descriptors associated with this characteristic (TBD)
-  
+  - discover descriptors associated with this characteristic 
+* YMSCBDescriptor
+  - write value to descriptor
+  - read value of descriptor
   
 ### Show Code
-
 #### Scanning for Peripherals
 
 In the following code sample, `self` is an instance of a subclass of YMSCBCentralManager.
@@ -108,13 +107,16 @@ In the following code sample, `self` is an instance of a subclass of YMSCBPeriph
 				}
 
 				for (YMSCBService *service in yservices) {
+					__weak YMSCBService *thisService = (YMSCBService *)service;
+
 					[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
 						if (error) {
 							return;
 						}
-						__weak YMSCBService *thisService = (YMSCBService *)service;
+
 						for (NSString *key in chDict) {
 							YMSCBCharacteristic *ct = chDict[key];
+							//NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
 
 							[ct discoverDescriptorsWithBlock:^(NSArray *ydescriptors, NSError *error) {
 								if (error) {
@@ -125,12 +127,8 @@ In the following code sample, `self` is an instance of a subclass of YMSCBPeriph
 								}
 							}];
 						}
-
-
 					}];
-
 				}
-
 			}];
 		}];
 	}
