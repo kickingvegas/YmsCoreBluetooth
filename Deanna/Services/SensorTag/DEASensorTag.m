@@ -71,39 +71,32 @@
         if (error) {
             return;
         }
-        // NOTE: self and yp are the same.
+        
         [yp discoverServices:[yp services] withBlock:^(NSArray *yservices, NSError *error) {
             if (error) {
                 return;
             }
             
             for (YMSCBService *service in yservices) {
-                [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
-                    if (error) {
-                        return;
-                    }
-
-                    if ([service.name isEqualToString:@"simplekeys"]) {
-                        DEASimpleKeysService *sks = (DEASimpleKeysService *)service;
-                        [sks turnOn];
-                        
-                    } else if ([service.name isEqualToString:@"devinfo"]) {
-                        DEADeviceInfoService *ds = (DEADeviceInfoService *)service;
-                        [ds readDeviceInfo];
-                    }
+                if ([service.name isEqualToString:@"simplekeys"]) {
+                    __weak DEASimpleKeysService *thisService = (DEASimpleKeysService *)service;
+                    [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+                        [thisService turnOn];
+                    }];
                     
-                    // TODO find descriptors (if necessary)
+                } else if ([service.name isEqualToString:@"devinfo"]) {
+                    __weak DEADeviceInfoService *thisService = (DEADeviceInfoService *)service;
+                    [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+                        [thisService readDeviceInfo];
+                    }];
                     
-                }];
-                
+                } else {
+                    [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+                    }];
+                }
             }
-            
         }];
-        
-        
-        
     }];
-    
 }
 
 
