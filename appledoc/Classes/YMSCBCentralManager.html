@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>YMSCBAppService Class Reference</title>
+		<title>YMSCBCentralManager Class Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
@@ -17,7 +17,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">YMSCBAppService Class Reference</h1>
+				<h1 class="hideInXcode">YMSCBCentralManager Class Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -39,8 +39,6 @@
 	
 	
 	<option value="properties">Properties</option>
-	
-	<option value="//api/name/connectionCallbackDict">&nbsp;&nbsp;&nbsp;&nbsp;connectionCallbackDict</option>
 	
 	<option value="//api/name/count">&nbsp;&nbsp;&nbsp;&nbsp;count</option>
 	
@@ -71,23 +69,7 @@
 	
 	<option value="//api/name/addPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- addPeripheral:</option>
 	
-	<option value="//api/name/cancelPeripheralConnection:">&nbsp;&nbsp;&nbsp;&nbsp;- cancelPeripheralConnection:</option>
-	
-	<option value="//api/name/connect:">&nbsp;&nbsp;&nbsp;&nbsp;- connect:</option>
-	
-	<option value="//api/name/connectPeripheral:options:">&nbsp;&nbsp;&nbsp;&nbsp;- connectPeripheral:options:</option>
-	
-	<option value="//api/name/connectPeripheral:options:withBlock:">&nbsp;&nbsp;&nbsp;&nbsp;- connectPeripheral:options:withBlock:</option>
-	
-	<option value="//api/name/connectPeripheralAtIndex:options:">&nbsp;&nbsp;&nbsp;&nbsp;- connectPeripheralAtIndex:options:</option>
-	
-	<option value="//api/name/connectPeripheralAtIndex:options:withBlock:">&nbsp;&nbsp;&nbsp;&nbsp;- connectPeripheralAtIndex:options:withBlock:</option>
-	
-	<option value="//api/name/disconnectPeripheralAtIndex:">&nbsp;&nbsp;&nbsp;&nbsp;- disconnectPeripheralAtIndex:</option>
-	
 	<option value="//api/name/findPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- findPeripheral:</option>
-	
-	<option value="//api/name/handleConnectedPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- handleConnectedPeripheral:</option>
 	
 	<option value="//api/name/handleFoundPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- handleFoundPeripheral:</option>
 	
@@ -149,15 +131,11 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Properties">Properties</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Initializing YMSCBAppService">Initializing YMSCBAppService</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Initializing YMSCBCentralManager">Initializing YMSCBCentralManager</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Peripheral Management">Peripheral Management</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Scanning for Peripherals">Scanning for Peripherals</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Connecting to Peripherals">Connecting to Peripherals</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Cancelling a Connection Request">Cancelling a Connection Request</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Retrieve Peripherals">Retrieve Peripherals</a></span></li>
 	
@@ -170,8 +148,6 @@
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/connectionCallbackDict">connectionCallbackDict</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/count">count</a></span></li>
 	
@@ -203,23 +179,7 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/addPeripheral:">addPeripheral:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/cancelPeripheralConnection:">cancelPeripheralConnection:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/connect:">connect:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/connectPeripheral:options:">connectPeripheral:options:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/connectPeripheral:options:withBlock:">connectPeripheral:options:withBlock:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/connectPeripheralAtIndex:options:">connectPeripheralAtIndex:options:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/connectPeripheralAtIndex:options:withBlock:">connectPeripheralAtIndex:options:withBlock:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/disconnectPeripheralAtIndex:">disconnectPeripheralAtIndex:</a></span></li>
-	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/findPeripheral:">findPeripheral:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/handleConnectedPeripheral:">handleConnectedPeripheral:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/handleFoundPeripheral:">handleFoundPeripheral:</a></span></li>
 	
@@ -270,7 +230,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="YMSCBAppService Class Reference" name="top"></a>
+				<a title="YMSCBCentralManager Class Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -279,7 +239,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">YMSCBAppService Class Reference</h1>
+						<h1 class="title title-header">YMSCBCentralManager Class Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -293,7 +253,7 @@
 	<td class="specification-value">CBCentralManagerDelegate</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">YMSCBAppService.h<br />YMSCBAppService.m</td>
+	<td class="specification-value">YMSCBCentralManager.h<br />YMSCBCentralManager.m</td>
 </tr>
 						</tbody></table></div>
 					
@@ -303,23 +263,23 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>Base class for defining a CoreBluetooth application service.</p>
+						<p>Base class for defining a Bluetooth LE central.</p>
 
-<p>Note that this class is not to be confused with a CoreBluetooth <em>service</em>. Rather,
-an <em>application service</em> is meant here to define a set of functionality which is to be
-considered a sub-system of the application.</p>
+<p>YMSCBCentralManager holds an instance of CBCentralManager (<a href="#//api/name/manager">manager</a>) and implements the
+CBCentralManagerDelgate messages sent by <a href="#//api/name/manager">manager</a>.</p>
 
-<p>YMSCBAppService manages all CoreBluetooth interactions by the parent application. The class manages
-an an instance of the CBCentralManager (<a href="#//api/name/manager">manager</a>) and all the Bluetooth LE (BLE) peripherals discovered by
-it.</p>
+<p>This class provides ObjectiveC block-based callback support for peripheral
+scanning and retrieval.</p>
 
-<p>YMSCBAppService is intended to be subclassed to handle the different types of BLE peripherals
-the application is to communicate with. The implementation of <a href="#//api/name/handleFoundPeripheral:">handleFoundPeripheral:</a> handles the details
-of discovering a BLE peripheral.</p>
+<p>YMSCBCentralManager is intended to be subclassed: the subclass would in turn be written to
+handle the set of BLE peripherals of interest to the application.</p>
 
-<p>The subclass is typically implemented (though not necessarily) as a singleton.</p>
+<p>The subclass is typically implemented (though not necessarily) as a singleton, so that there
+is only one instance of CBCentralManager that is used by the application.</p>
 
 <p>All discovered BLE peripherals are stored in the array <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p>
+
+<p>Legacy Note: This class was previously named YMSCBAppService.</p>
 					</div>
 					
 					
@@ -400,13 +360,6 @@ of discovering a BLE peripheral.</p>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/connectionCallbackDict">&nbsp;&nbsp;connectionCallbackDict</a></code>
-		<span class="tooltip"><p>Peripheral Connection Callback Dictionary</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
 		<code><a href="#//api/name/useStoredPeripherals">&nbsp;&nbsp;useStoredPeripherals</a></code>
 		<span class="tooltip"><p>If YES, then discovered peripheral UUIDs are stored in standardUserDefaults.</p></span>
 	</span>
@@ -416,8 +369,8 @@ of discovering a BLE peripheral.</p>
 						</ul>
 						
 						
-						<a title="Initializing YMSCBAppService" name="task_Initializing YMSCBAppService"></a>
-						<h3 class="subsubtitle task-title">Initializing YMSCBAppService</h3>
+						<a title="Initializing YMSCBCentralManager" name="task_Initializing YMSCBCentralManager"></a>
+						<h3 class="subsubtitle task-title">Initializing YMSCBCentralManager</h3>
 
 						<ul class="task-list">
 							<li>
@@ -453,13 +406,6 @@ of discovering a BLE peripheral.</p>
 	<span class="tooltip">
 		<code><a href="#//api/name/handleFoundPeripheral:">&ndash;&nbsp;handleFoundPeripheral:</a></code>
 		<span class="tooltip"><p>Handler for discovered or found peripheral. This method is to be overridden.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/handleConnectedPeripheral:">&ndash;&nbsp;handleConnectedPeripheral:</a></code>
-		<span class="tooltip"><p>  Handler for connected peripheral. This method is to be overridden.</p></span>
 	</span>
 	
 	
@@ -539,71 +485,6 @@ that is discovered.</p></span>
 						</ul>
 						
 						
-						<a title="Connecting to Peripherals" name="task_Connecting to Peripherals"></a>
-						<h3 class="subsubtitle task-title">Connecting to Peripherals</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/connect:">&ndash;&nbsp;connect:</a></code>
-		<span class="tooltip"><p>Connect to peripheral.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/connectPeripheralAtIndex:options:">&ndash;&nbsp;connectPeripheralAtIndex:options:</a></code>
-		<span class="tooltip"><p>Connect peripheral at index in <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/connectPeripheralAtIndex:options:withBlock:">&ndash;&nbsp;connectPeripheralAtIndex:options:withBlock:</a></code>
-		<span class="tooltip"><p>Connect peripheral at index in <a href="#//api/name/ymsPeripherals">ymsPeripherals</a> with callback block.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/disconnectPeripheralAtIndex:">&ndash;&nbsp;disconnectPeripheralAtIndex:</a></code>
-		<span class="tooltip"><p>Disconnect peripheral.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/connectPeripheral:options:">&ndash;&nbsp;connectPeripheral:options:</a></code>
-		<span class="tooltip"><p>Establishes connection to peripheral.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/connectPeripheral:options:withBlock:">&ndash;&nbsp;connectPeripheral:options:withBlock:</a></code>
-		<span class="tooltip"><p>Establishes connection to peripheral with callback block.</p></span>
-	</span>
-	
-	
-</li>
-						</ul>
-						
-						
-						<a title="Cancelling a Connection Request" name="task_Cancelling a Connection Request"></a>
-						<h3 class="subsubtitle task-title">Cancelling a Connection Request</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/cancelPeripheralConnection:">&ndash;&nbsp;cancelPeripheralConnection:</a></code>
-		<span class="tooltip"><p>Cancels an active or pending local connection to a peripheral.</p></span>
-	</span>
-	
-	
-</li>
-						</ul>
-						
-						
 						<a title="Retrieve Peripherals" name="task_Retrieve Peripherals"></a>
 						<h3 class="subsubtitle task-title">Retrieve Peripherals</h3>
 
@@ -626,7 +507,7 @@ that is discovered.</p></span>
 	<span class="tooltip">
 		<code><a href="#//api/name/retrievePeripherals:">&ndash;&nbsp;retrievePeripherals:</a></code>
 		<span class="tooltip"><p>Retrieves a list of the peripherals currently connected to the system and handles them using
-a callback block.</p></span>
+<a href="#//api/name/handleFoundPeripheral:">handleFoundPeripheral:</a></p></span>
 	</span>
 	
 	
@@ -649,7 +530,7 @@ a callback block.</p></span>
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/managerPoweredOnHandler">&ndash;&nbsp;managerPoweredOnHandler</a></code>
-		<span class="tooltip"><p>Handler for when <a href="../Classes/YMSCBAppService.html#//api/name/manager">manager</a> state is powered on.</p></span>
+		<span class="tooltip"><p>Handler for when <a href="../Classes/YMSCBCentralManager.html#//api/name/manager">manager</a> state is powered on.</p></span>
 	</span>
 	
 	
@@ -702,47 +583,6 @@ a callback block.</p></span>
 						<h2 class="subtitle subtitle-methods">Properties</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/connectionCallbackDict" title="connectionCallbackDict"></a>
-	<h3 class="subsubtitle method-title">connectionCallbackDict</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Peripheral Connection Callback Dictionary</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSMutableDictionary *connectionCallbackDict</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Peripheral Connection Callback Dictionary</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
 	<a name="//api/name/count" title="count"></a>
 	<h3 class="subsubtitle method-title">count</h3>
 	
@@ -777,7 +617,7 @@ a callback block.</p></span>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -820,7 +660,7 @@ a callback block.</p></span>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -861,7 +701,7 @@ a callback block.</p></span>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -902,7 +742,7 @@ a callback block.</p></span>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -946,7 +786,7 @@ This value is typically initialized using <a href="#//api/name/initWithKnownPeri
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -978,7 +818,7 @@ This value is typically initialized using <a href="#//api/name/initWithKnownPeri
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>The CBCentralManager object.</p>
 
-<p>In typical practice, there is only one instance of CBCentralManager and it is located in a singleton instance of YMSCBAppService.
+<p>In typical practice, there is only one instance of CBCentralManager and it is located in a singleton instance of YMSCBCentralManager.
 This class listens to CBCentralManagerDelegate messages sent by manager, which in turn forwards those messages to <a href="#//api/name/delegate">delegate</a>.</p>
 	</div>
 	
@@ -990,7 +830,7 @@ This class listens to CBCentralManagerDelegate messages sent by manager, which i
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -1031,7 +871,7 @@ This class listens to CBCentralManagerDelegate messages sent by manager, which i
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -1072,7 +912,7 @@ This class listens to CBCentralManagerDelegate messages sent by manager, which i
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -1113,7 +953,7 @@ This class listens to CBCentralManagerDelegate messages sent by manager, which i
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -1156,7 +996,7 @@ This class listens to CBCentralManagerDelegate messages sent by manager, which i
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -1217,396 +1057,7 @@ This class listens to CBCentralManagerDelegate messages sent by manager, which i
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/cancelPeripheralConnection:" title="cancelPeripheralConnection:"></a>
-	<h3 class="subsubtitle method-title">cancelPeripheralConnection:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Cancels an active or pending local connection to a peripheral.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)cancelPeripheralConnection:(YMSCBPeripheral *)<em>peripheral</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>peripheral</em></dt>
-			<dd><p>The peripheral to which the central <a href="#//api/name/manager">manager</a> is either trying to connect or has already connected.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Cancels an active or pending local connection to a peripheral.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/connect:" title="connect:"></a>
-	<h3 class="subsubtitle method-title">connect:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Connect to peripheral.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)connect:(YMSCBPeripheral *)<em>peripheral</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>peripheral</em></dt>
-			<dd><p>Peripheral to connect.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Connect to peripheral.</p>
-
-<p>This method is to be overridden.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/connectPeripheral:options:" title="connectPeripheral:options:"></a>
-	<h3 class="subsubtitle method-title">connectPeripheral:options:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Establishes connection to peripheral.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)connectPeripheral:(YMSCBPeripheral *)<em>peripheral</em> options:(NSDictionary *)<em>options</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>peripheral</em></dt>
-			<dd><p>The peripheral to which <a href="#//api/name/manager">manager</a> is attempting to connect.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>options</em></dt>
-			<dd><p>A dictionary to customize the behavior of the connection. See &ldquo;Peripheral Connection Options&rdquo; for CBCentralManager.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Establishes connection to peripheral.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/connectPeripheral:options:withBlock:" title="connectPeripheral:options:withBlock:"></a>
-	<h3 class="subsubtitle method-title">connectPeripheral:options:withBlock:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Establishes connection to peripheral with callback block.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)connectPeripheral:(YMSCBPeripheral *)<em>peripheral</em> options:(NSDictionary *)<em>options</em> withBlock:(void ( ^ ) ( YMSCBPeripheral *yp , NSError *error ))<em>connectCallback</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>peripheral</em></dt>
-			<dd><p>The peripheral to which <a href="#//api/name/manager">manager</a> is attempting to connect.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>options</em></dt>
-			<dd><p>A dictionary to customize the behavior of the connection. See &ldquo;Peripheral Connection Options&rdquo; for CBCentralManager.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>connectCallback</em></dt>
-			<dd><p>Callback block to handle peripheral connection.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Establishes connection to peripheral with callback block.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/connectPeripheralAtIndex:options:" title="connectPeripheralAtIndex:options:"></a>
-	<h3 class="subsubtitle method-title">connectPeripheralAtIndex:options:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Connect peripheral at index in <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)connectPeripheralAtIndex:(NSUInteger)<em>index</em> options:(NSDictionary *)<em>options</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>index</em></dt>
-			<dd><p>Index value of peripheral in <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>options</em></dt>
-			<dd><p>A dictionary to customize the behavior of the connection. See &ldquo;Peripheral Connection Options&rdquo; for CBCentralManager.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Connect peripheral at index in <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/connectPeripheralAtIndex:options:withBlock:" title="connectPeripheralAtIndex:options:withBlock:"></a>
-	<h3 class="subsubtitle method-title">connectPeripheralAtIndex:options:withBlock:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Connect peripheral at index in <a href="#//api/name/ymsPeripherals">ymsPeripherals</a> with callback block.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)connectPeripheralAtIndex:(NSUInteger)<em>index</em> options:(NSDictionary *)<em>options</em> withBlock:(void ( ^ ) ( YMSCBPeripheral *yp , NSError *error ))<em>connectCallback</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>index</em></dt>
-			<dd><p>Index value of peripheral in <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>options</em></dt>
-			<dd><p>A dictionary to customize the behavior of the connection. See &ldquo;Peripheral Connection Options&rdquo; for CBCentralManager.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>connectCallback</em></dt>
-			<dd><p>Callback block to execute upon connection.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Connect peripheral at index in <a href="#//api/name/ymsPeripherals">ymsPeripherals</a> with callback block.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/disconnectPeripheralAtIndex:" title="disconnectPeripheralAtIndex:"></a>
-	<h3 class="subsubtitle method-title">disconnectPeripheralAtIndex:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Disconnect peripheral.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)disconnectPeripheralAtIndex:(NSUInteger)<em>index</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>index</em></dt>
-			<dd><p>index value of peripheral in <a href="#//api/name/ymsPeripherals">ymsPeripherals</a> to disconnect.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Disconnect peripheral.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -1662,58 +1113,7 @@ This class listens to CBCentralManagerDelegate messages sent by manager, which i
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/handleConnectedPeripheral:" title="handleConnectedPeripheral:"></a>
-	<h3 class="subsubtitle method-title">handleConnectedPeripheral:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>  Handler for connected peripheral. This method is to be overridden.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)handleConnectedPeripheral:(CBPeripheral *)<em>peripheral</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>peripheral</em></dt>
-			<dd><p>CoreBluetooth peripheral instance</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>  Handler for connected peripheral. This method is to be overridden.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -1764,7 +1164,7 @@ This class listens to CBCentralManagerDelegate messages sent by manager, which i
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -1823,7 +1223,7 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -1885,7 +1285,7 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -1943,7 +1343,7 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -1984,7 +1384,7 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -1997,7 +1397,7 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Handler for when <a href="../Classes/YMSCBAppService.html#//api/name/manager">manager</a> state is powered on.</p>
+		<p>Handler for when <a href="../Classes/YMSCBCentralManager.html#//api/name/manager">manager</a> state is powered on.</p>
 	</div>		
 	
     
@@ -2014,7 +1414,7 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Handler for when <a href="../Classes/YMSCBAppService.html#//api/name/manager">manager</a> state is powered on.</p>
+		<p>Handler for when <a href="../Classes/YMSCBCentralManager.html#//api/name/manager">manager</a> state is powered on.</p>
 	</div>
 	
 	
@@ -2025,7 +1425,7 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -2066,7 +1466,7 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -2107,7 +1507,7 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -2148,7 +1548,7 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -2189,7 +1589,7 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -2240,7 +1640,7 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -2291,7 +1691,7 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -2342,7 +1742,7 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -2383,7 +1783,7 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -2434,7 +1834,7 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -2448,7 +1848,7 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 	
 	<div class="method-subsection brief-description">
 		<p>Retrieves a list of the peripherals currently connected to the system and handles them using
-a callback block.</p>
+<a href="#//api/name/handleFoundPeripheral:">handleFoundPeripheral:</a></p>
 	</div>		
 	
     
@@ -2476,7 +1876,7 @@ a callback block.</p>
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Retrieves a list of the peripherals currently connected to the system and handles them using
-a callback block.</p>
+<a href="#//api/name/handleFoundPeripheral:">handleFoundPeripheral:</a></p>
 	</div>
 	
 	
@@ -2487,7 +1887,7 @@ a callback block.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -2520,7 +1920,13 @@ a callback block.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>retrieveCallback</em></dt>
-			<dd><p>Callback block to handle each retrieved peripheral.</p></dd>
+			<dd><p>Callback block to handle each retrieved peripheral.
+The parameter of retrieve callback are:</p>
+
+<ul>
+<li><code>peripheral</code> &ndash; the retrieved peripheral.</li>
+</ul>
+</dd>
 		</dl>
 		
 	</div>
@@ -2545,7 +1951,7 @@ a callback block.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -2603,7 +2009,7 @@ a callback block.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -2641,7 +2047,16 @@ that is discovered.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>discoverCallback</em></dt>
-			<dd><p>Callback block to execute upon discovery of a peripheral.</p></dd>
+			<dd><p>Callback block to execute upon discovery of a peripheral.
+The parameters of discoverCallback are:</p>
+
+<ul>
+<li><code>peripheral</code> &ndash; the discovered peripheral.</li>
+<li><code>advertisementData</code> &ndash; A dictionary containing any advertisement data.</li>
+<li><code>RSSI</code> &ndash; The current received signal strength indicator (RSSI) of the peripheral, in decibels.</li>
+<li><code>error</code> &ndash; The cause of a failure, if any.</li>
+</ul>
+</dd>
 		</dl>
 		
 	</div>
@@ -2666,7 +2081,7 @@ that is discovered.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -2699,7 +2114,7 @@ that is discovered.</p>
 		<p>Start CoreBluetooth scan for peripherals. This method is to be overridden.</p>
 
 <p>The implementation of this method in a subclass must include the call to
-<a href="../Classes/YMSCBAppService.html#//api/name/scanForPeripheralsWithServices:options:">scanForPeripheralsWithServices:options:</a></p>
+<a href="../Classes/YMSCBCentralManager.html#//api/name/scanForPeripheralsWithServices:options:">scanForPeripheralsWithServices:options:</a></p>
 	</div>
 	
 	
@@ -2710,7 +2125,7 @@ that is discovered.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -2751,7 +2166,7 @@ that is discovered.</p>
 	
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBAppService.h</code><br />
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
 	</div>				
 	
 	
@@ -2770,7 +2185,7 @@ that is discovered.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-12)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-26)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

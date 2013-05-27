@@ -46,13 +46,15 @@
 	
 	<option value="//api/name/characteristicDict">&nbsp;&nbsp;&nbsp;&nbsp;characteristicDict</option>
 	
+	<option value="//api/name/discoverCharacteristicsCallback">&nbsp;&nbsp;&nbsp;&nbsp;discoverCharacteristicsCallback</option>
+	
 	<option value="//api/name/isEnabled">&nbsp;&nbsp;&nbsp;&nbsp;isEnabled</option>
 	
 	<option value="//api/name/isOn">&nbsp;&nbsp;&nbsp;&nbsp;isOn</option>
 	
 	<option value="//api/name/name">&nbsp;&nbsp;&nbsp;&nbsp;name</option>
 	
-	<option value="//api/name/responseBlockDict">&nbsp;&nbsp;&nbsp;&nbsp;responseBlockDict</option>
+	<option value="//api/name/parent">&nbsp;&nbsp;&nbsp;&nbsp;parent</option>
 	
 	
 	
@@ -67,35 +69,15 @@
 	
 	<option value="//api/name/characteristics">&nbsp;&nbsp;&nbsp;&nbsp;- characteristics</option>
 	
-	<option value="//api/name/executeBlock:error:">&nbsp;&nbsp;&nbsp;&nbsp;- executeBlock:error:</option>
+	<option value="//api/name/discoverCharacteristics:withBlock:">&nbsp;&nbsp;&nbsp;&nbsp;- discoverCharacteristics:withBlock:</option>
 	
 	<option value="//api/name/findCharacteristic:">&nbsp;&nbsp;&nbsp;&nbsp;- findCharacteristic:</option>
 	
-	<option value="//api/name/initWithName:baseHi:baseLo:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:baseHi:baseLo:</option>
+	<option value="//api/name/initWithName:parent:baseHi:baseLo:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:parent:baseHi:baseLo:</option>
 	
 	<option value="//api/name/notifyCharacteristicHandler:error:">&nbsp;&nbsp;&nbsp;&nbsp;- notifyCharacteristicHandler:error:</option>
 	
-	<option value="//api/name/readValueForCharacteristic:">&nbsp;&nbsp;&nbsp;&nbsp;- readValueForCharacteristic:</option>
-	
-	<option value="//api/name/readValueForCharacteristicName:">&nbsp;&nbsp;&nbsp;&nbsp;- readValueForCharacteristicName:</option>
-	
-	<option value="//api/name/readValueForCharacteristicName:withBlock:">&nbsp;&nbsp;&nbsp;&nbsp;- readValueForCharacteristicName:withBlock:</option>
-	
-	<option value="//api/name/setNotifyValue:forCharacteristic:">&nbsp;&nbsp;&nbsp;&nbsp;- setNotifyValue:forCharacteristic:</option>
-	
-	<option value="//api/name/setNotifyValue:forCharacteristicName:">&nbsp;&nbsp;&nbsp;&nbsp;- setNotifyValue:forCharacteristicName:</option>
-	
 	<option value="//api/name/syncCharacteristics:">&nbsp;&nbsp;&nbsp;&nbsp;- syncCharacteristics:</option>
-	
-	<option value="//api/name/writeByte:forCharacteristicName:type:">&nbsp;&nbsp;&nbsp;&nbsp;- writeByte:forCharacteristicName:type:</option>
-	
-	<option value="//api/name/writeByte:forCharacteristicName:withBlock:">&nbsp;&nbsp;&nbsp;&nbsp;- writeByte:forCharacteristicName:withBlock:</option>
-	
-	<option value="//api/name/writeValue:forCharacteristic:type:">&nbsp;&nbsp;&nbsp;&nbsp;- writeValue:forCharacteristic:type:</option>
-	
-	<option value="//api/name/writeValue:forCharacteristicName:type:">&nbsp;&nbsp;&nbsp;&nbsp;- writeValue:forCharacteristicName:type:</option>
-	
-	<option value="//api/name/writeValue:forCharacteristicName:withBlock:">&nbsp;&nbsp;&nbsp;&nbsp;- writeValue:forCharacteristicName:withBlock:</option>
 	
 	
 	
@@ -125,14 +107,6 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Find a YMSCBCharacteristic">Find a YMSCBCharacteristic</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_BLE Notification Methods">BLE Notification Methods</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Write Request BLE Service Methods">Write Request BLE Service Methods</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Read Request BLE Service Methods">Read Request BLE Service Methods</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Block Execution">Block Execution</a></span></li>
-	
 </ul></li>
 
 
@@ -147,13 +121,15 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/characteristicDict">characteristicDict</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/discoverCharacteristicsCallback">discoverCharacteristicsCallback</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isEnabled">isEnabled</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isOn">isOn</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/name">name</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/responseBlockDict">responseBlockDict</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/parent">parent</a></span></li>
 	
 </ul></li>
 
@@ -169,35 +145,15 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/characteristics">characteristics</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/executeBlock:error:">executeBlock:error:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/discoverCharacteristics:withBlock:">discoverCharacteristics:withBlock:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/findCharacteristic:">findCharacteristic:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithName:baseHi:baseLo:">initWithName:baseHi:baseLo:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithName:parent:baseHi:baseLo:">initWithName:parent:baseHi:baseLo:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/notifyCharacteristicHandler:error:">notifyCharacteristicHandler:error:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/readValueForCharacteristic:">readValueForCharacteristic:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/readValueForCharacteristicName:">readValueForCharacteristicName:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/readValueForCharacteristicName:withBlock:">readValueForCharacteristicName:withBlock:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setNotifyValue:forCharacteristic:">setNotifyValue:forCharacteristic:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setNotifyValue:forCharacteristicName:">setNotifyValue:forCharacteristicName:</a></span></li>
-	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/syncCharacteristics:">syncCharacteristics:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/writeByte:forCharacteristicName:type:">writeByte:forCharacteristicName:type:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/writeByte:forCharacteristicName:withBlock:">writeByte:forCharacteristicName:withBlock:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/writeValue:forCharacteristic:type:">writeValue:forCharacteristic:type:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/writeValue:forCharacteristicName:type:">writeValue:forCharacteristicName:type:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/writeValue:forCharacteristicName:withBlock:">writeValue:forCharacteristicName:withBlock:</a></span></li>
 	
 </ul></li>
 
@@ -238,8 +194,7 @@
 						<h2 class="subtitle subtitle-overview">Overview</h2>
 						<p>Base class for defining a Bluetooth LE service.</p>
 
-<p>YMSCBService holds an instance of CBService (<a href="#//api/name/cbService">cbService</a>) and provides a service-centric
-read/write API to a CBPeripheral instance contained in <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</p>
+<p>YMSCBService holds an instance of CBService (<a href="#//api/name/cbService">cbService</a>).</p>
 
 <p>This class is typically subclassed to map to a service in a BLE peripheral. The subclass
 typically implements <a href="#//api/name/notifyCharacteristicHandler:error:">notifyCharacteristicHandler:error:</a> to handle <a href="#//api/name/characteristics">characteristics</a> whose
@@ -269,7 +224,14 @@ BLE notification has been enabled.</p>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/cbService">&nbsp;&nbsp;cbService</a></code>
-		<span class="tooltip"><p>pointer to CBService</p></span>
+		<span class="tooltip"><p>Pointer to CBService. Note that access to the peripheral is available via the <code>peripheral</code> property of cbService.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/parent">&nbsp;&nbsp;parent</a></code>
+		<span class="tooltip"><p>Pointer to parent peripheral.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -303,8 +265,8 @@ BLE notification has been enabled.</p>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/responseBlockDict">&nbsp;&nbsp;responseBlockDict</a></code>
-		<span class="tooltip"><p>Dictionary to hold (c<a href="#//api/name/name">name</a>, FIFO queue) for response blocks to execute for a characteristic read or write.</p></span>
+		<code><a href="#//api/name/discoverCharacteristicsCallback">&nbsp;&nbsp;discoverCharacteristicsCallback</a></code>
+		<span class="tooltip"><p>Callback for <a href="#//api/name/characteristics">characteristics</a> that are discovered.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -318,7 +280,7 @@ BLE notification has been enabled.</p>
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithName:baseHi:baseLo:">&ndash;&nbsp;initWithName:baseHi:baseLo:</a></code>
+		<code><a href="#//api/name/initWithName:parent:baseHi:baseLo:">&ndash;&nbsp;initWithName:parent:baseHi:baseLo:</a></code>
 		<span class="tooltip"><p>Initialize class instance.</p></span>
 	</span>
 	
@@ -390,28 +352,6 @@ BLE notification has been enabled.</p>
 	</span>
 	
 	
-</li>
-						</ul>
-						
-						
-						<a title="BLE Notification Methods" name="task_BLE Notification Methods"></a>
-						<h3 class="subsubtitle task-title">BLE Notification Methods</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/setNotifyValue:forCharacteristic:">&ndash;&nbsp;setNotifyValue:forCharacteristic:</a></code>
-		<span class="tooltip"><p>Set notification value with respect to characteristic.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/setNotifyValue:forCharacteristicName:">&ndash;&nbsp;setNotifyValue:forCharacteristicName:</a></code>
-		<span class="tooltip"><p>Set notification value with respect to characteristic <a href="#//api/name/name">name</a>.</p></span>
-	</span>
-	
-	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/notifyCharacteristicHandler:error:">&ndash;&nbsp;notifyCharacteristicHandler:error:</a></code>
@@ -419,90 +359,10 @@ BLE notification has been enabled.</p>
 	</span>
 	
 	
-</li>
-						</ul>
-						
-						
-						<a title="Write Request BLE Service Methods" name="task_Write Request BLE Service Methods"></a>
-						<h3 class="subsubtitle task-title">Write Request BLE Service Methods</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/writeValue:forCharacteristic:type:">&ndash;&nbsp;writeValue:forCharacteristic:type:</a></code>
-		<span class="tooltip"><p>Write value with respect to characteristic.</p></span>
-	</span>
-	
-	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/writeValue:forCharacteristicName:type:">&ndash;&nbsp;writeValue:forCharacteristicName:type:</a></code>
-		<span class="tooltip"><p>Write value with respect to characteristic <a href="#//api/name/name">name</a>.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/writeByte:forCharacteristicName:type:">&ndash;&nbsp;writeByte:forCharacteristicName:type:</a></code>
-		<span class="tooltip"><p>Write byte with respect to characteristic <a href="#//api/name/name">name</a>.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/writeValue:forCharacteristicName:withBlock:">&ndash;&nbsp;writeValue:forCharacteristicName:withBlock:</a></code>
-		<span class="tooltip"><p>Request write value given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/writeByte:forCharacteristicName:withBlock:">&ndash;&nbsp;writeByte:forCharacteristicName:withBlock:</a></code>
-		<span class="tooltip"><p>Request write byte given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p></span>
-	</span>
-	
-	
-</li>
-						</ul>
-						
-						
-						<a title="Read Request BLE Service Methods" name="task_Read Request BLE Service Methods"></a>
-						<h3 class="subsubtitle task-title">Read Request BLE Service Methods</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/readValueForCharacteristic:">&ndash;&nbsp;readValueForCharacteristic:</a></code>
-		<span class="tooltip"><p>Read value with respect to characteristic.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/readValueForCharacteristicName:">&ndash;&nbsp;readValueForCharacteristicName:</a></code>
-		<span class="tooltip"><p>Read value with respect to characteristic <a href="#//api/name/name">name</a>.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/readValueForCharacteristicName:withBlock:">&ndash;&nbsp;readValueForCharacteristicName:withBlock:</a></code>
-		<span class="tooltip"><p>Request read value given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p></span>
-	</span>
-	
-	
-</li>
-						</ul>
-						
-						
-						<a title="Block Execution" name="task_Block Execution"></a>
-						<h3 class="subsubtitle task-title">Block Execution</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/executeBlock:error:">&ndash;&nbsp;executeBlock:error:</a></code>
-		<span class="tooltip"><p>Execute callback block for read or write request.</p></span>
+		<code><a href="#//api/name/discoverCharacteristics:withBlock:">&ndash;&nbsp;discoverCharacteristics:withBlock:</a></code>
+		<span class="tooltip"><p>Discover <a href="#//api/name/characteristics">characteristics</a> for this service.</p></span>
 	</span>
 	
 	
@@ -567,7 +427,7 @@ BLE notification has been enabled.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>pointer to CBService</p>
+		<p>Pointer to CBService. Note that access to the peripheral is available via the <code>peripheral</code> property of cbService.</p>
 	</div>		
 	
     
@@ -584,7 +444,7 @@ BLE notification has been enabled.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>pointer to CBService</p>
+		<p>Pointer to CBService. Note that access to the peripheral is available via the <code>peripheral</code> property of cbService.</p>
 	</div>
 	
 	
@@ -626,6 +486,47 @@ BLE notification has been enabled.</p>
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Holds (key, value pairs of (NSString, <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a>) instances</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/discoverCharacteristicsCallback" title="discoverCharacteristicsCallback"></a>
+	<h3 class="subsubtitle method-title">discoverCharacteristicsCallback</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Callback for <a href="#//api/name/characteristics">characteristics</a> that are discovered.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) YMSCBDiscoverCharacteristicsCallbackBlockType discoverCharacteristicsCallback</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Callback for <a href="#//api/name/characteristics">characteristics</a> that are discovered.</p>
 	</div>
 	
 	
@@ -766,18 +667,18 @@ BLE notification has been enabled.</p>
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/responseBlockDict" title="responseBlockDict"></a>
-	<h3 class="subsubtitle method-title">responseBlockDict</h3>
+	<a name="//api/name/parent" title="parent"></a>
+	<h3 class="subsubtitle method-title">parent</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Dictionary to hold (c<a href="#//api/name/name">name</a>, FIFO queue) for response blocks to execute for a characteristic read or write.</p>
+		<p>Pointer to parent peripheral.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSMutableDictionary *responseBlockDict</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, weak) YMSCBPeripheral *parent</code></div>
 
     
 	
@@ -789,7 +690,7 @@ BLE notification has been enabled.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Dictionary to hold (c<a href="#//api/name/name">name</a>, FIFO queue) for response blocks to execute for a characteristic read or write.</p>
+		<p>Pointer to parent peripheral.</p>
 	</div>
 	
 	
@@ -893,7 +794,7 @@ BLE notification has been enabled.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>cname</em></dt>
-			<dd><p>characteristic <a href="../Classes/YMSCBService.html#//api/name/name">name</a></p></dd>
+			<dd><p>characteristic <a href="#//api/name/name">name</a></p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
@@ -970,18 +871,18 @@ BLE notification has been enabled.</p>
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/executeBlock:error:" title="executeBlock:error:"></a>
-	<h3 class="subsubtitle method-title">executeBlock:error:</h3>
+	<a name="//api/name/discoverCharacteristics:withBlock:" title="discoverCharacteristics:withBlock:"></a>
+	<h3 class="subsubtitle method-title">discoverCharacteristics:withBlock:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Execute callback block for read or write request.</p>
+		<p>Discover <a href="#//api/name/characteristics">characteristics</a> for this service.</p>
 	</div>		
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)executeBlock:(YMSCBCharacteristic *)<em>yc</em> error:(NSError *)<em>error</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)discoverCharacteristics:(NSArray *)<em>characteristicUUIDs</em> withBlock:(void ( ^ ) ( NSDictionary *chDict , NSError *))<em>callback</em></code></div>
 
     
 	
@@ -989,13 +890,13 @@ BLE notification has been enabled.</p>
 		<h4 class="method-subtitle parameter-title">Parameters</h4>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>yc</em></dt>
-			<dd><p>Characteristic to execute callback block.</p></dd>
+			<dt><em>characteristicUUIDs</em></dt>
+			<dd><p>An array of CBUUID objects that you are interested in. Here, each CBUUID object represents a UUID that identifies the type of a characteristic you want to discover.</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>error</em></dt>
-			<dd><p>Error object if the request fails.</p></dd>
+			<dt><em>callback</em></dt>
+			<dd><p>Callback block to execute upon response for discovered <a href="#//api/name/characteristics">characteristics</a>.</p></dd>
 		</dl>
 		
 	</div>
@@ -1008,7 +909,7 @@ BLE notification has been enabled.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Execute callback block for read or write request.</p>
+		<p>Discover <a href="#//api/name/characteristics">characteristics</a> for this service.</p>
 	</div>
 	
 	
@@ -1082,8 +983,8 @@ BLE notification has been enabled.</p>
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithName:baseHi:baseLo:" title="initWithName:baseHi:baseLo:"></a>
-	<h3 class="subsubtitle method-title">initWithName:baseHi:baseLo:</h3>
+	<a name="//api/name/initWithName:parent:baseHi:baseLo:" title="initWithName:parent:baseHi:baseLo:"></a>
+	<h3 class="subsubtitle method-title">initWithName:parent:baseHi:baseLo:</h3>
 	
 	
 	
@@ -1093,7 +994,7 @@ BLE notification has been enabled.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (id)initWithName:(NSString *)<em>oName</em> baseHi:(int64_t)<em>hi</em> baseLo:(int64_t)<em>lo</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (id)initWithName:(NSString *)<em>oName</em> parent:(YMSCBPeripheral *)<em>pObj</em> baseHi:(int64_t)<em>hi</em> baseLo:(int64_t)<em>lo</em></code></div>
 
     
 	
@@ -1209,284 +1110,6 @@ conformed to by <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/readValueForCharacteristic:" title="readValueForCharacteristic:"></a>
-	<h3 class="subsubtitle method-title">readValueForCharacteristic:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Read value with respect to characteristic.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)readValueForCharacteristic:(CBCharacteristic *)<em>characteristic</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>characteristic</em></dt>
-			<dd><p>CBCharacteristic to be notified of.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Read value with respect to characteristic.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/readValueForCharacteristicName:" title="readValueForCharacteristicName:"></a>
-	<h3 class="subsubtitle method-title">readValueForCharacteristicName:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Read value with respect to characteristic <a href="#//api/name/name">name</a>.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)readValueForCharacteristicName:(NSString *)<em>cname</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>cname</em></dt>
-			<dd><p>Name of CBCharacteristic to be notified of.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Read value with respect to characteristic <a href="#//api/name/name">name</a>.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/readValueForCharacteristicName:withBlock:" title="readValueForCharacteristicName:withBlock:"></a>
-	<h3 class="subsubtitle method-title">readValueForCharacteristicName:withBlock:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Request read value given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)readValueForCharacteristicName:(NSString *)<em>cname</em> withBlock:(void ( ^ ) ( NSData *data , NSError *error ))<em>readCallback</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>cname</em></dt>
-			<dd><p><a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> <a href="#//api/name/name">name</a>.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>readCallback</em></dt>
-			<dd><p>Callback block to execute upon response.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Request read value given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p>
-
-<p>The callback block readCallback has two arguments: <code>data</code> and <code>error</code>:</p>
-
-<ul>
-<li><code>data</code> is populated with the <code>value</code> property of <a href="../Classes/YMSCBCharacteristic.html#//api/name/cbCharacteristic">[YMSCBCharacteristic cbCharacteristic]</a>.</li>
-<li><code>error</code> is populated with the returned <code>error</code> object from the delegate method peripheral:didUpdateValueForCharacteristic:error: implemented in <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</li>
-</ul>
-
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/setNotifyValue:forCharacteristic:" title="setNotifyValue:forCharacteristic:"></a>
-	<h3 class="subsubtitle method-title">setNotifyValue:forCharacteristic:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Set notification value with respect to characteristic.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)setNotifyValue:(BOOL)<em>notifyValue</em> forCharacteristic:(CBCharacteristic *)<em>characteristic</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>notifyValue</em></dt>
-			<dd><p>Set notification enable.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>characteristic</em></dt>
-			<dd><p>CBCharacteristic to be notified of.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Set notification value with respect to characteristic.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/setNotifyValue:forCharacteristicName:" title="setNotifyValue:forCharacteristicName:"></a>
-	<h3 class="subsubtitle method-title">setNotifyValue:forCharacteristicName:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Set notification value with respect to characteristic <a href="#//api/name/name">name</a>.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)setNotifyValue:(BOOL)<em>notifyValue</em> forCharacteristicName:(NSString *)<em>cname</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>notifyValue</em></dt>
-			<dd><p>Set notification enable.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>cname</em></dt>
-			<dd><p>Name of CBCharacteristic to be notified of.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Set notification value with respect to characteristic <a href="#//api/name/name">name</a>.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
 	<a name="//api/name/syncCharacteristics:" title="syncCharacteristics:"></a>
 	<h3 class="subsubtitle method-title">syncCharacteristics:</h3>
 	
@@ -1537,327 +1160,6 @@ conformed to by <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</
 	
 </div>
 						
-						<div class="section-method">
-	<a name="//api/name/writeByte:forCharacteristicName:type:" title="writeByte:forCharacteristicName:type:"></a>
-	<h3 class="subsubtitle method-title">writeByte:forCharacteristicName:type:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Write byte with respect to characteristic <a href="#//api/name/name">name</a>.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)writeByte:(int8_t)<em>val</em> forCharacteristicName:(NSString *)<em>cname</em> type:(CBCharacteristicWriteType)<em>type</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>val</em></dt>
-			<dd><p>Byte value to be written.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>cname</em></dt>
-			<dd><p>Name of CBCharacteristic to be notified of.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>type</em></dt>
-			<dd><p>The type of write to be executed.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Write byte with respect to characteristic <a href="#//api/name/name">name</a>.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/writeByte:forCharacteristicName:withBlock:" title="writeByte:forCharacteristicName:withBlock:"></a>
-	<h3 class="subsubtitle method-title">writeByte:forCharacteristicName:withBlock:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Request write byte given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)writeByte:(int8_t *)<em>val</em> forCharacteristicName:(NSString *)<em>cname</em> withBlock:(void ( ^ ) ( NSError *error ))<em>writeCallback</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>val</em></dt>
-			<dd><p>Byte value to be written</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>cname</em></dt>
-			<dd><p><a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> <a href="#//api/name/name">name</a>.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>writeCallback</em></dt>
-			<dd><p>Callback block to execute upon response.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Request write byte given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p>
-
-<p>The callback block readCallback has one argument: <code>error</code>:</p>
-
-<ul>
-<li><code>error</code> is populated with the returned <code>error</code> object from the delegate method peripheral:didUpdateValueForCharacteristic:error:
-or peripheral:didWriteValueForCharacteristic:error: implemented in <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</li>
-</ul>
-
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/writeValue:forCharacteristic:type:" title="writeValue:forCharacteristic:type:"></a>
-	<h3 class="subsubtitle method-title">writeValue:forCharacteristic:type:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Write value with respect to characteristic.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)writeValue:(NSData *)<em>data</em> forCharacteristic:(CBCharacteristic *)<em>characteristic</em> type:(CBCharacteristicWriteType)<em>type</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>data</em></dt>
-			<dd><p>Data to be written.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>characteristic</em></dt>
-			<dd><p>CBCharacteristic to be notified of.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>type</em></dt>
-			<dd><p>The type of write to be executed.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Write value with respect to characteristic.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/writeValue:forCharacteristicName:type:" title="writeValue:forCharacteristicName:type:"></a>
-	<h3 class="subsubtitle method-title">writeValue:forCharacteristicName:type:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Write value with respect to characteristic <a href="#//api/name/name">name</a>.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)writeValue:(NSData *)<em>data</em> forCharacteristicName:(NSString *)<em>cname</em> type:(CBCharacteristicWriteType)<em>type</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>data</em></dt>
-			<dd><p>Data to be written.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>cname</em></dt>
-			<dd><p>Name of CBCharacteristic to be notified of.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>type</em></dt>
-			<dd><p>The type of write to be executed.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Write value with respect to characteristic <a href="#//api/name/name">name</a>.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/writeValue:forCharacteristicName:withBlock:" title="writeValue:forCharacteristicName:withBlock:"></a>
-	<h3 class="subsubtitle method-title">writeValue:forCharacteristicName:withBlock:</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Request write value given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)writeValue:(NSData *)<em>data</em> forCharacteristicName:(NSString *)<em>cname</em> withBlock:(void ( ^ ) ( NSError *error ))<em>writeCallback</em></code></div>
-
-    
-	
-	<div class="method-subsection arguments-section parameters">
-		<h4 class="method-subtitle parameter-title">Parameters</h4>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>data</em></dt>
-			<dd><p>The value to be written</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>cname</em></dt>
-			<dd><p><a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> <a href="#//api/name/name">name</a>.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>writeCallback</em></dt>
-			<dd><p>Callback block to execute upon response.</p></dd>
-		</dl>
-		
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Request write value given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p>
-
-<p>The callback block readCallback has one argument: <code>error</code>:</p>
-
-<ul>
-<li><code>error</code> is populated with the returned <code>error</code> object from the delegate method peripheral:didUpdateValueForCharacteristic:error:
-or peripheral:didWriteValueForCharacteristic:error: implemented in <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</li>
-</ul>
-
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBService.h</code><br />
-	</div>				
-	
-	
-</div>
-						
 					</div>
 					
 					
@@ -1871,7 +1173,7 @@ or peripheral:didWriteValueForCharacteristic:error: implemented in <a href="../C
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-12)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-26)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						
