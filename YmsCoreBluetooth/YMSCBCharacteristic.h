@@ -186,9 +186,9 @@ typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
 - (void)discoverDescriptorsWithBlock:(void (^)(NSArray *ydescriptors, NSError *error))callback;
 
 /**
- Handler method for discovered characteristics.
+ Handler method for discovered descriptors.
  
- @param desDict Dictionary of YMSCBCharacteristics that have been discovered.
+ @param ydescriptors Array of YMSCBDescriptor instances.
  @param error Error object, if failure.
  */
 - (void)handleDiscoveredDescriptorsResponse:(NSArray *)ydescriptors withError:(NSError *)error;
