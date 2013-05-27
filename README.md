@@ -107,26 +107,33 @@ In the following code sample, `self` is an instance of a subclass of YMSCBPeriph
 				}
 
 				for (YMSCBService *service in yservices) {
-					if ([service.name isEqualToString:@"simplekeys"]) {
-						__weak DEASimpleKeysService *thisService = (DEASimpleKeysService *)service;
-						[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError 	*error) {
-							[thisService turnOn];
-						}];
+					[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+						if (error) {
+							return;
+						}
+						__weak YMSCBService *thisService = (YMSCBService *)service;
+						for (NSString *key in chDict) {
+							YMSCBCharacteristic *ct = chDict[key];
 
-					} else if ([service.name isEqualToString:@"devinfo"]) {
-						__weak DEADeviceInfoService *thisService = (DEADeviceInfoService *)service;
-						[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError 	*error) {
-							[thisService readDeviceInfo];
-						}];
+							[ct discoverDescriptorsWithBlock:^(NSArray *ydescriptors, NSError *error) {
+								if (error) {
+									return;
+								}
+								for (YMSCBDescriptor *yd in ydescriptors) {
+									NSLog(@"Descriptor: %@ %@ %@", thisService.name, yd.UUID, yd.cbDescriptor);
+								}
+							}];
+						}
 
-					} else {
-						[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError 	*error) {
-						}];
-					}
+
+					}];
+
 				}
+
 			}];
 		}];
 	}
+
 
 #### Read a Characteristic
 
