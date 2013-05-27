@@ -36,7 +36,7 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
  CBCentralManagerDelgate messages sent by manager.
  
  This class provides ObjectiveC block-based callback support for peripheral
- scanning, connection, and retrieval.
+ scanning and retrieval.
  
  YMSCBCentralManager is intended to be subclassed: the subclass would in turn be written to 
  handle the set of BLE peripherals of interest to the application.
@@ -203,7 +203,14 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
 
  @param serviceUUIDs An array of CBUUIDs the app is interested in.
  @param options A dictionary to customize the scan, see CBCentralManagerScanOptionAllowDuplicatesKey.
- @param discoverCallback Callback block to execute upon discovery of a peripheral.
+ @param discoverCallback Callback block to execute upon discovery of a peripheral. 
+ The parameters of discoverCallback are:
+ 
+ * `peripheral` - the discovered peripheral.
+ * `advertisementData` - A dictionary containing any advertisement data.
+ * `RSSI` - The current received signal strength indicator (RSSI) of the peripheral, in decibels.
+ * `error` - The cause of a failure, if any.
+ 
  */
 - (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs options:(NSDictionary *)options withBlock:(void (^)(CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI, NSError *error))discoverCallback;
 
@@ -231,7 +238,8 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
 
 /**
  Retrieves a list of the peripherals currently connected to the system and handles them using
- a callback block.
+ handleFoundPeripheral:
+
  
  @param peripheralUUIDs An array of CFUUIDRef objects from which CBPeripheral objects can be retrieved.
  */
@@ -244,6 +252,10 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
  
  @param peripheralUUIDs An array of CFUUIDRef objects from which CBPeripheral objects can be retrieved. 
  @param retrieveCallback Callback block to handle each retrieved peripheral.
+ The parameter of retrieve callback are:
+ 
+ * `peripheral` - the retrieved peripheral.
+ 
  */
 - (void)retrievePeripherals:(NSArray *)peripheralUUIDs
                   withBlock:(void (^)(CBPeripheral *peripheral))retrieveCallback;
