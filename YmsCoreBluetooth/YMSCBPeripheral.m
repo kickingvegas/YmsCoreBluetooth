@@ -121,7 +121,6 @@
                     if (error) {
                         return;
                     }
-                    // TODO find descriptors (if necessary)
                     __weak YMSCBService *thisService = (YMSCBService *)service;
                     for (NSString *key in chDict) {
                         YMSCBCharacteristic *ct = chDict[key];
@@ -200,7 +199,6 @@
         self.connectCallback(self, error);
         self.connectCallback = nil;
     } else {
-        // TODO: support connectionHandler
         [self defaultConnectionHandler];
     }
 }
@@ -360,8 +358,6 @@
  @param error If an error occured, the cause of the failure.
  */
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
-    // TODO: Implement callback block for notification change response.
-    
     YMSCBService *btService = [self findService:characteristic.service];
     YMSCBCharacteristic *ct = [btService findCharacteristic:characteristic];
     
