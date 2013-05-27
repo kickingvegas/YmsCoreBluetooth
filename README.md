@@ -30,7 +30,7 @@ The data object hierachy of CoreBluetooth can be described as such:
 	    * A CBService instance can have multiple CBCharacteristic instances.
 		    * A CBCharacteristic instance can have multiple CBDescriptor instances.
 			
-However the existing CoreBluetooth API does not map BLE requests to the data object hierarchy. For example connection to a CBPeripheral instance is accomplished from a CBCentralManager instance instead of from CBPeripheral. Writes, reads, and setting the notification state of a CBCharacteristic is issued from a CBPeripheral instance, instead of from CBCharacteristic. *YmsCoreBluetooth provides an API that more naturally maps operations to the data object hierarchy*.
+However the existing CoreBluetooth API does not map BLE requests to the data object hierarchy. For example connection to a CBPeripheral instance is accomplished from a CBCentralManager instance instead of from a CBPeripheral. Writes, reads, and setting the notification state of a CBCharacteristic are issued from a CBPeripheral instance, instead of from CBCharacteristic. *YmsCoreBluetooth provides an API that more naturally maps operations to the data object hierarchy*.
 
 YMSCoreBluetooth defines container classes which map to the CoreBluetooth object hierarchy:
 
@@ -131,7 +131,7 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 	- (void)readDeviceInfo {
 
 		YMSCBCharacteristic *system_idCt = self.characteristicDict[@"system_id"];
-
+		__weak DEADeviceInfoService *this = self;
 		[system_idCt readValueWithBlock:^(NSData *data, NSError *error) {
 			NSMutableString *tmpString = [NSMutableString stringWithFormat:@""];
 			unsigned char bytes[data.length];
@@ -167,7 +167,7 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 
 	- (void)requestCalibration {
 		if (self.isCalibrating == NO) {
-
+            __weak DEABarometerService *this = self;
 			YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
 			[configCt writeByte:0x2 withBlock:^(NSError *error) {
 				if (error) {
@@ -222,7 +222,6 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 
 	- (void)turnOn {
 	    __weak DEABaseService *this = self;
-		
 		YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
 		[configCt writeByte:0x1 withBlock:^(NSError *error) {
 			if (error) {
