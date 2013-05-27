@@ -92,8 +92,8 @@
                     }];
                     
                 } else {
+                    __weak DEABaseService *thisService = (DEABaseService *)service;
                     [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
-                        __weak DEABaseService *thisService = (DEABaseService *)service;
                         for (NSString *key in chDict) {
                             YMSCBCharacteristic *ct = chDict[key];
                             //NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
@@ -107,7 +107,6 @@
                                 }
                             }];
                         }
-
                     }];
                 }
             }
