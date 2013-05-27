@@ -54,6 +54,7 @@ static DEACentralManager *sharedCentralManager;
      */
     
 #ifdef CALLBACK_EXAMPLE
+    __weak DEACentralManager *this = self;
     [self scanForPeripheralsWithServices:nil
                                  options:options
                                withBlock:^(CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI, NSError *error) {
@@ -63,7 +64,7 @@ static DEACentralManager *sharedCentralManager;
                                    }
                                    
                                    NSLog(@"DISCOVERED: %@, %@, %@ db", peripheral, peripheral.name, RSSI);
-                                   [self handleFoundPeripheral:peripheral];
+                                   [this handleFoundPeripheral:peripheral];
                                }];
     
 #else
@@ -105,10 +106,10 @@ static DEACentralManager *sharedCentralManager;
 - (void)managerPoweredOnHandler {
     if (self.useStoredPeripherals) {
         NSArray *peripheralUUIDs = [YMSCBStoredPeripherals genPeripheralUUIDs];
-
+        __weak DEACentralManager *this = self;
         [self retrievePeripherals:peripheralUUIDs
                         withBlock:^(CBPeripheral *peripheral) {
-                            [self handleFoundPeripheral:peripheral];
+                            [this handleFoundPeripheral:peripheral];
                         }];
     }
 }
