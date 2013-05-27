@@ -117,11 +117,13 @@
             }
             
             for (YMSCBService *service in yservices) {
+                __weak YMSCBService *thisService = (YMSCBService *)service;
+                
                 [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
                     if (error) {
                         return;
                     }
-                    __weak YMSCBService *thisService = (YMSCBService *)service;
+
                     for (NSString *key in chDict) {
                         YMSCBCharacteristic *ct = chDict[key];
                         //NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
@@ -135,12 +137,8 @@
                             }
                         }];
                     }
-
-
                 }];
-                
             }
-            
         }];
     }];
 }
