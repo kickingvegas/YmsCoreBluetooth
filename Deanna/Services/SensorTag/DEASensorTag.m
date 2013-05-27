@@ -18,14 +18,14 @@
 
 #import "DEASensorTag.h"
 #import "DEABaseService.h"
-#import "DEATemperatureService.h"
-#import "DEASimpleKeysService.h"
 #import "DEAAccelerometerService.h"
-#import "DEAHumidityService.h"
 #import "DEABarometerService.h"
-#import "DEAGyroscopeService.h"
-#import "DEAMagnetometerService.h"
 #import "DEADeviceInfoService.h"
+#import "DEAGyroscopeService.h"
+#import "DEAHumidityService.h"
+#import "DEAMagnetometerService.h"
+#import "DEASimpleKeysService.h"
+#import "DEATemperatureService.h"
 #import "YMSCBCharacteristic.h"
 
 
@@ -99,5 +99,37 @@
     }];
 }
 
+
+- (DEAAccelerometerService *)accelerometer {
+    return self.serviceDict[@"accelerometer"];
+}
+
+- (DEABarometerService *)barometer {
+    return self.serviceDict[@"barometer"];
+}
+
+- (DEADeviceInfoService *)devinfo {
+    return self.serviceDict[@"devinfo"];
+}
+
+- (DEAGyroscopeService *)gyroscope {
+    return self.serviceDict[@"gyroscope"];
+}
+
+- (DEAHumidityService *)humidity {
+    return self.serviceDict[@"humidity"];
+}
+
+- (DEAMagnetometerService *)magnetometer {
+    return self.serviceDict[@"magnetometer"];
+}
+
+- (DEASimpleKeysService *)simplekeys {
+    return self.serviceDict[@"simplekeys"];
+}
+
+- (DEATemperatureService *)temperature {
+    return self.serviceDict[@"temperature"];
+}
 
 @end

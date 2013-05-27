@@ -18,11 +18,30 @@
 
 #import "YMSCBPeripheral.h"
 
+@class DEAAccelerometerService;
+@class DEABarometerService;
+@class DEADeviceInfoService;
+@class DEAGyroscopeService;
+@class DEAHumidityService;
+@class DEAMagnetometerService;
+@class DEASimpleKeysService;
+@class DEATemperatureService;
+
 /**
  TI SensorTag Peripheral Class.
  
  This class maps to an instance of a CBPeripheral associated with a found TI SensorTag.
  */
 @interface DEASensorTag : YMSCBPeripheral
+
+
+@property (nonatomic, readonly) DEAAccelerometerService *accelerometer;
+@property (nonatomic, readonly) DEABarometerService *barometer;
+@property (nonatomic, readonly) DEADeviceInfoService *devinfo;
+@property (nonatomic, readonly) DEAGyroscopeService *gyroscope;
+@property (nonatomic, readonly) DEAHumidityService *humidity;
+@property (nonatomic, readonly) DEAMagnetometerService *magnetometer;
+@property (nonatomic, readonly) DEASimpleKeysService *simplekeys;
+@property (nonatomic, readonly) DEATemperatureService *temperature;
 
 @end
