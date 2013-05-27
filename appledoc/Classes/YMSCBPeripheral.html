@@ -48,6 +48,8 @@
 	
 	<option value="//api/name/connectCallback">&nbsp;&nbsp;&nbsp;&nbsp;connectCallback</option>
 	
+	<option value="//api/name/delegate">&nbsp;&nbsp;&nbsp;&nbsp;delegate</option>
+	
 	<option value="//api/name/discoverServicesCallback">&nbsp;&nbsp;&nbsp;&nbsp;discoverServicesCallback</option>
 	
 	<option value="//api/name/isConnected">&nbsp;&nbsp;&nbsp;&nbsp;isConnected</option>
@@ -78,8 +80,6 @@
 	<option value="//api/name/defaultConnectionHandler">&nbsp;&nbsp;&nbsp;&nbsp;- defaultConnectionHandler</option>
 	
 	<option value="//api/name/disconnect">&nbsp;&nbsp;&nbsp;&nbsp;- disconnect</option>
-	
-	<option value="//api/name/discoverServices">&nbsp;&nbsp;&nbsp;&nbsp;- discoverServices</option>
 	
 	<option value="//api/name/discoverServices:withBlock:">&nbsp;&nbsp;&nbsp;&nbsp;- discoverServices:withBlock:</option>
 	
@@ -165,6 +165,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/connectCallback">connectCallback</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/delegate">delegate</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/discoverServicesCallback">discoverServicesCallback</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isConnected">isConnected</a></span></li>
@@ -196,8 +198,6 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/defaultConnectionHandler">defaultConnectionHandler</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/disconnect">disconnect</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/discoverServices">discoverServices</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/discoverServices:withBlock:">discoverServices:withBlock:</a></span></li>
 	
@@ -315,6 +315,13 @@ contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</
 	<span class="tooltip">
 		<code><a href="#//api/name/base">&nbsp;&nbsp;base</a></code>
 		<span class="tooltip"><p>128 bit address base</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+		<span class="tooltip"><p>Pointer to delegate.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -445,13 +452,6 @@ contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</
 	<span class="tooltip">
 		<code><a href="#//api/name/updateRSSI">&ndash;&nbsp;updateRSSI</a></code>
 		<span class="tooltip"><p>Request RSSI update from CBPeripheral.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/discoverServices">&ndash;&nbsp;discoverServices</a></code>
-		<span class="tooltip"><p>Discover the <a href="#//api/name/services">services</a></p></span>
 	</span>
 	
 	
@@ -771,6 +771,49 @@ contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Holds callback for connection established.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBPeripheral.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="subsubtitle method-title">delegate</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Pointer to delegate.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, weak) id&lt;CBPeripheralDelegate&gt; delegate</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Pointer to delegate.</p>
+
+<p>The delegate object will be sent CBCentralManagerDelegate messages received by manager.</p>
 	</div>
 	
 	
@@ -1298,47 +1341,6 @@ a callback block defined.</p>
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Dis<a href="#//api/name/connect">connect</a> peripheral</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBPeripheral.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/discoverServices" title="discoverServices"></a>
-	<h3 class="subsubtitle method-title">discoverServices</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Discover the <a href="#//api/name/services">services</a></p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)discoverServices</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Discover the <a href="#//api/name/services">services</a></p>
 	</div>
 	
 	
@@ -2488,7 +2490,7 @@ reference a <a href="../Classes/YMSCBService.html">YMSCBService</a>.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-26)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-27)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

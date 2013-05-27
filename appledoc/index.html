@@ -112,7 +112,7 @@
 <li> <a href="Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> &ndash; A BLE characteristic can have multiple BLE descriptors
 
 <ul>
-<li> YMSCBDescriptor &ndash; A BLE descriptor (TBD)</li>
+<li> <a href="Classes/YMSCBDescriptor.html">YMSCBDescriptor</a> &ndash; A BLE descriptor</li>
 </ul>
 </li>
 </ul>
@@ -154,7 +154,14 @@
 <li>set notification status (on, off)</li>
 <li>write value to characteristic</li>
 <li>read value of characteristic</li>
-<li>discover descriptors associated with this characteristic (TBD)</li>
+<li>discover descriptors associated with this characteristic</li>
+</ul>
+</li>
+<li><a href="Classes/YMSCBDescriptor.html">YMSCBDescriptor</a>
+
+<ul>
+<li>write value to descriptor</li>
+<li>read value of descriptor</li>
 </ul>
 </li>
 </ul>
@@ -201,22 +208,32 @@
         if (error) {
             return;
         }
-        // NOTE: self and yp are the same.
+
         [yp discoverServices:[yp services] withBlock:^(NSArray *yservices, NSError *error) {
             if (error) {
                 return;
             }
+
             for (YMSCBService *service in yservices) {
+                __weak YMSCBService *thisService = (YMSCBService *)service;
+
                 [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
                     if (error) {
                         return;
                     }
-                    if ([service.name isEqualToString:@"simplekeys"]) {
-                        DEASimpleKeysService *sks = (DEASimpleKeysService *)service;
-                        [sks turnOn];
-                    } else if ([service.name isEqualToString:@"devinfo"]) {
-                        DEADeviceInfoService *ds = (DEADeviceInfoService *)service;
-                        [ds readDeviceInfo];
+
+                    for (NSString *key in chDict) {
+                        YMSCBCharacteristic *ct = chDict[key];
+                        //NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
+
+                        [ct discoverDescriptorsWithBlock:^(NSArray *ydescriptors, NSError *error) {
+                            if (error) {
+                                return;
+                            }
+                            for (YMSCBDescriptor *yd in ydescriptors) {
+                                NSLog(@"Descriptor: %@ %@ %@", thisService.name, yd.UUID, yd.cbDescriptor);
+                            }
+                        }];
                     }
                 }];
             }
@@ -269,7 +286,9 @@
 
 <pre><code>- (void)requestCalibration {
     if (self.isCalibrating == NO) {
+
         __weak DEABarometerService *this = self;
+
         YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
         [configCt writeByte:0x2 withBlock:^(NSError *error) {
             if (error) {
@@ -277,7 +296,7 @@
                 return;
             }
 
-            YMSCBCharacteristic *calibrationCt = self.characteristicDict[@"calibration"];
+            YMSCBCharacteristic *calibrationCt = this.characteristicDict[@"calibration"];
             [calibrationCt readValueWithBlock:^(NSData *data, NSError *error) {
                 if (error) {
                     NSLog(@"ERROR: read request to barometer calibration failed.");
@@ -296,13 +315,13 @@
                     int index = i/2 + 1;
 
                     if (index == 1) self.c1 = cx;
-                    else if (index == 2) self.c2 = cx;
-                    else if (index == 3) self.c3 = cx;
-                    else if (index == 4) self.c4 = cx;
-                    else if (index == 5) self.c5 = cx;
-                    else if (index == 6) self.c6 = cx;
-                    else if (index == 7) self.c7 = cx;
-                    else if (index == 8) self.c8 = cx;
+                    else if (index == 2) this.c2 = cx;
+                    else if (index == 3) this.c3 = cx;
+                    else if (index == 4) this.c4 = cx;
+                    else if (index == 5) this.c5 = cx;
+                    else if (index == 6) this.c6 = cx;
+                    else if (index == 7) this.c7 = cx;
+                    else if (index == 8) this.c8 = cx;
 
                     i = i + 2;
                 }
@@ -491,6 +510,8 @@
 							
 							<li><a href="Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a></li>
 							
+							<li><a href="Classes/YMSCBDescriptor.html">YMSCBDescriptor</a></li>
+							
 							<li><a href="Classes/YMSCBPeripheral.html">YMSCBPeripheral</a></li>
 							
 							<li><a href="Classes/YMSCBService.html">YMSCBService</a></li>
@@ -523,7 +544,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-26)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-27)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

@@ -42,6 +42,10 @@
 	
 	<option value="//api/name/cbCharacteristic">&nbsp;&nbsp;&nbsp;&nbsp;cbCharacteristic</option>
 	
+	<option value="//api/name/descriptors">&nbsp;&nbsp;&nbsp;&nbsp;descriptors</option>
+	
+	<option value="//api/name/discoverDescriptorsCallback">&nbsp;&nbsp;&nbsp;&nbsp;discoverDescriptorsCallback</option>
+	
 	<option value="//api/name/name">&nbsp;&nbsp;&nbsp;&nbsp;name</option>
 	
 	<option value="//api/name/notificationStateCallback">&nbsp;&nbsp;&nbsp;&nbsp;notificationStateCallback</option>
@@ -62,6 +66,16 @@
 	
 	
 	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/discoverDescriptorsWithBlock:">&nbsp;&nbsp;&nbsp;&nbsp;- discoverDescriptorsWithBlock:</option>
+	
+	<option value="//api/name/executeNotificationStateCallback:">&nbsp;&nbsp;&nbsp;&nbsp;- executeNotificationStateCallback:</option>
+	
+	<option value="//api/name/executeReadCallback:error:">&nbsp;&nbsp;&nbsp;&nbsp;- executeReadCallback:error:</option>
+	
+	<option value="//api/name/executeWriteCallback:">&nbsp;&nbsp;&nbsp;&nbsp;- executeWriteCallback:</option>
+	
+	<option value="//api/name/handleDiscoveredDescriptorsResponse:withError:">&nbsp;&nbsp;&nbsp;&nbsp;- handleDiscoveredDescriptorsResponse:withError:</option>
 	
 	<option value="//api/name/initWithName:parent:uuid:offset:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:parent:uuid:offset:</option>
 	
@@ -91,6 +105,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Properties">Properties</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Callback Handler Methods">Callback Handler Methods</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Initializing a YMSCBCharacteristic">Initializing a YMSCBCharacteristic</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Changing the notification state">Changing the notification state</a></span></li>
@@ -98,6 +114,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Issuing a Write Request">Issuing a Write Request</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Issuing a Read Request">Issuing a Read Request</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Discover Descriptors">Discover Descriptors</a></span></li>
 	
 </ul></li>
 
@@ -108,6 +126,10 @@
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/cbCharacteristic">cbCharacteristic</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/descriptors">descriptors</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/discoverDescriptorsCallback">discoverDescriptorsCallback</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/name">name</a></span></li>
 	
@@ -130,6 +152,16 @@
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/discoverDescriptorsWithBlock:">discoverDescriptorsWithBlock:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/executeNotificationStateCallback:">executeNotificationStateCallback:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/executeReadCallback:error:">executeReadCallback:error:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/executeWriteCallback:">executeWriteCallback:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/handleDiscoveredDescriptorsResponse:withError:">handleDiscoveredDescriptorsResponse:withError:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithName:parent:uuid:offset:">initWithName:parent:uuid:offset:</a></span></li>
 	
@@ -236,8 +268,22 @@ cbCharacteristic is set in <a href="../Classes/YMSCBService.html#//api/name/sync
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/descriptors">&nbsp;&nbsp;descriptors</a></code>
+		<span class="tooltip"><p>Holds instances of <a href="../Classes/YMSCBDescriptor.html">YMSCBDescriptor</a></p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/notificationStateCallback">&nbsp;&nbsp;notificationStateCallback</a></code>
 		<span class="tooltip"><p>Notification state callback</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/discoverDescriptorsCallback">&nbsp;&nbsp;discoverDescriptorsCallback</a></code>
+		<span class="tooltip"><p>Callback for <a href="#//api/name/descriptors">descriptors</a> that are discovered.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -254,6 +300,35 @@ cbCharacteristic is set in <a href="../Classes/YMSCBService.html#//api/name/sync
 		<span class="tooltip"><p>FIFO queue for writes.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						<a title="Callback Handler Methods" name="task_Callback Handler Methods"></a>
+						<h3 class="subsubtitle task-title">Callback Handler Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/executeNotificationStateCallback:">&ndash;&nbsp;executeNotificationStateCallback:</a></code>
+		<span class="tooltip"><p>Handler method to process <a href="#//api/name/notificationStateCallback">notificationStateCallback</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/executeReadCallback:error:">&ndash;&nbsp;executeReadCallback:error:</a></code>
+		<span class="tooltip"><p>Handler method to process first callback in <a href="#//api/name/readCallbacks">readCallbacks</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/executeWriteCallback:">&ndash;&nbsp;executeWriteCallback:</a></code>
+		<span class="tooltip"><p>Handler method to process first callback in <a href="#//api/name/writeCallbacks">writeCallbacks</a>.</p></span>
+	</span>
+	
 	
 </li>
 						</ul>
@@ -296,14 +371,14 @@ cbCharacteristic is set in <a href="../Classes/YMSCBService.html#//api/name/sync
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/writeValue:withBlock:">&ndash;&nbsp;writeValue:withBlock:</a></code>
-		<span class="tooltip"><p>Request write value given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p></span>
+		<span class="tooltip"><p>Issue write with value data and execute callback block writeCallback upon response.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/writeByte:withBlock:">&ndash;&nbsp;writeByte:withBlock:</a></code>
-		<span class="tooltip"><p>Request write byte given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p></span>
+		<span class="tooltip"><p>Issue write with byte val and execute callback block writeCallback upon response.</p></span>
 	</span>
 	
 	
@@ -318,7 +393,29 @@ cbCharacteristic is set in <a href="../Classes/YMSCBService.html#//api/name/sync
 							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/readValueWithBlock:">&ndash;&nbsp;readValueWithBlock:</a></code>
-		<span class="tooltip"><p>Request read value given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p></span>
+		<span class="tooltip"><p>Issue read and execute callback block readCallback upon response.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Discover Descriptors" name="task_Discover Descriptors"></a>
+						<h3 class="subsubtitle task-title">Discover Descriptors</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/discoverDescriptorsWithBlock:">&ndash;&nbsp;discoverDescriptorsWithBlock:</a></code>
+		<span class="tooltip"><p>Discover <a href="#//api/name/descriptors">descriptors</a> for this characteristic.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/handleDiscoveredDescriptorsResponse:withError:">&ndash;&nbsp;handleDiscoveredDescriptorsResponse:withError:</a></code>
+		<span class="tooltip"><p>Handler method for discovered <a href="#//api/name/descriptors">descriptors</a>.</p></span>
 	</span>
 	
 	
@@ -360,6 +457,88 @@ cbCharacteristic is set in <a href="../Classes/YMSCBService.html#//api/name/sync
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Pointer to actual CBCharacterisic.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBCharacteristic.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/descriptors" title="descriptors"></a>
+	<h3 class="subsubtitle method-title">descriptors</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Holds instances of <a href="../Classes/YMSCBDescriptor.html">YMSCBDescriptor</a></p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSArray *descriptors</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Holds instances of <a href="../Classes/YMSCBDescriptor.html">YMSCBDescriptor</a></p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBCharacteristic.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/discoverDescriptorsCallback" title="discoverDescriptorsCallback"></a>
+	<h3 class="subsubtitle method-title">discoverDescriptorsCallback</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Callback for <a href="#//api/name/descriptors">descriptors</a> that are discovered.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) YMSCBDiscoverDescriptorsCallbackBlockType discoverDescriptorsCallback</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Callback for <a href="#//api/name/descriptors">descriptors</a> that are discovered.</p>
 	</div>
 	
 	
@@ -678,6 +857,271 @@ cbCharacteristic is set in <a href="../Classes/YMSCBService.html#//api/name/sync
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
+	<a name="//api/name/discoverDescriptorsWithBlock:" title="discoverDescriptorsWithBlock:"></a>
+	<h3 class="subsubtitle method-title">discoverDescriptorsWithBlock:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Discover <a href="#//api/name/descriptors">descriptors</a> for this characteristic.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)discoverDescriptorsWithBlock:(void ( ^ ) ( NSArray *ydescriptors , NSError *error ))<em>callback</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>callback</em></dt>
+			<dd><p>Callback block to execute upon response for discovered <a href="#//api/name/descriptors">descriptors</a>.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Discover <a href="#//api/name/descriptors">descriptors</a> for this characteristic.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBCharacteristic.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/executeNotificationStateCallback:" title="executeNotificationStateCallback:"></a>
+	<h3 class="subsubtitle method-title">executeNotificationStateCallback:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Handler method to process <a href="#//api/name/notificationStateCallback">notificationStateCallback</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)executeNotificationStateCallback:(NSError *)<em>error</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>Error object, if failed.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Handler method to process <a href="#//api/name/notificationStateCallback">notificationStateCallback</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBCharacteristic.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/executeReadCallback:error:" title="executeReadCallback:error:"></a>
+	<h3 class="subsubtitle method-title">executeReadCallback:error:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Handler method to process first callback in <a href="#//api/name/readCallbacks">readCallbacks</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)executeReadCallback:(NSData *)<em>data</em> error:(NSError *)<em>error</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>data</em></dt>
+			<dd><p>Value returned from read request.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>Error object, if failed.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Handler method to process first callback in <a href="#//api/name/readCallbacks">readCallbacks</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBCharacteristic.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/executeWriteCallback:" title="executeWriteCallback:"></a>
+	<h3 class="subsubtitle method-title">executeWriteCallback:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Handler method to process first callback in <a href="#//api/name/writeCallbacks">writeCallbacks</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)executeWriteCallback:(NSError *)<em>error</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>Error object, if failed.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Handler method to process first callback in <a href="#//api/name/writeCallbacks">writeCallbacks</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBCharacteristic.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/handleDiscoveredDescriptorsResponse:withError:" title="handleDiscoveredDescriptorsResponse:withError:"></a>
+	<h3 class="subsubtitle method-title">handleDiscoveredDescriptorsResponse:withError:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Handler method for discovered <a href="#//api/name/descriptors">descriptors</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)handleDiscoveredDescriptorsResponse:(NSArray *)<em>ydescriptors</em> withError:(NSError *)<em>error</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>ydescriptors</em></dt>
+			<dd><p>Array of <a href="../Classes/YMSCBDescriptor.html">YMSCBDescriptor</a> instances.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>Error object, if failure.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Handler method for discovered <a href="#//api/name/descriptors">descriptors</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBCharacteristic.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/initWithName:parent:uuid:offset:" title="initWithName:parent:uuid:offset:"></a>
 	<h3 class="subsubtitle method-title">initWithName:parent:uuid:offset:</h3>
 	
@@ -750,7 +1194,7 @@ cbCharacteristic is set in <a href="../Classes/YMSCBService.html#//api/name/sync
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Request read value given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p>
+		<p>Issue read and execute callback block readCallback upon response.</p>
 	</div>		
 	
     
@@ -777,7 +1221,7 @@ cbCharacteristic is set in <a href="../Classes/YMSCBService.html#//api/name/sync
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Request read value given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p>
+		<p>Issue read and execute callback block readCallback upon response.</p>
 
 <p>The callback block readCallback has two arguments: <code>data</code> and <code>error</code>:</p>
 
@@ -848,7 +1292,7 @@ When notifyValue is NO, then no notifications are sent.</p>
 
 <p>An implementation of the method <a href="../Classes/YMSCBService.html#//api/name/notifyCharacteristicHandler:error:">[YMSCBService notifyCharacteristicHandler:error:]</a> is used to handle
 updates to <a href="#//api/name/cbCharacteristic">cbCharacteristic</a>. Note that notification handling is done at the <a href="../Classes/YMSCBService.html">YMSCBService</a> level via
-method handler and not by callback blocks. The reason for this is for opinion: It is more convenient to
+method handler and not by callback blocks. The reason for this is opinion: It is more convenient to
 write a method handler to deal with non-deterministic, asynchronous notification events than it is with blocks.</p>
 	</div>
 	
@@ -873,7 +1317,7 @@ write a method handler to deal with non-deterministic, asynchronous notification
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Request write byte given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p>
+		<p>Issue write with byte val and execute callback block writeCallback upon response.</p>
 	</div>		
 	
     
@@ -905,13 +1349,13 @@ write a method handler to deal with non-deterministic, asynchronous notification
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Request write byte given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p>
+		<p>Issue write with byte val and execute callback block writeCallback upon response.</p>
 
-<p>The callback block readCallback has one argument: <code>error</code>:</p>
+<p>The callback block writeCallback has one argument: <code>error</code>:</p>
 
 <ul>
-<li><code>error</code> is populated with the returned <code>error</code> object from the delegate method peripheral:didUpdateValueForCharacteristic:error:
-or peripheral:didWriteValueForCharacteristic:error: implemented in <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</li>
+<li><code>error</code> is populated with the returned <code>error</code> object from the delegate method
+peripheral:didWriteValueForCharacteristic:error: implemented in <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</li>
 </ul>
 
 	</div>
@@ -937,7 +1381,7 @@ or peripheral:didWriteValueForCharacteristic:error: implemented in <a href="../C
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Request write value given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p>
+		<p>Issue write with value data and execute callback block writeCallback upon response.</p>
 	</div>		
 	
     
@@ -969,13 +1413,13 @@ or peripheral:didWriteValueForCharacteristic:error: implemented in <a href="../C
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Request write value given characteristic <a href="#//api/name/name">name</a> and execute callback block upon response.</p>
+		<p>Issue write with value data and execute callback block writeCallback upon response.</p>
 
-<p>The callback block readCallback has one argument: <code>error</code>:</p>
+<p>The callback block writeCallback has one argument: <code>error</code>:</p>
 
 <ul>
-<li><code>error</code> is populated with the returned <code>error</code> object from the delegate method peripheral:didUpdateValueForCharacteristic:error:
-or peripheral:didWriteValueForCharacteristic:error: implemented in <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</li>
+<li><code>error</code> is populated with the returned <code>error</code> object from the delegate method
+peripheral:didWriteValueForCharacteristic:error: implemented in <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</li>
 </ul>
 
 	</div>
@@ -1007,7 +1451,7 @@ or peripheral:didWriteValueForCharacteristic:error: implemented in <a href="../C
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-26)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-05-27)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						
