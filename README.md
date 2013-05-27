@@ -1,116 +1,138 @@
-# YmsCoreBluetooth 0.92 (beta)
+# YmsCoreBluetooth 0.93 (beta)
 A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS applications using the CoreBluetooth API. Includes Deanna, an iOS application using YmsCoreBluetooth to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag).
 
-[YmsCoreBluetooth API Reference](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/index.html)
+* [YmsCoreBluetooth API Reference](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/index.html)
 
-## File Naming Conventions
+## YmsCoreBluetooth Design Intent: Or Why You Want To Use This Framework
+### tl;dr 
+* ObjectiveC Block-based API for Bluetooth LE communication.
+* Operations (e.g. scanning, retrieval, connection, reads, writes) map to the data object hierarchy of CoreBluetooth.
 
-The YmsCoreBluetooth framework is the set of files prefixed with `YMSCB` located in the directory `YmsCoreBluetooth`.
+### A More Detailed Explaination
 
-The files for the iOS application **Deanna** are prefixed with `DEA` located in the directory `Deanna`.
+#### Blocks are cool.
+Transactions in Bluetooth LE (BLE) are two-phase (request-response) in nature: CoreBluetooth abstracts this protocol so that request behavior is separated from response behavior. The two phases are reconciled using a delegation pattern: the object initiating the request phase has a delegate object with a delegate method to handle the corresponding response phase. While functional, the delegation pattern can be cumbersome to use because the behavior for a two-phase transaction is split into two different locations in code.
 
-## Organizational Structure & Operation
+A more convenient programming pattern is to use a callback block which is defined with the request. When the response is received, the callback block can be executed to handle it. *The design intent of YmsCoreBluetooth is use Objective-C blocks to define response behavior to BLE requests*. Such requests include:
 
-The organizational structure of the YmsCoreBluetooth framework largely mirrors the CoreBluetooth hierarchy:
+* scanning and/or retrieving peripheral(s)
+* connecting to a peripheral
+* discovering a peripheral's services
+* discovering a service's characteristics
+* write and read of a characteristic
+* setting the notification status of a characteristic
 
-* YMSCBCentralManager - An application service which manages multiple BLE peripherals
+#### Hierarchical operations are cool.
+The data object hierachy of CoreBluetooth can be described as such:
+
+* A CBCentralManager instance can connect to multiple CBPeripheral instances.
+    * A CBPeripheral instance can have multiple CBService instances.
+	    * A CBService instance can have multiple CBCharacteristic instances.
+		    * A CBCharacteristic instance can have multiple CBDescriptor instances.
+			
+However the existing CoreBluetooth API does not map BLE requests to the data object hierarchy. For example connection to a CBPeripheral instance is accomplished from a CBCentralManager instance instead of from CBPeripheral. Writes, reads, and setting the notification state of a CBCharacteristic is issued from a CBPeripheral instance, instead of from CBCharacteristic. *YmsCoreBluetooth provides an API that more naturally maps operations to the data object hierarchy*.
+
+YMSCoreBluetooth defines container classes which map to the CoreBluetooth object hierarchy:
+
+* YMSCBCentralManager - A BLE central which manages the BLE peripherals it either discovers via scanning or retrieval.
     * YMSCBPeripheral - A BLE peripheral can have multiple BLE services
         * YMSCBService - A BLE service can have multiple BLE characteristics
-             * YMSCBCharacteristic 
-	     
-	     
-With CoreBluetooth, the API to issue read and write requests to a BLE peripheral is accomplished through the CBPeripheral class and the responses sent back are handled via CBPeripheralDelegate methods. For a BLE peripheral with multiple services, this approach requires the developer to write code to manage read/write requests to different services.
-        
-YmsCoreBluetooth framework offers iOS developers a more natural API that is BLE service-centric: **read and write requests to a BLE peripheral are done from the point of view of a BLE service**. Responses can be handled using a callback block or via a notification handler method.
+             * YMSCBCharacteristic - A BLE characteristic can have multiple BLE descriptors
+			     * YMSCBDescriptor - A BLE descriptor (TBD)
 
-## YmsCoreBluetooth by Example: DEATemperatureService, a subclass of YMSCBService
 
-To demonstrate the BLE service-centric API in action, below is the implementation of the temperature service for a TI SensorTag. 
 
-	@implementation DEATemperatureService
-	- (id)initWithName:(NSString *)oName
-				baseHi:(int64_t)hi
-				baseLo:(int64_t)lo {
-		self = [super initWithName:oName
-							baseHi:hi
-							baseLo:lo];
-		if (self) {
-			[self addCharacteristic:@"service" withOffset:kSensorTag_TEMPERATURE_SERVICE];
-			[self addCharacteristic:@"data" withOffset:kSensorTag_TEMPERATURE_DATA];
-			[self addCharacteristic:@"config" withOffset:kSensorTag_TEMPERATURE_CONFIG];
-		}
-		return self;
+However, they differ from CoreBluetooth in that operations are done with respect to the object type:
+
+* YMSCBCentralManager
+  - scans for peripherals
+  - retrieves peripherals
+* YMSCBPeripheral
+  - connects and disconnects to central
+  - discovers services associated with this peripheral
+* YMSCBService
+  - discovers characteristics associated with this service
+  - handles notification updates for characteristics which are set to notify
+* YMSCBCharacteristic
+  - set notification status (on, off)
+  - write value to characteristic
+  - read value of characteristic
+  - discover descriptors associated with this characteristic (TBD)
+  
+  
+### Show Code
+
+#### Scanning for Peripherals
+
+In the following code sample, `self` is an instance of a subclass of YMSCBCentralManager.
+
+    [self scanForPeripheralsWithServices:nil
+                                 options:options
+                               withBlock:^(CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI, NSError *error) {
+                                   if (error) {
+                                       NSLog(@"Something bad happened with scanForPeripheralWithServices:options:withBlock:");
+                                       return;
+                                   }
+                                   
+                                   NSLog(@"DISCOVERED: %@, %@, %@ db", peripheral, peripheral.name, RSSI);
+                                   [self handleFoundPeripheral:peripheral];
+                               }];
+
+#### Retrieving Peripherals
+
+In the following code sample, `self` is an instance of a subclass of YMSCBCentralManager.
+
+	[self retrievePeripherals:peripheralUUIDs
+					withBlock:^(CBPeripheral *peripheral) {
+						[self handleFoundPeripheral:peripheral];
+					}];
+  
+  
+#### Connecting to a Peripheral
+
+In the following code sample, `self` is an instance of a subclass of YMSCBPeripheral. Note that in the callbacks, discovering services and characteristics are handled in a nested fashion:
+
+	- (void)connect {
+		// Watchdog aware method
+		[self resetWatchdog];
+
+		[self connectWithOptions:nil withBlock:^(YMSCBPeripheral *yp, NSError *error) {
+			if (error) {
+				return;
+			}
+			// NOTE: self and yp are the same.
+			[yp discoverServices:[yp services] withBlock:^(NSArray *yservices, NSError *error) {
+				if (error) {
+					return;
+				}
+				for (YMSCBService *service in yservices) {
+					[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+						if (error) {
+							return;
+						}
+						if ([service.name isEqualToString:@"simplekeys"]) {
+							DEASimpleKeysService *sks = (DEASimpleKeysService *)service;
+							[sks turnOn];
+						} else if ([service.name isEqualToString:@"devinfo"]) {
+							DEADeviceInfoService *ds = (DEADeviceInfoService *)service;
+							[ds readDeviceInfo];
+						}
+					}];
+				}
+			}];
+		}];
 	}
-	- (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error {
-		if (error) {
-			return;
-		}
-		if ([yc.name isEqualToString:@"data"]) {
-			NSData *data = yc.cbCharacteristic.value;
-			char val[data.length];
-			[data getBytes:&val length:data.length];
-			int16_t v0 = val[0];
-			int16_t v1 = val[1];
-			int16_t v2 = val[2];
-			int16_t v3 = val[3];
-			int16_t amb = ((v2 & 0xff)| ((v3 << 8) & 0xff00));
-			int16_t objT = ((v0 & 0xff)| ((v1 << 8) & 0xff00));
-			double tempAmb = calcTmpLocal(amb);
-			self.ambientTemp = [NSNumber numberWithDouble:tempAmb];
-			self.objectTemp = [NSNumber numberWithDouble:calcTmpTarget(objT, tempAmb)];
-		}
-	}
-
-	- (void)turnOn {
-		[self writeByte:0x1 forCharacteristicName:@"config" type:CBCharacteristicWriteWithoutResponse];
-		[self setNotifyValue:YES forCharacteristicName:@"data"];
-		self.isOn = YES;
-	}
-
-	- (void)turnOff {
-		[self writeByte:0x0 forCharacteristicName:@"config" type:CBCharacteristicWriteWithoutResponse];
-		[self setNotifyValue:NO forCharacteristicName:@"data"];
-		self.isOn = NO;
-	}
-
-	@end
 
 
-In the class constructor [DEATemperatureService initWithName:baseHi:baseLo:], three BLE characteristics are specified: `service`, `data`, and `config` using defined address offsets to the 128-bit base address specified by `hi` and `lo`.
+#### Read a Characteristic
 
-DEATemperatureService can be turned on or off via the `turnOn` and `turnOff` methods respectively (these methods are actually found in DEABaseService which DEATemperatureService inherits from, but presented here for convenience).
-
-When notification for the `data` characteristic is turned on, the [DEATemperatureService notifyCharacteristicHandler:error:]
-implementation handles the response from the BLE peripheral. With `notifyCharacteristicHandler:error:`, its implementation can be written to arbitrarily handle notifications from any specified notifying-enabled characteristic.
-
-
-### Callback Block Example
-
-The implementation of DEADeviceInfoService (shown in abbreivated form below) illustrates an example of using an ObjC block to implement a response callback function. This callback is executed upon the response for a request, in this case for the read request of the `system_id` and `model_number` BLE characteristic.
-
-	@implementation DEADeviceInfoService
-	- (id)initWithName:(NSString *)oName
-				baseHi:(int64_t)hi
-				baseLo:(int64_t)lo {
-		self = [super initWithName:oName
-							baseHi:hi
-							baseLo:lo];
-		if (self) {
-			[self addCharacteristic:@"service" withAddress:kSensorTag_DEVINFO_SERV_UUID];
-			[self addCharacteristic:@"system_id" withAddress:kSensorTag_DEVINFO_SYSTEM_ID];
-			[self addCharacteristic:@"model_number" withAddress:kSensorTag_DEVINFO_MODEL_NUMBER];
-			[self addCharacteristic:@"serial_number" withAddress:kSensorTag_DEVINFO_SERIAL_NUMBER];
-			[self addCharacteristic:@"firmware_rev" withAddress:kSensorTag_DEVINFO_FIRMWARE_REV];
-			[self addCharacteristic:@"hardware_rev" withAddress:kSensorTag_DEVINFO_HARDWARE_REV];
-			[self addCharacteristic:@"software_rev" withAddress:kSensorTag_DEVINFO_SOFTWARE_REV];
-			[self addCharacteristic:@"manufacturer_name" withAddress:kSensorTag_DEVINFO_MANUFACTURER_NAME];
-			[self addCharacteristic:@"ieee11073_cert_data" withAddress:kSensorTag_DEVINFO_11073_CERT_DATA];
-		}
-		return self;
-	}
+In the following code sample, `self` is an instance of a subclass of YMSCBService. All discovered characteristics are stored in [YMSCBService characteristicDict].
 
 	- (void)readDeviceInfo {
-		[self readValueForCharacteristicName:@"system_id" withBlock:^(NSData *data, NSError *error) {
+
+		YMSCBCharacteristic *system_idCt = self.characteristicDict[@"system_id"];
+
+		[system_idCt readValueWithBlock:^(NSData *data, NSError *error) {
 			NSMutableString *tmpString = [NSMutableString stringWithFormat:@""];
 			unsigned char bytes[data.length];
 			[data getBytes:bytes];
@@ -123,10 +145,10 @@ The implementation of DEADeviceInfoService (shown in abbreivated form below) ill
 
 			NSLog(@"system id: %@", tmpString);
 			self.system_id = tmpString;
-
 		}];
 
-		[self readValueForCharacteristicName:@"model_number" withBlock:^(NSData *data, NSError *error) {
+		YMSCBCharacteristic *model_numberCt = self.characteristicDict[@"model_number"];
+		[model_numberCt readValueWithBlock:^(NSData *data, NSError *error) {
 			if (error) {
 				NSLog(@"ERROR: %@", error);
 				return;
@@ -135,16 +157,135 @@ The implementation of DEADeviceInfoService (shown in abbreivated form below) ill
 			NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
 			self.model_number = payload;
 			NSLog(@"model: %@", payload);
+
 		}];
 	}
-	@end
 
+#### Write to a Characteristic
+
+In the following code sample, `self` is an instance of a subclass of YMSCBService. In this example, a write to the 'config' characteristic followed by a read of the 'calibration' characteristic is done.
+
+	- (void)requestCalibration {
+		if (self.isCalibrating == NO) {
+
+			YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
+			[configCt writeByte:0x2 withBlock:^(NSError *error) {
+				if (error) {
+					NSLog(@"ERROR: write request to barometer config to start calibration failed.");
+					return;
+				}
+
+				YMSCBCharacteristic *calibrationCt = self.characteristicDict[@"calibration"];
+				[calibrationCt readValueWithBlock:^(NSData *data, NSError *error) {
+					if (error) {
+						NSLog(@"ERROR: read request to barometer calibration failed.");
+						return;
+					}
+
+					self.isCalibrating = NO;
+					char val[data.length];
+					[data getBytes:&val length:data.length];
+
+					int i = 0;
+					while (i < data.length) {
+						uint16_t lo = val[i];
+						uint16_t hi = val[i+1];
+						uint16_t cx = ((lo & 0xff)| ((hi << 8) & 0xff00));
+						int index = i/2 + 1;
+
+						if (index == 1) self.c1 = cx;
+						else if (index == 2) self.c2 = cx;
+						else if (index == 3) self.c3 = cx;
+						else if (index == 4) self.c4 = cx;
+						else if (index == 5) self.c5 = cx;
+						else if (index == 6) self.c6 = cx;
+						else if (index == 7) self.c7 = cx;
+						else if (index == 8) self.c8 = cx;
+
+						i = i + 2;
+					}
+
+					self.isCalibrated = YES;
+
+				}];
+			}];
+
+		}
+	}
+
+
+### Handling Characteristic Notification Updates
+
+One place where YmsCoreBluetooth does *not* use blocks to handle BLE responses is with characteristic notification updates. The reason for this is because such updates are asynchronous and non-deterministic. As such the handler method [YMSCBService notifyCharacteristicHandler:error:] must be implemented for any subclass of YMSCBService to handle such updates.
+
+In the following code sample, `self` is an instance of a subclass of YMSCBService. 
+
+	- (void)turnOn {
+		YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
+		[configCt writeByte:0x1 withBlock:^(NSError *error) {
+			if (error) {
+				NSLog(@"ERROR: %@", error);
+				return;
+			}
+
+			NSLog(@"TURNED ON: %@", self.name);
+		}];
+
+		YMSCBCharacteristic *dataCt = self.characteristicDict[@"data"];
+		[dataCt setNotifyValue:YES withBlock:^(NSError *error) {
+			NSLog(@"Data notification for %@ on", self.name);
+		}];
+
+		self.isOn = YES;
+	}
+
+	- (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error {
+		if (error) {
+			return;
+		}
+
+		if ([yc.name isEqualToString:@"data"]) {
+			NSData *data = yc.cbCharacteristic.value;
+			char val[data.length];
+			[data getBytes:&val length:data.length];
+
+			int16_t v0 = val[0];
+			int16_t v1 = val[1];
+			int16_t v2 = val[2];
+			int16_t v3 = val[3];
+			int16_t amb = ((v2 & 0xff)| ((v3 << 8) & 0xff00));
+			int16_t objT = ((v0 & 0xff)| ((v1 << 8) & 0xff00));
+
+			double tempAmb = calcTmpLocal(amb);
+			
+			self.ambientTemp = [NSNumber numberWithDouble:tempAmb];
+			self.objectTemp = [NSNumber numberWithDouble:calcTmpTarget(objT, tempAmb)];
+		}
+	}
+
+### Block Callback Design
+
+The callback pattern used by YmsCoreBluetooth uses a single callback to handle both successfull and failed responses. This is accomplished by including an `error` parameter. If an `error` object is not `nil`, then behavior to handle the failure can be implemented. Otherwise behavior to handle success is implemented.
+
+	^(NSError *error) {
+	   if (error) {
+		  // Code to handle failure
+		  return;
+	   }
+	   // Code to handle success
+	}
+
+
+## File Naming Conventions
+The YmsCoreBluetooth framework is the set of files prefixed with `YMSCB` located in the directory `YmsCoreBluetooth`.
+
+The files for the iOS application **Deanna** are prefixed with `DEA` located in the directory `Deanna`.
 
 ## Recommended Code Walk Through
 
 To better understand how YmsCoreBluetooth works, it is recommended to first read the source of the following BLE service implementations:
 
-* DEAAccelerometerService, DEABarometerService, DEAGyroscopeService, DEAHumidityService, DEAMagnetometerService, DEASimpleKeysService, DEATemperatureService
+* DEAAccelerometerService, DEABarometerService, DEAGyroscopeService, DEAHumidityService, DEAMagnetometerService, DEASimpleKeysService, DEATemperatureService, DEADeviceInfoService
 
 Then the BLE peripheral implementation of the TI SensorTag:
 
@@ -154,12 +295,12 @@ Then the application service which manages all known peripherals:
 
 * DEACentralManager
 
-The [Class Hierarchy](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/hierarchy.html) is very instructive in showing the relationship of the above classes to the YmsCoreBluetooth framework.
+The [Class Hierarchy](hierarchy.html) is very instructive in showing the relationship of the above classes to the YmsCoreBluetooth framework.
 
 
 ## Writing your own Bluetooth LE service with YmsCoreBluetooth
 
-Learn how to write your own Bluetooth LE service by reading the example of how its done for the TI SensorTag in the [Tutorial](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/docs/tutorial/Tutorial.html).
+Learn how to write your own Bluetooth LE service by reading the example of how its done for the TI SensorTag in the Tutorial.
 
 ## Questions
 
@@ -176,108 +317,22 @@ Code tested on:
 ## Known Issues
 * No support is offered for the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator [TN2295](http://developer.apple.com/library/ios/#technotes/tn2295/_index.html), I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.
 
-## Changes
+## Latest Changes
+### Sun May 26 2013 - Rare Groove Release (ver 0.93)
+* Issue #47 - rename YMSCBAppService to YMSCBCentralManager. 
+  Associated changes include:
+    - renaming DEAAppService to DEACentralManager
+	- rename variable cbAppService to centralManager
 
-### Sun May 12 2013 - Moombahton Release (ver 0.92)
-* Block-based callbacks for central manager scanning, peripheral connection, and peripheral retrieval are now supported.
-* Watchdog timeout for unanswered peripheral connection requests are now supported.
-* Significant API changes to YMSCBCentralManager and YMSCBPeripheral detailed below.
+* API change to fully embrace ObjectiveC block-based callbacks.
+* API change to map BLE operations to data object hierarchy.
 
-#### API 0.92 Changes
+**API 0.93 is a BIG CHANGE.** It is largely a rethink of YmsCoreBluetooth to support the pattern for hierarchical block-based operations. This will very much *break code* written for prior releases of YmsCoreBluetooth. That said, the changes should be fairly comprehensible and address the following points going forward:
 
-<table border='1'>
-<tbody>
-<tr><td colspan='2'><code>YMSCBCentralManager</code></td></tr>
-<tr><td>obsolete</td><td><code>- (void)persistPeripherals</code></td><td>Replaced by YMSCBStoredPeripherals</td></tr>
-<tr><td>obsolete</td><td><code>- (void)loadPeripherals</code></td><td>Replaced by YMSCBStoredPeripherals</td></tr>
-<tr><td>new</td><td><code>- (id)initWithKnownPeripheralNames:(NSArray *)nameList<br>&nbsp;&nbsp;&nbsp;queue:(dispatch_queue_t)queue<br>&nbsp;&nbsp;&nbsp;useStoredPeripherals:(BOOL)useStore;</code></td><td>Add support to optionally store peripherals.</td></tr>
-<tr><td>obsolete</td><td><code>- (void)connectPeripheral:(NSUInteger)index;</code></td><td rowspan='2'>Use more accurate name</td></tr>
-<tr><td>replaced by</td><td><code>- (void)connectPeripheralAtIndex:(NSUInteger)index<br>&nbsp;&nbsp;&nbsp;options:(NSDictionary *)options;</code></td></tr>
-<tr><td>obsolete</td><td><code>- (void)disconnectPeripheral:(NSUInteger)index;</code></td><td rowspan='2'>Use more accurate name.</td></tr>
-<tr><td>replaced by</td><td><code>- (void)disconnectPeripheralAtIndex:(NSUInteger)index;</code></td></tr>
-<tr><td>new</td><td><code>- (void)connectPeripheral:(YMSCBPeripheral *)peripheral<br>&nbsp;&nbsp;&nbsp;options:(NSDictionary *)options;</code></td><td>Mirror CBCentralManager method</td></tr>
-<tr><td>new</td><td><code>- (void)cancelPeripheralConnection:(YMSCBPeripheral *)peripheral;</code></td><td>Mirror CBCentralManager method</td></tr>
-<tr><td>new</td><td><code>- (void)connectPeripheral:(YMSCBPeripheral *)peripheral<br>&nbsp;&nbsp;&nbsp;options:(NSDictionary *)options<br/>&nbsp;&nbsp;&nbsp;withBlock:(void (^)(YMSCBPeripheral *yp, NSError *error))connectCallback</code></td><td>Support block based connection</td></tr>
-<tr><td>new</td><td><code>- (void)retrieveConnectedPeripherals</code></td><td>Mirror CBCentralManager method</td></tr>
-<tr><td>new</td><td><code>- (void)retrieveConnectedPeripheralsWithBlock:<br>(void (^)(CBPeripheral *peripheral))retrieveCallback</code></td><td>Support block based connection</td></tr>
-<tr><td>new</td><td><code>- (void)retrievePeripherals:(NSArray *)peripheralUUIDs</code></td><td>Mirror CBCentralManager method</td></tr>
-<tr><td>new</td><td><code>- (void)retrievePeripherals:(NSArray *)peripheralUUIDs<br>&nbsp;&nbsp;&nbsp;withBlock:(void (^)(CBPeripheral *peripheral))retrieveCallback</code></td><td>Support block based connection</td></tr>
-<tr><td>new</td><td><code>- (void)scanForPeripheralsWithServices:(NSArray *)serviceUUIDs<br>&nbsp;&nbsp;&nbsp;options:(NSDictionary *)options<br>&nbsp;&nbsp;&nbsp;withBlock:<br>(void (^)(CBPeripheral *,NSDictionary *, NSNumber *, NSError *))discoverCallback</code></td><td>Support block based connection</td></tr>
-</tbody>
-</table>
+* Improved understanding of API behavior; prior releases had too much implicit behavior ("magic") which made involuntary decisions for the developer using the API. Using blocks gives the developer a clearer and more structured view of the BLE transactions to be made.
+* With the pattern for hierarchical block-based operations in place, a more structured way to add new API features. Like Winter, characteristic descriptors are coming.
 
-<table border='1'>
-<tbody>
-<tr><td colspan='2'><code>YMSCBPeripheral</code></td></tr>
-<tr><td>obsolete</td>
-<td><code>
-- (id)initWithPeripheral:(CBPeripheral *)peripheral
-    <br>&nbsp;&nbsp;&nbsp;baseHi:(int64_t)hi
-    <br>&nbsp;&nbsp;&nbsp;baseLo:(int64_t)lo
-    <br>&nbsp;&nbsp;&nbsp;updateRSSI:(BOOL)update;
-</code></td><td rowspan='2'>Support parent property so that methods on parent can be called directly from an instance of YMSCBPeripheral.</td></tr>
-<tr><td>replaced by</td>
-<td><code>
-- (id)initWithPeripheral:(CBPeripheral *)peripheral
-    <br>&nbsp;&nbsp;&nbsp;parent:(YMSCBCentralManager *)owner
-    <br>&nbsp;&nbsp;&nbsp;baseHi:(int64_t)hi
-    <br>&nbsp;&nbsp;&nbsp;baseLo:(int64_t)lo
-    <br>&nbsp;&nbsp;&nbsp;updateRSSI:(BOOL)update;
-</code></td></tr>
-<tr><td>new</td><td><code>- (void)discoverServices</code></td><td>Convenience method to call behavior from YMSCBCentralManager</td></tr>
-<tr><td>new</td><td><code>- (void)connect</code></td><td>Convenience method to call behavior from YMSCBCentralManager</td></tr>
-<tr><td>new</td><td><code>- (void)disconnect</code></td><td>Convenience method to call behavior from YMSCBCentralManager</td></tr>
-</tbody>
-</table>
-
-
-
-### Wed May 8 2013
-* Issue #37 - UI for SensorTag Device Information Service implemented.
-
-### Tue May 7 2013
-* Bugfixes: #41, #42
-
-### Mon May 6 2013
-* Issue #19 - First draft of Tutorial written
-* Added initial support for launching a local notification when *Deanna* app in the background. The view controller for the SensorTag must be presented before going into the background for local notifications to work.
-
-### Wed May 2 2013
-* Issue #34 - Updated YmsCoreBluetooth Documentation
-
-### Wed May 1 2013
-* Improved API for reads and writes using either blocks or notifications.
-* Issue #12 - Callback blocks for service requests implemented.
-* Issue #22 - Support for reading SensorTag device info implemented.
-* Issue #24 - API version implemented.
-* Bugfix #31 - Remove all UI dependencies in YmsCoreBluetooth. Handling CBCentralManager state is an application UX issue.
-
-### Fri Apr 26 2013
-* Bugfix #21 - YMSCBService now supports constructor with 128-bit base address.
-* Issue #23 - Moved SensorTag specific methods (`requestConfig`, `responseConfig`, `turnOn`, `turnOff`) from YMSCBService.
-
-### Wed Apr 24 2013
-* Bugfix #5 to support multiple SensorTags is now in. With many thanks to Texas Instruments, a second SensorTag was donated to YmsCoreBluetooth to test for multiple peripherals.
-* Support for deleting discovered peripherals is in.
-* Support for discovering unknown peripherals is in.
-
-### Sat Apr 20 2013
-* Bugfix #15 where connect button is blocked when scanning.
-* Bugfixes on handling peripheral disconnects.
-
-### Thu Apr 18 2013 - Major Revision
-* Refactored `DECBAppService` to support:
-    * Separation of peripheral discovery by scanning from peripheral retrieval via stored UUID.
-    * Removed `NSNotification` messages to use `CBCentralManagerDelegate` methods instead.
-* Reorganized physical file directory structure to match that of Xcode project group structure.
-* Added RSSI display to both peripheral screen and SensorTag screen.
-* Added connect button per peripherals discovered.
-* Initial support for multiple SensorTags. (This has not yet been tested, due to the fact that I have only 1 SensorTag to test.)
-
-### Sun Mar 3 2013
-* First stable release.
-* Support for communication with all sensors/services on a SensorTag.
-* Initial documentation for YmsCoreBluetooth API and Deanna source code.
+View [Prior Change List](https://github.com/kickingvegas/YmsCoreBluetooth/blob/master/CHANGES.md)
 
 
 ### License
