@@ -54,7 +54,7 @@
 - (void)readDeviceInfo {
     
     YMSCBCharacteristic *system_idCt = self.characteristicDict[@"system_id"];
-    
+    __weak DEADeviceInfoService *this = self;
     [system_idCt readValueWithBlock:^(NSData *data, NSError *error) {
         NSMutableString *tmpString = [NSMutableString stringWithFormat:@""];
         unsigned char bytes[data.length];
@@ -67,7 +67,7 @@
         }
         
         NSLog(@"system id: %@", tmpString);
-        self.system_id = tmpString;
+        this.system_id = tmpString;
     }];
     
     YMSCBCharacteristic *model_numberCt = self.characteristicDict[@"model_number"];
@@ -78,7 +78,7 @@
         }
         
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        self.model_number = payload;
+        this.model_number = payload;
         NSLog(@"model: %@", payload);
         
     }];
@@ -92,7 +92,7 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        self.serial_number = payload;
+        this.serial_number = payload;
         NSLog(@"serial: %@", payload);
     }];
     
@@ -105,7 +105,7 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        self.firmware_rev = payload;
+        this.firmware_rev = payload;
         NSLog(@"firmware rev: %@", payload);
     }];
     
@@ -117,7 +117,7 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        self.hardware_rev = payload;
+        this.hardware_rev = payload;
         NSLog(@"hardware rev: %@", payload);
     }];
 
@@ -129,7 +129,7 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        self.software_rev = payload;
+        this.software_rev = payload;
         NSLog(@"sw rev: %@", payload);
     }];
     
@@ -141,7 +141,7 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        self.manufacturer_name = payload;
+        this.manufacturer_name = payload;
         NSLog(@"manufacturer name: %@", payload);
     }];
     
@@ -153,7 +153,7 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        self.ieee11073_cert_data = payload;
+        this.ieee11073_cert_data = payload;
         NSLog(@"IEEE 11073 Cert Data: %@", payload);
     }];
     

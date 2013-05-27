@@ -102,16 +102,24 @@ float calcGyro(int16_t v, float c, int16_t d) {
 - (void)turnOn {
     YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
     YMSCBCharacteristic *dataCt = self.characteristicDict[@"data"];
+        
+    __weak DEAGyroscopeService *this = self;
     
     [configCt writeByte:0x7 withBlock:^(NSError *error) {
-        NSLog(@"Turned On: %@", self.name);
+        if (error) {
+            return;
+        }
+        NSLog(@"Turned On: %@", this.name);
     }];
     
     [dataCt setNotifyValue:YES withBlock:^(NSError *error) {
-        NSLog(@"Notification for data of %@ turned on", self.name);
+        if (error) {
+            return;
+        }
+        NSLog(@"Notification for data of %@ turned on", this.name);
     }];
 
-    self.isOn = YES;
+    this.isOn = YES;
 }
 
 

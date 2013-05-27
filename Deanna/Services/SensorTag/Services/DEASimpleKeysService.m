@@ -63,19 +63,26 @@
 }
 
 - (void)turnOff {
+    __weak DEASimpleKeysService *this = self;
     YMSCBCharacteristic *ct = self.characteristicDict[@"data"];
     [ct setNotifyValue:NO withBlock:^(NSError *error) {
-        NSLog(@"Turned Off: %@", self.name);
+        if (error) {
+            return;
+        }
+        NSLog(@"Turned Off: %@", this.name);
     }];
     self.isOn = NO;
     
 }
 
 - (void)turnOn {
+    __weak DEASimpleKeysService *this = self;
     YMSCBCharacteristic *ct = self.characteristicDict[@"data"];
     [ct setNotifyValue:YES withBlock:^(NSError *error) {
-        NSLog(@"Turned On: %@", self.name);
-
+        if (error) {
+            return;
+        }
+        NSLog(@"Turned On: %@", this.name);
     }];
     self.isOn = YES;
 }

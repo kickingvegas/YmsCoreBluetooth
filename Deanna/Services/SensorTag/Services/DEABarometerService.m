@@ -118,6 +118,8 @@ double calcBarPress(int16_t t_r,
 - (void)requestCalibration {
     if (self.isCalibrating == NO) {
         
+        __weak DEABarometerService *this = self;
+        
         YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
         [configCt writeByte:0x2 withBlock:^(NSError *error) {
             if (error) {
@@ -132,7 +134,7 @@ double calcBarPress(int16_t t_r,
                     return;
                 }
                 
-                self.isCalibrating = NO;
+                this.isCalibrating = NO;
                 char val[data.length];
                 [data getBytes:&val length:data.length];
                 
@@ -155,7 +157,7 @@ double calcBarPress(int16_t t_r,
                     i = i + 2;
                 }
                 
-                self.isCalibrated = YES;
+                this.isCalibrated = YES;
                 
             }];
         }];

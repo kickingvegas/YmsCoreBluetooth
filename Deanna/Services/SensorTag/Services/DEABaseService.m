@@ -39,6 +39,8 @@
 
 
 - (void)turnOff {
+    __weak DEABaseService *this = self;
+
     YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
     [configCt writeByte:0x0 withBlock:^(NSError *error) {
         if (error) {
@@ -46,12 +48,12 @@
             return;
         }
         
-        NSLog(@"TURNED OFF: %@", self.name);
+        NSLog(@"TURNED OFF: %@", this.name);
     }];
     
     YMSCBCharacteristic *dataCt = self.characteristicDict[@"data"];
     [dataCt setNotifyValue:NO withBlock:^(NSError *error) {
-        NSLog(@"Data notification for %@ off", self.name);
+        NSLog(@"Data notification for %@ off", this.name);
 
     }];
     
@@ -59,6 +61,8 @@
 }
 
 - (void)turnOn {
+    __weak DEABaseService *this = self;
+    
     YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
     [configCt writeByte:0x1 withBlock:^(NSError *error) {
         if (error) {
@@ -66,12 +70,12 @@
             return;
         }
         
-        NSLog(@"TURNED ON: %@", self.name);
+        NSLog(@"TURNED ON: %@", this.name);
     }];
     
     YMSCBCharacteristic *dataCt = self.characteristicDict[@"data"];
     [dataCt setNotifyValue:YES withBlock:^(NSError *error) {
-        NSLog(@"Data notification for %@ on", self.name);
+        NSLog(@"Data notification for %@ on", this.name);
     }];
 
     self.isOn = YES;
