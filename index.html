@@ -80,7 +80,7 @@
 </li>
 </ul>
 </li>
-</ul><p>However the existing CoreBluetooth API does not map BLE requests to the data object hierarchy. For example connection to a CBPeripheral instance is accomplished from a CBCentralManager instance instead of from CBPeripheral. Writes, reads, and setting the notification state of a CBCharacteristic is issued from a CBPeripheral instance, instead of from CBCharacteristic. <em>YmsCoreBluetooth provides an API that more naturally maps operations to the data object hierarchy</em>.</p>
+</ul><p>However the existing CoreBluetooth API does not map BLE requests to the data object hierarchy. For example connection to a CBPeripheral instance is accomplished from a CBCentralManager instance instead of from a CBPeripheral. Writes, reads, and setting the notification state of a CBCharacteristic are issued from a CBPeripheral instance, instead of from CBCharacteristic. <em>YmsCoreBluetooth provides an API that more naturally maps operations to the data object hierarchy</em>.</p>
 
 <p>YMSCoreBluetooth defines container classes which map to the CoreBluetooth object hierarchy:</p>
 
@@ -154,7 +154,7 @@
                                }
 
                                NSLog(@"DISCOVERED: %@, %@, %@ db", peripheral, peripheral.name, RSSI);
-                               [self handleFoundPeripheral:peripheral];
+                               [this handleFoundPeripheral:peripheral];
                            }];
 </code></pre>
 
@@ -164,7 +164,7 @@
 
 <pre><code>[self retrievePeripherals:peripheralUUIDs
                 withBlock:^(CBPeripheral *peripheral) {
-                    [self handleFoundPeripheral:peripheral];
+                    [this handleFoundPeripheral:peripheral];
                 }];
 </code></pre>
 
@@ -211,7 +211,7 @@
 <pre><code>- (void)readDeviceInfo {
 
     YMSCBCharacteristic *system_idCt = self.characteristicDict[@"system_id"];
-
+    __weak DEADeviceInfoService *this = self;
     [system_idCt readValueWithBlock:^(NSData *data, NSError *error) {
         NSMutableString *tmpString = [NSMutableString stringWithFormat:@""];
         unsigned char bytes[data.length];
@@ -224,7 +224,7 @@
         }
 
         NSLog(@"system id: %@", tmpString);
-        self.system_id = tmpString;
+        this.system_id = tmpString;
     }];
 
     YMSCBCharacteristic *model_numberCt = self.characteristicDict[@"model_number"];
@@ -235,7 +235,7 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        self.model_number = payload;
+        this.model_number = payload;
         NSLog(@"model: %@", payload);
 
     }];
@@ -248,7 +248,7 @@
 
 <pre><code>- (void)requestCalibration {
     if (self.isCalibrating == NO) {
-
+        __weak DEABarometerService *this = self;
         YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
         [configCt writeByte:0x2 withBlock:^(NSError *error) {
             if (error) {
@@ -263,7 +263,7 @@
                     return;
                 }
 
-                self.isCalibrating = NO;
+                this.isCalibrating = NO;
                 char val[data.length];
                 [data getBytes:&amp;val length:data.length];
 
@@ -286,7 +286,7 @@
                     i = i + 2;
                 }
 
-                self.isCalibrated = YES;
+                this.isCalibrated = YES;
 
             }];
         }];
@@ -302,6 +302,7 @@
 <p>In the following code sample, <code>self</code> is an instance of a subclass of YMSCBService. </p>
 
 <pre><code>- (void)turnOn {
+    __weak DEABaseService *this = self;
     YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
     [configCt writeByte:0x1 withBlock:^(NSError *error) {
         if (error) {
@@ -309,12 +310,15 @@
             return;
         }
 
-        NSLog(@"TURNED ON: %@", self.name);
+        NSLog(@"TURNED ON: %@", this.name);
     }];
 
     YMSCBCharacteristic *dataCt = self.characteristicDict[@"data"];
     [dataCt setNotifyValue:YES withBlock:^(NSError *error) {
-        NSLog(@"Data notification for %@ on", self.name);
+        if (error) {
+            return;
+        }
+        NSLog(@"Data notification for %@ on", this.name);
     }];
 
     self.isOn = YES;
