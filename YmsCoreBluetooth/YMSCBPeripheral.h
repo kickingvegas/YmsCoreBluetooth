@@ -65,6 +65,14 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
 /// 128 bit address base
 @property (nonatomic, assign) yms_u128_t base;
 
+/** @name Properties */
+/**
+ Pointer to delegate.
+ 
+ The delegate object will be sent CBCentralManagerDelegate messages received by manager.
+ */
+@property (nonatomic, weak) id<CBPeripheralDelegate> delegate;
+
 /** 
  Dictionary of (`key`, `value`) pairs of (NSString, YMSCBService) instances.
  
@@ -176,11 +184,6 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
  This method uses rssiPingPeriod for the frequency of updates.
  */
 - (void)updateRSSI;
-
-/**
- Discover the services 
- */
-- (void)discoverServices;
 
 /**
  Connect peripheral

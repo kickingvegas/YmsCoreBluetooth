@@ -101,13 +101,6 @@
 }
 
 
-- (void)discoverServices {
-    NSArray *services = [self services];
-    [self.cbPeripheral discoverServices:services];
-}
-
-
-
 #pragma mark - Connection Methods
 
 - (void)connect {
@@ -239,6 +232,10 @@
         self.discoverServicesCallback(services, error);
         self.discoverServicesCallback = nil;
     }
+    
+    if ([self.delegate respondsToSelector:@selector(peripheral:didDiscoverServices:)]) {
+        [self.delegate peripheral:peripheral didDiscoverServices:error];
+    }
 }
 
 
@@ -252,6 +249,9 @@
  */
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverIncludedServicesForService:(CBService *)service error:(NSError *)error {
     // TBD
+    if ([self.delegate respondsToSelector:@selector(peripheral:didDiscoverIncludedServicesForService:error:)]) {
+        [self.delegate peripheral:peripheral didDiscoverIncludedServicesForService:service error:error];
+    }
 }
 
 
@@ -268,6 +268,10 @@
     
     [btService syncCharacteristics:service.characteristics];
     [btService handleDiscoveredCharacteristicsResponse:btService.characteristicDict withError:error];
+
+    if ([self.delegate respondsToSelector:@selector(peripheral:didDiscoverCharacteristicsForService:error:)]) {
+        [self.delegate peripheral:peripheral didDiscoverCharacteristicsForService:service error:error];
+    }
 }
 
 
@@ -280,6 +284,9 @@
  */
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     // TBD
+    if ([self.delegate respondsToSelector:@selector(peripheral:didDiscoverDescriptorsForCharacteristic:error:)]) {
+        [self.delegate peripheral:peripheral didDiscoverDescriptorsForCharacteristic:characteristic error:error];
+    }
 }
 
 
@@ -303,6 +310,10 @@
             [yc executeReadCallback:characteristic.value error:error];
         }
     }
+    
+    if ([self.delegate respondsToSelector:@selector(peripheral:didUpdateValueForCharacteristic:error:)]) {
+        [self.delegate peripheral:peripheral didUpdateValueForCharacteristic:characteristic error:error];
+    }
 }
 
 
@@ -315,6 +326,10 @@
  */
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error {
     // TBD
+    
+    if ([self.delegate respondsToSelector:@selector(peripheral:didUpdateValueForDescriptor:error:)]) {
+        [self.delegate peripheral:peripheral didUpdateValueForDescriptor:descriptor error:error];
+    }
 }
 
 /**
@@ -331,6 +346,10 @@
     YMSCBCharacteristic *ct = [btService findCharacteristic:characteristic];
     
     [ct executeNotificationStateCallback:error];
+    
+    if ([self.delegate respondsToSelector:@selector(peripheral:didUpdateNotificationStateForCharacteristic:error:)]) {
+        [self.delegate peripheral:peripheral didUpdateNotificationStateForCharacteristic:characteristic error:error];
+    }
 }
 
 
@@ -354,6 +373,11 @@
         // TODO is this dangerous?
         [btService notifyCharacteristicHandler:yc error:error];
     }
+    
+    if ([self.delegate respondsToSelector:@selector(peripheral:didWriteValueForCharacteristic:error:)]) {
+        [self.delegate peripheral:peripheral didWriteValueForCharacteristic:characteristic error:error];
+    }
+
 }
 
 
@@ -366,6 +390,9 @@
  */
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error {
     // TBD
+    if ([self.delegate respondsToSelector:@selector(peripheral:didWriteValueForDescriptor:error:)]) {
+        [self.delegate peripheral:peripheral didWriteValueForDescriptor:descriptor error:error];
+    }
 }
 
 
@@ -380,6 +407,9 @@
         [self performSelector:@selector(updateRSSI) withObject:self afterDelay:self.rssiPingPeriod];
     }
     
+    if ([self.delegate respondsToSelector:@selector(peripheralDidUpdateRSSI:error:)]) {
+        [self.delegate peripheralDidUpdateRSSI:peripheral error:error];
+    }
 }
 
 
@@ -391,6 +421,11 @@
 
 - (void)peripheralDidUpdateName:(CBPeripheral *)peripheral {
     // TBD
+    
+    if ([self.delegate respondsToSelector:@selector(peripheralDidUpdateName:)]) {
+        [self.delegate peripheralDidUpdateName:peripheral];
+    }
+
 }
 
 
@@ -401,6 +436,10 @@
  */
 - (void)peripheralDidInvalidateServices:(CBPeripheral *)peripheral {
     // TBD
+    if ([self.delegate respondsToSelector:@selector(peripheralDidInvalidateServices:)]) {
+        [self.delegate peripheralDidInvalidateServices:peripheral];
+    }
+
 }
 
 
