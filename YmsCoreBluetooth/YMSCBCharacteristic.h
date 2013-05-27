@@ -69,8 +69,27 @@ typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
  */
 @property (nonatomic, strong) NSMutableArray *writeCallbacks;
 
+/** @name Callback Handler Methods */
+/**
+ Handler method to process notificationStateCallback.
+ 
+ @param error Error object, if failed.
+ */
 - (void)executeNotificationStateCallback:(NSError *)error;
+
+/**
+ Handler method to process first callback in readCallbacks.
+
+ @param data Value returned from read request.
+ @param error Error object, if failed.
+ */
 - (void)executeReadCallback:(NSData *)data error:(NSError *)error;
+
+/**
+ Handler method to process first callback in writeCallbacks.
+ 
+ @param error Error object, if failed.
+ */
 - (void)executeWriteCallback:(NSError *)error;
 
 /** @name Initializing a YMSCBCharacteristic */
