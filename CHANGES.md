@@ -11,7 +11,7 @@
 
 **API 0.93 is a BIG CHANGE.** It is largely a rethink of YmsCoreBluetooth to support the pattern for hierarchical block-based operations. This will very much *break code* written for prior releases of YmsCoreBluetooth. That said, the changes should be fairly comprehensible and address the following points going forward:
 
-* Improved understanding of API behavior; prior releases had too much implicit behavior ("magic") which made involuntary decisions for the developer using the API. Using blocks gives the developer a clearer and more structured view of the BLE transactions to be made.
+* Improved understanding of API behavior: prior releases had too much implicit behavior ("magic") which made involuntary decisions for the developer using the API. Using blocks gives the developer a clearer and more structured view of the BLE transactions to be made.
 * With the pattern for hierarchical block-based operations in place, a more structured way to add new API features. Like Winter, characteristic descriptors are coming.
 
 ### Sun May 12 2013 - Moombahton Release (ver 0.92)
