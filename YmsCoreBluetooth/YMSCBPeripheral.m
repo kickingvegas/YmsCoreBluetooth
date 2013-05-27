@@ -20,8 +20,7 @@
 #import "YMSCBPeripheral.h"
 #import "YMSCBService.h"
 #import "YMSCBCharacteristic.h"
-
-
+#import "YMSCBDescriptor.h"
 
 @implementation YMSCBPeripheral
 
@@ -123,6 +122,21 @@
                         return;
                     }
                     // TODO find descriptors (if necessary)
+                    __weak YMSCBService *thisService = (YMSCBService *)service;
+                    for (NSString *key in chDict) {
+                        YMSCBCharacteristic *ct = chDict[key];
+                        //NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
+                        
+                        [ct discoverDescriptorsWithBlock:^(NSArray *ydescriptors, NSError *error) {
+                            if (error) {
+                                return;
+                            }
+                            for (YMSCBDescriptor *yd in ydescriptors) {
+                                NSLog(@"Descriptor: %@ %@ %@", thisService.name, yd.UUID, yd.cbDescriptor);
+                            }
+                        }];
+                    }
+
 
                 }];
                 
