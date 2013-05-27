@@ -282,6 +282,22 @@ The YmsCoreBluetooth framework is the set of files prefixed with `YMSCB` located
 
 The files for the iOS application **Deanna** are prefixed with `DEA` located in the directory `Deanna`.
 
+## Recommended Code Walk Through
+
+To better understand how YmsCoreBluetooth works, it is recommended to first read the source of the following BLE service implementations:
+
+* DEAAccelerometerService, DEABarometerService, DEAGyroscopeService, DEAHumidityService, DEAMagnetometerService, DEASimpleKeysService, DEATemperatureService, DEADeviceInfoService
+
+Then the BLE peripheral implementation of the TI SensorTag:
+
+* DEASensorTag
+
+Then the application service which manages all known peripherals:
+
+* DEACentralManager
+
+The [Class Hierarchy](hierarchy.html) is very instructive in showing the relationship of the above classes to the YmsCoreBluetooth framework.
+
 
 ## Writing your own Bluetooth LE service with YmsCoreBluetooth
 
