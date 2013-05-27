@@ -34,14 +34,21 @@
  */
 @interface DEASensorTag : YMSCBPeripheral
 
-
+/// Convenience pointer to accelerometer service.
 @property (nonatomic, readonly) DEAAccelerometerService *accelerometer;
+/// Convenience pointer to barometer service.
 @property (nonatomic, readonly) DEABarometerService *barometer;
+/// Convenience pointer to device information service.
 @property (nonatomic, readonly) DEADeviceInfoService *devinfo;
+/// Convenience pointer to gyroscope service.
 @property (nonatomic, readonly) DEAGyroscopeService *gyroscope;
+/// Convenience pointer to humidity service.
 @property (nonatomic, readonly) DEAHumidityService *humidity;
+/// Convenience pointer to magnetometer service.
 @property (nonatomic, readonly) DEAMagnetometerService *magnetometer;
+/// Convenience pointer to simple keys service.
 @property (nonatomic, readonly) DEASimpleKeysService *simplekeys;
+/// Convenience pointer to temperature service.
 @property (nonatomic, readonly) DEATemperatureService *temperature;
 
 @end
