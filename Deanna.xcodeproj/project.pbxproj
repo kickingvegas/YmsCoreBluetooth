@@ -47,6 +47,7 @@
 		D9960A54173B0A1B0013C8E7 /* DEADeviceInfoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9960A53173B0A1B0013C8E7 /* DEADeviceInfoViewCell.m */; };
 		D9971AEA1720A9A100B1A068 /* DEAPeripheralTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9971AE91720A9A100B1A068 /* DEAPeripheralTableViewCell.xib */; };
 		D9971AEE1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9971AED1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m */; };
+		D9AA81C91753E00700C2836D /* YMSCBDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AA81C81753E00700C2836D /* YMSCBDescriptor.m */; };
 		D9AC59991721216700FC786F /* app_icon_57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC598F1721216700FC786F /* app_icon_57x57.png */; };
 		D9AC599A1721216700FC786F /* app_icon_72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC59901721216700FC786F /* app_icon_72x72.png */; };
 		D9AC599B1721216700FC786F /* app_icon_114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC59911721216700FC786F /* app_icon_114x114.png */; };
@@ -151,6 +152,8 @@
 		D9971AE91720A9A100B1A068 /* DEAPeripheralTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEAPeripheralTableViewCell.xib; sourceTree = "<group>"; };
 		D9971AEC1720AA7E00B1A068 /* DEAPeripheralTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAPeripheralTableViewCell.h; sourceTree = "<group>"; };
 		D9971AED1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAPeripheralTableViewCell.m; sourceTree = "<group>"; };
+		D9AA81C71753E00700C2836D /* YMSCBDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBDescriptor.h; sourceTree = "<group>"; };
+		D9AA81C81753E00700C2836D /* YMSCBDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBDescriptor.m; sourceTree = "<group>"; };
 		D9AC598F1721216700FC786F /* app_icon_57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon_57x57.png; sourceTree = "<group>"; };
 		D9AC59901721216700FC786F /* app_icon_72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon_72x72.png; sourceTree = "<group>"; };
 		D9AC59911721216700FC786F /* app_icon_114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon_114x114.png; sourceTree = "<group>"; };
@@ -224,6 +227,8 @@
 				D933CECE16DDAFA700EDDAD6 /* YMSCBUtils.m */,
 				D9812902173F3804008EA8D5 /* YMSCBStoredPeripherals.h */,
 				D9812903173F3804008EA8D5 /* YMSCBStoredPeripherals.m */,
+				D9AA81C71753E00700C2836D /* YMSCBDescriptor.h */,
+				D9AA81C81753E00700C2836D /* YMSCBDescriptor.m */,
 				D9268B4117306295009C4284 /* NSMutableArray+fifoQueue.h */,
 				D9268B4217306295009C4284 /* NSMutableArray+fifoQueue.m */,
 			);
@@ -590,6 +595,7 @@
 				D9187E1D1739D3FF003AA71D /* DEASensorTagUtils.m in Sources */,
 				D9960A54173B0A1B0013C8E7 /* DEADeviceInfoViewCell.m in Sources */,
 				D9812904173F3804008EA8D5 /* YMSCBStoredPeripherals.m in Sources */,
+				D9AA81C91753E00700C2836D /* YMSCBDescriptor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
