@@ -75,7 +75,7 @@ In the following code sample, `self` is an instance of a subclass of YMSCBCentra
                                    }
                                    
                                    NSLog(@"DISCOVERED: %@, %@, %@ db", peripheral, peripheral.name, RSSI);
-                                   [self handleFoundPeripheral:peripheral];
+                                   [this handleFoundPeripheral:peripheral];
                                }];
 
 #### Retrieving Peripherals
@@ -84,7 +84,7 @@ In the following code sample, `self` is an instance of a subclass of YMSCBCentra
 
 	[self retrievePeripherals:peripheralUUIDs
 					withBlock:^(CBPeripheral *peripheral) {
-						[self handleFoundPeripheral:peripheral];
+						[this handleFoundPeripheral:peripheral];
 					}];
   
   
@@ -144,7 +144,7 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 			}
 
 			NSLog(@"system id: %@", tmpString);
-			self.system_id = tmpString;
+			this.system_id = tmpString;
 		}];
 
 		YMSCBCharacteristic *model_numberCt = self.characteristicDict[@"model_number"];
@@ -155,7 +155,7 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 			}
 
 			NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-			self.model_number = payload;
+			this.model_number = payload;
 			NSLog(@"model: %@", payload);
 
 		}];
@@ -182,7 +182,7 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 						return;
 					}
 
-					self.isCalibrating = NO;
+					this.isCalibrating = NO;
 					char val[data.length];
 					[data getBytes:&val length:data.length];
 
@@ -205,7 +205,7 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 						i = i + 2;
 					}
 
-					self.isCalibrated = YES;
+					this.isCalibrated = YES;
 
 				}];
 			}];
@@ -221,6 +221,8 @@ One place where YmsCoreBluetooth does *not* use blocks to handle BLE responses i
 In the following code sample, `self` is an instance of a subclass of YMSCBService. 
 
 	- (void)turnOn {
+	    __weak DEABaseService *this = self;
+		
 		YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
 		[configCt writeByte:0x1 withBlock:^(NSError *error) {
 			if (error) {
@@ -228,12 +230,15 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 				return;
 			}
 
-			NSLog(@"TURNED ON: %@", self.name);
+			NSLog(@"TURNED ON: %@", this.name);
 		}];
 
 		YMSCBCharacteristic *dataCt = self.characteristicDict[@"data"];
 		[dataCt setNotifyValue:YES withBlock:^(NSError *error) {
-			NSLog(@"Data notification for %@ on", self.name);
+		    if (error) {
+			    return;
+			}
+			NSLog(@"Data notification for %@ on", this.name);
 		}];
 
 		self.isOn = YES;
