@@ -168,7 +168,9 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 
 	- (void)requestCalibration {
 		if (self.isCalibrating == NO) {
-            __weak DEABarometerService *this = self;
+
+			__weak DEABarometerService *this = self;
+
 			YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
 			[configCt writeByte:0x2 withBlock:^(NSError *error) {
 				if (error) {
@@ -176,7 +178,7 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 					return;
 				}
 
-				YMSCBCharacteristic *calibrationCt = self.characteristicDict[@"calibration"];
+				YMSCBCharacteristic *calibrationCt = this.characteristicDict[@"calibration"];
 				[calibrationCt readValueWithBlock:^(NSData *data, NSError *error) {
 					if (error) {
 						NSLog(@"ERROR: read request to barometer calibration failed.");
@@ -195,13 +197,13 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 						int index = i/2 + 1;
 
 						if (index == 1) self.c1 = cx;
-						else if (index == 2) self.c2 = cx;
-						else if (index == 3) self.c3 = cx;
-						else if (index == 4) self.c4 = cx;
-						else if (index == 5) self.c5 = cx;
-						else if (index == 6) self.c6 = cx;
-						else if (index == 7) self.c7 = cx;
-						else if (index == 8) self.c8 = cx;
+						else if (index == 2) this.c2 = cx;
+						else if (index == 3) this.c3 = cx;
+						else if (index == 4) this.c4 = cx;
+						else if (index == 5) this.c5 = cx;
+						else if (index == 6) this.c6 = cx;
+						else if (index == 7) this.c7 = cx;
+						else if (index == 8) this.c8 = cx;
 
 						i = i + 2;
 					}
