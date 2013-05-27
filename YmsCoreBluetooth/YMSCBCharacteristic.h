@@ -21,6 +21,8 @@
 
 @class YMSCBPeripheral;
 
+typedef void (^YMSCBDiscoverDescriptorsCallbackBlockType)(NSArray *, NSError *);
+
 typedef void (^YMSCBReadCallbackBlockType)(NSData *, NSError *);
 typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
 
@@ -52,8 +54,15 @@ typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
 /// Offset address value, if applicable.
 @property (nonatomic, strong) NSNumber *offset;
 
+/// Holds instances of YMSCBDescriptor
+@property (nonatomic, strong) NSArray *descriptors;
+
 /// Notification state callback
 @property (nonatomic, strong) YMSCBWriteCallbackBlockType notificationStateCallback;
+
+/// Callback for descriptors that are discovered.
+@property (nonatomic, strong) YMSCBDiscoverDescriptorsCallbackBlockType discoverDescriptorsCallback;
+
 
 /**
  FIFO queue for reads.
@@ -168,6 +177,25 @@ typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
  */
 - (void)readValueWithBlock:(void (^)(NSData *data, NSError *error))readCallback;
 
+/** @name Discover Descriptors */
+/**
+ Discover descriptors for this characteristic.
+ 
+ @param callback Callback block to execute upon response for discovered descriptors.
+ */
+- (void)discoverDescriptorsWithBlock:(void (^)(NSArray *ydescriptors, NSError *error))callback;
+
+/**
+ Handler method for discovered characteristics.
+ 
+ @param desDict Dictionary of YMSCBCharacteristics that have been discovered.
+ @param error Error object, if failure.
+ */
+- (void)handleDiscoveredDescriptorsResponse:(NSArray *)ydescriptors withError:(NSError *)error;
+
+// TODO: document
+
+- (void)syncDescriptors:(NSArray *)foundDescriptors;
 
 
 @end

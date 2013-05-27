@@ -150,7 +150,12 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
  */
 - (void)discoverCharacteristics:(NSArray *)characteristicUUIDs
                       withBlock:(void (^)(NSDictionary *chDict, NSError *))callback;
-
+/**
+ Handler method for discovered characteristics.
+ 
+ @param chDict Dictionary of YMSCBCharacteristics that have been discovered.
+ @param error Error object, if failure.
+ */
 - (void)handleDiscoveredCharacteristicsResponse:(NSDictionary *)chDict withError:(NSError *)error;
 
 //- (void)defaultDiscoveredCharacteristicsHandler:(NSDictionary *)chDict withError:(NSError *)error;

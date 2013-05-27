@@ -283,7 +283,13 @@
  @param error If an error occured, the cause of the failure.
  */
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
-    // TBD
+    
+    YMSCBService *btService = [self findService:characteristic.service];
+    YMSCBCharacteristic *ct = [btService findCharacteristic:characteristic];
+    
+    [ct syncDescriptors:characteristic.descriptors];
+    [ct handleDiscoveredDescriptorsResponse:ct.descriptors withError:error];
+    
     if ([self.delegate respondsToSelector:@selector(peripheral:didDiscoverDescriptorsForCharacteristic:error:)]) {
         [self.delegate peripheral:peripheral didDiscoverDescriptorsForCharacteristic:characteristic error:error];
     }

@@ -27,6 +27,7 @@
 #import "DEASimpleKeysService.h"
 #import "DEATemperatureService.h"
 #import "YMSCBCharacteristic.h"
+#import "YMSCBDescriptor.h"
 
 
 @implementation DEASensorTag
@@ -92,6 +93,21 @@
                     
                 } else {
                     [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+                        __weak DEABaseService *thisService = (DEABaseService *)service;
+                        for (NSString *key in chDict) {
+                            YMSCBCharacteristic *ct = chDict[key];
+                            //NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
+                            
+                            [ct discoverDescriptorsWithBlock:^(NSArray *ydescriptors, NSError *error) {
+                                if (error) {
+                                    return;
+                                }
+                                for (YMSCBDescriptor *yd in ydescriptors) {
+                                    NSLog(@"Descriptor: %@ %@ %@", thisService.name, yd.UUID, yd.cbDescriptor);
+                                }
+                            }];
+                        }
+
                     }];
                 }
             }

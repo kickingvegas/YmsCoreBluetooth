@@ -19,6 +19,7 @@
 #import "YMSCBCharacteristic.h"
 #import "NSMutableArray+fifoQueue.h"
 #import "YMSCBPeripheral.h"
+#import "YMSCBDescriptor.h"
 
 @implementation YMSCBCharacteristic
 
@@ -90,7 +91,33 @@
     writeCB(error);
 }
 
+- (void)discoverDescriptorsWithBlock:(void (^)(NSArray *, NSError *))callback {
+    if (self.cbCharacteristic) {
+        self.discoverDescriptorsCallback = callback;
+    
+        [self.parent.cbPeripheral discoverDescriptorsForCharacteristic:self.cbCharacteristic];
+    } else {
+        NSLog(@"WARNING: Attempt to discover descriptors with null cbCharacteristic: '%@' for %@", self.name, self.uuid);
+    }
+}
 
 
+- (void)handleDiscoveredDescriptorsResponse:(NSArray *)ydescriptors withError:(NSError *)error {
+    self.discoverDescriptorsCallback(ydescriptors, error);
+}
+
+- (void)syncDescriptors:(NSArray *)foundDescriptors {
+    
+    NSMutableArray *tempList = [[NSMutableArray alloc] initWithCapacity:[foundDescriptors count]];
+    
+    for (CBDescriptor *cbDescriptor in foundDescriptors) {
+        YMSCBDescriptor *yd = [YMSCBDescriptor new];
+        yd.cbDescriptor = cbDescriptor;
+        yd.parent = self.parent;
+        [tempList addObject:yd];
+    }
+    
+    self.descriptors = tempList;
+}
 
 @end

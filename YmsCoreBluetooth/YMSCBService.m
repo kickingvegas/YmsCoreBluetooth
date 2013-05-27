@@ -120,7 +120,6 @@
 
 
 - (void)discoverCharacteristics:(NSArray *)characteristicUUIDs withBlock:(void (^)(NSDictionary *, NSError *))callback {
-    
     self.discoverCharacteristicsCallback = callback;
     
     [self.parent.cbPeripheral discoverCharacteristics:characteristicUUIDs
