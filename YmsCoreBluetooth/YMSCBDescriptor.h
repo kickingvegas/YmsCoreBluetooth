@@ -56,12 +56,13 @@
 
 /** @name Issuing a Write Request */
 /**
- Request write value given characteristic name and execute callback block upon response.
  
- The callback block readCallback has one argument: `error`:
+ Issue write with value data and execute callback block writeCallback upon response.
  
- * `error` is populated with the returned `error` object from the delegate method peripheral:didUpdateValueForCharacteristic:error:
- or peripheral:didWriteValueForCharacteristic:error: implemented in YMSCBPeripheral.
+ The callback block writeCallback has one argument: `error`:
+ 
+ * `error` is populated with the returned `error` object from the delegate method
+ peripheral:didWriteValueForCharacteristic:error: implemented in YMSCBPeripheral.
  
  @param data The value to be written
  @param writeCallback Callback block to execute upon response.
@@ -70,12 +71,12 @@
 - (void)writeValue:(NSData *)data withBlock:(void (^)(NSError *error))writeCallback;
 
 /**
- Request write byte given characteristic name and execute callback block upon response.
+ Issue write with byte val and execute callback block writeCallback upon response.
  
- The callback block readCallback has one argument: `error`:
+ The callback block writeCallback has one argument: `error`:
  
- * `error` is populated with the returned `error` object from the delegate method peripheral:didUpdateValueForCharacteristic:error:
- or peripheral:didWriteValueForCharacteristic:error: implemented in YMSCBPeripheral.
+ * `error` is populated with the returned `error` object from the delegate method
+ peripheral:didWriteValueForCharacteristic:error: implemented in YMSCBPeripheral.
  
  @param val Byte value to be written
  @param writeCallback Callback block to execute upon response.
@@ -86,7 +87,7 @@
 
 /** @name Issuing a Read Request */
 /**
- Request read value given characteristic name and execute callback block upon response.
+ Issue read and execute callback block readCallback upon response.
  
  The callback block readCallback has two arguments: `data` and `error`:
  
