@@ -309,12 +309,12 @@ Then the application service which manages all known peripherals:
 
 * DEACentralManager
 
-The [Class Hierarchy](hierarchy.html) is very instructive in showing the relationship of the above classes to the YmsCoreBluetooth framework.
+The [Class Hierarchy](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/hierarchy.html) is very instructive in showing the relationship of the above classes to the YmsCoreBluetooth framework.
 
 
 ## Writing your own Bluetooth LE service with YmsCoreBluetooth
 
-Learn how to write your own Bluetooth LE service by reading the example of how its done for the TI SensorTag in the Tutorial.
+Learn how to write your own Bluetooth LE service by reading the example of how its done for the TI SensorTag in the [Tutorial](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/docs/tutorial/Tutorial.html).
 
 ## Questions
 
