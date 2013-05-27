@@ -19,6 +19,7 @@
 #import "YMSCBDescriptor.h"
 #import "YMSCBCharacteristic.h"
 #import "YMSCBPeripheral.h"
+#import "NSMutableArray+fifoQueue.h"
 
 @implementation YMSCBDescriptor
 
@@ -33,27 +34,30 @@
     return result;
 }
 
-
 - (void)writeValue:(NSData *)data withBlock:(void (^)(NSError *))writeCallback {
-    
+    [self.writeCallbacks push:writeCallback];
+    [self.parent.cbPeripheral writeValue:data forDescriptor:self.cbDescriptor];
 }
 
 
 - (void)writeByte:(int8_t)val withBlock:(void (^)(NSError *))writeCallback {
-    
+    NSData *data = [NSData dataWithBytes:&val length:1];
+    [self writeValue:data withBlock:writeCallback];
 }
 
 
 - (void)readValueWithBlock:(void (^)(NSData *, NSError *))readCallback {
-    
+    [self.parent.cbPeripheral readValueForDescriptor:self.cbDescriptor];
 }
 
 - (void)executeReadCallback:(NSData *)data error:(NSError *)error {
-    
+    YMSCBReadCallbackBlockType readCB = [self.readCallbacks pop];
+    readCB(data, error);
 }
 
 - (void)executeWriteCallback:(NSError *)error {
-    
+    YMSCBWriteCallbackBlockType writeCB = [self.writeCallbacks pop];
+    writeCB(error);
 }
 
 @end
