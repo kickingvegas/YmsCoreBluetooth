@@ -23,7 +23,7 @@ Shown below is a partial file hierarchy of *Deanna* to help illustrate the organ
 
 With the above figure, let's walk through building a *SensorTag* peripheral.
 
-## Subclass YMSCBCentralManager
+## Subclass YMSCBCentralManager to make DEACentralManager
 
 The class DEACentralManager in `Deanna/Services/DEACentralManager.[hm]` is an application service to manage all known peripherals as defined by you the implementer. In this case we're only concerning ourselves with *SensorTag* peripherals.
 It is typically implemented as a singleton instance and contains the following method implementations:
@@ -33,17 +33,17 @@ It is typically implemented as a singleton instance and contains the following m
 * `handleFoundPeripheral`
 * `managerPoweredOnHandler`
 
-The `sharedService` method is a singleton constructor for `DEACBAppService`. In this implementation, the property `[YMSCBAppService knownPeripheralNames]` is set using `initWithKnownPeripheralNames:queue:` to help identify and filter the peripherals you care to communicate with.
+The `sharedService` method is a singleton constructor for DEACentralManager. In this implementation, the property [YMSCBCentralManager knownPeripheralNames] is set using [YMSCBCentralManager initWithKnownPeripheralNames:queue:userStoredPeripherals:] to help identify and filter the peripherals you care to communicate with.
 
-    + (DEACBAppService *)sharedService {
-        if (sharedCBAppService == nil) {
-            NSArray *nameList = @[@"TI BLE Sensor Tag", @"SensorTag"];
-            sharedCBAppService = [[super allocWithZone:NULL] initWithKnownPeripheralNames:nameList
-                                                                                    queue:nil];
-        }
-        return sharedCBAppService;
-    }
-
+	+ (DEACentralManager *)sharedService {
+		if (sharedCentralManager == nil) {
+			NSArray *nameList = @[@"TI BLE Sensor Tag", @"SensorTag"];
+			sharedCentralManager = [[super allocWithZone:NULL] initWithKnownPeripheralNames:nameList
+																					queue:nil
+																	 useStoredPeripherals:YES];
+		}
+		return sharedCentralManager;
+	}
 
 The `startScan` method lets you define how to go about scanning for peripherals. Within its implementation should be a call to `scanForPeripheralsWithServices:options:withBlock:` to tell the `CBCentralManager` property `manager` to start scanning.
 
@@ -122,14 +122,12 @@ For our purpose, we are interested on retrivieving previously discovered periphe
 	}
 
 
-## Subclass YMSCBPeripheral
+## Subclass YMSCBPeripheral to make DEASensorTag
 
 The class implementation of `DEASensorTag` in `Deanna/Services/SensorTag/DEASensorTag.[hm]` is where the top-level behavior of the *SensorTag* peripheral is captured. Two methods are implemented:
 
 * `initWithPeripheral:central:baseHi:baseLo:updateRSSI:` - the constructor for DEASensorTag
 * `connect` - the method to initiate a connection request for the peripheral.
-
-## Constructing DEASensorTag
 
 The class constructor for `DEASensorTag` is responsible for instantiating subclasses of `YMSCBService` to capture the behavior of the different BLE services offered by the *SensorTag*. The source for this constructor, `initWithPeripheral:central:baseHi:baseLo:updateRSSI:` is shown below:
 
@@ -177,9 +175,9 @@ In this implementation, the following BLE services of the *SensorTag* are suppor
 * Device Information Service - DEADeviceInfoService
 * 
 
-The instances of these classes are stored in the dictionary `[YMSCBPeripheral serviceDict]` where their respective keys are human-readable strings.
+The instances of these classes are stored in the dictionary [YMSCBPeripheral serviceDict] where their respective keys are human-readable strings.
 
-The `connect` method implements all the desired behavior involved with connecting to a BLE peripheral. It is here where the value of using ObjectiveC blocks as callbacks for responses sent back from the peripheral is shown.
+The `connect` method implements all the desired behavior involved with connecting to a BLE peripheral. It is here where the utility of ObjectiveC blocks to handle response behavior becomes evident.
 
 In the following implementation the following tasks are undertaken in sequential order:
 
