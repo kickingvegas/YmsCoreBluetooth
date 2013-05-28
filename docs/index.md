@@ -9,7 +9,7 @@ A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS applicat
 * ObjectiveC Block-based API for Bluetooth LE communication.
 * Operations (e.g. scanning, retrieval, connection, reads, writes) map to the data object hierarchy of CoreBluetooth.
 
-### A More Detailed Explaination
+### A More Detailed Explanation
 
 #### Blocks are cool.
 Transactions in Bluetooth LE (BLE) are two-phase (request-response) in nature: CoreBluetooth abstracts this protocol so that request behavior is separated from response behavior. The two phases are reconciled using a delegation pattern: the object initiating the request phase has a delegate object with a delegate method to handle the corresponding response phase. While functional, the delegation pattern can be cumbersome to use because the behavior for a two-phase transaction is split into two different locations in code.
@@ -35,11 +35,11 @@ However the existing CoreBluetooth API does not map BLE requests to the data obj
 
 YMSCoreBluetooth defines container classes which map to the CoreBluetooth object hierarchy:
 
-* YMSCBCentralManager - A BLE central which manages the BLE peripherals it either discovers via scanning or retrieval.
-    * YMSCBPeripheral - A BLE peripheral can have multiple BLE services
-        * YMSCBService - A BLE service can have multiple BLE characteristics
-             * YMSCBCharacteristic - A BLE characteristic can have multiple BLE descriptors
-			     * YMSCBDescriptor - A BLE descriptor 
+* YMSCBCentralManager - Contains a CBCentralManager instance.
+    * YMSCBPeripheral - Contains a CBPeripheral instance.
+        * YMSCBService - Contains a CBService instance.
+             * YMSCBCharacteristic - Contains a CBCharacteristic service.
+			     * YMSCBDescriptor - Contains a CBDescriptor service.
 
 However, they differ from CoreBluetooth in that operations are done with respect to the object type:
 
