@@ -44,7 +44,7 @@
 <ul>
 <li>ObjectiveC Block-based API for Bluetooth LE communication.</li>
 <li>Operations (e.g. scanning, retrieval, connection, reads, writes) map to the data object hierarchy of CoreBluetooth.</li>
-</ul><h3>A More Detailed Explaination</h3>
+</ul><h3>A More Detailed Explanation</h3>
 
 <h4>Blocks are cool.</h4>
 
@@ -85,19 +85,19 @@
 <p>YMSCoreBluetooth defines container classes which map to the CoreBluetooth object hierarchy:</p>
 
 <ul>
-<li>YMSCBCentralManager - A BLE central which manages the BLE peripherals it either discovers via scanning or retrieval.
+<li>YMSCBCentralManager - Contains a CBCentralManager instance.
 
 <ul>
-<li>YMSCBPeripheral - A BLE peripheral can have multiple BLE services
+<li>YMSCBPeripheral - Contains a CBPeripheral instance.
 
 <ul>
-<li>YMSCBService - A BLE service can have multiple BLE characteristics
+<li>YMSCBService - Contains a CBService instance.
 
 <ul>
-<li>YMSCBCharacteristic - A BLE characteristic can have multiple BLE descriptors
+<li>YMSCBCharacteristic - Contains a CBCharacteristic service.
 
 <ul>
-<li>YMSCBDescriptor - A BLE descriptor </li>
+<li>YMSCBDescriptor - Contains a CBDescriptor service.</li>
 </ul>
 </li>
 </ul>
