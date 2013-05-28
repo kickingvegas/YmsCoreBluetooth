@@ -37,8 +37,8 @@ YMSCoreBluetooth defines container classes which map to the CoreBluetooth object
 * YMSCBCentralManager - Contains a CBCentralManager instance.
     * YMSCBPeripheral - Contains a CBPeripheral instance.
         * YMSCBService - Contains a CBService instance.
-             * YMSCBCharacteristic - Contains a CBCharacteristic service.
-			     * YMSCBDescriptor - Contains a CBDescriptor service.
+             * YMSCBCharacteristic - Contains a CBCharacteristic instance.
+			     * YMSCBDescriptor - Contains a CBDescriptor instance.
 
 However, they differ from CoreBluetooth in that operations are done with respect to the object type:
 
