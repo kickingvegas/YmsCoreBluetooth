@@ -92,15 +92,16 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 /** @name Adding a BLE characteristic */
 /**
  Add YMSCBCharacteristic instance given address offset.
- @param cname characteristic name
- @param addrOffset offset value
+ @param cname Characteristic name
+ @param addrOffset Offset value
  */
 - (void)addCharacteristic:(NSString *)cname withOffset:(int)addrOffset;
 
 /**
- Add YMSCBCharacteristic instance given address offset.
- @param cname characteristic name
- @param addr offset value
+ Add YMSCBCharacteristic instance given absolute address.
+ 
+ @param cname Characteristic name
+ @param addr Absolute address value
  */
 - (void)addCharacteristic:(NSString *)cname withAddress:(int)addr;
 
