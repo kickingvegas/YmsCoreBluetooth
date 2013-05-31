@@ -51,7 +51,7 @@ typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
 /// Pointer to parent peripheral.
 @property (nonatomic, weak) YMSCBPeripheral *parent;
 
-/// Offset address value, if applicable.
+/// Absolute address value. May turn into an offset value if base address is supported in the future for this class.
 @property (nonatomic, strong) NSNumber *offset;
 
 /// Holds instances of YMSCBDescriptor
@@ -104,14 +104,21 @@ typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
 /** @name Initializing a YMSCBCharacteristic */
 /**
  Constructor.
+ 
+ Note:  addrOffset is really an absolute address here in implementation.
+ TBD whether this should be considered an API bug or possibly an API change
+ where a base address is supported in this method (and class). 
+ For now leaving as is until feedback is provided (please use the issue
+ tracker on GitHub.)
+ 
+ https://github.com/kickingvegas/YmsCoreBluetooth/issues
 
  @param oName characteristic name
  @param pObj parent peripheral
  @param oUUID characteristic CBUUID
- @param addrOffset characteristic address offset
+ @param addrOffset characteristic absolute address (it's not really an offset)
  */
 - (id)initWithName:(NSString *)oName parent:(YMSCBPeripheral *)pObj uuid:(CBUUID *)oUUID offset:(int)addrOffset;
-
 
 
 /** @name Changing the notification state */
