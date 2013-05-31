@@ -426,23 +426,25 @@
     }
 }
 
-
+#if TARGET_OS_IPHONE
 /**
  CBPeripheralDelegate implementation. Not yet supported.
  
  @param peripheral The peripheral providing this information.
  */
-
 - (void)peripheralDidUpdateName:(CBPeripheral *)peripheral {
     // TBD
     
+
+
     if ([self.delegate respondsToSelector:@selector(peripheralDidUpdateName:)]) {
         [self.delegate peripheralDidUpdateName:peripheral];
     }
 
 }
+#endif
 
-
+#if TARGET_OS_IPHONE
 /**
  CBPeripheralDelegate implementation. Not yet supported.
  
@@ -455,8 +457,7 @@
     }
 
 }
-
-
+#endif
 
 
 @end

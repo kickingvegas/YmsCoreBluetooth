@@ -17,10 +17,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#if TARGET_OS_IPHONE
 #import <CoreBluetooth/CoreBluetooth.h>
+#elif TARGET_OS_MAC
+#import <IOBluetooth/IOBluetooth.h>
+#endif
 
-
-#define kYMSCBVersion "0.93"
+#define kYMSCBVersion "0.94"
 extern NSString *const YMSCBVersion;
 
 @class YMSCBPeripheral;
