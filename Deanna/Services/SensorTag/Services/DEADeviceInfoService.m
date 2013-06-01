@@ -59,7 +59,7 @@
         NSMutableString *tmpString = [NSMutableString stringWithFormat:@""];
         unsigned char bytes[data.length];
         [data getBytes:bytes];
-        for (int ii = data.length; ii >= 0;ii--) {
+        for (int ii = (int)data.length; ii >= 0;ii--) {
             [tmpString appendFormat:@"%02hhx",bytes[ii]];
             if (ii) {
                 [tmpString appendFormat:@":"];
