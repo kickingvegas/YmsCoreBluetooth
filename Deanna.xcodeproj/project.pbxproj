@@ -47,6 +47,43 @@
 		D9960A54173B0A1B0013C8E7 /* DEADeviceInfoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9960A53173B0A1B0013C8E7 /* DEADeviceInfoViewCell.m */; };
 		D9971AEA1720A9A100B1A068 /* DEAPeripheralTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9971AE91720A9A100B1A068 /* DEAPeripheralTableViewCell.xib */; };
 		D9971AEE1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9971AED1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m */; };
+		D997AC9C175B245800C91B0D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D997AC9A175B245800C91B0D /* InfoPlist.strings */; };
+		D997AC9E175B245800C91B0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D997AC9D175B245800C91B0D /* main.m */; };
+		D997ACA2175B245800C91B0D /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D997ACA0175B245800C91B0D /* Credits.rtf */; };
+		D997ACA5175B245800C91B0D /* DEMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACA4175B245800C91B0D /* DEMAppDelegate.m */; };
+		D997ACAE175B24AB00C91B0D /* IOBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D997ACAC175B24AB00C91B0D /* IOBluetooth.framework */; };
+		D997ACAF175B24AB00C91B0D /* IOBluetoothUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D997ACAD175B24AB00C91B0D /* IOBluetoothUI.framework */; };
+		D997ACB1175B24B700C91B0D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D997ACB0175B24B700C91B0D /* Cocoa.framework */; };
+		D997ACB3175B24C800C91B0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D997ACB2175B24C800C91B0D /* Foundation.framework */; };
+		D997ACB6175B254500C91B0D /* YMS128.c in Sources */ = {isa = PBXBuildFile; fileRef = D933CEC316DDAFA700EDDAD6 /* YMS128.c */; };
+		D997ACB7175B254500C91B0D /* YMSCBCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D933CEC616DDAFA700EDDAD6 /* YMSCBCentralManager.m */; };
+		D997ACB8175B254500C91B0D /* YMSCBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = D933CECA16DDAFA700EDDAD6 /* YMSCBPeripheral.m */; };
+		D997ACB9175B254500C91B0D /* YMSCBService.m in Sources */ = {isa = PBXBuildFile; fileRef = D933CECC16DDAFA700EDDAD6 /* YMSCBService.m */; };
+		D997ACBA175B254500C91B0D /* YMSCBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = D933CEC816DDAFA700EDDAD6 /* YMSCBCharacteristic.m */; };
+		D997ACBB175B254500C91B0D /* YMSCBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D933CECE16DDAFA700EDDAD6 /* YMSCBUtils.m */; };
+		D997ACBC175B254500C91B0D /* YMSCBStoredPeripherals.m in Sources */ = {isa = PBXBuildFile; fileRef = D9812903173F3804008EA8D5 /* YMSCBStoredPeripherals.m */; };
+		D997ACBD175B254500C91B0D /* YMSCBDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AA81C81753E00700C2836D /* YMSCBDescriptor.m */; };
+		D997ACBE175B254500C91B0D /* NSMutableArray+fifoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D9268B4217306295009C4284 /* NSMutableArray+fifoQueue.m */; };
+		D997ACBF175B255E00C91B0D /* DEACentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D906E5F016DCAC55001D7932 /* DEACentralManager.m */; };
+		D997ACC0175B255E00C91B0D /* TISensorTag.c in Sources */ = {isa = PBXBuildFile; fileRef = D988A5C716DD464A00D7D392 /* TISensorTag.c */; };
+		D997ACC1175B255E00C91B0D /* DEASensorTagUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D9187E1C1739D3FF003AA71D /* DEASensorTagUtils.m */; };
+		D997ACC2175B255E00C91B0D /* DEASensorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = D988A5C516DD26A100D7D392 /* DEASensorTag.m */; };
+		D997ACC3175B257000C91B0D /* DEABaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = D97EC6CF172B08AB00CAECFC /* DEABaseService.m */; };
+		D997ACC4175B257000C91B0D /* DEAAccelerometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = D91170551681461300E2D19A /* DEAAccelerometerService.m */; };
+		D997ACC5175B257000C91B0D /* DEABarometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DE671016E0223E00F1B15C /* DEABarometerService.m */; };
+		D997ACC6175B257000C91B0D /* DEADeviceInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9268B45173081E2009C4284 /* DEADeviceInfoService.m */; };
+		D997ACC7175B257000C91B0D /* DEAGyroscopeService.m in Sources */ = {isa = PBXBuildFile; fileRef = D93EAC4F16E18711008B1BD3 /* DEAGyroscopeService.m */; };
+		D997ACC8175B257000C91B0D /* DEAHumidityService.m in Sources */ = {isa = PBXBuildFile; fileRef = D90C0C3C16DD9133002D3FFD /* DEAHumidityService.m */; };
+		D997ACC9175B257000C91B0D /* DEAMagnetometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = D93EAC5816E1DAF5008B1BD3 /* DEAMagnetometerService.m */; };
+		D997ACCA175B257000C91B0D /* DEASimpleKeysService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D8316C168449FD00F51E42 /* DEASimpleKeysService.m */; };
+		D997ACCB175B257000C91B0D /* DEATemperatureService.m in Sources */ = {isa = PBXBuildFile; fileRef = D91170521681251900E2D19A /* DEATemperatureService.m */; };
+		D997ACCD175B27C000C91B0D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D997ACCC175B27C000C91B0D /* MainMenu.xib */; };
+		D997ACD1175B287200C91B0D /* DEASensorTagWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D997ACD0175B287200C91B0D /* DEASensorTagWindow.xib */; };
+		D997ACDA175B288900C91B0D /* DEAPeripheralViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACD3175B288900C91B0D /* DEAPeripheralViewCell.m */; };
+		D997ACDB175B288900C91B0D /* DEMBaseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACD5175B288900C91B0D /* DEMBaseViewCell.m */; };
+		D997ACDC175B288900C91B0D /* DEMAccelerometerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACD7175B288900C91B0D /* DEMAccelerometerViewCell.m */; };
+		D997ACDD175B288900C91B0D /* DEMBarometerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACD9175B288900C91B0D /* DEMBarometerViewCell.m */; };
+		D997ACE0175B28E900C91B0D /* DEASensorTagWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACDF175B28E900C91B0D /* DEASensorTagWindow.m */; };
 		D9AA81C91753E00700C2836D /* YMSCBDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AA81C81753E00700C2836D /* YMSCBDescriptor.m */; };
 		D9AC59991721216700FC786F /* app_icon_57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC598F1721216700FC786F /* app_icon_57x57.png */; };
 		D9AC599A1721216700FC786F /* app_icon_72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC59901721216700FC786F /* app_icon_72x72.png */; };
@@ -152,6 +189,33 @@
 		D9971AE91720A9A100B1A068 /* DEAPeripheralTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEAPeripheralTableViewCell.xib; sourceTree = "<group>"; };
 		D9971AEC1720AA7E00B1A068 /* DEAPeripheralTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAPeripheralTableViewCell.h; sourceTree = "<group>"; };
 		D9971AED1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAPeripheralTableViewCell.m; sourceTree = "<group>"; };
+		D997AC90175B245800C91B0D /* DeannaMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeannaMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D997AC94175B245800C91B0D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		D997AC95175B245800C91B0D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		D997AC96175B245800C91B0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D997AC99175B245800C91B0D /* DeannaMac-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DeannaMac-Info.plist"; sourceTree = "<group>"; };
+		D997AC9B175B245800C91B0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D997AC9D175B245800C91B0D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D997AC9F175B245800C91B0D /* DeannaMac-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DeannaMac-Prefix.pch"; sourceTree = "<group>"; };
+		D997ACA1175B245800C91B0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		D997ACA3175B245800C91B0D /* DEMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DEMAppDelegate.h; sourceTree = "<group>"; };
+		D997ACA4175B245800C91B0D /* DEMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DEMAppDelegate.m; sourceTree = "<group>"; };
+		D997ACAC175B24AB00C91B0D /* IOBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOBluetooth.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/IOBluetooth.framework; sourceTree = DEVELOPER_DIR; };
+		D997ACAD175B24AB00C91B0D /* IOBluetoothUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOBluetoothUI.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/IOBluetoothUI.framework; sourceTree = DEVELOPER_DIR; };
+		D997ACB0175B24B700C91B0D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		D997ACB2175B24C800C91B0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		D997ACCC175B27C000C91B0D /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = ../en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		D997ACD0175B287200C91B0D /* DEASensorTagWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEASensorTagWindow.xib; sourceTree = "<group>"; };
+		D997ACD2175B288900C91B0D /* DEAPeripheralViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAPeripheralViewCell.h; sourceTree = "<group>"; };
+		D997ACD3175B288900C91B0D /* DEAPeripheralViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAPeripheralViewCell.m; sourceTree = "<group>"; };
+		D997ACD4175B288900C91B0D /* DEMBaseViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMBaseViewCell.h; sourceTree = "<group>"; };
+		D997ACD5175B288900C91B0D /* DEMBaseViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMBaseViewCell.m; sourceTree = "<group>"; };
+		D997ACD6175B288900C91B0D /* DEMAccelerometerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMAccelerometerViewCell.h; sourceTree = "<group>"; };
+		D997ACD7175B288900C91B0D /* DEMAccelerometerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMAccelerometerViewCell.m; sourceTree = "<group>"; };
+		D997ACD8175B288900C91B0D /* DEMBarometerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMBarometerViewCell.h; sourceTree = "<group>"; };
+		D997ACD9175B288900C91B0D /* DEMBarometerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMBarometerViewCell.m; sourceTree = "<group>"; };
+		D997ACDE175B28E900C91B0D /* DEASensorTagWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASensorTagWindow.h; sourceTree = "<group>"; };
+		D997ACDF175B28E900C91B0D /* DEASensorTagWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASensorTagWindow.m; sourceTree = "<group>"; };
 		D9AA81C71753E00700C2836D /* YMSCBDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBDescriptor.h; sourceTree = "<group>"; };
 		D9AA81C81753E00700C2836D /* YMSCBDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBDescriptor.m; sourceTree = "<group>"; };
 		D9AC598F1721216700FC786F /* app_icon_57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon_57x57.png; sourceTree = "<group>"; };
@@ -207,6 +271,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D997AC8D175B245800C91B0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D997ACB3175B24C800C91B0D /* Foundation.framework in Frameworks */,
+				D997ACB1175B24B700C91B0D /* Cocoa.framework in Frameworks */,
+				D997ACAE175B24AB00C91B0D /* IOBluetooth.framework in Frameworks */,
+				D997ACAF175B24AB00C91B0D /* IOBluetoothUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -244,6 +319,7 @@
 				D933CEC216DDAFA700EDDAD6 /* YmsCoreBluetooth */,
 				D9718B4B167F9F9F0001E42C /* Deanna */,
 				D9718B69167F9FA00001E42C /* DeannaTests */,
+				D997AC97175B245800C91B0D /* DeannaMac */,
 				D9718B44167F9F9F0001E42C /* Frameworks */,
 				D9718B42167F9F9F0001E42C /* Products */,
 			);
@@ -254,6 +330,7 @@
 			children = (
 				D9718B41167F9F9F0001E42C /* Deanna.app */,
 				D9718B62167F9FA00001E42C /* DeannaTests.octest */,
+				D997AC90175B245800C91B0D /* DeannaMac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -261,11 +338,10 @@
 		D9718B44167F9F9F0001E42C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D9718B8E167FA5140001E42C /* CoreBluetooth.framework */,
-				D9718B45167F9F9F0001E42C /* UIKit.framework */,
-				D9718B47167F9F9F0001E42C /* Foundation.framework */,
-				D9718B49167F9F9F0001E42C /* CoreGraphics.framework */,
+				D997ACB4175B24DF00C91B0D /* iOS */,
+				D997ACB5175B250800C91B0D /* OSX */,
 				D9718B63167F9FA00001E42C /* SenTestingKit.framework */,
+				D997AC93175B245800C91B0D /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -355,6 +431,88 @@
 				D9DE671216E036C100F1B15C /* Sensors */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		D997AC93175B245800C91B0D /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D997AC94175B245800C91B0D /* AppKit.framework */,
+				D997AC95175B245800C91B0D /* CoreData.framework */,
+				D997AC96175B245800C91B0D /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		D997AC97175B245800C91B0D /* DeannaMac */ = {
+			isa = PBXGroup;
+			children = (
+				D997ACA3175B245800C91B0D /* DEMAppDelegate.h */,
+				D997ACA4175B245800C91B0D /* DEMAppDelegate.m */,
+				D997ACDE175B28E900C91B0D /* DEASensorTagWindow.h */,
+				D997ACDF175B28E900C91B0D /* DEASensorTagWindow.m */,
+				D997ACCE175B285F00C91B0D /* UI */,
+				D997ACCF175B285F00C91B0D /* XIBs */,
+				D997AC98175B245800C91B0D /* Supporting Files */,
+			);
+			path = DeannaMac;
+			sourceTree = "<group>";
+		};
+		D997AC98175B245800C91B0D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D997AC99175B245800C91B0D /* DeannaMac-Info.plist */,
+				D997AC9A175B245800C91B0D /* InfoPlist.strings */,
+				D997AC9D175B245800C91B0D /* main.m */,
+				D997AC9F175B245800C91B0D /* DeannaMac-Prefix.pch */,
+				D997ACA0175B245800C91B0D /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D997ACB4175B24DF00C91B0D /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D9718B8E167FA5140001E42C /* CoreBluetooth.framework */,
+				D9718B45167F9F9F0001E42C /* UIKit.framework */,
+				D9718B47167F9F9F0001E42C /* Foundation.framework */,
+				D9718B49167F9F9F0001E42C /* CoreGraphics.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		D997ACB5175B250800C91B0D /* OSX */ = {
+			isa = PBXGroup;
+			children = (
+				D997ACB2175B24C800C91B0D /* Foundation.framework */,
+				D997ACB0175B24B700C91B0D /* Cocoa.framework */,
+				D997ACAC175B24AB00C91B0D /* IOBluetooth.framework */,
+				D997ACAD175B24AB00C91B0D /* IOBluetoothUI.framework */,
+			);
+			name = OSX;
+			sourceTree = "<group>";
+		};
+		D997ACCE175B285F00C91B0D /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				D997ACD2175B288900C91B0D /* DEAPeripheralViewCell.h */,
+				D997ACD3175B288900C91B0D /* DEAPeripheralViewCell.m */,
+				D997ACD4175B288900C91B0D /* DEMBaseViewCell.h */,
+				D997ACD5175B288900C91B0D /* DEMBaseViewCell.m */,
+				D997ACD6175B288900C91B0D /* DEMAccelerometerViewCell.h */,
+				D997ACD7175B288900C91B0D /* DEMAccelerometerViewCell.m */,
+				D997ACD8175B288900C91B0D /* DEMBarometerViewCell.h */,
+				D997ACD9175B288900C91B0D /* DEMBarometerViewCell.m */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		D997ACCF175B285F00C91B0D /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				D997ACCC175B27C000C91B0D /* MainMenu.xib */,
+				D997ACD0175B287200C91B0D /* DEASensorTagWindow.xib */,
+			);
+			path = XIBs;
 			sourceTree = "<group>";
 		};
 		D9AC598E1721208500FC786F /* Assets */ = {
@@ -476,6 +634,23 @@
 			productReference = D9718B62167F9FA00001E42C /* DeannaTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
+		D997AC8F175B245800C91B0D /* DeannaMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D997ACAB175B245800C91B0D /* Build configuration list for PBXNativeTarget "DeannaMac" */;
+			buildPhases = (
+				D997AC8C175B245800C91B0D /* Sources */,
+				D997AC8D175B245800C91B0D /* Frameworks */,
+				D997AC8E175B245800C91B0D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DeannaMac;
+			productName = DeannaMac;
+			productReference = D997AC90175B245800C91B0D /* DeannaMac.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -500,6 +675,7 @@
 			targets = (
 				D9718B40167F9F9F0001E42C /* Deanna */,
 				D9718B61167F9FA00001E42C /* DeannaTests */,
+				D997AC8F175B245800C91B0D /* DeannaMac */,
 			);
 		};
 /* End PBXProject section */
@@ -534,6 +710,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9718B6E167F9FA00001E42C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D997AC8E175B245800C91B0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D997AC9C175B245800C91B0D /* InfoPlist.strings in Resources */,
+				D997ACA2175B245800C91B0D /* Credits.rtf in Resources */,
+				D997ACCD175B27C000C91B0D /* MainMenu.xib in Resources */,
+				D997ACD1175B287200C91B0D /* DEASensorTagWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -607,6 +794,42 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D997AC8C175B245800C91B0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D997AC9E175B245800C91B0D /* main.m in Sources */,
+				D997ACA5175B245800C91B0D /* DEMAppDelegate.m in Sources */,
+				D997ACB6175B254500C91B0D /* YMS128.c in Sources */,
+				D997ACB7175B254500C91B0D /* YMSCBCentralManager.m in Sources */,
+				D997ACB8175B254500C91B0D /* YMSCBPeripheral.m in Sources */,
+				D997ACB9175B254500C91B0D /* YMSCBService.m in Sources */,
+				D997ACBA175B254500C91B0D /* YMSCBCharacteristic.m in Sources */,
+				D997ACBB175B254500C91B0D /* YMSCBUtils.m in Sources */,
+				D997ACBC175B254500C91B0D /* YMSCBStoredPeripherals.m in Sources */,
+				D997ACBD175B254500C91B0D /* YMSCBDescriptor.m in Sources */,
+				D997ACBE175B254500C91B0D /* NSMutableArray+fifoQueue.m in Sources */,
+				D997ACBF175B255E00C91B0D /* DEACentralManager.m in Sources */,
+				D997ACC0175B255E00C91B0D /* TISensorTag.c in Sources */,
+				D997ACC1175B255E00C91B0D /* DEASensorTagUtils.m in Sources */,
+				D997ACC2175B255E00C91B0D /* DEASensorTag.m in Sources */,
+				D997ACC3175B257000C91B0D /* DEABaseService.m in Sources */,
+				D997ACC4175B257000C91B0D /* DEAAccelerometerService.m in Sources */,
+				D997ACC5175B257000C91B0D /* DEABarometerService.m in Sources */,
+				D997ACC6175B257000C91B0D /* DEADeviceInfoService.m in Sources */,
+				D997ACC7175B257000C91B0D /* DEAGyroscopeService.m in Sources */,
+				D997ACC8175B257000C91B0D /* DEAHumidityService.m in Sources */,
+				D997ACC9175B257000C91B0D /* DEAMagnetometerService.m in Sources */,
+				D997ACCA175B257000C91B0D /* DEASimpleKeysService.m in Sources */,
+				D997ACCB175B257000C91B0D /* DEATemperatureService.m in Sources */,
+				D997ACDA175B288900C91B0D /* DEAPeripheralViewCell.m in Sources */,
+				D997ACDB175B288900C91B0D /* DEMBaseViewCell.m in Sources */,
+				D997ACDC175B288900C91B0D /* DEMAccelerometerViewCell.m in Sources */,
+				D997ACDD175B288900C91B0D /* DEMBarometerViewCell.m in Sources */,
+				D997ACE0175B28E900C91B0D /* DEASensorTagWindow.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -632,6 +855,22 @@
 				D9718B6D167F9FA00001E42C /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D997AC9A175B245800C91B0D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D997AC9B175B245800C91B0D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D997ACA0175B245800C91B0D /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D997ACA1175B245800C91B0D /* en */,
+			);
+			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -753,6 +992,55 @@
 			};
 			name = Release;
 		};
+		D997ACA9175B245800C91B0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DeannaMac/DeannaMac-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "DeannaMac/DeannaMac-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D997ACAA175B245800C91B0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DeannaMac/DeannaMac-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "DeannaMac/DeannaMac-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -779,6 +1067,15 @@
 			buildConfigurations = (
 				D9718B78167F9FA00001E42C /* Debug */,
 				D9718B79167F9FA00001E42C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D997ACAB175B245800C91B0D /* Build configuration list for PBXNativeTarget "DeannaMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D997ACA9175B245800C91B0D /* Debug */,
+				D997ACAA175B245800C91B0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
