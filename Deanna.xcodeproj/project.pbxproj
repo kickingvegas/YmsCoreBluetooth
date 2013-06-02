@@ -15,6 +15,10 @@
 		D91170561681461300E2D19A /* DEAAccelerometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = D91170551681461300E2D19A /* DEAAccelerometerService.m */; };
 		D9187E1D1739D3FF003AA71D /* DEASensorTagUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D9187E1C1739D3FF003AA71D /* DEASensorTagUtils.m */; };
 		D92049D51742C836001380A6 /* CHANGES.md in Resources */ = {isa = PBXBuildFile; fileRef = D92049D41742C836001380A6 /* CHANGES.md */; };
+		D9211E20175BBEFB0081143F /* DEMTemperatureViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9211E1F175BBEFB0081143F /* DEMTemperatureViewCell.m */; };
+		D9211E23175BC2870081143F /* DEMMagnetometerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9211E22175BC2870081143F /* DEMMagnetometerViewCell.m */; };
+		D9211E26175BCA860081143F /* DEMGyroscopeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9211E25175BCA860081143F /* DEMGyroscopeViewCell.m */; };
+		D9211E29175BCF040081143F /* DEMHumidityViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9211E28175BCF030081143F /* DEMHumidityViewCell.m */; };
 		D9268B4317306295009C4284 /* NSMutableArray+fifoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D9268B4217306295009C4284 /* NSMutableArray+fifoQueue.m */; };
 		D9268B46173081E2009C4284 /* DEADeviceInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9268B45173081E2009C4284 /* DEADeviceInfoService.m */; };
 		D933CECF16DDAFA700EDDAD6 /* YMS128.c in Sources */ = {isa = PBXBuildFile; fileRef = D933CEC316DDAFA700EDDAD6 /* YMS128.c */; };
@@ -84,6 +88,8 @@
 		D997ACDC175B288900C91B0D /* DEMAccelerometerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACD7175B288900C91B0D /* DEMAccelerometerViewCell.m */; };
 		D997ACDD175B288900C91B0D /* DEMBarometerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACD9175B288900C91B0D /* DEMBarometerViewCell.m */; };
 		D997ACE0175B28E900C91B0D /* DEASensorTagWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACDF175B28E900C91B0D /* DEASensorTagWindow.m */; };
+		D997ACE3175B331F00C91B0D /* DEMDeviceInfoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACE2175B331F00C91B0D /* DEMDeviceInfoViewCell.m */; };
+		D997ACE6175B3D0D00C91B0D /* DEMSimpleKeysViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACE5175B3D0D00C91B0D /* DEMSimpleKeysViewCell.m */; };
 		D9AA81C91753E00700C2836D /* YMSCBDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AA81C81753E00700C2836D /* YMSCBDescriptor.m */; };
 		D9AC59991721216700FC786F /* app_icon_57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC598F1721216700FC786F /* app_icon_57x57.png */; };
 		D9AC599A1721216700FC786F /* app_icon_72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC59901721216700FC786F /* app_icon_72x72.png */; };
@@ -134,6 +140,14 @@
 		D9187E1B1739D3FF003AA71D /* DEASensorTagUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASensorTagUtils.h; sourceTree = "<group>"; };
 		D9187E1C1739D3FF003AA71D /* DEASensorTagUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASensorTagUtils.m; sourceTree = "<group>"; };
 		D92049D41742C836001380A6 /* CHANGES.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGES.md; sourceTree = "<group>"; };
+		D9211E1E175BBEFB0081143F /* DEMTemperatureViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMTemperatureViewCell.h; sourceTree = "<group>"; };
+		D9211E1F175BBEFB0081143F /* DEMTemperatureViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMTemperatureViewCell.m; sourceTree = "<group>"; };
+		D9211E21175BC2870081143F /* DEMMagnetometerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMMagnetometerViewCell.h; sourceTree = "<group>"; };
+		D9211E22175BC2870081143F /* DEMMagnetometerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMMagnetometerViewCell.m; sourceTree = "<group>"; };
+		D9211E24175BCA860081143F /* DEMGyroscopeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMGyroscopeViewCell.h; sourceTree = "<group>"; };
+		D9211E25175BCA860081143F /* DEMGyroscopeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMGyroscopeViewCell.m; sourceTree = "<group>"; };
+		D9211E27175BCF030081143F /* DEMHumidityViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMHumidityViewCell.h; sourceTree = "<group>"; };
+		D9211E28175BCF030081143F /* DEMHumidityViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMHumidityViewCell.m; sourceTree = "<group>"; };
 		D9268B4117306295009C4284 /* NSMutableArray+fifoQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+fifoQueue.h"; sourceTree = "<group>"; };
 		D9268B4217306295009C4284 /* NSMutableArray+fifoQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+fifoQueue.m"; sourceTree = "<group>"; };
 		D9268B44173081E2009C4284 /* DEADeviceInfoService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEADeviceInfoService.h; sourceTree = "<group>"; };
@@ -216,6 +230,10 @@
 		D997ACD9175B288900C91B0D /* DEMBarometerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMBarometerViewCell.m; sourceTree = "<group>"; };
 		D997ACDE175B28E900C91B0D /* DEASensorTagWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASensorTagWindow.h; sourceTree = "<group>"; };
 		D997ACDF175B28E900C91B0D /* DEASensorTagWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASensorTagWindow.m; sourceTree = "<group>"; };
+		D997ACE1175B331E00C91B0D /* DEMDeviceInfoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMDeviceInfoViewCell.h; sourceTree = "<group>"; };
+		D997ACE2175B331F00C91B0D /* DEMDeviceInfoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMDeviceInfoViewCell.m; sourceTree = "<group>"; };
+		D997ACE4175B3D0C00C91B0D /* DEMSimpleKeysViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMSimpleKeysViewCell.h; sourceTree = "<group>"; };
+		D997ACE5175B3D0D00C91B0D /* DEMSimpleKeysViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMSimpleKeysViewCell.m; sourceTree = "<group>"; };
 		D9AA81C71753E00700C2836D /* YMSCBDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBDescriptor.h; sourceTree = "<group>"; };
 		D9AA81C81753E00700C2836D /* YMSCBDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBDescriptor.m; sourceTree = "<group>"; };
 		D9AC598F1721216700FC786F /* app_icon_57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon_57x57.png; sourceTree = "<group>"; };
@@ -502,6 +520,18 @@
 				D997ACD7175B288900C91B0D /* DEMAccelerometerViewCell.m */,
 				D997ACD8175B288900C91B0D /* DEMBarometerViewCell.h */,
 				D997ACD9175B288900C91B0D /* DEMBarometerViewCell.m */,
+				D997ACE1175B331E00C91B0D /* DEMDeviceInfoViewCell.h */,
+				D997ACE2175B331F00C91B0D /* DEMDeviceInfoViewCell.m */,
+				D997ACE4175B3D0C00C91B0D /* DEMSimpleKeysViewCell.h */,
+				D997ACE5175B3D0D00C91B0D /* DEMSimpleKeysViewCell.m */,
+				D9211E1E175BBEFB0081143F /* DEMTemperatureViewCell.h */,
+				D9211E1F175BBEFB0081143F /* DEMTemperatureViewCell.m */,
+				D9211E21175BC2870081143F /* DEMMagnetometerViewCell.h */,
+				D9211E22175BC2870081143F /* DEMMagnetometerViewCell.m */,
+				D9211E24175BCA860081143F /* DEMGyroscopeViewCell.h */,
+				D9211E25175BCA860081143F /* DEMGyroscopeViewCell.m */,
+				D9211E27175BCF030081143F /* DEMHumidityViewCell.h */,
+				D9211E28175BCF030081143F /* DEMHumidityViewCell.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -827,6 +857,12 @@
 				D997ACDC175B288900C91B0D /* DEMAccelerometerViewCell.m in Sources */,
 				D997ACDD175B288900C91B0D /* DEMBarometerViewCell.m in Sources */,
 				D997ACE0175B28E900C91B0D /* DEASensorTagWindow.m in Sources */,
+				D997ACE3175B331F00C91B0D /* DEMDeviceInfoViewCell.m in Sources */,
+				D997ACE6175B3D0D00C91B0D /* DEMSimpleKeysViewCell.m in Sources */,
+				D9211E20175BBEFB0081143F /* DEMTemperatureViewCell.m in Sources */,
+				D9211E23175BC2870081143F /* DEMMagnetometerViewCell.m in Sources */,
+				D9211E26175BCA860081143F /* DEMGyroscopeViewCell.m in Sources */,
+				D9211E29175BCF040081143F /* DEMHumidityViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
