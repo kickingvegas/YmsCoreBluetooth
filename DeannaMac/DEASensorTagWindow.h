@@ -23,6 +23,7 @@
 @class DEMBarometerViewCell;
 @class DEMDeviceInfoViewCell;
 @class DEMSimpleKeysViewCell;
+@class DEMTemperatureViewCell;
 
 @interface DEASensorTagWindow : NSWindowController<NSTableViewDataSource, NSTableViewDelegate, NSWindowDelegate>
 
@@ -36,5 +37,6 @@
 @property (strong) IBOutlet DEMBarometerViewCell *barometerViewCell;
 @property (strong) IBOutlet DEMDeviceInfoViewCell *devinfoViewCell;
 @property (strong) IBOutlet DEMSimpleKeysViewCell *simplekeysViewCell;
+@property (strong) IBOutlet DEMTemperatureViewCell *temperatureViewCell;
 
 @end

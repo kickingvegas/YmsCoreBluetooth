@@ -40,6 +40,7 @@
          */
         
         _cbServiceCells = @[@"simplekeys"
+                            , @"temperature"
                             , @"accelerometer"
                             , @"barometer"
                             , @"devinfo"
