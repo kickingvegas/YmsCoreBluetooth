@@ -21,7 +21,8 @@
 @class DEASensorTag;
 @class DEMAccelerometerViewCell;
 @class DEMBarometerViewCell;
-
+@class DEMDeviceInfoViewCell;
+@class DEMSimpleKeysViewCell;
 
 @interface DEASensorTagWindow : NSWindowController<NSTableViewDataSource, NSTableViewDelegate, NSWindowDelegate>
 
@@ -33,5 +34,7 @@
 @property (strong) IBOutlet NSTableView *servicesTableView;
 @property (strong) IBOutlet DEMAccelerometerViewCell *accelerometerViewCell;
 @property (strong) IBOutlet DEMBarometerViewCell *barometerViewCell;
+@property (strong) IBOutlet DEMDeviceInfoViewCell *devinfoViewCell;
+@property (strong) IBOutlet DEMSimpleKeysViewCell *simplekeysViewCell;
 
 @end

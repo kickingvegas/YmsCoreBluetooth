@@ -17,9 +17,10 @@
 //
 
 #import "DEASensorTagWindow.h"
+#import "DEASensorTag.h"
 #import "DEMAccelerometerViewCell.h"
 #import "DEMBarometerViewCell.h"
-#import "DEASensorTag.h"
+#import "DEMDeviceInfoViewCell.h"
 
 @implementation DEASensorTagWindow
 
@@ -38,19 +39,28 @@
                             ];
          */
         
-        _cbServiceCells = @[@"accelerometer"
-                            , @"barometer"];
+        _cbServiceCells = @[@"simplekeys"
+                            , @"accelerometer"
+                            , @"barometer"
+                            , @"devinfo"
+                            ];
+                            
     }
     return self;
 }
 
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    return 2;
+    return [self.cbServiceCells count];
 }
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
-    return 114.0;
+    NSView *serviceView;
+    NSString *prefix  = self.cbServiceCells[row];
+    serviceView = [self valueForKey:[NSString stringWithFormat:@"%@ViewCell", prefix]];
+
+    CGFloat height = serviceView.bounds.size.height;
+    return height;
 }
 
 
@@ -65,23 +75,24 @@
 }
 
 - (void)windowDidBecomeMain:(NSNotification *)notification {
-    [self.accelerometerViewCell configureWithSensorTag:self.sensorTag];
-    [self.barometerViewCell configureWithSensorTag:self.sensorTag];
+    
+    for (NSString *prefix in self.cbServiceCells) {
+        DEMBaseViewCell *serviceView;
+        serviceView = [self valueForKey:[NSString stringWithFormat:@"%@ViewCell", prefix]];
+        [serviceView configureWithSensorTag:self.sensorTag];
+    }
+    
 }
 
 
 - (void)windowWillClose:(NSNotification *)notification {
     NSLog(@"window is about to close");
     
-    
     for (NSString *prefix in self.cbServiceCells) {
-        NSView *serviceView;
+        DEMBaseViewCell *serviceView;
         serviceView = [self valueForKey:[NSString stringWithFormat:@"%@ViewCell", prefix]];
+        [serviceView deconfigure];
     }
-    
-
-    [self.accelerometerViewCell deconfigure];
-    [self.barometerViewCell deconfigure];
 }
 
 
