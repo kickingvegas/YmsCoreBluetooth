@@ -27,7 +27,6 @@
 - (id)init {
     self = [super initWithWindowNibName:@"DEASensorTagWindow"];
     if (self) {
-        /*
         _cbServiceCells = @[@"simplekeys"
                             , @"temperature"
                             , @"accelerometer"
@@ -37,17 +36,6 @@
                             , @"barometer"
                             , @"devinfo"
                             ];
-         */
-        
-        _cbServiceCells = @[@"simplekeys"
-                            , @"temperature"
-                            , @"accelerometer"
-                            , @"magnetometer"
-                            , @"gyroscope"
-                            , @"barometer"
-                            , @"devinfo"
-                            ];
-                            
     }
     return self;
 }
