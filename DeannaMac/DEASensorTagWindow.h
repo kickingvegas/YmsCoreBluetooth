@@ -25,6 +25,7 @@
 @class DEMSimpleKeysViewCell;
 @class DEMTemperatureViewCell;
 @class DEMMagnetometerViewCell;
+@class DEMGyroscopeViewCell;
 
 @interface DEASensorTagWindow : NSWindowController<NSTableViewDataSource, NSTableViewDelegate, NSWindowDelegate>
 
@@ -40,5 +41,6 @@
 @property (strong) IBOutlet DEMSimpleKeysViewCell *simplekeysViewCell;
 @property (strong) IBOutlet DEMTemperatureViewCell *temperatureViewCell;
 @property (strong) IBOutlet DEMMagnetometerViewCell *magnetometerViewCell;
+@property (strong) IBOutlet DEMGyroscopeViewCell *gyroscopeViewCell;
 
 @end
