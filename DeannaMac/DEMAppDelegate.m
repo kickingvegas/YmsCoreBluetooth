@@ -14,7 +14,7 @@
 #import "DEASimpleKeysService.h"
 #import "DEASensorTagWindow.h"
 
-@implementation STTAppDelegate
+@implementation DEMAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application

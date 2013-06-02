@@ -12,7 +12,7 @@
 
 @class DEASensorTagWindow;
 
-@interface STTAppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource, NSTableViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate, DEAPeripheralViewCellDelegate>
+@interface DEMAppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource, NSTableViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate, DEAPeripheralViewCellDelegate>
 @property (nonatomic, assign) int oldCount;
 @property (nonatomic, strong) NSMutableArray *peripheralWindows;
 
