@@ -38,10 +38,14 @@
         [_connectButton setAction:@selector(connectButtonAction:)];
         
         // RSSI Label
-        _rssiLabel = [[NSTextField alloc] initWithFrame:CGRectMake(181, 0, 81, 50)];
+        _rssiLabel = [[NSTextField alloc] initWithFrame:CGRectMake(181, 25, 81, 23)];
         [_rssiLabel setFont:[NSFont systemFontOfSize:22.0]];
         [self configureTextField:_rssiLabel];
         
+        _dbLabel = [[NSTextField alloc] initWithFrame:CGRectMake(230, 25, 81, 12)];
+        [_dbLabel setFont:[NSFont systemFontOfSize:10.0]];
+        _dbLabel.stringValue = @"db";
+        [self configureTextField:_dbLabel];
         
         // Detail Button
         _detailButton = [[NSButton alloc] initWithFrame:CGRectMake(300, 0, 50, 50)];
@@ -55,7 +59,7 @@
         [self addSubview:_connectButton];
         [self addSubview:_rssiLabel];
         [self addSubview:_detailButton];
-        
+        [self addSubview:_dbLabel];
 
         
     }
