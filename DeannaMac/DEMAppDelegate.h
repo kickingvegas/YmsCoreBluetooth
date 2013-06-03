@@ -20,18 +20,49 @@
 #import <IOBluetooth/IOBluetooth.h>
 #import "DEMPeripheralViewCell.h"
 
+/**
+ DeannaMac application delegate.
+ 
+ This application scans for BLE peripherals and if the peripheral is a TI SensorTag, 
+ will allow connection to it from an OS X system.
+ */
 @class DEASensorTagWindow;
 
-@interface DEMAppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource, NSTableViewDelegate, CBCentralManagerDelegate, CBPeripheralDelegate, DEAPeripheralViewCellDelegate>
+@interface DEMAppDelegate : NSObject <NSApplicationDelegate,
+ NSTableViewDataSource,
+ NSTableViewDelegate,
+ CBCentralManagerDelegate,
+ CBPeripheralDelegate,
+ DEAPeripheralViewCellDelegate>
+
+/**
+ Counter used to determine if there is a change in the number of peripherals discovered.
+ */
 @property (nonatomic, assign) int oldCount;
+
+/**
+ Array containing peripheral window instances.
+ */
 @property (nonatomic, strong) NSMutableArray *peripheralWindows;
 
+/**
+ Main window.
+ */
 @property (assign) IBOutlet NSWindow *window;
+
+/**
+ Scan button.
+ */
 @property (weak) IBOutlet NSButton *scanButton;
+
+/**
+ Table containing discovered peripherals.
+ */
 @property (weak) IBOutlet NSTableView *peripheralTableView;
 
-
-
+/**
+ Action method for scanButton.
+ */
 - (IBAction)scanAction:(id)sender;
 
 
