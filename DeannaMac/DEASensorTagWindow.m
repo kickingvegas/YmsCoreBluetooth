@@ -41,6 +41,8 @@
 }
 
 
+#pragma mark - NSTableViewDelegate & NSTableViewDataSource Methods
+
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     return [self.cbServiceCells count];
 }
@@ -68,6 +70,8 @@
     
     return serviceView;
 }
+
+#pragma mark - NSWindowDelegate Methods
 
 - (void)windowDidBecomeMain:(NSNotification *)notification {
     
