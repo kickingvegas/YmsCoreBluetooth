@@ -1,5 +1,5 @@
-# YmsCoreBluetooth 0.93 (beta)
-A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS applications using the CoreBluetooth API. Includes Deanna, an iOS application using YmsCoreBluetooth to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag).
+# YmsCoreBluetooth 0.94 (beta)
+A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS or OS X applications using the CoreBluetooth API. Includes *Deanna* and *DeannaMac*, applications to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag) for iOS and OS X respectively.
 
 * [YmsCoreBluetooth API Reference](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/index.html)
 
@@ -293,7 +293,9 @@ The callback pattern used by YmsCoreBluetooth uses a single callback to handle b
 ## File Naming Conventions
 The YmsCoreBluetooth framework is the set of files prefixed with `YMSCB` located in the directory `YmsCoreBluetooth`.
 
-The files for the iOS application **Deanna** are prefixed with `DEA` located in the directory `Deanna`.
+The files for the iOS application **Deanna** are prefixed with `DEA` and are located in the directory `Deanna`.
+
+The files for the OS X application **DeannaMac** are prefixed with `DEM` and are located in the directory `DeannaMac`.
 
 ## Recommended Code Walk Through
 
@@ -327,11 +329,24 @@ Code tested on:
 
 * iPhone 4S, iOS 6.1.3
 * TI SensorTag firmware 1.2, 1.3.
+* iMac 27 Mid-2010, OS X 10.8.3
 
 ## Known Issues
 * No support is offered for the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator [TN2295](http://developer.apple.com/library/ios/#technotes/tn2295/_index.html), I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.
 
 ## Latest Changes
+
+### Mon Jun 3 2013 - Disco Release (ver 0.94)
+* Issue #9 - OS X Support
+
+YmsCoreBluetooth now supports OS X! Includes app target DeannaMac which replicates functionality found in Deanna for iOS.
+
+Tested Mac Environment:
+
+* OS X 10.8.3
+* Cirago Bluetooth 4.0 USB Adapter
+* iMac 27 Mid-2010
+
 ### Sun May 26 2013 - Rare Groove Release (ver 0.93)
 * Issue #47 - rename YMSCBAppService to YMSCBCentralManager. 
   Associated changes include:
