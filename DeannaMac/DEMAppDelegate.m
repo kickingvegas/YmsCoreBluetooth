@@ -92,6 +92,11 @@
     if (yp) {
         if ([yp isKindOfClass:[DEASensorTag class]]) {
             [result configureWithSensorTag:(DEASensorTag *)yp];
+        } else {
+            [result.connectButton setHidden:YES];
+            [result.dbLabel setHidden:YES];
+            [result.rssiLabel setHidden:YES];
+            [result.detailButton setHidden:YES];
         }
         
         if (yp.cbPeripheral.name != nil) {
@@ -99,8 +104,6 @@
         } else {
             result.nameLabel.stringValue = @"Unknown";
         }
-        
-        
     }
     
     result.delegate = self;
