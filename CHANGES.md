@@ -1,4 +1,14 @@
 # YmsCoreBluetooth Changes
+### Mon Jun 3 2013 - Disco Release (ver 0.94)
+* Issue #9 - OS X Support
+
+YmsCoreBluetooth now supports OS X! Includes app target DeannaMac which replicates functionality found in Deanna for iOS.
+
+Tested Mac Environment:
+
+* OS X 10.8.3
+* Cirago Bluetooth 4.0 USB Adapter
+* iMac 27 Mid-2010
 
 ### Sun May 26 2013 - Rare Groove Release (ver 0.93)
 * Issue #47 - rename YMSCBAppService to YMSCBCentralManager. 
