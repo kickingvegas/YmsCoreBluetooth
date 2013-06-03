@@ -7,6 +7,10 @@ A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS or OS X 
 ### tl;dr 
 * ObjectiveC Block-based API for Bluetooth LE communication.
 * Operations (e.g. scanning, retrieval, connection, reads, writes) map to the data object hierarchy of CoreBluetooth.
+* You can build apps using CoreBluetooth faster.
+<div style='text-align:center;'
+<iframe width="420" height="315" src="http://www.youtube.com/embed/1WdYfYyXyv4" frameborder="0"allowfullscreen></iframe>
+</div>
 
 ### A More Detailed Explanation
 
