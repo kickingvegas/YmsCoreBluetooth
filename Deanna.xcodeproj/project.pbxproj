@@ -83,7 +83,7 @@
 		D997ACCB175B257000C91B0D /* DEATemperatureService.m in Sources */ = {isa = PBXBuildFile; fileRef = D91170521681251900E2D19A /* DEATemperatureService.m */; };
 		D997ACCD175B27C000C91B0D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D997ACCC175B27C000C91B0D /* MainMenu.xib */; };
 		D997ACD1175B287200C91B0D /* DEASensorTagWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = D997ACD0175B287200C91B0D /* DEASensorTagWindow.xib */; };
-		D997ACDA175B288900C91B0D /* DEAPeripheralViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACD3175B288900C91B0D /* DEAPeripheralViewCell.m */; };
+		D997ACDA175B288900C91B0D /* DEMPeripheralViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACD3175B288900C91B0D /* DEMPeripheralViewCell.m */; };
 		D997ACDB175B288900C91B0D /* DEMBaseViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACD5175B288900C91B0D /* DEMBaseViewCell.m */; };
 		D997ACDC175B288900C91B0D /* DEMAccelerometerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACD7175B288900C91B0D /* DEMAccelerometerViewCell.m */; };
 		D997ACDD175B288900C91B0D /* DEMBarometerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACD9175B288900C91B0D /* DEMBarometerViewCell.m */; };
@@ -220,8 +220,8 @@
 		D997ACB2175B24C800C91B0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		D997ACCC175B27C000C91B0D /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = ../en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		D997ACD0175B287200C91B0D /* DEASensorTagWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEASensorTagWindow.xib; sourceTree = "<group>"; };
-		D997ACD2175B288900C91B0D /* DEAPeripheralViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAPeripheralViewCell.h; sourceTree = "<group>"; };
-		D997ACD3175B288900C91B0D /* DEAPeripheralViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAPeripheralViewCell.m; sourceTree = "<group>"; };
+		D997ACD2175B288900C91B0D /* DEMPeripheralViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMPeripheralViewCell.h; sourceTree = "<group>"; };
+		D997ACD3175B288900C91B0D /* DEMPeripheralViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMPeripheralViewCell.m; sourceTree = "<group>"; };
 		D997ACD4175B288900C91B0D /* DEMBaseViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMBaseViewCell.h; sourceTree = "<group>"; };
 		D997ACD5175B288900C91B0D /* DEMBaseViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMBaseViewCell.m; sourceTree = "<group>"; };
 		D997ACD6175B288900C91B0D /* DEMAccelerometerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMAccelerometerViewCell.h; sourceTree = "<group>"; };
@@ -512,8 +512,8 @@
 		D997ACCE175B285F00C91B0D /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				D997ACD2175B288900C91B0D /* DEAPeripheralViewCell.h */,
-				D997ACD3175B288900C91B0D /* DEAPeripheralViewCell.m */,
+				D997ACD2175B288900C91B0D /* DEMPeripheralViewCell.h */,
+				D997ACD3175B288900C91B0D /* DEMPeripheralViewCell.m */,
 				D997ACD4175B288900C91B0D /* DEMBaseViewCell.h */,
 				D997ACD5175B288900C91B0D /* DEMBaseViewCell.m */,
 				D997ACD6175B288900C91B0D /* DEMAccelerometerViewCell.h */,
@@ -852,7 +852,7 @@
 				D997ACC9175B257000C91B0D /* DEAMagnetometerService.m in Sources */,
 				D997ACCA175B257000C91B0D /* DEASimpleKeysService.m in Sources */,
 				D997ACCB175B257000C91B0D /* DEATemperatureService.m in Sources */,
-				D997ACDA175B288900C91B0D /* DEAPeripheralViewCell.m in Sources */,
+				D997ACDA175B288900C91B0D /* DEMPeripheralViewCell.m in Sources */,
 				D997ACDB175B288900C91B0D /* DEMBaseViewCell.m in Sources */,
 				D997ACDC175B288900C91B0D /* DEMAccelerometerViewCell.m in Sources */,
 				D997ACDD175B288900C91B0D /* DEMBarometerViewCell.m in Sources */,
