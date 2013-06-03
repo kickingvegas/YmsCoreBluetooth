@@ -113,6 +113,10 @@
     return 107.0;
 }
 
+- (BOOL)selectionShouldChangeInTableView:(NSTableView *)tableView {
+    return NO;
+}
+
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
     DEACentralManager *centralManager = [DEACentralManager sharedService];

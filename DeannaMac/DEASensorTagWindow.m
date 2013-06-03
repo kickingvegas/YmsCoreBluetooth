@@ -45,6 +45,10 @@
     return [self.cbServiceCells count];
 }
 
+- (BOOL)selectionShouldChangeInTableView:(NSTableView *)tableView {
+    return NO;
+}
+
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
     NSView *serviceView;
     NSString *prefix  = self.cbServiceCells[row];
