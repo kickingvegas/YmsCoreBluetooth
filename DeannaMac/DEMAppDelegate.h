@@ -18,7 +18,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <IOBluetooth/IOBluetooth.h>
-#import "DEAPeripheralViewCell.h"
+#import "DEMPeripheralViewCell.h"
 
 @class DEASensorTagWindow;
 

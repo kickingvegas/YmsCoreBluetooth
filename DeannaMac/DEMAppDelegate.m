@@ -20,7 +20,7 @@
 #import "DEACentralManager.h"
 #import "YMSCBPeripheral.h"
 #import "DEASensorTag.h"
-#import "DEAPeripheralViewCell.h"
+#import "DEMPeripheralViewCell.h"
 #import "DEASimpleKeysService.h"
 #import "DEASensorTagWindow.h"
 
@@ -49,7 +49,7 @@
         
         [self.peripheralTableView enumerateAvailableRowViewsUsingBlock:^(NSTableRowView *rowView, NSInteger row) {
             
-            DEAPeripheralViewCell *pvc = [rowView viewAtColumn:0];
+            DEMPeripheralViewCell *pvc = [rowView viewAtColumn:0];
             
             if (pvc.sensorTag) {
                 NSLog(@"%@", rowView);
@@ -78,11 +78,11 @@
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
-    DEAPeripheralViewCell *result = [tableView makeViewWithIdentifier:@"myView" owner:self];
+    DEMPeripheralViewCell *result = [tableView makeViewWithIdentifier:@"myView" owner:self];
     
     if (result == nil) {
         CGRect frame = CGRectMake(0, 0, self.peripheralTableView.bounds.size.width, 0);
-        result = [[DEAPeripheralViewCell alloc] initWithFrame:frame];
+        result = [[DEMPeripheralViewCell alloc] initWithFrame:frame];
         result.identifier = @"myView";
         
     }
@@ -186,7 +186,7 @@
     [self.peripheralTableView enumerateAvailableRowViewsUsingBlock:^(NSTableRowView *rowView, NSInteger row) {
         
         
-        DEAPeripheralViewCell *pvc = [rowView viewAtColumn:0];
+        DEMPeripheralViewCell *pvc = [rowView viewAtColumn:0];
         
         if (pvc.sensorTag == sensorTag) {
             
@@ -216,7 +216,7 @@
         
         [self.peripheralTableView enumerateAvailableRowViewsUsingBlock:^(NSTableRowView *rowView, NSInteger row) {
             
-            DEAPeripheralViewCell *pvc = [rowView viewAtColumn:0];
+            DEMPeripheralViewCell *pvc = [rowView viewAtColumn:0];
             
             if (pvc.sensorTag == sensorTag) {
                 pvc.rssiLabel.stringValue = [NSString stringWithFormat:@"%d", [sensorTag.cbPeripheral.RSSI intValue]];
@@ -251,7 +251,7 @@
     [self.peripheralTableView enumerateAvailableRowViewsUsingBlock:^(NSTableRowView *rowView, NSInteger row) {
         
         
-        DEAPeripheralViewCell *pvc = [rowView viewAtColumn:0];
+        DEMPeripheralViewCell *pvc = [rowView viewAtColumn:0];
         
         if (pvc.sensorTag == sensorTag) {
             
