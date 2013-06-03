@@ -214,7 +214,8 @@
             break;
             
         case CBCentralManagerStateUnsupported: {
-            NSLog(@"Can't do that.");
+            NSLog(@"ERROR: This system does not support Bluetooth 4.0 Low Energy communication. "
+                  "Please run this app on a system that either has BLE hardware support or has a BLE USB adapter attached.");
             break;
         }
             
