@@ -1,8 +1,7 @@
-
-### Version 0.93 (beta)
+### Version 0.94 (beta)
 * [Class Hierarchy](hierarchy.html)
 
-A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS applications using the CoreBluetooth API. Includes Deanna, an iOS application using YmsCoreBluetooth to communicate with a TI SensorTag.
+A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS or OS X applications using the CoreBluetooth API. Includes *Deanna* and *DeannaMac*, applications to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag) for iOS and OS X respectively.
 
 ## YmsCoreBluetooth Design Intent: Or Why You Want To Use This Framework
 ### tl;dr 
@@ -245,6 +244,9 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 
 		YMSCBCharacteristic *dataCt = self.characteristicDict[@"data"];
 		[dataCt setNotifyValue:YES withBlock:^(NSError *error) {
+		    if (error) {
+			    return;
+			}
 			NSLog(@"Data notification for %@ on", this.name);
 		}];
 
@@ -287,11 +289,12 @@ The callback pattern used by YmsCoreBluetooth uses a single callback to handle b
 	   // Code to handle success
 	}
 
-
 ## File Naming Conventions
 The YmsCoreBluetooth framework is the set of files prefixed with `YMSCB` located in the directory `YmsCoreBluetooth`.
 
-The files for the iOS application **Deanna** are prefixed with `DEA` located in the directory `Deanna`.
+The files for the iOS application **Deanna** are prefixed with `DEA` and are located in the directory `Deanna`.
+
+The files for the OS X application **DeannaMac** are prefixed with `DEM` and are located in the directory `DeannaMac`.
 
 ## Recommended Code Walk Through
 
