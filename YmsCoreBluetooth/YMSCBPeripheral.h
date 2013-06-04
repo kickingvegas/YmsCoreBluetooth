@@ -49,16 +49,6 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
  YMSCBPeripheral holds an instance of CBPeripheral (cbPeripheral) and implements
  the CBPeripheralDelegate messages sent by cbPeripheral.
  
- How those CBPeripheralDelegate messages are processed is where YmsCoreBluetooth 
- distinguishes itself from CoreBluetooth.
- 
- In CoreBluetooth, read and write requests are issued via CBPeripheral. However, if 
- the BLE peripheral has many services, then the application would likely prefer to use
- an abstraction that issues read and write requests from the BLE service.
-
- **YmsCoreBluetooth offers this abstraction**. YMSCBPeripheral and YMSCBService are designed
- to provide a read/write API that is BLE service-centric.
- 
  The BLE services discovered by cbPeripheral are encapulated in instances of YMSCBService and
  contained in the dictionary serviceDict.
  
