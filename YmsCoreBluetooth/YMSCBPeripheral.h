@@ -63,7 +63,8 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
 /**
  Pointer to delegate.
  
- The delegate object will be sent CBCentralManagerDelegate messages received by manager.
+ The delegate object will be forwarded CBPeripheralDelegate messages sent by cbPeripheral.
+ 
  */
 @property (nonatomic, weak) id<CBPeripheralDelegate> delegate;
 
