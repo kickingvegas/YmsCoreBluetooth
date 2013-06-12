@@ -958,6 +958,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1047,7 +1048,7 @@
 				INFOPLIST_FILE = "DeannaMac/DeannaMac-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
+				SDKROOT = iphoneos6.1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1072,7 +1073,7 @@
 				INFOPLIST_FILE = "DeannaMac/DeannaMac-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
+				SDKROOT = iphoneos6.1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
