@@ -122,7 +122,7 @@ typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
  @param oUUID characteristic CBUUID
  @param addrOffset characteristic absolute address (it's not really an offset)
  */
-- (id)initWithName:(NSString *)oName parent:(YMSCBPeripheral *)pObj uuid:(CBUUID *)oUUID offset:(int)addrOffset;
+- (instancetype)initWithName:(NSString *)oName parent:(YMSCBPeripheral *)pObj uuid:(CBUUID *)oUUID offset:(int)addrOffset;
 
 
 /** @name Changing the notification state */

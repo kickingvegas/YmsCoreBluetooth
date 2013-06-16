@@ -89,10 +89,10 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
  @param lo bottom 64 bits of 128-bit base address value
  @return YMSCBCharacteristic
  */
-- (id)initWithName:(NSString *)oName
-            parent:(YMSCBPeripheral *)pObj
-            baseHi:(int64_t)hi
-            baseLo:(int64_t)lo;
+- (instancetype)initWithName:(NSString *)oName
+                      parent:(YMSCBPeripheral *)pObj
+                      baseHi:(int64_t)hi
+                      baseLo:(int64_t)lo;
 
 /** @name Adding a BLE characteristic */
 /**

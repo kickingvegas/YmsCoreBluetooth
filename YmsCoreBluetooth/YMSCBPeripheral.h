@@ -145,11 +145,11 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
  @param update If YES, update the RSSI.
  @return instance of this class
  */
-- (id)initWithPeripheral:(CBPeripheral *)peripheral
-                 central:(YMSCBCentralManager *)owner
-                  baseHi:(int64_t)hi
-                  baseLo:(int64_t)lo
-              updateRSSI:(BOOL)update;
+- (instancetype)initWithPeripheral:(CBPeripheral *)peripheral
+                           central:(YMSCBCentralManager *)owner
+                            baseHi:(int64_t)hi
+                            baseLo:(int64_t)lo
+                        updateRSSI:(BOOL)update;
 
 
 

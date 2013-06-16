@@ -32,7 +32,7 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 #pragma mark - Constructors
 
-- (id)initWithKnownPeripheralNames:(NSArray *)nameList queue:(dispatch_queue_t)queue {
+- (instancetype)initWithKnownPeripheralNames:(NSArray *)nameList queue:(dispatch_queue_t)queue {
     self = [super init];
     
     if (self) {
@@ -47,7 +47,7 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     return self;
 }
 
-- (id)initWithKnownPeripheralNames:(NSArray *)nameList queue:(dispatch_queue_t)queue useStoredPeripherals:(BOOL)useStore {
+- (instancetype)initWithKnownPeripheralNames:(NSArray *)nameList queue:(dispatch_queue_t)queue useStoredPeripherals:(BOOL)useStore {
 
     self = [super init];
     
