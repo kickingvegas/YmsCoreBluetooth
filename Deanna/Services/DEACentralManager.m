@@ -29,18 +29,24 @@ static DEACentralManager *sharedCentralManager;
 
 @implementation DEACentralManager
 
-
-+ (DEACentralManager *)sharedService {
++ (DEACentralManager *)initSharedServiceWithDelegate:(id)delegate {
     if (sharedCentralManager == nil) {
-        
-        //dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
         dispatch_queue_t queue = dispatch_queue_create("com.yummymelon.deanna", 0);
-        //dispatch_queue_t queue = nil;
-        
+
         NSArray *nameList = @[@"TI BLE Sensor Tag", @"SensorTag"];
         sharedCentralManager = [[super allocWithZone:NULL] initWithKnownPeripheralNames:nameList
                                                                                   queue:queue
-                                                                   useStoredPeripherals:YES];
+                                                                   useStoredPeripherals:YES
+                                                                               delegate:delegate];
+    }
+    return sharedCentralManager;
+    
+}
+
+
++ (DEACentralManager *)sharedService {
+    if (sharedCentralManager == nil) {
+        NSLog(@"ERROR: must call initSharedServiceWithDelegate: first.");
     }
     return sharedCentralManager;
 }

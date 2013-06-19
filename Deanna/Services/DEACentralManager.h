@@ -30,7 +30,14 @@
 
 /**
  Return singleton instance.
+ @param delegate
  */
++ (DEACentralManager *)initSharedServiceWithDelegate:(id)delegate;
+
+/**
+ Return singleton instance.
+ */
+
 + (DEACentralManager *)sharedService;
 
 @end
