@@ -50,8 +50,7 @@
 - (instancetype)initWithPeripheral:(CBPeripheral *)peripheral
                            central:(YMSCBCentralManager *)owner
                             baseHi:(int64_t)hi
-                            baseLo:(int64_t)lo
-                        updateRSSI:(BOOL)update {
+                            baseLo:(int64_t)lo {
     
     self = [super init];
     
@@ -65,11 +64,6 @@
         
         _rssiPingPeriod = 2.0;
 
-        _willPingRSSI = update;
-        if (update == YES) {
-            [peripheral readRSSI];
-        }
-        
         //_peripheralConnectionState = YMSCBPeripheralConnectionStateUnknown;
         _watchdogTimerInterval = 5.0;
     }
@@ -116,12 +110,6 @@
     }
     return result;
 }
-
-- (void)updateRSSI {
-    [self.cbPeripheral readRSSI];
-    
-}
-
 
 #pragma mark - Connection Methods
 
@@ -605,9 +593,11 @@
  @param error If an error occured, the cause of the failure.
  */
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {
+    /*
     if (self.willPingRSSI) {
         [self performSelector:@selector(updateRSSI) withObject:nil afterDelay:self.rssiPingPeriod];
     }
+     */
     
     if ([self.delegate respondsToSelector:@selector(peripheralDidUpdateRSSI:error:)]) {
         NSArray *args;
