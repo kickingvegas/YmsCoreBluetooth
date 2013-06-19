@@ -39,7 +39,7 @@
               updateRSSI:(BOOL)update {
 
     
-    self = [super initWithPeripheral:peripheral central:owner baseHi:hi baseLo:lo updateRSSI:update];
+    self = [super initWithPeripheral:peripheral central:owner baseHi:hi baseLo:lo];
     
     if (self) {
         DEATemperatureService *ts = [[DEATemperatureService alloc] initWithName:@"temperature" parent:self baseHi:hi baseLo:lo];
