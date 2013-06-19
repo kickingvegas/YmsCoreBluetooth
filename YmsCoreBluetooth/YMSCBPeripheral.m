@@ -373,8 +373,8 @@
 
 /**
  CBPeripheralDelegate implementation.  Not yet supported.
-
-[self performSelectorOnMainThread:@selector(performPeripheralDidDiscoverIncludedServicesForServiceWithObject:) withObject:args waitUntilDone:NO]; @param peripheral The peripheral providing this information.
+ 
+ @param peripheral The peripheral providing this information.
  @param service The CBService object containing the included service.
  @param error If an error occured, the cause of the failure.
  */
