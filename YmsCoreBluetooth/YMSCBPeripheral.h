@@ -85,12 +85,6 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
  */
 @property (readonly) BOOL isConnected;
 
-
-/**
- If set to YES, enable updates of RSSI are done via updateRSSI.
- */
-@property (nonatomic, assign) BOOL willPingRSSI;
-
 /**
  Time period between RSSI pings. (Default: 2 seconds)
  
@@ -142,15 +136,12 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
  @param owner Pointer to YMSCBCentralManager
  @param hi Top 64 bits of 128-bit base address value
  @param lo Bottom 64 bits of 128-bit base address value
- @param update If YES, update the RSSI.
  @return instance of this class
  */
 - (instancetype)initWithPeripheral:(CBPeripheral *)peripheral
                            central:(YMSCBCentralManager *)owner
                             baseHi:(int64_t)hi
-                            baseLo:(int64_t)lo
-                        updateRSSI:(BOOL)update;
-
+                            baseLo:(int64_t)lo;
 
 
 /** @name Get all CBService CBUUIDs for this peripheral  */
@@ -171,14 +162,6 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
  @return YMSCBService instance which holds *service*.
  */
 - (YMSCBService *)findService:(CBService *)service;
-
-/** @name Update the RSSI */
-/**
- Request RSSI update from CBPeripheral.
- 
- This method uses rssiPingPeriod for the frequency of updates.
- */
-- (void)updateRSSI;
 
 /**
  Connect peripheral
