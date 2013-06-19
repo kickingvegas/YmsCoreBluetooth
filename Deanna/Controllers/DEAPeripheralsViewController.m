@@ -41,7 +41,11 @@
     
     self.title = @"Deanna";
     
-    DEACentralManager *centralManager = [DEACentralManager sharedService];
+    /*
+     First time DEACentralManager singleton is instantiated.
+     All subsequent references will use [DEACentralManager sharedService].
+     */
+    DEACentralManager *centralManager = [DEACentralManager initSharedServiceWithDelegate:self];
     
 
     [self.navigationController setToolbarHidden:NO];
@@ -88,18 +92,9 @@
                 self.scanButton.title = @"Start Scan";
             }
         }
-    } else if ([keyPath isEqualToString:@"RSSI"]) {
-        for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
-            if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
-                DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)cell;
-                if (pcell.sensorTag.cbPeripheral == object) {
-                    pcell.rssiLabel.text = [NSString stringWithFormat:@"%@", change[@"new"]];
-                    break;
-                }
-            }
-        }
-   }
+    }
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -112,8 +107,6 @@
     
     if (centralManager.isScanning == NO) {
         [centralManager startScan];
-        
-        //[centralManager performSelectorInBackground:@selector(startScan) withObject:nil];
     }
     else {
         [centralManager stopScan];
@@ -140,37 +133,27 @@
 
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
+    DEACentralManager *centralManager = [DEACentralManager sharedService];
+    YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
+    yp.delegate = self;
     
-    [peripheral addObserver:self
-                 forKeyPath:@"RSSI"
-                    options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
-                    context:NULL];
-    
+    [yp.cbPeripheral readRSSI];
     
     for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
         if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
             DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)cell;
-            [pcell updateDisplay:peripheral];
+            if (pcell.sensorTag == yp) {
+                [pcell updateDisplay:peripheral];
+                break;
+            }
         }
     }
 }
 
-- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
-    
-    /*
-     cchoi comment:
-     I sympathize with the notion that adding and removing observers should always be
-     strictly symmetric. However, in the case of cancelling a connection request:
-     using an exception to catch a failed attempt to remove an observer
-     is syntactically the cleanest way to go because observers are only added after
-     a successful connection.
-     */
-    @try {
-        [peripheral removeObserver:self forKeyPath:@"RSSI"];
-    }
-    @catch (NSException *exception) {
-    }
 
+
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
+   
     for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
         if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
             DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)cell;
@@ -204,78 +187,72 @@
 
 
 - (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals {
-    BOOL test = YES;
+    DEACentralManager *centralManager = [DEACentralManager sharedService];
     
-    for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
-        for (CBPeripheral *peripheral in peripherals) {
-            if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
-                DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)cell;
-                if (pcell.sensorTag.cbPeripheral == peripheral) {
-                    test = NO;
-                    break;
-                }
-            }
+    for (CBPeripheral *peripheral in peripherals) {
+        YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
+        if (yp) {
+            yp.delegate = self;
         }
-        
-        if (!test) {
-            break;
-        }
-        
     }
     
-    if (test) {
-        for (CBPeripheral *peripheral in peripherals) {
-            if (peripheral.isConnected) {
-                [peripheral addObserver:self
-                             forKeyPath:@"RSSI"
-                                options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
-                                context:NULL];
-            }
-            
-        }
-
-        [self.peripheralsTableView reloadData];
-    }
-    
+    [self.peripheralsTableView reloadData];
 
 }
 
 
 - (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals {
-    BOOL test = YES;
+    DEACentralManager *centralManager = [DEACentralManager sharedService];
     
-    for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
-        for (CBPeripheral *peripheral in peripherals) {
-            if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
-                DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)cell;
-                if (pcell.sensorTag.cbPeripheral == peripheral) {
-                    test = NO;
-                    break;
-                }
-            }
+    for (CBPeripheral *peripheral in peripherals) {
+        YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
+        if (yp) {
+            yp.delegate = self;
         }
-        
-        if (!test) {
-            break;
-        }
-        
     }
     
-    if (test) {
-        for (CBPeripheral *peripheral in peripherals) {
-            [peripheral addObserver:self
-                         forKeyPath:@"RSSI"
-                            options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
-                            context:NULL];
+    [self.peripheralsTableView reloadData];
+}
 
-        }
-        
-        [self.peripheralsTableView reloadData];
-    }
+#pragma mark - CBPeripheralDelegate Methods
+
+- (void)performUpdateRSSI:(NSArray *)args {
+    CBPeripheral *peripheral = args[0];
+    
+    [peripheral readRSSI];
 
 }
 
 
+- (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {
+
+    if (error) {
+        NSLog(@"ERROR: readRSSI failed, retrying. %@", error.description);
+        
+        if (peripheral.isConnected) {
+            NSArray *args = @[peripheral];
+            [self performSelector:@selector(performUpdateRSSI:) withObject:args afterDelay:2.0];
+        }
+
+        return;
+    }
+    
+    for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+        if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
+            DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)cell;
+            if (pcell.sensorTag.cbPeripheral == peripheral) {
+                pcell.rssiLabel.text = [NSString stringWithFormat:@"%@", peripheral.RSSI];
+                break;
+            }
+        }
+    }
+    
+    DEACentralManager *centralManager = [DEACentralManager sharedService];
+    YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
+    
+    NSArray *args = @[peripheral];
+    [self performSelector:@selector(performUpdateRSSI:) withObject:args afterDelay:yp.rssiPingPeriod];
+}
 
 #pragma mark - UITableViewDelegate and UITableViewDataSource methods
 
