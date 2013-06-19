@@ -386,6 +386,10 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     CBCentralManager *central = args[0];
     CBPeripheral *peripheral = args[1];
     NSError *error = args[2];
+    if ((id)error == [NSNull null]) {
+        error = nil;
+    }
+
     [self.delegate centralManager:central didDisconnectPeripheral:peripheral error:error];
 }
 
@@ -401,7 +405,14 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     }
     
     if ([self.delegate respondsToSelector:@selector(centralManager:didDisconnectPeripheral:error:)]) {
-        NSArray *args = @[central, peripheral, error];
+        NSArray *args;
+        
+        if (error) {
+            args = @[central, peripheral, error];
+        } else {
+            args = @[central, peripheral, [NSNull null]];
+        }
+
         [self performSelectorOnMainThread:@selector(performCentralManagerDidDisconnectPeripheralWithObject:) withObject:args waitUntilDone:NO];
     }
     
@@ -411,6 +422,10 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     CBCentralManager *central = args[0];
     CBPeripheral *peripheral = args[1];
     NSError *error = args[2];
+    if ((id)error == [NSNull null]) {
+        error = nil;
+    }
+
     [self.delegate centralManager:central didFailToConnectPeripheral:peripheral error:error];
 }
 
@@ -421,7 +436,14 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     [yp handleConnectionResponse:error];
     
     if ([self.delegate respondsToSelector:@selector(centralManager:didFailToConnectPeripheral:error:)]) {
-        NSArray *args = @[central, peripheral, error];
+        NSArray *args;
+        
+        if (error) {
+            args = @[central, peripheral, error];
+        } else {
+            args = @[central, peripheral, [NSNull null]];
+        }
+
         [self performSelectorOnMainThread:@selector(performCentralManagerDidFailToConnectPeripheralWithObject:) withObject:args waitUntilDone:NO];
     }
     
