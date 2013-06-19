@@ -25,7 +25,7 @@
 /**
  View Controller for listing of Bluetooth LE Peripherals available.
  */
-@interface DEAPeripheralsViewController : DEABaseViewController <UITableViewDataSource, UITableViewDelegate>
+@interface DEAPeripheralsViewController : DEABaseViewController <UITableViewDataSource, UITableViewDelegate, CBPeripheralDelegate>
 
 /** @name Properties */
 /// TableViewCell for a connectable peripheral.
