@@ -72,7 +72,6 @@
 }
 
 - (void)initializeAppServices {
-    [DEACentralManager sharedService];
 }
 
 @end
