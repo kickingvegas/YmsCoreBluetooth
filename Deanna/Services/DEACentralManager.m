@@ -32,9 +32,14 @@ static DEACentralManager *sharedCentralManager;
 
 + (DEACentralManager *)sharedService {
     if (sharedCentralManager == nil) {
+        
+        //dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+        dispatch_queue_t queue = dispatch_queue_create("com.yummymelon.deanna", 0);
+        //dispatch_queue_t queue = nil;
+        
         NSArray *nameList = @[@"TI BLE Sensor Tag", @"SensorTag"];
         sharedCentralManager = [[super allocWithZone:NULL] initWithKnownPeripheralNames:nameList
-                                                                                  queue:nil
+                                                                                  queue:queue
                                                                    useStoredPeripherals:YES];
     }
     return sharedCentralManager;
@@ -42,7 +47,7 @@ static DEACentralManager *sharedCentralManager;
 
 
 - (void)startScan {
-    NSDictionary *options = @{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES };
+    NSDictionary *options = @{ CBCentralManagerScanOptionAllowDuplicatesKey: @NO };
     // NOTE: TI SensorTag firmware does not included services in advertisementData.
     // This prevents usage of serviceUUIDs array to filter on.
 
@@ -83,8 +88,8 @@ static DEACentralManager *sharedCentralManager;
                 DEASensorTag *sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
                                                                            central:self
                                                                             baseHi:kSensorTag_BASE_ADDRESS_HI
-                                                                            baseLo:kSensorTag_BASE_ADDRESS_LO
-                                                                        updateRSSI:YES];
+                                                                            baseLo:kSensorTag_BASE_ADDRESS_LO];
+
                 [self.ymsPeripherals addObject:sensorTag];
                 isUnknownPeripheral = NO;
                 break;
@@ -95,7 +100,7 @@ static DEACentralManager *sharedCentralManager;
         
         if (isUnknownPeripheral) {
             //TODO: Handle unknown peripheral
-            yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral central:self baseHi:0 baseLo:0 updateRSSI:NO];
+            yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral central:self baseHi:0 baseLo:0];
             [self.ymsPeripherals addObject:yp];
         }
     }
