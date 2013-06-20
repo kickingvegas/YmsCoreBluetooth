@@ -73,9 +73,9 @@
 	
 	<option value="//api/name/handleFoundPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- handleFoundPeripheral:</option>
 	
-	<option value="//api/name/initWithKnownPeripheralNames:queue:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithKnownPeripheralNames:queue:</option>
+	<option value="//api/name/initWithKnownPeripheralNames:queue:delegate:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithKnownPeripheralNames:queue:delegate:</option>
 	
-	<option value="//api/name/initWithKnownPeripheralNames:queue:useStoredPeripherals:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithKnownPeripheralNames:queue:useStoredPeripherals:</option>
+	<option value="//api/name/initWithKnownPeripheralNames:queue:useStoredPeripherals:delegate:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithKnownPeripheralNames:queue:useStoredPeripherals:delegate:</option>
 	
 	<option value="//api/name/isKnownPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- isKnownPeripheral:</option>
 	
@@ -183,9 +183,9 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/handleFoundPeripheral:">handleFoundPeripheral:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithKnownPeripheralNames:queue:">initWithKnownPeripheralNames:queue:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithKnownPeripheralNames:queue:delegate:">initWithKnownPeripheralNames:queue:delegate:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithKnownPeripheralNames:queue:useStoredPeripherals:">initWithKnownPeripheralNames:queue:useStoredPeripherals:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithKnownPeripheralNames:queue:useStoredPeripherals:delegate:">initWithKnownPeripheralNames:queue:useStoredPeripherals:delegate:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isKnownPeripheral:">isKnownPeripheral:</a></span></li>
 	
@@ -375,14 +375,14 @@ is only one instance of CBCentralManager that is used by the application.</p>
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithKnownPeripheralNames:queue:">&ndash;&nbsp;initWithKnownPeripheralNames:queue:</a></code>
+		<code><a href="#//api/name/initWithKnownPeripheralNames:queue:delegate:">&ndash;&nbsp;initWithKnownPeripheralNames:queue:delegate:</a></code>
 		<span class="tooltip"><p>Constructor with array of known peripheral names.</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithKnownPeripheralNames:queue:useStoredPeripherals:">&ndash;&nbsp;initWithKnownPeripheralNames:queue:useStoredPeripherals:</a></code>
+		<code><a href="#//api/name/initWithKnownPeripheralNames:queue:useStoredPeripherals:delegate:">&ndash;&nbsp;initWithKnownPeripheralNames:queue:useStoredPeripherals:delegate:</a></code>
 		<span class="tooltip"><p>Constructor with array of known peripheral names.</p></span>
 	</span>
 	
@@ -775,7 +775,7 @@ a callback block.</p></span>
 		<p>Array of NSStrings to search to match CBPeripheral instances.</p>
 
 <p>Used in conjunction with <a href="#//api/name/isKnownPeripheral:">isKnownPeripheral:</a>.
-This value is typically initialized using <a href="#//api/name/initWithKnownPeripheralNames:queue:">initWithKnownPeripheralNames:queue:</a>.</p>
+This value is typically initialized using initWithKnownPeripheralNames:queue:.</p>
 	</div>
 	
 	
@@ -1171,8 +1171,8 @@ This class listens to CBCentralManagerDelegate messages sent by manager, which i
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithKnownPeripheralNames:queue:" title="initWithKnownPeripheralNames:queue:"></a>
-	<h3 class="subsubtitle method-title">initWithKnownPeripheralNames:queue:</h3>
+	<a name="//api/name/initWithKnownPeripheralNames:queue:delegate:" title="initWithKnownPeripheralNames:queue:delegate:"></a>
+	<h3 class="subsubtitle method-title">initWithKnownPeripheralNames:queue:delegate:</h3>
 	
 	
 	
@@ -1182,7 +1182,7 @@ This class listens to CBCentralManagerDelegate messages sent by manager, which i
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (id)initWithKnownPeripheralNames:(NSArray *)<em>nameList</em> queue:(dispatch_queue_t)<em>queue</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (instancetype)initWithKnownPeripheralNames:(NSArray *)<em>nameList</em> queue:(dispatch_queue_t)<em>queue</em> delegate:(id&lt;CBCentralManagerDelegate&gt;)<em>delegate</em></code></div>
 
     
 	
@@ -1198,6 +1198,11 @@ This class listens to CBCentralManagerDelegate messages sent by manager, which i
 			<dt><em>queue</em></dt>
 			<dd><p>The dispatch queue to use to dispatch the central role events.
 If its value is nil, the central <a href="#//api/name/manager">manager</a> dispatches central role events using the main queue.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>delegate</em></dt>
+			<dd><p>Delegate of this class instance.</p></dd>
 		</dl>
 		
 	</div>
@@ -1230,8 +1235,8 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithKnownPeripheralNames:queue:useStoredPeripherals:" title="initWithKnownPeripheralNames:queue:useStoredPeripherals:"></a>
-	<h3 class="subsubtitle method-title">initWithKnownPeripheralNames:queue:useStoredPeripherals:</h3>
+	<a name="//api/name/initWithKnownPeripheralNames:queue:useStoredPeripherals:delegate:" title="initWithKnownPeripheralNames:queue:useStoredPeripherals:delegate:"></a>
+	<h3 class="subsubtitle method-title">initWithKnownPeripheralNames:queue:useStoredPeripherals:delegate:</h3>
 	
 	
 	
@@ -1241,7 +1246,7 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (id)initWithKnownPeripheralNames:(NSArray *)<em>nameList</em> queue:(dispatch_queue_t)<em>queue</em> useStoredPeripherals:(BOOL)<em>useStore</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (instancetype)initWithKnownPeripheralNames:(NSArray *)<em>nameList</em> queue:(dispatch_queue_t)<em>queue</em> useStoredPeripherals:(BOOL)<em>useStore</em> delegate:(id&lt;CBCentralManagerDelegate&gt;)<em>delegate</em></code></div>
 
     
 	
@@ -1262,6 +1267,11 @@ If its value is nil, the central <a href="#//api/name/manager">manager</a> dispa
 		<dl class="argument-def parameter-def">
 			<dt><em>useStore</em></dt>
 			<dd><p>If YES, then discovered peripheral UUIDs are stored in standardUserDefaults.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>delegate</em></dt>
+			<dd><p>Delegate of this class instance.</p></dd>
 		</dl>
 		
 	</div>
@@ -2185,7 +2195,7 @@ that is discovered.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-06-03)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-06-19)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

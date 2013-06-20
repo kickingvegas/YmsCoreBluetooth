@@ -62,8 +62,6 @@
 	
 	<option value="//api/name/watchdogTimerInterval">&nbsp;&nbsp;&nbsp;&nbsp;watchdogTimerInterval</option>
 	
-	<option value="//api/name/willPingRSSI">&nbsp;&nbsp;&nbsp;&nbsp;willPingRSSI</option>
-	
 	
 	
 	
@@ -87,7 +85,7 @@
 	
 	<option value="//api/name/handleConnectionResponse:">&nbsp;&nbsp;&nbsp;&nbsp;- handleConnectionResponse:</option>
 	
-	<option value="//api/name/initWithPeripheral:central:baseHi:baseLo:updateRSSI:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithPeripheral:central:baseHi:baseLo:updateRSSI:</option>
+	<option value="//api/name/initWithPeripheral:central:baseHi:baseLo:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithPeripheral:central:baseHi:baseLo:</option>
 	
 	<option value="//api/name/peripheral:didDiscoverCharacteristicsForService:error:">&nbsp;&nbsp;&nbsp;&nbsp;- peripheral:didDiscoverCharacteristicsForService:error:</option>
 	
@@ -117,8 +115,6 @@
 	
 	<option value="//api/name/services">&nbsp;&nbsp;&nbsp;&nbsp;- services</option>
 	
-	<option value="//api/name/updateRSSI">&nbsp;&nbsp;&nbsp;&nbsp;- updateRSSI</option>
-	
 	<option value="//api/name/watchdogDisconnect">&nbsp;&nbsp;&nbsp;&nbsp;- watchdogDisconnect</option>
 	
 	
@@ -144,8 +140,6 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Get all CBService CBUUIDs for this peripheral">Get all CBService CBUUIDs for this peripheral</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Find a YMSCBService">Find a YMSCBService</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Update the RSSI">Update the RSSI</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_CBPeripheralDelegate Methods">CBPeripheralDelegate Methods</a></span></li>
 	
@@ -179,8 +173,6 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/watchdogTimerInterval">watchdogTimerInterval</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/willPingRSSI">willPingRSSI</a></span></li>
-	
 </ul></li>
 
 
@@ -205,7 +197,7 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/handleConnectionResponse:">handleConnectionResponse:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithPeripheral:central:baseHi:baseLo:updateRSSI:">initWithPeripheral:central:baseHi:baseLo:updateRSSI:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithPeripheral:central:baseHi:baseLo:">initWithPeripheral:central:baseHi:baseLo:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/peripheral:didDiscoverCharacteristicsForService:error:">peripheral:didDiscoverCharacteristicsForService:error:</a></span></li>
 	
@@ -234,8 +226,6 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/resetWatchdog">resetWatchdog</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/services">services</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/updateRSSI">updateRSSI</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/watchdogDisconnect">watchdogDisconnect</a></span></li>
 	
@@ -283,16 +273,6 @@
 
 <p>YMSCBPeripheral holds an instance of CBPeripheral (<a href="#//api/name/cbPeripheral">cbPeripheral</a>) and implements
 the CBPeripheralDelegate messages sent by <a href="#//api/name/cbPeripheral">cbPeripheral</a>.</p>
-
-<p>How those CBPeripheralDelegate messages are processed is where YmsCoreBluetooth
-distinguishes itself from CoreBluetooth.</p>
-
-<p>In CoreBluetooth, read and write requests are issued via CBPeripheral. However, if
-the BLE peripheral has many <a href="#//api/name/services">services</a>, then the application would likely prefer to use
-an abstraction that issues read and write requests from the BLE service.</p>
-
-<p><strong>YmsCoreBluetooth offers this abstraction</strong>. YMSCBPeripheral and <a href="../Classes/YMSCBService.html">YMSCBService</a> are designed
-to provide a read/write API that is BLE service-centric.</p>
 
 <p>The BLE <a href="#//api/name/services">services</a> discovered by <a href="#//api/name/cbPeripheral">cbPeripheral</a> are encapulated in instances of <a href="../Classes/YMSCBService.html">YMSCBService</a> and
 contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</p>
@@ -348,13 +328,6 @@ contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/willPingRSSI">&nbsp;&nbsp;willPingRSSI</a></code>
-		<span class="tooltip"><p>If set to YES, enable updates of RSSI are done via <a href="#//api/name/updateRSSI">updateRSSI</a>.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
 		<code><a href="#//api/name/rssiPingPeriod">&nbsp;&nbsp;rssiPingPeriod</a></code>
 		<span class="tooltip"><p>Time period between RSSI pings. (Default: 2 seconds)</p></span>
 	</span>
@@ -405,7 +378,7 @@ contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithPeripheral:central:baseHi:baseLo:updateRSSI:">&ndash;&nbsp;initWithPeripheral:central:baseHi:baseLo:updateRSSI:</a></code>
+		<code><a href="#//api/name/initWithPeripheral:central:baseHi:baseLo:">&ndash;&nbsp;initWithPeripheral:central:baseHi:baseLo:</a></code>
 		<span class="tooltip"><p>Constructor.</p></span>
 	</span>
 	
@@ -437,21 +410,6 @@ contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</
 	<span class="tooltip">
 		<code><a href="#//api/name/findService:">&ndash;&nbsp;findService:</a></code>
 		<span class="tooltip"><p>Find <a href="../Classes/YMSCBService.html">YMSCBService</a> given its corresponding CBService.</p></span>
-	</span>
-	
-	
-</li>
-						</ul>
-						
-						
-						<a title="Update the RSSI" name="task_Update the RSSI"></a>
-						<h3 class="subsubtitle task-title">Update the RSSI</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/updateRSSI">&ndash;&nbsp;updateRSSI</a></code>
-		<span class="tooltip"><p>Request RSSI update from CBPeripheral.</p></span>
 	</span>
 	
 	
@@ -813,7 +771,7 @@ contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Pointer to delegate.</p>
 
-<p>The delegate object will be sent CBCentralManagerDelegate messages received by manager.</p>
+<p>The delegate object will be forwarded CBPeripheralDelegate messages sent by <a href="#//api/name/cbPeripheral">cbPeripheral</a>.</p>
 	</div>
 	
 	
@@ -940,8 +898,8 @@ contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Time period between RSSI pings. (Default: 2 seconds)</p>
 
-<p>This property is used by <a href="#//api/name/updateRSSI">updateRSSI</a> to determine the period between requests for the RSSI.
-This property is only used when <a href="#//api/name/willPingRSSI">willPingRSSI</a> is set to YES.</p>
+<p>This property is used by updateRSSI to determine the period between requests for the RSSI.
+This property is only used when willPingRSSI is set to YES.</p>
 	</div>
 	
 	
@@ -1067,47 +1025,6 @@ This property is only used when <a href="#//api/name/willPingRSSI">willPingRSSI<
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Watchdog timer interval in seconds. Default is 5 seconds.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBPeripheral.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/willPingRSSI" title="willPingRSSI"></a>
-	<h3 class="subsubtitle method-title">willPingRSSI</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>If set to YES, enable updates of RSSI are done via <a href="#//api/name/updateRSSI">updateRSSI</a>.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL willPingRSSI</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>If set to YES, enable updates of RSSI are done via <a href="#//api/name/updateRSSI">updateRSSI</a>.</p>
 	</div>
 	
 	
@@ -1521,8 +1438,8 @@ a callback block defined.</p>
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithPeripheral:central:baseHi:baseLo:updateRSSI:" title="initWithPeripheral:central:baseHi:baseLo:updateRSSI:"></a>
-	<h3 class="subsubtitle method-title">initWithPeripheral:central:baseHi:baseLo:updateRSSI:</h3>
+	<a name="//api/name/initWithPeripheral:central:baseHi:baseLo:" title="initWithPeripheral:central:baseHi:baseLo:"></a>
+	<h3 class="subsubtitle method-title">initWithPeripheral:central:baseHi:baseLo:</h3>
 	
 	
 	
@@ -1532,7 +1449,7 @@ a callback block defined.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (id)initWithPeripheral:(CBPeripheral *)<em>peripheral</em> central:(YMSCBCentralManager *)<em>owner</em> baseHi:(int64_t)<em>hi</em> baseLo:(int64_t)<em>lo</em> updateRSSI:(BOOL)<em>update</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (instancetype)initWithPeripheral:(CBPeripheral *)<em>peripheral</em> central:(YMSCBCentralManager *)<em>owner</em> baseHi:(int64_t)<em>hi</em> baseLo:(int64_t)<em>lo</em></code></div>
 
     
 	
@@ -1551,17 +1468,12 @@ a callback block defined.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>hi</em></dt>
-			<dd><p>Top 64 bits of 128-bit <a href="../Classes/YMSCBPeripheral.html#//api/name/base">base</a> address value</p></dd>
+			<dd><p>Top 64 bits of 128-bit <a href="#//api/name/base">base</a> address value</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>lo</em></dt>
-			<dd><p>Bottom 64 bits of 128-bit <a href="../Classes/YMSCBPeripheral.html#//api/name/base">base</a> address value</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>update</em></dt>
-			<dd><p>If YES, update the RSSI.</p></dd>
+			<dd><p>Bottom 64 bits of 128-bit <a href="#//api/name/base">base</a> address value</p></dd>
 		</dl>
 		
 	</div>
@@ -1583,7 +1495,7 @@ a callback block defined.</p>
 
 <p>This method must be called via super in any subclass implementation.</p>
 
-<p>The implementation of this method in a subclass will populate <a href="../Classes/YMSCBPeripheral.html#//api/name/serviceDict">serviceDict</a> with (<code>key</code>, <code>value</code>) pairs of
+<p>The implementation of this method in a subclass will populate <a href="#//api/name/serviceDict">serviceDict</a> with (<code>key</code>, <code>value</code>) pairs of
 (NSString, <a href="../Classes/YMSCBService.html">YMSCBService</a>) instances, where <code>key</code> is typically a &ldquo;human-readable&rdquo; string to easily
 reference a <a href="../Classes/YMSCBService.html">YMSCBService</a>.</p>
 	</div>
@@ -2398,49 +2310,6 @@ reference a <a href="../Classes/YMSCBService.html">YMSCBService</a>.</p>
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/updateRSSI" title="updateRSSI"></a>
-	<h3 class="subsubtitle method-title">updateRSSI</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Request RSSI update from CBPeripheral.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (void)updateRSSI</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Request RSSI update from CBPeripheral.</p>
-
-<p>This method uses <a href="#//api/name/rssiPingPeriod">rssiPingPeriod</a> for the frequency of updates.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBPeripheral.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
 	<a name="//api/name/watchdogDisconnect" title="watchdogDisconnect"></a>
 	<h3 class="subsubtitle method-title">watchdogDisconnect</h3>
 	
@@ -2494,7 +2363,7 @@ reference a <a href="../Classes/YMSCBService.html">YMSCBService</a>.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-06-03)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-06-19)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						
