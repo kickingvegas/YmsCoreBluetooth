@@ -1,6 +1,6 @@
 # YmsCoreBluetooth Changes
 ### Wed Jun 19 2013 - Interim Release (ver 0.941)
-* Support for background operation of BLE transactions (Issues #57, #58, #59)
+* Support for background thread operation of BLE transactions (Issues #57, #58, #59)
 
 Prior releases ran all BLE transactions off the main UI thread. For a small number of BLE devices (< 5), performance degradation was neglible. However, in an environment with many devices (> 30), support for background operation that does not block the main UI is necessary. Changes so that messages sent to the delegate for `YMSCBCentralManager` and `YMSCBPeripheral` are executed in the main thread.
 
@@ -9,6 +9,8 @@ Similarly, any change to a property of a subclass of `YMSCBService` should be ex
 * API Change: Removed RSSI auto-update functionality from YmsCoreBluetooth.
 
 This directly attributed with background thread operation of BLE transactions. Prior code, if run using a background thread, would not correctly schedule a read of the RSSI value of a peripheral. It is now the responsibility of an application using YmsCoreBluetooth to invoke `readRSSI` and handle the response to update the UI properly.
+
+* Update of Deanna and DeannaMac to support background thread BLE transactions.
 
 #### API Changes
 
