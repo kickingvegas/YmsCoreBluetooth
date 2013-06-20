@@ -91,8 +91,12 @@ double calcTmpTarget(int16_t objT, double m_tempAmb) {
         
         double tempAmb = calcTmpLocal(amb);
         
-        self.ambientTemp = [NSNumber numberWithDouble:tempAmb];
-        self.objectTemp = [NSNumber numberWithDouble:calcTmpTarget(objT, tempAmb)];
+        NSArray *ambientArgs = @[@"ambientTemp", @(tempAmb)];
+        NSArray *objectArgs = @[@"objectTemp", @(calcTmpTarget(objT, tempAmb))];
+
+        [self performSelectorOnMainThread:@selector(performSetField:) withObject:ambientArgs waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(performSetField:) withObject:objectArgs waitUntilDone:NO];
+        
     }
 }
 

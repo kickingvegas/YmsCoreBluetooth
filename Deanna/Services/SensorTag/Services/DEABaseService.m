@@ -20,6 +20,10 @@
 #import "YMSCBCharacteristic.h"
 #import "DEASensorTagUtils.h"
 
+@interface DEABaseService ()
+
+@end
+
 @implementation DEABaseService
 
 - (void)addCharacteristic:(NSString *)cname withOffset:(int)addrOffset {
@@ -57,7 +61,8 @@
 
     }];
     
-    self.isOn = NO;
+    NSArray *args = @[@"isOn", @NO];
+    [self performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
 }
 
 - (void)turnOn {
@@ -77,8 +82,10 @@
     [dataCt setNotifyValue:YES withBlock:^(NSError *error) {
         NSLog(@"Data notification for %@ on", this.name);
     }];
+    
+    NSArray *args = @[@"isOn", @YES];
+    [self performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
 
-    self.isOn = YES;
 }
 
 

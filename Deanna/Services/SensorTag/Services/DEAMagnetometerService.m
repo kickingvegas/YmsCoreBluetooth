@@ -81,11 +81,14 @@ float calcMag(int16_t v, float c, int16_t d) {
         self.lastY = calcMag(yy, self.cY, 1);
         self.lastZ = calcMag(zz, self.cZ, 1);
         
-        self.x = [NSNumber numberWithFloat:self.lastX];
-        self.y = [NSNumber numberWithFloat:self.lastY];
-        self.z = [NSNumber numberWithFloat:self.lastZ];
+        NSArray *xargs = @[@"x", [NSNumber numberWithFloat:self.lastX]];
+        NSArray *yargs = @[@"y", [NSNumber numberWithFloat:self.lastY]];
+        NSArray *zargs = @[@"z", [NSNumber numberWithFloat:self.lastZ]];
         
-        
+        [self performSelectorOnMainThread:@selector(performSetField:) withObject:xargs waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(performSetField:) withObject:yargs waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(performSetField:) withObject:zargs waitUntilDone:NO];
+
     } else if ([yc.name isEqualToString:@"config"]) {
         
     }

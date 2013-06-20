@@ -78,16 +78,18 @@ float calcGyro(int16_t v, float c, int16_t d) {
         self.lastPitch = calcGyro(yy, self.cPitch, -1);
         self.lastYaw = calcGyro(xx, self.cYaw, 1);
         
-        self.roll = [NSNumber numberWithFloat:self.lastRoll];
-        self.pitch = [NSNumber numberWithFloat:self.lastPitch];
-        self.yaw = [NSNumber numberWithFloat:self.lastYaw];
+        
+        NSArray *rollArgs = @[@"roll", [NSNumber numberWithFloat:self.lastRoll]];
+        NSArray *pitchArgs = @[@"pitch", [NSNumber numberWithFloat:self.lastPitch]];
+        NSArray *yawArgs = @[@"yaw", [NSNumber numberWithFloat:self.lastYaw]];
+        
+
+        [self performSelectorOnMainThread:@selector(performSetField:) withObject:rollArgs waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(performSetField:) withObject:pitchArgs waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(performSetField:) withObject:yawArgs waitUntilDone:NO];
+        
         
     } else if ([yc.name isEqualToString:@"config"]) {
-//        NSData *data = yc.cbCharacteristic.value;
-//        
-//        char val[data.length];
-//        [data getBytes:&val length:data.length];
-        
     }
 
 }
@@ -118,8 +120,11 @@ float calcGyro(int16_t v, float c, int16_t d) {
         }
         NSLog(@"Notification for data of %@ turned on", this.name);
     }];
+    
+    
+    NSArray *args = @[@"isOn", @YES];
+    [self performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
 
-    this.isOn = YES;
 }
 
 

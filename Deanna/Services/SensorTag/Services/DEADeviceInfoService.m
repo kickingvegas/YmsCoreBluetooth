@@ -20,6 +20,7 @@
 #import "DEADeviceInfoService.h"
 #import "YMSCBCharacteristic.h"
 
+
 @implementation DEADeviceInfoService
 
 - (id)initWithName:(NSString *)oName
@@ -51,6 +52,8 @@
 }
 
 
+
+
 - (void)readDeviceInfo {
     
     YMSCBCharacteristic *system_idCt = self.characteristicDict[@"system_id"];
@@ -67,7 +70,9 @@
         }
         
         NSLog(@"system id: %@", tmpString);
-        this.system_id = tmpString;
+        
+        NSArray *args = @[@"system_id", tmpString];
+        [this performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
     }];
     
     YMSCBCharacteristic *model_numberCt = self.characteristicDict[@"model_number"];
@@ -78,9 +83,11 @@
         }
         
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        this.model_number = payload;
+
         NSLog(@"model: %@", payload);
-        
+        NSArray *args = @[@"model_number", payload];
+        [this performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
+
     }];
     
     
@@ -92,7 +99,8 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        this.serial_number = payload;
+        NSArray *args = @[@"serial_number", payload];
+        [this performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
         NSLog(@"serial: %@", payload);
     }];
     
@@ -105,7 +113,8 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        this.firmware_rev = payload;
+        NSArray *args = @[@"firmware_rev", payload];
+        [this performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
         NSLog(@"firmware rev: %@", payload);
     }];
     
@@ -117,7 +126,8 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        this.hardware_rev = payload;
+        NSArray *args = @[@"hardware_rev", payload];
+        [this performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
         NSLog(@"hardware rev: %@", payload);
     }];
 
@@ -129,7 +139,8 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        this.software_rev = payload;
+        NSArray *args = @[@"software_rev", payload];
+        [this performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
         NSLog(@"sw rev: %@", payload);
     }];
     
@@ -141,7 +152,8 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        this.manufacturer_name = payload;
+        NSArray *args = @[@"manufacturer_name", payload];
+        [this performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
         NSLog(@"manufacturer name: %@", payload);
     }];
     
@@ -153,11 +165,11 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        this.ieee11073_cert_data = payload;
+        NSArray *args = @[@"ieee11073_cert_data", payload];
+        [this performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
         NSLog(@"IEEE 11073 Cert Data: %@", payload);
     }];
     
 }
-
 
 @end

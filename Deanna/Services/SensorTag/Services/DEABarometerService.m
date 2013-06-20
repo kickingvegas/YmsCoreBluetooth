@@ -103,15 +103,19 @@ double calcBarPress(int16_t t_r,
         
         int16_t t_r = ((v0 & 0xff)| ((v1 << 8) & 0xff00));
         
-        self.ambientTemp = [NSNumber numberWithDouble:calcBarTmp(t_r, _c1, _c2)];
-        self.pressure = [NSNumber numberWithDouble:calcBarPress(t_r,
-                                                                p_r,
-                                                                _c3,
-                                                                _c4,
-                                                                _c5,
-                                                                _c6,
-                                                                _c7,
-                                                                _c8)];
+        
+        NSArray *ambientArgs = @[@"ambientTemp", [NSNumber numberWithDouble:calcBarTmp(t_r, _c1, _c2)]];
+        NSArray *pressureArgs = @[@"pressure", [NSNumber numberWithDouble:calcBarPress(t_r,
+                                                                                       p_r,
+                                                                                       _c3,
+                                                                                       _c4,
+                                                                                       _c5,
+                                                                                       _c6,
+                                                                                       _c7,
+                                                                                       _c8)]];
+        
+        [self performSelectorOnMainThread:@selector(performSetField:) withObject:ambientArgs waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(performSetField:) withObject:pressureArgs waitUntilDone:NO];
     }
 }
 
@@ -157,6 +161,7 @@ double calcBarPress(int16_t t_r,
                     i = i + 2;
                 }
                 
+                this.isCalibrating = YES;
                 this.isCalibrated = YES;
                 
             }];

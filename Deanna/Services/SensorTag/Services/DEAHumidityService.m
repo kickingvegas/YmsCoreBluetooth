@@ -73,8 +73,13 @@ double calcHumRel(uint16_t rawH) {
         uint16_t rawTemperature = yms_u16_build(v0, v1);
         uint16_t rawHumidity = yms_u16_build(v2, v3);
         
-        self.ambientTemp = [NSNumber numberWithDouble:calcHumTmp(rawTemperature)];
-        self.relativeHumidity = [NSNumber numberWithDouble:calcHumRel(rawHumidity)];
+        
+        NSArray *ambientArgs = @[@"ambientTemp", [NSNumber numberWithDouble:calcHumTmp(rawTemperature)]];
+        NSArray *rhArgs = @[@"relativeHumidity", [NSNumber numberWithDouble:calcHumRel(rawHumidity)]];
+
+        [self performSelectorOnMainThread:@selector(performSetField:) withObject:ambientArgs waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(performSetField:) withObject:rhArgs waitUntilDone:NO];
+
 
     }
 }

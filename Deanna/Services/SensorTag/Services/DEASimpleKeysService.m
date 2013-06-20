@@ -55,9 +55,9 @@
         
         int16_t value = val[0];
         
+        NSArray *args = @[@"keyValue", [NSNumber numberWithInt:value]];
         
-        self.keyValue = [NSNumber numberWithInt:value];
-        
+        [self performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
     }
     
 }
@@ -71,8 +71,9 @@
         }
         NSLog(@"Turned Off: %@", this.name);
     }];
-    self.isOn = NO;
     
+    NSArray *args = @[@"isOn", @NO];
+    [self performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
 }
 
 - (void)turnOn {
@@ -84,7 +85,9 @@
         }
         NSLog(@"Turned On: %@", this.name);
     }];
-    self.isOn = YES;
+    
+    NSArray *args = @[@"isOn", @YES];
+    [self performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
 }
 
 

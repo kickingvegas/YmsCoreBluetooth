@@ -65,11 +65,14 @@ float calcAccel(int16_t rawV) {
         int16_t yy = val[1];
         int16_t zz = val[2];
         
+        NSArray *xargs = @[@"x", [NSNumber numberWithFloat:calcAccel(xx)]];
+        NSArray *yargs = @[@"y", [NSNumber numberWithFloat:calcAccel(yy)]];
+        NSArray *zargs = @[@"z", [NSNumber numberWithFloat:calcAccel(zz)]];
         
-        self.x = [NSNumber numberWithFloat:calcAccel(xx)];
-        self.y = [NSNumber numberWithFloat:calcAccel(yy)];
-        self.z = [NSNumber numberWithFloat:calcAccel(zz)];
-        
+        [self performSelectorOnMainThread:@selector(performSetField:) withObject:xargs waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(performSetField:) withObject:yargs waitUntilDone:NO];
+        [self performSelectorOnMainThread:@selector(performSetField:) withObject:zargs waitUntilDone:NO];
+
     }
 }
 
