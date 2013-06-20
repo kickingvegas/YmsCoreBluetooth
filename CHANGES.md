@@ -1,4 +1,11 @@
 # YmsCoreBluetooth Changes
+### Wed Jun 19 2013 - Interim Release (ver 0.941)
+* Support for background operation of BLE transactions (Issues #57, #58, #59)
+
+Prior releases ran all BLE transactions off the main UI thread. For a small number of BLE devices (< 5), performance degradation was neglible. However, in an environment with many devices (> 30), support for background operation that does not block the main UI is necessary. Changes so that messages sent to the delegate for `YMSCBCentralManager` and `YMSCBPeripheral` are executed in the main thread.
+
+Similarly, any change to a property of a subclass of `YMSCBService` should be executed in the main thread so that it can be properly key-value observed (KVO) by any UI components.
+
 ### Mon Jun 3 2013 - Disco Release (ver 0.94)
 * Issue #9 - OS X Support
 
