@@ -74,6 +74,13 @@
     DEACentralManager *centralManager = [DEACentralManager sharedService];
     centralManager.delegate = self;
     
+    for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+        if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
+            DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)cell;
+            pcell.sensorTag.delegate = self;
+        }
+    }
+
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
