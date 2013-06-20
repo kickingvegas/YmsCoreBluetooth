@@ -30,7 +30,7 @@
     // Insert code here to initialize your application
     
     
-    DEACentralManager *centralManager = [DEACentralManager sharedService];
+    DEACentralManager *centralManager = [DEACentralManager initSharedServiceWithDelegate:self];
     centralManager.delegate = self;
     [self.peripheralTableView reloadData];
     
@@ -67,29 +67,6 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-
-    if ([keyPath isEqualToString:@"keyValue"]) {
-        DEASimpleKeysService *sks = (DEASimpleKeysService *)object;
-        NSLog(@"Button %d pressed", [sks.keyValue intValue]);
-    } else if ([keyPath isEqualToString:@"RSSI"]) {
-        
-        DEACentralManager *centralManager = [DEACentralManager sharedService];
-        __weak DEASensorTag *sensorTag = (DEASensorTag *)[centralManager findPeripheral:object];
-        
-        [self.peripheralTableView enumerateAvailableRowViewsUsingBlock:^(NSTableRowView *rowView, NSInteger row) {
-            
-            DEMPeripheralViewCell *pvc = [rowView viewAtColumn:0];
-            
-            if (pvc.sensorTag == sensorTag) {
-                pvc.rssiLabel.stringValue = [NSString stringWithFormat:@"%d", [sensorTag.cbPeripheral.RSSI intValue]];
-                
-            }
-            
-        }];
-        
-        
-    }
-    
 }
 
 
@@ -229,20 +206,8 @@
     DEACentralManager *centralManager = [DEACentralManager sharedService];
     DEASensorTag *sensorTag = (DEASensorTag *)[centralManager findPeripheral:peripheral];
     
-    // TODO: Need to trigger RSSI update cycle. This may be a Cirago bug.
-    [sensorTag updateRSSI];
-    DEASimpleKeysService *sks = sensorTag.simplekeys;
-    
-    [sks addObserver:self
-          forKeyPath:@"keyValue"
-             options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
-             context:NULL];
-    
-    [peripheral addObserver:self
-                 forKeyPath:@"RSSI"
-                    options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
-                    context:NULL];
-    
+    sensorTag.delegate = self;
+    [sensorTag.cbPeripheral readRSSI];
     
     [self.peripheralTableView enumerateAvailableRowViewsUsingBlock:^(NSTableRowView *rowView, NSInteger row) {
         DEMPeripheralViewCell *pvc = [rowView viewAtColumn:0];
@@ -260,25 +225,9 @@
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     DEACentralManager *centralManager = [DEACentralManager sharedService];
-    DEASensorTag *sensorTag = (DEASensorTag *)[centralManager findPeripheral:peripheral];
-    
-    DEASimpleKeysService *sks = sensorTag.simplekeys;
-    
-    
-    [sks removeObserver:self forKeyPath:@"keyValue"];
-    
-    
-    @try {
-        [peripheral removeObserver:self forKeyPath:@"RSSI"];
-    }
-    @catch (NSException *exception) {
-    }
-    
-    
-    
+    __weak DEASensorTag *sensorTag = (DEASensorTag *)[centralManager findPeripheral:peripheral];
+
     [self.peripheralTableView enumerateAvailableRowViewsUsingBlock:^(NSTableRowView *rowView, NSInteger row) {
-        
-        
         DEMPeripheralViewCell *pvc = [rowView viewAtColumn:0];
         
         if (pvc.sensorTag == sensorTag) {
@@ -295,8 +244,49 @@
 
 #pragma mark - CBPeripheralDelegate Methods
 
-- (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {
-    NSLog(@"RSSI: %@", peripheral.RSSI);
+#pragma mark - CBPeripheralDelegate Methods
+
+- (void)performUpdateRSSI:(NSArray *)args {
+    CBPeripheral *peripheral = args[0];
+    
+    [peripheral readRSSI];
+    
 }
+
+
+- (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {
+    
+    if (error) {
+        NSLog(@"ERROR: readRSSI failed, retrying. %@", error.description);
+        
+        if (peripheral.isConnected) {
+            NSArray *args = @[peripheral];
+            [self performSelector:@selector(performUpdateRSSI:) withObject:args afterDelay:2.0];
+        }
+        
+        return;
+    }
+    
+
+    DEACentralManager *centralManager = [DEACentralManager sharedService];
+    __weak DEASensorTag *sensorTag = (DEASensorTag *)[centralManager findPeripheral:peripheral];
+    
+    [self.peripheralTableView enumerateAvailableRowViewsUsingBlock:^(NSTableRowView *rowView, NSInteger row) {
+        
+        DEMPeripheralViewCell *pvc = [rowView viewAtColumn:0];
+        
+        if (pvc.sensorTag == sensorTag) {
+            pvc.rssiLabel.stringValue = [NSString stringWithFormat:@"%d", [sensorTag.cbPeripheral.RSSI intValue]];
+        }
+        
+    }];
+
+
+       
+    NSArray *args = @[peripheral];
+    [self performSelector:@selector(performUpdateRSSI:) withObject:args afterDelay:sensorTag.rssiPingPeriod];
+}
+
+
 
 @end
