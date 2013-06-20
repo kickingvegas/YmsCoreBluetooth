@@ -25,6 +25,9 @@
 #import "DEASimpleKeysViewCell.h"
 #import "DEAGyroscopeViewCell.h"
 #import "DEASensorTag.h"
+#import "YMSCBService.h"
+#import "YMSCBCharacteristic.h"
+#import "DEATemperatureService.h"
 
 @interface DEASensorTagViewController ()
 
@@ -62,11 +65,6 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    
-    if ([keyPath isEqualToString:@"RSSI"]) {
-        self.rssiButton.title = [NSString stringWithFormat:@"%@ db", change[@"new"]];
-    }
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -92,6 +90,8 @@
     DEACentralManager *centralManager = [DEACentralManager sharedService];
     centralManager.delegate = self;
     
+    self.sensorTag.delegate = self;
+    
     for (NSString *prefix in self.cbServiceCells) {
         NSString *key = [[NSString alloc] initWithFormat:@"%@ViewCell", prefix];
         UITableViewCell *cell = (UITableViewCell *)[self valueForKey:key];
@@ -100,19 +100,11 @@
             [cell performSelector:@selector(configureWithSensorTag:) withObject:self.sensorTag];
         }
     }
-    
-    [self.sensorTag.cbPeripheral addObserver:self
-                                  forKeyPath:@"RSSI"
-                                     options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
-                                     context:NULL];
-
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated {
-    
-    [self.sensorTag.cbPeripheral removeObserver:self forKeyPath:@"RSSI"];
-    
+
     for (NSString *prefix in self.cbServiceCells) {
         NSString *key = [[NSString alloc] initWithFormat:@"%@ViewCell", prefix];
         UITableViewCell *cell = (UITableViewCell *)[self valueForKey:key];
@@ -183,7 +175,57 @@
 }
 
 
+#pragma mark - CBPeripheralDelegate Methods
 
+- (void)performUpdateRSSI:(NSArray *)args {
+    CBPeripheral *peripheral = args[0];
+    
+    [peripheral readRSSI];
+    
+}
+
+
+
+- (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {
+    //NSLog(@"HEY got here");
+    
+    if (error) {
+        NSLog(@"ERROR: readRSSI failed, retrying. %@", error.description);
+        
+        if (peripheral.isConnected) {
+            NSArray *args = @[peripheral];
+            [self performSelector:@selector(performUpdateRSSI:) withObject:args afterDelay:2.0];
+        }
+        
+        return;
+    }
+    
+    self.rssiButton.title = [NSString stringWithFormat:@"%@ db", peripheral.RSSI];
+    
+    DEACentralManager *centralManager = [DEACentralManager sharedService];
+    YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
+    
+    NSArray *args = @[peripheral];
+    [self performSelector:@selector(performUpdateRSSI:) withObject:args afterDelay:yp.rssiPingPeriod];
+
+}
+
+/*
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+    //NSLog(@"HEY updating characteristic");
+    
+
+    if (characteristic.isNotifying) {
+        YMSCBService *btService = [self.sensorTag findService:characteristic.service];
+        YMSCBCharacteristic *ct = [btService findCharacteristic:characteristic];
+        
+        if ([btService isKindOfClass:[DEATemperatureService class]]) {
+            [self.temperatureViewCell updateDisplayForCharacteristicName:ct.name];
+        }
+        
+    }
+}
+*/
 
 
 @end
