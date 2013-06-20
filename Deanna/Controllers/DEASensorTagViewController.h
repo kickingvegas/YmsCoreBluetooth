@@ -31,7 +31,7 @@
 /**
  ViewController for TI SensorTag peripheral.
  */
-@interface DEASensorTagViewController : DEABaseViewController <UITableViewDelegate, UITableViewDataSource>
+@interface DEASensorTagViewController : DEABaseViewController <UITableViewDelegate, UITableViewDataSource, CBPeripheralDelegate>
 
 /** @name Properties */
 /// Array of names of service cells.
