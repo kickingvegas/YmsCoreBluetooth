@@ -1,4 +1,4 @@
-### Version 0.94 (beta)
+### Version 0.941 (beta)
 * [Class Hierarchy](hierarchy.html)
 
 A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS or OS X applications using the CoreBluetooth API. Includes *Deanna* and *DeannaMac*, applications to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag) for iOS and OS X respectively.
