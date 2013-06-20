@@ -328,13 +328,17 @@
 }
 
 - (void)performPeripheralDidUpdateNameWithObject:(NSArray *)args {
+#if TARGET_OS_IPHONE
     CBPeripheral *peripheral = args[0];
     [self.delegate peripheralDidUpdateName:peripheral];
+#endif
 }
 
 - (void)performPeripheralDidInvalidateServicesWithObject:(NSArray *)args {
+#if TARGET_OS_IPHONE
     CBPeripheral *peripheral = args[0];
     [self.delegate peripheralDidInvalidateServices:peripheral];
+#endif
 }
 
 
