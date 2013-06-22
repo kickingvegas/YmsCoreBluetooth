@@ -28,19 +28,31 @@ With the above figure, let's walk through building a *SensorTag* peripheral.
 The class DEACentralManager in `Deanna/Services/DEACentralManager.[hm]` is an application service to manage all known peripherals as defined by you the implementer. In this case we're only concerning ourselves with *SensorTag* peripherals.
 It is typically implemented as a singleton instance and contains the following method implementations:
 
+* `initSharedServiceWithDelegate:`
 * `sharedService`
 * `startScan`
 * `handleFoundPeripheral`
 * `managerPoweredOnHandler`
 
-The `sharedService` method is a singleton constructor for DEACentralManager. In this implementation, the property [YMSCBCentralManager knownPeripheralNames] is set using [YMSCBCentralManager initWithKnownPeripheralNames:queue:userStoredPeripherals:] to help identify and filter the peripherals you care to communicate with.
+The `initSharedServiceWithDelegate:` method is a singleton constructor for DEACentralManager. In this implementation, the property [YMSCBCentralManager knownPeripheralNames] is set using [YMSCBCentralManager initWithKnownPeripheralNames:queue:useStoredPeripherals:delegate:] to help identify and filter the peripherals you care to communicate with.
+
+	+ (DEACentralManager *)initSharedServiceWithDelegate:(id)delegate {
+		if (sharedCentralManager == nil) {
+			dispatch_queue_t queue = dispatch_queue_create("com.yummymelon.deanna", 0);
+
+			NSArray *nameList = @[@"TI BLE Sensor Tag", @"SensorTag"];
+			sharedCentralManager = [[super allocWithZone:NULL] initWithKnownPeripheralNames:nameList
+																					  queue:queue
+																	   useStoredPeripherals:YES
+																				   delegate:delegate];
+		}
+		return sharedCentralManager;
+
+	}
 
 	+ (DEACentralManager *)sharedService {
 		if (sharedCentralManager == nil) {
-			NSArray *nameList = @[@"TI BLE Sensor Tag", @"SensorTag"];
-			sharedCentralManager = [[super allocWithZone:NULL] initWithKnownPeripheralNames:nameList
-																					queue:nil
-																	 useStoredPeripherals:YES];
+			NSLog(@"ERROR: must call initSharedServiceWithDelegate: first.");
 		}
 		return sharedCentralManager;
 	}
@@ -48,8 +60,8 @@ The `sharedService` method is a singleton constructor for DEACentralManager. In 
 The `startScan` method lets you define how to go about scanning for peripherals. Within its implementation should be a call to `scanForPeripheralsWithServices:options:withBlock:` to tell the `CBCentralManager` property `manager` to start scanning.
 
 	- (void)startScan {
-		NSDictionary *options = @{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES };
-		
+		NSDictionary *options = @{ CBCentralManagerScanOptionAllowDuplicatesKey: @NO };
+
 		__weak DEACentralManager *this = self;
 		[self scanForPeripheralsWithServices:nil
 									 options:options
@@ -62,39 +74,43 @@ The `startScan` method lets you define how to go about scanning for peripherals.
 									   NSLog(@"DISCOVERED: %@, %@, %@ db", peripheral, peripheral.name, RSSI);
 									   [this handleFoundPeripheral:peripheral];
 								   }];
-
 	}
+
 
 Note that a weak pointer named `this` is set to `self`. This is done to handle retain issues with referencing self within an ObjectiveC block.
 
 The callback block is executed upon a response from a BLE peripheral that is advertising. A discovered BLE peripheral will pass a pointer to itself (`peripheral`), advertisement data (`advertisementData`), its RSSI value (`RSSI`), and in the event of a failure, an error object (`error`) to the callback block. In this implementation, the execution of the callback block will call `handleFoundPeripheral:`. Note that the statements in `handleFoundPeripheral:` could just as easily be located within the block statement.
 
-The `handleFoundPeripheral:` method defines what to do once you've found a peripheral via scanning. In the case of a *SensorTag* it is to instantiate `DEASensorTag`, a subclass of `YMSCBPeripheral`. 
+The `handleFoundPeripheral:` method defines what to do once you've found a peripheral via scanning. In the case of a *SensorTag* it is to instantiate `DEASensorTag`, a subclass of `YMSCBPeripheral`.
 
-    - (void)handleFoundPeripheral:(CBPeripheral *)peripheral {
-        YMSCBPeripheral *yp = [self findPeripheral:peripheral];
-		
-        if (yp == nil) {
-            BOOL isUnknownPeripheral = YES;
-            for (NSString *pname in self.knownPeripheralNames) {
-                if ([pname isEqualToString:peripheral.name]) {
-                    DEASensorTag *sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
-                                                                                baseHi:kSensorTag_BASE_ADDRESS_HI
-                                                                                baseLo:kSensorTag_BASE_ADDRESS_LO
-                                                                            updateRSSI:YES];
-                    [self.ymsPeripherals addObject:sensorTag];
-                    isUnknownPeripheral = NO;
-                    break;
-                }
-            }
+	- (void)handleFoundPeripheral:(CBPeripheral *)peripheral {
+		YMSCBPeripheral *yp = [self findPeripheral:peripheral];
 
-            if (isUnknownPeripheral) {
-                //TODO: Handle unknown peripheral
-                yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral baseHi:0 baseLo:0 updateRSSI:NO];
-                [self.ymsPeripherals addObject:yp];
-            }
-        }
-    }
+		if (yp == nil) {
+			BOOL isUnknownPeripheral = YES;
+			for (NSString *pname in self.knownPeripheralNames) {
+				if ([pname isEqualToString:peripheral.name]) {
+					DEASensorTag *sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
+																			   central:self
+																				baseHi:kSensorTag_BASE_ADDRESS_HI
+																				baseLo:kSensorTag_BASE_ADDRESS_LO];
+
+					[self.ymsPeripherals addObject:sensorTag];
+					isUnknownPeripheral = NO;
+					break;
+
+				}
+
+			}
+
+			if (isUnknownPeripheral) {
+				//TODO: Handle unknown peripheral
+				yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral central:self baseHi:0 baseLo:0];
+				[self.ymsPeripherals addObject:yp];
+			}
+		}
+
+	}
 
 
 An alternate implementation of `startScan` without using a block callback is to use `scanForPeripheralsWithServices:options:`. In this case, you then *must* implement `handleFoundPeripheral:` to handle the discovered peripheral.
@@ -126,29 +142,28 @@ For our purpose, we are interested on retrivieving previously discovered periphe
 
 The class implementation of `DEASensorTag` in `Deanna/Services/SensorTag/DEASensorTag.[hm]` is where the top-level behavior of the *SensorTag* peripheral is captured. Two methods are implemented:
 
-* `initWithPeripheral:central:baseHi:baseLo:updateRSSI:` - the constructor for DEASensorTag
+* `initWithPeripheral:central:baseHi:baseLo:` - the constructor for DEASensorTag
 * `connect` - the method to initiate a connection request for the peripheral.
 
-The class constructor for `DEASensorTag` is responsible for instantiating subclasses of `YMSCBService` to capture the behavior of the different BLE services offered by the *SensorTag*. The source for this constructor, `initWithPeripheral:central:baseHi:baseLo:updateRSSI:` is shown below:
-
-	- (id)initWithPeripheral:(CBPeripheral *)peripheral
-					 central:(YMSCBCentralManager *)owner
-					  baseHi:(int64_t)hi
-					  baseLo:(int64_t)lo
-				  updateRSSI:(BOOL)update {
+The class constructor for `DEASensorTag` is responsible for instantiating subclasses of `YMSCBService` to capture the behavior of the different BLE services offered by the *SensorTag*. The source for this constructor, `initWithPeripheral:central:baseHi:baseLo:` is shown below:
 
 
-		self = [super initWithPeripheral:peripheral central:owner baseHi:hi baseLo:lo updateRSSI:update];
+	- (instancetype)initWithPeripheral:(CBPeripheral *)peripheral
+							   central:(YMSCBCentralManager *)owner
+								baseHi:(int64_t)hi
+								baseLo:(int64_t)lo {
+
+		self = [super initWithPeripheral:peripheral central:owner baseHi:hi baseLo:lo];
 
 		if (self) {
-			DEATemperatureService *ts = [[DEATemperatureService alloc] initWithName:@"temperature" parent:self baseHi:hi 	baseLo:lo];
-			DEAAccelerometerService *as = [[DEAAccelerometerService alloc] initWithName:@"accelerometer" parent:self 	baseHi:hi baseLo:lo];
-			DEASimpleKeysService *sks = [[DEASimpleKeysService alloc] initWithName:@"simplekeys" parent:self baseHi:hi 	baseLo:lo];
-			DEAHumidityService *hs = [[DEAHumidityService alloc] initWithName:@"humidity" parent:self baseHi:hi 	baseLo:lo];
-			DEABarometerService *bs = [[DEABarometerService alloc] initWithName:@"barometer" parent:self baseHi:hi 	baseLo:lo];
-			DEAGyroscopeService *gs = [[DEAGyroscopeService alloc] initWithName:@"gyroscope" parent:self baseHi:hi 	baseLo:lo];
-			DEAMagnetometerService *ms = [[DEAMagnetometerService alloc] initWithName:@"magnetometer" parent:self 	baseHi:hi baseLo:lo];
-			DEADeviceInfoService *ds = [[DEADeviceInfoService alloc] initWithName:@"devinfo" parent:self baseHi:hi 	baseLo:lo];
+			DEATemperatureService *ts = [[DEATemperatureService alloc] initWithName:@"temperature" parent:self baseHi:hi baseLo:lo];
+			DEAAccelerometerService *as = [[DEAAccelerometerService alloc] initWithName:@"accelerometer" parent:self baseHi:hi baseLo:lo];
+			DEASimpleKeysService *sks = [[DEASimpleKeysService alloc] initWithName:@"simplekeys" parent:self baseHi:hi baseLo:lo];
+			DEAHumidityService *hs = [[DEAHumidityService alloc] initWithName:@"humidity" parent:self baseHi:hi baseLo:lo];
+			DEABarometerService *bs = [[DEABarometerService alloc] initWithName:@"barometer" parent:self baseHi:hi baseLo:lo];
+			DEAGyroscopeService *gs = [[DEAGyroscopeService alloc] initWithName:@"gyroscope" parent:self baseHi:hi baseLo:lo];
+			DEAMagnetometerService *ms = [[DEAMagnetometerService alloc] initWithName:@"magnetometer" parent:self baseHi:hi baseLo:lo];
+			DEADeviceInfoService *ds = [[DEADeviceInfoService alloc] initWithName:@"devinfo" parent:self baseHi:hi baseLo:lo];
 
 			self.serviceDict = @{@"temperature": ts,
 								 @"accelerometer": as,
@@ -162,6 +177,7 @@ The class constructor for `DEASensorTag` is responsible for instantiating subcla
 		return self;
 
 	}
+
 
 In this implementation, the following BLE services of the *SensorTag* are supported:
 
@@ -205,19 +221,19 @@ Note that the tasks listed above are accomplished via a nested chain of callback
 				for (YMSCBService *service in yservices) {
 					if ([service.name isEqualToString:@"simplekeys"]) {
 						__weak DEASimpleKeysService *thisService = (DEASimpleKeysService *)service;
-						[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, 	NSError *error) {
+						[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
 							[thisService turnOn];
 						}];
 
 					} else if ([service.name isEqualToString:@"devinfo"]) {
 						__weak DEADeviceInfoService *thisService = (DEADeviceInfoService *)service;
-						[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, 	NSError *error) {
+						[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
 							[thisService readDeviceInfo];
 						}];
 
 					} else {
 						__weak DEABaseService *thisService = (DEABaseService *)service;
-						[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, 	NSError *error) {
+						[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
 							for (NSString *key in chDict) {
 								YMSCBCharacteristic *ct = chDict[key];
 								//NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
@@ -253,6 +269,9 @@ This subclass is responsible for implementing:
 
 Shown below is the implementation for `DEAAccelerometerService`.
 
+	#import "DEAAccelerometerService.h"
+	#import "YMSCBCharacteristic.h"
+
 	float calcAccel(int16_t rawV) {
 		float v;
 		v = ((float)rawV + 1.0) / (256.0/4.0);
@@ -270,6 +289,7 @@ Shown below is the implementation for `DEAAccelerometerService`.
 							parent:pObj
 							baseHi:hi
 							baseLo:lo];
+
 		if (self) {
 			[self addCharacteristic:@"service" withOffset:kSensorTag_ACCELEROMETER_SERVICE];
 			[self addCharacteristic:@"data" withOffset:kSensorTag_ACCELEROMETER_DATA];
@@ -294,32 +314,28 @@ Shown below is the implementation for `DEAAccelerometerService`.
 			int16_t xx = val[0];
 			int16_t yy = val[1];
 			int16_t zz = val[2];
-			
-			self.x = [NSNumber numberWithFloat:calcAccel(xx)];
-			self.y = [NSNumber numberWithFloat:calcAccel(yy)];
-			self.z = [NSNumber numberWithFloat:calcAccel(zz)];
 
+			__weak DEAAccelerometerService *this = self;
+			_YMS_PERFORM_ON_MAIN_THREAD(^{
+				this.x = [NSNumber numberWithFloat:calcAccel(xx)];
+				this.y = [NSNumber numberWithFloat:calcAccel(yy)];
+				this.z = [NSNumber numberWithFloat:calcAccel(zz)];
+			});
 		}
 	}
 
-	@end
 
 The class constructor `initWithName:parent:baseHi:baseLo:` defines four BLE characteristics using [YMSCBService addCharacteristic:withOffset:] which we can reference with the following four strings: ("service", "data", "config", "period").
 
 When the service is turned on using the method [DEABaseService turnOn], notifications for the "data" characteristic are turned on. Handling notification events sent from the *SensorTag* are handled by `notifyCharacteristicHandler`. The acceleration measurements are stored as `NSNumber` properties `x`, `y`, `z`. These properties can then be Key-Value Observed (KVO) by the application, typically to be displayed in user interface.
+
+** Important **: To let the UI components in the main thread know via KVO that a property has changed, you must update that property on the main thread. A convenience macro `_YMS_PERFORM_ON_MAIN_THREAD` which uses the GCD call `dispatch_async()` does just that:
+
+	#define _YMS_PERFORM_ON_MAIN_THREAD(block) dispatch_async(dispatch_get_main_queue(), block);
 
 
 # Comments
 This document can always be improved. Please submit any comments or corrections about this document to the [issue tracker](https://github.com/kickingvegas/YmsCoreBluetooth/issues?state=open) for **YmsCoreBluetooth**.
 
 Thank you for using **YmsCoreBluetooth**!
-
-
-
-
-
-
-
-
-
 
