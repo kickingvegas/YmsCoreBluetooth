@@ -302,6 +302,10 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 		}
 	}
 
+** Important **: To let the UI components in the main thread know via KVO that a property has changed, you must update that property on the main thread. A convenience macro `_YMS_PERFORM_ON_MAIN_THREAD` which uses the GCD call `dispatch_async()` does just that:
+
+	#define _YMS_PERFORM_ON_MAIN_THREAD(block) dispatch_async(dispatch_get_main_queue(), block);
+
 
 ### Block Callback Design
 
