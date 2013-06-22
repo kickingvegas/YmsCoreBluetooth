@@ -61,6 +61,7 @@
 It is typically implemented as a singleton instance and contains the following method implementations:</p>
 
 <ul>
+<li><code>initSharedServiceWithDelegate:</code></li>
 <li><code>sharedService</code></li>
 <li><code>startScan</code></li>
 <li><code>handleFoundPeripheral</code></li>
@@ -68,14 +69,25 @@ It is typically implemented as a singleton instance and contains the following m
 </ul>
 
 
-<p>The <code>sharedService</code> method is a singleton constructor for DEACentralManager. In this implementation, the property <a href="../../Classes/YMSCBCentralManager.html#//api/name/knownPeripheralNames">[YMSCBCentralManager knownPeripheralNames]</a> is set using [YMSCBCentralManager initWithKnownPeripheralNames:queue:userStoredPeripherals:] to help identify and filter the peripherals you care to communicate with.</p>
+<p>The <code>initSharedServiceWithDelegate:</code> method is a singleton constructor for DEACentralManager. In this implementation, the property <a href="../../Classes/YMSCBCentralManager.html#//api/name/knownPeripheralNames">[YMSCBCentralManager knownPeripheralNames]</a> is set using <a href="../../Classes/YMSCBCentralManager.html#//api/name/initWithKnownPeripheralNames:queue:useStoredPeripherals:delegate:">[YMSCBCentralManager initWithKnownPeripheralNames:queue:useStoredPeripherals:delegate:]</a> to help identify and filter the peripherals you care to communicate with.</p>
 
-<pre><code>+ (DEACentralManager *)sharedService {
+<pre><code>+ (DEACentralManager *)initSharedServiceWithDelegate:(id)delegate {
     if (sharedCentralManager == nil) {
+        dispatch_queue_t queue = dispatch_queue_create("com.yummymelon.deanna", 0);
+
         NSArray *nameList = @[@"TI BLE Sensor Tag", @"SensorTag"];
         sharedCentralManager = [[super allocWithZone:NULL] initWithKnownPeripheralNames:nameList
-                                                                                queue:nil
-                                                                 useStoredPeripherals:YES];
+                                                                                  queue:queue
+                                                                   useStoredPeripherals:YES
+                                                                               delegate:delegate];
+    }
+    return sharedCentralManager;
+
+}
+
++ (DEACentralManager *)sharedService {
+    if (sharedCentralManager == nil) {
+        NSLog(@"ERROR: must call initSharedServiceWithDelegate: first.");
     }
     return sharedCentralManager;
 }
@@ -84,7 +96,7 @@ It is typically implemented as a singleton instance and contains the following m
 <p>The <code>startScan</code> method lets you define how to go about scanning for peripherals. Within its implementation should be a call to <code>scanForPeripheralsWithServices:options:withBlock:</code> to tell the <code>CBCentralManager</code> property <code>manager</code> to start scanning.</p>
 
 <pre><code>- (void)startScan {
-    NSDictionary *options = @{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES };
+    NSDictionary *options = @{ CBCentralManagerScanOptionAllowDuplicatesKey: @NO };
 
     __weak DEACentralManager *this = self;
     [self scanForPeripheralsWithServices:nil
@@ -98,7 +110,6 @@ It is typically implemented as a singleton instance and contains the following m
                                    NSLog(@"DISCOVERED: %@, %@, %@ db", peripheral, peripheral.name, RSSI);
                                    [this handleFoundPeripheral:peripheral];
                                }];
-
 }
 </code></pre>
 
@@ -116,21 +127,25 @@ It is typically implemented as a singleton instance and contains the following m
         for (NSString *pname in self.knownPeripheralNames) {
             if ([pname isEqualToString:peripheral.name]) {
                 DEASensorTag *sensorTag = [[DEASensorTag alloc] initWithPeripheral:peripheral
+                                                                           central:self
                                                                             baseHi:kSensorTag_BASE_ADDRESS_HI
-                                                                            baseLo:kSensorTag_BASE_ADDRESS_LO
-                                                                        updateRSSI:YES];
+                                                                            baseLo:kSensorTag_BASE_ADDRESS_LO];
+
                 [self.ymsPeripherals addObject:sensorTag];
                 isUnknownPeripheral = NO;
                 break;
+
             }
+
         }
 
         if (isUnknownPeripheral) {
             //TODO: Handle unknown peripheral
-            yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral baseHi:0 baseLo:0 updateRSSI:NO];
+            yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral central:self baseHi:0 baseLo:0];
             [self.ymsPeripherals addObject:yp];
         }
     }
+
 }
 </code></pre>
 
@@ -167,31 +182,29 @@ It is typically implemented as a singleton instance and contains the following m
 <p>The class implementation of <code>DEASensorTag</code> in <code>Deanna/Services/SensorTag/DEASensorTag.[hm]</code> is where the top-level behavior of the <em>SensorTag</em> peripheral is captured. Two methods are implemented:</p>
 
 <ul>
-<li><code>initWithPeripheral:central:baseHi:baseLo:updateRSSI:</code> &ndash; the constructor for <a href="../../Classes/DEASensorTag.html">DEASensorTag</a></li>
+<li><code>initWithPeripheral:central:baseHi:baseLo:</code> &ndash; the constructor for <a href="../../Classes/DEASensorTag.html">DEASensorTag</a></li>
 <li><code>connect</code> &ndash; the method to initiate a connection request for the peripheral.</li>
 </ul>
 
 
-<p>The class constructor for <code>DEASensorTag</code> is responsible for instantiating subclasses of <code>YMSCBService</code> to capture the behavior of the different BLE services offered by the <em>SensorTag</em>. The source for this constructor, <code>initWithPeripheral:central:baseHi:baseLo:updateRSSI:</code> is shown below:</p>
+<p>The class constructor for <code>DEASensorTag</code> is responsible for instantiating subclasses of <code>YMSCBService</code> to capture the behavior of the different BLE services offered by the <em>SensorTag</em>. The source for this constructor, <code>initWithPeripheral:central:baseHi:baseLo:</code> is shown below:</p>
 
-<pre><code>- (id)initWithPeripheral:(CBPeripheral *)peripheral
-                 central:(YMSCBCentralManager *)owner
-                  baseHi:(int64_t)hi
-                  baseLo:(int64_t)lo
-              updateRSSI:(BOOL)update {
+<pre><code>- (instancetype)initWithPeripheral:(CBPeripheral *)peripheral
+                           central:(YMSCBCentralManager *)owner
+                            baseHi:(int64_t)hi
+                            baseLo:(int64_t)lo {
 
-
-    self = [super initWithPeripheral:peripheral central:owner baseHi:hi baseLo:lo updateRSSI:update];
+    self = [super initWithPeripheral:peripheral central:owner baseHi:hi baseLo:lo];
 
     if (self) {
-        DEATemperatureService *ts = [[DEATemperatureService alloc] initWithName:@"temperature" parent:self baseHi:hi  baseLo:lo];
-        DEAAccelerometerService *as = [[DEAAccelerometerService alloc] initWithName:@"accelerometer" parent:self    baseHi:hi baseLo:lo];
-        DEASimpleKeysService *sks = [[DEASimpleKeysService alloc] initWithName:@"simplekeys" parent:self baseHi:hi     baseLo:lo];
-        DEAHumidityService *hs = [[DEAHumidityService alloc] initWithName:@"humidity" parent:self baseHi:hi  baseLo:lo];
-        DEABarometerService *bs = [[DEABarometerService alloc] initWithName:@"barometer" parent:self baseHi:hi  baseLo:lo];
-        DEAGyroscopeService *gs = [[DEAGyroscopeService alloc] initWithName:@"gyroscope" parent:self baseHi:hi  baseLo:lo];
-        DEAMagnetometerService *ms = [[DEAMagnetometerService alloc] initWithName:@"magnetometer" parent:self    baseHi:hi baseLo:lo];
-        DEADeviceInfoService *ds = [[DEADeviceInfoService alloc] initWithName:@"devinfo" parent:self baseHi:hi     baseLo:lo];
+        DEATemperatureService *ts = [[DEATemperatureService alloc] initWithName:@"temperature" parent:self baseHi:hi baseLo:lo];
+        DEAAccelerometerService *as = [[DEAAccelerometerService alloc] initWithName:@"accelerometer" parent:self baseHi:hi baseLo:lo];
+        DEASimpleKeysService *sks = [[DEASimpleKeysService alloc] initWithName:@"simplekeys" parent:self baseHi:hi baseLo:lo];
+        DEAHumidityService *hs = [[DEAHumidityService alloc] initWithName:@"humidity" parent:self baseHi:hi baseLo:lo];
+        DEABarometerService *bs = [[DEABarometerService alloc] initWithName:@"barometer" parent:self baseHi:hi baseLo:lo];
+        DEAGyroscopeService *gs = [[DEAGyroscopeService alloc] initWithName:@"gyroscope" parent:self baseHi:hi baseLo:lo];
+        DEAMagnetometerService *ms = [[DEAMagnetometerService alloc] initWithName:@"magnetometer" parent:self baseHi:hi baseLo:lo];
+        DEADeviceInfoService *ds = [[DEADeviceInfoService alloc] initWithName:@"devinfo" parent:self baseHi:hi baseLo:lo];
 
         self.serviceDict = @{@"temperature": ts,
                              @"accelerometer": as,
@@ -255,19 +268,19 @@ It is typically implemented as a singleton instance and contains the following m
             for (YMSCBService *service in yservices) {
                 if ([service.name isEqualToString:@"simplekeys"]) {
                     __weak DEASimpleKeysService *thisService = (DEASimpleKeysService *)service;
-                    [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict,    NSError *error) {
+                    [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
                         [thisService turnOn];
                     }];
 
                 } else if ([service.name isEqualToString:@"devinfo"]) {
                     __weak DEADeviceInfoService *thisService = (DEADeviceInfoService *)service;
-                    [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict,    NSError *error) {
+                    [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
                         [thisService readDeviceInfo];
                     }];
 
                 } else {
                     __weak DEABaseService *thisService = (DEABaseService *)service;
-                    [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict,    NSError *error) {
+                    [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
                         for (NSString *key in chDict) {
                             YMSCBCharacteristic *ct = chDict[key];
                             //NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
@@ -306,7 +319,10 @@ It is typically implemented as a singleton instance and contains the following m
 
 <p>Shown below is the implementation for <code>DEAAccelerometerService</code>.</p>
 
-<pre><code>float calcAccel(int16_t rawV) {
+<pre><code>#import "DEAAccelerometerService.h"
+#import "YMSCBCharacteristic.h"
+
+float calcAccel(int16_t rawV) {
     float v;
     v = ((float)rawV + 1.0) / (256.0/4.0);
     return v;
@@ -323,6 +339,7 @@ It is typically implemented as a singleton instance and contains the following m
                         parent:pObj
                         baseHi:hi
                         baseLo:lo];
+
     if (self) {
         [self addCharacteristic:@"service" withOffset:kSensorTag_ACCELEROMETER_SERVICE];
         [self addCharacteristic:@"data" withOffset:kSensorTag_ACCELEROMETER_DATA];
@@ -348,19 +365,24 @@ It is typically implemented as a singleton instance and contains the following m
         int16_t yy = val[1];
         int16_t zz = val[2];
 
-        self.x = [NSNumber numberWithFloat:calcAccel(xx)];
-        self.y = [NSNumber numberWithFloat:calcAccel(yy)];
-        self.z = [NSNumber numberWithFloat:calcAccel(zz)];
-
+        __weak DEAAccelerometerService *this = self;
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.x = [NSNumber numberWithFloat:calcAccel(xx)];
+            this.y = [NSNumber numberWithFloat:calcAccel(yy)];
+            this.z = [NSNumber numberWithFloat:calcAccel(zz)];
+        });
     }
 }
-
-@end
 </code></pre>
 
 <p>The class constructor <code>initWithName:parent:baseHi:baseLo:</code> defines four BLE characteristics using <a href="../../Classes/YMSCBService.html#//api/name/addCharacteristic:withOffset:">[YMSCBService addCharacteristic:withOffset:]</a> which we can reference with the following four strings: (&ldquo;service&rdquo;, &ldquo;data&rdquo;, &ldquo;config&rdquo;, &ldquo;period&rdquo;).</p>
 
 <p>When the service is turned on using the method <a href="../../Classes/DEABaseService.html#//api/name/turnOn">[DEABaseService turnOn]</a>, notifications for the &ldquo;data&rdquo; characteristic are turned on. Handling notification events sent from the <em>SensorTag</em> are handled by <code>notifyCharacteristicHandler</code>. The acceleration measurements are stored as <code>NSNumber</code> properties <code>x</code>, <code>y</code>, <code>z</code>. These properties can then be Key-Value Observed (KVO) by the application, typically to be displayed in user interface.</p>
+
+<p><strong> Important </strong>: To let the UI components in the main thread know via KVO that a property has changed, you must update that property on the main thread. A convenience macro <code>_YMS_PERFORM_ON_MAIN_THREAD</code> which uses the GCD call <code>dispatch_async()</code> does just that:</p>
+
+<pre><code>#define _YMS_PERFORM_ON_MAIN_THREAD(block) dispatch_async(dispatch_get_main_queue(), block);
+</code></pre>
 
 <h1>Comments</h1>
 
@@ -371,7 +393,7 @@ It is typically implemented as a singleton instance and contains the following m
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-06-19)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-06-22)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						

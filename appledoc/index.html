@@ -34,14 +34,14 @@
 					<div class="section section-overview index-overview">
 						
 						
-						<h3>Version 0.941 (beta)</h3>
+						<h1>YmsCoreBluetooth v0.942 (beta)</h1>
+
+<p>A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS or OS X applications using the CoreBluetooth API. Includes <em>Deanna</em> and <em>DeannaMac</em>, applications to communicate with a TI SensorTag for iOS and OS X respectively.</p>
 
 <ul>
-<li><a href="hierarchy.html">Class Hierarchy</a></li>
+<li><a href="hierarchy.html">YmsCoreBluetooth API Reference</a></li>
 </ul>
 
-
-<p>A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS or OS X applications using the CoreBluetooth API. Includes <em>Deanna</em> and <em>DeannaMac</em>, applications to communicate with a <a href="http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag">TI SensorTag</a> for iOS and OS X respectively.</p>
 
 <h2>YmsCoreBluetooth Design Intent: Or Why You Want To Use This Framework</h2>
 
@@ -174,7 +174,8 @@
 
 <p>In the following code sample, <code>self</code> is an instance of a subclass of <a href="Classes/YMSCBCentralManager.html">YMSCBCentralManager</a>.</p>
 
-<pre><code>[self scanForPeripheralsWithServices:nil
+<pre><code>__weak DEACentralManager *this = self;
+[self scanForPeripheralsWithServices:nil
                              options:options
                            withBlock:^(CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI, NSError *error) {
                                if (error) {
@@ -191,7 +192,8 @@
 
 <p>In the following code sample, <code>self</code> is an instance of a subclass of <a href="Classes/YMSCBCentralManager.html">YMSCBCentralManager</a>.</p>
 
-<pre><code>[self retrievePeripherals:peripheralUUIDs
+<pre><code>__weak DEACentralManager *this = self;
+[self retrievePeripherals:peripheralUUIDs
                 withBlock:^(CBPeripheral *peripheral) {
                     [this handleFoundPeripheral:peripheral];
                 }];
@@ -216,27 +218,36 @@
             }
 
             for (YMSCBService *service in yservices) {
-                __weak YMSCBService *thisService = (YMSCBService *)service;
+                if ([service.name isEqualToString:@"simplekeys"]) {
+                    __weak DEASimpleKeysService *thisService = (DEASimpleKeysService *)service;
+                    [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+                        [thisService turnOn];
+                    }];
 
-                [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
-                    if (error) {
-                        return;
-                    }
+                } else if ([service.name isEqualToString:@"devinfo"]) {
+                    __weak DEADeviceInfoService *thisService = (DEADeviceInfoService *)service;
+                    [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+                        [thisService readDeviceInfo];
+                    }];
 
-                    for (NSString *key in chDict) {
-                        YMSCBCharacteristic *ct = chDict[key];
-                        //NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
+                } else {
+                    __weak DEABaseService *thisService = (DEABaseService *)service;
+                    [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+                        for (NSString *key in chDict) {
+                            YMSCBCharacteristic *ct = chDict[key];
+                            //NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
 
-                        [ct discoverDescriptorsWithBlock:^(NSArray *ydescriptors, NSError *error) {
-                            if (error) {
-                                return;
-                            }
-                            for (YMSCBDescriptor *yd in ydescriptors) {
-                                NSLog(@"Descriptor: %@ %@ %@", thisService.name, yd.UUID, yd.cbDescriptor);
-                            }
-                        }];
-                    }
-                }];
+                            [ct discoverDescriptorsWithBlock:^(NSArray *ydescriptors, NSError *error) {
+                                if (error) {
+                                    return;
+                                }
+                                for (YMSCBDescriptor *yd in ydescriptors) {
+                                    NSLog(@"Descriptor: %@ %@ %@", thisService.name, yd.UUID, yd.cbDescriptor);
+                                }
+                            }];
+                        }
+                    }];
+                }
             }
         }];
     }];
@@ -255,7 +266,7 @@
         NSMutableString *tmpString = [NSMutableString stringWithFormat:@""];
         unsigned char bytes[data.length];
         [data getBytes:bytes];
-        for (int ii = data.length; ii &gt;= 0;ii--) {
+        for (int ii = (int)data.length; ii &gt;= 0;ii--) {
             [tmpString appendFormat:@"%02hhx",bytes[ii]];
             if (ii) {
                 [tmpString appendFormat:@":"];
@@ -263,7 +274,10 @@
         }
 
         NSLog(@"system id: %@", tmpString);
-        this.system_id = tmpString;
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.system_id = tmpString;
+        });
+
     }];
 
     YMSCBCharacteristic *model_numberCt = self.characteristicDict[@"model_number"];
@@ -274,9 +288,10 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        this.model_number = payload;
-        NSLog(@"model: %@", payload);
-
+        NSLog(@"model number: %@", payload);
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.model_number = payload;
+        });
     }];
 }
 </code></pre>
@@ -327,6 +342,7 @@
                     i = i + 2;
                 }
 
+                this.isCalibrating = YES;
                 this.isCalibrated = YES;
 
             }];
@@ -338,12 +354,13 @@
 
 <h3>Handling Characteristic Notification Updates</h3>
 
-<p>One place where YmsCoreBluetooth does <em>not</em> use blocks to handle BLE responses is with characteristic notification updates. The reason for this is because such updates are asynchronous and non-deterministic. As such the handler method <a href="Classes/YMSCBService.html#//api/name/notifyCharacteristicHandler:error:">[YMSCBService notifyCharacteristicHandler:error:]</a> must be implemented for any subclass of <a href="Classes/YMSCBService.html">YMSCBService</a> to handle such updates.</p>
+<p>One place where YmsCoreBluetooth does <em>not</em> use blocks to handle BLE responses is with characteristic notification updates. The reason for this is because such updates are asynchronous and non-deterministic. As such the handler method <code>[YMSCBService notifyCharacteristicHandler:error:]</code> must be implemented for any subclass of <a href="Classes/YMSCBService.html">YMSCBService</a> to handle such updates.</p>
 
 <p>In the following code sample, <code>self</code> is an instance of a subclass of <a href="Classes/YMSCBService.html">YMSCBService</a>.</p>
 
 <pre><code>- (void)turnOn {
     __weak DEABaseService *this = self;
+
     YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
     [configCt writeByte:0x1 withBlock:^(NSError *error) {
         if (error) {
@@ -356,13 +373,13 @@
 
     YMSCBCharacteristic *dataCt = self.characteristicDict[@"data"];
     [dataCt setNotifyValue:YES withBlock:^(NSError *error) {
-        if (error) {
-            return;
-        }
         NSLog(@"Data notification for %@ on", this.name);
     }];
 
-    self.isOn = YES;
+
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        this.isOn = YES;
+    });
 }
 
 - (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error {
@@ -372,6 +389,7 @@
 
     if ([yc.name isEqualToString:@"data"]) {
         NSData *data = yc.cbCharacteristic.value;
+
         char val[data.length];
         [data getBytes:&amp;val length:data.length];
 
@@ -379,15 +397,24 @@
         int16_t v1 = val[1];
         int16_t v2 = val[2];
         int16_t v3 = val[3];
+
         int16_t amb = ((v2 &amp; 0xff)| ((v3 &lt;&lt; 8) &amp; 0xff00));
         int16_t objT = ((v0 &amp; 0xff)| ((v1 &lt;&lt; 8) &amp; 0xff00));
 
         double tempAmb = calcTmpLocal(amb);
 
-        self.ambientTemp = [NSNumber numberWithDouble:tempAmb];
-        self.objectTemp = [NSNumber numberWithDouble:calcTmpTarget(objT, tempAmb)];
+        __weak DEATemperatureService *this = self;
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.ambientTemp = @(tempAmb);
+            this.objectTemp = @(calcTmpTarget(objT, tempAmb));
+        });
     }
 }
+</code></pre>
+
+<p><strong> Important </strong>: To let the UI components in the main thread know via KVO that a property has changed, you must update that property on the main thread. A convenience macro <code>_YMS_PERFORM_ON_MAIN_THREAD</code> which uses the GCD call <code>dispatch_async()</code> does just that:</p>
+
+<pre><code>#define _YMS_PERFORM_ON_MAIN_THREAD(block) dispatch_async(dispatch_get_main_queue(), block);
 </code></pre>
 
 <h3>Block Callback Design</h3>
@@ -443,6 +470,24 @@
 <h2>Questions</h2>
 
 <p>While quite functional, YmsCoreBluetooth is still very much in an early state and there&rsquo;s always room for improvement. Please submit any questions or <a href="https://github.com/kickingvegas/YmsCoreBluetooth/issues?labels=&amp;milestone=&amp;page=1&amp;state=open">issues to the GitHub project for YmsCoreBluetooth</a>.</p>
+
+<h2>Notes</h2>
+
+<p>Code tested on:</p>
+
+<ul>
+<li>iPhone 4S, iOS 6.1.3</li>
+<li>TI SensorTag firmware 1.2, 1.3.</li>
+<li>iMac 27 Mid-2010, OS X 10.8.3</li>
+</ul>
+
+
+<h2>Known Issues</h2>
+
+<ul>
+<li>No support is offered for the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator <a href="[http://developer.apple.com/library/ios/](http://developer.apple.com/library/ios/">TN2295</a>#technotes/tn2295/_index.html), I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.</li>
+</ul>
+
 						
 						
 					</div>
@@ -550,7 +595,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-06-19)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-06-22)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						
