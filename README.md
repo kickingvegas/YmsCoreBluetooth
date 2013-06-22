@@ -1,4 +1,4 @@
-# YmsCoreBluetooth v0.941 (beta)
+# YmsCoreBluetooth v0.942 (beta)
 A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS or OS X applications using the CoreBluetooth API. Includes *Deanna* and *DeannaMac*, applications to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag) for iOS and OS X respectively.
 
 * [YmsCoreBluetooth API Reference](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/index.html)
@@ -66,6 +66,7 @@ However, they differ from CoreBluetooth in that operations are done with respect
 
 In the following code sample, `self` is an instance of a subclass of YMSCBCentralManager.
 
+    __weak DEACentralManager *this = self;
     [self scanForPeripheralsWithServices:nil
                                  options:options
                                withBlock:^(CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI, NSError *error) {
@@ -82,6 +83,7 @@ In the following code sample, `self` is an instance of a subclass of YMSCBCentra
 
 In the following code sample, `self` is an instance of a subclass of YMSCBCentralManager.
 
+	__weak DEACentralManager *this = self;
 	[self retrievePeripherals:peripheralUUIDs
 					withBlock:^(CBPeripheral *peripheral) {
 						[this handleFoundPeripheral:peripheral];
@@ -107,31 +109,41 @@ In the following code sample, `self` is an instance of a subclass of YMSCBPeriph
 				}
 
 				for (YMSCBService *service in yservices) {
-					__weak YMSCBService *thisService = (YMSCBService *)service;
+					if ([service.name isEqualToString:@"simplekeys"]) {
+						__weak DEASimpleKeysService *thisService = (DEASimpleKeysService *)service;
+						[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+							[thisService turnOn];
+						}];
 
-					[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
-						if (error) {
-							return;
-						}
+					} else if ([service.name isEqualToString:@"devinfo"]) {
+						__weak DEADeviceInfoService *thisService = (DEADeviceInfoService *)service;
+						[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+							[thisService readDeviceInfo];
+						}];
 
-						for (NSString *key in chDict) {
-							YMSCBCharacteristic *ct = chDict[key];
-							//NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
+					} else {
+						__weak DEABaseService *thisService = (DEABaseService *)service;
+						[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+							for (NSString *key in chDict) {
+								YMSCBCharacteristic *ct = chDict[key];
+								//NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
 
-							[ct discoverDescriptorsWithBlock:^(NSArray *ydescriptors, NSError *error) {
-								if (error) {
-									return;
-								}
-								for (YMSCBDescriptor *yd in ydescriptors) {
-									NSLog(@"Descriptor: %@ %@ %@", thisService.name, yd.UUID, yd.cbDescriptor);
-								}
-							}];
-						}
-					}];
+								[ct discoverDescriptorsWithBlock:^(NSArray *ydescriptors, NSError *error) {
+									if (error) {
+										return;
+									}
+									for (YMSCBDescriptor *yd in ydescriptors) {
+										NSLog(@"Descriptor: %@ %@ %@", thisService.name, yd.UUID, yd.cbDescriptor);
+									}
+								}];
+							}
+						}];
+					}
 				}
 			}];
 		}];
 	}
+
 
 #### Read a Characteristic
 
@@ -145,7 +157,7 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 			NSMutableString *tmpString = [NSMutableString stringWithFormat:@""];
 			unsigned char bytes[data.length];
 			[data getBytes:bytes];
-			for (int ii = data.length; ii >= 0;ii--) {
+			for (int ii = (int)data.length; ii >= 0;ii--) {
 				[tmpString appendFormat:@"%02hhx",bytes[ii]];
 				if (ii) {
 					[tmpString appendFormat:@":"];
@@ -153,7 +165,10 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 			}
 
 			NSLog(@"system id: %@", tmpString);
-			this.system_id = tmpString;
+			_YMS_PERFORM_ON_MAIN_THREAD(^{
+				this.system_id = tmpString;
+			});
+
 		}];
 
 		YMSCBCharacteristic *model_numberCt = self.characteristicDict[@"model_number"];
@@ -164,11 +179,13 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 			}
 
 			NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-			this.model_number = payload;
-			NSLog(@"model: %@", payload);
-
+			NSLog(@"model number: %@", payload);
+			_YMS_PERFORM_ON_MAIN_THREAD(^{
+				this.model_number = payload;
+			});
 		}];
 	}
+
 
 #### Write to a Characteristic
 
@@ -216,6 +233,7 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 						i = i + 2;
 					}
 
+					this.isCalibrating = YES;
 					this.isCalibrated = YES;
 
 				}];
@@ -227,12 +245,13 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 
 ### Handling Characteristic Notification Updates
 
-One place where YmsCoreBluetooth does *not* use blocks to handle BLE responses is with characteristic notification updates. The reason for this is because such updates are asynchronous and non-deterministic. As such the handler method [YMSCBService notifyCharacteristicHandler:error:] must be implemented for any subclass of YMSCBService to handle such updates.
+One place where YmsCoreBluetooth does *not* use blocks to handle BLE responses is with characteristic notification updates. The reason for this is because such updates are asynchronous and non-deterministic. As such the handler method `[YMSCBService notifyCharacteristicHandler:error:]` must be implemented for any subclass of YMSCBService to handle such updates.
 
-In the following code sample, `self` is an instance of a subclass of YMSCBService. 
+In the following code sample, `self` is an instance of a subclass of YMSCBService.
 
 	- (void)turnOn {
-	    __weak DEABaseService *this = self;
+		__weak DEABaseService *this = self;
+
 		YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
 		[configCt writeByte:0x1 withBlock:^(NSError *error) {
 			if (error) {
@@ -245,13 +264,13 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 
 		YMSCBCharacteristic *dataCt = self.characteristicDict[@"data"];
 		[dataCt setNotifyValue:YES withBlock:^(NSError *error) {
-		    if (error) {
-			    return;
-			}
 			NSLog(@"Data notification for %@ on", this.name);
 		}];
 
-		self.isOn = YES;
+
+		_YMS_PERFORM_ON_MAIN_THREAD(^{
+			this.isOn = YES;
+		});
 	}
 
 	- (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error {
@@ -261,6 +280,7 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 
 		if ([yc.name isEqualToString:@"data"]) {
 			NSData *data = yc.cbCharacteristic.value;
+
 			char val[data.length];
 			[data getBytes:&val length:data.length];
 
@@ -268,15 +288,20 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 			int16_t v1 = val[1];
 			int16_t v2 = val[2];
 			int16_t v3 = val[3];
+
 			int16_t amb = ((v2 & 0xff)| ((v3 << 8) & 0xff00));
 			int16_t objT = ((v0 & 0xff)| ((v1 << 8) & 0xff00));
 
 			double tempAmb = calcTmpLocal(amb);
-			
-			self.ambientTemp = [NSNumber numberWithDouble:tempAmb];
-			self.objectTemp = [NSNumber numberWithDouble:calcTmpTarget(objT, tempAmb)];
+
+			__weak DEATemperatureService *this = self;
+			_YMS_PERFORM_ON_MAIN_THREAD(^{
+				this.ambientTemp = @(tempAmb);
+				this.objectTemp = @(calcTmpTarget(objT, tempAmb));
+			});
 		}
 	}
+
 
 ### Block Callback Design
 
@@ -337,6 +362,10 @@ Code tested on:
 
 ## Latest Changes
 
+### Sat Jun 22 2013 - Interim Release (ver 0.942)
+* Reimplemented background thread UI updates to use GCD `dispatch_async()` instead of `performSelectorOnMainThread:` (Issue #61).
+* Updated documentation.
+
 ### Wed Jun 19 2013 - Interim Release (ver 0.941)
 * Support for background thread operation of BLE transactions (Issues #57, #58, #59)
 
@@ -372,19 +401,6 @@ Tested Mac Environment:
 * Cirago Bluetooth 4.0 USB Adapter
 * iMac 27 Mid-2010
 
-### Sun May 26 2013 - Rare Groove Release (ver 0.93)
-* Issue #47 - rename YMSCBAppService to YMSCBCentralManager. 
-  Associated changes include:
-    - renaming DEAAppService to DEACentralManager
-	- rename variable cbAppService to centralManager
-
-* API change to fully embrace ObjectiveC block-based callbacks.
-* API change to map BLE operations to data object hierarchy.
-
-**API 0.93 is a BIG CHANGE.** It is largely a rethink of YmsCoreBluetooth to support the pattern for hierarchical block-based operations. This will very much *break code* written for prior releases of YmsCoreBluetooth. That said, the changes should be fairly comprehensible and address the following points going forward:
-
-* Improved understanding of API behavior; prior releases had too much implicit behavior ("magic") which made involuntary decisions for the developer using the API. Using blocks gives the developer a clearer and more structured view of the BLE transactions to be made.
-* With the pattern for hierarchical block-based operations in place, a more structured way to add new API features. <del>Like Winter, characteristic descriptors are coming.</del> [Descriptor](https://github.com/kickingvegas/YmsCoreBluetooth/blob/master/YmsCoreBluetooth/YMSCBDescriptor.h) support is in!
 
 View [Prior Change List](https://github.com/kickingvegas/YmsCoreBluetooth/blob/master/CHANGES.md)
 
