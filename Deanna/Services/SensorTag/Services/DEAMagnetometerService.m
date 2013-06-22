@@ -81,13 +81,12 @@ float calcMag(int16_t v, float c, int16_t d) {
         self.lastY = calcMag(yy, self.cY, 1);
         self.lastZ = calcMag(zz, self.cZ, 1);
         
-        NSArray *xargs = @[@"x", [NSNumber numberWithFloat:self.lastX]];
-        NSArray *yargs = @[@"y", [NSNumber numberWithFloat:self.lastY]];
-        NSArray *zargs = @[@"z", [NSNumber numberWithFloat:self.lastZ]];
-        
-        [self performSelectorOnMainThread:@selector(performSetField:) withObject:xargs waitUntilDone:NO];
-        [self performSelectorOnMainThread:@selector(performSetField:) withObject:yargs waitUntilDone:NO];
-        [self performSelectorOnMainThread:@selector(performSetField:) withObject:zargs waitUntilDone:NO];
+        __weak DEAMagnetometerService *this = self;
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.x = [NSNumber numberWithFloat:this.lastX];
+            this.y = [NSNumber numberWithFloat:this.lastY];
+            this.z = [NSNumber numberWithFloat:this.lastZ];
+        });
 
     } else if ([yc.name isEqualToString:@"config"]) {
         

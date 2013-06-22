@@ -61,8 +61,10 @@
 
     }];
     
-    NSArray *args = @[@"isOn", @NO];
-    [self performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
+
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        this.isOn = NO;
+    });
 }
 
 - (void)turnOn {
@@ -83,9 +85,10 @@
         NSLog(@"Data notification for %@ on", this.name);
     }];
     
-    NSArray *args = @[@"isOn", @YES];
-    [self performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
 
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        this.isOn = YES;
+    });
 }
 
 

@@ -78,15 +78,12 @@ float calcGyro(int16_t v, float c, int16_t d) {
         self.lastPitch = calcGyro(yy, self.cPitch, -1);
         self.lastYaw = calcGyro(xx, self.cYaw, 1);
         
-        
-        NSArray *rollArgs = @[@"roll", [NSNumber numberWithFloat:self.lastRoll]];
-        NSArray *pitchArgs = @[@"pitch", [NSNumber numberWithFloat:self.lastPitch]];
-        NSArray *yawArgs = @[@"yaw", [NSNumber numberWithFloat:self.lastYaw]];
-        
-
-        [self performSelectorOnMainThread:@selector(performSetField:) withObject:rollArgs waitUntilDone:NO];
-        [self performSelectorOnMainThread:@selector(performSetField:) withObject:pitchArgs waitUntilDone:NO];
-        [self performSelectorOnMainThread:@selector(performSetField:) withObject:yawArgs waitUntilDone:NO];
+        __weak DEAGyroscopeService *this = self;
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.roll = [NSNumber numberWithFloat:this.lastRoll];
+            this.pitch = [NSNumber numberWithFloat:this.lastPitch];
+            this.yaw = [NSNumber numberWithFloat:this.lastYaw];
+        });
         
         
     } else if ([yc.name isEqualToString:@"config"]) {
@@ -122,8 +119,9 @@ float calcGyro(int16_t v, float c, int16_t d) {
     }];
     
     
-    NSArray *args = @[@"isOn", @YES];
-    [self performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        this.isOn = YES;
+    });
 
 }
 

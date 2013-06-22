@@ -166,11 +166,4 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 
 //- (void)defaultDiscoveredCharacteristicsHandler:(NSDictionary *)chDict withError:(NSError *)error;
 
-/**
- Helper method to perform KVC on main thread.
- 
- @param args List of arguments to pass
- */
-- (void)performSetField:(NSArray *)args;
-
 @end

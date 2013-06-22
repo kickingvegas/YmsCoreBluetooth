@@ -78,25 +78,21 @@ double calcTmpTarget(int16_t objT, double m_tempAmb) {
         char val[data.length];
         [data getBytes:&val length:data.length];
         
-        
         int16_t v0 = val[0];
         int16_t v1 = val[1];
         int16_t v2 = val[2];
         int16_t v3 = val[3];
         
-        
         int16_t amb = ((v2 & 0xff)| ((v3 << 8) & 0xff00));
-        
         int16_t objT = ((v0 & 0xff)| ((v1 << 8) & 0xff00));
         
         double tempAmb = calcTmpLocal(amb);
-        
-        NSArray *ambientArgs = @[@"ambientTemp", @(tempAmb)];
-        NSArray *objectArgs = @[@"objectTemp", @(calcTmpTarget(objT, tempAmb))];
 
-        [self performSelectorOnMainThread:@selector(performSetField:) withObject:ambientArgs waitUntilDone:NO];
-        [self performSelectorOnMainThread:@selector(performSetField:) withObject:objectArgs waitUntilDone:NO];
-        
+        __weak DEATemperatureService *this = self;
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.ambientTemp = @(tempAmb);
+            this.objectTemp = @(calcTmpTarget(objT, tempAmb));
+        });
     }
 }
 

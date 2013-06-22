@@ -70,9 +70,10 @@
         }
         
         NSLog(@"system id: %@", tmpString);
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.system_id = tmpString;
+        });
         
-        NSArray *args = @[@"system_id", tmpString];
-        [this performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
     }];
     
     YMSCBCharacteristic *model_numberCt = self.characteristicDict[@"model_number"];
@@ -83,11 +84,10 @@
         }
         
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-
-        NSLog(@"model: %@", payload);
-        NSArray *args = @[@"model_number", payload];
-        [this performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
-
+        NSLog(@"model number: %@", payload);
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.model_number = payload;
+        });
     }];
     
     
@@ -99,9 +99,10 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        NSArray *args = @[@"serial_number", payload];
-        [this performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
-        NSLog(@"serial: %@", payload);
+        NSLog(@"serial number: %@", payload);
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.serial_number = payload;
+        });
     }];
     
     
@@ -113,9 +114,11 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        NSArray *args = @[@"firmware_rev", payload];
-        [this performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
         NSLog(@"firmware rev: %@", payload);
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.firmware_rev = payload;
+        });
+
     }];
     
     YMSCBCharacteristic *hardware_revCt = self.characteristicDict[@"hardware_rev"];
@@ -126,9 +129,11 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        NSArray *args = @[@"hardware_rev", payload];
-        [this performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
         NSLog(@"hardware rev: %@", payload);
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.hardware_rev = payload;
+        });
+
     }];
 
     YMSCBCharacteristic *software_revCt = self.characteristicDict[@"software_rev"];
@@ -139,9 +144,11 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        NSArray *args = @[@"software_rev", payload];
-        [this performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
-        NSLog(@"sw rev: %@", payload);
+        NSLog(@"software rev: %@", payload);
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.software_rev = payload;
+        });
+
     }];
     
     YMSCBCharacteristic *manufacturer_nameCt = self.characteristicDict[@"manufacturer_name"];
@@ -152,9 +159,11 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        NSArray *args = @[@"manufacturer_name", payload];
-        [this performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
         NSLog(@"manufacturer name: %@", payload);
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.manufacturer_name = payload;
+        });
+
     }];
     
     YMSCBCharacteristic *ieeeCt = self.characteristicDict[@"ieee11073_cert_data"];
@@ -165,9 +174,11 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        NSArray *args = @[@"ieee11073_cert_data", payload];
-        [this performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
         NSLog(@"IEEE 11073 Cert Data: %@", payload);
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.ieee11073_cert_data = payload;
+        });
+
     }];
     
 }

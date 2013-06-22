@@ -55,12 +55,13 @@
         
         int16_t value = val[0];
         
-        NSArray *args = @[@"keyValue", [NSNumber numberWithInt:value]];
-        
-        [self performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
+        __weak DEASimpleKeysService *this = self;
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.keyValue = [NSNumber numberWithInt:value];
+        });
     }
-    
 }
+
 
 - (void)turnOff {
     __weak DEASimpleKeysService *this = self;
@@ -72,8 +73,9 @@
         NSLog(@"Turned Off: %@", this.name);
     }];
     
-    NSArray *args = @[@"isOn", @NO];
-    [self performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        this.isOn = NO;
+    });
 }
 
 - (void)turnOn {
@@ -86,8 +88,9 @@
         NSLog(@"Turned On: %@", this.name);
     }];
     
-    NSArray *args = @[@"isOn", @YES];
-    [self performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        this.isOn = YES;
+    });
 }
 
 

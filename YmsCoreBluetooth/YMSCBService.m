@@ -43,12 +43,6 @@
     return self;
 }
 
-- (void)performSetField:(NSArray *)args {
-    NSString *key = args[0];
-    id value = args[1];
-    
-    [self setValue:value forKey:key];
-}
 
 - (void)addCharacteristic:(NSString *)cname withOffset:(int)addrOffset {
     YMSCBCharacteristic *yc;
@@ -105,9 +99,11 @@
         }
     }
     
-    NSArray *args = @[@"isEnabled", @YES];
+    __weak YMSCBService *this = self;
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        this.isEnabled = YES;
+    });
     
-    [self performSelectorOnMainThread:@selector(performSetField:) withObject:args waitUntilDone:NO];
 }
 
 
