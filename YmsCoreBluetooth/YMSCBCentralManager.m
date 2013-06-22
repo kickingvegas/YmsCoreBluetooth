@@ -22,23 +22,13 @@
 #import "YMSCBCharacteristic.h"
 #import "YMSCBStoredPeripherals.h"
 
+#ifndef _YMS_PERFORM_ON_MAIN_THREAD
+#define _YMS_PERFORM_ON_MAIN_THREAD(block) dispatch_async(dispatch_get_main_queue(), block);
+#endif
+
 NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 @interface YMSCBCentralManager ()
-
-
-// Helper methods to perform delegate method on main thread.
-
-- (void)performCentralManagerDidConnectPeripheralWithObject:(NSArray *)args;
-- (void)performCentralManagerDidDisconnectPeripheralWithObject:(NSArray *)args;
-- (void)performCentralManagerDidFailToConnectPeripheralWithObject:(NSArray *)args;
-
-- (void)performCentralManagerDidDiscoverPeripheralWithObject:(NSArray *)args;
-- (void)performCentralManagerDidRetrieveConnectedPeripheralsWithObject:(NSArray *)arg;
-- (void)performCentralManagerDidRetrievePeripheralsWithObject:(NSArray *)args;
-
-- (void)performCentralManagerDidUpdateStateWithObject:(NSArray *)args;
-
 @end
 
 @implementation YMSCBCentralManager
@@ -46,6 +36,7 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 - (NSString *)version {
     return YMSCBVersion;
 }
+
 
 #pragma mark - Constructors
 
@@ -239,10 +230,6 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 }
 
 #pragma mark - CBCentralManagerDelegate Protocol Methods
-- (void)performCentralManagerDidUpdateStateWithObject:(NSArray *)args {
-    CBCentralManager *central = args[0];
-    [self.delegate centralManagerDidUpdateState:central];
-}
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
 
@@ -274,25 +261,14 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     }
 
     if ([self.delegate respondsToSelector:@selector(centralManagerDidUpdateState:)]) {
-        NSArray *args = @[central];
-        [self performSelectorOnMainThread:@selector(performCentralManagerDidUpdateStateWithObject:) withObject:args waitUntilDone:NO];
+        __weak YMSCBCentralManager *this = self;
+        
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [this.delegate centralManagerDidUpdateState:central];
+        });
     }
-
 }
 
-
-- (void)performCentralManagerDidDiscoverPeripheralWithObject:(NSArray *)args {
-    CBCentralManager *central = args[0];
-    CBPeripheral *peripheral = args[1];
-    NSDictionary *advertisementData = args[2];
-    NSNumber *RSSI = args[3];
-    [self.delegate centralManager:central
-            didDiscoverPeripheral:peripheral
-                advertisementData:advertisementData
-                             RSSI:RSSI];
-    
-     
-}
 
 
 - (void)centralManager:(CBCentralManager *)central
@@ -310,19 +286,18 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
         [self handleFoundPeripheral:peripheral];
     }
 
-
     if ([self.delegate respondsToSelector:@selector(centralManager:didDiscoverPeripheral:advertisementData:RSSI:)]) {
-        NSArray *args = @[central, peripheral, advertisementData, RSSI];
-        [self performSelectorOnMainThread:@selector(performCentralManagerDidDiscoverPeripheralWithObject:) withObject:args waitUntilDone:NO];
+        __weak YMSCBCentralManager *this = self;
+        
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [this.delegate centralManager:central
+                    didDiscoverPeripheral:peripheral
+                        advertisementData:advertisementData
+                                     RSSI:RSSI];
+
+        });
     }
 
-}
-
-
-- (void)performCentralManagerDidRetrievePeripheralsWithObject:(NSArray *)args {
-    CBCentralManager *central = args[0];
-    NSArray *peripherals = args[1];
-    [self.delegate centralManager:central didRetrievePeripherals:peripherals];
 }
 
 
@@ -339,17 +314,13 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     }
     
     if ([self.delegate respondsToSelector:@selector(centralManager:didRetrievePeripherals:)]) {
-        //[self.delegate centralManager:central didRetrievePeripherals:peripherals];
-        NSArray *args = @[central, peripherals];
-        [self performSelectorOnMainThread:@selector(performCentralManagerDidRetrievePeripheralsWithObject:) withObject:args waitUntilDone:NO];
+        __weak YMSCBCentralManager *this = self;
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [this.delegate centralManager:central didRetrievePeripherals:peripherals];
+        });
     }
 }
 
-- (void)performCentralManagerDidRetrieveConnectedPeripheralsWithObject:(NSArray *)args {
-    CBCentralManager *central = args[0];
-    NSArray *peripherals = args[1];
-    [self.delegate centralManager:central didRetrieveConnectedPeripherals:peripherals];
-}
 
 - (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals {
     
@@ -358,18 +329,14 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     }
 
     if ([self.delegate respondsToSelector:@selector(centralManager:didRetrieveConnectedPeripherals:)]) {
-        NSArray *args = @[central, peripherals];
-        [self performSelectorOnMainThread:@selector(performCentralManagerDidRetrieveConnectedPeripheralsWithObject:) withObject:args waitUntilDone:NO];
+        __weak YMSCBCentralManager *this = self;
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [this.delegate centralManager:central didRetrieveConnectedPeripherals:peripherals];
+        });
     }
     
 }
 
-
-- (void)performCentralManagerDidConnectPeripheralWithObject:(NSArray *)args {
-    CBCentralManager *central = args[0];
-    CBPeripheral *peripheral = args[1];
-    [self.delegate centralManager:central didConnectPeripheral:peripheral];
-}
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
     
@@ -378,22 +345,14 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     [yp handleConnectionResponse:nil];
     
     if ([self.delegate respondsToSelector:@selector(centralManager:didConnectPeripheral:)]) {
-        NSArray *args = @[central, peripheral];
-        [self performSelectorOnMainThread:@selector(performCentralManagerDidConnectPeripheralWithObject:) withObject:args waitUntilDone:NO];
+        __weak YMSCBCentralManager *this = self;
+        
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [this.delegate centralManager:central didConnectPeripheral:peripheral];
+        });
     }
 }
 
-
-- (void)performCentralManagerDidDisconnectPeripheralWithObject:(NSArray *)args {
-    CBCentralManager *central = args[0];
-    CBPeripheral *peripheral = args[1];
-    NSError *error = args[2];
-    if ((id)error == [NSNull null]) {
-        error = nil;
-    }
-
-    [self.delegate centralManager:central didDisconnectPeripheral:peripheral error:error];
-}
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     
@@ -407,29 +366,15 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     }
     
     if ([self.delegate respondsToSelector:@selector(centralManager:didDisconnectPeripheral:error:)]) {
-        NSArray *args;
-        
-        if (error) {
-            args = @[central, peripheral, error];
-        } else {
-            args = @[central, peripheral, [NSNull null]];
-        }
-
-        [self performSelectorOnMainThread:@selector(performCentralManagerDidDisconnectPeripheralWithObject:) withObject:args waitUntilDone:NO];
+        __weak YMSCBCentralManager *this = self;
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [this.delegate centralManager:central didDisconnectPeripheral:peripheral error:error];
+        });
+    
     }
     
 }
 
-- (void)performCentralManagerDidFailToConnectPeripheralWithObject:(NSArray *)args {
-    CBCentralManager *central = args[0];
-    CBPeripheral *peripheral = args[1];
-    NSError *error = args[2];
-    if ((id)error == [NSNull null]) {
-        error = nil;
-    }
-
-    [self.delegate centralManager:central didFailToConnectPeripheral:peripheral error:error];
-}
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     
@@ -438,19 +383,12 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     [yp handleConnectionResponse:error];
     
     if ([self.delegate respondsToSelector:@selector(centralManager:didFailToConnectPeripheral:error:)]) {
-        NSArray *args;
+        __weak YMSCBCentralManager *this = self;
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [this.delegate centralManager:central didFailToConnectPeripheral:peripheral error:error];
+        });
         
-        if (error) {
-            args = @[central, peripheral, error];
-        } else {
-            args = @[central, peripheral, [NSNull null]];
-        }
-
-        [self performSelectorOnMainThread:@selector(performCentralManagerDidFailToConnectPeripheralWithObject:) withObject:args waitUntilDone:NO];
     }
-    
 }
-
-
 
 @end
