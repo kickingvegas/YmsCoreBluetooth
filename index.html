@@ -32,7 +32,7 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h1>
-<a name="ymscorebluetooth-v0941-beta" class="anchor" href="#ymscorebluetooth-v0941-beta"><span class="octicon octicon-link"></span></a>YmsCoreBluetooth v0.941 (beta)</h1>
+<a name="ymscorebluetooth-v0942-beta" class="anchor" href="#ymscorebluetooth-v0942-beta"><span class="octicon octicon-link"></span></a>YmsCoreBluetooth v0.942 (beta)</h1>
 
 <p>A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS or OS X applications using the CoreBluetooth API. Includes <em>Deanna</em> and <em>DeannaMac</em>, applications to communicate with a <a href="http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag">TI SensorTag</a> for iOS and OS X respectively.</p>
 
@@ -161,7 +161,8 @@
 
 <p>In the following code sample, <code>self</code> is an instance of a subclass of YMSCBCentralManager.</p>
 
-<pre><code>[self scanForPeripheralsWithServices:nil
+<pre><code>__weak DEACentralManager *this = self;
+[self scanForPeripheralsWithServices:nil
                              options:options
                            withBlock:^(CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI, NSError *error) {
                                if (error) {
@@ -179,7 +180,8 @@
 
 <p>In the following code sample, <code>self</code> is an instance of a subclass of YMSCBCentralManager.</p>
 
-<pre><code>[self retrievePeripherals:peripheralUUIDs
+<pre><code>__weak DEACentralManager *this = self;
+[self retrievePeripherals:peripheralUUIDs
                 withBlock:^(CBPeripheral *peripheral) {
                     [this handleFoundPeripheral:peripheral];
                 }];
@@ -205,27 +207,36 @@
             }
 
             for (YMSCBService *service in yservices) {
-                __weak YMSCBService *thisService = (YMSCBService *)service;
+                if ([service.name isEqualToString:@"simplekeys"]) {
+                    __weak DEASimpleKeysService *thisService = (DEASimpleKeysService *)service;
+                    [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+                        [thisService turnOn];
+                    }];
 
-                [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
-                    if (error) {
-                        return;
-                    }
+                } else if ([service.name isEqualToString:@"devinfo"]) {
+                    __weak DEADeviceInfoService *thisService = (DEADeviceInfoService *)service;
+                    [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+                        [thisService readDeviceInfo];
+                    }];
 
-                    for (NSString *key in chDict) {
-                        YMSCBCharacteristic *ct = chDict[key];
-                        //NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
+                } else {
+                    __weak DEABaseService *thisService = (DEABaseService *)service;
+                    [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+                        for (NSString *key in chDict) {
+                            YMSCBCharacteristic *ct = chDict[key];
+                            //NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
 
-                        [ct discoverDescriptorsWithBlock:^(NSArray *ydescriptors, NSError *error) {
-                            if (error) {
-                                return;
-                            }
-                            for (YMSCBDescriptor *yd in ydescriptors) {
-                                NSLog(@"Descriptor: %@ %@ %@", thisService.name, yd.UUID, yd.cbDescriptor);
-                            }
-                        }];
-                    }
-                }];
+                            [ct discoverDescriptorsWithBlock:^(NSArray *ydescriptors, NSError *error) {
+                                if (error) {
+                                    return;
+                                }
+                                for (YMSCBDescriptor *yd in ydescriptors) {
+                                    NSLog(@"Descriptor: %@ %@ %@", thisService.name, yd.UUID, yd.cbDescriptor);
+                                }
+                            }];
+                        }
+                    }];
+                }
             }
         }];
     }];
@@ -245,7 +256,7 @@
         NSMutableString *tmpString = [NSMutableString stringWithFormat:@""];
         unsigned char bytes[data.length];
         [data getBytes:bytes];
-        for (int ii = data.length; ii &gt;= 0;ii--) {
+        for (int ii = (int)data.length; ii &gt;= 0;ii--) {
             [tmpString appendFormat:@"%02hhx",bytes[ii]];
             if (ii) {
                 [tmpString appendFormat:@":"];
@@ -253,7 +264,10 @@
         }
 
         NSLog(@"system id: %@", tmpString);
-        this.system_id = tmpString;
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.system_id = tmpString;
+        });
+
     }];
 
     YMSCBCharacteristic *model_numberCt = self.characteristicDict[@"model_number"];
@@ -264,9 +278,10 @@
         }
 
         NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-        this.model_number = payload;
-        NSLog(@"model: %@", payload);
-
+        NSLog(@"model number: %@", payload);
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.model_number = payload;
+        });
     }];
 }
 </code></pre>
@@ -318,6 +333,7 @@
                     i = i + 2;
                 }
 
+                this.isCalibrating = YES;
                 this.isCalibrated = YES;
 
             }];
@@ -330,12 +346,13 @@
 <h3>
 <a name="handling-characteristic-notification-updates" class="anchor" href="#handling-characteristic-notification-updates"><span class="octicon octicon-link"></span></a>Handling Characteristic Notification Updates</h3>
 
-<p>One place where YmsCoreBluetooth does <em>not</em> use blocks to handle BLE responses is with characteristic notification updates. The reason for this is because such updates are asynchronous and non-deterministic. As such the handler method [YMSCBService notifyCharacteristicHandler:error:] must be implemented for any subclass of YMSCBService to handle such updates.</p>
+<p>One place where YmsCoreBluetooth does <em>not</em> use blocks to handle BLE responses is with characteristic notification updates. The reason for this is because such updates are asynchronous and non-deterministic. As such the handler method <code>[YMSCBService notifyCharacteristicHandler:error:]</code> must be implemented for any subclass of YMSCBService to handle such updates.</p>
 
-<p>In the following code sample, <code>self</code> is an instance of a subclass of YMSCBService. </p>
+<p>In the following code sample, <code>self</code> is an instance of a subclass of YMSCBService.</p>
 
 <pre><code>- (void)turnOn {
     __weak DEABaseService *this = self;
+
     YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
     [configCt writeByte:0x1 withBlock:^(NSError *error) {
         if (error) {
@@ -348,13 +365,13 @@
 
     YMSCBCharacteristic *dataCt = self.characteristicDict[@"data"];
     [dataCt setNotifyValue:YES withBlock:^(NSError *error) {
-        if (error) {
-            return;
-        }
         NSLog(@"Data notification for %@ on", this.name);
     }];
 
-    self.isOn = YES;
+
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        this.isOn = YES;
+    });
 }
 
 - (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error {
@@ -364,6 +381,7 @@
 
     if ([yc.name isEqualToString:@"data"]) {
         NSData *data = yc.cbCharacteristic.value;
+
         char val[data.length];
         [data getBytes:&amp;val length:data.length];
 
@@ -371,15 +389,24 @@
         int16_t v1 = val[1];
         int16_t v2 = val[2];
         int16_t v3 = val[3];
+
         int16_t amb = ((v2 &amp; 0xff)| ((v3 &lt;&lt; 8) &amp; 0xff00));
         int16_t objT = ((v0 &amp; 0xff)| ((v1 &lt;&lt; 8) &amp; 0xff00));
 
         double tempAmb = calcTmpLocal(amb);
 
-        self.ambientTemp = [NSNumber numberWithDouble:tempAmb];
-        self.objectTemp = [NSNumber numberWithDouble:calcTmpTarget(objT, tempAmb)];
+        __weak DEATemperatureService *this = self;
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.ambientTemp = @(tempAmb);
+            this.objectTemp = @(calcTmpTarget(objT, tempAmb));
+        });
     }
 }
+</code></pre>
+
+<p>** Important **: To let the UI components in the main thread know via KVO that a property has changed, you must update that property on the main thread. A convenience macro <code>_YMS_PERFORM_ON_MAIN_THREAD</code> which uses the GCD call <code>dispatch_async()</code> does just that:</p>
+
+<pre><code>#define _YMS_PERFORM_ON_MAIN_THREAD(block) dispatch_async(dispatch_get_main_queue(), block);
 </code></pre>
 
 <h3>
@@ -450,6 +477,12 @@
 <a name="latest-changes" class="anchor" href="#latest-changes"><span class="octicon octicon-link"></span></a>Latest Changes</h2>
 
 <h3>
+<a name="sat-jun-22-2013---interim-release-ver-0942" class="anchor" href="#sat-jun-22-2013---interim-release-ver-0942"><span class="octicon octicon-link"></span></a>Sat Jun 22 2013 - Interim Release (ver 0.942)</h3>
+
+<ul>
+<li>Reimplemented background thread UI updates to use GCD <code>dispatch_async()</code> instead of <code>performSelectorOnMainThread:</code> (Issue #61).</li>
+<li>Updated documentation.</li>
+</ul><h3>
 <a name="wed-jun-19-2013---interim-release-ver-0941" class="anchor" href="#wed-jun-19-2013---interim-release-ver-0941"><span class="octicon octicon-link"></span></a>Wed Jun 19 2013 - Interim Release (ver 0.941)</h3>
 
 <ul>
@@ -485,26 +518,6 @@
 <li>OS X 10.8.3</li>
 <li>Cirago Bluetooth 4.0 USB Adapter</li>
 <li>iMac 27 Mid-2010</li>
-</ul><h3>
-<a name="sun-may-26-2013---rare-groove-release-ver-093" class="anchor" href="#sun-may-26-2013---rare-groove-release-ver-093"><span class="octicon octicon-link"></span></a>Sun May 26 2013 - Rare Groove Release (ver 0.93)</h3>
-
-<ul>
-<li>
-<p>Issue #47 - rename YMSCBAppService to YMSCBCentralManager. 
-Associated changes include:</p>
-
-<ul>
-<li>renaming DEAAppService to DEACentralManager</li>
-<li>rename variable cbAppService to centralManager</li>
-</ul>
-</li>
-<li><p>API change to fully embrace ObjectiveC block-based callbacks.</p></li>
-<li><p>API change to map BLE operations to data object hierarchy.</p></li>
-</ul><p><strong>API 0.93 is a BIG CHANGE.</strong> It is largely a rethink of YmsCoreBluetooth to support the pattern for hierarchical block-based operations. This will very much <em>break code</em> written for prior releases of YmsCoreBluetooth. That said, the changes should be fairly comprehensible and address the following points going forward:</p>
-
-<ul>
-<li>Improved understanding of API behavior; prior releases had too much implicit behavior ("magic") which made involuntary decisions for the developer using the API. Using blocks gives the developer a clearer and more structured view of the BLE transactions to be made.</li>
-<li>With the pattern for hierarchical block-based operations in place, a more structured way to add new API features. <del>Like Winter, characteristic descriptors are coming.</del> <a href="https://github.com/kickingvegas/YmsCoreBluetooth/blob/master/YmsCoreBluetooth/YMSCBDescriptor.h">Descriptor</a> support is in!</li>
 </ul><p>View <a href="https://github.com/kickingvegas/YmsCoreBluetooth/blob/master/CHANGES.md">Prior Change List</a></p>
 
 <h3>
