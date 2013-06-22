@@ -23,26 +23,6 @@
 #import "YMSCBDescriptor.h"
 
 @interface YMSCBPeripheral ()
-
-- (void)performPeripheralDidDiscoverServicesWithObject:(NSArray *)args;
-- (void)performPeripheralDidDiscoverIncludedServicesForServiceWithObject:(NSArray *)args;
-
-- (void)performPeripheralDidDiscoverCharacteristicsForServiceWithObject:(NSArray *)args;
-- (void)performPeripheralDidDiscoverDescriptorsForCharacteristicWithObject:(NSArray *)args;
-
-- (void)performPeripheralDidUpdateValueForCharacteristicWithObject:(NSArray *)args;
-- (void)performPeripheralDidUpdateValueForDescriptorWithObject:(NSArray *)args;
-
-- (void)performPeripheralDidWriteValueForCharacteristicWithObject:(NSArray *)args;
-- (void)performPeripheralDidWriteValueForDescriptorWithObject:(NSArray *)args;
-
-- (void)performPeripheralDidUpdateNotificationStateForCharacteristicWithObject:(NSArray *)args;
-
-- (void)performPeripheralDidUpdateRSSIWithObject:(NSArray *)args;
-
-- (void)performPeripheralDidUpdateNameWithObject:(NSArray *)args;
-- (void)performPeripheralDidInvalidateServicesWithObject:(NSArray *)args;
-
 @end
 
 @implementation YMSCBPeripheral
@@ -225,123 +205,7 @@
 }
 
 
-
-
 #pragma mark - CBPeripheralDelegate Methods
-
-- (void)performPeripheralDidDiscoverServicesWithObject:(NSArray *)args {
-    CBPeripheral *peripheral = args[0];
-    NSError *error = args[1];
-    if ((id)error == [NSNull null]) {
-        error = nil;
-    }
-    [self.delegate peripheral:peripheral didDiscoverServices:error];
-}
-
-- (void)performPeripheralDidDiscoverIncludedServicesForServiceWithObject:(NSArray *)args {
-    CBPeripheral *peripheral = args[0];
-    CBService *service = args[1];
-    NSError *error = args[2];
-    if ((id)error == [NSNull null]) {
-        error = nil;
-    }
-    [self.delegate peripheral:peripheral didDiscoverIncludedServicesForService:service error:error];
-}
-
-- (void)performPeripheralDidDiscoverCharacteristicsForServiceWithObject:(NSArray *)args {
-    CBPeripheral *peripheral = args[0];
-    CBService *service = args[1];
-    NSError *error = args[2];
-    if ((id)error == [NSNull null]) {
-        error = nil;
-    }
-    [self.delegate peripheral:peripheral didDiscoverCharacteristicsForService:service error:error];
-}
-
-- (void)performPeripheralDidDiscoverDescriptorsForCharacteristicWithObject:(NSArray *)args {
-    CBPeripheral *peripheral = args[0];
-    CBCharacteristic *characteristic = args[1];
-    NSError *error = args[2];
-    if ((id)error == [NSNull null]) {
-        error = nil;
-    }
-    [self.delegate peripheral:peripheral didDiscoverDescriptorsForCharacteristic:characteristic error:error];
-}
-
-- (void)performPeripheralDidUpdateValueForCharacteristicWithObject:(NSArray *)args {
-    CBPeripheral *peripheral = args[0];
-    CBCharacteristic *characteristic = args[1];
-    NSError *error = args[2];
-    if ((id)error == [NSNull null]) {
-        error = nil;
-    }
-    [self.delegate peripheral:peripheral didUpdateValueForCharacteristic:characteristic error:error];
-}
-
-- (void)performPeripheralDidUpdateValueForDescriptorWithObject:(NSArray *)args {
-    CBPeripheral *peripheral = args[0];
-    CBDescriptor *descriptor = args[1];
-    NSError *error = args[2];
-    if ((id)error == [NSNull null]) {
-        error = nil;
-    }
-    [self.delegate peripheral:peripheral didUpdateValueForDescriptor:descriptor error:error];
-}
-
-- (void)performPeripheralDidWriteValueForCharacteristicWithObject:(NSArray *)args {
-    CBPeripheral *peripheral = args[0];
-    CBCharacteristic *characteristic = args[1];
-    NSError *error = args[2];
-    if ((id)error == [NSNull null]) {
-        error = nil;
-    }
-    [self.delegate peripheral:peripheral didWriteValueForCharacteristic:characteristic error:error];
-}
-
-- (void)performPeripheralDidWriteValueForDescriptorWithObject:(NSArray *)args {
-    CBPeripheral *peripheral = args[0];
-    CBDescriptor *descriptor = args[1];
-    NSError *error = args[2];
-    if ((id)error == [NSNull null]) {
-        error = nil;
-    }
-    [self.delegate peripheral:peripheral didWriteValueForDescriptor:descriptor error:error];
-}
-
-- (void)performPeripheralDidUpdateNotificationStateForCharacteristicWithObject:(NSArray *)args {
-    CBPeripheral *peripheral = args[0];
-    CBCharacteristic *characteristic = args[1];
-    NSError *error = args[2];
-    if ((id)error == [NSNull null]) {
-        error = nil;
-    }
-    [self.delegate peripheral:peripheral didUpdateNotificationStateForCharacteristic:characteristic error:error];
-}
-
-- (void)performPeripheralDidUpdateRSSIWithObject:(NSArray *)args {
-    CBPeripheral *peripheral = args[0];
-    NSError *error = args[1];
-    if ((id)error == [NSNull null]) {
-        error = nil;
-    }
-    [self.delegate peripheralDidUpdateRSSI:peripheral error:error];
-}
-
-- (void)performPeripheralDidUpdateNameWithObject:(NSArray *)args {
-#if TARGET_OS_IPHONE
-    CBPeripheral *peripheral = args[0];
-    [self.delegate peripheralDidUpdateName:peripheral];
-#endif
-}
-
-- (void)performPeripheralDidInvalidateServicesWithObject:(NSArray *)args {
-#if TARGET_OS_IPHONE
-    CBPeripheral *peripheral = args[0];
-    [self.delegate peripheralDidInvalidateServices:peripheral];
-#endif
-}
-
-
 /** @name CBPeripheralDelegate Methods */
 /**
  CBPeripheralDelegate implementation.
@@ -368,12 +232,13 @@
     }
     
     if ([self.delegate respondsToSelector:@selector(peripheral:didDiscoverServices:)]) {
-        NSArray *args = @[peripheral, error];
-        [self performSelectorOnMainThread:@selector(performPeripheralDidDiscoverServicesWithObject:) withObject:args waitUntilDone:NO];
+        __weak YMSCBPeripheral *this = self;
+        
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [this.delegate peripheral:peripheral didDiscoverServices:error];
+        });
     }
 }
-
-
 
 /**
  CBPeripheralDelegate implementation.  Not yet supported.
@@ -385,20 +250,13 @@
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverIncludedServicesForService:(CBService *)service error:(NSError *)error {
     // TBD
     if ([self.delegate respondsToSelector:@selector(peripheral:didDiscoverIncludedServicesForService:error:)]) {
-
-        NSArray *args;
+        __weak YMSCBPeripheral *this = self;
         
-        if (error) {
-            args = @[peripheral, service, error];
-        } else {
-            args = @[peripheral, service, [NSNull null]];
-        }
-
-        [self performSelectorOnMainThread:@selector(performPeripheralDidDiscoverIncludedServicesForServiceWithObject:) withObject:args waitUntilDone:NO];
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [this.delegate peripheral:peripheral didDiscoverIncludedServicesForService:service error:error];
+        });
     }
 }
-
-
 
 /**
  CBPeripheralDelegate implementation.
@@ -414,15 +272,11 @@
     [btService handleDiscoveredCharacteristicsResponse:btService.characteristicDict withError:error];
 
     if ([self.delegate respondsToSelector:@selector(peripheral:didDiscoverCharacteristicsForService:error:)]) {
-        NSArray *args;
+        __weak YMSCBPeripheral *this = self;
         
-        if (error) {
-            args = @[peripheral, service, error];
-        } else {
-            args = @[peripheral, service, [NSNull null]];
-        }
-
-        [self performSelectorOnMainThread:@selector(performPeripheralDidDiscoverCharacteristicsForServiceWithObject:) withObject:args waitUntilDone:NO];
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [this.delegate peripheral:peripheral didDiscoverCharacteristicsForService:service error:error];
+        });
     }
 }
 
@@ -443,14 +297,11 @@
     [ct handleDiscoveredDescriptorsResponse:ct.descriptors withError:error];
     
     if ([self.delegate respondsToSelector:@selector(peripheral:didDiscoverDescriptorsForCharacteristic:error:)]) {
-        NSArray *args;
-        if (error) {
-            args = @[peripheral, characteristic, error];
-        } else {
-            args = @[peripheral, characteristic, [NSNull null]];
-        }
-
-        [self performSelectorOnMainThread:@selector(performPeripheralDidDiscoverDescriptorsForCharacteristicWithObject:) withObject:args waitUntilDone:NO];
+        __weak YMSCBPeripheral *this = self;
+        
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [this.delegate peripheral:peripheral didDiscoverDescriptorsForCharacteristic:characteristic error:error];
+        });
     }
 }
 
@@ -477,14 +328,11 @@
     }
     
     if ([self.delegate respondsToSelector:@selector(peripheral:didUpdateValueForCharacteristic:error:)]) {
-        NSArray *args;
-        if (error) {
-            args = @[peripheral, characteristic, error];
-        } else {
-            args = @[peripheral, characteristic, [NSNull null]];
-        }
-
-        [self performSelectorOnMainThread:@selector(performPeripheralDidUpdateValueForCharacteristicWithObject:) withObject:args waitUntilDone:NO];
+        __weak YMSCBPeripheral *this = self;
+        
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [this.delegate peripheral:peripheral didUpdateValueForCharacteristic:characteristic error:error];
+        });
     }
 }
 
@@ -500,13 +348,11 @@
     // TBD
     
     if ([self.delegate respondsToSelector:@selector(peripheral:didUpdateValueForDescriptor:error:)]) {
-        NSArray *args;
-        if (error) {
-            args = @[peripheral, descriptor, error];
-        } else {
-            args = @[peripheral, descriptor, [NSNull null]];
-        }
-        [self performSelectorOnMainThread:@selector(performPeripheralDidUpdateValueForDescriptorWithObject:) withObject:args waitUntilDone:NO];
+        __weak YMSCBPeripheral *this = self;
+        
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [this.delegate peripheral:peripheral didUpdateValueForDescriptor:descriptor error:error];
+        });
     }
 }
 
@@ -524,17 +370,13 @@
     [ct executeNotificationStateCallback:error];
     
     if ([self.delegate respondsToSelector:@selector(peripheral:didUpdateNotificationStateForCharacteristic:error:)]) {
-        NSArray *args;
-        if (error) {
-            args = @[peripheral, characteristic, error];
-        } else {
-            args = @[peripheral, characteristic, [NSNull null]];
-        }
-        [self performSelectorOnMainThread:@selector(performPeripheralDidUpdateNotificationStateForCharacteristicWithObject:) withObject:args waitUntilDone:NO];
+        __weak YMSCBPeripheral *this = self;
+        
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [this.delegate peripheral:peripheral didUpdateNotificationStateForCharacteristic:characteristic error:error];
+        });
     }
 }
-
-
 
 
 /**
@@ -557,13 +399,11 @@
     }
     
     if ([self.delegate respondsToSelector:@selector(peripheral:didWriteValueForCharacteristic:error:)]) {
-        NSArray *args;
-        if (error) {
-            args = @[peripheral, characteristic, error];
-        } else {
-            args = @[peripheral, characteristic, [NSNull null]];
-        }
-        [self performSelectorOnMainThread:@selector(performPeripheralDidWriteValueForCharacteristicWithObject:) withObject:args waitUntilDone:NO];
+        __weak YMSCBPeripheral *this = self;
+        
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [this.delegate peripheral:peripheral didWriteValueForCharacteristic:characteristic error:error];
+        });
     }
 
 }
@@ -579,16 +419,12 @@
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error {
     // TBD
     if ([self.delegate respondsToSelector:@selector(peripheral:didWriteValueForDescriptor:error:)]) {
-        NSArray *args;
-        if (error) {
-            args = @[peripheral, descriptor, error];
-        } else {
-            args = @[peripheral, descriptor, [NSNull null]];
-        }
-        [self performSelectorOnMainThread:@selector(performPeripheralDidWriteValueForDescriptorWithObject:) withObject:args waitUntilDone:NO];
+        __weak YMSCBPeripheral *this = self;
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+           [this.delegate peripheral:peripheral didWriteValueForDescriptor:descriptor error:error];
+        });
     }
 }
-
 
 /**
  CBPeripheralDelegate implementation.
@@ -597,26 +433,16 @@
  @param error If an error occured, the cause of the failure.
  */
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {
-    /*
-    if (self.willPingRSSI) {
-        [self performSelector:@selector(updateRSSI) withObject:nil afterDelay:self.rssiPingPeriod];
-    }
-     */
-    
     if ([self.delegate respondsToSelector:@selector(peripheralDidUpdateRSSI:error:)]) {
-        NSArray *args;
-        if (error) {
-            args = @[peripheral, error];
-        } else {
-            args = @[peripheral, [NSNull null]];
-        }
-
-        [self performSelectorOnMainThread:@selector(performPeripheralDidUpdateRSSIWithObject:) withObject:args waitUntilDone:NO];
+        __weak YMSCBPeripheral *this = self;
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [this.delegate peripheralDidUpdateRSSI:peripheral error:error];
+        });
     }
 }
 
 
-#if TARGET_OS_IPHONE
+
 /**
  CBPeripheralDelegate implementation. Not yet supported.
  
@@ -625,16 +451,19 @@
  @param peripheral The peripheral providing this information.
  */
 - (void)peripheralDidUpdateName:(CBPeripheral *)peripheral {
+#if TARGET_OS_IPHONE
     // TBD
     if ([self.delegate respondsToSelector:@selector(peripheralDidUpdateName:)]) {
-        NSArray *args = @[peripheral];
-        [self performSelectorOnMainThread:@selector(performPeripheralDidUpdateNameWithObject:) withObject:args waitUntilDone:NO];
+        __weak YMSCBPeripheral *this = self;
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+           [this.delegate peripheralDidUpdateName:peripheral];
+        });
     }
-
-}
 #endif
+}
 
-#if TARGET_OS_IPHONE
+
+
 /**
  CBPeripheralDelegate implementation. Not yet supported.
  
@@ -643,13 +472,17 @@
  @param peripheral The peripheral providing this information.
  */
 - (void)peripheralDidInvalidateServices:(CBPeripheral *)peripheral {
+#if TARGET_OS_IPHONE
     // TBD
     if ([self.delegate respondsToSelector:@selector(peripheralDidInvalidateServices:)]) {
-        NSArray *args = @[peripheral];
-        [self performSelectorOnMainThread:@selector(performPeripheralDidInvalidateServicesWithObject:) withObject:args waitUntilDone:NO];
+        __weak YMSCBPeripheral *this = self;
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [this.delegate peripheralDidInvalidateServices:peripheral];
+        });
     }
-}
 #endif
+}
+
 
 
 @end
