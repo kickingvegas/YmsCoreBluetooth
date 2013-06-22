@@ -25,6 +25,11 @@
 
 #include "YMS128.h"
 
+
+#ifndef _YMS_PERFORM_ON_MAIN_THREAD
+#define _YMS_PERFORM_ON_MAIN_THREAD(block) dispatch_async(dispatch_get_main_queue(), block);
+#endif
+
 /**
  Utility class for YMS CoreBluetooth Framework
  */

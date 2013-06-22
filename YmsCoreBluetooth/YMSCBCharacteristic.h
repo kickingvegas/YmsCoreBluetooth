@@ -23,6 +23,8 @@
 #import <IOBluetooth/IOBluetooth.h>
 #endif
 
+#import "YMSCBUtils.h"
+
 @class YMSCBPeripheral;
 
 typedef void (^YMSCBDiscoverDescriptorsCallbackBlockType)(NSArray *, NSError *);
