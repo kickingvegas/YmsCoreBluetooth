@@ -1,4 +1,8 @@
 # YmsCoreBluetooth Changes
+### Sat Jun 22 2013 - Interim Release (ver 0.942)
+* Reimplemented background thread UI updates to use GCD `dispatch_async()` instead of `performSelectorOnMainThread:` (Issue #61).
+* Updated documentation.
+
 ### Wed Jun 19 2013 - Interim Release (ver 0.941)
 * Support for background thread operation of BLE transactions (Issues #57, #58, #59)
 
