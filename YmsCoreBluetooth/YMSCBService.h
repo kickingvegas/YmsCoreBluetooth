@@ -85,6 +85,7 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 /**
  Initialize class instance.
  @param oName name of service
+ @param pObj parent object which owns this service
  @param hi top 64 bits of 128-bit base address value
  @param lo bottom 64 bits of 128-bit base address value
  @return YMSCBCharacteristic
