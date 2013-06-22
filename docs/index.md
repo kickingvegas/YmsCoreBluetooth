@@ -1,7 +1,7 @@
-### Version 0.941 (beta)
-* [Class Hierarchy](hierarchy.html)
+# YmsCoreBluetooth v0.942 (beta)
+A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS or OS X applications using the CoreBluetooth API. Includes *Deanna* and *DeannaMac*, applications to communicate with a TI SensorTag for iOS and OS X respectively.
 
-A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS or OS X applications using the CoreBluetooth API. Includes *Deanna* and *DeannaMac*, applications to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag) for iOS and OS X respectively.
+* [YmsCoreBluetooth API Reference](hierarchy.html)
 
 ## YmsCoreBluetooth Design Intent: Or Why You Want To Use This Framework
 ### tl;dr 
@@ -66,6 +66,7 @@ However, they differ from CoreBluetooth in that operations are done with respect
 
 In the following code sample, `self` is an instance of a subclass of YMSCBCentralManager.
 
+    __weak DEACentralManager *this = self;
     [self scanForPeripheralsWithServices:nil
                                  options:options
                                withBlock:^(CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI, NSError *error) {
@@ -82,6 +83,7 @@ In the following code sample, `self` is an instance of a subclass of YMSCBCentra
 
 In the following code sample, `self` is an instance of a subclass of YMSCBCentralManager.
 
+	__weak DEACentralManager *this = self;
 	[self retrievePeripherals:peripheralUUIDs
 					withBlock:^(CBPeripheral *peripheral) {
 						[this handleFoundPeripheral:peripheral];
@@ -107,45 +109,55 @@ In the following code sample, `self` is an instance of a subclass of YMSCBPeriph
 				}
 
 				for (YMSCBService *service in yservices) {
-					__weak YMSCBService *thisService = (YMSCBService *)service;
+					if ([service.name isEqualToString:@"simplekeys"]) {
+						__weak DEASimpleKeysService *thisService = (DEASimpleKeysService *)service;
+						[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+							[thisService turnOn];
+						}];
 
-					[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
-						if (error) {
-							return;
-						}
+					} else if ([service.name isEqualToString:@"devinfo"]) {
+						__weak DEADeviceInfoService *thisService = (DEADeviceInfoService *)service;
+						[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+							[thisService readDeviceInfo];
+						}];
 
-						for (NSString *key in chDict) {
-							YMSCBCharacteristic *ct = chDict[key];
-							//NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
+					} else {
+						__weak DEABaseService *thisService = (DEABaseService *)service;
+						[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+							for (NSString *key in chDict) {
+								YMSCBCharacteristic *ct = chDict[key];
+								//NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
 
-							[ct discoverDescriptorsWithBlock:^(NSArray *ydescriptors, NSError *error) {
-								if (error) {
-									return;
-								}
-								for (YMSCBDescriptor *yd in ydescriptors) {
-									NSLog(@"Descriptor: %@ %@ %@", thisService.name, yd.UUID, yd.cbDescriptor);
-								}
-							}];
-						}
-					}];
+								[ct discoverDescriptorsWithBlock:^(NSArray *ydescriptors, NSError *error) {
+									if (error) {
+										return;
+									}
+									for (YMSCBDescriptor *yd in ydescriptors) {
+										NSLog(@"Descriptor: %@ %@ %@", thisService.name, yd.UUID, yd.cbDescriptor);
+									}
+								}];
+							}
+						}];
+					}
 				}
 			}];
 		}];
 	}
+
 
 #### Read a Characteristic
 
 In the following code sample, `self` is an instance of a subclass of YMSCBService. All discovered characteristics are stored in [YMSCBService characteristicDict].
 
 	- (void)readDeviceInfo {
-        
+
 		YMSCBCharacteristic *system_idCt = self.characteristicDict[@"system_id"];
 		__weak DEADeviceInfoService *this = self;
 		[system_idCt readValueWithBlock:^(NSData *data, NSError *error) {
 			NSMutableString *tmpString = [NSMutableString stringWithFormat:@""];
 			unsigned char bytes[data.length];
 			[data getBytes:bytes];
-			for (int ii = data.length; ii >= 0;ii--) {
+			for (int ii = (int)data.length; ii >= 0;ii--) {
 				[tmpString appendFormat:@"%02hhx",bytes[ii]];
 				if (ii) {
 					[tmpString appendFormat:@":"];
@@ -153,7 +165,10 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 			}
 
 			NSLog(@"system id: %@", tmpString);
-			this.system_id = tmpString;
+			_YMS_PERFORM_ON_MAIN_THREAD(^{
+				this.system_id = tmpString;
+			});
+
 		}];
 
 		YMSCBCharacteristic *model_numberCt = self.characteristicDict[@"model_number"];
@@ -164,11 +179,13 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 			}
 
 			NSString *payload = [[NSString alloc] initWithData:data encoding:NSStringEncodingConversionAllowLossy];
-			this.model_number = payload;
-			NSLog(@"model: %@", payload);
-
+			NSLog(@"model number: %@", payload);
+			_YMS_PERFORM_ON_MAIN_THREAD(^{
+				this.model_number = payload;
+			});
 		}];
 	}
+
 
 #### Write to a Characteristic
 
@@ -216,6 +233,7 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 						i = i + 2;
 					}
 
+					this.isCalibrating = YES;
 					this.isCalibrated = YES;
 
 				}];
@@ -227,12 +245,13 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 
 ### Handling Characteristic Notification Updates
 
-One place where YmsCoreBluetooth does *not* use blocks to handle BLE responses is with characteristic notification updates. The reason for this is because such updates are asynchronous and non-deterministic. As such the handler method [YMSCBService notifyCharacteristicHandler:error:] must be implemented for any subclass of YMSCBService to handle such updates.
+One place where YmsCoreBluetooth does *not* use blocks to handle BLE responses is with characteristic notification updates. The reason for this is because such updates are asynchronous and non-deterministic. As such the handler method `[YMSCBService notifyCharacteristicHandler:error:]` must be implemented for any subclass of YMSCBService to handle such updates.
 
-In the following code sample, `self` is an instance of a subclass of YMSCBService. 
+In the following code sample, `self` is an instance of a subclass of YMSCBService.
 
 	- (void)turnOn {
-	    __weak DEABaseService *this = self;
+		__weak DEABaseService *this = self;
+
 		YMSCBCharacteristic *configCt = self.characteristicDict[@"config"];
 		[configCt writeByte:0x1 withBlock:^(NSError *error) {
 			if (error) {
@@ -245,13 +264,13 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 
 		YMSCBCharacteristic *dataCt = self.characteristicDict[@"data"];
 		[dataCt setNotifyValue:YES withBlock:^(NSError *error) {
-		    if (error) {
-			    return;
-			}
 			NSLog(@"Data notification for %@ on", this.name);
 		}];
 
-		self.isOn = YES;
+
+		_YMS_PERFORM_ON_MAIN_THREAD(^{
+			this.isOn = YES;
+		});
 	}
 
 	- (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error {
@@ -261,6 +280,7 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 
 		if ([yc.name isEqualToString:@"data"]) {
 			NSData *data = yc.cbCharacteristic.value;
+
 			char val[data.length];
 			[data getBytes:&val length:data.length];
 
@@ -268,15 +288,20 @@ In the following code sample, `self` is an instance of a subclass of YMSCBServic
 			int16_t v1 = val[1];
 			int16_t v2 = val[2];
 			int16_t v3 = val[3];
+
 			int16_t amb = ((v2 & 0xff)| ((v3 << 8) & 0xff00));
 			int16_t objT = ((v0 & 0xff)| ((v1 << 8) & 0xff00));
 
 			double tempAmb = calcTmpLocal(amb);
-			
-			self.ambientTemp = [NSNumber numberWithDouble:tempAmb];
-			self.objectTemp = [NSNumber numberWithDouble:calcTmpTarget(objT, tempAmb)];
+
+			__weak DEATemperatureService *this = self;
+			_YMS_PERFORM_ON_MAIN_THREAD(^{
+				this.ambientTemp = @(tempAmb);
+				this.objectTemp = @(calcTmpTarget(objT, tempAmb));
+			});
 		}
 	}
+
 
 ### Block Callback Design
 
@@ -289,6 +314,7 @@ The callback pattern used by YmsCoreBluetooth uses a single callback to handle b
 	   }
 	   // Code to handle success
 	}
+
 
 ## File Naming Conventions
 The YmsCoreBluetooth framework is the set of files prefixed with `YMSCB` located in the directory `YmsCoreBluetooth`.
@@ -316,9 +342,21 @@ The [Class Hierarchy](hierarchy.html) is very instructive in showing the relatio
 
 ## Writing your own Bluetooth LE service with YmsCoreBluetooth
 
-Learn how to write your own Bluetooth LE service by reading the example of how its done for the TI SensorTag in the Tutorial.
+Learn how to write your own Bluetooth LE service by reading the example of how its done for the TI SensorTag in the [Tutorial](docs/tutorial/Tutorial.html).
 
 ## Questions
 
 While quite functional, YmsCoreBluetooth is still very much in an early state and there's always room for improvement. Please submit any questions or [issues to the GitHub project for YmsCoreBluetooth](https://github.com/kickingvegas/YmsCoreBluetooth/issues?labels=&milestone=&page=1&state=open).
+
+
+## Notes
+
+Code tested on:
+
+* iPhone 4S, iOS 6.1.3
+* TI SensorTag firmware 1.2, 1.3.
+* iMac 27 Mid-2010, OS X 10.8.3
+
+## Known Issues
+* No support is offered for the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator [TN2295](http://developer.apple.com/library/ios/#technotes/tn2295/_index.html), I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.
 
