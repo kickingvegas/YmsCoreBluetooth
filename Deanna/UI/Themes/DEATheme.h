@@ -17,19 +17,34 @@
 //
 
 #import <Foundation/Foundation.h>
+@class DEAPeripheralTableViewCell;
+
+typedef NS_ENUM(NSInteger, DEAButtonStyle) {
+  DEAButtonStyleDefault
+};
 
 @protocol DEATheme <NSObject>
 
-- (UIColor *)mainColor;
-- (UIColor *)highlightColor;
-- (UIColor *)shadowColor;
+- (UIColor *)bodyTextColor;
 - (UIColor *)backgroundColor;
+- (UIColor *)navbarBackgroundColor;
+- (UIColor *)borderColor;
+- (UIColor *)highlightTextColor;
+- (UIColor *)shadowColor;
+- (UIColor *)tableviewSeparatorColor;
+- (UIColor *)rssiTextColor;
 
+- (UIFont *)bodyFontWithSize:(CGFloat)ptSize;
 
 @end
 
 @interface DEATheme : NSObject
 
 + (id <DEATheme>)sharedTheme;
+
++ (void)customizeApplication;
++ (void)customizeView:(UIView *)view;
++ (void)customizeButton:(UIButton *)button forType:(DEAButtonStyle)buttonStyle;
++ (void)customizePeripheralTableViewCell:(DEAPeripheralTableViewCell *)viewCell;
 
 @end

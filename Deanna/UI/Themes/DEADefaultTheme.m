@@ -16,24 +16,46 @@
 //  Author: Charles Y. Choi <charles.choi@yummymelon.com>
 //
 
+#import "DEAStyleSheet.h"
 #import "DEADefaultTheme.h"
 
 @implementation DEADefaultTheme
 
-- (UIColor *)mainColor {
-    return nil;
-}
-
-- (UIColor *)highlightColor {
-    return nil;
-}
-
-- (UIColor *)shadowColor {
-    return nil;
+- (UIColor *)bodyTextColor {
+    return RGB(79, 85, 106);
 }
 
 - (UIColor *)backgroundColor {
-    return nil;
+    return RGB(29, 31, 37);
+}
+
+- (UIColor *)navbarBackgroundColor {
+    return RGB(42, 45, 55);
+}
+
+- (UIColor *)highlightTextColor {
+    return RGB(255, 255, 255);
+}
+
+- (UIColor *)borderColor {
+    return RGB(79, 85, 106);
+}
+
+- (UIColor *)tableviewSeparatorColor {
+    return RGB(31, 41, 51);
+}
+
+- (UIColor *)shadowColor {
+    return RGBA(0, 0, 0, 0.8);
+}
+
+- (UIColor *)rssiTextColor {
+    return RGB(90, 133, 183);
+}
+
+- (UIFont *)bodyFontWithSize:(CGFloat)ptSize {
+    //return [UIFont fontWithName:@"ArialRoundedMTBold" size:ptSize];
+    return [UIFont fontWithName:@"Copperplate" size:ptSize];
 }
 
 
