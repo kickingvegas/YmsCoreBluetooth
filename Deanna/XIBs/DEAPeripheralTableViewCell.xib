@@ -65,13 +65,13 @@
 								</object>
 								<int key="IBUIBaselineAdjustment">0</int>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
-									<string key="name">Helvetica-Bold</string>
-									<string key="family">Helvetica</string>
-									<int key="traits">2</int>
+									<string key="name">ArialRoundedMTBold</string>
+									<string key="family">Arial Rounded MT Bold</string>
+									<int key="traits">0</int>
 									<double key="pointSize">20</double>
 								</object>
 								<object class="NSFont" key="IBUIFont">
-									<string key="NSName">Helvetica-Bold</string>
+									<string key="NSName">ArialRoundedMTBold</string>
 									<double key="NSSize">20</double>
 									<int key="NSfFlags">16</int>
 								</object>
@@ -83,6 +83,7 @@
 								<string key="NSFrame">{{91, 115}, {157, 44}}</string>
 								<reference key="NSSuperview" ref="479600453"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -99,12 +100,14 @@
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC41AA</bytes>
 								</object>
-								<object class="IBUIFontDescription" key="IBUIFontDescription">
-									<int key="type">2</int>
-									<int key="size">2</int>
+								<object class="IBUIFontDescription" key="IBUIFontDescription" id="393259999">
+									<string key="name">ArialRoundedMTBold</string>
+									<string key="family">Arial Rounded MT Bold</string>
+									<int key="traits">0</int>
+									<double key="pointSize">18</double>
 								</object>
-								<object class="NSFont" key="IBUIFont">
-									<string key="NSName">Helvetica-Bold</string>
+								<object class="NSFont" key="IBUIFont" id="1070846426">
+									<string key="NSName">ArialRoundedMTBold</string>
 									<double key="NSSize">18</double>
 									<int key="NSfFlags">16</int>
 								</object>
@@ -127,23 +130,14 @@
 								<reference key="IBUIHighlightedColor" ref="355732309"/>
 								<int key="IBUIBaselineAdjustment">0</int>
 								<int key="IBUITextAlignment">2</int>
-								<object class="IBUIFontDescription" key="IBUIFontDescription">
-									<string key="name">Helvetica</string>
-									<string key="family">Helvetica</string>
-									<int key="traits">0</int>
-									<double key="pointSize">18</double>
-								</object>
-								<object class="NSFont" key="IBUIFont" id="467580056">
-									<string key="NSName">Helvetica</string>
-									<double key="NSSize">18</double>
-									<int key="NSfFlags">16</int>
-								</object>
+								<reference key="IBUIFontDescription" ref="393259999"/>
+								<reference key="IBUIFont" ref="1070846426"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 							</object>
 							<object class="IBUILabel" id="984068954">
 								<reference key="NSNextResponder" ref="479600453"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{221, 92}, {12, 13}}</string>
+								<string key="NSFrame">{{225, 92}, {13, 13}}</string>
 								<reference key="NSSuperview" ref="479600453"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="402645819"/>
@@ -159,13 +153,13 @@
 								<int key="IBUIBaselineAdjustment">0</int>
 								<int key="IBUITextAlignment">1</int>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
-									<string key="name">Helvetica</string>
-									<string key="family">Helvetica</string>
+									<string key="name">ArialRoundedMTBold</string>
+									<string key="family">Arial Rounded MT Bold</string>
 									<int key="traits">0</int>
 									<double key="pointSize">10</double>
 								</object>
 								<object class="NSFont" key="IBUIFont">
-									<string key="NSName">Helvetica</string>
+									<string key="NSName">ArialRoundedMTBold</string>
 									<double key="NSSize">10</double>
 									<int key="NSfFlags">16</int>
 								</object>
@@ -174,7 +168,7 @@
 							<object class="IBUILabel" id="142138119">
 								<reference key="NSNextResponder" ref="479600453"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{91, 85}, {67, 22}}</string>
+								<string key="NSFrame">{{91, 85}, {98, 22}}</string>
 								<reference key="NSSuperview" ref="479600453"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="809848761"/>
@@ -188,17 +182,14 @@
 								<reference key="IBUITextColor" ref="46858441"/>
 								<reference key="IBUIHighlightedColor" ref="355732309"/>
 								<int key="IBUIBaselineAdjustment">0</int>
-								<object class="IBUIFontDescription" key="IBUIFontDescription" id="257453703">
-									<int key="type">1</int>
-									<double key="pointSize">18</double>
-								</object>
-								<reference key="IBUIFont" ref="467580056"/>
+								<reference key="IBUIFontDescription" ref="393259999"/>
+								<reference key="IBUIFont" ref="1070846426"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 							</object>
 							<object class="IBUILabel" id="288811614">
 								<reference key="NSNextResponder" ref="479600453"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{91, 55}, {141, 22}}</string>
+								<string key="NSFrame">{{91, 55}, {166, 22}}</string>
 								<reference key="NSSuperview" ref="479600453"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="142138119"/>
@@ -212,8 +203,8 @@
 								<reference key="IBUITextColor" ref="46858441"/>
 								<reference key="IBUIHighlightedColor" ref="355732309"/>
 								<int key="IBUIBaselineAdjustment">0</int>
-								<reference key="IBUIFontDescription" ref="257453703"/>
-								<reference key="IBUIFont" ref="467580056"/>
+								<reference key="IBUIFontDescription" ref="393259999"/>
+								<reference key="IBUIFont" ref="1070846426"/>
 								<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 							</object>
 						</array>
