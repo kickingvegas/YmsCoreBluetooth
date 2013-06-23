@@ -20,7 +20,7 @@
 #import "DEAAppDelegate.h"
 #import "DEAPeripheralsViewController.h"
 #import "DEACentralManager.h"
-#import "DEAStyleSheet.h"
+#import "DEATheme.h"
 
 
 @implementation DEAAppDelegate
@@ -32,7 +32,7 @@
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = kDEA_STYLE_BACKGROUNDCOLOR;
+    self.window.backgroundColor = [[DEATheme sharedTheme] backgroundColor];
     
     DEAPeripheralsViewController *pvc = [[DEAPeripheralsViewController alloc] initWithNibName:@"DEAPeripheralsViewController" bundle:nil];
     
@@ -63,8 +63,6 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
-    //sDTBTLEService *btleService = [DTBTLEService sharedService];
-    //[btleService loadPeripherals];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -78,23 +76,7 @@
 }
 
 - (void)initializeAppearance {
-    [[UINavigationBar appearance] setTintColor:kDEA_STYLE_NAVBAR_BACKGROUNDCOLOR];
-    [[UIToolbar appearance] setTintColor:kDEA_STYLE_NAVBAR_BACKGROUNDCOLOR];
-    
-    [[UINavigationBar appearance] setTitleTextAttributes:@{
-                                UITextAttributeTextColor: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0],
-                          UITextAttributeTextShadowColor: [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8],
-                         UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-                                     UITextAttributeFont: [UIFont fontWithName:@"Arial Rounded MT Bold" size:0.0],
-     }];
-    
-    [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil] setTitleTextAttributes:@{
-                                                                            UITextAttributeTextColor: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0],
-                                                                      UITextAttributeTextShadowColor: [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8],
-                                                                     UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-                                                                                 UITextAttributeFont: [UIFont fontWithName:@"Arial Rounded MT Bold" size:0.0]
-     }
-                                                                                            forState:UIControlStateNormal];
+    [DEATheme customizeApplication];
 }
 
 @end
