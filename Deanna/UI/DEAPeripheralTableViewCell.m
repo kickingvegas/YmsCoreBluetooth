@@ -9,6 +9,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "DEAPeripheralTableViewCell.h"
 #import "YMSCBPeripheral.h"
+#import "DEASensorTag.h"
 #import "DEACentralManager.h"
 #import "DEAStyleSheet.h"
 #import "DEABaseButton.h"
@@ -42,11 +43,11 @@
 }
 
 
-- (void)configureWithPeripheral:(YMSCBPeripheral *)sensorTag {
+- (void)configureWithPeripheral:(YMSCBPeripheral *)yp {
     
-    self.yperipheral = sensorTag;
+    self.yperipheral = yp;
     
-    [self updateDisplay:self.yperipheral.cbPeripheral];
+    [self updateDisplay];
 }
 
 - (void)applyStyle {
@@ -60,39 +61,40 @@
     [self.connectButton applyStyle];
 }
 
-- (void)updateDisplay:(CBPeripheral *)peripheral {
+- (void)updateDisplay {
     NSString *buttonLabel;
     
-    if (peripheral == nil) {
-        self.connectButton.hidden = YES;
-        self.peripheralStatusLabel.text = @"DISCOVERED";
-        self.accessoryType = UITableViewCellAccessoryNone;
-        
-    } else if (self.yperipheral.cbPeripheral == peripheral) {
-        if (peripheral.isConnected) {
-            
+    if (self.yperipheral.cbPeripheral.name) {
+        self.nameLabel.text = self.yperipheral.cbPeripheral.name;
+    } else {
+        self.nameLabel.text = @"Undisclosed Name";
+    }
+
+    
+    if ([self.yperipheral isKindOfClass:[DEASensorTag class]]) {
+        if (self.yperipheral.isConnected) {
             buttonLabel = @"DISCONNECT";
             self.peripheralStatusLabel.text = @"CONNECTED";
-            
             self.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-            //self.dbLabel.hidden = NO;
             [self.connectButton setTitle:buttonLabel forState:UIControlStateNormal];
             self.connectButton.titleLabel.text = buttonLabel;
             
         } else {
-            
             buttonLabel = @"CONNECT";
             self.peripheralStatusLabel.text = @"UNCONNECTED";
-            
             self.accessoryType = UITableViewCellAccessoryNone;
-            //self.dbLabel.hidden = YES;
             [self.connectButton setTitle:buttonLabel forState:UIControlStateNormal];
-
-            self.rssiLabel.text = @"—";
-
+            
+            //self.rssiLabel.text = @"—";
+            
         }
+
+    } else {
+        self.connectButton.hidden = YES;
+        self.accessoryType = UITableViewCellAccessoryNone;
     }
-    
+        
+
 }
 
 

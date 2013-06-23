@@ -25,9 +25,9 @@
 
 - (IBAction)connectButtonAction:(id)sender;
 
-- (void)configureWithPeripheral:(YMSCBPeripheral *)sensorTag;
+- (void)configureWithPeripheral:(YMSCBPeripheral *)yp;
 
-- (void)updateDisplay:(CBPeripheral *)peripheral;
+- (void)updateDisplay;
 
 - (void)applyStyle;
 
