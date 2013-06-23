@@ -162,32 +162,57 @@
             [DEATheme customizeButton:(UIButton *)view forType:DEAButtonStyleDefault];
         }
     }
-    
-    
-/*
+
     if ([viewCell isKindOfClass:[DEAAccelerometerViewCell class]]) {
-        
-    } else if ([viewCell isKindOfClass:[DEAAccelerometerViewCell class]]) {
+        DEAAccelerometerViewCell *cell = (DEAAccelerometerViewCell *)viewCell;
+        [cell.accelXLabel setTextColor:[theme highlightTextColor]];
+        [cell.accelYLabel setTextColor:[theme highlightTextColor]];
+        [cell.accelZLabel setTextColor:[theme highlightTextColor]];
 
     } else if ([viewCell isKindOfClass:[DEABarometerViewCell class]]) {
+        DEABarometerViewCell *cell = (DEABarometerViewCell *)viewCell;
+        [cell.ambientTemperatureLabel setTextColor:[theme highlightTextColor]];
+        [cell.pressureLabel setTextColor:[theme highlightTextColor]];
  
     } else if ([viewCell isKindOfClass:[DEADeviceInfoViewCell class]]) {
-
+        DEADeviceInfoViewCell *cell = (DEADeviceInfoViewCell *)viewCell;
+        [cell.system_idLabel setTextColor:[theme highlightTextColor]];
+        [cell.model_numberLabel setTextColor:[theme highlightTextColor]];
+        [cell.serial_numberLabel setTextColor:[theme highlightTextColor]];
+        [cell.firmware_revLabel setTextColor:[theme highlightTextColor]];
+        [cell.hardware_revLabel setTextColor:[theme highlightTextColor]];
+        [cell.software_revLabel setTextColor:[theme highlightTextColor]];
+        [cell.manufacturer_nameLabel setTextColor:[theme highlightTextColor]];
+        [cell.ieee11073_cert_dataLabel setTextColor:[theme highlightTextColor]];
+        
     } else if ([viewCell isKindOfClass:[DEAGyroscopeViewCell class]]) {
+        DEAGyroscopeViewCell *cell = (DEAGyroscopeViewCell *)viewCell;
+        [cell.rollLabel setTextColor:[theme highlightTextColor]];
+        [cell.pitchLabel setTextColor:[theme highlightTextColor]];
+        [cell.yawLabel setTextColor:[theme highlightTextColor]];
 
     } else if ([viewCell isKindOfClass:[DEAHumidityViewCell class]]) {
+        DEAHumidityViewCell *cell = (DEAHumidityViewCell *)viewCell;
+        [cell.ambientTemperatureLabel setTextColor:[theme highlightTextColor]];
+        [cell.relativeHumidityLabel setTextColor:[theme highlightTextColor]];
 
     } else if ([viewCell isKindOfClass:[DEAMagnetometerViewCell class]]) {
-        
+        DEAMagnetometerViewCell *cell = (DEAMagnetometerViewCell *)viewCell;
+        [cell.xLabel setTextColor:[theme highlightTextColor]];
+        [cell.yLabel setTextColor:[theme highlightTextColor]];
+        [cell.zLabel setTextColor:[theme highlightTextColor]];
+                
     } else if ([viewCell isKindOfClass:[DEASimpleKeysViewCell class]]) {
-        DEASimpleKeysViewCell *vc = (DEASimpleKeysViewCell *)viewCell;
-        [DEATheme customizeButton:vc.button1 forType:DEAButtonStyleDefault];
-        [DEATheme customizeButton:vc.button2 forType:DEAButtonStyleDefault];
+        DEASimpleKeysViewCell *cell = (DEASimpleKeysViewCell *)viewCell;
+        [DEATheme customizeButton:cell.button1 forType:DEAButtonStyleDefault];
+        [DEATheme customizeButton:cell.button2 forType:DEAButtonStyleDefault];
 
     } else if ([viewCell isKindOfClass:[DEATemperatureViewCell class]]) {
-
+        DEATemperatureViewCell *cell = (DEATemperatureViewCell *)viewCell;
+        [cell.ambientTemperatureLabel setTextColor:[theme highlightTextColor]];
+        [cell.objectTemperatureLabel setTextColor:[theme highlightTextColor]];
     }
-*/ 
+
 
 }
 
