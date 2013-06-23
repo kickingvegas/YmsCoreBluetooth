@@ -69,10 +69,7 @@
     
     self.navigationItem.rightBarButtonItem = editButton;
     
-    
-    self.peripheralsTableView.backgroundColor = kDEA_STYLE_BACKGROUNDCOLOR;
-    self.peripheralsTableView.separatorColor = kDEA_STYLE_TABLEVIEW_SEPARATORCOLOR;
-    
+    [DEATheme customizeTableView:self.peripheralsTableView forType:DEAPeripheralTableViewStyle];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
