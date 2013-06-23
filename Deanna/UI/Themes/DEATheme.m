@@ -21,7 +21,14 @@
 #import "DEATheme.h"
 #import "DEADefaultTheme.h"
 #import "DEAPeripheralTableViewCell.h"
-
+#import "DEAAccelerometerViewCell.h"
+#import "DEABarometerViewCell.h"
+#import "DEADeviceInfoViewCell.h"
+#import "DEAGyroscopeViewCell.h"
+#import "DEAHumidityViewCell.h"
+#import "DEAMagnetometerViewCell.h"
+#import "DEASimpleKeysViewCell.h"
+#import "DEATemperatureViewCell.h"
 
 @implementation DEATheme
 
@@ -57,8 +64,13 @@
      UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
      UITextAttributeFont: [theme bodyFontWithSize:0.0] }
      forState:UIControlStateNormal];
-
-      
+    
+    [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setColor:[theme highlightTextColor]];
+    [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setShadowColor:nil];
+    [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setFont:[theme bodyFontWithSize:16.0]];
+    
+    [[UISwitch appearance] setTintColor:[theme navbarBackgroundColor]];
+    
 }
 
 + (void)customizeView:(UIView *)view {
@@ -74,7 +86,7 @@
     switch (buttonStyle) {
         case DEAButtonStyleDefault: {
             [button setTitleColor:[theme bodyTextColor] forState:UIControlStateNormal];
-            [button setTitleColor:[theme highlightTextColor] forState:UIControlStateDisabled];
+            [button setTitleColor:[theme disabledColor] forState:UIControlStateDisabled];
             [button setTitleColor:[theme highlightTextColor] forState:UIControlStateHighlighted];
             [button.titleLabel setFont:[theme bodyFontWithSize:18.0]];
             
@@ -112,5 +124,71 @@
 
 }
 
++ (void)customizeTableView:(UITableView *)tableView forType:(DEATableViewStyle)tableViewStyle {
+    id <DEATheme> theme = [self sharedTheme];
+    switch (tableViewStyle) {
+        case DEAPeripheralTableViewStyle: {
+            [DEATheme customizeView:tableView];
+            tableView.separatorColor = [theme tableviewSeparatorColor];
+            
+            break;
+        }
+            
+        case DEAPeripheralDetailTableViewStyle: {
+            [DEATheme customizeView:tableView];
+            tableView.separatorColor = [theme backgroundColor];
+            
+            UIView *backView = [UIView new];
+            [backView setBackgroundColor:[theme backgroundColor]];
+            [tableView setBackgroundView:backView];
+            tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+            
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
++ (void)customizeSensorTableViewCell:(UITableViewCell *)viewCell {
+    id <DEATheme> theme = [self sharedTheme];
+    [DEATheme customizeView:viewCell.contentView.superview];
+    
+    for (UIView *view in viewCell.contentView.subviews) {
+        if ([view isKindOfClass:[UILabel class]]) {
+            [((UILabel *)view) setTextColor:[theme bodyTextColor]];
+        } else if ([view isKindOfClass:[UIButton class]]) {
+            [DEATheme customizeButton:(UIButton *)view forType:DEAButtonStyleDefault];
+        }
+    }
+    
+    
+/*
+    if ([viewCell isKindOfClass:[DEAAccelerometerViewCell class]]) {
+        
+    } else if ([viewCell isKindOfClass:[DEAAccelerometerViewCell class]]) {
+
+    } else if ([viewCell isKindOfClass:[DEABarometerViewCell class]]) {
+ 
+    } else if ([viewCell isKindOfClass:[DEADeviceInfoViewCell class]]) {
+
+    } else if ([viewCell isKindOfClass:[DEAGyroscopeViewCell class]]) {
+
+    } else if ([viewCell isKindOfClass:[DEAHumidityViewCell class]]) {
+
+    } else if ([viewCell isKindOfClass:[DEAMagnetometerViewCell class]]) {
+        
+    } else if ([viewCell isKindOfClass:[DEASimpleKeysViewCell class]]) {
+        DEASimpleKeysViewCell *vc = (DEASimpleKeysViewCell *)viewCell;
+        [DEATheme customizeButton:vc.button1 forType:DEAButtonStyleDefault];
+        [DEATheme customizeButton:vc.button2 forType:DEAButtonStyleDefault];
+
+    } else if ([viewCell isKindOfClass:[DEATemperatureViewCell class]]) {
+
+    }
+*/ 
+
+}
 
 @end

@@ -20,8 +20,14 @@
 @class DEAPeripheralTableViewCell;
 
 typedef NS_ENUM(NSInteger, DEAButtonStyle) {
-  DEAButtonStyleDefault
+    DEAButtonStyleDefault
 };
+
+typedef NS_ENUM(NSInteger, DEATableViewStyle) {
+    DEAPeripheralTableViewStyle,
+    DEAPeripheralDetailTableViewStyle
+};
+
 
 @protocol DEATheme <NSObject>
 
@@ -33,6 +39,7 @@ typedef NS_ENUM(NSInteger, DEAButtonStyle) {
 - (UIColor *)shadowColor;
 - (UIColor *)tableviewSeparatorColor;
 - (UIColor *)rssiTextColor;
+- (UIColor *)disabledColor;
 
 - (UIFont *)bodyFontWithSize:(CGFloat)ptSize;
 
@@ -46,5 +53,7 @@ typedef NS_ENUM(NSInteger, DEAButtonStyle) {
 + (void)customizeView:(UIView *)view;
 + (void)customizeButton:(UIButton *)button forType:(DEAButtonStyle)buttonStyle;
 + (void)customizePeripheralTableViewCell:(DEAPeripheralTableViewCell *)viewCell;
++ (void)customizeSensorTableViewCell:(UITableViewCell *)viewCell;
++ (void)customizeTableView:(UITableView *)tableView forType:(DEATableViewStyle)tableViewStyle;
 
 @end
