@@ -115,10 +115,12 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
 @property (nonatomic, strong) YMSCBPeripheralDiscoverServicesBlockType discoverServicesCallback;
 
 
-///**
-// Peripheral connection state
-// */
-//@property (nonatomic, assign) enum YMSCBPeripheralConnectionState peripheralConnectionState;
+/**
+ Helper flag to determine ViewCell updates.
+ 
+ */
+@property (nonatomic, assign) BOOL isRenderedInViewCell;
+           
 
 
 /** @name Initializing a YMSCBPeripheral */
