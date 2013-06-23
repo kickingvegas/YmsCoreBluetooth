@@ -25,7 +25,7 @@
 
 #import "YMSCBUtils.h"
 
-#define kYMSCBVersion "0.942"
+#define kYMSCBVersion "0.943"
 extern NSString *const YMSCBVersion;
 
 @class YMSCBPeripheral;
