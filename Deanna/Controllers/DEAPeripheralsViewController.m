@@ -117,6 +117,14 @@
     }
     else {
         [centralManager stopScan];
+        
+        for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+            if (cell.yperipheral.cbPeripheral.isConnected == NO) {
+                cell.rssiLabel.text = @"—";
+                cell.peripheralStatusLabel.text = @"QUIESCENT";
+            }
+        }
+
     }
 }
 
@@ -148,7 +156,7 @@
     
     for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
         if (cell.yperipheral == yp) {
-            [cell updateDisplay:peripheral];
+            [cell updateDisplay];
             break;
         }
     }
@@ -158,28 +166,32 @@
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
-        [cell updateDisplay:peripheral];
+        [cell updateDisplay];
     }
-    
 }
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
     
-    BOOL test = YES;
+    DEACentralManager *centralManager = [DEACentralManager sharedService];
     
+    YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
+    if (yp.isRenderedInViewCell == NO) {
+        [self.peripheralsTableView reloadData];
+        yp.isRenderedInViewCell = YES;
+    }
+    
+
     for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
         if (cell.yperipheral.cbPeripheral == peripheral) {
-            test = NO;
-            break;
+            
+            if (peripheral.isConnected == NO) {
+                cell.rssiLabel.text = [NSString stringWithFormat:@"%d", [RSSI integerValue]];
+                cell.peripheralStatusLabel.text = @"ADVERTISING";
+            } else {
+                continue;
+            }
         }
     }
-    
-    if (test) {
-        [self.peripheralsTableView reloadData];
-    }
-    
-    
-    
 }
 
 
@@ -235,9 +247,11 @@
     }
     
     for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
-        if (cell.yperipheral.cbPeripheral == peripheral) {
-            cell.rssiLabel.text = [NSString stringWithFormat:@"%@", peripheral.RSSI];
-            break;
+        if (cell.yperipheral) {
+            if (cell.yperipheral.cbPeripheral == peripheral) {
+                cell.rssiLabel.text = [NSString stringWithFormat:@"%@", peripheral.RSSI];
+                break;
+            }
         }
     }
     
@@ -277,22 +291,13 @@
         pcell = self.tvCell;
         self.tvCell = nil;
     }
-    if ([centralManager isKnownPeripheral:yp.cbPeripheral]) {
-        [pcell configureWithPeripheral:yp];
-    }
-    else {
-        [pcell configureWithPeripheral:nil];
-    }
     
-    if (yp.cbPeripheral.name == nil) {
-        pcell.nameLabel.text = @"Undisclosed Name";
-    } else {
-        pcell.nameLabel.text = yp.cbPeripheral.name;
-    }
+    yp.isRenderedInViewCell = YES;
+    
+    [pcell configureWithPeripheral:yp];
+    
     cell = pcell;
-
     return cell;
-
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
