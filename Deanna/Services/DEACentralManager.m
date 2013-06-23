@@ -53,7 +53,11 @@ static DEACentralManager *sharedCentralManager;
 
 
 - (void)startScan {
-    NSDictionary *options = @{ CBCentralManagerScanOptionAllowDuplicatesKey: @NO };
+    /*
+     Setting CBCentralManagerScanOptionAllowDuplicatesKey to YES will allow for repeated updates of the RSSI via advertising.
+     */
+    
+    NSDictionary *options = @{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES };
     // NOTE: TI SensorTag firmware does not included services in advertisementData.
     // This prevents usage of serviceUUIDs array to filter on.
 
