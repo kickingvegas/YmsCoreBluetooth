@@ -53,9 +53,13 @@
     return RGB(90, 133, 183);
 }
 
+- (UIColor *)disabledColor {
+    return RGB(90, 90, 90);
+}
+
 - (UIFont *)bodyFontWithSize:(CGFloat)ptSize {
-    //return [UIFont fontWithName:@"ArialRoundedMTBold" size:ptSize];
-    return [UIFont fontWithName:@"Copperplate" size:ptSize];
+    return [UIFont fontWithName:@"ArialRoundedMTBold" size:ptSize];
+    //return [UIFont fontWithName:@"Copperplate" size:ptSize];
 }
 
 
