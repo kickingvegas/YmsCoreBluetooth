@@ -28,6 +28,7 @@
 #import "YMSCBService.h"
 #import "YMSCBCharacteristic.h"
 #import "DEATemperatureService.h"
+#import "DEATheme.h"
 
 @interface DEASensorTagViewController ()
 
@@ -62,6 +63,15 @@
     UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 
     self.toolbarItems = @[flexSpace, self.rssiButton];
+    
+    [DEATheme customizeTableView:self.sensorTableView forType:DEAPeripheralDetailTableViewStyle];
+    
+    for (NSString *prefix in self.cbServiceCells) {
+        NSString *key = [[NSString alloc] initWithFormat:@"%@ViewCell", prefix];
+        [DEATheme customizeSensorTableViewCell:[self valueForKey:key]];
+    }
+
+
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -136,11 +146,8 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSString *result;
-    
     result = [self.cbServiceCells objectAtIndex:section];
-    
-    return result;
-    
+    return [result uppercaseString];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
