@@ -21,6 +21,7 @@
 #import "DEASensorTagViewController.h"
 #import "DEAPeripheralTableViewCell.h"
 #import "DEAStyleSheet.h"
+#import "DEATheme.h"
 
 @interface DEAPeripheralsViewController ()
 - (void)editButtonAction:(id)sender;
@@ -133,12 +134,11 @@
     UIBarButtonItem *button = nil;
     
     [self.peripheralsTableView setEditing:(!self.peripheralsTableView.editing) animated:YES];
-    
+
     if (self.peripheralsTableView.editing) {
-        button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editButtonAction:)];
+        button = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(editButtonAction:)];
     } else {
-        button = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonAction:)];
-        
+        button = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(editButtonAction:)];
     }
     self.navigationItem.rightBarButtonItem = button;
         
@@ -303,7 +303,7 @@
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
-        [(DEAPeripheralTableViewCell *)cell applyStyle];
+        [DEATheme customizePeripheralTableViewCell:(DEAPeripheralTableViewCell *)cell];
     }
 
     
