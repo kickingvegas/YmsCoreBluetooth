@@ -96,8 +96,8 @@
         NSString *key = [[NSString alloc] initWithFormat:@"%@ViewCell", prefix];
         UITableViewCell *cell = (UITableViewCell *)[self valueForKey:key];
         
-        if ([cell respondsToSelector:@selector(configureWithSensorTag:)]) {
-            [cell performSelector:@selector(configureWithSensorTag:) withObject:self.sensorTag];
+        if ([cell respondsToSelector:@selector(configureWithPeripheral:)]) {
+            [cell performSelector:@selector(configureWithPeripheral:) withObject:self.sensorTag];
         }
     }
 }
