@@ -78,13 +78,9 @@
     DEACentralManager *centralManager = [DEACentralManager sharedService];
     centralManager.delegate = self;
     
-    for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
-        if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
-            DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)cell;
-            pcell.sensorTag.delegate = self;
-        }
+    for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+        cell.yperipheral.delegate = self;
     }
-
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -150,13 +146,10 @@
     
     [yp.cbPeripheral readRSSI];
     
-    for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
-        if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
-            DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)cell;
-            if (pcell.sensorTag == yp) {
-                [pcell updateDisplay:peripheral];
-                break;
-            }
+    for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+        if (cell.yperipheral == yp) {
+            [cell updateDisplay:peripheral];
+            break;
         }
     }
 }
@@ -164,12 +157,8 @@
 
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
-   
-    for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
-        if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
-            DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)cell;
-            [pcell updateDisplay:peripheral];
-        }
+    for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+        [cell updateDisplay:peripheral];
     }
     
 }
@@ -178,13 +167,10 @@
     
     BOOL test = YES;
     
-    for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
-        if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
-            DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)cell;
-            if (pcell.sensorTag.cbPeripheral == peripheral) {
-                test = NO;
-                break;
-            }
+    for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+        if (cell.yperipheral.cbPeripheral == peripheral) {
+            test = NO;
+            break;
         }
     }
     
@@ -248,13 +234,10 @@
         return;
     }
     
-    for (UITableViewCell *cell in [self.peripheralsTableView visibleCells]) {
-        if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
-            DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)cell;
-            if (pcell.sensorTag.cbPeripheral == peripheral) {
-                pcell.rssiLabel.text = [NSString stringWithFormat:@"%@", peripheral.RSSI];
-                break;
-            }
+    for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+        if (cell.yperipheral.cbPeripheral == peripheral) {
+            cell.rssiLabel.text = [NSString stringWithFormat:@"%@", peripheral.RSSI];
+            break;
         }
     }
     
@@ -295,7 +278,7 @@
         self.tvCell = nil;
     }
     if ([centralManager isKnownPeripheral:yp.cbPeripheral]) {
-        [pcell configureWithPeripheral:(DEASensorTag *)yp];
+        [pcell configureWithPeripheral:yp];
     }
     else {
         [pcell configureWithPeripheral:nil];
