@@ -36,5 +36,9 @@
  */
 - (void)initializeAppServices;
 
+/**
+ Initialize App Appearance
+ */
+- (void)initializeAppearance;
 
 @end

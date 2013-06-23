@@ -20,16 +20,19 @@
 #import "DEAAppDelegate.h"
 #import "DEAPeripheralsViewController.h"
 #import "DEACentralManager.h"
+#import "DEAStyleSheet.h"
+
 
 @implementation DEAAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self initializeUserDefaults];
     [self initializeAppServices];
+    [self initializeAppearance];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = kDEA_STYLE_BACKGROUNDCOLOR;
     
     DEAPeripheralsViewController *pvc = [[DEAPeripheralsViewController alloc] initWithNibName:@"DEAPeripheralsViewController" bundle:nil];
     
@@ -72,6 +75,11 @@
 }
 
 - (void)initializeAppServices {
+}
+
+- (void)initializeAppearance {
+    [[UINavigationBar appearance] setTintColor:kDEA_STYLE_NAVBAR_BACKGROUNDCOLOR];
+    [[UIToolbar appearance] setTintColor:kDEA_STYLE_NAVBAR_BACKGROUNDCOLOR];
 }
 
 @end
