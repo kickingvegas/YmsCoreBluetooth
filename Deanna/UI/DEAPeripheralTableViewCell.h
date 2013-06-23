@@ -19,7 +19,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *rssiLabel;
 @property (strong, nonatomic) IBOutlet UILabel *signalLabel;
-@property (strong, nonatomic) IBOutlet DEABaseButton *connectButton;
+@property (strong, nonatomic) IBOutlet UIButton *connectButton;
 @property (strong, nonatomic) IBOutlet UILabel *dbLabel;
 @property (strong, nonatomic) IBOutlet UILabel *peripheralStatusLabel;
 
@@ -28,7 +28,5 @@
 - (void)configureWithPeripheral:(YMSCBPeripheral *)yp;
 
 - (void)updateDisplay;
-
-- (void)applyStyle;
 
 @end

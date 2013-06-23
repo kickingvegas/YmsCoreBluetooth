@@ -11,8 +11,6 @@
 #import "YMSCBPeripheral.h"
 #import "DEASensorTag.h"
 #import "DEACentralManager.h"
-#import "DEAStyleSheet.h"
-#import "DEABaseButton.h"
 
 @implementation DEAPeripheralTableViewCell
 
@@ -50,16 +48,6 @@
     [self updateDisplay];
 }
 
-- (void)applyStyle {
-    self.contentView.superview.backgroundColor = kDEA_STYLE_BACKGROUNDCOLOR;
-    self.dbLabel.textColor = kDEA_STYLE_WHITECOLOR;
-    self.rssiLabel.textColor = kDEA_STYLE_RSSI_TEXTCOLOR;
-    self.nameLabel.textColor = kDEA_STYLE_WHITECOLOR;
-    self.signalLabel.textColor = kDEA_STYLE_BASIC_TEXTCOLOR;
-    self.peripheralStatusLabel.textColor = kDEA_STYLE_BASIC_TEXTCOLOR;
-    
-    [self.connectButton applyStyle];
-}
 
 - (void)updateDisplay {
     NSString *buttonLabel;
