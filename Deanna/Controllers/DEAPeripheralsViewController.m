@@ -20,6 +20,7 @@
 #import "DEASensorTag.h"
 #import "DEASensorTagViewController.h"
 #import "DEAPeripheralTableViewCell.h"
+#import "DEAStyleSheet.h"
 
 @interface DEAPeripheralsViewController ()
 - (void)editButtonAction:(id)sender;
@@ -66,8 +67,11 @@
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonAction:)];
     
     self.navigationItem.rightBarButtonItem = editButton;
-
-
+    
+    
+    self.peripheralsTableView.backgroundColor = kDEA_STYLE_BACKGROUNDCOLOR;
+    self.peripheralsTableView.separatorColor = kDEA_STYLE_TABLEVIEW_SEPARATORCOLOR;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -270,54 +274,52 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat result;
-    DEACentralManager *centralManager = [DEACentralManager sharedService];
-    YMSCBPeripheral *yp = [centralManager peripheralAtIndex:indexPath.row];
-    if ([centralManager isKnownPeripheral:yp.cbPeripheral]) {
-        result = 107.0;
-    } else {
-        result = 44.0;
-    }
+    result = 172.0;
     return result;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *SensorTagCellIdentifier = @"SensorTagCell";
-    static NSString *UnknownPeripheralCellIdentifier = @"UnknownPeripheralCell";
+    //static NSString *UnknownPeripheralCellIdentifier = @"UnknownPeripheralCell";
 
     DEACentralManager *centralManager = [DEACentralManager sharedService];
     YMSCBPeripheral *yp = [centralManager peripheralAtIndex:indexPath.row];
     
     UITableViewCell *cell = nil;
     
+    DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)[tableView dequeueReusableCellWithIdentifier:SensorTagCellIdentifier];
+    
+    if (pcell == nil) {
+        [[NSBundle mainBundle] loadNibNamed:@"DEAPeripheralTableViewCell" owner:self options:nil];
+        pcell = self.tvCell;
+        self.tvCell = nil;
+    }
     if ([centralManager isKnownPeripheral:yp.cbPeripheral]) {
-        DEAPeripheralTableViewCell *pcell = (DEAPeripheralTableViewCell *)[tableView dequeueReusableCellWithIdentifier:SensorTagCellIdentifier];
-        
-        if (pcell == nil) {
-            [[NSBundle mainBundle] loadNibNamed:@"DEAPeripheralTableViewCell" owner:self options:nil];
-            pcell = self.tvCell;
-            self.tvCell = nil;
-        }
-        
-        [pcell configureWithSensorTag:(DEASensorTag *)yp];
-        
-        pcell.nameLabel.text = yp.cbPeripheral.name;
-        cell = pcell;
-        
-    } else {
-        
-        cell = [tableView dequeueReusableCellWithIdentifier:UnknownPeripheralCellIdentifier];
-        
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:UnknownPeripheralCellIdentifier];
-        }
-        cell.textLabel.text = yp.cbPeripheral.name;
-        cell.detailTextLabel.text = @"Unknown Peripheral";
+        [pcell configureWithPeripheral:(DEASensorTag *)yp];
+    }
+    else {
+        [pcell configureWithPeripheral:nil];
     }
     
+    if (yp.cbPeripheral.name == nil) {
+        pcell.nameLabel.text = @"Undisclosed Name";
+    } else {
+        pcell.nameLabel.text = yp.cbPeripheral.name;
+    }
+    cell = pcell;
+
     return cell;
 
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([cell isKindOfClass:[DEAPeripheralTableViewCell class]]) {
+        [(DEAPeripheralTableViewCell *)cell applyStyle];
+    }
+
+    
+}
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
