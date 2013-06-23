@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-@class DEASensorTag;
+@class YMSCBPeripheral;
 @class CBPeripheral;
 @class DEABaseButton;
 
 @interface DEAPeripheralTableViewCell : UITableViewCell
 
 
-@property (weak, nonatomic) DEASensorTag *sensorTag;
+@property (weak, nonatomic) YMSCBPeripheral *yperipheral;
         
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *rssiLabel;
@@ -25,7 +25,7 @@
 
 - (IBAction)connectButtonAction:(id)sender;
 
-- (void)configureWithPeripheral:(DEASensorTag *)sensorTag;
+- (void)configureWithPeripheral:(YMSCBPeripheral *)sensorTag;
 
 - (void)updateDisplay:(CBPeripheral *)peripheral;
 

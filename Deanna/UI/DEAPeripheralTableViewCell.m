@@ -8,7 +8,7 @@
 
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "DEAPeripheralTableViewCell.h"
-#import "DEASensorTag.h"
+#import "YMSCBPeripheral.h"
 #import "DEACentralManager.h"
 #import "DEAStyleSheet.h"
 #import "DEABaseButton.h"
@@ -31,22 +31,22 @@
 
 - (IBAction)connectButtonAction:(id)sender {
     
-    if (self.sensorTag.isConnected) {
+    if (self.yperipheral.isConnected) {
         [self.connectButton setTitle:@"CANCELLING…" forState:UIControlStateNormal];
-        [self.sensorTag disconnect];
+        [self.yperipheral disconnect];
     } else {
         [self.connectButton setTitle:@"PAIRING…" forState:UIControlStateNormal];
-        [self.sensorTag connect];
+        [self.yperipheral connect];
 
     }
 }
 
 
-- (void)configureWithPeripheral:(DEASensorTag *)sensorTag {
+- (void)configureWithPeripheral:(YMSCBPeripheral *)sensorTag {
     
-    self.sensorTag = sensorTag;
+    self.yperipheral = sensorTag;
     
-    [self updateDisplay:self.sensorTag.cbPeripheral];
+    [self updateDisplay:self.yperipheral.cbPeripheral];
 }
 
 - (void)applyStyle {
@@ -68,7 +68,7 @@
         self.peripheralStatusLabel.text = @"DISCOVERED";
         self.accessoryType = UITableViewCellAccessoryNone;
         
-    } else if (self.sensorTag.cbPeripheral == peripheral) {
+    } else if (self.yperipheral.cbPeripheral == peripheral) {
         if (peripheral.isConnected) {
             
             buttonLabel = @"DISCONNECT";
