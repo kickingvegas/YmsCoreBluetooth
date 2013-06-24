@@ -65,7 +65,7 @@ However, they differ from CoreBluetooth in that operations are done with respect
 
 The apps **Deanna** and **DeannaMac** are demonstration apps intended to illustrate the use of *YmsCoreBluetooth*. Both apps use *YmsCoreBluetooth* to characterize a TI SensorTag and provide controllability and observability of the six sensors on the device. It also has the capability to scan for other BLE devices.
 
-*Deanna* has been recently changed (v 0.943) to support the graphic design contributions of [Wayne Dalhberg](http://waynedalhberg.com). 
+*Deanna* has been recently changed (v 0.943) to support the graphic design contributions of [Wayne Dahlberg](http://waynedahlberg.com). 
 
 ### Show Code
 #### Scanning for Peripherals
