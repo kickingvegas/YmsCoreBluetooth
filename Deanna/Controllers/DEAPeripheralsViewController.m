@@ -180,16 +180,16 @@
         yp.isRenderedInViewCell = YES;
     }
     
-
-    for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
-        if (cell.yperipheral.cbPeripheral == peripheral) {
-            
-            if (peripheral.isConnected == NO) {
-                cell.rssiLabel.text = [NSString stringWithFormat:@"%d", [RSSI integerValue]];
-                cell.peripheralStatusLabel.text = @"ADVERTISING";
-                [cell.peripheralStatusLabel setTextColor:[[DEATheme sharedTheme] advertisingColor]];
-            } else {
-                continue;
+    if (centralManager.isScanning) {
+        for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
+            if (cell.yperipheral.cbPeripheral == peripheral) {
+                if (peripheral.isConnected == NO) {
+                    cell.rssiLabel.text = [NSString stringWithFormat:@"%d", [RSSI integerValue]];
+                    cell.peripheralStatusLabel.text = @"ADVERTISING";
+                    [cell.peripheralStatusLabel setTextColor:[[DEATheme sharedTheme] advertisingColor]];
+                } else {
+                    continue;
+                }
             }
         }
     }
@@ -249,9 +249,11 @@
     
     for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
         if (cell.yperipheral) {
-            if (cell.yperipheral.cbPeripheral == peripheral) {
-                cell.rssiLabel.text = [NSString stringWithFormat:@"%@", peripheral.RSSI];
-                break;
+            if (cell.yperipheral.isConnected) {
+                if (cell.yperipheral.cbPeripheral == peripheral) {
+                    cell.rssiLabel.text = [NSString stringWithFormat:@"%@", peripheral.RSSI];
+                    break;
+                }
             }
         }
     }
