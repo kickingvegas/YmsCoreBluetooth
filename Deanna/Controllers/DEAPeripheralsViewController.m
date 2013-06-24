@@ -112,14 +112,17 @@
     
     if (centralManager.isScanning == NO) {
         [centralManager startScan];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     }
     else {
         [centralManager stopScan];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         
         for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
             if (cell.yperipheral.cbPeripheral.isConnected == NO) {
                 cell.rssiLabel.text = @"—";
                 cell.peripheralStatusLabel.text = @"QUIESCENT";
+                [cell.peripheralStatusLabel setTextColor:[[DEATheme sharedTheme] bodyTextColor]];
             }
         }
 
@@ -184,6 +187,7 @@
             if (peripheral.isConnected == NO) {
                 cell.rssiLabel.text = [NSString stringWithFormat:@"%d", [RSSI integerValue]];
                 cell.peripheralStatusLabel.text = @"ADVERTISING";
+                [cell.peripheralStatusLabel setTextColor:[[DEATheme sharedTheme] advertisingColor]];
             } else {
                 continue;
             }
@@ -268,7 +272,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat result;
-    result = 172.0;
+    result = 166.0;
     return result;
 }
 
