@@ -216,8 +216,8 @@
 
 
 + (void)customizeNavigationController:(UINavigationController *)nc {
-    //nc.navigationBar.translucent = NO;
-    nc.toolbar.translucent = YES;
+    nc.navigationBar.translucent = NO;
+    nc.toolbar.translucent = NO;
 }
 
 @end
