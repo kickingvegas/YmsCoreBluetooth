@@ -40,6 +40,11 @@ typedef NS_ENUM(NSInteger, DEATableViewStyle) {
 - (UIColor *)tableviewSeparatorColor;
 - (UIColor *)rssiTextColor;
 - (UIColor *)disabledColor;
+- (UIColor *)connectedColor;
+- (UIColor *)advertisingColor;
+- (UIColor *)pairingColor;
+- (UIColor *)signalColor;
+
 
 - (UIFont *)bodyFontWithSize:(CGFloat)ptSize;
 

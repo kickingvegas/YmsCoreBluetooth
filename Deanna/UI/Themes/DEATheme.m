@@ -29,6 +29,7 @@
 #import "DEAMagnetometerViewCell.h"
 #import "DEASimpleKeysViewCell.h"
 #import "DEATemperatureViewCell.h"
+#import "YMSCBPeripheral.h"
 
 @implementation DEATheme
 
@@ -108,8 +109,12 @@
     viewCell.dbLabel.textColor = [theme highlightTextColor];
     viewCell.rssiLabel.textColor = [theme rssiTextColor];
     viewCell.nameLabel.textColor = [theme highlightTextColor];
-    viewCell.signalLabel.textColor = [theme bodyTextColor];
-    viewCell.peripheralStatusLabel.textColor = [theme bodyTextColor];
+    viewCell.signalLabel.textColor = [theme signalColor];
+    
+    if (viewCell.yperipheral.isConnected)
+        viewCell.peripheralStatusLabel.textColor = [theme connectedColor];
+    else
+        viewCell.peripheralStatusLabel.textColor = [theme bodyTextColor];
     
     [DEATheme customizeButton:viewCell.connectButton forType:DEAButtonStyleDefault];
 
@@ -118,7 +123,6 @@
     [viewCell.nameLabel setFont:[theme bodyFontWithSize:20.0]];
     [viewCell.signalLabel setFont:[theme bodyFontWithSize:18.0]];
     [viewCell.peripheralStatusLabel setFont:[theme bodyFontWithSize:18.0]];
-    
 
 }
 
@@ -128,7 +132,6 @@
         case DEAPeripheralTableViewStyle: {
             [DEATheme customizeView:tableView];
             tableView.separatorColor = [theme tableviewSeparatorColor];
-            
             break;
         }
             

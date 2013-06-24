@@ -57,6 +57,22 @@
     return RGB(90, 90, 90);
 }
 
+- (UIColor *)connectedColor {
+    return RGBCSS(0x2ECC71);
+}
+
+- (UIColor *)advertisingColor {
+    return RGBCSS(0x2980B9);
+}
+
+- (UIColor *)pairingColor {
+    return RGBCSS(0xF1C40F);
+}
+
+- (UIColor *)signalColor {
+    return RGBCSS(0xE67E22);
+}
+
 - (UIFont *)bodyFontWithSize:(CGFloat)ptSize {
     return [UIFont fontWithName:@"ArialRoundedMTBold" size:ptSize];
     //return [UIFont fontWithName:@"Copperplate" size:ptSize];
