@@ -20,6 +20,7 @@
 #import "DEASimpleKeysViewCell.h"
 #import "DEASimpleKeysService.h"
 #import "DEASensorTag.h"
+#import "DEATheme.h"
 
 @implementation DEASimpleKeysViewCell
 
@@ -68,13 +69,13 @@
         if (keyValue & 1) {
             self.button1.titleLabel.textColor = [UIColor redColor];
         } else {
-            self.button1.titleLabel.textColor = [UIColor blackColor];
+            self.button1.titleLabel.textColor = [[DEATheme sharedTheme] bodyTextColor];
         }
 
         if (keyValue & 2) {
             self.button2.titleLabel.textColor = [UIColor redColor];
         } else {
-            self.button2.titleLabel.textColor = [UIColor blackColor];
+            self.button2.titleLabel.textColor = [[DEATheme sharedTheme] bodyTextColor];
         }
 
         
