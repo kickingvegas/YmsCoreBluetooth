@@ -1,4 +1,4 @@
-# YmsCoreBluetooth v0.942 (beta)
+# YmsCoreBluetooth v0.943 (beta)
 A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS or OS X applications using the CoreBluetooth API. Includes *Deanna* and *DeannaMac*, applications to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag) for iOS and OS X respectively.
 
 * [YmsCoreBluetooth API Reference](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/index.html)
@@ -60,7 +60,13 @@ However, they differ from CoreBluetooth in that operations are done with respect
 * YMSCBDescriptor
   - write value to descriptor
   - read value of descriptor
-  
+
+### Deanna and DeannaMac
+
+The apps **Deanna** and **DeannaMac** are demonstration apps intended to illustrate the use of *YmsCoreBluetooth*. Both apps use *YmsCoreBluetooth* to characterize a TI SensorTag and provide controllability and observability of the six sensors on the device. It also has the capability to scan for other BLE devices.
+
+*Deanna* has been recently changed (v 0.943) to support the graphic design contributions of [Wayne Dalhberg](http://waynedalhberg.com). 
+
 ### Show Code
 #### Scanning for Peripherals
 
@@ -366,6 +372,10 @@ Code tested on:
 * No support is offered for the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator [TN2295](http://developer.apple.com/library/ios/#technotes/tn2295/_index.html), I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.
 
 ## Latest Changes
+
+### Mon Jun 24 2013 - Interim Release (ver 0.943)
+* Initial work on beautifying Deanna app (Issue #62) based on graphic design work by [Wayne Dahlberg](http://waynedahlberg.com).
+* Fixes to updates of RSSI values via scanning or by connection.
 
 ### Sat Jun 22 2013 - Interim Release (ver 0.942)
 * Reimplemented background thread UI updates to use GCD `dispatch_async()` instead of `performSelectorOnMainThread:` (Issue #61).
