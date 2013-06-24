@@ -54,7 +54,9 @@
                           UITextAttributeTextShadowColor: [theme shadowColor],
                          UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
                                      UITextAttributeFont: [theme bodyFontWithSize:0.0] }];
-     
+    
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackTranslucent];
+    [[UIToolbar appearance] setBarStyle:UIBarStyleBlackTranslucent];
 
     
     [[UIBarButtonItem appearance]
@@ -65,7 +67,7 @@
      UITextAttributeFont: [theme bodyFontWithSize:0.0] }
      forState:UIControlStateNormal];
     
-    [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setColor:[theme highlightTextColor]];
+    [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTextColor:[theme highlightTextColor]];
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setShadowColor:nil];
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setFont:[theme bodyFontWithSize:16.0]];
     
