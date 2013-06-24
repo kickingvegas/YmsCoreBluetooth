@@ -1,9 +1,19 @@
+// 
+// Copyright 2013 Yummy Melon Software LLC
 //
-//  DEAPeripheralTableViewCell.m
-//  Deanna
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-//  Created by Charles Choi on 4/18/13.
-//  Copyright (c) 2013 Yummy Melon Software. All rights reserved.
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+//  Author: Charles Y. Choi <charles.choi@yummymelon.com>
 //
 
 #import <CoreBluetooth/CoreBluetooth.h>
@@ -11,6 +21,7 @@
 #import "YMSCBPeripheral.h"
 #import "DEASensorTag.h"
 #import "DEACentralManager.h"
+#import "DEATheme.h"
 
 @implementation DEAPeripheralTableViewCell
 
@@ -32,19 +43,22 @@
     
     if (self.yperipheral.isConnected) {
         [self.connectButton setTitle:@"CANCELLING…" forState:UIControlStateNormal];
+        self.peripheralStatusLabel.text = @"QUIESCENT";
+        [self.peripheralStatusLabel setTextColor:[[DEATheme sharedTheme] bodyTextColor]];
+        self.peripheralStatusIcon.image = [UIImage imageNamed:@"static/images/iconStatusAdvertising.png"];
+        self.rssiLabel.text = @"—";
         [self.yperipheral disconnect];
     } else {
         [self.connectButton setTitle:@"PAIRING…" forState:UIControlStateNormal];
+        self.peripheralStatusLabel.text = @"PAIRING…";
+        [self.peripheralStatusLabel setTextColor:[[DEATheme sharedTheme] pairingColor]];
+        self.peripheralStatusIcon.image = [UIImage imageNamed:@"static/images/iconStatusPairing.png"];
         [self.yperipheral connect];
-
     }
 }
 
-
 - (void)configureWithPeripheral:(YMSCBPeripheral *)yp {
-    
     self.yperipheral = yp;
-    
     [self updateDisplay];
 }
 
@@ -60,16 +74,22 @@
 
     
     if ([self.yperipheral isKindOfClass:[DEASensorTag class]]) {
+        self.peripheralIcon.image = [UIImage imageNamed:@"static/images/deviceIcon_sensorTag.png"];
+        
         if (self.yperipheral.isConnected) {
             buttonLabel = @"DISCONNECT";
             self.peripheralStatusLabel.text = @"CONNECTED";
+            [self.peripheralStatusLabel setTextColor:[[DEATheme sharedTheme] connectedColor]];
+            self.peripheralStatusIcon.image = [UIImage imageNamed:@"static/images/iconStatusConnected.png"];
             self.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
             [self.connectButton setTitle:buttonLabel forState:UIControlStateNormal];
             self.connectButton.titleLabel.text = buttonLabel;
             
         } else {
             buttonLabel = @"CONNECT";
-            self.peripheralStatusLabel.text = @"UNCONNECTED";
+            self.peripheralStatusLabel.text = @"QUIESCENT";
+            [self.peripheralStatusLabel setTextColor:[[DEATheme sharedTheme] bodyTextColor]];
+            self.peripheralStatusIcon.image = [UIImage imageNamed:@"static/images/iconStatusAdvertising.png"];
             self.accessoryType = UITableViewCellAccessoryNone;
             [self.connectButton setTitle:buttonLabel forState:UIControlStateNormal];
             
@@ -78,6 +98,7 @@
         }
 
     } else {
+        self.peripheralIcon.image = [UIImage imageNamed:@"static/images/deviceIcon_genericBLE.png"];
         self.connectButton.hidden = YES;
         self.accessoryType = UITableViewCellAccessoryNone;
     }
