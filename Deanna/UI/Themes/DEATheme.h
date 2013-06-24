@@ -55,5 +55,6 @@ typedef NS_ENUM(NSInteger, DEATableViewStyle) {
 + (void)customizePeripheralTableViewCell:(DEAPeripheralTableViewCell *)viewCell;
 + (void)customizeSensorTableViewCell:(UITableViewCell *)viewCell;
 + (void)customizeTableView:(UITableView *)tableView forType:(DEATableViewStyle)tableViewStyle;
++ (void)customizeNavigationController:(UINavigationController *)nc;
 
 @end

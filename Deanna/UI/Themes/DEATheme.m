@@ -55,10 +55,6 @@
                          UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
                                      UITextAttributeFont: [theme bodyFontWithSize:0.0] }];
     
-    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackTranslucent];
-    [[UIToolbar appearance] setBarStyle:UIBarStyleBlackTranslucent];
-
-    
     [[UIBarButtonItem appearance]
      setTitleTextAttributes:@{
      UITextAttributeTextColor: [theme highlightTextColor],
@@ -216,6 +212,12 @@
     }
 
 
+}
+
+
++ (void)customizeNavigationController:(UINavigationController *)nc {
+    nc.navigationBar.translucent = NO;
+    nc.toolbar.translucent = YES;
 }
 
 @end

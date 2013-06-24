@@ -37,8 +37,8 @@
     DEAPeripheralsViewController *pvc = [[DEAPeripheralsViewController alloc] initWithNibName:@"DEAPeripheralsViewController" bundle:nil];
     
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:pvc];
-    
-    
+    [DEATheme customizeNavigationController:nvc];
+
     self.window.rootViewController = nvc;
     
     [self.window makeKeyAndVisible];
