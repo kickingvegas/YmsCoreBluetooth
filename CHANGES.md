@@ -1,4 +1,8 @@
 # YmsCoreBluetooth Changes
+### Mon Jun 24 2013 - Interim Release (ver 0.943)
+* Initial work on beautifying Deanna app (Issue #62) based on graphic design work by [Wayne Dahlberg](http://waynedahlberg.com).
+* Fixes to updates of RSSI values via scanning or by connection.
+
 ### Sat Jun 22 2013 - Interim Release (ver 0.942)
 * Reimplemented background thread UI updates to use GCD `dispatch_async()` instead of `performSelectorOnMainThread:` (Issue #61).
 * Updated documentation.
