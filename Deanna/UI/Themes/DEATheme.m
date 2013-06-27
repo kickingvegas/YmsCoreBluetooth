@@ -154,7 +154,7 @@
 
 + (void)customizeSensorTableViewCell:(UITableViewCell *)viewCell {
     id <DEATheme> theme = [self sharedTheme];
-    [DEATheme customizeView:viewCell.contentView.superview];
+    [DEATheme customizeView:viewCell.contentView];
     
     for (UIView *view in viewCell.contentView.subviews) {
         if ([view isKindOfClass:[UILabel class]]) {
