@@ -79,6 +79,7 @@
     for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
         cell.yperipheral.delegate = self;
     }
+    [self.peripheralsTableView reloadData];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
