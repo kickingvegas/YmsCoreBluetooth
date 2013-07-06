@@ -1,4 +1,10 @@
 # YmsCoreBluetooth Changes
+
+### Sat Jul 6 2013 - Interim Release (ver 0.944)
+* Bugfix #69 - Reload peripheralsTableView when dismissing SensorTag view controller
+* Bugfix #68 - Handle CoreBluetooth XPC reset
+* Issue #32 - Added interim icon design by Wayne Dahlberg
+
 ### Mon Jun 24 2013 - Interim Release (ver 0.943)
 * Initial work on beautifying Deanna app (Issue #62) based on graphic design work by [Wayne Dahlberg](http://waynedahlberg.com).
 * Fixes to updates of RSSI values via scanning or by connection.
