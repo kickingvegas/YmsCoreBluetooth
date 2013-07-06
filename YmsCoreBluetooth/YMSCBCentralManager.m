@@ -215,7 +215,9 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 }
 
 - (void)managerResettingHandler {
-    // THIS METHOD IS TO BE OVERRIDDEN
+    // CALL SUPER METHOD
+    // THIS METHOD MUST BE INVOKED BY SUBCLASSES THAT OVERRIDE THIS METHOD
+    [self.ymsPeripherals removeAllObjects];
 }
 
 - (void)managerUnauthorizedHandler {
