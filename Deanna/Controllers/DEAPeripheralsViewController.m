@@ -148,6 +148,43 @@
 #pragma mark - CBCentralManagerDelegate Methods
 
 
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central {
+    
+    switch (central.state) {
+        case CBCentralManagerStatePoweredOn:
+            break;
+        case CBCentralManagerStatePoweredOff:
+            break;
+            
+        case CBCentralManagerStateUnsupported: {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Dang."
+                                                            message:@"Unfortunately this device can not talk to Bluetooth Smart (Low Energy) Devices"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Dismiss"
+                                                  otherButtonTitles:nil];
+            
+            [alert show];
+            break;
+        }
+        case CBCentralManagerStateResetting: {
+            [self.peripheralsTableView reloadData];
+            break;
+        }
+        case CBCentralManagerStateUnauthorized:
+            break;
+            
+        case CBCentralManagerStateUnknown:
+            break;
+            
+        default:
+            break;
+    }
+    
+    
+    
+}
+
+
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
     DEACentralManager *centralManager = [DEACentralManager sharedService];
     YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
