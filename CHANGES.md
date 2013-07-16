@@ -1,5 +1,8 @@
 # YmsCoreBluetooth Changes
 
+### Tue Jul 16 2013 - Interim Release (ver 0.945)
+* Bugfix #61 - Change all delegate implementations so that the callback is performed on the main thread.
+
 ### Sat Jul 6 2013 - Interim Release (ver 0.944)
 * Bugfix #69 - Reload peripheralsTableView when dismissing SensorTag view controller
 * Bugfix #68 - Handle CoreBluetooth XPC reset
