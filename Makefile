@@ -16,6 +16,10 @@
 # Author: Charles Y. Choi <charles.choi@yummymelon.com>
 #
 
+# Edit PUBLISH_BASE to be the base directory to install YmsCoreBluetooth.
+PUBLISH_BASE=
+PUBLISH_TARGET=${PUBLISH_BASE}/YmsCoreBluetooth
+
 doc: cleanBackup
 	appledoc \
 	--project-name "YmsCoreBluetooth Framework + Deanna" \
@@ -43,6 +47,9 @@ html: cleanBackup
 	--no-create-docset \
 	Deanna \
 	YmsCoreBluetooth
+
+publish:
+	rsync -avz --delete YmsCoreBluetooth/ ${PUBLISH_TARGET}
 
 cleanBackup:
 	find . -name '*~' -delete
