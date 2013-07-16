@@ -1,4 +1,4 @@
-# YmsCoreBluetooth v0.944 (beta)
+# YmsCoreBluetooth v0.945 (beta)
 A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS or OS X applications using the CoreBluetooth API. Includes *Deanna* and *DeannaMac*, applications to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag) for iOS and OS X respectively.
 
 * [YmsCoreBluetooth API Reference](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/index.html)
@@ -373,6 +373,9 @@ Code tested on:
 
 ## Latest Changes
 
+### Tue Jul 16 2013 - Interim Release (ver 0.945)
+* Bugfix #61 - Change all delegate implementations so that the callback is performed on the main thread.
+
 ### Sat Jul 6 2013 - Interim Release (ver 0.944)
 * Bugfix #69 - Reload peripheralsTableView when dismissing SensorTag view controller
 * Bugfix #68 - Handle CoreBluetooth XPC reset
@@ -382,38 +385,6 @@ Code tested on:
 * Initial work on beautifying Deanna app (Issue #62) based on graphic design work by [Wayne Dahlberg](http://waynedahlberg.com).
 * Fixes to updates of RSSI values via scanning or by connection.
 
-### Sat Jun 22 2013 - Interim Release (ver 0.942)
-* Reimplemented background thread UI updates to use GCD `dispatch_async()` instead of `performSelectorOnMainThread:` (Issue #61).
-* Updated documentation.
-
-### Wed Jun 19 2013 - Interim Release (ver 0.941)
-* Support for background thread operation of BLE transactions (Issues #57, #58, #59)
-
-Prior releases ran all BLE transactions off the main UI thread. For a small number of BLE devices (< 5), performance degradation was neglible. However, in an environment with many devices (> 30), support for background operation that does not block the main UI is necessary. Changes so that messages sent to the delegate for `YMSCBCentralManager` and `YMSCBPeripheral` are executed in the main thread.
-
-Similarly, any change to a property of a subclass of `YMSCBService` should be executed in the main thread so that it can be properly key-value observed (KVO) by any UI components.
-
-* API Change: Removed RSSI auto-update functionality from YmsCoreBluetooth.
-
-This directly attributed with background thread operation of BLE transactions. Prior code, if run using a background thread, would not correctly schedule a read of the RSSI value of a peripheral. It is now the responsibility of an application using YmsCoreBluetooth to invoke `readRSSI` and handle the response to update the UI properly.
-
-* Update of Deanna and DeannaMac to support background thread BLE transactions.
-
-#### API Changes
-
-* `[YMSCBPeripheral initWithPeripheral:central:baseHi:baseLo:updateRSSI:]` is obsolete.<br/>Replacing this call is `[YMSCBPeripheral initWithPeripheral:central:baseHi:baseLo:]`
-
-* `[YMSCBPeripheral updateRSSI]` is obsolete.
-
-* `[YMSCBCentralManager initWithKnownPeripheralNames:queue:]` is obsolete.<br/>Replacing this call is `[YMSCBCentralManager initWithKnownPeripheralNames:queue:delegate:]`
-
-* `[YMSCBCentralManager initWithKnownPeripheralNames:queue:useStoredPeripherals:]` is obsolete.<br/>Replacing this call is `[YMSCBCentralManager initWithKnownPeripheralNames:queue:userStoredPeripherals:delegate:]`
-
-
-### Mon Jun 3 2013 - Disco Release (ver 0.94)
-* Issue #9 - OS X Support
-
-YmsCoreBluetooth now supports OS X! Includes app target DeannaMac which replicates functionality found in Deanna for iOS.
 
 Tested Mac Environment:
 
