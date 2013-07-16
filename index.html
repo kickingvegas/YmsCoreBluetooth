@@ -32,7 +32,7 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h1>
-<a name="ymscorebluetooth-v0944-beta" class="anchor" href="#ymscorebluetooth-v0944-beta"><span class="octicon octicon-link"></span></a>YmsCoreBluetooth v0.944 (beta)</h1>
+<a name="ymscorebluetooth-v0945-beta" class="anchor" href="#ymscorebluetooth-v0945-beta"><span class="octicon octicon-link"></span></a>YmsCoreBluetooth v0.945 (beta)</h1>
 
 <p>A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS or OS X applications using the CoreBluetooth API. Includes <em>Deanna</em> and <em>DeannaMac</em>, applications to communicate with a <a href="http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag">TI SensorTag</a> for iOS and OS X respectively.</p>
 
@@ -484,6 +484,11 @@
 <a name="latest-changes" class="anchor" href="#latest-changes"><span class="octicon octicon-link"></span></a>Latest Changes</h2>
 
 <h3>
+<a name="tue-jul-16-2013---interim-release-ver-0945" class="anchor" href="#tue-jul-16-2013---interim-release-ver-0945"><span class="octicon octicon-link"></span></a>Tue Jul 16 2013 - Interim Release (ver 0.945)</h3>
+
+<ul>
+<li>Bugfix #61 - Change all delegate implementations so that the callback is performed on the main thread.</li>
+</ul><h3>
 <a name="sat-jul-6-2013---interim-release-ver-0944" class="anchor" href="#sat-jul-6-2013---interim-release-ver-0944"><span class="octicon octicon-link"></span></a>Sat Jul 6 2013 - Interim Release (ver 0.944)</h3>
 
 <ul>
@@ -496,43 +501,7 @@
 <ul>
 <li>Initial work on beautifying Deanna app (Issue #62) based on graphic design work by <a href="http://waynedahlberg.com">Wayne Dahlberg</a>.</li>
 <li>Fixes to updates of RSSI values via scanning or by connection.</li>
-</ul><h3>
-<a name="sat-jun-22-2013---interim-release-ver-0942" class="anchor" href="#sat-jun-22-2013---interim-release-ver-0942"><span class="octicon octicon-link"></span></a>Sat Jun 22 2013 - Interim Release (ver 0.942)</h3>
-
-<ul>
-<li>Reimplemented background thread UI updates to use GCD <code>dispatch_async()</code> instead of <code>performSelectorOnMainThread:</code> (Issue #61).</li>
-<li>Updated documentation.</li>
-</ul><h3>
-<a name="wed-jun-19-2013---interim-release-ver-0941" class="anchor" href="#wed-jun-19-2013---interim-release-ver-0941"><span class="octicon octicon-link"></span></a>Wed Jun 19 2013 - Interim Release (ver 0.941)</h3>
-
-<ul>
-<li>Support for background thread operation of BLE transactions (Issues #57, #58, #59)</li>
-</ul><p>Prior releases ran all BLE transactions off the main UI thread. For a small number of BLE devices (&lt; 5), performance degradation was neglible. However, in an environment with many devices (&gt; 30), support for background operation that does not block the main UI is necessary. Changes so that messages sent to the delegate for <code>YMSCBCentralManager</code> and <code>YMSCBPeripheral</code> are executed in the main thread.</p>
-
-<p>Similarly, any change to a property of a subclass of <code>YMSCBService</code> should be executed in the main thread so that it can be properly key-value observed (KVO) by any UI components.</p>
-
-<ul>
-<li>API Change: Removed RSSI auto-update functionality from YmsCoreBluetooth.</li>
-</ul><p>This directly attributed with background thread operation of BLE transactions. Prior code, if run using a background thread, would not correctly schedule a read of the RSSI value of a peripheral. It is now the responsibility of an application using YmsCoreBluetooth to invoke <code>readRSSI</code> and handle the response to update the UI properly.</p>
-
-<ul>
-<li>Update of Deanna and DeannaMac to support background thread BLE transactions.</li>
-</ul><h4>
-<a name="api-changes" class="anchor" href="#api-changes"><span class="octicon octicon-link"></span></a>API Changes</h4>
-
-<ul>
-<li><p><code>[YMSCBPeripheral initWithPeripheral:central:baseHi:baseLo:updateRSSI:]</code> is obsolete.<br>Replacing this call is <code>[YMSCBPeripheral initWithPeripheral:central:baseHi:baseLo:]</code></p></li>
-<li><p><code>[YMSCBPeripheral updateRSSI]</code> is obsolete.</p></li>
-<li><p><code>[YMSCBCentralManager initWithKnownPeripheralNames:queue:]</code> is obsolete.<br>Replacing this call is <code>[YMSCBCentralManager initWithKnownPeripheralNames:queue:delegate:]</code></p></li>
-<li><p><code>[YMSCBCentralManager initWithKnownPeripheralNames:queue:useStoredPeripherals:]</code> is obsolete.<br>Replacing this call is <code>[YMSCBCentralManager initWithKnownPeripheralNames:queue:userStoredPeripherals:delegate:]</code></p></li>
-</ul><h3>
-<a name="mon-jun-3-2013---disco-release-ver-094" class="anchor" href="#mon-jun-3-2013---disco-release-ver-094"><span class="octicon octicon-link"></span></a>Mon Jun 3 2013 - Disco Release (ver 0.94)</h3>
-
-<ul>
-<li>Issue #9 - OS X Support</li>
-</ul><p>YmsCoreBluetooth now supports OS X! Includes app target DeannaMac which replicates functionality found in Deanna for iOS.</p>
-
-<p>Tested Mac Environment:</p>
+</ul><p>Tested Mac Environment:</p>
 
 <ul>
 <li>OS X 10.8.3</li>
