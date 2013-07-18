@@ -127,12 +127,8 @@ static DEACentralManager *sharedCentralManager;
     
     if (self.useStoredPeripherals) {
 #if TARGET_OS_IPHONE
-        NSArray *peripheralUUIDs = [YMSCBStoredPeripherals genPeripheralUUIDs];
-        __weak DEACentralManager *this = self;
-        [self retrievePeripherals:peripheralUUIDs
-                        withBlock:^(CBPeripheral *peripheral) {
-                            [this handleFoundPeripheral:peripheral];
-                        }];
+        NSArray *identifiers = [YMSCBStoredPeripherals genIdentifiers];
+        [self retrievePeripheralsWithIdentifiers:identifiers];
 #endif
     }
 }
