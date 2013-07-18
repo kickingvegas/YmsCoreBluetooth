@@ -120,7 +120,7 @@
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         
         for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
-            if (cell.yperipheral.cbPeripheral.isConnected == NO) {
+            if (cell.yperipheral.cbPeripheral.state == CBPeripheralStateDisconnected) {
                 cell.rssiLabel.text = @"—";
                 cell.peripheralStatusLabel.text = @"QUIESCENT";
                 [cell.peripheralStatusLabel setTextColor:[[DEATheme sharedTheme] bodyTextColor]];
@@ -221,7 +221,7 @@
     if (centralManager.isScanning) {
         for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
             if (cell.yperipheral.cbPeripheral == peripheral) {
-                if (peripheral.isConnected == NO) {
+                if (peripheral.state == CBPeripheralStateDisconnected) {
                     cell.rssiLabel.text = [NSString stringWithFormat:@"%d", [RSSI integerValue]];
                     cell.peripheralStatusLabel.text = @"ADVERTISING";
                     [cell.peripheralStatusLabel setTextColor:[[DEATheme sharedTheme] advertisingColor]];
@@ -277,7 +277,7 @@
     if (error) {
         NSLog(@"ERROR: readRSSI failed, retrying. %@", error.description);
         
-        if (peripheral.isConnected) {
+        if (peripheral.state == CBPeripheralStateConnected) {
             NSArray *args = @[peripheral];
             [self performSelector:@selector(performUpdateRSSI:) withObject:args afterDelay:2.0];
         }
@@ -358,7 +358,7 @@
             DEACentralManager *centralManager = [DEACentralManager sharedService];
             YMSCBPeripheral *yp = [centralManager peripheralAtIndex:indexPath.row];
             if ([yp isKindOfClass:[DEASensorTag class]]) {
-                if (yp.cbPeripheral.isConnected) {
+                if (yp.cbPeripheral.state == CBPeripheralStateConnected) {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
                                                                     message:@"Disconnect the peripheral before deleting."
                                                                    delegate:nil cancelButtonTitle:@"Dismiss"

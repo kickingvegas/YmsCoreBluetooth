@@ -199,7 +199,7 @@
     if (error) {
         NSLog(@"ERROR: readRSSI failed, retrying. %@", error.description);
         
-        if (peripheral.isConnected) {
+        if (peripheral.state == CBPeripheralStateConnected) {
             NSArray *args = @[peripheral];
             [self performSelector:@selector(performUpdateRSSI:) withObject:args afterDelay:2.0];
         }

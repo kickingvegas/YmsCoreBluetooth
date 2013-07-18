@@ -47,8 +47,8 @@
 + (void)customizeApplication {
     id <DEATheme> theme = [self sharedTheme];
     
-    [[UINavigationBar appearance] setTintColor:[theme navbarBackgroundColor]];
-    [[UIToolbar appearance] setTintColor:[theme navbarBackgroundColor]];
+    [[UINavigationBar appearance] setBarTintColor:[theme navbarBackgroundColor]];
+    [[UIToolbar appearance] setBarTintColor:[theme navbarBackgroundColor]];
     
     [[UINavigationBar appearance] setTitleTextAttributes:@{
                                 UITextAttributeTextColor: [theme highlightTextColor],
@@ -68,7 +68,7 @@
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setShadowColor:nil];
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setFont:[theme bodyFontWithSize:16.0]];
     
-    [[UISwitch appearance] setTintColor:[theme navbarBackgroundColor]];
+    //[[UISwitch appearance] setTintColor:[theme navbarBackgroundColor]];
     
 }
 
@@ -219,8 +219,8 @@
 
 
 + (void)customizeNavigationController:(UINavigationController *)nc {
-    nc.navigationBar.translucent = NO;
-    nc.toolbar.translucent = NO;
+//    nc.navigationBar.translucent = NO;
+//    nc.toolbar.translucent = NO;
 }
 
 @end
