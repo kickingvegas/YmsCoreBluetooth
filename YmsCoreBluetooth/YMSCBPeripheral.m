@@ -55,7 +55,14 @@
 #pragma mark - Peripheral Methods
 
 - (BOOL)isConnected {
-    return self.cbPeripheral.isConnected;
+    
+    BOOL result = NO;
+    
+    if (self.cbPeripheral.state == CBPeripheralStateConnected) {
+        result = YES;
+    }
+    
+    return result;
 }
 
 
@@ -162,7 +169,7 @@
 
 - (void)watchdogDisconnect {
     // Watchdog aware method
-    if (!self.isConnected) {
+    if (self.cbPeripheral.state != CBPeripheralStateDisconnected) {
         [self disconnect];
     }
     self.watchdogTimer = nil;
