@@ -31,7 +31,7 @@
 
 }
 
-+ (NSArray *)genPeripheralUUIDs {
++ (NSArray *)genIdentifiers {
     NSMutableArray *result= [NSMutableArray new];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -42,25 +42,25 @@
             continue;
         }
         
-        CFUUIDRef uuid = CFUUIDCreateFromString(NULL, (CFStringRef)uuidString);
-        
+        NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:uuidString];
+
         if (!uuid)
             continue;
         
-        [result addObject:(id)CFBridgingRelease(uuid)];
+        [result addObject:uuid];
     }
     
     return result;
 }
 
-+ (void)saveUUID:(CFUUIDRef)UUID {
++ (void)saveUUID:(NSUUID *)UUID {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
     NSArray *existingDevices = [userDefaults objectForKey:@"storedPeripherals"];
     NSMutableArray *devices;
     NSString *uuidString = nil;
     if (UUID != nil) {
-        uuidString = UUID2STRING(UUID);
+        uuidString = [UUID UUIDString];
 
         if (existingDevices != nil) {
             devices = [[NSMutableArray alloc] initWithArray:existingDevices];
@@ -92,12 +92,12 @@
     
 }
 
-+ (void)deleteUUID:(CFUUIDRef)UUID {
++ (void)deleteUUID:(NSUUID *)UUID {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSArray *devices = [userDefaults arrayForKey:@"storedPeripherals"];
     NSMutableArray *newDevices = [NSMutableArray arrayWithArray:devices];
     
-    NSString *uuidString = UUID2STRING(UUID);
+    NSString *uuidString = [UUID UUIDString];
     
     [newDevices removeObject:uuidString];
     
