@@ -92,17 +92,6 @@
 		D997ACE3175B331F00C91B0D /* DEMDeviceInfoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACE2175B331F00C91B0D /* DEMDeviceInfoViewCell.m */; };
 		D997ACE6175B3D0D00C91B0D /* DEMSimpleKeysViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACE5175B3D0D00C91B0D /* DEMSimpleKeysViewCell.m */; };
 		D9AA81C91753E00700C2836D /* YMSCBDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = D9AA81C81753E00700C2836D /* YMSCBDescriptor.m */; };
-		D9AC59991721216700FC786F /* app_icon_57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC598F1721216700FC786F /* app_icon_57x57.png */; };
-		D9AC599A1721216700FC786F /* app_icon_72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC59901721216700FC786F /* app_icon_72x72.png */; };
-		D9AC599B1721216700FC786F /* app_icon_114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC59911721216700FC786F /* app_icon_114x114.png */; };
-		D9AC599C1721216700FC786F /* app_icon_144x144.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC59921721216700FC786F /* app_icon_144x144.png */; };
-		D9AC599D1721216700FC786F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC59931721216700FC786F /* Default-568h@2x.png */; };
-		D9AC599E1721216700FC786F /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC59941721216700FC786F /* Default-Landscape@2x~ipad.png */; };
-		D9AC599F1721216700FC786F /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC59951721216700FC786F /* Default-Landscape~ipad.png */; };
-		D9AC59A01721216700FC786F /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC59961721216700FC786F /* Default-Portrait@2x~ipad.png */; };
-		D9AC59A11721216700FC786F /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC59971721216700FC786F /* Default-Portrait~ipad.png */; };
-		D9AC59A21721216700FC786F /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC59981721216700FC786F /* Default.png */; };
-		D9AC59A41721217100FC786F /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9AC59A31721217100FC786F /* Default@2x.png */; };
 		D9C5012216AB37DD001D4D4F /* DEAPeripheralsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C5012016AB37DD001D4D4F /* DEAPeripheralsViewController.m */; };
 		D9C5012316AB37DD001D4D4F /* DEAPeripheralsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9C5012116AB37DD001D4D4F /* DEAPeripheralsViewController.xib */; };
 		D9C6137A177672BA00826EBF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C61379177672BA00826EBF /* QuartzCore.framework */; };
@@ -110,6 +99,7 @@
 		D9D70098177783DB0066AB1B /* DEADefaultTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D70097177783DB0066AB1B /* DEADefaultTheme.m */; };
 		D9D8316D168449FE00F51E42 /* DEASimpleKeysService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D8316C168449FD00F51E42 /* DEASimpleKeysService.m */; };
 		D9DE671116E0223E00F1B15C /* DEABarometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = D9DE671016E0223E00F1B15C /* DEABarometerService.m */; };
+		D9E012F71797D66400677FC1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9E012F61797D66400677FC1 /* Images.xcassets */; };
 		D9F412F016DED0030094FEFA /* DEASensorTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F412EE16DED0030094FEFA /* DEASensorTagViewController.m */; };
 		D9F412F116DED0030094FEFA /* DEASensorTagViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9F412EF16DED0030094FEFA /* DEASensorTagViewController.xib */; };
 		D9F412F416DED7510094FEFA /* DEATemperatureViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F412F316DED7510094FEFA /* DEATemperatureViewCell.m */; };
@@ -241,17 +231,6 @@
 		D997ACE5175B3D0D00C91B0D /* DEMSimpleKeysViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMSimpleKeysViewCell.m; sourceTree = "<group>"; };
 		D9AA81C71753E00700C2836D /* YMSCBDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBDescriptor.h; sourceTree = "<group>"; };
 		D9AA81C81753E00700C2836D /* YMSCBDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBDescriptor.m; sourceTree = "<group>"; };
-		D9AC598F1721216700FC786F /* app_icon_57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon_57x57.png; sourceTree = "<group>"; };
-		D9AC59901721216700FC786F /* app_icon_72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon_72x72.png; sourceTree = "<group>"; };
-		D9AC59911721216700FC786F /* app_icon_114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon_114x114.png; sourceTree = "<group>"; };
-		D9AC59921721216700FC786F /* app_icon_144x144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app_icon_144x144.png; sourceTree = "<group>"; };
-		D9AC59931721216700FC786F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		D9AC59941721216700FC786F /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
-		D9AC59951721216700FC786F /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
-		D9AC59961721216700FC786F /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
-		D9AC59971721216700FC786F /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
-		D9AC59981721216700FC786F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		D9AC59A31721217100FC786F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		D9C5011F16AB37DD001D4D4F /* DEAPeripheralsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAPeripheralsViewController.h; sourceTree = "<group>"; };
 		D9C5012016AB37DD001D4D4F /* DEAPeripheralsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAPeripheralsViewController.m; sourceTree = "<group>"; };
 		D9C5012116AB37DD001D4D4F /* DEAPeripheralsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEAPeripheralsViewController.xib; sourceTree = "<group>"; };
@@ -265,6 +244,7 @@
 		D9D8316C168449FD00F51E42 /* DEASimpleKeysService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASimpleKeysService.m; sourceTree = "<group>"; };
 		D9DE670F16E0223E00F1B15C /* DEABarometerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEABarometerService.h; sourceTree = "<group>"; };
 		D9DE671016E0223E00F1B15C /* DEABarometerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEABarometerService.m; sourceTree = "<group>"; };
+		D9E012F61797D66400677FC1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D9F412ED16DED0030094FEFA /* DEASensorTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASensorTagViewController.h; sourceTree = "<group>"; };
 		D9F412EE16DED0030094FEFA /* DEASensorTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASensorTagViewController.m; sourceTree = "<group>"; };
 		D9F412EF16DED0030094FEFA /* DEASensorTagViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEASensorTagViewController.xib; sourceTree = "<group>"; };
@@ -386,6 +366,7 @@
 				D9718B82167FA1360001E42C /* Controllers */,
 				D9971AEB1720AA5600B1A068 /* UI */,
 				D9718B84167FA1450001E42C /* XIBs */,
+				D9E012F61797D66400677FC1 /* Images.xcassets */,
 				D9718B4C167F9F9F0001E42C /* Supporting Files */,
 			);
 			path = Deanna;
@@ -564,17 +545,6 @@
 		D9AC598E1721208500FC786F /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				D9AC59A31721217100FC786F /* Default@2x.png */,
-				D9AC598F1721216700FC786F /* app_icon_57x57.png */,
-				D9AC59901721216700FC786F /* app_icon_72x72.png */,
-				D9AC59911721216700FC786F /* app_icon_114x114.png */,
-				D9AC59921721216700FC786F /* app_icon_144x144.png */,
-				D9AC59931721216700FC786F /* Default-568h@2x.png */,
-				D9AC59941721216700FC786F /* Default-Landscape@2x~ipad.png */,
-				D9AC59951721216700FC786F /* Default-Landscape~ipad.png */,
-				D9AC59961721216700FC786F /* Default-Portrait@2x~ipad.png */,
-				D9AC59971721216700FC786F /* Default-Portrait~ipad.png */,
-				D9AC59981721216700FC786F /* Default.png */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -715,7 +685,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = DEA;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Yummy Melon Software";
 			};
 			buildConfigurationList = D9718B3B167F9F9F0001E42C /* Build configuration list for PBXProject "Deanna" */;
@@ -746,17 +716,7 @@
 				D9C5012316AB37DD001D4D4F /* DEAPeripheralsViewController.xib in Resources */,
 				D9F412F116DED0030094FEFA /* DEASensorTagViewController.xib in Resources */,
 				D9971AEA1720A9A100B1A068 /* DEAPeripheralTableViewCell.xib in Resources */,
-				D9AC59991721216700FC786F /* app_icon_57x57.png in Resources */,
-				D9AC599A1721216700FC786F /* app_icon_72x72.png in Resources */,
-				D9AC599B1721216700FC786F /* app_icon_114x114.png in Resources */,
-				D9AC599C1721216700FC786F /* app_icon_144x144.png in Resources */,
-				D9AC599D1721216700FC786F /* Default-568h@2x.png in Resources */,
-				D9AC599E1721216700FC786F /* Default-Landscape@2x~ipad.png in Resources */,
-				D9AC599F1721216700FC786F /* Default-Landscape~ipad.png in Resources */,
-				D9AC59A01721216700FC786F /* Default-Portrait@2x~ipad.png in Resources */,
-				D9AC59A11721216700FC786F /* Default-Portrait~ipad.png in Resources */,
-				D9AC59A21721216700FC786F /* Default.png in Resources */,
-				D9AC59A41721217100FC786F /* Default@2x.png in Resources */,
+				D9E012F71797D66400677FC1 /* Images.xcassets in Resources */,
 				D97EC6D2172B1B8C00CAECFC /* README.md in Resources */,
 				D92049D51742C836001380A6 /* CHANGES.md in Resources */,
 				D90CFD09177812CF00F8242B /* static in Resources */,
@@ -1000,11 +960,13 @@
 		D9718B75167F9FA00001E42C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Deanna/Deanna-Prefix.pch";
 				INFOPLIST_FILE = "Deanna/Deanna-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1013,11 +975,13 @@
 		D9718B76167F9FA00001E42C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Deanna/Deanna-Prefix.pch";
 				INFOPLIST_FILE = "Deanna/Deanna-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1062,7 +1026,6 @@
 		D997ACA9175B245800C91B0D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
@@ -1086,7 +1049,6 @@
 		D997ACAA175B245800C91B0D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
