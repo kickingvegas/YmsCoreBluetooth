@@ -94,8 +94,8 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 - (void)removePeripheral:(YMSCBPeripheral *)yperipheral {
     if (self.useStoredPeripherals) {
-        if (yperipheral.cbPeripheral.UUID != nil) {
-            [YMSCBStoredPeripherals deleteUUID:yperipheral.cbPeripheral.UUID];
+        if (yperipheral.cbPeripheral.identifier != nil) {
+            [YMSCBStoredPeripherals deleteUUID:yperipheral.cbPeripheral.identifier];
         }
     }
     [self.ymsPeripherals removeObject:yperipheral];
@@ -181,22 +181,16 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 #pragma mark - Retrieve Methods
 
-- (void)retrieveConnectedPeripherals {
-    [self.manager retrieveConnectedPeripherals];
+- (NSArray *)retrieveConnectedPeripheralsWithServices:(NSArray *)serviceUUIDs {
+    NSArray *result = [self.manager retrieveConnectedPeripheralsWithServices:serviceUUIDs];
+    return result;
 }
 
-- (void)retrieveConnectedPeripheralswithBlock:(void (^)(CBPeripheral *))retrieveCallback {
-    self.retrievedCallback = retrieveCallback;
-    [self retrieveConnectedPeripherals];
-}
 
-- (void)retrievePeripherals:(NSArray *)peripheralUUIDs {
-    [self.manager retrievePeripherals:peripheralUUIDs];
-}
-
-- (void)retrievePeripherals:(NSArray *)peripheralUUIDs withBlock:(void (^)(CBPeripheral *))retrieveCallback {
-    self.retrievedCallback = retrieveCallback;
-    [self retrievePeripherals:peripheralUUIDs];
+- (NSArray *)retrievePeripheralsWithIdentifiers:(NSArray *)identifiers {
+    NSArray *result = [self.manager retrievePeripheralsWithIdentifiers:identifiers];
+    [self centralManager:self.manager didRetrievePeripherals:result];
+    return result;
 }
 
 
@@ -276,7 +270,7 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     __weak YMSCBCentralManager *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
         if (this.useStoredPeripherals) {
-            [YMSCBStoredPeripherals saveUUID:peripheral.UUID];
+            [YMSCBStoredPeripherals saveUUID:peripheral.identifier];
         }
         
         if (this.discoveredCallback) {
@@ -296,17 +290,10 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 
 - (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals {
-
     __weak YMSCBCentralManager *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
-        if (this.retrievedCallback) {
-            for (CBPeripheral *peripheral in peripherals) {
-                this.retrievedCallback(peripheral);
-            }
-        } else {
-            for (CBPeripheral *peripheral in peripherals) {
-                [this handleFoundPeripheral:peripheral];
-            }
+        for (CBPeripheral *peripheral in peripherals) {
+            [this handleFoundPeripheral:peripheral];
         }
         
         if ([this.delegate respondsToSelector:@selector(centralManager:didRetrievePeripherals:)]) {
