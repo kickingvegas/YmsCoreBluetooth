@@ -25,7 +25,7 @@
 
 #import "YMSCBUtils.h"
 
-#define kYMSCBVersion "0.945"
+#define kYMSCBVersion "0.9467"
 extern NSString *const YMSCBVersion;
 
 @class YMSCBPeripheral;
@@ -233,39 +233,28 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
 
 /**
  Retrieves a list of known peripherals by their UUIDs.
- */
-- (void)retrieveConnectedPeripherals;
-
-/**
- Retrieves a list of known peripherals by their UUIDs and handles them using a callback block.
  
- @param retrieveCallback Callback block to handle each retrieved peripheral.
+ @param identifiers A list of NSUUID objects.
+ @return A list of peripherals.
+
  */
-- (void)retrieveConnectedPeripheralswithBlock:(void (^)(CBPeripheral *peripheral))retrieveCallback;
+- (NSArray *)retrievePeripheralsWithIdentifiers:(NSArray *)identifiers;
 
 /**
  Retrieves a list of the peripherals currently connected to the system and handles them using
  handleFoundPeripheral:
-
  
- @param peripheralUUIDs An array of CFUUIDRef objects from which CBPeripheral objects can be retrieved.
+
+ Retrieves all peripherals that are connected to the system and implement 
+ any of the services listed in <i>serviceUUIDs</i>.
+ Note that this set can include peripherals which were connected by other 
+ applications, which will need to be connected locally
+ via connectPeripheral:options: before they can be used.
+
+ @param identifiers A list of NSUUID services
+ @return A list of CBPeripheral objects.
  */
-- (void)retrievePeripherals:(NSArray *)peripheralUUIDs;
-
-
-/**
- Retrieves a list of the peripherals currently connected to the system and handles them using
- a callback block.
- 
- @param peripheralUUIDs An array of CFUUIDRef objects from which CBPeripheral objects can be retrieved. 
- @param retrieveCallback Callback block to handle each retrieved peripheral.
- The parameter of retrieve callback are:
- 
- * `peripheral` - the retrieved peripheral.
- 
- */
-- (void)retrievePeripherals:(NSArray *)peripheralUUIDs
-                  withBlock:(void (^)(CBPeripheral *peripheral))retrieveCallback;
+- (NSArray *)retrieveConnectedPeripheralsWithServices:(NSArray *)serviceUUIDS;
 
 
 #pragma mark - CBCentralManager state handling methods
