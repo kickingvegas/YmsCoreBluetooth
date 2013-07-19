@@ -170,12 +170,11 @@
 
 - (void)watchdogDisconnect {
     // Watchdog aware method
-    if (self.cbPeripheral.state != CBPeripheralStateDisconnected) {
+    if (self.cbPeripheral.state != CBPeripheralStateConnected) {
         self.watchdogRaised = YES;
         [self disconnect];
     }
     self.watchdogTimer = nil;
-    
 }
 
 - (void)connectWithOptions:(NSDictionary *)options withBlock:(void (^)(YMSCBPeripheral *, NSError *))connectCallback {
