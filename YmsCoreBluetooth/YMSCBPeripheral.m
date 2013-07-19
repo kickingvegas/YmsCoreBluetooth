@@ -156,6 +156,7 @@
     if (self.watchdogTimer) {
         [self.watchdogTimer invalidate];
         self.watchdogTimer = nil;
+        self.watchdogRaised = NO;
     }
 
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.watchdogTimerInterval
@@ -170,6 +171,7 @@
 - (void)watchdogDisconnect {
     // Watchdog aware method
     if (self.cbPeripheral.state != CBPeripheralStateDisconnected) {
+        self.watchdogRaised = YES;
         [self disconnect];
     }
     self.watchdogTimer = nil;

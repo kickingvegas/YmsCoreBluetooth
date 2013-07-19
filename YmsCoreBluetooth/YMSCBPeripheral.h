@@ -68,6 +68,11 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
  */
 @property (nonatomic, weak) id<CBPeripheralDelegate> delegate;
 
+/**
+ Flag to indicate if the watchdog timer has expired and forced a disconnect.
+ */
+@property (nonatomic, assign) BOOL watchdogRaised;
+
 /** 
  Dictionary of (`key`, `value`) pairs of (NSString, YMSCBService) instances.
  
