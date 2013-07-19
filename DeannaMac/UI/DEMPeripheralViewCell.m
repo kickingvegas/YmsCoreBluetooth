@@ -88,7 +88,7 @@
 - (void)connectButtonAction:(id)sender {
     NSLog(@"hit connect button");
     
-    if (self.sensorTag.cbPeripheral.isConnected) {
+    if (self.sensorTag.cbPeripheral.state != CBPeripheralStateDisconnected) {
         [self.sensorTag disconnect];
         [self.connectButton setTitle:@"Disconnecting..."];
     } else {
