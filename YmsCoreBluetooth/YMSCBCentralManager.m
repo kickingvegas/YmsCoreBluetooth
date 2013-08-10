@@ -157,7 +157,9 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     
     YMSCBPeripheral *result = nil;
     
-    for (YMSCBPeripheral *yPeripheral in self.ymsPeripherals) {
+    NSArray *peripheralsCopy = [NSArray arrayWithArray:self.ymsPeripherals];
+    
+    for (YMSCBPeripheral *yPeripheral in peripheralsCopy) {
         if (yPeripheral.cbPeripheral == peripheral) {
             result = yPeripheral;
             break;
@@ -267,18 +269,19 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
  didDiscoverPeripheral:(CBPeripheral *)peripheral
      advertisementData:(NSDictionary *)advertisementData
                   RSSI:(NSNumber *)RSSI {
+
+    if (self.useStoredPeripherals) {
+        [YMSCBStoredPeripherals saveUUID:peripheral.identifier];
+    }
+    
+    if (self.discoveredCallback) {
+        self.discoveredCallback(peripheral, advertisementData, RSSI, nil);
+    } else {
+        [self handleFoundPeripheral:peripheral];
+    }
+    
     __weak YMSCBCentralManager *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
-        if (this.useStoredPeripherals) {
-            [YMSCBStoredPeripherals saveUUID:peripheral.identifier];
-        }
-        
-        if (this.discoveredCallback) {
-            this.discoveredCallback(peripheral, advertisementData, RSSI, nil);
-        } else {
-            [this handleFoundPeripheral:peripheral];
-        }
-        
         if ([this.delegate respondsToSelector:@selector(centralManager:didDiscoverPeripheral:advertisementData:RSSI:)]) {
             [this.delegate centralManager:central
                     didDiscoverPeripheral:peripheral
@@ -290,12 +293,13 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 
 - (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals {
+
+    for (CBPeripheral *peripheral in peripherals) {
+        [self handleFoundPeripheral:peripheral];
+    }
+    
     __weak YMSCBCentralManager *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
-        for (CBPeripheral *peripheral in peripherals) {
-            [this handleFoundPeripheral:peripheral];
-        }
-        
         if ([this.delegate respondsToSelector:@selector(centralManager:didRetrievePeripherals:)]) {
             [this.delegate centralManager:central didRetrievePeripherals:peripherals];
         }
@@ -304,13 +308,13 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 
 - (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals {
+
+    for (CBPeripheral *peripheral in peripherals) {
+        [self handleFoundPeripheral:peripheral];
+    }
+    
     __weak YMSCBCentralManager *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
-        
-        for (CBPeripheral *peripheral in peripherals) {
-            [this handleFoundPeripheral:peripheral];
-        }
-        
         if ([this.delegate respondsToSelector:@selector(centralManager:didRetrieveConnectedPeripherals:)]) {
             [this.delegate centralManager:central didRetrieveConnectedPeripherals:peripherals];
         }
@@ -319,12 +323,11 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
+    YMSCBPeripheral *yp = [self findPeripheral:peripheral];
+    [yp handleConnectionResponse:nil];
+    
     __weak YMSCBCentralManager *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
-        YMSCBPeripheral *yp = [this findPeripheral:peripheral];
-        
-        [yp handleConnectionResponse:nil];
-        
         if ([this.delegate respondsToSelector:@selector(centralManager:didConnectPeripheral:)]) {
             [this.delegate centralManager:central didConnectPeripheral:peripheral];
         }
@@ -333,17 +336,17 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
+    YMSCBPeripheral *yp = [self findPeripheral:peripheral];
+    
+    for (id key in yp.serviceDict) {
+        YMSCBService *service = yp.serviceDict[key];
+        service.cbService = nil;
+        service.isOn = NO;
+        service.isEnabled = NO;
+    }
+    
     __weak YMSCBCentralManager *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
-        YMSCBPeripheral *yp = [this findPeripheral:peripheral];
-        
-        for (id key in yp.serviceDict) {
-            YMSCBService *service = yp.serviceDict[key];
-            service.cbService = nil;
-            service.isOn = NO;
-            service.isEnabled = NO;
-        }
-        
         if ([this.delegate respondsToSelector:@selector(centralManager:didDisconnectPeripheral:error:)]) {
             [this.delegate centralManager:central didDisconnectPeripheral:peripheral error:error];
         }
@@ -352,10 +355,11 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
+    YMSCBPeripheral *yp = [self findPeripheral:peripheral];
+    [yp handleConnectionResponse:error];
+    
     __weak YMSCBCentralManager *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
-        YMSCBPeripheral *yp = [this findPeripheral:peripheral];
-        [yp handleConnectionResponse:error];
         if ([this.delegate respondsToSelector:@selector(centralManager:didFailToConnectPeripheral:error:)]) {
             [this.delegate centralManager:central didFailToConnectPeripheral:peripheral error:error];
         }

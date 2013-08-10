@@ -222,25 +222,24 @@
  @param error If an error occurred, the cause of the failure.
  */
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error {
-    __weak YMSCBPeripheral *this = self;
-    _YMS_PERFORM_ON_MAIN_THREAD(^{
+    if (self.discoverServicesCallback) {
+        NSMutableArray *services = [NSMutableArray new];
         
-        if (this.discoverServicesCallback) {
-            NSMutableArray *services = [NSMutableArray new];
-            
-            // TODO: add method syncServices
-            for (CBService *service in peripheral.services) {
-                YMSCBService *btService = [this findService:service];
-                if (btService) {
-                    btService.cbService = service;
-                    [services addObject:btService];
-                }
+        // TODO: add method syncServices
+        for (CBService *service in peripheral.services) {
+            YMSCBService *btService = [self findService:service];
+            if (btService) {
+                btService.cbService = service;
+                [services addObject:btService];
             }
-            
-            this.discoverServicesCallback(services, error);
-            this.discoverServicesCallback = nil;
         }
         
+        self.discoverServicesCallback(services, error);
+        self.discoverServicesCallback = nil;
+    }
+    
+    __weak YMSCBPeripheral *this = self;
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
         if ([this.delegate respondsToSelector:@selector(peripheral:didDiscoverServices:)]) {
             [this.delegate peripheral:peripheral didDiscoverServices:error];
         }
@@ -272,13 +271,12 @@
  @param error If an error occured, the cause of the failure.
  */
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error {
+    YMSCBService *btService = [self findService:service];
+    
+    [btService syncCharacteristics:service.characteristics];
+    [btService handleDiscoveredCharacteristicsResponse:btService.characteristicDict withError:error];
     __weak YMSCBPeripheral *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
-        YMSCBService *btService = [this findService:service];
-        
-        [btService syncCharacteristics:service.characteristics];
-        [btService handleDiscoveredCharacteristicsResponse:btService.characteristicDict withError:error];
-        
         if ([this.delegate respondsToSelector:@selector(peripheral:didDiscoverCharacteristicsForService:error:)]) {
             [this.delegate peripheral:peripheral didDiscoverCharacteristicsForService:service error:error];
         }
@@ -294,14 +292,14 @@
  @param error If an error occured, the cause of the failure.
  */
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+    YMSCBService *btService = [self findService:characteristic.service];
+    YMSCBCharacteristic *ct = [btService findCharacteristic:characteristic];
+        
+    [ct syncDescriptors:characteristic.descriptors];
+    [ct handleDiscoveredDescriptorsResponse:ct.descriptors withError:error];
+    
     __weak YMSCBPeripheral *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
-        YMSCBService *btService = [this findService:characteristic.service];
-        YMSCBCharacteristic *ct = [btService findCharacteristic:characteristic];
-        
-        [ct syncDescriptors:characteristic.descriptors];
-        [ct handleDiscoveredDescriptorsResponse:ct.descriptors withError:error];
-        
         if ([this.delegate respondsToSelector:@selector(peripheral:didDiscoverDescriptorsForCharacteristic:error:)]) {
             [this.delegate peripheral:peripheral didDiscoverDescriptorsForCharacteristic:characteristic error:error];
             
@@ -318,20 +316,19 @@
  @param error If an error occured, the cause of the failure.
  */
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+    YMSCBService *btService = [self findService:characteristic.service];
+    YMSCBCharacteristic *yc = [btService findCharacteristic:characteristic];
+        
+    if (yc.cbCharacteristic.isNotifying) {
+        [btService notifyCharacteristicHandler:yc error:error];
+        
+    } else {
+        if ([yc.readCallbacks count] > 0) {
+            [yc executeReadCallback:characteristic.value error:error];
+        }
+    }
     __weak YMSCBPeripheral *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
-        YMSCBService *btService = [this findService:characteristic.service];
-        YMSCBCharacteristic *yc = [btService findCharacteristic:characteristic];
-        
-        if (yc.cbCharacteristic.isNotifying) {
-            [btService notifyCharacteristicHandler:yc error:error];
-            
-        } else {
-            if ([yc.readCallbacks count] > 0) {
-                [yc executeReadCallback:characteristic.value error:error];
-            }
-        }
-        
         if ([this.delegate respondsToSelector:@selector(peripheral:didUpdateValueForCharacteristic:error:)]) {
             [this.delegate peripheral:peripheral didUpdateValueForCharacteristic:characteristic error:error];
         }
@@ -364,13 +361,12 @@
  @param error If an error occured, the cause of the failure.
  */
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+    YMSCBService *btService = [self findService:characteristic.service];
+    YMSCBCharacteristic *ct = [btService findCharacteristic:characteristic];
+        
+    [ct executeNotificationStateCallback:error];
     __weak YMSCBPeripheral *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
-        YMSCBService *btService = [this findService:characteristic.service];
-        YMSCBCharacteristic *ct = [btService findCharacteristic:characteristic];
-        
-        [ct executeNotificationStateCallback:error];
-        
         if ([this.delegate respondsToSelector:@selector(peripheral:didUpdateNotificationStateForCharacteristic:error:)]) {
             [this.delegate peripheral:peripheral didUpdateNotificationStateForCharacteristic:characteristic error:error];
             
@@ -387,19 +383,19 @@
  @param error If an error occured, the cause of the failure.
  */
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+
+    YMSCBService *btService = [self findService:characteristic.service];
+    YMSCBCharacteristic *yc = [btService findCharacteristic:characteristic];
+    
+    if ([yc.writeCallbacks count] > 0) {
+        [yc executeWriteCallback:error];
+    } else {
+        // TODO is this dangerous?
+        [btService notifyCharacteristicHandler:yc error:error];
+    }
+    
     __weak YMSCBPeripheral *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
-        
-        YMSCBService *btService = [this findService:characteristic.service];
-        YMSCBCharacteristic *yc = [btService findCharacteristic:characteristic];
-        
-        if ([yc.writeCallbacks count] > 0) {
-            [yc executeWriteCallback:error];
-        } else {
-            // TODO is this dangerous?
-            [btService notifyCharacteristicHandler:yc error:error];
-        }
-        
         if ([this.delegate respondsToSelector:@selector(peripheral:didWriteValueForCharacteristic:error:)]) {
             [this.delegate peripheral:peripheral didWriteValueForCharacteristic:characteristic error:error];
         }
