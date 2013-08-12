@@ -26,7 +26,7 @@
 #import "YMSCBUtils.h"
 
 // iOS7 
-#define kYMSCBVersion "0.948"
+#define kYMSCBVersion "0.949"
 extern NSString *const YMSCBVersion;
 
 @class YMSCBPeripheral;
