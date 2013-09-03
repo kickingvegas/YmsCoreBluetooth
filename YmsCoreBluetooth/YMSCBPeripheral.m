@@ -193,7 +193,8 @@
 
 - (void)handleConnectionResponse:(NSError *)error {
     if (self.connectCallback) {
-        self.connectCallback(self, error);
+        YMSCBPeripheralConnectCallbackBlockType callback = self.connectCallback;
+        callback(self, error);
         self.connectCallback = nil;
     } else {
         [self defaultConnectionHandler];

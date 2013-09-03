@@ -64,10 +64,10 @@ typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
 @property (nonatomic, strong) NSArray *descriptors;
 
 /// Notification state callback
-@property (nonatomic, strong) YMSCBWriteCallbackBlockType notificationStateCallback;
+@property (nonatomic, copy) YMSCBWriteCallbackBlockType notificationStateCallback;
 
 /// Callback for descriptors that are discovered.
-@property (nonatomic, strong) YMSCBDiscoverDescriptorsCallbackBlockType discoverDescriptorsCallback;
+@property (nonatomic, copy) YMSCBDiscoverDescriptorsCallbackBlockType discoverDescriptorsCallback;
 
 
 /**

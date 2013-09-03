@@ -114,10 +114,10 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
 @property (nonatomic, assign) NSTimeInterval watchdogTimerInterval;
 
 /// Holds callback for connection established.
-@property (nonatomic, strong) YMSCBPeripheralConnectCallbackBlockType connectCallback;
+@property (nonatomic, copy) YMSCBPeripheralConnectCallbackBlockType connectCallback;
 
 /// Holds callback for services discovered.
-@property (nonatomic, strong) YMSCBPeripheralDiscoverServicesBlockType discoverServicesCallback;
+@property (nonatomic, copy) YMSCBPeripheralDiscoverServicesBlockType discoverServicesCallback;
 
 
 /**

@@ -26,7 +26,7 @@
 #import "YMSCBUtils.h"
 
 // iOS7 
-#define kYMSCBVersion "0.949"
+#define kYMSCBVersion "0.950"
 extern NSString *const YMSCBVersion;
 
 @class YMSCBPeripheral;
@@ -98,10 +98,10 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
 
 
 /// Peripheral Discovered Callback
-@property (nonatomic, strong) YMSCBDiscoverCallbackBlockType discoveredCallback;
+@property (nonatomic, copy) YMSCBDiscoverCallbackBlockType discoveredCallback;
 
 /// Peripheral Retreived Callback
-@property (nonatomic, strong) YMSCBRetrieveCallbackBlockType retrievedCallback;
+@property (nonatomic, copy) YMSCBRetrieveCallbackBlockType retrievedCallback;
 
 /// If YES, then discovered peripheral UUIDs are stored in standardUserDefaults.
 @property (nonatomic, assign) BOOL useStoredPeripherals;
