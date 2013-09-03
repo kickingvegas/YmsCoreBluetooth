@@ -35,7 +35,7 @@
 }
 
 - (void)writeValue:(NSData *)data withBlock:(void (^)(NSError *))writeCallback {
-    [self.writeCallbacks push:writeCallback];
+    [self.writeCallbacks push:[writeCallback copy]];
     [self.parent.cbPeripheral writeValue:data forDescriptor:self.cbDescriptor];
 }
 
@@ -47,6 +47,7 @@
 
 
 - (void)readValueWithBlock:(void (^)(NSData *, NSError *))readCallback {
+    [self.readCallbacks push:[readCallback copy]];
     [self.parent.cbPeripheral readValueForDescriptor:self.cbDescriptor];
 }
 
