@@ -40,6 +40,8 @@
 	
 	<option value="properties">Properties</option>
 	
+	<option value="//api/name/period">&nbsp;&nbsp;&nbsp;&nbsp;period</option>
+	
 	<option value="//api/name/x">&nbsp;&nbsp;&nbsp;&nbsp;x</option>
 	
 	<option value="//api/name/y">&nbsp;&nbsp;&nbsp;&nbsp;y</option>
@@ -53,9 +55,13 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
+	<option value="//api/name/configPeriod:">&nbsp;&nbsp;&nbsp;&nbsp;- configPeriod:</option>
+	
 	<option value="//api/name/initWithName:parent:baseHi:baseLo:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:parent:baseHi:baseLo:</option>
 	
 	<option value="//api/name/notifyCharacteristicHandler:error:">&nbsp;&nbsp;&nbsp;&nbsp;- notifyCharacteristicHandler:error:</option>
+	
+	<option value="//api/name/readPeriod">&nbsp;&nbsp;&nbsp;&nbsp;- readPeriod</option>
 	
 	
 	
@@ -81,6 +87,8 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/period">period</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/x">x</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/y">y</a></span></li>
@@ -95,9 +103,13 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/configPeriod:">configPeriod:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithName:parent:baseHi:baseLo:">initWithName:parent:baseHi:baseLo:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/notifyCharacteristicHandler:error:">notifyCharacteristicHandler:error:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/readPeriod">readPeriod</a></span></li>
 	
 </ul></li>
 
@@ -173,6 +185,27 @@
 	</span>
 	<span class="task-item-suffix">property</span>
 	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/period">&nbsp;&nbsp;period</a></code>
+		<span class="tooltip"><p>Period</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/configPeriod:">&ndash;&nbsp;configPeriod:</a></code>
+		<span class="tooltip"><p>Configure accelerometer <a href="#//api/name/period">period</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/readPeriod">&ndash;&nbsp;readPeriod</a></code>
+		<span class="tooltip"><p>Read accelerometer <a href="#//api/name/period">period</a>.</p></span>
+	</span>
+	
+	
 </li>
 						</ul>
 						
@@ -207,6 +240,47 @@
 					<div class="section section-methods">
 						<a title="Properties" name="properties"></a>
 						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/period" title="period"></a>
+	<h3 class="subsubtitle method-title">period</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Period</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSNumber *period</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Period</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DEAAccelerometerService.h</code><br />
+	</div>				
+	
+	
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/x" title="x"></a>
@@ -342,6 +416,57 @@
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
+	<a name="//api/name/configPeriod:" title="configPeriod:"></a>
+	<h3 class="subsubtitle method-title">configPeriod:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Configure accelerometer <a href="#//api/name/period">period</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)configPeriod:(uint8_t)<em>value</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>value</em></dt>
+			<dd><p>unsigned byte value to set <a href="#//api/name/period">period</a></p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Configure accelerometer <a href="#//api/name/period">period</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DEAAccelerometerService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/initWithName:parent:baseHi:baseLo:" title="initWithName:parent:baseHi:baseLo:"></a>
 	<h3 class="subsubtitle method-title">initWithName:parent:baseHi:baseLo:</h3>
 	
@@ -362,22 +487,22 @@
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>oName</em></dt>
-			<dd><p><a href="#//api/name/name">name</a> of service</p></dd>
+			<dd><p><a href="../Classes/YMSCBService.html#//api/name/name">name</a> of service</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>pObj</em></dt>
-			<dd><p><a href="#//api/name/parent">parent</a> object which owns this service</p></dd>
+			<dd><p><a href="../Classes/YMSCBService.html#//api/name/parent">parent</a> object which owns this service</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>hi</em></dt>
-			<dd><p>top 64 bits of 128-bit <a href="#//api/name/base">base</a> address value</p></dd>
+			<dd><p>top 64 bits of 128-bit <a href="../Classes/YMSCBService.html#//api/name/base">base</a> address value</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>lo</em></dt>
-			<dd><p>bottom 64 bits of 128-bit <a href="#//api/name/base">base</a> address value</p></dd>
+			<dd><p>bottom 64 bits of 128-bit <a href="../Classes/YMSCBService.html#//api/name/base">base</a> address value</p></dd>
 		</dl>
 		
 	</div>
@@ -456,7 +581,7 @@
 <p>This method is invoked by the CBPeripheralDelegate method peripheral:didUpdateValueForCharacteristic:error:
 conformed to by <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</p>
 
-<p>This method is typically overridden to handle <a href="#//api/name/characteristics">characteristics</a> whose notification has been turned on.</p>
+<p>This method is typically overridden to handle <a href="../Classes/YMSCBService.html#//api/name/characteristics">characteristics</a> whose notification has been turned on.</p>
 	</div>
 	
 	
@@ -468,6 +593,47 @@ conformed to by <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</
 	<div class="method-subsection declared-in-section">
 		<h4 class="method-subtitle">Declared In</h4>
 		<code class="declared-in-ref">YMSCBService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/readPeriod" title="readPeriod"></a>
+	<h3 class="subsubtitle method-title">readPeriod</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Read accelerometer <a href="#//api/name/period">period</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)readPeriod</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Read accelerometer <a href="#//api/name/period">period</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DEAAccelerometerService.h</code><br />
 	</div>				
 	
 	
@@ -486,7 +652,7 @@ conformed to by <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-07-16)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-09-07)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
 						
