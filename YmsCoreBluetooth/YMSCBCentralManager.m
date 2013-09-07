@@ -156,8 +156,9 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 - (YMSCBPeripheral *)findPeripheral:(CBPeripheral *)peripheral {
     
     YMSCBPeripheral *result = nil;
+    NSArray *peripheralsCopy = [NSArray arrayWithArray:self.ymsPeripherals];
     
-    for (YMSCBPeripheral *yPeripheral in self.ymsPeripherals) {
+    for (YMSCBPeripheral *yPeripheral in peripheralsCopy) {
         if (yPeripheral.cbPeripheral == peripheral) {
             result = yPeripheral;
             break;
@@ -296,7 +297,6 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 
 - (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals {
-
     __weak YMSCBCentralManager *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
         if (this.retrievedCallback) {
