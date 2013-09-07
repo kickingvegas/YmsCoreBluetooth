@@ -36,6 +36,15 @@
         [self.notifySwitch setState:NSOffState];
     }
     [self.notifySwitch setEnabled:self.service.isEnabled];
+    
+    
+    self.periodSlider.enabled = self.service.isEnabled;
+    
+    DEAAccelerometerService *as = (DEAAccelerometerService *)self.service;
+    if (as.isEnabled) {
+        [as readPeriod];
+    }
+
 }
 
 - (void)deconfigure {
