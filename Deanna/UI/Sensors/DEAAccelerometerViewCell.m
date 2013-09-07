@@ -45,19 +45,30 @@
     }
 }
 
+- (IBAction)periodSliderAction:(id)sender {
+    
+    uint8_t value;
+    
+    value = (uint8_t)nearbyintf(self.periodSlider.value);
+    
+    //NSLog(@"Value: %x", value);
+    [self.service configPeriod:value];
+}
+
 - (void)configureWithSensorTag:(DEASensorTag *)sensorTag {
     self.service = sensorTag.serviceDict[@"accelerometer"];
     
-    for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled"]) {
+    for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled", @"period"]) {
         [self.service addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
     }
     
     [self.notifySwitch setOn:self.service.isOn animated:YES];
     [self.notifySwitch setEnabled:self.service.isEnabled];
+    
 }
 
 - (void)deconfigure {
-    for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled"]) {
+    for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled", @"period"]) {
         [self.service removeObserver:self forKeyPath:key];
     }
 }
@@ -80,6 +91,21 @@
         [self.notifySwitch setOn:as.isOn animated:YES];
     } else if ([keyPath isEqualToString:@"isEnabled"]) {
         [self.notifySwitch setEnabled:as.isEnabled];
+        if (as.isEnabled) {
+            self.periodSlider.enabled = as.isEnabled;
+            [as readPeriod];
+        }
+        
+    } else if ([keyPath isEqualToString:@"period"]) {
+        
+        int pvalue = (int)([as.period floatValue] * 10.0);
+        
+        self.periodLabel.text = [NSString stringWithFormat:@"%d ms", pvalue];
+        if (!self.hasReadPeriod) {
+            [self.periodSlider setValue:[as.period floatValue] animated:YES];
+            self.hasReadPeriod = YES;
+        }
+
     }
 
 }
