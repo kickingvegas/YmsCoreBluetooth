@@ -58,7 +58,7 @@
 
 - (void)writeValue:(NSData *)data withBlock:(void (^)(NSError *))writeCallback {
     if (writeCallback) {
-        [self.writeCallbacks push:writeCallback];
+        [self.writeCallbacks push:[writeCallback copy]];
         [self.parent.cbPeripheral writeValue:data
                            forCharacteristic:self.cbCharacteristic
                                         type:CBCharacteristicWriteWithResponse];
@@ -76,7 +76,7 @@
 
 
 - (void)readValueWithBlock:(void (^)(NSData *, NSError *))readCallback {
-    [self.readCallbacks push:readCallback];
+    [self.readCallbacks push:[readCallback copy]];
     [self.parent.cbPeripheral readValueForCharacteristic:self.cbCharacteristic];
 }
 
