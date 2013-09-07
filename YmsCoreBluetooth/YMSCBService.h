@@ -78,7 +78,7 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 @property (nonatomic, strong) NSMutableDictionary *characteristicDict;
 
 /// Callback for characteristics that are discovered.
-@property (nonatomic, strong) YMSCBDiscoverCharacteristicsCallbackBlockType discoverCharacteristicsCallback;
+@property (nonatomic, copy) YMSCBDiscoverCharacteristicsCallbackBlockType discoverCharacteristicsCallback;
 
 
 /** @name Initializing a YMSCBService */
