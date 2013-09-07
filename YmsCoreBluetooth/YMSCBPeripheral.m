@@ -149,6 +149,7 @@
     if (self.watchdogTimer) {
         [self.watchdogTimer invalidate];
         self.watchdogTimer = nil;
+        self.watchdogRaised = NO;
     }
 
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.watchdogTimerInterval
@@ -163,10 +164,10 @@
 - (void)watchdogDisconnect {
     // Watchdog aware method
     if (!self.isConnected) {
+        self.watchdogRaised = YES;
         [self disconnect];
     }
     self.watchdogTimer = nil;
-    
 }
 
 - (void)connectWithOptions:(NSDictionary *)options withBlock:(void (^)(YMSCBPeripheral *, NSError *))connectCallback {
@@ -185,7 +186,8 @@
 
 - (void)handleConnectionResponse:(NSError *)error {
     if (self.connectCallback) {
-        self.connectCallback(self, error);
+        YMSCBPeripheralConnectCallbackBlockType callback = self.connectCallback;
+        callback(self, error);
         self.connectCallback = nil;
     } else {
         [self defaultConnectionHandler];
