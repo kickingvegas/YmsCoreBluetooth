@@ -64,6 +64,13 @@
     
     [self.notifySwitch setOn:self.service.isOn animated:YES];
     [self.notifySwitch setEnabled:self.service.isEnabled];
+    self.periodSlider.enabled = self.service.isEnabled;
+    
+    DEAAccelerometerService *as = (DEAAccelerometerService *)self.service;
+    if (as.isEnabled) {
+        [as readPeriod];
+    }
+    
     
 }
 
