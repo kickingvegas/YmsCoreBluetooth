@@ -25,8 +25,19 @@
 @property (strong) IBOutlet NSTextField *accelYLabel;
 @property (strong) IBOutlet NSTextField *accelZLabel;
 
+@property (strong) IBOutlet NSTextField *periodLabel;
 
+@property (strong) IBOutlet NSSlider *periodSlider;
 
+/// hasReadPeriod
+@property (nonatomic, assign) BOOL hasReadPeriod;
+
+/**
+ Action method for periodSlider
+ 
+ @param sender periodSlider UI component.
+ */
+- (IBAction)periodSliderAction:(id)sender;
 
 
 @end
