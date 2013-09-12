@@ -44,6 +44,32 @@
 }
 
 
+- (instancetype)initWithName:(NSString *)oName
+                      parent:(YMSCBPeripheral *)pObj
+                      baseHi:(int64_t)hi
+                      baseLo:(int64_t)lo
+               serviceOffset:(int)serviceOffset {
+
+    self = [super init];
+    if (self) {
+        _name = oName;
+        _parent = pObj;
+        _base.hi = hi;
+        _base.lo = lo;
+        _characteristicDict = [[NSMutableDictionary alloc] init];
+        
+        if ((hi == 0) && (lo == 0)) {
+            NSString *addrString = [NSString stringWithFormat:@"%x", serviceOffset];
+            _uuid = [CBUUID UUIDWithString:addrString];
+
+        } else {
+            _uuid = [YMSCBUtils createCBUUID:&_base withIntOffset:serviceOffset];
+        }
+    }
+    return self;
+}
+
+
 - (id)objectForKeyedSubscript:(id)key {
     return self.characteristicDict[key];
 }
@@ -89,6 +115,24 @@
         [result addObject:yc.uuid];
     }
     
+    return result;
+}
+
+- (NSArray *)characteristicsSubset:(NSArray *)keys {
+    NSArray *result = nil;
+    NSMutableArray *tempArray = [[NSMutableArray alloc] initWithCapacity:keys.count];
+    
+    for (NSString *key in keys) {
+        YMSCBCharacteristic *yc = (YMSCBCharacteristic *)self[key];
+        
+        if (yc) {
+            [tempArray addObject:yc.uuid];
+        } else {
+            NSLog(@"WARNING: characteristic key '%@' is not found in service '%@' for characteristicSubset:", key, self.name);
+        }
+    }
+    
+    result = [NSArray arrayWithArray:tempArray];
     return result;
 }
 

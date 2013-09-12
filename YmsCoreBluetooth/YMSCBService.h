@@ -66,6 +66,9 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 /// 128 bit base address struct
 @property (nonatomic, assign) yms_u128_t base;
 
+/// Service UUID
+@property (nonatomic, strong) CBUUID *uuid;
+
 /**
  When set to YES, the CoreBluetooth service is turned on.
 */
@@ -80,7 +83,6 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 /// Callback for characteristics that are discovered.
 @property (nonatomic, copy) YMSCBDiscoverCharacteristicsCallbackBlockType discoverCharacteristicsCallback;
 
-
 /** @name Initializing a YMSCBService */
 /**
  Initialize class instance.
@@ -94,6 +96,22 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
                       parent:(YMSCBPeripheral *)pObj
                       baseHi:(int64_t)hi
                       baseLo:(int64_t)lo;
+
+
+/**
+ Initialize class instance.
+ @param oName name of service
+ @param pObj parent object which owns this service
+ @param hi top 64 bits of 128-bit base address value
+ @param lo bottom 64 bits of 128-bit base address value
+ @param serviceOffset offset address of service
+ @return YMSCBCharacteristic
+ */
+- (instancetype)initWithName:(NSString *)oName
+                      parent:(YMSCBPeripheral *)pObj
+                      baseHi:(int64_t)hi
+                      baseLo:(int64_t)lo
+               serviceOffset:(int)serviceOffset;
 
 /** @name Adding a BLE characteristic */
 /**
@@ -114,8 +132,19 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 /** @name Retrieve CBUUIDs for all discovered characteristics */
 /**
  Return array of CBUUIDs for all YMSCBCharacteristic instances in characteristicDict.
+ 
+ @return array of CBUUIDs
  */
 - (NSArray *)characteristics;
+
+/**
+ Return array of CBUUIDs for YMSCBCharacteristic instances in characteristicDict whose key is included in keys.
+ 
+ @param keys array of NSString keys, where each key must exist in characteristicDict.
+ 
+ @return array of CBUUIDs
+ */
+- (NSArray *)characteristicsSubset:(NSArray *)keys;
 
 /** @name Synchronize found CBCharacteristic instances with corresponding their YMSCBCharacter instance */
 /**
