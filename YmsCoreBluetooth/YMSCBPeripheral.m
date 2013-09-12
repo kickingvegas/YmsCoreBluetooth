@@ -23,6 +23,7 @@
 #import "YMSCBDescriptor.h"
 
 @interface YMSCBPeripheral ()
+- (id)objectForKeyedSubscript:(id)key;
 @end
 
 @implementation YMSCBPeripheral
@@ -63,6 +64,11 @@
     }
     
     return result;
+}
+
+
+- (id)objectForKeyedSubscript:(id)key {
+    return self.serviceDict[key];
 }
 
 
@@ -178,7 +184,7 @@
 }
 
 - (void)connectWithOptions:(NSDictionary *)options withBlock:(void (^)(YMSCBPeripheral *, NSError *))connectCallback {
-    self.connectCallback = connectCallback;
+    self.connectCallback = [connectCallback copy];
     [self.central.manager connectPeripheral:self.cbPeripheral options:options];
 }
 
@@ -192,9 +198,14 @@
 
 
 - (void)handleConnectionResponse:(NSError *)error {
+    YMSCBPeripheralConnectCallbackBlockType callback = self.connectCallback;
+    
     if (self.connectCallback) {
-        YMSCBPeripheralConnectCallbackBlockType callback = self.connectCallback;
-        callback(self, error);
+        if (callback) {
+            callback(self, error);
+        } else {
+            NSAssert(NO, @"ERROR: connectCallback is nil; please check for multi-threaded access of handleConnectionResponse");
+        }
         self.connectCallback = nil;
     } else {
         [self defaultConnectionHandler];
