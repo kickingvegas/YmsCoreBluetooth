@@ -43,14 +43,20 @@
 
 - (void)setNotifyValue:(BOOL)notifyValue withBlock:(void (^)(NSError *))notifyStateCallback {
     if (notifyStateCallback) {
-        self.notificationStateCallback = notifyStateCallback;
+        self.notificationStateCallback = [notifyStateCallback copy];
     }
     [self.parent.cbPeripheral setNotifyValue:notifyValue forCharacteristic:self.cbCharacteristic];
 }
 
 - (void)executeNotificationStateCallback:(NSError *)error {
+    YMSCBWriteCallbackBlockType callback = self.notificationStateCallback;
+    
     if (self.notificationStateCallback) {
-        self.notificationStateCallback(error);
+        if (callback) {
+            callback(error);
+        } else {
+            NSAssert(NO, @"ERROR: notificationStateCallback is nil; please check for multi-threaded access of executeNotificationStateCallback");
+        }
         self.notificationStateCallback = nil;
     }
 }
@@ -93,7 +99,7 @@
 
 - (void)discoverDescriptorsWithBlock:(void (^)(NSArray *, NSError *))callback {
     if (self.cbCharacteristic) {
-        self.discoverDescriptorsCallback = callback;
+        self.discoverDescriptorsCallback = [callback copy];
     
         [self.parent.cbPeripheral discoverDescriptorsForCharacteristic:self.cbCharacteristic];
     } else {
@@ -103,7 +109,15 @@
 
 
 - (void)handleDiscoveredDescriptorsResponse:(NSArray *)ydescriptors withError:(NSError *)error {
-    self.discoverDescriptorsCallback(ydescriptors, error);
+    YMSCBDiscoverDescriptorsCallbackBlockType callback = self.discoverDescriptorsCallback;
+    if (self.discoverDescriptorsCallback) {
+        if (callback) {
+            callback(ydescriptors, error);
+        } else {
+            NSAssert(NO, @"ERROR: discoverDescriptorsCallback is nil; please check for multi-threaded access of handleDiscoveredDescriptorsResponse");
+        }
+    }
+    self.discoverDescriptorsCallback = nil;
 }
 
 - (void)syncDescriptors:(NSArray *)foundDescriptors {
