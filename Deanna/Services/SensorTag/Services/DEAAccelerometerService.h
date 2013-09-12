@@ -30,5 +30,20 @@
 @property (nonatomic, strong) NSNumber *y;
 /// z value
 @property (nonatomic, strong) NSNumber *z;
+/// Period
+@property (nonatomic, strong) NSNumber *period;
+
+/**
+ Configure accelerometer period.
+ 
+ @param value unsigned byte value to set period
+ */
+- (void)configPeriod:(uint8_t)value;
+
+/**
+ Read accelerometer period.
+ */
+- (void)readPeriod;
+
 
 @end

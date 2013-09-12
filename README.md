@@ -1,5 +1,5 @@
-# YmsCoreBluetooth v0.945 (beta)
-A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS or OS X applications using the CoreBluetooth API. Includes *Deanna* and *DeannaMac*, applications to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag) for iOS and OS X respectively.
+# YmsCoreBluetooth v0.946 (beta)
+A block-based framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS or OS X applications using the CoreBluetooth API. Includes *Deanna* and *DeannaMac*, applications to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag) for iOS and OS X respectively.
 
 * [YmsCoreBluetooth API Reference](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/index.html)
 
@@ -372,6 +372,9 @@ Code tested on:
 * No support is offered for the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator [TN2295](http://developer.apple.com/library/ios/#technotes/tn2295/_index.html), I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.
 
 ## Latest Changes
+### Sat Sep 7 2013 - Interim Release (ver 0.946)
+* #25 - Support for accelerometer period
+* #73 - Fix declaration of block properties to copy
 
 ### Tue Jul 16 2013 - Interim Release (ver 0.945)
 * Bugfix #61 - Change all delegate implementations so that the callback is performed on the main thread.

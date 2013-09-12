@@ -1,5 +1,9 @@
 # YmsCoreBluetooth Changes
 
+### Sat Sep 7 2013 - Interim Release (ver 0.946)
+* #25 - Support for accelerometer period
+* #73 - Fix declaration of block properties to copy
+
 ### Tue Jul 16 2013 - Interim Release (ver 0.945)
 * Bugfix #61 - Change all delegate implementations so that the callback is performed on the main thread.
 

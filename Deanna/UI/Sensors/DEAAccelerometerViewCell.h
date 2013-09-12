@@ -35,6 +35,12 @@
 @property (strong, nonatomic) IBOutlet UILabel *accelYLabel;
 /// Z label
 @property (strong, nonatomic) IBOutlet UILabel *accelZLabel;
+/// Period label
+@property (strong, nonatomic) IBOutlet UILabel *periodLabel;
+/// Period slider
+@property (strong, nonatomic) IBOutlet UISlider *periodSlider;
+/// hasReadPeriod
+@property (nonatomic, assign) BOOL hasReadPeriod;
 
 /**
  Action method to handle notifySwitch toggle.
@@ -42,6 +48,13 @@
  @param sender notifySwitch UI component.
  */
 - (IBAction)notifySwitchAction:(id)sender;
+
+/**
+ Action method for periodSlider
+ 
+ @param sender periodSlider UI component.
+ */
+- (IBAction)periodSliderAction:(id)sender;
 
 /**
  Configure this class to use sensorTag.

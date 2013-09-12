@@ -74,6 +74,32 @@ float calcAccel(int16_t rawV) {
     }
 }
 
+- (void)configPeriod:(uint8_t)value {
+    
+    YMSCBCharacteristic *periodCt = self.characteristicDict[@"period"];
+    __weak DEAAccelerometerService *this = self;
+    [periodCt writeByte:value withBlock:^(NSError *error) {
+        //NSLog(@"Set period to: %x", value);
+        this.period = @(value);
+    }];
+}
+
+- (void)readPeriod {
+    YMSCBCharacteristic *periodCt = self.characteristicDict[@"period"];
+    
+    __weak DEAAccelerometerService *this = self;
+    
+    [periodCt readValueWithBlock:^(NSData *data, NSError *error) {
+        char val[data.length];
+        [data getBytes:&val length:data.length];
+        
+        int16_t periodValue = val[0];
+        
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.period = @(periodValue);
+        });
+    }];
+}
 
 
 

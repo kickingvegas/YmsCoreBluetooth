@@ -27,7 +27,7 @@
 - (void)configureWithSensorTag:(DEASensorTag *)sensorTag {
     self.service = sensorTag.serviceDict[@"accelerometer"];
     
-    for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled"]) {
+    for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled", @"period"]) {
         [self.service addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
     }
     if (self.service.isOn) {
@@ -36,12 +36,34 @@
         [self.notifySwitch setState:NSOffState];
     }
     [self.notifySwitch setEnabled:self.service.isEnabled];
+    
+    
+    self.periodSlider.enabled = self.service.isEnabled;
+    
+    DEAAccelerometerService *as = (DEAAccelerometerService *)self.service;
+    if (as.isEnabled) {
+        [as readPeriod];
+    }
+
 }
 
 - (void)deconfigure {
-    for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled"]) {
+    for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled", @"period"]) {
         [self.service removeObserver:self forKeyPath:key];
     }
+}
+
+
+- (IBAction)periodSliderAction:(id)sender {
+    
+    uint8_t value;
+    
+    value = (uint8_t)[self.periodSlider integerValue];
+    
+    //NSLog(@"Value: %x", value);
+    
+    DEAAccelerometerService *as = (DEAAccelerometerService *)self.service;
+    [as configPeriod:value];
 }
 
 
@@ -67,9 +89,24 @@
         }
     } else if ([keyPath isEqualToString:@"isEnabled"]) {
         [self.notifySwitch setEnabled:as.isEnabled];
-    }
+        if (as.isEnabled) {
+            self.periodSlider.enabled = as.isEnabled;
+            [as readPeriod];
+        }
     
+    } else if ([keyPath isEqualToString:@"period"]) {
+        
+        int pvalue = (int)([as.period floatValue] * 10.0);
+
+        self.periodLabel.stringValue = [NSString stringWithFormat:@"%d ms", pvalue];
+        if (!self.hasReadPeriod) {
+            [self.periodSlider setFloatValue:[as.period floatValue]];
+            self.hasReadPeriod = YES;
+        }
+        
+    }
 }
+
 
 
 @end
