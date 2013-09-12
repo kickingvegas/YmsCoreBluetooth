@@ -50,19 +50,24 @@
     [[UINavigationBar appearance] setBarTintColor:[theme navbarBackgroundColor]];
     [[UIToolbar appearance] setBarTintColor:[theme navbarBackgroundColor]];
     
-    [[UINavigationBar appearance] setTitleTextAttributes:@{
-                                UITextAttributeTextColor: [theme highlightTextColor],
-                          UITextAttributeTextShadowColor: [theme shadowColor],
-                         UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-                                     UITextAttributeFont: [theme bodyFontWithSize:0.0] }];
+    NSShadow *barButtonShadow = [NSShadow new];
+    barButtonShadow.shadowOffset = CGSizeMake(0, -1);
+    barButtonShadow.shadowColor = [theme shadowColor];
+    
+    [[UINavigationBar appearance]
+     setTitleTextAttributes:@{
+                              NSForegroundColorAttributeName: [theme highlightTextColor],
+                              NSShadowAttributeName: barButtonShadow,
+                              NSFontAttributeName: [theme bodyFontWithSize:0.0] }];
+    
     
     [[UIBarButtonItem appearance]
      setTitleTextAttributes:@{
-     UITextAttributeTextColor: [theme highlightTextColor],
-     UITextAttributeTextShadowColor: [theme shadowColor],
-     UITextAttributeTextShadowOffset: [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
-     UITextAttributeFont: [theme bodyFontWithSize:0.0] }
+                              NSForegroundColorAttributeName: [theme highlightTextColor],
+                              NSShadowAttributeName: barButtonShadow,
+                              NSFontAttributeName: [theme bodyFontWithSize:0.0] }
      forState:UIControlStateNormal];
+
     
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setTextColor:[theme highlightTextColor]];
     [[UILabel appearanceWhenContainedIn:[UITableViewHeaderFooterView class], nil] setShadowColor:nil];
