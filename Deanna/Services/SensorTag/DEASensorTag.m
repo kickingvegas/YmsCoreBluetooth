@@ -28,6 +28,7 @@
 #import "DEATemperatureService.h"
 #import "YMSCBCharacteristic.h"
 #import "YMSCBDescriptor.h"
+#import "TISensorTag.h"
 
 
 @implementation DEASensorTag
@@ -40,14 +41,14 @@
     self = [super initWithPeripheral:peripheral central:owner baseHi:hi baseLo:lo];
     
     if (self) {
-        DEATemperatureService *ts = [[DEATemperatureService alloc] initWithName:@"temperature" parent:self baseHi:hi baseLo:lo];
-        DEAAccelerometerService *as = [[DEAAccelerometerService alloc] initWithName:@"accelerometer" parent:self baseHi:hi baseLo:lo];
-        DEASimpleKeysService *sks = [[DEASimpleKeysService alloc] initWithName:@"simplekeys" parent:self baseHi:hi baseLo:lo];
-        DEAHumidityService *hs = [[DEAHumidityService alloc] initWithName:@"humidity" parent:self baseHi:hi baseLo:lo];
-        DEABarometerService *bs = [[DEABarometerService alloc] initWithName:@"barometer" parent:self baseHi:hi baseLo:lo];
-        DEAGyroscopeService *gs = [[DEAGyroscopeService alloc] initWithName:@"gyroscope" parent:self baseHi:hi baseLo:lo];
-        DEAMagnetometerService *ms = [[DEAMagnetometerService alloc] initWithName:@"magnetometer" parent:self baseHi:hi baseLo:lo];
-        DEADeviceInfoService *ds = [[DEADeviceInfoService alloc] initWithName:@"devinfo" parent:self baseHi:hi baseLo:lo];
+        DEATemperatureService *ts = [[DEATemperatureService alloc] initWithName:@"temperature" parent:self baseHi:hi baseLo:lo serviceOffset:kSensorTag_TEMPERATURE_SERVICE];
+        DEAAccelerometerService *as = [[DEAAccelerometerService alloc] initWithName:@"accelerometer" parent:self baseHi:hi baseLo:lo serviceOffset:kSensorTag_ACCELEROMETER_SERVICE];
+        DEASimpleKeysService *sks = [[DEASimpleKeysService alloc] initWithName:@"simplekeys" parent:self baseHi:0 baseLo:0 serviceOffset:kSensorTag_SIMPLEKEYS_SERVICE];
+        DEAHumidityService *hs = [[DEAHumidityService alloc] initWithName:@"humidity" parent:self baseHi:hi baseLo:lo serviceOffset:kSensorTag_HUMIDITY_SERVICE];
+        DEABarometerService *bs = [[DEABarometerService alloc] initWithName:@"barometer" parent:self baseHi:hi baseLo:lo serviceOffset:kSensorTag_BAROMETER_SERVICE];
+        DEAGyroscopeService *gs = [[DEAGyroscopeService alloc] initWithName:@"gyroscope" parent:self baseHi:hi baseLo:lo serviceOffset:kSensorTag_GYROSCOPE_SERVICE];
+        DEAMagnetometerService *ms = [[DEAMagnetometerService alloc] initWithName:@"magnetometer" parent:self baseHi:hi baseLo:lo serviceOffset:kSensorTag_MAGNETOMETER_SERVICE];
+        DEADeviceInfoService *ds = [[DEADeviceInfoService alloc] initWithName:@"devinfo" parent:self baseHi:0 baseLo:0 serviceOffset:kSensorTag_DEVINFO_SERV_UUID];
         
         self.serviceDict = @{@"temperature": ts,
                              @"accelerometer": as,
@@ -70,6 +71,9 @@
         if (error) {
             return;
         }
+        
+        // Example where only a subset of services is to be discovered.
+        //[yp discoverServices:[yp servicesSubset:@[@"temperature", @"simplekeys", @"devinfo"]] withBlock:^(NSArray *yservices, NSError *error) {
         
         [yp discoverServices:[yp services] withBlock:^(NSArray *yservices, NSError *error) {
             if (error) {
