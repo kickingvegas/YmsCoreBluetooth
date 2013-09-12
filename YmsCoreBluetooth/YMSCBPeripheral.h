@@ -32,16 +32,6 @@
 typedef void (^YMSCBPeripheralConnectCallbackBlockType)(YMSCBPeripheral *, NSError *);
 typedef void (^YMSCBPeripheralDiscoverServicesBlockType)(NSArray *, NSError *);
 
-/*
-NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
-    YMSCBPeripheralConnectionStateUnknown,
-    YMSCBPeripheralConnectionStateDisconnecting,
-    YMSCBPeripheralConnectionStateDisconnected,
-    YMSCBPeripheralConnectionStateConnecting,
-    YMSCBPeripheralConnectionStateConnected
-};
-*/
-
 
 /**
  Base class for defining a Bluetooth LE peripheral.
@@ -153,7 +143,7 @@ NS_ENUM(NSInteger, YMSCBPeripheralConnectionState) {
 
 /** @name Get all CBService CBUUIDs for this peripheral  */
 /**
- Generate array of CBUUID for all SensorTag CoreBluetooth services.
+ Generate array of CBUUID for all CoreBluetooth services associated with this peripheral.
  
  The output of this method is to be passed to the method discoverServices: in CBPeripheral:
  
