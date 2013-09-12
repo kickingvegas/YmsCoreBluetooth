@@ -39,7 +39,6 @@
         _base.hi = hi;
         _base.lo = lo;
         _characteristicDict = [[NSMutableDictionary alloc] init];
-        //_responseBlockDict = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
