@@ -86,6 +86,26 @@
     return result;
 }
 
+- (NSArray *)servicesSubset:(NSArray *)keys {
+    NSArray *result = nil;
+    NSMutableArray *tempArray = [[NSMutableArray alloc] initWithCapacity:keys.count];
+    
+    for (NSString *key in keys) {
+        YMSCBService *btService = (YMSCBService *)self[key];
+        
+        if (btService) {
+            [tempArray addObject:btService.uuid];
+        } else {
+            NSLog(@"WARNING: service key '%@' is not found in peripheral '%@' for servicesSubset:", key, [self.cbPeripheral.identifier UUIDString]);
+        }
+    }
+    
+    result = [NSArray arrayWithArray:tempArray];
+    return result;
+
+    
+}
+
 - (YMSCBService *)findService:(CBService *)service {
     YMSCBService *result;
     

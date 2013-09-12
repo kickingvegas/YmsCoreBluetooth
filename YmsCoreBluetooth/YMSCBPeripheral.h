@@ -151,6 +151,17 @@ typedef void (^YMSCBPeripheralDiscoverServicesBlockType)(NSArray *, NSError *);
  */
 - (NSArray *)services;
 
+
+/**
+ Return array of CBUUIDs for YMSCBService instances in serviceDict whose key is included in keys.
+ 
+ @param keys array of NSString keys, where each key must exist in serviceDict
+ 
+ @return array of CBUUIDs
+ */
+- (NSArray *)servicesSubset:(NSArray *)keys;
+
+
 /** @name Find a YMSCBService */
 /**
  Find YMSCBService given its corresponding CBService.
