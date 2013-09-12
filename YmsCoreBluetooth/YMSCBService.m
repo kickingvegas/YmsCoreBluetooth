@@ -22,6 +22,7 @@
 #import "YMSCBCharacteristic.h"
 
 @interface YMSCBService ()
+- (id)objectForKeyedSubscript:(id)key;
 @end
 
 @implementation YMSCBService
@@ -41,6 +42,11 @@
         //_responseBlockDict = [[NSMutableDictionary alloc] init];
     }
     return self;
+}
+
+
+- (id)objectForKeyedSubscript:(id)key {
+    return self.characteristicDict[key];
 }
 
 
@@ -129,7 +135,7 @@
 
 
 - (void)discoverCharacteristics:(NSArray *)characteristicUUIDs withBlock:(void (^)(NSDictionary *, NSError *))callback {
-    self.discoverCharacteristicsCallback = callback;
+    self.discoverCharacteristicsCallback = [callback copy];
     
     [self.parent.cbPeripheral discoverCharacteristics:characteristicUUIDs
                                            forService:self.cbService];
@@ -137,8 +143,14 @@
 }
 
 - (void)handleDiscoveredCharacteristicsResponse:(NSDictionary *)chDict withError:(NSError *)error {
+    YMSCBDiscoverCharacteristicsCallbackBlockType callback = self.discoverCharacteristicsCallback;
+    
     if (self.discoverCharacteristicsCallback) {
-        self.discoverCharacteristicsCallback(chDict, error);
+        if (callback) {
+            callback(chDict, error);
+        } else {
+             NSAssert(NO, @"ERROR: discoveredCharacteristicsCallback is nil; please check for multi-threaded access of handleDiscoveredCharacteristicsResponse");
+        }
         self.discoverCharacteristicsCallback = nil;
     }
 }
