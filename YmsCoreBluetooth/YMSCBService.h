@@ -83,20 +83,6 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 /// Callback for characteristics that are discovered.
 @property (nonatomic, copy) YMSCBDiscoverCharacteristicsCallbackBlockType discoverCharacteristicsCallback;
 
-/** @name Initializing a YMSCBService */
-/**
- Initialize class instance.
- @param oName name of service
- @param pObj parent object which owns this service
- @param hi top 64 bits of 128-bit base address value
- @param lo bottom 64 bits of 128-bit base address value
- @return YMSCBCharacteristic
- */
-- (instancetype)initWithName:(NSString *)oName
-                      parent:(YMSCBPeripheral *)pObj
-                      baseHi:(int64_t)hi
-                      baseLo:(int64_t)lo;
-
 
 /**
  Initialize class instance.

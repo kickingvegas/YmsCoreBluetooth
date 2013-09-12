@@ -31,22 +31,6 @@
 - (instancetype)initWithName:(NSString *)oName
                       parent:(YMSCBPeripheral *)pObj
                       baseHi:(int64_t)hi
-                      baseLo:(int64_t)lo {
-    self = [super init];
-    if (self) {
-        _name = oName;
-        _parent = pObj;
-        _base.hi = hi;
-        _base.lo = lo;
-        _characteristicDict = [[NSMutableDictionary alloc] init];
-    }
-    return self;
-}
-
-
-- (instancetype)initWithName:(NSString *)oName
-                      parent:(YMSCBPeripheral *)pObj
-                      baseHi:(int64_t)hi
                       baseLo:(int64_t)lo
                serviceOffset:(int)serviceOffset {
 
