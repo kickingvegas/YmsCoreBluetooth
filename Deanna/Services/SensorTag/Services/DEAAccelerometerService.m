@@ -29,18 +29,20 @@ float calcAccel(int16_t rawV) {
 @implementation DEAAccelerometerService
 
 
-- (id)initWithName:(NSString *)oName
-            parent:(YMSCBPeripheral *)pObj
-            baseHi:(int64_t)hi
-            baseLo:(int64_t)lo {
+
+- (instancetype)initWithName:(NSString *)oName
+                      parent:(YMSCBPeripheral *)pObj
+                      baseHi:(int64_t)hi
+                      baseLo:(int64_t)lo
+               serviceOffset:(int)serviceOffset {
+    
     self = [super initWithName:oName
                         parent:pObj
                         baseHi:hi
-                        baseLo:lo];
-    
-    
+                        baseLo:lo
+                 serviceOffset:serviceOffset];
+
     if (self) {
-        [self addCharacteristic:@"service" withOffset:kSensorTag_ACCELEROMETER_SERVICE];
         [self addCharacteristic:@"data" withOffset:kSensorTag_ACCELEROMETER_DATA];
         [self addCharacteristic:@"config" withOffset:kSensorTag_ACCELEROMETER_CONFIG];
         [self addCharacteristic:@"period" withOffset:kSensorTag_ACCELEROMETER_PERIOD];

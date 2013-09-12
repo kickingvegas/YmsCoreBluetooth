@@ -23,19 +23,19 @@
 
 @implementation DEADeviceInfoService
 
-- (id)initWithName:(NSString *)oName
-            parent:(YMSCBPeripheral *)pObj
-            baseHi:(int64_t)hi
-            baseLo:(int64_t)lo {
+- (instancetype)initWithName:(NSString *)oName
+                      parent:(YMSCBPeripheral *)pObj
+                      baseHi:(int64_t)hi
+                      baseLo:(int64_t)lo
+               serviceOffset:(int)serviceOffset {
     
     self = [super initWithName:oName
                         parent:pObj
                         baseHi:hi
-                        baseLo:lo];
-    
+                        baseLo:lo
+                 serviceOffset:serviceOffset];
     
     if (self) {
-        [self addCharacteristic:@"service" withAddress:kSensorTag_DEVINFO_SERV_UUID];
         [self addCharacteristic:@"system_id" withAddress:kSensorTag_DEVINFO_SYSTEM_ID];
         [self addCharacteristic:@"model_number" withAddress:kSensorTag_DEVINFO_MODEL_NUMBER];
         [self addCharacteristic:@"serial_number" withAddress:kSensorTag_DEVINFO_SERIAL_NUMBER];

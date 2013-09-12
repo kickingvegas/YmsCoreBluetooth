@@ -22,17 +22,19 @@
 @implementation DEASimpleKeysService
 
 
-- (id)initWithName:(NSString *)oName
-            parent:(YMSCBPeripheral *)pObj
-            baseHi:(int64_t)hi
-            baseLo:(int64_t)lo {
+- (instancetype)initWithName:(NSString *)oName
+                      parent:(YMSCBPeripheral *)pObj
+                      baseHi:(int64_t)hi
+                      baseLo:(int64_t)lo
+               serviceOffset:(int)serviceOffset {
+    
     self = [super initWithName:oName
                         parent:pObj
                         baseHi:hi
-                        baseLo:lo];
+                        baseLo:lo
+                 serviceOffset:serviceOffset];
     
     if (self) {
-        [self addCharacteristic:@"service" withAddress:kSensorTag_SIMPLEKEYS_SERVICE];
         [self addCharacteristic:@"data" withAddress:kSensorTag_SIMPLEKEYS_DATA];
     }
     return self;

@@ -34,17 +34,19 @@ double calcHumRel(uint16_t rawH) {
 
 @implementation DEAHumidityService
 
-- (id)initWithName:(NSString *)oName
-            parent:(YMSCBPeripheral *)pObj
-            baseHi:(int64_t)hi
-            baseLo:(int64_t)lo {
+- (instancetype)initWithName:(NSString *)oName
+                      parent:(YMSCBPeripheral *)pObj
+                      baseHi:(int64_t)hi
+                      baseLo:(int64_t)lo
+               serviceOffset:(int)serviceOffset {
+    
     self = [super initWithName:oName
                         parent:pObj
                         baseHi:hi
-                        baseLo:lo];
+                        baseLo:lo
+                 serviceOffset:serviceOffset];
     
     if (self) {
-        [self addCharacteristic:@"service" withOffset:kSensorTag_HUMIDITY_SERVICE];
         [self addCharacteristic:@"data" withOffset:kSensorTag_HUMIDITY_DATA];
         [self addCharacteristic:@"config" withOffset:kSensorTag_HUMIDITY_CONFIG];
     }

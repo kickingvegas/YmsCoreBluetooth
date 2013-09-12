@@ -56,17 +56,19 @@ double calcBarPress(int16_t t_r,
 }
                     
 
-- (id)initWithName:(NSString *)oName
-            parent:(YMSCBPeripheral *)pObj
-            baseHi:(int64_t)hi
-            baseLo:(int64_t)lo {
+- (instancetype)initWithName:(NSString *)oName
+                      parent:(YMSCBPeripheral *)pObj
+                      baseHi:(int64_t)hi
+                      baseLo:(int64_t)lo
+               serviceOffset:(int)serviceOffset {
+    
     self = [super initWithName:oName
                         parent:pObj
                         baseHi:hi
-                        baseLo:lo];
+                        baseLo:lo
+                 serviceOffset:serviceOffset];
 
     if (self) {
-        [self addCharacteristic:@"service" withOffset:kSensorTag_BAROMETER_SERVICE];
         [self addCharacteristic:@"data" withOffset:kSensorTag_BAROMETER_DATA];
         [self addCharacteristic:@"config" withOffset:kSensorTag_BAROMETER_CONFIG];
         [self addCharacteristic:@"calibration" withOffset:kSensorTag_BAROMETER_CALIBRATION];

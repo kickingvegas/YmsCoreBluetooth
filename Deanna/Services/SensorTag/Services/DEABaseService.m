@@ -19,12 +19,38 @@
 #import "DEABaseService.h"
 #import "YMSCBCharacteristic.h"
 #import "DEASensorTagUtils.h"
+#import "YMSCBUtils.h"
 
 @interface DEABaseService ()
 
 @end
 
 @implementation DEABaseService
+
+
+- (instancetype)initWithName:(NSString *)oName
+                      parent:(YMSCBPeripheral *)pObj
+                      baseHi:(int64_t)hi
+                      baseLo:(int64_t)lo
+               serviceOffset:(int)serviceOffset {
+    
+    self = [super initWithName:oName
+                        parent:pObj
+                        baseHi:hi
+                        baseLo:lo
+                 serviceOffset:serviceOffset];
+    
+    
+    if (self) {
+        yms_u128_t pbase = self.base;
+        
+        if (![oName isEqualToString:@"simplekeys"]) {
+            self.uuid = [DEASensorTagUtils createCBUUID:&pbase withIntOffset:serviceOffset];
+        }
+    }
+    return self;
+}
+
 
 - (void)addCharacteristic:(NSString *)cname withOffset:(int)addrOffset {
     YMSCBCharacteristic *yc;
