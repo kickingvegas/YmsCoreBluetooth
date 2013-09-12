@@ -79,12 +79,10 @@
     
     for (NSString *key in self.serviceDict) {
         YMSCBService *service = self.serviceDict[key];
-        YMSCBCharacteristic *ct = service.characteristicDict[@"service"];
-        
-        [tempArray addObject:ct.uuid];
+        [tempArray addObject:service.uuid];
     }
     
-    result = tempArray;
+    result = [NSArray arrayWithArray:tempArray];
     return result;
 }
 
@@ -93,9 +91,8 @@
     
     for (NSString *key in self.serviceDict) {
         YMSCBService *btService = self.serviceDict[key];
-        YMSCBCharacteristic *ct = btService.characteristicDict[@"service"];
         
-        if ([service.UUID isEqual:ct.uuid]) {
+        if ([service.UUID isEqual:btService.uuid]) {
             result = btService;
             break;
         }
