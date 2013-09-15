@@ -45,14 +45,14 @@
         [self.connectButton setTitle:@"CANCELLING…" forState:UIControlStateNormal];
         self.peripheralStatusLabel.text = @"QUIESCENT";
         [self.peripheralStatusLabel setTextColor:[[DEATheme sharedTheme] bodyTextColor]];
-        self.peripheralStatusIcon.image = [UIImage imageNamed:@"static/images/iconStatusAdvertising.png"];
+        self.peripheralStatusIcon.image = [UIImage imageNamed:@"iconStatusAdvertising"];
         self.rssiLabel.text = @"—";
         [self.yperipheral disconnect];
     } else {
         [self.connectButton setTitle:@"PAIRING…" forState:UIControlStateNormal];
         self.peripheralStatusLabel.text = @"PAIRING…";
         [self.peripheralStatusLabel setTextColor:[[DEATheme sharedTheme] pairingColor]];
-        self.peripheralStatusIcon.image = [UIImage imageNamed:@"static/images/iconStatusPairing.png"];
+        self.peripheralStatusIcon.image = [UIImage imageNamed:@"iconStatusPairing"];
         [self.yperipheral connect];
     }
 }
@@ -74,13 +74,13 @@
 
     
     if ([self.yperipheral isKindOfClass:[DEASensorTag class]]) {
-        self.peripheralIcon.image = [UIImage imageNamed:@"static/images/deviceIcon_sensorTag.png"];
+        self.peripheralIcon.image = [UIImage imageNamed:@"iconSensorTag"];
         
         if (self.yperipheral.isConnected) {
             buttonLabel = @"DISCONNECT";
             self.peripheralStatusLabel.text = @"CONNECTED";
             [self.peripheralStatusLabel setTextColor:[[DEATheme sharedTheme] connectedColor]];
-            self.peripheralStatusIcon.image = [UIImage imageNamed:@"static/images/iconStatusConnected.png"];
+            self.peripheralStatusIcon.image = [UIImage imageNamed:@"iconStatusConnected"];
             self.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
             [self.connectButton setTitle:buttonLabel forState:UIControlStateNormal];
             self.connectButton.titleLabel.text = buttonLabel;
@@ -89,7 +89,7 @@
             buttonLabel = @"CONNECT";
             self.peripheralStatusLabel.text = @"QUIESCENT";
             [self.peripheralStatusLabel setTextColor:[[DEATheme sharedTheme] bodyTextColor]];
-            self.peripheralStatusIcon.image = [UIImage imageNamed:@"static/images/iconStatusAdvertising.png"];
+            self.peripheralStatusIcon.image = [UIImage imageNamed:@"iconStatusAdvertising"];
             self.accessoryType = UITableViewCellAccessoryNone;
             [self.connectButton setTitle:buttonLabel forState:UIControlStateNormal];
             
@@ -98,7 +98,7 @@
         }
 
     } else {
-        self.peripheralIcon.image = [UIImage imageNamed:@"static/images/deviceIcon_genericBLE.png"];
+        self.peripheralIcon.image = [UIImage imageNamed:@"iconGenericBLE"];
         self.connectButton.hidden = YES;
         self.accessoryType = UITableViewCellAccessoryNone;
     }
