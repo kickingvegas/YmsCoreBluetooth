@@ -325,7 +325,6 @@
 			children = (
 				D92049D41742C836001380A6 /* CHANGES.md */,
 				D97EC6D1172B1B8C00CAECFC /* README.md */,
-				D9AC598E1721208500FC786F /* Assets */,
 				D933CEC216DDAFA700EDDAD6 /* YmsCoreBluetooth */,
 				D9718B4B167F9F9F0001E42C /* Deanna */,
 				D9718B69167F9FA00001E42C /* DeannaTests */,
@@ -540,13 +539,6 @@
 				D997ACD0175B287200C91B0D /* DEASensorTagWindow.xib */,
 			);
 			path = XIBs;
-			sourceTree = "<group>";
-		};
-		D9AC598E1721208500FC786F /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Assets;
 			sourceTree = "<group>";
 		};
 		D9CB2C0616A71F8E00279DDA /* SensorTag */ = {
@@ -968,6 +960,7 @@
 				INFOPLIST_FILE = "Deanna/Deanna-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -983,6 +976,7 @@
 				INFOPLIST_FILE = "Deanna/Deanna-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
