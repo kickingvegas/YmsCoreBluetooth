@@ -1,5 +1,5 @@
-# YmsCoreBluetooth v0.946 (beta)
-A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS or OS X applications using the CoreBluetooth API. Includes *Deanna* and *DeannaMac*, applications to communicate with a TI SensorTag for iOS and OS X respectively.
+# YmsCoreBluetooth v1.0 
+A block-based framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS 7 or OS X 10.9 applications using the CoreBluetooth API. Includes *Deanna* and *DeannaMac*, applications to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag) for iOS and OS X respectively.
 
 * [YmsCoreBluetooth API Reference](hierarchy.html)
 
@@ -87,68 +87,77 @@ In the following code sample, `self` is an instance of a subclass of YMSCBCentra
 
 #### Retrieving Peripherals
 
-In the following code sample, `self` is an instance of a subclass of YMSCBCentralManager.
+In the following code sample, `self` is an instance of a subclass of YMSCBCentralManager and `identifiers` is an array of `NSUUID` instances that map to a peripheral that has been discovered by the iOS device.
 
-	__weak DEACentralManager *this = self;
-	[self retrievePeripherals:peripheralUUIDs
-					withBlock:^(CBPeripheral *peripheral) {
-						[this handleFoundPeripheral:peripheral];
-					}];
+    [self retrievePeripheralsWithIdentifiers:identifiers];
+
+
+*Note* - This API has changed for iOS7 due to the deprecation of [YMSCBCentralManager retrievePeripherals:withBlock:]
+
+    // I AM OLD CODE. 
+    __weak DEACentralManager *this = self;
+    [self retrievePeripherals:peripheralUUIDs
+                    withBlock:^(CBPeripheral *peripheral) {
+                        [this handleFoundPeripheral:peripheral];
+                    }];
   
   
 #### Connecting to a Peripheral
 
 In the following code sample, `self` is an instance of a subclass of YMSCBPeripheral. Note that in the callbacks, discovering services and characteristics are handled in a nested fashion:
 
-	- (void)connect {
-		// Watchdog aware method
-		[self resetWatchdog];
+    - (void)connect {
+        // Watchdog aware method
+        [self resetWatchdog];
 
-		[self connectWithOptions:nil withBlock:^(YMSCBPeripheral *yp, NSError *error) {
-			if (error) {
-				return;
-			}
+        [self connectWithOptions:nil withBlock:^(YMSCBPeripheral *yp, NSError *error) {
+            if (error) {
+                return;
+            }
 
-			[yp discoverServices:[yp services] withBlock:^(NSArray *yservices, NSError *error) {
-				if (error) {
-					return;
-				}
+            // Example where only a subset of services is to be discovered.
+            //[yp discoverServices:[yp servicesSubset:@[@"temperature", @"simplekeys", @"devinfo"]] withBlock:^(NSArray *yservices, NSError *error) {
 
-				for (YMSCBService *service in yservices) {
-					if ([service.name isEqualToString:@"simplekeys"]) {
-						__weak DEASimpleKeysService *thisService = (DEASimpleKeysService *)service;
-						[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
-							[thisService turnOn];
-						}];
+            [yp discoverServices:[yp services] withBlock:^(NSArray *yservices, NSError *error) {
+                if (error) {
+                    return;
+                }
 
-					} else if ([service.name isEqualToString:@"devinfo"]) {
-						__weak DEADeviceInfoService *thisService = (DEADeviceInfoService *)service;
-						[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
-							[thisService readDeviceInfo];
-						}];
+                for (YMSCBService *service in yservices) {
+                    if ([service.name isEqualToString:@"simplekeys"]) {
+                        __weak DEASimpleKeysService *thisService = (DEASimpleKeysService *)service;
+                        [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+                            [thisService turnOn];
+                        }];
 
-					} else {
-						__weak DEABaseService *thisService = (DEABaseService *)service;
-						[service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
-							for (NSString *key in chDict) {
-								YMSCBCharacteristic *ct = chDict[key];
-								//NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
+                    } else if ([service.name isEqualToString:@"devinfo"]) {
+                        __weak DEADeviceInfoService *thisService = (DEADeviceInfoService *)service;
+                        [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+                            [thisService readDeviceInfo];
+                        }];
 
-								[ct discoverDescriptorsWithBlock:^(NSArray *ydescriptors, NSError *error) {
-									if (error) {
-										return;
-									}
-									for (YMSCBDescriptor *yd in ydescriptors) {
-										NSLog(@"Descriptor: %@ %@ %@", thisService.name, yd.UUID, yd.cbDescriptor);
-									}
-								}];
-							}
-						}];
-					}
-				}
-			}];
-		}];
-	}
+                    } else {
+                        __weak DEABaseService *thisService = (DEABaseService *)service;
+                        [service discoverCharacteristics:[service characteristics] withBlock:^(NSDictionary *chDict, NSError *error) {
+                            for (NSString *key in chDict) {
+                                YMSCBCharacteristic *ct = chDict[key];
+                                //NSLog(@"%@ %@ %@", ct, ct.cbCharacteristic, ct.uuid);
+
+                                [ct discoverDescriptorsWithBlock:^(NSArray *ydescriptors, NSError *error) {
+                                    if (error) {
+                                        return;
+                                    }
+                                    for (YMSCBDescriptor *yd in ydescriptors) {
+                                        NSLog(@"Descriptor: %@ %@ %@", thisService.name, yd.UUID, yd.cbDescriptor);
+                                    }
+                                }];
+                            }
+                        }];
+                    }
+                }
+            }];
+        }];
+    }
 
 
 #### Read a Characteristic
@@ -363,10 +372,11 @@ While quite functional, YmsCoreBluetooth is still very much in an early state an
 
 Code tested on:
 
-* iPhone 4S, iOS 6.1.3
+* iPhone 4S, iPod touch, iPhone 5 all running iOS7
 * TI SensorTag firmware 1.2, 1.3.
-* iMac 27 Mid-2010, OS X 10.8.3
+* iMac 27 Mid-2010, OS X 10.8.5
 
 ## Known Issues
-* No support is offered for the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator [TN2295](http://developer.apple.com/library/ios/#technotes/tn2295/_index.html), I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.
+* Use this code only on iOS or Mac hardware that supports CoreBluetooth. The iOS Simulator is not supported.
+
 
