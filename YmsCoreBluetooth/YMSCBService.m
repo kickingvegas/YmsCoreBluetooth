@@ -122,12 +122,14 @@
 
 
 - (void)syncCharacteristics:(NSArray *)foundCharacteristics {
-    for (NSString *key in self.characteristicDict) {
-        YMSCBCharacteristic *yc = self.characteristicDict[key];
-        for (CBCharacteristic *ct in foundCharacteristics) {
-            if ([yc.uuid isEqual:ct.UUID]) {
-                yc.cbCharacteristic = ct;
-                break;
+    @synchronized(self) {
+        for (NSString *key in self.characteristicDict) {
+            YMSCBCharacteristic *yc = self.characteristicDict[key];
+            for (CBCharacteristic *ct in foundCharacteristics) {
+                if ([yc.uuid isEqual:ct.UUID]) {
+                    yc.cbCharacteristic = ct;
+                    break;
+                }
             }
         }
     }
