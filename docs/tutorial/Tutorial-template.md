@@ -126,16 +126,13 @@ A common task is to define program behavior upon a change in the state of `CBCen
 
 For our purpose, we are interested on retrivieving previously discovered peripherals whose UUIDs have been persisted from a previous run of the app upon `CBCentralManager` being powered on:
 
-	- (void)managerPoweredOnHandler {
-		if (self.useStoredPeripherals) {
-			NSArray *peripheralUUIDs = [YMSCBStoredPeripherals genPeripheralUUIDs];
-			__weak DEACentralManager *this = self;
-			[self retrievePeripherals:peripheralUUIDs
-							withBlock:^(CBPeripheral *peripheral) {
-								[this handleFoundPeripheral:peripheral];
-							}];
-		}
-	}
+    - (void)managerPoweredOnHandler {
+        if (self.useStoredPeripherals) {
+            NSArray *identifiers = [YMSCBStoredPeripherals genIdentifiers];
+            [self retrievePeripheralsWithIdentifiers:identifiers];
+        }
+    }
+
 
 
 ## Subclass YMSCBPeripheral to make DEASensorTag
@@ -147,36 +144,35 @@ The class implementation of `DEASensorTag` in `Deanna/Services/SensorTag/DEASens
 
 The class constructor for `DEASensorTag` is responsible for instantiating subclasses of `YMSCBService` to capture the behavior of the different BLE services offered by the *SensorTag*. The source for this constructor, `initWithPeripheral:central:baseHi:baseLo:` is shown below:
 
+    - (instancetype)initWithPeripheral:(CBPeripheral *)peripheral
+                               central:(YMSCBCentralManager *)owner
+                                baseHi:(int64_t)hi
+                                baseLo:(int64_t)lo {
 
-	- (instancetype)initWithPeripheral:(CBPeripheral *)peripheral
-							   central:(YMSCBCentralManager *)owner
-								baseHi:(int64_t)hi
-								baseLo:(int64_t)lo {
+        self = [super initWithPeripheral:peripheral central:owner baseHi:hi baseLo:lo];
 
-		self = [super initWithPeripheral:peripheral central:owner baseHi:hi baseLo:lo];
+        if (self) {
+            DEATemperatureService *ts = [[DEATemperatureService alloc] initWithName:@"temperature" parent:self baseHi:hi baseLo:lo serviceOffset:kSensorTag_TEMPERATURE_SERVICE];
+            DEAAccelerometerService *as = [[DEAAccelerometerService alloc] initWithName:@"accelerometer" parent:self baseHi:hi baseLo:lo  serviceOffset:kSensorTag_ACCELEROMETER_SERVICE];
+            DEASimpleKeysService *sks = [[DEASimpleKeysService alloc] initWithName:@"simplekeys" parent:self baseHi:0 baseLo:0  serviceOffset:kSensorTag_SIMPLEKEYS_SERVICE];
+            DEAHumidityService *hs = [[DEAHumidityService alloc] initWithName:@"humidity" parent:self baseHi:hi baseLo:lo  serviceOffset:kSensorTag_HUMIDITY_SERVICE];
+            DEABarometerService *bs = [[DEABarometerService alloc] initWithName:@"barometer" parent:self baseHi:hi baseLo:lo  serviceOffset:kSensorTag_BAROMETER_SERVICE];
+            DEAGyroscopeService *gs = [[DEAGyroscopeService alloc] initWithName:@"gyroscope" parent:self baseHi:hi baseLo:lo  serviceOffset:kSensorTag_GYROSCOPE_SERVICE];
+            DEAMagnetometerService *ms = [[DEAMagnetometerService alloc] initWithName:@"magnetometer" parent:self baseHi:hi baseLo:lo  serviceOffset:kSensorTag_MAGNETOMETER_SERVICE];
+            DEADeviceInfoService *ds = [[DEADeviceInfoService alloc] initWithName:@"devinfo" parent:self baseHi:0 baseLo:0  serviceOffset:kSensorTag_DEVINFO_SERV_UUID];
 
-		if (self) {
-			DEATemperatureService *ts = [[DEATemperatureService alloc] initWithName:@"temperature" parent:self baseHi:hi baseLo:lo];
-			DEAAccelerometerService *as = [[DEAAccelerometerService alloc] initWithName:@"accelerometer" parent:self baseHi:hi baseLo:lo];
-			DEASimpleKeysService *sks = [[DEASimpleKeysService alloc] initWithName:@"simplekeys" parent:self baseHi:hi baseLo:lo];
-			DEAHumidityService *hs = [[DEAHumidityService alloc] initWithName:@"humidity" parent:self baseHi:hi baseLo:lo];
-			DEABarometerService *bs = [[DEABarometerService alloc] initWithName:@"barometer" parent:self baseHi:hi baseLo:lo];
-			DEAGyroscopeService *gs = [[DEAGyroscopeService alloc] initWithName:@"gyroscope" parent:self baseHi:hi baseLo:lo];
-			DEAMagnetometerService *ms = [[DEAMagnetometerService alloc] initWithName:@"magnetometer" parent:self baseHi:hi baseLo:lo];
-			DEADeviceInfoService *ds = [[DEADeviceInfoService alloc] initWithName:@"devinfo" parent:self baseHi:hi baseLo:lo];
+            self.serviceDict = @{@"temperature": ts,
+                                 @"accelerometer": as,
+                                 @"simplekeys": sks,
+                                 @"humidity": hs,
+                                 @"magnetometer": ms,
+                                 @"gyroscope": gs,
+                                 @"barometer": bs,
+                                 @"devinfo": ds};
+        }
+        return self;
 
-			self.serviceDict = @{@"temperature": ts,
-								 @"accelerometer": as,
-								 @"simplekeys": sks,
-								 @"humidity": hs,
-								 @"magnetometer": ms,
-								 @"gyroscope": gs,
-								 @"barometer": bs,
-								 @"devinfo": ds};
-		}
-		return self;
-
-	}
+    }
 
 
 In this implementation, the following BLE services of the *SensorTag* are supported:
@@ -280,18 +276,19 @@ Shown below is the implementation for `DEAAccelerometerService`.
 
 	@implementation DEAAccelerometerService
 
+	- (instancetype)initWithName:(NSString *)oName
+						  parent:(YMSCBPeripheral *)pObj
+						  baseHi:(int64_t)hi
+						  baseLo:(int64_t)lo
+				   serviceOffset:(int)serviceOffset {
 
-	- (id)initWithName:(NSString *)oName
-				parent:(YMSCBPeripheral *)pObj
-				baseHi:(int64_t)hi
-				baseLo:(int64_t)lo {
 		self = [super initWithName:oName
 							parent:pObj
 							baseHi:hi
-							baseLo:lo];
+							baseLo:lo
+					 serviceOffset:serviceOffset];
 
 		if (self) {
-			[self addCharacteristic:@"service" withOffset:kSensorTag_ACCELEROMETER_SERVICE];
 			[self addCharacteristic:@"data" withOffset:kSensorTag_ACCELEROMETER_DATA];
 			[self addCharacteristic:@"config" withOffset:kSensorTag_ACCELEROMETER_CONFIG];
 			[self addCharacteristic:@"period" withOffset:kSensorTag_ACCELEROMETER_PERIOD];
@@ -324,12 +321,41 @@ Shown below is the implementation for `DEAAccelerometerService`.
 		}
 	}
 
+	- (void)configPeriod:(uint8_t)value {
 
-The class constructor `initWithName:parent:baseHi:baseLo:` defines four BLE characteristics using [YMSCBService addCharacteristic:withOffset:] which we can reference with the following four strings: ("service", "data", "config", "period").
+		YMSCBCharacteristic *periodCt = self.characteristicDict[@"period"];
+		__weak DEAAccelerometerService *this = self;
+		[periodCt writeByte:value withBlock:^(NSError *error) {
+			//NSLog(@"Set period to: %x", value);
+			this.period = @(value);
+		}];
+	}
+
+	- (void)readPeriod {
+		YMSCBCharacteristic *periodCt = self.characteristicDict[@"period"];
+
+		__weak DEAAccelerometerService *this = self;
+
+		[periodCt readValueWithBlock:^(NSData *data, NSError *error) {
+			char val[data.length];
+			[data getBytes:&val length:data.length];
+
+			int16_t periodValue = val[0];
+
+			_YMS_PERFORM_ON_MAIN_THREAD(^{
+				this.period = @(periodValue);
+			});
+		}];
+	}
+
+	@end
+
+
+The class constructor `initWithName:parent:baseHi:baseLo:serviceOffset:` defines three BLE characteristics using [YMSCBService addCharacteristic:withOffset:] which we can reference with the following four strings: ("data", "config", "period").
 
 When the service is turned on using the method [DEABaseService turnOn], notifications for the "data" characteristic are turned on. Handling notification events sent from the *SensorTag* are handled by `notifyCharacteristicHandler`. The acceleration measurements are stored as `NSNumber` properties `x`, `y`, `z`. These properties can then be Key-Value Observed (KVO) by the application, typically to be displayed in user interface.
 
-** Important **: To let the UI components in the main thread know via KVO that a property has changed, you must update that property on the main thread. A convenience macro `_YMS_PERFORM_ON_MAIN_THREAD` which uses the GCD call `dispatch_async()` does just that:
+**Important**: To let the UI components in the main thread know via KVO that a property has changed, you must update that property on the main thread. A convenience macro `_YMS_PERFORM_ON_MAIN_THREAD` which uses the GCD call `dispatch_async()` does just that:
 
 	#define _YMS_PERFORM_ON_MAIN_THREAD(block) dispatch_async(dispatch_get_main_queue(), block);
 
