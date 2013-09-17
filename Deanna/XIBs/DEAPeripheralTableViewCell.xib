@@ -67,15 +67,15 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="static/images/deviceIcon_genericBLE.png" translatesAutoresizingMaskIntoConstraints="NO" id="35">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="iconGenericBLE" translatesAutoresizingMaskIntoConstraints="NO" id="35">
                         <rect key="frame" x="9" y="35" width="66" height="76"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="static/images/iconStatusAdvertising.png" translatesAutoresizingMaskIntoConstraints="NO" id="36">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="iconStatusAdvertising" translatesAutoresizingMaskIntoConstraints="NO" id="36">
                         <rect key="frame" x="82" y="43" width="19" height="19"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="static/images/iconStatusSignal.png" translatesAutoresizingMaskIntoConstraints="NO" id="37">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="iconStatusSignal" translatesAutoresizingMaskIntoConstraints="NO" id="37">
                         <rect key="frame" x="82" y="77" width="19" height="19"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
@@ -95,8 +95,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="static/images/deviceIcon_genericBLE.png" width="16" height="16"/>
-        <image name="static/images/iconStatusAdvertising.png" width="16" height="16"/>
-        <image name="static/images/iconStatusSignal.png" width="16" height="16"/>
+        <image name="iconGenericBLE" width="74" height="84"/>
+        <image name="iconStatusAdvertising" width="19" height="19"/>
+        <image name="iconStatusSignal" width="19" height="19"/>
     </resources>
 </document>
