@@ -32,9 +32,9 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h1>
-<a name="ymscorebluetooth-v0946-beta" class="anchor" href="#ymscorebluetooth-v0946-beta"><span class="octicon octicon-link"></span></a>YmsCoreBluetooth v0.946 (beta)</h1>
+<a name="ymscorebluetooth-v10" class="anchor" href="#ymscorebluetooth-v10"><span class="octicon octicon-link"></span></a>YmsCoreBluetooth v1.0</h1>
 
-<p>A block-based framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS or OS X applications using the CoreBluetooth API. Includes <em>Deanna</em> and <em>DeannaMac</em>, applications to communicate with a <a href="http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag">TI SensorTag</a> for iOS and OS X respectively.</p>
+<p>A block-based framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS 7 or OS X 10.9 applications using the CoreBluetooth API. Includes <em>Deanna</em> and <em>DeannaMac</em>, applications to communicate with a <a href="http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag">TI SensorTag</a> for iOS and OS X respectively.</p>
 
 <ul>
 <li><a href="http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/index.html">YmsCoreBluetooth API Reference</a></li>
@@ -185,9 +185,15 @@
 <h4>
 <a name="retrieving-peripherals" class="anchor" href="#retrieving-peripherals"><span class="octicon octicon-link"></span></a>Retrieving Peripherals</h4>
 
-<p>In the following code sample, <code>self</code> is an instance of a subclass of YMSCBCentralManager.</p>
+<p>In the following code sample, <code>self</code> is an instance of a subclass of YMSCBCentralManager and <code>identifiers</code> is an array of <code>NSUUID</code> instances that map to a peripheral that has been discovered by the iOS device.</p>
 
-<pre><code>__weak DEACentralManager *this = self;
+<pre><code>[self retrievePeripheralsWithIdentifiers:identifiers];
+</code></pre>
+
+<p><em>Note</em> - This API has changed for iOS7 due to the deprecation of [YMSCBCentralManager retrievePeripherals:withBlock:]</p>
+
+<pre><code>// I AM OLD CODE. 
+__weak DEACentralManager *this = self;
 [self retrievePeripherals:peripheralUUIDs
                 withBlock:^(CBPeripheral *peripheral) {
                     [this handleFoundPeripheral:peripheral];
@@ -207,6 +213,9 @@
         if (error) {
             return;
         }
+
+        // Example where only a subset of services is to be discovered.
+        //[yp discoverServices:[yp servicesSubset:@[@"temperature", @"simplekeys", @"devinfo"]] withBlock:^(NSArray *yservices, NSError *error) {
 
         [yp discoverServices:[yp services] withBlock:^(NSArray *yservices, NSError *error) {
             if (error) {
@@ -411,7 +420,7 @@
 }
 </code></pre>
 
-<p>** Important **: To let the UI components in the main thread know via KVO that a property has changed, you must update that property on the main thread. A convenience macro <code>_YMS_PERFORM_ON_MAIN_THREAD</code> which uses the GCD call <code>dispatch_async()</code> does just that:</p>
+<p><strong>Important</strong>: To let the UI components in the main thread know via KVO that a property has changed, you must update that property on the main thread. A convenience macro <code>_YMS_PERFORM_ON_MAIN_THREAD</code> which uses the GCD call <code>dispatch_async()</code> does just that:</p>
 
 <pre><code>#define _YMS_PERFORM_ON_MAIN_THREAD(block) dispatch_async(dispatch_get_main_queue(), block);
 </code></pre>
@@ -472,41 +481,34 @@
 <p>Code tested on:</p>
 
 <ul>
-<li>iPhone 4S, iOS 6.1.3</li>
+<li>iPhone 4S, iPod touch, iPhone 5 all running iOS7</li>
 <li>TI SensorTag firmware 1.2, 1.3.</li>
-<li>iMac 27 Mid-2010, OS X 10.8.3</li>
+<li>iMac 27 Mid-2010, OS X 10.8.5</li>
 </ul><h2>
 <a name="known-issues" class="anchor" href="#known-issues"><span class="octicon octicon-link"></span></a>Known Issues</h2>
 
 <ul>
-<li>No support is offered for the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator <a href="http://developer.apple.com/library/ios/#technotes/tn2295/_index.html">TN2295</a>, I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.</li>
+<li>Use this code only on iOS or Mac hardware that supports CoreBluetooth. The iOS Simulator is not supported.</li>
 </ul><h2>
 <a name="latest-changes" class="anchor" href="#latest-changes"><span class="octicon octicon-link"></span></a>Latest Changes</h2>
 
 <h3>
+<a name="sat-sep-18-2013---ios7-release-ver-10" class="anchor" href="#sat-sep-18-2013---ios7-release-ver-10"><span class="octicon octicon-link"></span></a>Sat Sep 18 2013 - iOS7 Release (ver 1.0)</h3>
+
+<ul>
+<li>Updated codebase to support all iOS7 changes to the CoreBluetooth API.</li>
+<li>DeannaMac will not compile on OS X &lt; 10.9. For OS X 10.8 users, please use the <a href="https://github.com/kickingvegas/YmsCoreBluetooth/tree/ios6">ios6 branch</a>.</li>
+</ul><h3>
 <a name="sat-sep-7-2013---interim-release-ver-0946" class="anchor" href="#sat-sep-7-2013---interim-release-ver-0946"><span class="octicon octicon-link"></span></a>Sat Sep 7 2013 - Interim Release (ver 0.946)</h3>
 
 <ul>
-<li>#25 - Support for accelerometer period</li>
-<li>#73 - Fix declaration of block properties to copy</li>
+<li>(#25) - Support for accelerometer period</li>
+<li>(#73) - Fix declaration of block properties to copy</li>
 </ul><h3>
 <a name="tue-jul-16-2013---interim-release-ver-0945" class="anchor" href="#tue-jul-16-2013---interim-release-ver-0945"><span class="octicon octicon-link"></span></a>Tue Jul 16 2013 - Interim Release (ver 0.945)</h3>
 
 <ul>
 <li>Bugfix #61 - Change all delegate implementations so that the callback is performed on the main thread.</li>
-</ul><h3>
-<a name="sat-jul-6-2013---interim-release-ver-0944" class="anchor" href="#sat-jul-6-2013---interim-release-ver-0944"><span class="octicon octicon-link"></span></a>Sat Jul 6 2013 - Interim Release (ver 0.944)</h3>
-
-<ul>
-<li>Bugfix #69 - Reload peripheralsTableView when dismissing SensorTag view controller</li>
-<li>Bugfix #68 - Handle CoreBluetooth XPC reset</li>
-<li>Issue #32 - Added interim icon design by Wayne Dahlberg</li>
-</ul><h3>
-<a name="mon-jun-24-2013---interim-release-ver-0943" class="anchor" href="#mon-jun-24-2013---interim-release-ver-0943"><span class="octicon octicon-link"></span></a>Mon Jun 24 2013 - Interim Release (ver 0.943)</h3>
-
-<ul>
-<li>Initial work on beautifying Deanna app (Issue #62) based on graphic design work by <a href="http://waynedahlberg.com">Wayne Dahlberg</a>.</li>
-<li>Fixes to updates of RSSI values via scanning or by connection.</li>
 </ul><p>Tested Mac Environment:</p>
 
 <ul>
