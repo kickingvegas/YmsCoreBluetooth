@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
 		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
-		<meta name="generator" content="appledoc 2.1 (build 858)" />
+		<meta name="generator" content="appledoc 2.2 (build 961)" />
 	</head>
 	<body>
 		<header id="top_header">
@@ -57,7 +57,7 @@
 	
 	<option value="//api/name/configPeriod:">&nbsp;&nbsp;&nbsp;&nbsp;- configPeriod:</option>
 	
-	<option value="//api/name/initWithName:parent:baseHi:baseLo:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:parent:baseHi:baseLo:</option>
+	<option value="//api/name/initWithName:parent:baseHi:baseLo:serviceOffset:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:parent:baseHi:baseLo:serviceOffset:</option>
 	
 	<option value="//api/name/notifyCharacteristicHandler:error:">&nbsp;&nbsp;&nbsp;&nbsp;- notifyCharacteristicHandler:error:</option>
 	
@@ -105,7 +105,7 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/configPeriod:">configPeriod:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithName:parent:baseHi:baseLo:">initWithName:parent:baseHi:baseLo:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithName:parent:baseHi:baseLo:serviceOffset:">initWithName:parent:baseHi:baseLo:serviceOffset:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/notifyCharacteristicHandler:error:">notifyCharacteristicHandler:error:</a></span></li>
 	
@@ -166,31 +166,17 @@
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/x">&nbsp;&nbsp;x</a></code>
-		<span class="tooltip"><p>x value</p></span>
+		<code><a href="#//api/name/initWithName:parent:baseHi:baseLo:serviceOffset:">&ndash;&nbsp;initWithName:parent:baseHi:baseLo:serviceOffset:</a></code>
+		<span class="tooltip"><p>Initialize class instance.</p></span>
 	</span>
-	<span class="task-item-suffix">property</span>
+	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/y">&nbsp;&nbsp;y</a></code>
-		<span class="tooltip"><p>y value</p></span>
+		<code><a href="#//api/name/notifyCharacteristicHandler:error:">&ndash;&nbsp;notifyCharacteristicHandler:error:</a></code>
+		<span class="tooltip"><p>Method to handle response update for a prior read or write request to a characteristic.</p></span>
 	</span>
-	<span class="task-item-suffix">property</span>
 	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/z">&nbsp;&nbsp;z</a></code>
-		<span class="tooltip"><p>z value</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/period">&nbsp;&nbsp;period</a></code>
-		<span class="tooltip"><p>Period</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
@@ -216,17 +202,31 @@
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithName:parent:baseHi:baseLo:">&ndash;&nbsp;initWithName:parent:baseHi:baseLo:</a></code>
-		<span class="tooltip"><p>Initialize class instance.</p></span>
+		<code><a href="#//api/name/x">&nbsp;&nbsp;x</a></code>
+		<span class="tooltip"><p>x value</p></span>
 	</span>
-	
+	<span class="task-item-suffix">property</span>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/notifyCharacteristicHandler:error:">&ndash;&nbsp;notifyCharacteristicHandler:error:</a></code>
-		<span class="tooltip"><p>Method to handle response update for a prior read or write request to a characteristic.</p></span>
+		<code><a href="#//api/name/y">&nbsp;&nbsp;y</a></code>
+		<span class="tooltip"><p>y value</p></span>
 	</span>
+	<span class="task-item-suffix">property</span>
 	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/z">&nbsp;&nbsp;z</a></code>
+		<span class="tooltip"><p>z value</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/period">&nbsp;&nbsp;period</a></code>
+		<span class="tooltip"><p>Period</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
 	
 </li>
 						</ul>
@@ -467,8 +467,8 @@
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithName:parent:baseHi:baseLo:" title="initWithName:parent:baseHi:baseLo:"></a>
-	<h3 class="subsubtitle method-title">initWithName:parent:baseHi:baseLo:</h3>
+	<a name="//api/name/initWithName:parent:baseHi:baseLo:serviceOffset:" title="initWithName:parent:baseHi:baseLo:serviceOffset:"></a>
+	<h3 class="subsubtitle method-title">initWithName:parent:baseHi:baseLo:serviceOffset:</h3>
 	
 	
 	
@@ -478,7 +478,7 @@
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (id)initWithName:(NSString *)<em>oName</em> parent:(YMSCBPeripheral *)<em>pObj</em> baseHi:(int64_t)<em>hi</em> baseLo:(int64_t)<em>lo</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (instancetype)initWithName:(NSString *)<em>oName</em> parent:(YMSCBPeripheral *)<em>pObj</em> baseHi:(int64_t)<em>hi</em> baseLo:(int64_t)<em>lo</em> serviceOffset:(int)<em>serviceOffset</em></code></div>
 
     
 	
@@ -503,6 +503,11 @@
 		<dl class="argument-def parameter-def">
 			<dt><em>lo</em></dt>
 			<dd><p>bottom 64 bits of 128-bit <a href="../Classes/YMSCBService.html#//api/name/base">base</a> address value</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>serviceOffset</em></dt>
+			<dd><p>offset address of service</p></dd>
 		</dl>
 		
 	</div>
@@ -581,7 +586,7 @@
 <p>This method is invoked by the CBPeripheralDelegate method peripheral:didUpdateValueForCharacteristic:error:
 conformed to by <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</p>
 
-<p>This method is typically overridden to handle <a href="../Classes/YMSCBService.html#//api/name/characteristics">characteristics</a> whose notification has been turned on.</p>
+<p>This method is typically overridden to handle <a href="#//api/name/characteristics">characteristics</a> whose notification has been turned on.</p>
 	</div>
 	
 	
@@ -652,9 +657,9 @@ conformed to by <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-09-07)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-09-18)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 961)</a>.</span></p>
 						
 					</div>
 				</div>

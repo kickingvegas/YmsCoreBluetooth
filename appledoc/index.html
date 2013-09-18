@@ -5,7 +5,7 @@
 		<title>YmsCoreBluetooth Framework + Deanna Reference</title>
 		<link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
 		<link rel="stylesheet" type="text/css" media="print" href="css/stylesPrint.css" />
-		<meta name="generator" content="appledoc 2.1 (build 858)" />
+		<meta name="generator" content="appledoc 2.2 (build 961)" />
 	</head>
 	<body>
 		<header id="top_header">
@@ -34,9 +34,9 @@
 					<div class="section section-overview index-overview">
 						
 						
-						<h1>YmsCoreBluetooth v0.946 (beta)</h1>
+						<h1>YmsCoreBluetooth v1.0</h1>
 
-<p>A framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS or OS X applications using the CoreBluetooth API. Includes <em>Deanna</em> and <em>DeannaMac</em>, applications to communicate with a TI SensorTag for iOS and OS X respectively.</p>
+<p>A block-based framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS 7 or OS X 10.9 applications using the CoreBluetooth API. Includes <em>Deanna</em> and <em>DeannaMac</em>, applications to communicate with a <a href="[http://processors.wiki.ti.com/index.php/Bluetooth](http://processors.wiki.ti.com/index.php/Bluetooth">TI SensorTag</a>_SensorTag) for iOS and OS X respectively.</p>
 
 <ul>
 <li><a href="hierarchy.html">YmsCoreBluetooth API Reference</a></li>
@@ -101,19 +101,19 @@
 <p>YMSCoreBluetooth defines container classes which map to the CoreBluetooth object hierarchy:</p>
 
 <ul>
-<li><a href="Classes/YMSCBCentralManager.html">YMSCBCentralManager</a> &ndash; Contains a CBCentralManager instance.
+<li><a href="Classes/YMSCBCentralManager.html">YMSCBCentralManager</a> - Contains a CBCentralManager instance.
 
 <ul>
-<li><a href="Classes/YMSCBPeripheral.html">YMSCBPeripheral</a> &ndash; Contains a CBPeripheral instance.
+<li><a href="Classes/YMSCBPeripheral.html">YMSCBPeripheral</a> - Contains a CBPeripheral instance.
 
 <ul>
-<li><a href="Classes/YMSCBService.html">YMSCBService</a> &ndash; Contains a CBService instance.
+<li><a href="Classes/YMSCBService.html">YMSCBService</a> - Contains a CBService instance.
 
 <ul>
-<li> <a href="Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> &ndash; Contains a CBCharacteristic instance.
+<li> <a href="Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> - Contains a CBCharacteristic instance.
 
 <ul>
-<li> <a href="Classes/YMSCBDescriptor.html">YMSCBDescriptor</a> &ndash; Contains a CBDescriptor instance.</li>
+<li> <a href="Classes/YMSCBDescriptor.html">YMSCBDescriptor</a> - Contains a CBDescriptor instance.</li>
 </ul>
 </li>
 </ul>
@@ -196,9 +196,15 @@
 
 <h4>Retrieving Peripherals</h4>
 
-<p>In the following code sample, <code>self</code> is an instance of a subclass of <a href="Classes/YMSCBCentralManager.html">YMSCBCentralManager</a>.</p>
+<p>In the following code sample, <code>self</code> is an instance of a subclass of YMSCBCentralManager and <code>identifiers</code> is an array of <code>NSUUID</code> instances that map to a peripheral that has been discovered by the iOS device.</p>
 
-<pre><code>__weak DEACentralManager *this = self;
+<pre><code>[self retrievePeripheralsWithIdentifiers:identifiers];
+</code></pre>
+
+<p><em>Note</em> - This API has changed for iOS7 due to the deprecation of [YMSCBCentralManager retrievePeripherals:withBlock:]</p>
+
+<pre><code>// I AM OLD CODE. 
+__weak DEACentralManager *this = self;
 [self retrievePeripherals:peripheralUUIDs
                 withBlock:^(CBPeripheral *peripheral) {
                     [this handleFoundPeripheral:peripheral];
@@ -217,6 +223,9 @@
         if (error) {
             return;
         }
+
+        // Example where only a subset of services is to be discovered.
+        //[yp discoverServices:[yp servicesSubset:@[@"temperature", @"simplekeys", @"devinfo"]] withBlock:^(NSArray *yservices, NSError *error) {
 
         [yp discoverServices:[yp services] withBlock:^(NSArray *yservices, NSError *error) {
             if (error) {
@@ -360,7 +369,7 @@
 
 <h3>Handling Characteristic Notification Updates</h3>
 
-<p>One place where YmsCoreBluetooth does <em>not</em> use blocks to handle BLE responses is with characteristic notification updates. The reason for this is because such updates are asynchronous and non-deterministic. As such the handler method <code>[YMSCBService notifyCharacteristicHandler:error:]</code> must be implemented for any subclass of <a href="Classes/YMSCBService.html">YMSCBService</a> to handle such updates.</p>
+<p>One place where YmsCoreBluetooth does <em>not</em> use blocks to handle BLE responses is with characteristic notification updates. The reason for this is because such updates are asynchronous and non-deterministic. As such the handler method <a href="Classes/YMSCBService.html#//api/name/notifyCharacteristicHandler:error:"><code>[YMSCBService notifyCharacteristicHandler:error:]</code></a> must be implemented for any subclass of <a href="Classes/YMSCBService.html">YMSCBService</a> to handle such updates.</p>
 
 <p>In the following code sample, <code>self</code> is an instance of a subclass of <a href="Classes/YMSCBService.html">YMSCBService</a>.</p>
 
@@ -420,7 +429,7 @@
 
 <p><strong> Important </strong>: To let the UI components in the main thread know via KVO that a property has changed, you must update that property on the main thread. A convenience macro <code>_YMS_PERFORM_ON_MAIN_THREAD</code> which uses the GCD call <code>dispatch_async()</code> does just that:</p>
 
-<pre><code>#define _YMS_PERFORM_ON_MAIN_THREAD(block) dispatch_async(dispatch_get_main_queue(), block);
+<pre><code> #define _YMS_PERFORM_ON_MAIN_THREAD(block) dispatch_async(dispatch_get_main_queue(), block);
 </code></pre>
 
 <h3>Block Callback Design</h3>
@@ -482,16 +491,16 @@
 <p>Code tested on:</p>
 
 <ul>
-<li>iPhone 4S, iOS 6.1.3</li>
+<li>iPhone 4S, iPod touch, iPhone 5 all running iOS7</li>
 <li>TI SensorTag firmware 1.2, 1.3.</li>
-<li>iMac 27 Mid-2010, OS X 10.8.3</li>
+<li>iMac 27 Mid-2010, OS X 10.8.5</li>
 </ul>
 
 
 <h2>Known Issues</h2>
 
 <ul>
-<li>No support is offered for the iOS simulator due to the instability of the CoreBluetooth implementation on it. Use this code only on iOS hardware that supports CoreBluetooth. Given that Apple does not provide technical support for CoreBluetooth behavior on the iOS simulator <a href="[http://developer.apple.com/library/ios/](http://developer.apple.com/library/ios/">TN2295</a>#technotes/tn2295/_index.html), I feel this is a reasonable position to take. Hopefully in time the iOS simulator will exhibit better CoreBluetooth fidelity.</li>
+<li>Use this code only on iOS or Mac hardware that supports CoreBluetooth. The iOS Simulator is not supported.</li>
 </ul>
 
 						
@@ -601,9 +610,9 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-09-07)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-09-18)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 961)</a>.</span></p>
 						
 	
 					</div>

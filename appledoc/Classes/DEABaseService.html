@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
 		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
-		<meta name="generator" content="appledoc 2.1 (build 858)" />
+		<meta name="generator" content="appledoc 2.2 (build 961)" />
 	</head>
 	<body>
 		<header id="top_header">
@@ -46,6 +46,8 @@
 	
 	<option value="//api/name/addCharacteristic:withOffset:">&nbsp;&nbsp;&nbsp;&nbsp;- addCharacteristic:withOffset:</option>
 	
+	<option value="//api/name/initWithName:parent:baseHi:baseLo:serviceOffset:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:parent:baseHi:baseLo:serviceOffset:</option>
+	
 	<option value="//api/name/turnOff">&nbsp;&nbsp;&nbsp;&nbsp;- turnOff</option>
 	
 	<option value="//api/name/turnOn">&nbsp;&nbsp;&nbsp;&nbsp;- turnOn</option>
@@ -79,6 +81,8 @@
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/addCharacteristic:withOffset:">addCharacteristic:withOffset:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithName:parent:baseHi:baseLo:serviceOffset:">initWithName:parent:baseHi:baseLo:serviceOffset:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/turnOff">turnOff</a></span></li>
 	
@@ -161,6 +165,13 @@
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
+		<code><a href="#//api/name/initWithName:parent:baseHi:baseLo:serviceOffset:">&ndash;&nbsp;initWithName:parent:baseHi:baseLo:serviceOffset:</a></code>
+		<span class="tooltip"><p>Initialize class instance.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/addCharacteristic:withOffset:">&ndash;&nbsp;addCharacteristic:withOffset:</a></code>
 		<span class="tooltip"><p>Add <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> instance given address offset.</p></span>
 	</span>
@@ -223,6 +234,82 @@
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Add <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> instance given address offset.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithName:parent:baseHi:baseLo:serviceOffset:" title="initWithName:parent:baseHi:baseLo:serviceOffset:"></a>
+	<h3 class="subsubtitle method-title">initWithName:parent:baseHi:baseLo:serviceOffset:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Initialize class instance.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (instancetype)initWithName:(NSString *)<em>oName</em> parent:(YMSCBPeripheral *)<em>pObj</em> baseHi:(int64_t)<em>hi</em> baseLo:(int64_t)<em>lo</em> serviceOffset:(int)<em>serviceOffset</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>oName</em></dt>
+			<dd><p><a href="../Classes/YMSCBService.html#//api/name/name">name</a> of service</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>pObj</em></dt>
+			<dd><p><a href="../Classes/YMSCBService.html#//api/name/parent">parent</a> object which owns this service</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>hi</em></dt>
+			<dd><p>top 64 bits of 128-bit <a href="../Classes/YMSCBService.html#//api/name/base">base</a> address value</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>lo</em></dt>
+			<dd><p>bottom 64 bits of 128-bit <a href="../Classes/YMSCBService.html#//api/name/base">base</a> address value</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>serviceOffset</em></dt>
+			<dd><p>offset address of service</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p><a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a></p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Initialize class instance.</p>
 	</div>
 	
 	
@@ -350,9 +437,9 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-09-07)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-09-18)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 961)</a>.</span></p>
 						
 					</div>
 				</div>

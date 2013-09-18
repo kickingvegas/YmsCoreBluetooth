@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
 		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
-		<meta name="generator" content="appledoc 2.1 (build 858)" />
+		<meta name="generator" content="appledoc 2.2 (build 961)" />
 	</head>
 	<body>
 		<header id="top_header">
@@ -56,6 +56,8 @@
 	
 	<option value="//api/name/parent">&nbsp;&nbsp;&nbsp;&nbsp;parent</option>
 	
+	<option value="//api/name/uuid">&nbsp;&nbsp;&nbsp;&nbsp;uuid</option>
+	
 	
 	
 	
@@ -69,13 +71,15 @@
 	
 	<option value="//api/name/characteristics">&nbsp;&nbsp;&nbsp;&nbsp;- characteristics</option>
 	
+	<option value="//api/name/characteristicsSubset:">&nbsp;&nbsp;&nbsp;&nbsp;- characteristicsSubset:</option>
+	
 	<option value="//api/name/discoverCharacteristics:withBlock:">&nbsp;&nbsp;&nbsp;&nbsp;- discoverCharacteristics:withBlock:</option>
 	
 	<option value="//api/name/findCharacteristic:">&nbsp;&nbsp;&nbsp;&nbsp;- findCharacteristic:</option>
 	
 	<option value="//api/name/handleDiscoveredCharacteristicsResponse:withError:">&nbsp;&nbsp;&nbsp;&nbsp;- handleDiscoveredCharacteristicsResponse:withError:</option>
 	
-	<option value="//api/name/initWithName:parent:baseHi:baseLo:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:parent:baseHi:baseLo:</option>
+	<option value="//api/name/initWithName:parent:baseHi:baseLo:serviceOffset:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithName:parent:baseHi:baseLo:serviceOffset:</option>
 	
 	<option value="//api/name/notifyCharacteristicHandler:error:">&nbsp;&nbsp;&nbsp;&nbsp;- notifyCharacteristicHandler:error:</option>
 	
@@ -98,16 +102,6 @@
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Properties">Properties</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Initializing a YMSCBService">Initializing a YMSCBService</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Adding a BLE characteristic">Adding a BLE characteristic</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Retrieve CBUUIDs for all discovered characteristics">Retrieve CBUUIDs for all discovered characteristics</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Synchronize found CBCharacteristic instances with corresponding their YMSCBCharacter instance">Synchronize found CBCharacteristic instances with corresponding their YMSCBCharacter instance</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Find a YMSCBCharacteristic">Find a YMSCBCharacteristic</a></span></li>
 	
 </ul></li>
 
@@ -133,6 +127,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/parent">parent</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/uuid">uuid</a></span></li>
+	
 </ul></li>
 
 
@@ -147,13 +143,15 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/characteristics">characteristics</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/characteristicsSubset:">characteristicsSubset:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/discoverCharacteristics:withBlock:">discoverCharacteristics:withBlock:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/findCharacteristic:">findCharacteristic:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/handleDiscoveredCharacteristicsResponse:withError:">handleDiscoveredCharacteristicsResponse:withError:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithName:parent:baseHi:baseLo:">initWithName:parent:baseHi:baseLo:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithName:parent:baseHi:baseLo:serviceOffset:">initWithName:parent:baseHi:baseLo:serviceOffset:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/notifyCharacteristicHandler:error:">notifyCharacteristicHandler:error:</a></span></li>
 	
@@ -214,6 +212,84 @@ BLE notification has been enabled.</p>
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
+						
+						<h3 class="subsubtitle task-title">Other Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithName:parent:baseHi:baseLo:serviceOffset:">&ndash;&nbsp;initWithName:parent:baseHi:baseLo:serviceOffset:</a></code>
+		<span class="tooltip"><p>Initialize class instance.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addCharacteristic:withOffset:">&ndash;&nbsp;addCharacteristic:withOffset:</a></code>
+		<span class="tooltip"><p>Add <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> instance given address offset.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/addCharacteristic:withAddress:">&ndash;&nbsp;addCharacteristic:withAddress:</a></code>
+		<span class="tooltip"><p>Add <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> instance given absolute address.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/characteristics">&ndash;&nbsp;characteristics</a></code>
+		<span class="tooltip"><p>Return array of CBUUIDs for all <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> instances in <a href="#//api/name/characteristicDict">characteristicDict</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/characteristicsSubset:">&ndash;&nbsp;characteristicsSubset:</a></code>
+		<span class="tooltip"><p>Return array of CBUUIDs for <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> instances in <a href="#//api/name/characteristicDict">characteristicDict</a> whose key is included in keys.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/syncCharacteristics:">&ndash;&nbsp;syncCharacteristics:</a></code>
+		<span class="tooltip"><p>Synchronize found CBCharacteristics with corresponding <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> containers.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/findCharacteristic:">&ndash;&nbsp;findCharacteristic:</a></code>
+		<span class="tooltip"><p>Find characteristic container for CBCharacteristic.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/notifyCharacteristicHandler:error:">&ndash;&nbsp;notifyCharacteristicHandler:error:</a></code>
+		<span class="tooltip"><p>Method to handle response update for a prior read or write request to a characteristic.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/discoverCharacteristics:withBlock:">&ndash;&nbsp;discoverCharacteristics:withBlock:</a></code>
+		<span class="tooltip"><p>Discover <a href="#//api/name/characteristics">characteristics</a> for this service.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/handleDiscoveredCharacteristicsResponse:withError:">&ndash;&nbsp;handleDiscoveredCharacteristicsResponse:withError:</a></code>
+		<span class="tooltip"><p>Handler method for discovered <a href="#//api/name/characteristics">characteristics</a>.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
 						<a title="Properties" name="task_Properties"></a>
 						<h3 class="subsubtitle task-title">Properties</h3>
 
@@ -248,6 +324,13 @@ BLE notification has been enabled.</p>
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/uuid">&nbsp;&nbsp;uuid</a></code>
+		<span class="tooltip"><p>Service UUID</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/isOn">&nbsp;&nbsp;isOn</a></code>
 		<span class="tooltip"><p>When set to YES, the CoreBluetooth service is turned on.</p></span>
 	</span>
@@ -273,109 +356,6 @@ BLE notification has been enabled.</p>
 		<span class="tooltip"><p>Callback for <a href="#//api/name/characteristics">characteristics</a> that are discovered.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
-	
-</li>
-						</ul>
-						
-						
-						<a title="Initializing a YMSCBService" name="task_Initializing a YMSCBService"></a>
-						<h3 class="subsubtitle task-title">Initializing a YMSCBService</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/initWithName:parent:baseHi:baseLo:">&ndash;&nbsp;initWithName:parent:baseHi:baseLo:</a></code>
-		<span class="tooltip"><p>Initialize class instance.</p></span>
-	</span>
-	
-	
-</li>
-						</ul>
-						
-						
-						<a title="Adding a BLE characteristic" name="task_Adding a BLE characteristic"></a>
-						<h3 class="subsubtitle task-title">Adding a BLE characteristic</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/addCharacteristic:withOffset:">&ndash;&nbsp;addCharacteristic:withOffset:</a></code>
-		<span class="tooltip"><p>Add <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> instance given address offset.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/addCharacteristic:withAddress:">&ndash;&nbsp;addCharacteristic:withAddress:</a></code>
-		<span class="tooltip"><p>Add <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> instance given absolute address.</p></span>
-	</span>
-	
-	
-</li>
-						</ul>
-						
-						
-						<a title="Retrieve CBUUIDs for all discovered characteristics" name="task_Retrieve CBUUIDs for all discovered characteristics"></a>
-						<h3 class="subsubtitle task-title">Retrieve CBUUIDs for all discovered characteristics</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/characteristics">&ndash;&nbsp;characteristics</a></code>
-		<span class="tooltip"><p>Return array of CBUUIDs for all <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> instances in <a href="#//api/name/characteristicDict">characteristicDict</a>.</p></span>
-	</span>
-	
-	
-</li>
-						</ul>
-						
-						
-						<a title="Synchronize found CBCharacteristic instances with corresponding their YMSCBCharacter instance" name="task_Synchronize found CBCharacteristic instances with corresponding their YMSCBCharacter instance"></a>
-						<h3 class="subsubtitle task-title">Synchronize found CBCharacteristic instances with corresponding their YMSCBCharacter instance</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/syncCharacteristics:">&ndash;&nbsp;syncCharacteristics:</a></code>
-		<span class="tooltip"><p>Synchronize found CBCharacteristics with corresponding <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> containers.</p></span>
-	</span>
-	
-	
-</li>
-						</ul>
-						
-						
-						<a title="Find a YMSCBCharacteristic" name="task_Find a YMSCBCharacteristic"></a>
-						<h3 class="subsubtitle task-title">Find a YMSCBCharacteristic</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/findCharacteristic:">&ndash;&nbsp;findCharacteristic:</a></code>
-		<span class="tooltip"><p>Find characteristic container for CBCharacteristic.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/notifyCharacteristicHandler:error:">&ndash;&nbsp;notifyCharacteristicHandler:error:</a></code>
-		<span class="tooltip"><p>Method to handle response update for a prior read or write request to a characteristic.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/discoverCharacteristics:withBlock:">&ndash;&nbsp;discoverCharacteristics:withBlock:</a></code>
-		<span class="tooltip"><p>Discover <a href="#//api/name/characteristics">characteristics</a> for this service.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/handleDiscoveredCharacteristicsResponse:withError:">&ndash;&nbsp;handleDiscoveredCharacteristicsResponse:withError:</a></code>
-		<span class="tooltip"><p>Handler method for discovered <a href="#//api/name/characteristics">characteristics</a>.</p></span>
-	</span>
-	
 	
 </li>
 						</ul>
@@ -718,6 +698,47 @@ BLE notification has been enabled.</p>
 	
 </div>
 						
+						<div class="section-method">
+	<a name="//api/name/uuid" title="uuid"></a>
+	<h3 class="subsubtitle method-title">uuid</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Service UUID</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) CBUUID *uuid</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Service UUID</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
 					</div>
 					
 					
@@ -858,6 +879,11 @@ BLE notification has been enabled.</p>
 	
 	
 	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>array of CBUUIDs</p>
+	</div>
+	
 	
 	
 	
@@ -865,6 +891,62 @@ BLE notification has been enabled.</p>
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Return array of CBUUIDs for all <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> instances in <a href="#//api/name/characteristicDict">characteristicDict</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBService.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/characteristicsSubset:" title="characteristicsSubset:"></a>
+	<h3 class="subsubtitle method-title">characteristicsSubset:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Return array of CBUUIDs for <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> instances in <a href="#//api/name/characteristicDict">characteristicDict</a> whose key is included in keys.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (NSArray *)characteristicsSubset:(NSArray *)<em>keys</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>keys</em></dt>
+			<dd><p>array of NSString keys, where each key must exist in <a href="#//api/name/characteristicDict">characteristicDict</a>.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>array of CBUUIDs</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Return array of CBUUIDs for <a href="../Classes/YMSCBCharacteristic.html">YMSCBCharacteristic</a> instances in <a href="#//api/name/characteristicDict">characteristicDict</a> whose key is included in keys.</p>
 	</div>
 	
 	
@@ -893,7 +975,7 @@ BLE notification has been enabled.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)discoverCharacteristics:(NSArray *)<em>characteristicUUIDs</em> withBlock:(void ( ^ ) ( NSDictionary *chDict , NSError *))<em>callback</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)discoverCharacteristics:(NSArray *)<em>characteristicUUIDs</em> withBlock:(void ( ^ ) ( NSDictionary *, NSError *))<em>callback</em></code></div>
 
     
 	
@@ -1050,8 +1132,8 @@ BLE notification has been enabled.</p>
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/initWithName:parent:baseHi:baseLo:" title="initWithName:parent:baseHi:baseLo:"></a>
-	<h3 class="subsubtitle method-title">initWithName:parent:baseHi:baseLo:</h3>
+	<a name="//api/name/initWithName:parent:baseHi:baseLo:serviceOffset:" title="initWithName:parent:baseHi:baseLo:serviceOffset:"></a>
+	<h3 class="subsubtitle method-title">initWithName:parent:baseHi:baseLo:serviceOffset:</h3>
 	
 	
 	
@@ -1061,7 +1143,7 @@ BLE notification has been enabled.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (instancetype)initWithName:(NSString *)<em>oName</em> parent:(YMSCBPeripheral *)<em>pObj</em> baseHi:(int64_t)<em>hi</em> baseLo:(int64_t)<em>lo</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (instancetype)initWithName:(NSString *)<em>oName</em> parent:(YMSCBPeripheral *)<em>pObj</em> baseHi:(int64_t)<em>hi</em> baseLo:(int64_t)<em>lo</em> serviceOffset:(int)<em>serviceOffset</em></code></div>
 
     
 	
@@ -1086,6 +1168,11 @@ BLE notification has been enabled.</p>
 		<dl class="argument-def parameter-def">
 			<dt><em>lo</em></dt>
 			<dd><p>bottom 64 bits of 128-bit <a href="../Classes/YMSCBService.html#//api/name/base">base</a> address value</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>serviceOffset</em></dt>
+			<dd><p>offset address of service</p></dd>
 		</dl>
 		
 	</div>
@@ -1164,7 +1251,7 @@ BLE notification has been enabled.</p>
 <p>This method is invoked by the CBPeripheralDelegate method peripheral:didUpdateValueForCharacteristic:error:
 conformed to by <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</p>
 
-<p>This method is typically overridden to handle <a href="../Classes/YMSCBService.html#//api/name/characteristics">characteristics</a> whose notification has been turned on.</p>
+<p>This method is typically overridden to handle <a href="#//api/name/characteristics">characteristics</a> whose notification has been turned on.</p>
 	</div>
 	
 	
@@ -1245,9 +1332,9 @@ conformed to by <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a>.</
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-09-07)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-09-18)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 961)</a>.</span></p>
 						
 					</div>
 				</div>

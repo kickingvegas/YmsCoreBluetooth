@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=550" />
 		<link rel="stylesheet" type="text/css" href="../../css/styles.css" media="all" />
 		<link rel="stylesheet" type="text/css" media="print" href="../../css/stylesPrint.css" />	
-		<meta name="generator" content="appledoc 2.1 (build 858)" />
+		<meta name="generator" content="appledoc 2.2 (build 961)" />
 	</head>
 	<body>
 		<header id="top_header">
@@ -167,12 +167,8 @@ It is typically implemented as a singleton instance and contains the following m
 
 <pre><code>- (void)managerPoweredOnHandler {
     if (self.useStoredPeripherals) {
-        NSArray *peripheralUUIDs = [YMSCBStoredPeripherals genPeripheralUUIDs];
-        __weak DEACentralManager *this = self;
-        [self retrievePeripherals:peripheralUUIDs
-                        withBlock:^(CBPeripheral *peripheral) {
-                            [this handleFoundPeripheral:peripheral];
-                        }];
+        NSArray *identifiers = [YMSCBStoredPeripherals genIdentifiers];
+        [self retrievePeripheralsWithIdentifiers:identifiers];
     }
 }
 </code></pre>
@@ -182,8 +178,8 @@ It is typically implemented as a singleton instance and contains the following m
 <p>The class implementation of <code>DEASensorTag</code> in <code>Deanna/Services/SensorTag/DEASensorTag.[hm]</code> is where the top-level behavior of the <em>SensorTag</em> peripheral is captured. Two methods are implemented:</p>
 
 <ul>
-<li><code>initWithPeripheral:central:baseHi:baseLo:</code> &ndash; the constructor for <a href="../../Classes/DEASensorTag.html">DEASensorTag</a></li>
-<li><code>connect</code> &ndash; the method to initiate a connection request for the peripheral.</li>
+<li><code>initWithPeripheral:central:baseHi:baseLo:</code> - the constructor for <a href="../../Classes/DEASensorTag.html">DEASensorTag</a></li>
+<li><code>connect</code> - the method to initiate a connection request for the peripheral.</li>
 </ul>
 
 
@@ -197,14 +193,14 @@ It is typically implemented as a singleton instance and contains the following m
     self = [super initWithPeripheral:peripheral central:owner baseHi:hi baseLo:lo];
 
     if (self) {
-        DEATemperatureService *ts = [[DEATemperatureService alloc] initWithName:@"temperature" parent:self baseHi:hi baseLo:lo];
-        DEAAccelerometerService *as = [[DEAAccelerometerService alloc] initWithName:@"accelerometer" parent:self baseHi:hi baseLo:lo];
-        DEASimpleKeysService *sks = [[DEASimpleKeysService alloc] initWithName:@"simplekeys" parent:self baseHi:hi baseLo:lo];
-        DEAHumidityService *hs = [[DEAHumidityService alloc] initWithName:@"humidity" parent:self baseHi:hi baseLo:lo];
-        DEABarometerService *bs = [[DEABarometerService alloc] initWithName:@"barometer" parent:self baseHi:hi baseLo:lo];
-        DEAGyroscopeService *gs = [[DEAGyroscopeService alloc] initWithName:@"gyroscope" parent:self baseHi:hi baseLo:lo];
-        DEAMagnetometerService *ms = [[DEAMagnetometerService alloc] initWithName:@"magnetometer" parent:self baseHi:hi baseLo:lo];
-        DEADeviceInfoService *ds = [[DEADeviceInfoService alloc] initWithName:@"devinfo" parent:self baseHi:hi baseLo:lo];
+        DEATemperatureService *ts = [[DEATemperatureService alloc] initWithName:@"temperature" parent:self baseHi:hi baseLo:lo serviceOffset:kSensorTag_TEMPERATURE_SERVICE];
+        DEAAccelerometerService *as = [[DEAAccelerometerService alloc] initWithName:@"accelerometer" parent:self baseHi:hi baseLo:lo  serviceOffset:kSensorTag_ACCELEROMETER_SERVICE];
+        DEASimpleKeysService *sks = [[DEASimpleKeysService alloc] initWithName:@"simplekeys" parent:self baseHi:0 baseLo:0  serviceOffset:kSensorTag_SIMPLEKEYS_SERVICE];
+        DEAHumidityService *hs = [[DEAHumidityService alloc] initWithName:@"humidity" parent:self baseHi:hi baseLo:lo  serviceOffset:kSensorTag_HUMIDITY_SERVICE];
+        DEABarometerService *bs = [[DEABarometerService alloc] initWithName:@"barometer" parent:self baseHi:hi baseLo:lo  serviceOffset:kSensorTag_BAROMETER_SERVICE];
+        DEAGyroscopeService *gs = [[DEAGyroscopeService alloc] initWithName:@"gyroscope" parent:self baseHi:hi baseLo:lo  serviceOffset:kSensorTag_GYROSCOPE_SERVICE];
+        DEAMagnetometerService *ms = [[DEAMagnetometerService alloc] initWithName:@"magnetometer" parent:self baseHi:hi baseLo:lo  serviceOffset:kSensorTag_MAGNETOMETER_SERVICE];
+        DEADeviceInfoService *ds = [[DEADeviceInfoService alloc] initWithName:@"devinfo" parent:self baseHi:0 baseLo:0  serviceOffset:kSensorTag_DEVINFO_SERV_UUID];
 
         self.serviceDict = @{@"temperature": ts,
                              @"accelerometer": as,
@@ -223,14 +219,14 @@ It is typically implemented as a singleton instance and contains the following m
 <p>In this implementation, the following BLE services of the <em>SensorTag</em> are supported:</p>
 
 <ul>
-<li>Temperature Service &ndash; <a href="../../Classes/DEATemperatureService.html">DEATemperatureService</a></li>
-<li>Accelerometer Service &ndash; <a href="../../Classes/DEAAccelerometerService.html">DEAAccelerometerService</a></li>
-<li>Simple Keys Service &ndash; <a href="../../Classes/DEASimpleKeysService.html">DEASimpleKeysService</a></li>
-<li>Humidity Service &ndash; <a href="../../Classes/DEAHumidityService.html">DEAHumidityService</a></li>
-<li>Barometer Service &ndash; <a href="../../Classes/DEABarometerService.html">DEABarometerService</a></li>
-<li>Gyroscope Service &ndash; <a href="../../Classes/DEAGyroscopeService.html">DEAGyroscopeService</a></li>
-<li>Magnetometer Service &ndash; <a href="../../Classes/DEAMagnetometerService.html">DEAMagnetometerService</a></li>
-<li>Device Information Service &ndash; <a href="../../Classes/DEADeviceInfoService.html">DEADeviceInfoService</a></li>
+<li>Temperature Service - <a href="../../Classes/DEATemperatureService.html">DEATemperatureService</a></li>
+<li>Accelerometer Service - <a href="../../Classes/DEAAccelerometerService.html">DEAAccelerometerService</a></li>
+<li>Simple Keys Service - <a href="../../Classes/DEASimpleKeysService.html">DEASimpleKeysService</a></li>
+<li>Humidity Service - <a href="../../Classes/DEAHumidityService.html">DEAHumidityService</a></li>
+<li>Barometer Service - <a href="../../Classes/DEABarometerService.html">DEABarometerService</a></li>
+<li>Gyroscope Service - <a href="../../Classes/DEAGyroscopeService.html">DEAGyroscopeService</a></li>
+<li>Magnetometer Service - <a href="../../Classes/DEAMagnetometerService.html">DEAMagnetometerService</a></li>
+<li>Device Information Service - <a href="../../Classes/DEADeviceInfoService.html">DEADeviceInfoService</a></li>
 <li></li>
 </ul>
 
@@ -310,7 +306,7 @@ It is typically implemented as a singleton instance and contains the following m
 
 <ul>
 <li>Properties that are specific to the bluetooth service.</li>
-<li>The class constructor <a href="../../Classes/YMSCBService.html#//api/name/initWithName:parent:baseHi:baseLo:">[YMSCBService initWithName:parent:baseHi:baseLo:]</a>, defining the BLE characteristics with subclasses of YMSCBCharacteristic via <a href="../../Classes/YMSCBService.html#//api/name/addCharacteristic:withOffset:">[YMSCBService addCharacteristic:withOffset:]</a>.</li>
+<li>The class constructor [YMSCBService initWithName:parent:baseHi:baseLo:], defining the BLE characteristics with subclasses of YMSCBCharacteristic via <a href="../../Classes/YMSCBService.html#//api/name/addCharacteristic:withOffset:">[YMSCBService addCharacteristic:withOffset:]</a>.</li>
 <li><code>notifyCharacteristicHandler</code> to handle responses for characteristics whose notifications have been turned on.</li>
 <li>Any processing logic germane to the BLE service (e.g. temperature conversion, data correction/smoothing, etc.).</li>
 <li>Specific read/write transaction sequences germane to the BLE service.</li>
@@ -330,18 +326,19 @@ float calcAccel(int16_t rawV) {
 
 @implementation DEAAccelerometerService
 
+- (instancetype)initWithName:(NSString *)oName
+                      parent:(YMSCBPeripheral *)pObj
+                      baseHi:(int64_t)hi
+                      baseLo:(int64_t)lo
+               serviceOffset:(int)serviceOffset {
 
-- (id)initWithName:(NSString *)oName
-            parent:(YMSCBPeripheral *)pObj
-            baseHi:(int64_t)hi
-            baseLo:(int64_t)lo {
     self = [super initWithName:oName
                         parent:pObj
                         baseHi:hi
-                        baseLo:lo];
+                        baseLo:lo
+                 serviceOffset:serviceOffset];
 
     if (self) {
-        [self addCharacteristic:@"service" withOffset:kSensorTag_ACCELEROMETER_SERVICE];
         [self addCharacteristic:@"data" withOffset:kSensorTag_ACCELEROMETER_DATA];
         [self addCharacteristic:@"config" withOffset:kSensorTag_ACCELEROMETER_CONFIG];
         [self addCharacteristic:@"period" withOffset:kSensorTag_ACCELEROMETER_PERIOD];
@@ -373,13 +370,42 @@ float calcAccel(int16_t rawV) {
         });
     }
 }
+
+- (void)configPeriod:(uint8_t)value {
+
+    YMSCBCharacteristic *periodCt = self.characteristicDict[@"period"];
+    __weak DEAAccelerometerService *this = self;
+    [periodCt writeByte:value withBlock:^(NSError *error) {
+        //NSLog(@"Set period to: %x", value);
+        this.period = @(value);
+    }];
+}
+
+- (void)readPeriod {
+    YMSCBCharacteristic *periodCt = self.characteristicDict[@"period"];
+
+    __weak DEAAccelerometerService *this = self;
+
+    [periodCt readValueWithBlock:^(NSData *data, NSError *error) {
+        char val[data.length];
+        [data getBytes:&amp;val length:data.length];
+
+        int16_t periodValue = val[0];
+
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            this.period = @(periodValue);
+        });
+    }];
+}
+
+@end
 </code></pre>
 
-<p>The class constructor <code>initWithName:parent:baseHi:baseLo:</code> defines four BLE characteristics using <a href="../../Classes/YMSCBService.html#//api/name/addCharacteristic:withOffset:">[YMSCBService addCharacteristic:withOffset:]</a> which we can reference with the following four strings: (&ldquo;service&rdquo;, &ldquo;data&rdquo;, &ldquo;config&rdquo;, &ldquo;period&rdquo;).</p>
+<p>The class constructor <code>initWithName:parent:baseHi:baseLo:serviceOffset:</code> defines three BLE characteristics using <a href="../../Classes/YMSCBService.html#//api/name/addCharacteristic:withOffset:">[YMSCBService addCharacteristic:withOffset:]</a> which we can reference with the following four strings: (&ldquo;data&rdquo;, &ldquo;config&rdquo;, &ldquo;period&rdquo;).</p>
 
 <p>When the service is turned on using the method <a href="../../Classes/DEABaseService.html#//api/name/turnOn">[DEABaseService turnOn]</a>, notifications for the &ldquo;data&rdquo; characteristic are turned on. Handling notification events sent from the <em>SensorTag</em> are handled by <code>notifyCharacteristicHandler</code>. The acceleration measurements are stored as <code>NSNumber</code> properties <code>x</code>, <code>y</code>, <code>z</code>. These properties can then be Key-Value Observed (KVO) by the application, typically to be displayed in user interface.</p>
 
-<p><strong> Important </strong>: To let the UI components in the main thread know via KVO that a property has changed, you must update that property on the main thread. A convenience macro <code>_YMS_PERFORM_ON_MAIN_THREAD</code> which uses the GCD call <code>dispatch_async()</code> does just that:</p>
+<p><strong>Important</strong>: To let the UI components in the main thread know via KVO that a property has changed, you must update that property on the main thread. A convenience macro <code>_YMS_PERFORM_ON_MAIN_THREAD</code> which uses the GCD call <code>dispatch_async()</code> does just that:</p>
 
 <pre><code>#define _YMS_PERFORM_ON_MAIN_THREAD(block) dispatch_async(dispatch_get_main_queue(), block);
 </code></pre>
@@ -393,9 +419,9 @@ float calcAccel(int16_t rawV) {
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-09-07)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-09-18)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.1 (build 858)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 961)</a>.</span></p>
 						
 					
 					</div>
