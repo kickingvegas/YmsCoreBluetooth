@@ -119,6 +119,26 @@ Support for the property `uuid` has changed the constructor with the addition of
 
 Please take note that this will change any subclasses of `YMSCBService` that you have.
 
+The following method has been added:
+
+		- (NSArray *)characteristicsSubset:(NSArray *)keys {
+			NSArray *result = nil;
+			NSMutableArray *tempArray = [[NSMutableArray alloc] initWithCapacity:keys.count];
+
+			for (NSString *key in keys) {
+				YMSCBCharacteristic *yc = (YMSCBCharacteristic *)self[key];
+
+				if (yc) {
+					[tempArray addObject:yc.uuid];
+				} else {
+					NSLog(@"WARNING: characteristic key '%@' is not found in service '%@' for characteristicSubset:", key, self.name);
+				}
+			}
+
+			result = [NSArray arrayWithArray:tempArray];
+			return result;
+		}
+
 
 ## YMSCBStoredPeripherals
 
