@@ -121,23 +121,14 @@ Please take note that this will change any subclasses of `YMSCBService` that you
 
 The following method has been added:
 
-		- (NSArray *)characteristicsSubset:(NSArray *)keys {
-			NSArray *result = nil;
-			NSMutableArray *tempArray = [[NSMutableArray alloc] initWithCapacity:keys.count];
+		/**
+		 Return array of CBUUIDs for YMSCBCharacteristic instances in characteristicDict whose key is included in keys.
 
-			for (NSString *key in keys) {
-				YMSCBCharacteristic *yc = (YMSCBCharacteristic *)self[key];
+		 @param keys array of NSString keys, where each key must exist in characteristicDict.
 
-				if (yc) {
-					[tempArray addObject:yc.uuid];
-				} else {
-					NSLog(@"WARNING: characteristic key '%@' is not found in service '%@' for characteristicSubset:", key, self.name);
-				}
-			}
-
-			result = [NSArray arrayWithArray:tempArray];
-			return result;
-		}
+		 @return array of CBUUIDs
+		 */
+		- (NSArray *)characteristicsSubset:(NSArray *)keys;
 
 
 ## YMSCBStoredPeripherals
