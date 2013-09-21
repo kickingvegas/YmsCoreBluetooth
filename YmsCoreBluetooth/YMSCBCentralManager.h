@@ -70,14 +70,14 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
  In typical practice, there is only one instance of CBCentralManager and it is located in a singleton instance of YMSCBCentralManager.
  This class listens to CBCentralManagerDelegate messages sent by manager, which in turn forwards those messages to delegate.
  */
-@property (nonatomic, strong) CBCentralManager *manager;
+@property (atomic, strong) CBCentralManager *manager;
 
 /**
  Array of YMSCBPeripheral instances.
  
  This array holds all YMSCBPeripheral instances discovered or retrieved by manager.
  */
-@property (nonatomic, strong) NSMutableArray *ymsPeripherals;
+@property (atomic, strong) NSMutableArray *ymsPeripherals;
 
 /**
  Array of NSStrings to search to match CBPeripheral instances.
@@ -85,26 +85,26 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
  Used in conjunction with isKnownPeripheral:.  
  This value is typically initialized using initWithKnownPeripheralNames:queue:.
  */
-@property (nonatomic, strong) NSArray *knownPeripheralNames;
+@property (atomic, strong) NSArray *knownPeripheralNames;
 
 /// Flag to determine if manager is scanning.
-@property (nonatomic, assign) BOOL isScanning;
+@property (atomic, assign) BOOL isScanning;
 
 /// Count of ymsPeripherals.
-@property (nonatomic, readonly, assign) NSUInteger count;
+@property (atomic, readonly, assign) NSUInteger count;
 
 /// API version.
-@property (nonatomic, readonly, assign) NSString *version;
+@property (atomic, readonly, assign) NSString *version;
 
 
 /// Peripheral Discovered Callback
-@property (nonatomic, copy) YMSCBDiscoverCallbackBlockType discoveredCallback;
+@property (atomic, copy) YMSCBDiscoverCallbackBlockType discoveredCallback;
 
 /// Peripheral Retreived Callback
-@property (nonatomic, copy) YMSCBRetrieveCallbackBlockType retrievedCallback;
+@property (atomic, copy) YMSCBRetrieveCallbackBlockType retrievedCallback;
 
 /// If YES, then discovered peripheral UUIDs are stored in standardUserDefaults.
-@property (nonatomic, assign) BOOL useStoredPeripherals;
+@property (atomic, assign) BOOL useStoredPeripherals;
 
 #pragma mark - Constructors
 /** @name Initializing YMSCBCentralManager */
