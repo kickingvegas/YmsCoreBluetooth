@@ -37,27 +37,27 @@
 @interface YMSCBDescriptor : NSObject
 
 /// Pointer to actual CBDescriptor
-@property (nonatomic, strong) CBDescriptor *cbDescriptor;
+@property (atomic, strong) CBDescriptor *cbDescriptor;
 
 /// Descriptor UUID
-@property (nonatomic, readonly) CBUUID *UUID;
+@property (atomic, readonly) CBUUID *UUID;
 
 /// Pointer to parent peripheral.
-@property (nonatomic, weak) YMSCBPeripheral *parent;
+@property (atomic, weak) YMSCBPeripheral *parent;
 
 /**
  FIFO queue for reads.
  
  Each element is a block of type YMSCBReadCallbackBlockType.
  */
-@property (nonatomic, strong) NSMutableArray *readCallbacks;
+@property (atomic, strong) NSMutableArray *readCallbacks;
 
 /**
  FIFO queue for writes.
  
  Each element is a block of type YMSCBWriteCallbackBlockType.
  */
-@property (nonatomic, strong) NSMutableArray *writeCallbacks;
+@property (atomic, strong) NSMutableArray *writeCallbacks;
 
 
 /** @name Issuing a Write Request */
