@@ -271,7 +271,9 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     __weak YMSCBCentralManager *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
         if (this.useStoredPeripherals) {
-            [YMSCBStoredPeripherals saveUUID:peripheral.identifier];
+            if (peripheral.identifier) {
+                [YMSCBStoredPeripherals saveUUID:peripheral.identifier];
+            }
         }
         
         if (this.discoveredCallback) {
