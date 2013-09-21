@@ -53,35 +53,35 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 
 /** @name Properties */
 /// Human-friendly name for this BLE service
-@property (nonatomic, strong) NSString *name;
+@property (atomic, strong) NSString *name;
 
 /**
  Pointer to CBService. Note that access to the peripheral is available via the `peripheral` property of cbService.
  */
-@property (nonatomic, strong) CBService *cbService;
+@property (atomic, strong) CBService *cbService;
 
 /// Pointer to parent peripheral.
 @property (nonatomic, weak) YMSCBPeripheral *parent;
 
 /// 128 bit base address struct
-@property (nonatomic, assign) yms_u128_t base;
+@property (atomic, assign) yms_u128_t base;
 
 /// Service UUID
-@property (nonatomic, strong) CBUUID *uuid;
+@property (atomic, strong) CBUUID *uuid;
 
 /**
  When set to YES, the CoreBluetooth service is turned on.
 */
-@property (nonatomic, assign) BOOL isOn;
+@property (atomic, assign) BOOL isOn;
 
 /** CoreBluetooth characteristics are synchronized */
-@property (nonatomic, assign) BOOL isEnabled;
+@property (atomic, assign) BOOL isEnabled;
 
 /// Holds (key, value pairs of (NSString, YMSCBCharacteristic) instances
-@property (nonatomic, strong) NSMutableDictionary *characteristicDict;
+@property (atomic, strong) NSMutableDictionary *characteristicDict;
 
 /// Callback for characteristics that are discovered.
-@property (nonatomic, copy) YMSCBDiscoverCharacteristicsCallbackBlockType discoverCharacteristicsCallback;
+@property (atomic, copy) YMSCBDiscoverCharacteristicsCallbackBlockType discoverCharacteristicsCallback;
 
 
 /**
