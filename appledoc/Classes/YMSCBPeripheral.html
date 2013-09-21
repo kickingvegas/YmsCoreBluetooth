@@ -52,6 +52,8 @@
 	
 	<option value="//api/name/discoverServicesCallback">&nbsp;&nbsp;&nbsp;&nbsp;discoverServicesCallback</option>
 	
+	<option value="//api/name/isConnected">&nbsp;&nbsp;&nbsp;&nbsp;isConnected</option>
+	
 	<option value="//api/name/isRenderedInViewCell">&nbsp;&nbsp;&nbsp;&nbsp;isRenderedInViewCell</option>
 	
 	<option value="//api/name/rssiPingPeriod">&nbsp;&nbsp;&nbsp;&nbsp;rssiPingPeriod</option>
@@ -88,8 +90,6 @@
 	<option value="//api/name/handleConnectionResponse:">&nbsp;&nbsp;&nbsp;&nbsp;- handleConnectionResponse:</option>
 	
 	<option value="//api/name/initWithPeripheral:central:baseHi:baseLo:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithPeripheral:central:baseHi:baseLo:</option>
-	
-	<option value="//api/name/isConnected">&nbsp;&nbsp;&nbsp;&nbsp;- isConnected</option>
 	
 	<option value="//api/name/peripheral:didDiscoverCharacteristicsForService:error:">&nbsp;&nbsp;&nbsp;&nbsp;- peripheral:didDiscoverCharacteristicsForService:error:</option>
 	
@@ -139,9 +139,15 @@
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_CBPeripheralDelegate Methods">CBPeripheralDelegate Methods</a></span></li>
-	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Properties">Properties</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Initializing a YMSCBPeripheral">Initializing a YMSCBPeripheral</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Get all CBService CBUUIDs for this peripheral">Get all CBService CBUUIDs for this peripheral</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Find a YMSCBService">Find a YMSCBService</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_CBPeripheralDelegate Methods">CBPeripheralDelegate Methods</a></span></li>
 	
 </ul></li>
 
@@ -162,6 +168,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/delegate">delegate</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/discoverServicesCallback">discoverServicesCallback</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isConnected">isConnected</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isRenderedInViewCell">isRenderedInViewCell</a></span></li>
 	
@@ -200,8 +208,6 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/handleConnectionResponse:">handleConnectionResponse:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithPeripheral:central:baseHi:baseLo:">initWithPeripheral:central:baseHi:baseLo:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/isConnected">isConnected</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/peripheral:didDiscoverCharacteristicsForService:error:">peripheral:didDiscoverCharacteristicsForService:error:</a></span></li>
 	
@@ -293,8 +299,107 @@ contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
+						<a title="Properties" name="task_Properties"></a>
+						<h3 class="subsubtitle task-title">Properties</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/base">&nbsp;&nbsp;base</a></code>
+		<span class="tooltip"><p>128 bit address base</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+		<span class="tooltip"><p>Pointer to delegate.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/watchdogRaised">&nbsp;&nbsp;watchdogRaised</a></code>
+		<span class="tooltip"><p>Flag to indicate if the watchdog timer has expired and forced a <a href="#//api/name/disconnect">disconnect</a>.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/serviceDict">&nbsp;&nbsp;serviceDict</a></code>
+		<span class="tooltip"><p>Dictionary of (<code>key</code>, <code>value</code>) pairs of (NSString, <a href="../Classes/YMSCBService.html">YMSCBService</a>) instances.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/cbPeripheral">&nbsp;&nbsp;cbPeripheral</a></code>
+		<span class="tooltip"><p>The CBPeripheral instance.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isConnected">&nbsp;&nbsp;isConnected</a></code>
+		<span class="tooltip"><p>A Boolean value indicating whether the peripheral is currently connected to the <a href="#//api/name/central">central</a> manager. (read-only)</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/rssiPingPeriod">&nbsp;&nbsp;rssiPingPeriod</a></code>
+		<span class="tooltip"><p>Time period between RSSI pings. (Default: 2 seconds)</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/central">&nbsp;&nbsp;central</a></code>
+		<span class="tooltip"><p>Pointer to an instance of <a href="../Classes/YMSCBCentralManager.html">YMSCBCentralManager</a>.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/watchdogTimer">&nbsp;&nbsp;watchdogTimer</a></code>
+		<span class="tooltip"><p>Watchdog timer for connection.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/watchdogTimerInterval">&nbsp;&nbsp;watchdogTimerInterval</a></code>
+		<span class="tooltip"><p>Watchdog timer interval in seconds. Default is 5 seconds.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/connectCallback">&nbsp;&nbsp;connectCallback</a></code>
+		<span class="tooltip"><p>Holds callback for connection established.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/discoverServicesCallback">&nbsp;&nbsp;discoverServicesCallback</a></code>
+		<span class="tooltip"><p>Holds callback for <a href="#//api/name/services">services</a> discovered.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isRenderedInViewCell">&nbsp;&nbsp;isRenderedInViewCell</a></code>
+		<span class="tooltip"><p>Helper flag to determine ViewCell updates.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
 						
-						<h3 class="subsubtitle task-title">Other Methods</h3>
+						
+						<a title="Initializing a YMSCBPeripheral" name="task_Initializing a YMSCBPeripheral"></a>
+						<h3 class="subsubtitle task-title">Initializing a YMSCBPeripheral</h3>
 
 						<ul class="task-list">
 							<li>
@@ -304,14 +409,15 @@ contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</
 	</span>
 	
 	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/isConnected">&ndash;&nbsp;isConnected</a></code>
-		<span class="tooltip"><p>A Boolean value indicating whether the peripheral is currently connected to the <a href="#//api/name/central">central</a> manager. (read-only)</p></span>
-	</span>
-	
-	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Get all CBService CBUUIDs for this peripheral" name="task_Get all CBService CBUUIDs for this peripheral"></a>
+						<h3 class="subsubtitle task-title">Get all CBService CBUUIDs for this peripheral</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/services">&ndash;&nbsp;services</a></code>
 		<span class="tooltip"><p>Generate array of CBUUID for all CoreBluetooth services associated with this peripheral.</p></span>
@@ -325,7 +431,15 @@ contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</
 	</span>
 	
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Find a YMSCBService" name="task_Find a YMSCBService"></a>
+						<h3 class="subsubtitle task-title">Find a YMSCBService</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/findService:">&ndash;&nbsp;findService:</a></code>
 		<span class="tooltip"><p>Find <a href="../Classes/YMSCBService.html">YMSCBService</a> given its corresponding CBService.</p></span>
@@ -486,98 +600,6 @@ contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</
 		<span class="tooltip"><p>CBPeripheralDelegate implementation. Not yet supported.</p></span>
 	</span>
 	
-	
-</li>
-						</ul>
-						
-						
-						<a title="Properties" name="task_Properties"></a>
-						<h3 class="subsubtitle task-title">Properties</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/base">&nbsp;&nbsp;base</a></code>
-		<span class="tooltip"><p>128 bit address base</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
-		<span class="tooltip"><p>Pointer to delegate.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/watchdogRaised">&nbsp;&nbsp;watchdogRaised</a></code>
-		<span class="tooltip"><p>Flag to indicate if the watchdog timer has expired and forced a <a href="#//api/name/disconnect">disconnect</a>.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/serviceDict">&nbsp;&nbsp;serviceDict</a></code>
-		<span class="tooltip"><p>Dictionary of (<code>key</code>, <code>value</code>) pairs of (NSString, <a href="../Classes/YMSCBService.html">YMSCBService</a>) instances.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/cbPeripheral">&nbsp;&nbsp;cbPeripheral</a></code>
-		<span class="tooltip"><p>The CBPeripheral instance.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/rssiPingPeriod">&nbsp;&nbsp;rssiPingPeriod</a></code>
-		<span class="tooltip"><p>Time period between RSSI pings. (Default: 2 seconds)</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/central">&nbsp;&nbsp;central</a></code>
-		<span class="tooltip"><p>Pointer to an instance of <a href="../Classes/YMSCBCentralManager.html">YMSCBCentralManager</a>.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/watchdogTimer">&nbsp;&nbsp;watchdogTimer</a></code>
-		<span class="tooltip"><p>Watchdog timer for connection.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/watchdogTimerInterval">&nbsp;&nbsp;watchdogTimerInterval</a></code>
-		<span class="tooltip"><p>Watchdog timer interval in seconds. Default is 5 seconds.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/connectCallback">&nbsp;&nbsp;connectCallback</a></code>
-		<span class="tooltip"><p>Holds callback for connection established.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/discoverServicesCallback">&nbsp;&nbsp;discoverServicesCallback</a></code>
-		<span class="tooltip"><p>Holds callback for <a href="#//api/name/services">services</a> discovered.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/isRenderedInViewCell">&nbsp;&nbsp;isRenderedInViewCell</a></code>
-		<span class="tooltip"><p>Helper flag to determine ViewCell updates.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
 	
 </li>
 						</ul>
@@ -824,6 +846,49 @@ contained in the dictionary <a href="#//api/name/serviceDict">serviceDict</a>.</
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Holds callback for <a href="#//api/name/services">services</a> discovered.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBPeripheral.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/isConnected" title="isConnected"></a>
+	<h3 class="subsubtitle method-title">isConnected</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>A Boolean value indicating whether the peripheral is currently connected to the <a href="#//api/name/central">central</a> manager. (read-only)</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (readonly) BOOL isConnected</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>A Boolean value indicating whether the peripheral is currently connected to the <a href="#//api/name/central">central</a> manager. (read-only)</p>
+
+<p>This value is populated with <a href="#//api/name/cbPeripheral">cbPeripheral</a>.isConnected.</p>
 	</div>
 	
 	
@@ -1195,7 +1260,7 @@ This property is only used when willPingRSSI is set to YES.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)connectWithOptions:(NSDictionary *)<em>options</em> withBlock:(void ( ^ ) ( YMSCBPeripheral *, NSError *))<em>connectCallback</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)connectWithOptions:(NSDictionary *)<em>options</em> withBlock:(void ( ^ ) ( YMSCBPeripheral *yp , NSError *error ))<em>connectCallback</em></code></div>
 
     
 	
@@ -1336,7 +1401,7 @@ a callback block defined.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)discoverServices:(NSArray *)<em>serviceUUIDs</em> withBlock:(void ( ^ ) ( NSArray *, NSError *))<em>callback</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)discoverServices:(NSArray *)<em>serviceUUIDs</em> withBlock:(void ( ^ ) ( NSArray *services , NSError *error ))<em>callback</em></code></div>
 
     
 	
@@ -1518,12 +1583,12 @@ a callback block defined.</p>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>hi</em></dt>
-			<dd><p>Top 64 bits of 128-bit <a href="#//api/name/base">base</a> address value</p></dd>
+			<dd><p>Top 64 bits of 128-bit <a href="../Classes/YMSCBPeripheral.html#//api/name/base">base</a> address value</p></dd>
 		</dl>
 		
 		<dl class="argument-def parameter-def">
 			<dt><em>lo</em></dt>
-			<dd><p>Bottom 64 bits of 128-bit <a href="#//api/name/base">base</a> address value</p></dd>
+			<dd><p>Bottom 64 bits of 128-bit <a href="../Classes/YMSCBPeripheral.html#//api/name/base">base</a> address value</p></dd>
 		</dl>
 		
 	</div>
@@ -1545,52 +1610,9 @@ a callback block defined.</p>
 
 <p>This method must be called via super in any subclass implementation.</p>
 
-<p>The implementation of this method in a subclass will populate <a href="#//api/name/serviceDict">serviceDict</a> with (<code>key</code>, <code>value</code>) pairs of
+<p>The implementation of this method in a subclass will populate <a href="../Classes/YMSCBPeripheral.html#//api/name/serviceDict">serviceDict</a> with (<code>key</code>, <code>value</code>) pairs of
 (NSString, <a href="../Classes/YMSCBService.html">YMSCBService</a>) instances, where <code>key</code> is typically a &ldquo;human-readable&rdquo; string to easily
 reference a <a href="../Classes/YMSCBService.html">YMSCBService</a>.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBPeripheral.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/isConnected" title="isConnected"></a>
-	<h3 class="subsubtitle method-title">isConnected</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>A Boolean value indicating whether the peripheral is currently connected to the <a href="#//api/name/central">central</a> manager. (read-only)</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (BOOL)isConnected</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>A Boolean value indicating whether the peripheral is currently connected to the <a href="#//api/name/central">central</a> manager. (read-only)</p>
-
-<p>This value is populated with <a href="#//api/name/cbPeripheral">cbPeripheral</a>.isConnected.</p>
 	</div>
 	
 	
@@ -2512,7 +2534,7 @@ reference a <a href="../Classes/YMSCBService.html">YMSCBService</a>.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-09-18)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-09-21)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 961)</a>.</span></p>
 						

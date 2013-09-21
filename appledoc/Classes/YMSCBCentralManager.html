@@ -40,6 +40,8 @@
 	
 	<option value="properties">Properties</option>
 	
+	<option value="//api/name/count">&nbsp;&nbsp;&nbsp;&nbsp;count</option>
+	
 	<option value="//api/name/delegate">&nbsp;&nbsp;&nbsp;&nbsp;delegate</option>
 	
 	<option value="//api/name/discoveredCallback">&nbsp;&nbsp;&nbsp;&nbsp;discoveredCallback</option>
@@ -54,6 +56,8 @@
 	
 	<option value="//api/name/useStoredPeripherals">&nbsp;&nbsp;&nbsp;&nbsp;useStoredPeripherals</option>
 	
+	<option value="//api/name/version">&nbsp;&nbsp;&nbsp;&nbsp;version</option>
+	
 	<option value="//api/name/ymsPeripherals">&nbsp;&nbsp;&nbsp;&nbsp;ymsPeripherals</option>
 	
 	
@@ -64,8 +68,6 @@
 	<option value="instance_methods">Instance Methods</option>
 	
 	<option value="//api/name/addPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- addPeripheral:</option>
-	
-	<option value="//api/name/count">&nbsp;&nbsp;&nbsp;&nbsp;- count</option>
 	
 	<option value="//api/name/findPeripheral:">&nbsp;&nbsp;&nbsp;&nbsp;- findPeripheral:</option>
 	
@@ -107,8 +109,6 @@
 	
 	<option value="//api/name/stopScan">&nbsp;&nbsp;&nbsp;&nbsp;- stopScan</option>
 	
-	<option value="//api/name/version">&nbsp;&nbsp;&nbsp;&nbsp;- version</option>
-	
 	
 	
 </select>
@@ -127,6 +127,16 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Properties">Properties</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Initializing YMSCBCentralManager">Initializing YMSCBCentralManager</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Peripheral Management">Peripheral Management</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Scanning for Peripherals">Scanning for Peripherals</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Retrieve Peripherals">Retrieve Peripherals</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_CBCentralManager manager state handling methods">CBCentralManager manager state handling methods</a></span></li>
+	
 </ul></li>
 
 
@@ -134,6 +144,8 @@
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/count">count</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/delegate">delegate</a></span></li>
 	
@@ -149,6 +161,8 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/useStoredPeripherals">useStoredPeripherals</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/version">version</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/ymsPeripherals">ymsPeripherals</a></span></li>
 	
 </ul></li>
@@ -160,8 +174,6 @@
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/addPeripheral:">addPeripheral:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/count">count</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/findPeripheral:">findPeripheral:</a></span></li>
 	
@@ -202,8 +214,6 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/startScan">startScan</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/stopScan">stopScan</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/version">version</a></span></li>
 	
 </ul></li>
 
@@ -273,18 +283,89 @@ is only one instance of CBCentralManager that is used by the application.</p>
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						
-						<h3 class="subsubtitle task-title">Other Methods</h3>
+						<a title="Properties" name="task_Properties"></a>
+						<h3 class="subsubtitle task-title">Properties</h3>
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/version">&ndash;&nbsp;version</a></code>
-		<span class="tooltip"><p>API version.</p></span>
+		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+		<span class="tooltip"><p>Pointer to delegate.</p></span>
 	</span>
-	
+	<span class="task-item-suffix">property</span>
 	
 </li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/manager">&nbsp;&nbsp;manager</a></code>
+		<span class="tooltip"><p>The CBCentralManager object.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/ymsPeripherals">&nbsp;&nbsp;ymsPeripherals</a></code>
+		<span class="tooltip"><p>Array of <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a> instances.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/knownPeripheralNames">&nbsp;&nbsp;knownPeripheralNames</a></code>
+		<span class="tooltip"><p>Array of NSStrings to search to match CBPeripheral instances.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isScanning">&nbsp;&nbsp;isScanning</a></code>
+		<span class="tooltip"><p>Flag to determine if <a href="#//api/name/manager">manager</a> is scanning.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/count">&nbsp;&nbsp;count</a></code>
+		<span class="tooltip"><p>Count of <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/version">&nbsp;&nbsp;version</a></code>
+		<span class="tooltip"><p>API version.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/discoveredCallback">&nbsp;&nbsp;discoveredCallback</a></code>
+		<span class="tooltip"><p>Peripheral Discovered Callback</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/retrievedCallback">&nbsp;&nbsp;retrievedCallback</a></code>
+		<span class="tooltip"><p>Peripheral Retreived Callback</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/useStoredPeripherals">&nbsp;&nbsp;useStoredPeripherals</a></code>
+		<span class="tooltip"><p>If YES, then discovered peripheral UUIDs are stored in standardUserDefaults.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
+						<a title="Initializing YMSCBCentralManager" name="task_Initializing YMSCBCentralManager"></a>
+						<h3 class="subsubtitle task-title">Initializing YMSCBCentralManager</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/initWithKnownPeripheralNames:queue:delegate:">&ndash;&nbsp;initWithKnownPeripheralNames:queue:delegate:</a></code>
 		<span class="tooltip"><p>Constructor with array of known peripheral names.</p></span>
@@ -298,10 +379,25 @@ is only one instance of CBCentralManager that is used by the application.</p>
 	</span>
 	
 	
+</li>
+						</ul>
+						
+						
+						<a title="Peripheral Management" name="task_Peripheral Management"></a>
+						<h3 class="subsubtitle task-title">Peripheral Management</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/isKnownPeripheral:">&ndash;&nbsp;isKnownPeripheral:</a></code>
+		<span class="tooltip"><p>Determines if peripheral is known by this app service.</p></span>
+	</span>
+	
+	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/count">&ndash;&nbsp;count</a></code>
-		<span class="tooltip"><p>Count of <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p></span>
+		<code><a href="#//api/name/handleFoundPeripheral:">&ndash;&nbsp;handleFoundPeripheral:</a></code>
+		<span class="tooltip"><p>Handler for discovered or found peripheral. This method is to be overridden.</p></span>
 	</span>
 	
 	
@@ -335,12 +431,20 @@ is only one instance of CBCentralManager that is used by the application.</p>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/isKnownPeripheral:">&ndash;&nbsp;isKnownPeripheral:</a></code>
-		<span class="tooltip"><p>Determines if peripheral is known by this app service.</p></span>
+		<code><a href="#//api/name/findPeripheral:">&ndash;&nbsp;findPeripheral:</a></code>
+		<span class="tooltip"><p>Find <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a> instance matching peripheral</p></span>
 	</span>
 	
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Scanning for Peripherals" name="task_Scanning for Peripherals"></a>
+						<h3 class="subsubtitle task-title">Scanning for Peripherals</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/startScan">&ndash;&nbsp;startScan</a></code>
 		<span class="tooltip"><p>Start CoreBluetooth scan for peripherals. This method is to be overridden.</p></span>
@@ -369,17 +473,18 @@ that is discovered.</p></span>
 	</span>
 	
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Retrieve Peripherals" name="task_Retrieve Peripherals"></a>
+						<h3 class="subsubtitle task-title">Retrieve Peripherals</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/findPeripheral:">&ndash;&nbsp;findPeripheral:</a></code>
-		<span class="tooltip"><p>Find <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a> instance matching peripheral</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/handleFoundPeripheral:">&ndash;&nbsp;handleFoundPeripheral:</a></code>
-		<span class="tooltip"><p>Handler for discovered or found peripheral. This method is to be overridden.</p></span>
+		<code><a href="#//api/name/retrievePeripheralsWithIdentifiers:">&ndash;&nbsp;retrievePeripheralsWithIdentifiers:</a></code>
+		<span class="tooltip"><p>Retrieves a list of known peripherals by their UUIDs.</p></span>
 	</span>
 	
 	
@@ -391,14 +496,15 @@ that is discovered.</p></span>
 	</span>
 	
 	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/retrievePeripheralsWithIdentifiers:">&ndash;&nbsp;retrievePeripheralsWithIdentifiers:</a></code>
-		<span class="tooltip"><p>Retrieves a list of known peripherals by their UUIDs.</p></span>
-	</span>
-	
-	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="CBCentralManager manager state handling methods" name="task_CBCentralManager manager state handling methods"></a>
+						<h3 class="subsubtitle task-title">CBCentralManager manager state handling methods</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/managerPoweredOnHandler">&ndash;&nbsp;managerPoweredOnHandler</a></code>
 		<span class="tooltip"><p>Handler for when <a href="../Classes/YMSCBCentralManager.html#//api/name/manager">manager</a> state is powered on.</p></span>
@@ -443,70 +549,6 @@ that is discovered.</p></span>
 </li>
 						</ul>
 						
-						
-						<a title="Properties" name="task_Properties"></a>
-						<h3 class="subsubtitle task-title">Properties</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
-		<code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
-		<span class="tooltip"><p>Pointer to delegate.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/manager">&nbsp;&nbsp;manager</a></code>
-		<span class="tooltip"><p>The CBCentralManager object.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/ymsPeripherals">&nbsp;&nbsp;ymsPeripherals</a></code>
-		<span class="tooltip"><p>Array of <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a> instances.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/knownPeripheralNames">&nbsp;&nbsp;knownPeripheralNames</a></code>
-		<span class="tooltip"><p>Array of NSStrings to search to match CBPeripheral instances.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/isScanning">&nbsp;&nbsp;isScanning</a></code>
-		<span class="tooltip"><p>Flag to determine if <a href="#//api/name/manager">manager</a> is scanning.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/discoveredCallback">&nbsp;&nbsp;discoveredCallback</a></code>
-		<span class="tooltip"><p>Peripheral Discovered Callback</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/retrievedCallback">&nbsp;&nbsp;retrievedCallback</a></code>
-		<span class="tooltip"><p>Peripheral Retreived Callback</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/useStoredPeripherals">&nbsp;&nbsp;useStoredPeripherals</a></code>
-		<span class="tooltip"><p>If YES, then discovered peripheral UUIDs are stored in standardUserDefaults.</p></span>
-	</span>
-	<span class="task-item-suffix">property</span>
-	
-</li>
-						</ul>
-						
 					</div>
 					
 					
@@ -516,6 +558,47 @@ that is discovered.</p></span>
 					<div class="section section-methods">
 						<a title="Properties" name="properties"></a>
 						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/count" title="count"></a>
+	<h3 class="subsubtitle method-title">count</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Count of <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (atomic, readonly, assign) NSUInteger count</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Count of <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
+	</div>				
+	
+	
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/delegate" title="delegate"></a>
@@ -572,7 +655,7 @@ that is discovered.</p></span>
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) YMSCBDiscoverCallbackBlockType discoveredCallback</code></div>
+	<div class="method-subsection method-declaration"><code>@property (atomic, copy) YMSCBDiscoverCallbackBlockType discoveredCallback</code></div>
 
     
 	
@@ -613,7 +696,7 @@ that is discovered.</p></span>
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL isScanning</code></div>
+	<div class="method-subsection method-declaration"><code>@property (atomic, assign) BOOL isScanning</code></div>
 
     
 	
@@ -654,7 +737,7 @@ that is discovered.</p></span>
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSArray *knownPeripheralNames</code></div>
+	<div class="method-subsection method-declaration"><code>@property (atomic, strong) NSArray *knownPeripheralNames</code></div>
 
     
 	
@@ -698,7 +781,7 @@ This value is typically initialized using initWithKnownPeripheralNames:queue:.</
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) CBCentralManager *manager</code></div>
+	<div class="method-subsection method-declaration"><code>@property (atomic, strong) CBCentralManager *manager</code></div>
 
     
 	
@@ -742,7 +825,7 @@ This class listens to CBCentralManagerDelegate messages sent by manager, which i
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy) YMSCBRetrieveCallbackBlockType retrievedCallback</code></div>
+	<div class="method-subsection method-declaration"><code>@property (atomic, copy) YMSCBRetrieveCallbackBlockType retrievedCallback</code></div>
 
     
 	
@@ -783,7 +866,7 @@ This class listens to CBCentralManagerDelegate messages sent by manager, which i
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) BOOL useStoredPeripherals</code></div>
+	<div class="method-subsection method-declaration"><code>@property (atomic, assign) BOOL useStoredPeripherals</code></div>
 
     
 	
@@ -813,6 +896,47 @@ This class listens to CBCentralManagerDelegate messages sent by manager, which i
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/version" title="version"></a>
+	<h3 class="subsubtitle method-title">version</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>API version.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (atomic, readonly, assign) NSString *version</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>API version.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/ymsPeripherals" title="ymsPeripherals"></a>
 	<h3 class="subsubtitle method-title">ymsPeripherals</h3>
 	
@@ -824,7 +948,7 @@ This class listens to CBCentralManagerDelegate messages sent by manager, which i
 	
     
 
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, strong) NSMutableArray *ymsPeripherals</code></div>
+	<div class="method-subsection method-declaration"><code>@property (atomic, strong) NSMutableArray *ymsPeripherals</code></div>
 
     
 	
@@ -900,47 +1024,6 @@ This class listens to CBCentralManagerDelegate messages sent by manager, which i
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Add <a href="../Classes/YMSCBPeripheral.html">YMSCBPeripheral</a> instance to <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/count" title="count"></a>
-	<h3 class="subsubtitle method-title">count</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Count of <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (NSUInteger)count</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Count of <a href="#//api/name/ymsPeripherals">ymsPeripherals</a>.</p>
 	</div>
 	
 	
@@ -1843,7 +1926,7 @@ that is discovered.</p>
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)scanForPeripheralsWithServices:(NSArray *)<em>serviceUUIDs</em> options:(NSDictionary *)<em>options</em> withBlock:(void ( ^ ) ( CBPeripheral *, NSDictionary *, NSNumber *, NSError *))<em>discoverCallback</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)scanForPeripheralsWithServices:(NSArray *)<em>serviceUUIDs</em> options:(NSDictionary *)<em>options</em> withBlock:(void ( ^ ) ( CBPeripheral *peripheral , NSDictionary *advertisementData , NSNumber *RSSI , NSError *error ))<em>discoverCallback</em></code></div>
 
     
 	
@@ -1987,47 +2070,6 @@ that is discovered.</p>
 	
 </div>
 						
-						<div class="section-method">
-	<a name="//api/name/version" title="version"></a>
-	<h3 class="subsubtitle method-title">version</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>API version.</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (NSString *)version</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>API version.</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBCentralManager.h</code><br />
-	</div>				
-	
-	
-</div>
-						
 					</div>
 					
 					
@@ -2041,7 +2083,7 @@ that is discovered.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-09-18)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-09-21)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 961)</a>.</span></p>
 						
