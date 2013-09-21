@@ -217,13 +217,12 @@
 - (void)handleConnectionResponse:(NSError *)error {
     YMSCBPeripheralConnectCallbackBlockType callback = self.connectCallback;
     
-    if (self.connectCallback) {
-        if (callback) {
-            callback(self, error);
-        } else {
-            NSAssert(NO, @"ERROR: connectCallback is nil; please check for multi-threaded access of handleConnectionResponse");
-        }
-        self.connectCallback = nil;
+    if (callback) {
+        callback(self, error);
+        /*
+         note: self.connectCallback is kept hanging around to avoid potential 
+         race condition by setting it to nil.
+         */
     } else {
         [self defaultConnectionHandler];
     }
@@ -258,11 +257,14 @@
             NSMutableArray *services = [NSMutableArray new];
             
             // TODO: add method syncServices
-            for (CBService *service in peripheral.services) {
-                YMSCBService *btService = [this findService:service];
-                if (btService) {
-                    btService.cbService = service;
-                    [services addObject:btService];
+            
+            @synchronized(self) {
+                for (CBService *service in peripheral.services) {
+                    YMSCBService *btService = [this findService:service];
+                    if (btService) {
+                        btService.cbService = service;
+                        [services addObject:btService];
+                    }
                 }
             }
             
