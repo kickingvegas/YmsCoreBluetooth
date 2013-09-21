@@ -164,7 +164,7 @@
 
 
 - (void)discoverCharacteristics:(NSArray *)characteristicUUIDs withBlock:(void (^)(NSDictionary *, NSError *))callback {
-    self.discoverCharacteristicsCallback = [callback copy];
+    self.discoverCharacteristicsCallback = callback;
     
     [self.parent.cbPeripheral discoverCharacteristics:characteristicUUIDs
                                            forService:self.cbService];
@@ -174,14 +174,17 @@
 - (void)handleDiscoveredCharacteristicsResponse:(NSDictionary *)chDict withError:(NSError *)error {
     YMSCBDiscoverCharacteristicsCallbackBlockType callback = self.discoverCharacteristicsCallback;
     
-    if (self.discoverCharacteristicsCallback) {
-        if (callback) {
-            callback(chDict, error);
-        } else {
-             NSAssert(NO, @"ERROR: discoveredCharacteristicsCallback is nil; please check for multi-threaded access of handleDiscoveredCharacteristicsResponse");
-        }
-        self.discoverCharacteristicsCallback = nil;
+    if (callback) {
+        callback(chDict, error);
+        /* 
+         note - self.discoveredCharacteristicsCallback is kept around to avoid 
+         potential race condition of setting it to nil.
+         */
+         
+    } else {
+        NSAssert(NO, @"ERROR: discoveredCharacteristicsCallback is nil; please check for multi-threaded access of handleDiscoveredCharacteristicsResponse");
     }
+    
 }
 
 
