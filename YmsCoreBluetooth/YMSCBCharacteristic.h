@@ -46,28 +46,28 @@ typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
 
 /** @name Properties */
 /// Human-friendly name for this BLE characteristic.
-@property (nonatomic, strong) NSString *name;
+@property (atomic, strong) NSString *name;
 
 /// Characterisic CBUUID.
-@property (nonatomic, strong) CBUUID *uuid;
+@property (atomic, strong) CBUUID *uuid;
 
 /// Pointer to actual CBCharacterisic.
-@property (nonatomic, strong) CBCharacteristic *cbCharacteristic;
+@property (atomic, strong) CBCharacteristic *cbCharacteristic;
 
 /// Pointer to parent peripheral.
 @property (nonatomic, weak) YMSCBPeripheral *parent;
 
 /// Absolute address value. May turn into an offset value if base address is supported in the future for this class.
-@property (nonatomic, strong) NSNumber *offset;
+@property (atomic, strong) NSNumber *offset;
 
 /// Holds instances of YMSCBDescriptor
-@property (nonatomic, strong) NSArray *descriptors;
+@property (atomic, strong) NSArray *descriptors;
 
 /// Notification state callback
-@property (nonatomic, copy) YMSCBWriteCallbackBlockType notificationStateCallback;
+@property (atomic, copy) YMSCBWriteCallbackBlockType notificationStateCallback;
 
 /// Callback for descriptors that are discovered.
-@property (nonatomic, copy) YMSCBDiscoverDescriptorsCallbackBlockType discoverDescriptorsCallback;
+@property (atomic, copy) YMSCBDiscoverDescriptorsCallbackBlockType discoverDescriptorsCallback;
 
 
 /**
@@ -75,14 +75,14 @@ typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
  
  Each element is a block of type YMSCBReadCallbackBlockType.
  */
-@property (nonatomic, strong) NSMutableArray *readCallbacks;
+@property (atomic, strong) NSMutableArray *readCallbacks;
 
 /**
  FIFO queue for writes.
  
  Each element is a block of type YMSCBWriteCallbackBlockType.
  */
-@property (nonatomic, strong) NSMutableArray *writeCallbacks;
+@property (atomic, strong) NSMutableArray *writeCallbacks;
 
 /** @name Callback Handler Methods */
 /**
