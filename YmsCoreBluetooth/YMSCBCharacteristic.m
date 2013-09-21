@@ -99,7 +99,7 @@
 
 - (void)discoverDescriptorsWithBlock:(void (^)(NSArray *, NSError *))callback {
     if (self.cbCharacteristic) {
-        self.discoverDescriptorsCallback = [callback copy];
+        self.discoverDescriptorsCallback = callback;
     
         [self.parent.cbPeripheral discoverDescriptorsForCharacteristic:self.cbCharacteristic];
     } else {
@@ -110,14 +110,16 @@
 
 - (void)handleDiscoveredDescriptorsResponse:(NSArray *)ydescriptors withError:(NSError *)error {
     YMSCBDiscoverDescriptorsCallbackBlockType callback = self.discoverDescriptorsCallback;
-    if (self.discoverDescriptorsCallback) {
-        if (callback) {
-            callback(ydescriptors, error);
-        } else {
-            NSAssert(NO, @"ERROR: discoverDescriptorsCallback is nil; please check for multi-threaded access of handleDiscoveredDescriptorsResponse");
-        }
+
+    if (callback) {
+        callback(ydescriptors, error);
+        /* 
+         note - self.discoverDescriptorsCallback not set to nil to avoid 
+         potential race condition.
+         */
+    } else {
+        NSAssert(NO, @"ERROR: discoverDescriptorsCallback is nil; please check for multi-threaded access of handleDiscoveredDescriptorsResponse");
     }
-    self.discoverDescriptorsCallback = nil;
 }
 
 - (void)syncDescriptors:(NSArray *)foundDescriptors {
