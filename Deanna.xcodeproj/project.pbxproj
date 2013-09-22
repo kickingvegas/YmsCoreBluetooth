@@ -11,7 +11,6 @@
 		D907A76B16E0393300EA8D5B /* DEABarometerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D907A76A16E0393300EA8D5B /* DEABarometerViewCell.m */; };
 		D90C0C3A16DD6297002D3FFD /* DEABaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D90C0C3916DD6297002D3FFD /* DEABaseViewController.m */; };
 		D90C0C3D16DD9133002D3FFD /* DEAHumidityService.m in Sources */ = {isa = PBXBuildFile; fileRef = D90C0C3C16DD9133002D3FFD /* DEAHumidityService.m */; };
-		D90CFD09177812CF00F8242B /* static in Resources */ = {isa = PBXBuildFile; fileRef = D90CFD08177812CF00F8242B /* static */; };
 		D91170531681251900E2D19A /* DEATemperatureService.m in Sources */ = {isa = PBXBuildFile; fileRef = D91170521681251900E2D19A /* DEATemperatureService.m */; };
 		D91170561681461300E2D19A /* DEAAccelerometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = D91170551681461300E2D19A /* DEAAccelerometerService.m */; };
 		D9187E1D1739D3FF003AA71D /* DEASensorTagUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = D9187E1C1739D3FF003AA71D /* DEASensorTagUtils.m */; };
@@ -127,7 +126,6 @@
 		D90C0C3916DD6297002D3FFD /* DEABaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEABaseViewController.m; sourceTree = "<group>"; };
 		D90C0C3B16DD9133002D3FFD /* DEAHumidityService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAHumidityService.h; sourceTree = "<group>"; };
 		D90C0C3C16DD9133002D3FFD /* DEAHumidityService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAHumidityService.m; sourceTree = "<group>"; };
-		D90CFD08177812CF00F8242B /* static */ = {isa = PBXFileReference; lastKnownFileType = folder; path = static; sourceTree = "<group>"; };
 		D91170511681251900E2D19A /* DEATemperatureService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEATemperatureService.h; sourceTree = "<group>"; };
 		D91170521681251900E2D19A /* DEATemperatureService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEATemperatureService.m; sourceTree = "<group>"; };
 		D91170541681461300E2D19A /* DEAAccelerometerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAAccelerometerService.h; sourceTree = "<group>"; };
@@ -329,7 +327,6 @@
 				D9718B4B167F9F9F0001E42C /* Deanna */,
 				D9718B69167F9FA00001E42C /* DeannaTests */,
 				D997AC97175B245800C91B0D /* DeannaMac */,
-				D90CFD08177812CF00F8242B /* static */,
 				D9718B44167F9F9F0001E42C /* Frameworks */,
 				D9718B42167F9F9F0001E42C /* Products */,
 			);
@@ -711,7 +708,6 @@
 				D9E012F71797D66400677FC1 /* Images.xcassets in Resources */,
 				D97EC6D2172B1B8C00CAECFC /* README.md in Resources */,
 				D92049D51742C836001380A6 /* CHANGES.md in Resources */,
-				D90CFD09177812CF00F8242B /* static in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
