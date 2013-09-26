@@ -366,8 +366,11 @@ Learn how to write your own Bluetooth LE service by reading the example of how i
 
 ## Questions
 
-While quite functional, YmsCoreBluetooth is still very much in an early state and there's always room for improvement. Please submit any questions or [issues to the GitHub project for YmsCoreBluetooth](https://github.com/kickingvegas/YmsCoreBluetooth/issues?labels=&milestone=&page=1&state=open).
+While YmsCoreBluetooth is quite functional, there's always room for improvement. Please submit any questions or [issues to the GitHub project for YmsCoreBluetooth](https://github.com/kickingvegas/YmsCoreBluetooth/issues?labels=&milestone=&page=1&state=open).
 
+## Are you using YmsCoreBluetooth? Let us know!
+
+I'm working on publishing a list of projects using YmsCoreBluetooth. If you're not shy about this, please [let me know](mailto:charles.choi@yummymelon.com?subject=[YmsCoreBluetooth]) and thank you for using YmsCoreBluetooth! And even if you are shy, please let me know and I promise full discretion.
 
 ## Notes
 
