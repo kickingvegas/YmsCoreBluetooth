@@ -172,14 +172,11 @@
 }
 
 - (void)handleDiscoveredCharacteristicsResponse:(NSDictionary *)chDict withError:(NSError *)error {
-    YMSCBDiscoverCharacteristicsCallbackBlockType callback = self.discoverCharacteristicsCallback;
+    YMSCBDiscoverCharacteristicsCallbackBlockType callback = [self.discoverCharacteristicsCallback copy];
     
     if (callback) {
         callback(chDict, error);
-        /* 
-         note - self.discoveredCharacteristicsCallback is kept around to avoid 
-         potential race condition of setting it to nil.
-         */
+        self.discoverCharacteristicsCallback = nil;
          
     } else {
         NSAssert(NO, @"ERROR: discoveredCharacteristicsCallback is nil; please check for multi-threaded access of handleDiscoveredCharacteristicsResponse");
