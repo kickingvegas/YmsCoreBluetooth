@@ -109,14 +109,11 @@
 
 
 - (void)handleDiscoveredDescriptorsResponse:(NSArray *)ydescriptors withError:(NSError *)error {
-    YMSCBDiscoverDescriptorsCallbackBlockType callback = self.discoverDescriptorsCallback;
+    YMSCBDiscoverDescriptorsCallbackBlockType callback = [self.discoverDescriptorsCallback copy];
 
     if (callback) {
         callback(ydescriptors, error);
-        /* 
-         note - self.discoverDescriptorsCallback not set to nil to avoid 
-         potential race condition.
-         */
+        self.discoverDescriptorsCallback = nil;
     } else {
         NSAssert(NO, @"ERROR: discoverDescriptorsCallback is nil; please check for multi-threaded access of handleDiscoveredDescriptorsResponse");
     }
