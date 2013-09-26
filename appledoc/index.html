@@ -36,7 +36,7 @@
 						
 						<h1>YmsCoreBluetooth v1.02</h1>
 
-<p>A block-based framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS 7 or OS X 10.9 applications using the CoreBluetooth API. Includes <em>Deanna</em> and <em>DeannaMac</em>, applications to communicate with a <a href="[http://processors.wiki.ti.com/index.php/Bluetooth](http://processors.wiki.ti.com/index.php/Bluetooth">TI SensorTag</a>_SensorTag) for iOS and OS X respectively.</p>
+<p>A block-based framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS 7 or OS X 10.9 applications using the CoreBluetooth API. Includes <em>Deanna</em> and <em>DeannaMac</em>, applications to communicate with a <a href="http://processors.wiki.ti.com/index.php/Bluetooth%5FSensorTag">TI SensorTag</a> for iOS and OS X respectively.</p>
 
 <ul>
 <li><a href="hierarchy.html">YmsCoreBluetooth API Reference</a></li>
@@ -369,7 +369,7 @@ __weak DEACentralManager *this = self;
 
 <h3>Handling Characteristic Notification Updates</h3>
 
-<p>One place where YmsCoreBluetooth does <em>not</em> use blocks to handle BLE responses is with characteristic notification updates. The reason for this is because such updates are asynchronous and non-deterministic. As such the handler method <a href="Classes/YMSCBService.html#//api/name/notifyCharacteristicHandler:error:"><code>[YMSCBService notifyCharacteristicHandler:error:]</code></a> must be implemented for any subclass of <a href="Classes/YMSCBService.html">YMSCBService</a> to handle such updates.</p>
+<p>One place where YmsCoreBluetooth does <em>not</em> use blocks to handle BLE responses is with characteristic notification updates. The reason for this is because such updates are asynchronous and non-deterministic. As such the handler method <code>[YMSCBService notifyCharacteristicHandler:error:]</code> must be implemented for any subclass of <a href="Classes/YMSCBService.html">YMSCBService</a> to handle such updates.</p>
 
 <p>In the following code sample, <code>self</code> is an instance of a subclass of <a href="Classes/YMSCBService.html">YMSCBService</a>.</p>
 
