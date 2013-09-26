@@ -215,14 +215,12 @@
 
 
 - (void)handleConnectionResponse:(NSError *)error {
-    YMSCBPeripheralConnectCallbackBlockType callback = self.connectCallback;
+    YMSCBPeripheralConnectCallbackBlockType callback = [self.connectCallback copy];
     
     if (callback) {
         callback(self, error);
-        /*
-         note: self.connectCallback is kept hanging around to avoid potential 
-         race condition by setting it to nil.
-         */
+        self.connectCallback = nil;
+        
     } else {
         [self defaultConnectionHandler];
     }
