@@ -1,5 +1,9 @@
 # YmsCoreBluetooth Changes
 
+### Wed Sep 25 2013 - Interim Release (ver 1.02)
+* Fixed handling of callback properties so that they are set to nil after execution in a thread-safe manner.
+* Added #define kYMSCBVersionNumber
+
 ### Sat Sep 18 2013 - iOS7 Release (ver 1.0)
 * Updated codebase to support all iOS7 changes to the CoreBluetooth API.
 * DeannaMac will not compile on OS X < 10.9. For OS X 10.8 users, please use the [ios6 branch](https://github.com/kickingvegas/YmsCoreBluetooth/tree/ios6).

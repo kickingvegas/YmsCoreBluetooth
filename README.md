@@ -1,4 +1,4 @@
-# YmsCoreBluetooth v1.01 
+# YmsCoreBluetooth v1.02
 A block-based framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS 7 or OS X 10.9 applications using the CoreBluetooth API. Includes *Deanna* and *DeannaMac*, applications to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag) for iOS and OS X respectively.
 
 * [YmsCoreBluetooth API Reference](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/index.html)
@@ -374,13 +374,18 @@ While quite functional, YmsCoreBluetooth is still very much in an early state an
 Code tested on:
 
 * iPhone 4S, iPod touch, iPhone 5 all running iOS7
-* TI SensorTag firmware 1.2, 1.3.
+* TI SensorTag firmware 1.2, 1.3
 * iMac 27 Mid-2010, OS X 10.8.5
 
 ## Known Issues
 * Use this code only on iOS or Mac hardware that supports CoreBluetooth. The iOS Simulator is not supported.
 
 ## Latest Changes
+
+### Wed Sep 25 2013 - Interim Release (ver 1.02)
+* Fixed handling of callback properties so that they are set to nil after execution in a thread-safe manner.
+* Added #define kYMSCBVersionNumber
+
 ### Sat Sep 18 2013 - iOS7 Release (ver 1.0)
 * Updated codebase to support all iOS7 changes to the CoreBluetooth API.
 * DeannaMac will not compile on OS X < 10.9. For OS X 10.8 users, please use the [ios6 branch](https://github.com/kickingvegas/YmsCoreBluetooth/tree/ios6).
@@ -388,10 +393,6 @@ Code tested on:
 ### Sat Sep 7 2013 - Interim Release (ver 0.946)
 * (#25) - Support for accelerometer period
 * (#73) - Fix declaration of block properties to copy
-
-### Tue Jul 16 2013 - Interim Release (ver 0.945)
-* Bugfix #61 - Change all delegate implementations so that the callback is performed on the main thread.
-
 
 Tested Mac Environment:
 
