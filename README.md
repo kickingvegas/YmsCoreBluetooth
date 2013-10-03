@@ -374,25 +374,26 @@ that can be dropped into your project like any other (e.g., UIKit,
 Foundation etc).  
 
 The YmsCoreBluetooth Xcode project included here will build such a
-framework that build static libraries for i386, and all currently
+framework that builds static libraries for i386, and all currently
 supported ARM architectures including the new ARM64 included with
 Xcode5 (for the iPhone 5s).
 
 To use this framework, open the project and build the
-YmsCoreBluetooth-ibrary target. When the build completes there will be
-a new directory in the YmsCoreBluetooth root directory called
-"Finished-Framework" inside of which there will the file
+YmsCoreBluetooth-library target. When the build completes there will
+be a new directory in the YmsCoreBluetooth root directory called
+"Finished-Framework" inside of which there will be a file named
 "YmsCoreBluetooth.framework" that you can drag directly into your own
 project.
 
-To use this framework, simply add the following import to your classes as appropriate:
+To use this framework, simply add the following import to your classes
+as appropriate:
 
 ```
  #import <YmsCoreBluetooth/YmsCoreBluetooth.h>
 ```
 
 You can then utilize all of the classes provided by YmsCoreBluetooth,
-or subclass them to create your own Bluetooth managers.
+or subclass them to create your own custom Bluetooth managers.
 
 ## Questions
 
