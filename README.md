@@ -364,6 +364,36 @@ The [Class Hierarchy](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/hi
 
 Learn how to write your own Bluetooth LE service by reading the example of how its done for the TI SensorTag in the [Tutorial](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/docs/tutorial/Tutorial.html).
 
+
+## YmsCoreBluetooth "Framework"
+
+YmsCoreBluetooth can be added to your project as a collection of files
+and compiled as with the Deanna demo program, but a more direct
+approach may be to compile YmsCoreBluetooth into a static framework
+that can be dropped into your project like any other (e.g., UIKit,
+Foundation etc).  
+
+The YmsCoreBluetooth Xcode project included here will build such a
+framework that build static libraries for i386, and all currently
+supported ARM architectures including the new ARM64 included with
+Xcode5 (for the iPhone 5s).
+
+To use this framework, open the project and build the
+YmsCoreBluetooth-ibrary target. When the build completes there will be
+a new directory in the YmsCoreBluetooth root directory called
+"Finished-Framework" inside of which there will the file
+"YmsCoreBluetooth.framework" that you can drag directly into your own
+project.
+
+To use this framework, simply add the following import to your classes as appropriate:
+
+```
+ #import <YmsCoreBluetooth/YmsCoreBluetooth.h>
+```
+
+You can then utilize all of the classes provided by YmsCoreBluetooth,
+or subclass them to create your own Bluetooth managers.
+
 ## Questions
 
 While YmsCoreBluetooth is quite functional, there's always room for improvement. Please submit any questions or [issues to the GitHub project for YmsCoreBluetooth](https://github.com/kickingvegas/YmsCoreBluetooth/issues?labels=&milestone=&page=1&state=open).
@@ -426,6 +456,9 @@ View [Prior Change List](https://github.com/kickingvegas/YmsCoreBluetooth/blob/m
     Author: Charles Y. Choi <charles.choi@yummymelon.com>
 
 
-
+    YmsCoreBluetooth Framework Config by David HM Spector
+    Copyright © 2013 by David HM Spector, All Right Reserved
+    <spector@zeitgeist.com>; distributed under the same terms as
+    YmsCoreBluetooth itself.
 
 
