@@ -184,6 +184,7 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 - (NSArray *)retrieveConnectedPeripheralsWithServices:(NSArray *)serviceUUIDs {
     NSArray *result = [self.manager retrieveConnectedPeripheralsWithServices:serviceUUIDs];
+    [self centralManager:self.manager didRetrieveConnectedPeripherals:result];
     return result;
 }
 
