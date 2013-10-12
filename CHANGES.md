@@ -1,5 +1,9 @@
 # YmsCoreBluetooth Changes
 
+### Sat Oct 12 2013 - Pull Request Accepted from @coupgar
+
+* Fix centralManager:didRetrieveConnectedPeripherals won't be called when you call retrieveConnectedPeripheralsWithServices
+
 ### Wed Sep 25 2013 - Interim Release (ver 1.02)
 * Fixed handling of callback properties so that they are set to nil after execution in a thread-safe manner.
 * Added #define kYMSCBVersionNumber
