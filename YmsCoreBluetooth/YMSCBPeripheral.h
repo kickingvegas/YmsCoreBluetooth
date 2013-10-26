@@ -187,6 +187,10 @@ typedef void (^YMSCBPeripheralDiscoverServicesBlockType)(NSArray *, NSError *);
  */
 - (void)resetWatchdog;
 
+/**
+ Invalidate watchdog timer.
+ */
+- (void)invalidateWatchdog;
 
 /**
  Disconnect if watchdog times out.

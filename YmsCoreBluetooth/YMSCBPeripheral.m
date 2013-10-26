@@ -176,7 +176,7 @@
 }
 
 - (void)resetWatchdog {
-    [self invalidateWatchDog];
+    [self invalidateWatchdog];
 
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:self.watchdogTimerInterval
                                                       target:self
@@ -186,7 +186,7 @@
     self.watchdogTimer = timer;
 }
 
-- (void)invalidateWatchDog {
+- (void)invalidateWatchdog {
     if (self.watchdogTimer) {
         [self.watchdogTimer invalidate];
         self.watchdogTimer = nil;
@@ -220,7 +220,7 @@
 - (void)handleConnectionResponse:(NSError *)error {
     YMSCBPeripheralConnectCallbackBlockType callback = [self.connectCallback copy];
     
-    [self invalidateWatchDog];
+    [self invalidateWatchdog];
     
     if (callback) {
         callback(self, error);
