@@ -1,7 +1,9 @@
 # YmsCoreBluetooth Changes
 
-### Sat Oct 12 2013 - Pull Request Accepted from @coupgar
+### Sat Oct 26 2013 - Pull Request Accepted from @coupgar
+* Fix reset of watchdog timer for conditions when a peripheral connection has either succeeded or failed.
 
+### Sat Oct 12 2013 - Pull Request Accepted from @coupgar
 * Fix centralManager:didRetrieveConnectedPeripherals won't be called when you call retrieveConnectedPeripheralsWithServices
 
 ### Wed Sep 25 2013 - Interim Release (ver 1.02)

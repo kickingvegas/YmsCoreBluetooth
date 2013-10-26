@@ -1,4 +1,4 @@
-# YmsCoreBluetooth v1.03
+# YmsCoreBluetooth v1.04
 A block-based framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS 7 or OS X 10.9 applications using the CoreBluetooth API. Includes *Deanna* and *DeannaMac*, applications to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag) for iOS and OS X respectively.
 
 * [YmsCoreBluetooth API Reference](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/index.html)
@@ -384,6 +384,10 @@ Code tested on:
 * Use this code only on iOS or Mac hardware that supports CoreBluetooth. The iOS Simulator is not supported.
 
 ## Latest Changes
+
+### Sat Oct 26 2013 - Pull Request Accepted from @coupgar
+
+* Fix reset of watchdog timer for conditions when a peripheral connection has either succeeded or failed.
 
 ### Sat Oct 12 2013 - Pull Request Accepted from @coupgar
 
