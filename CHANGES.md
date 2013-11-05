@@ -1,5 +1,24 @@
 # YmsCoreBluetooth Changes
 
+### Tue Nov 5 2013
+* #87 - Calculate 128-bit address offset to comply to BLE spec.
+
+API changes related to this issue:
+
+YMSCBUtils:
+
+        + (NSString *)genCBUUID:(yms_u128_t *)base withIntBLEOffset:(int)addrOffset;
+        + (CBUUID *)createCBUUID:(yms_u128_t *)base withIntBLEOffset:(int)addrOffset;
+
+YMS128.c:
+
+        yms_u128_t yms_u128_genBLEOffset(int value
+        
+Removed files:
+        DEASensorTagUtils.h, DEASensorTagUtils.m, TISensorTag.c
+
+* #73 - Fixed assignment of connectCallback property to not use extraneous copy.
+
 ### Sat Oct 26 2013 - Pull Request Accepted from @coupgar
 * Fix reset of watchdog timer for conditions when a peripheral connection has either succeeded or failed.
 

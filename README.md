@@ -1,4 +1,4 @@
-# YmsCoreBluetooth v1.04
+# YmsCoreBluetooth v1.05
 A block-based framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS 7 or OS X 10.9 applications using the CoreBluetooth API. Includes *Deanna* and *DeannaMac*, applications to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag) for iOS and OS X respectively.
 
 * [YmsCoreBluetooth API Reference](http://kickingvegas.github.io/YmsCoreBluetooth/appledoc/index.html)
@@ -385,6 +385,26 @@ Code tested on:
 
 ## Latest Changes
 
+### Tue Nov 5 2013
+* #87 - Calculate 128-bit address offset to comply to BLE spec.
+
+API changes related to this issue:
+
+YMSCBUtils:
+
+        + (NSString *)genCBUUID:(yms_u128_t *)base withIntBLEOffset:(int)addrOffset;
+        + (CBUUID *)createCBUUID:(yms_u128_t *)base withIntBLEOffset:(int)addrOffset;
+
+YMS128.c:
+
+        yms_u128_t yms_u128_genBLEOffset(int value
+        
+Removed files:
+        DEASensorTagUtils.h, DEASensorTagUtils.m, TISensorTag.c
+
+* #73 - Fixed assignment of connectCallback property to not use extraneous copy.
+
+
 ### Sat Oct 26 2013 - Pull Request Accepted from @coupgar
 
 * Fix reset of watchdog timer for conditions when a peripheral connection has either succeeded or failed.
@@ -396,14 +416,6 @@ Code tested on:
 ### Wed Sep 25 2013 - Interim Release (ver 1.02)
 * Fixed handling of callback properties so that they are set to nil after execution in a thread-safe manner.
 * Added #define kYMSCBVersionNumber
-
-### Sat Sep 18 2013 - iOS7 Release (ver 1.0)
-* Updated codebase to support all iOS7 changes to the CoreBluetooth API.
-* DeannaMac will not compile on OS X < 10.9. For OS X 10.8 users, please use the [ios6 branch](https://github.com/kickingvegas/YmsCoreBluetooth/tree/ios6).
-
-### Sat Sep 7 2013 - Interim Release (ver 0.946)
-* (#25) - Support for accelerometer period
-* (#73) - Fix declaration of block properties to copy
 
 Tested Mac Environment:
 
