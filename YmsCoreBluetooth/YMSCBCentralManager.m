@@ -26,7 +26,14 @@
 NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 @interface YMSCBCentralManager ()
+{
+    NSMutableArray *_ymsPeripherals;
+}
+
+@property (atomic, strong) NSMutableArray *ymsPeripherals;
+
 @end
+
 
 @implementation YMSCBCentralManager
 
@@ -82,31 +89,47 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 
 - (YMSCBPeripheral *)peripheralAtIndex:(NSUInteger)index {
-    YMSCBPeripheral *result;
-    result = (YMSCBPeripheral *)[self.ymsPeripherals objectAtIndex:index];
-    return result;
+    return [self objectInYmsPeripheralsAtIndex:index];
 }
 
 
 - (void)addPeripheral:(YMSCBPeripheral *)yperipheral {
-    [self.ymsPeripherals addObject:yperipheral];
+    [self insertObject:yperipheral inYmsPeripheralsAtIndex:self.countOfYmsPeripherals];
 }
 
 - (void)removePeripheral:(YMSCBPeripheral *)yperipheral {
+    [self removeObjectFromYmsPeripheralsAtIndex:[self.ymsPeripherals indexOfObject:yperipheral]];
+}
+
+- (void)removePeripheralAtIndex:(NSUInteger)index {
+    [self removeObjectFromYmsPeripheralsAtIndex:index];
+}
+
+
+- (NSUInteger)countOfYmsPeripherals {
+    return _ymsPeripherals.count;
+}
+
+- (id)objectInYmsPeripheralsAtIndex:(NSUInteger)index
+{
+    return [_ymsPeripherals objectAtIndex:index];
+}
+
+- (void)insertObject:(YMSCBPeripheral *)object inYmsPeripheralsAtIndex:(NSUInteger)index {
+    [_ymsPeripherals insertObject:object atIndex:index];
+}
+
+- (void)removeObjectFromYmsPeripheralsAtIndex:(NSUInteger)index {
     if (self.useStoredPeripherals) {
+        YMSCBPeripheral *yperipheral = [self.ymsPeripherals objectAtIndex:index];
         if (yperipheral.cbPeripheral.identifier != nil) {
             [YMSCBStoredPeripherals deleteUUID:yperipheral.cbPeripheral.identifier];
         }
     }
-    [self.ymsPeripherals removeObject:yperipheral];
+    [_ymsPeripherals removeObjectAtIndex:index];
 }
 
-- (void)removePeripheralAtIndex:(NSUInteger)index {
-    
-    YMSCBPeripheral *yperipheral = [self.ymsPeripherals objectAtIndex:index];
-    
-    [self removePeripheral:yperipheral];
-}
+
 
 - (BOOL)isKnownPeripheral:(CBPeripheral *)peripheral {
     BOOL result = NO;
@@ -213,7 +236,7 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 - (void)managerResettingHandler {
     // CALL SUPER METHOD
     // THIS METHOD MUST BE INVOKED BY SUBCLASSES THAT OVERRIDE THIS METHOD
-    [self.ymsPeripherals removeAllObjects];
+    [_ymsPeripherals removeAllObjects];
 }
 
 - (void)managerUnauthorizedHandler {

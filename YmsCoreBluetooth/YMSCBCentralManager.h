@@ -74,13 +74,6 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
 @property (atomic, strong) CBCentralManager *manager;
 
 /**
- Array of YMSCBPeripheral instances.
- 
- This array holds all YMSCBPeripheral instances discovered or retrieved by manager.
- */
-@property (atomic, strong) NSMutableArray *ymsPeripherals;
-
-/**
  Array of NSStrings to search to match CBPeripheral instances.
  
  Used in conjunction with isKnownPeripheral:.  
@@ -90,6 +83,13 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
 
 /// Flag to determine if manager is scanning.
 @property (atomic, assign) BOOL isScanning;
+
+/**
+ Array of YMSCBPeripheral instances.
+ 
+ This array holds all YMSCBPeripheral instances discovered or retrieved by manager.
+ */
+@property (atomic, readonly, strong) NSArray *ymsPeripherals;
 
 /// Count of ymsPeripherals.
 @property (atomic, readonly, assign) NSUInteger count;
