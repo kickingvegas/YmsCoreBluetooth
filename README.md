@@ -397,7 +397,7 @@ YMSCBUtils:
 
 YMS128.c:
 
-        yms_u128_t yms_u128_genBLEOffset(int value
+        yms_u128_t yms_u128_genBLEOffset(int value);
         
 Removed files:
         DEASensorTagUtils.h, DEASensorTagUtils.m, TISensorTag.c
