@@ -204,7 +204,7 @@
 }
 
 - (void)connectWithOptions:(NSDictionary *)options withBlock:(void (^)(YMSCBPeripheral *, NSError *))connectCallback {
-    self.connectCallback = [connectCallback copy];
+    self.connectCallback = connectCallback;
     [self.central.manager connectPeripheral:self.cbPeripheral options:options];
 }
 
