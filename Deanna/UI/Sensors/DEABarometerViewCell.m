@@ -55,7 +55,7 @@
 - (void)configureWithSensorTag:(DEASensorTag *)sensorTag {
     self.service = sensorTag.serviceDict[@"barometer"];
     
-    for (NSString *key in @[@"ambientTemp", @"pressure", @"isOn", @"isEnabled", @"isCalibrating"]) {
+    for (NSString *key in @[@"barometerValues", @"isOn", @"isEnabled", @"isCalibrating"]) {
         [self.service addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
     }
     
@@ -64,7 +64,7 @@
 }
 
 - (void)deconfigure {
-    for (NSString *key in @[@"ambientTemp", @"pressure", @"isOn", @"isEnabled", @"isCalibrating"]) {
+    for (NSString *key in @[@"barometerValues", @"isOn", @"isEnabled", @"isCalibrating"]) {
         [self.service removeObserver:self forKeyPath:key];
     }
 }
@@ -78,14 +78,15 @@
     
     DEABarometerService *bs = (DEABarometerService *)object;
     
-    if ([keyPath isEqualToString:@"ambientTemp"]) {
-        double temperatureC = [bs.ambientTemp doubleValue];
+    if ([keyPath isEqualToString:@"barometerValues"]) {
+        NSDictionary *values = bs.barometerValues;
+        
+        double temperatureC = [values[@"ambientTemp"] doubleValue];
         float temperatureF = (float)temperatureC * 9.0/5.0 + 32.0;
         temperatureF = roundf(100 * temperatureF)/100.0;
         self.ambientTemperatureLabel.text = [NSString stringWithFormat:@"%0.2f ℉", temperatureF];
         
-    } else if ([keyPath isEqualToString:@"pressure"]) {
-        double pressure = [bs.pressure doubleValue];
+        double pressure = [values[@"pressure"] doubleValue];
         double pressureRound = pressure/1.01325E5;
         
         self.pressureLabel.text = [NSString stringWithFormat:@"%0.4f atm", pressureRound];

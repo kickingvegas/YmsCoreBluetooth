@@ -23,18 +23,9 @@
  */
 @interface DEAGyroscopeService : DEABaseService
 
-@property (nonatomic, strong) NSNumber *roll;
-@property (nonatomic, strong) NSNumber *pitch;
-@property (nonatomic, strong) NSNumber *yaw;
-
-@property (nonatomic, assign) float lastRoll;
-@property (nonatomic, assign) float lastPitch;
-@property (nonatomic, assign) float lastYaw;
-
-@property (nonatomic, assign) float cRoll;
-@property (nonatomic, assign) float cPitch;
-@property (nonatomic, assign) float cYaw;
-
+/// Dictionary containing data values.
+/// keys: @"roll", @"pitch" and @"yaw".
+@property (nonatomic, strong, readonly) NSDictionary *gyroscopeValues;
 
 - (void)calibrate;
 

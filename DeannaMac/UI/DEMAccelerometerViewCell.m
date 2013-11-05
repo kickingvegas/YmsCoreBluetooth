@@ -27,7 +27,7 @@
 - (void)configureWithSensorTag:(DEASensorTag *)sensorTag {
     self.service = sensorTag.serviceDict[@"accelerometer"];
     
-    for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled", @"period"]) {
+    for (NSString *key in @[@"accelerometerValues", @"isOn", @"isEnabled", @"period"]) {
         [self.service addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
     }
     if (self.service.isOn) {
@@ -42,13 +42,13 @@
     
     DEAAccelerometerService *as = (DEAAccelerometerService *)self.service;
     if (as.isEnabled) {
-        [as readPeriod];
+        [as requestReadPeriod];
     }
 
 }
 
 - (void)deconfigure {
-    for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled", @"period"]) {
+    for (NSString *key in @[@"accelerometerValues", @"isOn", @"isEnabled", @"period"]) {
         [self.service removeObserver:self forKeyPath:key];
     }
 }
@@ -75,12 +75,11 @@
     
     DEAAccelerometerService *as = (DEAAccelerometerService *)object;
     
-    if ([keyPath isEqualToString:@"x"]) {
-        self.accelXLabel.stringValue = [NSString stringWithFormat:@"%0.2f", [as.x floatValue]];
-    } else if ([keyPath isEqualToString:@"y"]) {
-        self.accelYLabel.stringValue = [NSString stringWithFormat:@"%0.2f", [as.y floatValue]];
-    } else if ([keyPath isEqualToString:@"z"]) {
-        self.accelZLabel.stringValue = [NSString stringWithFormat:@"%0.2f", [as.z floatValue]];
+    if ([keyPath isEqualToString:@"accelerometerValues"]) {
+        NSDictionary *values = as.accelerometerValues;
+        self.accelXLabel.stringValue = [NSString stringWithFormat:@"%0.2f", [values[@"x"] floatValue]];
+        self.accelYLabel.stringValue = [NSString stringWithFormat:@"%0.2f", [values[@"y"] floatValue]];
+        self.accelZLabel.stringValue = [NSString stringWithFormat:@"%0.2f", [values[@"z"] floatValue]];
     } else if ([keyPath isEqualToString:@"isOn"]) {
         if (as.isOn) {
             [self.notifySwitch setState:NSOnState];
@@ -91,19 +90,15 @@
         [self.notifySwitch setEnabled:as.isEnabled];
         if (as.isEnabled) {
             self.periodSlider.enabled = as.isEnabled;
-            [as readPeriod];
+            [as requestReadPeriod];
         }
     
     } else if ([keyPath isEqualToString:@"period"]) {
         
         int pvalue = (int)([as.period floatValue] * 10.0);
-
-        self.periodLabel.stringValue = [NSString stringWithFormat:@"%d ms", pvalue];
-        if (!self.hasReadPeriod) {
-            [self.periodSlider setFloatValue:[as.period floatValue]];
-            self.hasReadPeriod = YES;
-        }
         
+        self.periodLabel.stringValue = [NSString stringWithFormat:@"%d ms", pvalue];
+        [self.periodSlider setFloatValue:[as.period floatValue]];
     }
 }
 

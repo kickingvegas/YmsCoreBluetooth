@@ -23,17 +23,9 @@
  */
 @interface DEAMagnetometerService : DEABaseService
 
-@property (nonatomic, strong) NSNumber *x;
-@property (nonatomic, strong) NSNumber *y;
-@property (nonatomic, strong) NSNumber *z;
-
-@property (nonatomic, assign) float lastX;
-@property (nonatomic, assign) float lastY;
-@property (nonatomic, assign) float lastZ;
-
-@property (nonatomic, assign) float cX;
-@property (nonatomic, assign) float cY;
-@property (nonatomic, assign) float cZ;
+/// Dictionary containing data values.
+/// keys: @"x", @"y" and @"z".
+@property (nonatomic, strong, readonly) NSDictionary *magnetometerValues;
 
 - (void)calibrate;
 

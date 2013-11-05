@@ -26,8 +26,15 @@ float calcAccel(int16_t rawV) {
     return v;
 }
 
-@implementation DEAAccelerometerService
+@interface DEAAccelerometerService ()
 
+@property (nonatomic, strong) NSDictionary *accelerometerValues;
+@property (nonatomic, strong) NSNumber *period;
+
+@end
+
+
+@implementation DEAAccelerometerService
 
 
 - (instancetype)initWithName:(NSString *)oName
@@ -67,11 +74,13 @@ float calcAccel(int16_t rawV) {
         int16_t yy = val[1];
         int16_t zz = val[2];
         
+        __block NSDictionary *accelerometerValues = @{ @"x": @(calcAccel(xx)),
+                                                       @"y": @(calcAccel(yy)),
+                                                       @"z": @(calcAccel(zz)) };
+        
         __weak DEAAccelerometerService *this = self;
         _YMS_PERFORM_ON_MAIN_THREAD(^{
-            this.x = [NSNumber numberWithFloat:calcAccel(xx)];
-            this.y = [NSNumber numberWithFloat:calcAccel(yy)];
-            this.z = [NSNumber numberWithFloat:calcAccel(zz)];
+            this.accelerometerValues = accelerometerValues;
         });
     }
 }
@@ -82,11 +91,16 @@ float calcAccel(int16_t rawV) {
     __weak DEAAccelerometerService *this = self;
     [periodCt writeByte:value withBlock:^(NSError *error) {
         //NSLog(@"Set period to: %x", value);
-        this.period = @(value);
+        if (error) {
+            NSLog(@"ERROR: %@", [error localizedDescription]);
+            this.period = this.period;
+        } else {
+            this.period = @(value);
+        }
     }];
 }
 
-- (void)readPeriod {
+- (void)requestReadPeriod {
     YMSCBCharacteristic *periodCt = self.characteristicDict[@"period"];
     
     __weak DEAAccelerometerService *this = self;
@@ -102,7 +116,5 @@ float calcAccel(int16_t rawV) {
         });
     }];
 }
-
-
 
 @end

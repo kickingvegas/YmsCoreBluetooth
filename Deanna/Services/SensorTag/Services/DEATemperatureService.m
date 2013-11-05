@@ -48,6 +48,13 @@ double calcTmpTarget(int16_t objT, double m_tempAmb) {
     
 }
 
+@interface DEATemperatureService ()
+
+@property (nonatomic, strong) NSDictionary *temperatureValues;
+
+@end
+
+
 @implementation DEATemperatureService
 
 - (instancetype)initWithName:(NSString *)oName
@@ -90,10 +97,12 @@ double calcTmpTarget(int16_t objT, double m_tempAmb) {
         
         double tempAmb = calcTmpLocal(amb);
 
+        
+        __block NSDictionary *temperatureValues = @{ @"ambientTemp": @(tempAmb),
+                                                     @"objectTemp": @(calcTmpTarget(objT, tempAmb)) };
         __weak DEATemperatureService *this = self;
         _YMS_PERFORM_ON_MAIN_THREAD(^{
-            this.ambientTemp = @(tempAmb);
-            this.objectTemp = @(calcTmpTarget(objT, tempAmb));
+            this.temperatureValues = temperatureValues;
         });
     }
 }

@@ -20,6 +20,31 @@
 #import "DEABarometerService.h"
 #import "YMSCBCharacteristic.h"
 
+@interface DEABarometerService ()
+
+@property (nonatomic, strong, readwrite) NSDictionary *barometerValues;
+
+/// Calibration point
+@property (nonatomic, assign) uint16_t c1;
+/// Calibration point
+@property (nonatomic, assign) uint16_t c2;
+/// Calibration point
+@property (nonatomic, assign) uint16_t c3;
+/// Calibration point
+@property (nonatomic, assign) uint16_t c4;
+/// Calibration point
+@property (nonatomic, assign) int16_t c5;
+/// Calibration point
+@property (nonatomic, assign) int16_t c6;
+/// Calibration point
+@property (nonatomic, assign) int16_t c7;
+/// Calibration point
+@property (nonatomic, assign) int16_t c8;
+
+
+@end
+
+
 @implementation DEABarometerService
 
 double calcBarTmp(int16_t t_r, uint16_t c1, uint16_t c2) {
@@ -101,18 +126,13 @@ double calcBarPress(int16_t t_r,
         
         int16_t p_r = ((v2 & 0xff)| ((v3 << 8) & 0xff00));
         int16_t t_r = ((v0 & 0xff)| ((v1 << 8) & 0xff00));
+        
+        __block NSDictionary *barometerValues = @{ @"pressure": @(calcBarPress(t_r, p_r, _c3, _c4, _c5, _c6, _c7, _c8)),
+                                                   @"ambientTemp": @(calcBarTmp(t_r, _c1, _c2)) };
 
         __weak DEABarometerService *this = self;
         _YMS_PERFORM_ON_MAIN_THREAD(^{
-            this.ambientTemp = [NSNumber numberWithDouble:calcBarTmp(t_r, _c1, _c2)];
-            this.pressure = [NSNumber numberWithDouble:calcBarPress(t_r,
-                                                                    p_r,
-                                                                    _c3,
-                                                                    _c4,
-                                                                    _c5,
-                                                                    _c6,
-                                                                    _c7,
-                                                                    _c8)];
+            this.barometerValues = barometerValues;
         });
     }
 }

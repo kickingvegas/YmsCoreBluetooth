@@ -19,6 +19,20 @@
 #import "DEAMagnetometerService.h"
 #import "YMSCBCharacteristic.h"
 
+@interface DEAMagnetometerService ()
+
+@property (nonatomic, strong) NSDictionary *magnetometerValues;
+
+@property (nonatomic, assign) float lastX;
+@property (nonatomic, assign) float lastY;
+@property (nonatomic, assign) float lastZ;
+
+@property (nonatomic, assign) float cX;
+@property (nonatomic, assign) float cY;
+@property (nonatomic, assign) float cZ;
+
+@end
+
 @implementation DEAMagnetometerService
 
 float calcMag(int16_t v, float c, int16_t d) {
@@ -83,11 +97,12 @@ float calcMag(int16_t v, float c, int16_t d) {
         self.lastY = calcMag(yy, self.cY, 1);
         self.lastZ = calcMag(zz, self.cZ, 1);
         
+        __block NSDictionary *magnetometerValues = @{ @"x": @(self.lastX),
+                                                      @"y": @(self.lastY),
+                                                      @"z": @(self.lastZ) };
         __weak DEAMagnetometerService *this = self;
         _YMS_PERFORM_ON_MAIN_THREAD(^{
-            this.x = [NSNumber numberWithFloat:this.lastX];
-            this.y = [NSNumber numberWithFloat:this.lastY];
-            this.z = [NSNumber numberWithFloat:this.lastZ];
+            this.magnetometerValues = magnetometerValues;
         });
 
     } else if ([yc.name isEqualToString:@"config"]) {

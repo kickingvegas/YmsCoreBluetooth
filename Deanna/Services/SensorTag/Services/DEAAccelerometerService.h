@@ -24,14 +24,12 @@
  */
 @interface DEAAccelerometerService : DEABaseService
 
-/// x value
-@property (nonatomic, strong) NSNumber *x;
-/// y value
-@property (nonatomic, strong) NSNumber *y;
-/// z value
-@property (nonatomic, strong) NSNumber *z;
+/// Dictionary containing data values.
+/// keys: @"x", @"y" and @"z".
+@property (nonatomic, strong, readonly) NSDictionary *accelerometerValues;
+
 /// Period
-@property (nonatomic, strong) NSNumber *period;
+@property (nonatomic, strong, readonly) NSNumber *period;
 
 /**
  Configure accelerometer period.
@@ -43,7 +41,6 @@
 /**
  Read accelerometer period.
  */
-- (void)readPeriod;
-
+- (void)requestReadPeriod;
 
 @end

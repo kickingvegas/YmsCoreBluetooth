@@ -27,6 +27,20 @@ float calcGyro(int16_t v, float c, int16_t d) {
     return result;
 }
 
+@interface DEAGyroscopeService ()
+
+@property (nonatomic, strong) NSDictionary *gyroscopeValues;
+
+@property (nonatomic, assign) float lastRoll;
+@property (nonatomic, assign) float lastPitch;
+@property (nonatomic, assign) float lastYaw;
+
+@property (nonatomic, assign) float cRoll;
+@property (nonatomic, assign) float cPitch;
+@property (nonatomic, assign) float cYaw;
+
+@end
+
 @implementation DEAGyroscopeService
 
 - (instancetype)initWithName:(NSString *)oName
@@ -80,11 +94,12 @@ float calcGyro(int16_t v, float c, int16_t d) {
         self.lastPitch = calcGyro(yy, self.cPitch, -1);
         self.lastYaw = calcGyro(xx, self.cYaw, 1);
         
+        __block NSDictionary *gyroscopeValues = @{ @"roll": @(self.lastRoll),
+                                                   @"pitch": @(self.lastPitch),
+                                                   @"yaw": @(self.lastYaw) };
         __weak DEAGyroscopeService *this = self;
         _YMS_PERFORM_ON_MAIN_THREAD(^{
-            this.roll = [NSNumber numberWithFloat:this.lastRoll];
-            this.pitch = [NSNumber numberWithFloat:this.lastPitch];
-            this.yaw = [NSNumber numberWithFloat:this.lastYaw];
+            this.gyroscopeValues = gyroscopeValues;
         });
         
         

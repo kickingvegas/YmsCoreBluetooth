@@ -23,10 +23,8 @@
  */
 @interface DEAHumidityService : DEABaseService
 
-/// Ambient temperature
-@property (nonatomic, strong) NSNumber *ambientTemp;
-
-/// Relative humidity
-@property (nonatomic, strong) NSNumber *relativeHumidity;
+/// Dictionary containing data values.
+/// keys: @"ambientTemp", @"relativeHumidity".
+@property (nonatomic, strong, readonly) NSDictionary *humidityValues;
 
 @end

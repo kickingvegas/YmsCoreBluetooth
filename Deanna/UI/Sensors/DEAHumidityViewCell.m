@@ -48,7 +48,7 @@
 - (void)configureWithSensorTag:(DEASensorTag *)sensorTag {
     self.service = sensorTag.serviceDict[@"humidity"];
     
-    for (NSString *key in @[@"ambientTemp", @"relativeHumidity", @"isOn", @"isEnabled"]) {
+    for (NSString *key in @[@"humidityValues", @"isOn", @"isEnabled"]) {
         [self.service addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
     }
     
@@ -57,7 +57,7 @@
 }
 
 - (void)deconfigure {
-    for (NSString *key in @[@"ambientTemp", @"relativeHumidity", @"isOn", @"isEnabled"]) {
+    for (NSString *key in @[@"humidityValues", @"isOn", @"isEnabled"]) {
         [self.service removeObserver:self forKeyPath:key];
     }
 }
@@ -70,14 +70,15 @@
     
     DEAHumidityService *hs = (DEAHumidityService *)object;
     
-    if ([keyPath isEqualToString:@"ambientTemp"]) {
-        double temperatureC = [hs.ambientTemp doubleValue];
+    if ([keyPath isEqualToString:@"humidityValues"]) {
+        NSDictionary *values = hs.humidityValues;
+
+        double temperatureC = [values[@"ambientTemp"] doubleValue];
         float temperatureF = (float)temperatureC * 9.0/5.0 + 32.0;
         temperatureF = roundf(100 * temperatureF)/100.0;
         self.ambientTemperatureLabel.text = [NSString stringWithFormat:@"%0.2f ℉", temperatureF];
         
-    } else if ([keyPath isEqualToString:@"relativeHumidity"]) {
-        double relativeHumidity = [hs.relativeHumidity doubleValue];
+        double relativeHumidity = [values[@"relativeHumidity"] doubleValue];
         self.relativeHumidityLabel.text = [NSString stringWithFormat:@"%0.2f", relativeHumidity];
         
     } else if ([keyPath isEqualToString:@"isOn"]) {
