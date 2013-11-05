@@ -100,7 +100,7 @@ static DEACentralManager *sharedCentralManager;
                                                                             baseHi:kSensorTag_BASE_ADDRESS_HI
                                                                             baseLo:kSensorTag_BASE_ADDRESS_LO];
 
-                [self.ymsPeripherals addObject:sensorTag];
+                [self addPeripheral:sensorTag];
                 isUnknownPeripheral = NO;
                 break;
                 
@@ -111,7 +111,7 @@ static DEACentralManager *sharedCentralManager;
         if (isUnknownPeripheral) {
             //TODO: Handle unknown peripheral
             yp = [[YMSCBPeripheral alloc] initWithPeripheral:peripheral central:self baseHi:0 baseLo:0];
-            [self.ymsPeripherals addObject:yp];
+            [self addPeripheral:yp];
         }
     }
 
