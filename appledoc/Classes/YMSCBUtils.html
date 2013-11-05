@@ -42,6 +42,8 @@
 	
 	<option value="class_methods">Class Methods</option>
 	
+	<option value="//api/name/createCBUUID:withIntBLEOffset:">&nbsp;&nbsp;&nbsp;&nbsp;+ createCBUUID:withIntBLEOffset:</option>
+	
 	<option value="//api/name/createCBUUID:withIntOffset:">&nbsp;&nbsp;&nbsp;&nbsp;+ createCBUUID:withIntOffset:</option>
 	
 	<option value="//api/name/createCBUUID:withOffset:">&nbsp;&nbsp;&nbsp;&nbsp;+ createCBUUID:withOffset:</option>
@@ -51,6 +53,8 @@
 	<option value="//api/name/dataToInt16:">&nbsp;&nbsp;&nbsp;&nbsp;+ dataToInt16:</option>
 	
 	<option value="//api/name/dataToInt32:">&nbsp;&nbsp;&nbsp;&nbsp;+ dataToInt32:</option>
+	
+	<option value="//api/name/genCBUUID:withIntBLEOffset:">&nbsp;&nbsp;&nbsp;&nbsp;+ genCBUUID:withIntBLEOffset:</option>
 	
 	<option value="//api/name/genCBUUID:withIntOffset:">&nbsp;&nbsp;&nbsp;&nbsp;+ genCBUUID:withIntOffset:</option>
 	
@@ -84,6 +88,8 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/createCBUUID:withIntBLEOffset:">createCBUUID:withIntBLEOffset:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/createCBUUID:withIntOffset:">createCBUUID:withIntOffset:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/createCBUUID:withOffset:">createCBUUID:withOffset:</a></span></li>
@@ -93,6 +99,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/dataToInt16:">dataToInt16:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/dataToInt32:">dataToInt32:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/genCBUUID:withIntBLEOffset:">genCBUUID:withIntBLEOffset:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/genCBUUID:withIntOffset:">genCBUUID:withIntOffset:</a></span></li>
 	
@@ -162,13 +170,6 @@
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/genCBUUID:withIntOffset:">+&nbsp;genCBUUID:withIntOffset:</a></code>
-		<span class="tooltip"><p>Generate CBUUID string given base of type yms_u128_t and offset of type int</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
 		<code><a href="#//api/name/createCBUUID:withOffset:">+&nbsp;createCBUUID:withOffset:</a></code>
 		<span class="tooltip"><p>Generate CBUUID given base and offset of type yms_u128_t</p></span>
 	</span>
@@ -176,8 +177,29 @@
 	
 </li><li>
 	<span class="tooltip">
+		<code><a href="#//api/name/genCBUUID:withIntOffset:">+&nbsp;genCBUUID:withIntOffset:</a></code>
+		<span class="tooltip"><p>Generate CBUUID string given base of type yms_u128_t and offset of type int</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
 		<code><a href="#//api/name/createCBUUID:withIntOffset:">+&nbsp;createCBUUID:withIntOffset:</a></code>
 		<span class="tooltip"><p>Generate CBUUID given base of type yms_u128_t and offset of type int</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/genCBUUID:withIntBLEOffset:">+&nbsp;genCBUUID:withIntBLEOffset:</a></code>
+		<span class="tooltip"><p>Generate CBUUID string given base of type yms_u128_t and BLE offset of type int</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/createCBUUID:withIntBLEOffset:">+&nbsp;createCBUUID:withIntBLEOffset:</a></code>
+		<span class="tooltip"><p>Generate CBUUID given base and BLE offset of type yms_u128_t</p></span>
 	</span>
 	
 	
@@ -216,6 +238,72 @@
 					<div class="section section-methods">
 						<a title="Class Methods" name="class_methods"></a>
 						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/createCBUUID:withIntBLEOffset:" title="createCBUUID:withIntBLEOffset:"></a>
+	<h3 class="subsubtitle method-title">createCBUUID:withIntBLEOffset:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Generate CBUUID given base and BLE offset of type yms_u128_t</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (CBUUID *)createCBUUID:(yms_u128_t *)<em>base</em> withIntBLEOffset:(int)<em>addrOffset</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>base</em></dt>
+			<dd><p>base address</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>offset</em></dt>
+			<dd><p>offset value</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>CBUUID</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Generate CBUUID given base and BLE offset of type yms_u128_t</p>
+
+<p>This is written to comply with the Bluetooth Specification Version 4.0 [Vol. 3] Section 3.2.1 where:</p>
+
+<pre><code>128-Bit UUID = 16-bit Attribute UUID * pow(2,96) + Bluetooth_Base_UUID
+</code></pre>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBUtils.h</code><br />
+	</div>				
+	
+	
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/createCBUUID:withIntOffset:" title="createCBUUID:withIntOffset:"></a>
@@ -508,6 +596,72 @@
 </div>
 						
 						<div class="section-method">
+	<a name="//api/name/genCBUUID:withIntBLEOffset:" title="genCBUUID:withIntBLEOffset:"></a>
+	<h3 class="subsubtitle method-title">genCBUUID:withIntBLEOffset:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Generate CBUUID string given base of type yms_u128_t and BLE offset of type int</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>+ (NSString *)genCBUUID:(yms_u128_t *)<em>base</em> withIntBLEOffset:(int)<em>addrOffset</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>base</em></dt>
+			<dd><p>base address</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>addrOffset</em></dt>
+			<dd><p>offset value</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>CBUUID string</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Generate CBUUID string given base of type yms_u128_t and BLE offset of type int</p>
+
+<p>This is written to comply with the Bluetooth Specification Version 4.0 [Vol. 3] Section 3.2.1 where:</p>
+
+<pre><code> 128-Bit UUID = 16-bit Attribute UUID * pow(2,96) + Bluetooth_Base_UUID
+</code></pre>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBUtils.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
 	<a name="//api/name/genCBUUID:withIntOffset:" title="genCBUUID:withIntOffset:"></a>
 	<h3 class="subsubtitle method-title">genCBUUID:withIntOffset:</h3>
 	
@@ -644,7 +798,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-10-26)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-11-05)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 961)</a>.</span></p>
 						
