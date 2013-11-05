@@ -26,12 +26,19 @@
 
 @implementation DEMAppDelegate
 
+- (id)init
+{
+    self = [super init];
+    
+    if (self) {
+        DEACentralManager *centralManager = [DEACentralManager initSharedServiceWithDelegate:self];
+        centralManager.delegate = self;
+    }
+    
+    return self;
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    // Insert code here to initialize your application
-    
-    
-    DEACentralManager *centralManager = [DEACentralManager initSharedServiceWithDelegate:self];
-    centralManager.delegate = self;
     [self.peripheralTableView reloadData];
     
 }
