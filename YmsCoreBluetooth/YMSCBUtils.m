@@ -40,6 +40,18 @@
     return result;
 }
 
+
++ (CBUUID *)createCBUUID:(yms_u128_t *)base withOffset:(yms_u128_t *)offset {
+    CBUUID *result;
+    
+    NSString *uuidString = [YMSCBUtils genCBUUID:base withOffset:offset];
+    
+    result = [CBUUID UUIDWithString:uuidString];
+    return result;
+}
+
+
+
 + (NSString *)genCBUUID:(yms_u128_t *)base withIntOffset:(int)addrOffset {
     NSString *result;
     
@@ -62,14 +74,26 @@
 }
 
 
-+ (CBUUID *)createCBUUID:(yms_u128_t *)base withOffset:(yms_u128_t *)offset {
+
++ (NSString *)genCBUUID:(yms_u128_t *)base withIntBLEOffset:(int)addrOffset {
+    NSString *result;
+    
+    yms_u128_t offset = yms_u128_genBLEOffset(addrOffset);
+    
+    result = [YMSCBUtils genCBUUID:base withOffset:&offset];
+    
+    return result;
+}
+
++ (CBUUID *)createCBUUID:(yms_u128_t *)base withIntBLEOffset:(int)addrOffset {
     CBUUID *result;
     
-    NSString *uuidString = [YMSCBUtils genCBUUID:base withOffset:offset];
+    NSString *uuidString = [YMSCBUtils genCBUUID:base withIntBLEOffset:addrOffset];
     
     result = [CBUUID UUIDWithString:uuidString];
     return result;
 }
+
 
 
 + (int8_t)dataToByte:(NSData *)data {

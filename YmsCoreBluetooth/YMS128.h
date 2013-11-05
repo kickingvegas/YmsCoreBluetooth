@@ -56,6 +56,17 @@ yms_u128_t yms_u128_genAddress(yms_u128_t *base, yms_u128_t *offset);
 yms_u128_t yms_u128_genOffset(int value);
 
 /**
+ Generate 128-bit BLE offset.
+ 
+ This is written to comply with the Bluetooth Specification Version 4.0 [Vol. 3] Section 3.2.1 where:
+ 
+     128-Bit UUID = 16-bit Attribute UUID * pow(2,96) + Bluetooth_Base_UUID
+
+ @param value value to offset
+ */
+yms_u128_t yms_u128_genBLEOffset(int value);
+
+/**
  Build 16-bit number given lo and hi byte values.
 
  @param lo low byte

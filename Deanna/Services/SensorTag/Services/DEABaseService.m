@@ -18,7 +18,6 @@
 
 #import "DEABaseService.h"
 #import "YMSCBCharacteristic.h"
-#import "DEASensorTagUtils.h"
 #import "YMSCBUtils.h"
 
 @interface DEABaseService ()
@@ -45,7 +44,7 @@
         yms_u128_t pbase = self.base;
         
         if (![oName isEqualToString:@"simplekeys"]) {
-            self.uuid = [DEASensorTagUtils createCBUUID:&pbase withIntOffset:serviceOffset];
+            self.uuid = [YMSCBUtils createCBUUID:&pbase withIntBLEOffset:serviceOffset];
         }
     }
     return self;
@@ -57,7 +56,7 @@
     
     yms_u128_t pbase = self.base;
     
-    CBUUID *uuid = [DEASensorTagUtils createCBUUID:&pbase withIntOffset:addrOffset];
+    CBUUID *uuid = [YMSCBUtils createCBUUID:&pbase withIntBLEOffset:addrOffset];
     
     yc = [[YMSCBCharacteristic alloc] initWithName:cname
                                             parent:self.parent

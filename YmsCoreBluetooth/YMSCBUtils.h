@@ -72,6 +72,36 @@
 + (CBUUID *)createCBUUID:(yms_u128_t *)base withIntOffset:(int)addrOffset;
 
 /**
+ Generate CBUUID string given base of type yms_u128_t and BLE offset of type int
+ 
+ This is written to comply with the Bluetooth Specification Version 4.0 [Vol. 3] Section 3.2.1 where:
+ 
+     128-Bit UUID = 16-bit Attribute UUID * pow(2,96) + Bluetooth_Base_UUID
+
+ 
+ @param base base address
+ @param addrOffset offset value
+ @return CBUUID string
+ */
++ (NSString *)genCBUUID:(yms_u128_t *)base withIntBLEOffset:(int)addrOffset;
+
+
+/**
+ Generate CBUUID given base and BLE offset of type yms_u128_t
+ 
+ This is written to comply with the Bluetooth Specification Version 4.0 [Vol. 3] Section 3.2.1 where:
+ 
+    128-Bit UUID = 16-bit Attribute UUID * pow(2,96) + Bluetooth_Base_UUID
+
+ 
+ @param base base address
+ @param offset offset value
+ @return CBUUID
+ */
++ (CBUUID *)createCBUUID:(yms_u128_t *)base withIntBLEOffset:(int)addrOffset;
+
+
+/**
  Convert data to byte
  @param data data to convert
  @return 8-bit integer
