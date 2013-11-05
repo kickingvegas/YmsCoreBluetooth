@@ -32,7 +32,7 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h1>
-<a name="ymscorebluetooth-v104" class="anchor" href="#ymscorebluetooth-v104"><span class="octicon octicon-link"></span></a>YmsCoreBluetooth v1.04</h1>
+<a name="ymscorebluetooth-v105" class="anchor" href="#ymscorebluetooth-v105"><span class="octicon octicon-link"></span></a>YmsCoreBluetooth v1.05</h1>
 
 <p>A block-based framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS 7 or OS X 10.9 applications using the CoreBluetooth API. Includes <em>Deanna</em> and <em>DeannaMac</em>, applications to communicate with a <a href="http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag">TI SensorTag</a> for iOS and OS X respectively.</p>
 
@@ -498,6 +498,29 @@ __weak DEACentralManager *this = self;
 <a name="latest-changes" class="anchor" href="#latest-changes"><span class="octicon octicon-link"></span></a>Latest Changes</h2>
 
 <h3>
+<a name="tue-nov-5-2013" class="anchor" href="#tue-nov-5-2013"><span class="octicon octicon-link"></span></a>Tue Nov 5 2013</h3>
+
+<ul>
+<li>#87 - Calculate 128-bit address offset to comply to BLE spec.</li>
+</ul><p>API changes related to this issue:</p>
+
+<p>YMSCBUtils:</p>
+
+<pre><code>    + (NSString *)genCBUUID:(yms_u128_t *)base withIntBLEOffset:(int)addrOffset;
+    + (CBUUID *)createCBUUID:(yms_u128_t *)base withIntBLEOffset:(int)addrOffset;
+</code></pre>
+
+<p>YMS128.c:</p>
+
+<pre><code>    yms_u128_t yms_u128_genBLEOffset(int value
+</code></pre>
+
+<p>Removed files:
+        DEASensorTagUtils.h, DEASensorTagUtils.m, TISensorTag.c</p>
+
+<ul>
+<li>#73 - Fixed assignment of connectCallback property to not use extraneous copy.</li>
+</ul><h3>
 <a name="sat-oct-26-2013---pull-request-accepted-from-coupgar" class="anchor" href="#sat-oct-26-2013---pull-request-accepted-from-coupgar"><span class="octicon octicon-link"></span></a>Sat Oct 26 2013 - Pull Request Accepted from <a href="https://github.com/coupgar" class="user-mention">@coupgar</a>
 </h3>
 
@@ -515,18 +538,6 @@ __weak DEACentralManager *this = self;
 <ul>
 <li>Fixed handling of callback properties so that they are set to nil after execution in a thread-safe manner.</li>
 <li>Added #define kYMSCBVersionNumber</li>
-</ul><h3>
-<a name="sat-sep-18-2013---ios7-release-ver-10" class="anchor" href="#sat-sep-18-2013---ios7-release-ver-10"><span class="octicon octicon-link"></span></a>Sat Sep 18 2013 - iOS7 Release (ver 1.0)</h3>
-
-<ul>
-<li>Updated codebase to support all iOS7 changes to the CoreBluetooth API.</li>
-<li>DeannaMac will not compile on OS X &lt; 10.9. For OS X 10.8 users, please use the <a href="https://github.com/kickingvegas/YmsCoreBluetooth/tree/ios6">ios6 branch</a>.</li>
-</ul><h3>
-<a name="sat-sep-7-2013---interim-release-ver-0946" class="anchor" href="#sat-sep-7-2013---interim-release-ver-0946"><span class="octicon octicon-link"></span></a>Sat Sep 7 2013 - Interim Release (ver 0.946)</h3>
-
-<ul>
-<li>(#25) - Support for accelerometer period</li>
-<li>(#73) - Fix declaration of block properties to copy</li>
 </ul><p>Tested Mac Environment:</p>
 
 <ul>
