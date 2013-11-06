@@ -117,5 +117,10 @@
     });
 }
 
+- (NSDictionary *)sensorValues
+{
+    NSLog(@"WARNING: -[%@ sensorValues] has not been implemented.", NSStringFromClass([self class]));
+    return nil;
+}
 
 @end

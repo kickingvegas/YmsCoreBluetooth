@@ -23,9 +23,18 @@
  */
 @interface DEABarometerService : DEABaseService
 
-/// Dictionary containing data values.
-/// keys: @"pressure", @"ambientTemp"
-@property (nonatomic, strong, readonly) NSDictionary *barometerValues;
+/**
+ Inherited property of DEABaseService.
+ Keys: @"pressure", @"ambientTemp".
+ */
+@property (nonatomic, strong, readonly) NSDictionary *sensorValues;
+
+/// Pressure measurement
+@property (nonatomic, strong, readonly) NSNumber *pressure;
+
+/// Ambient temperature measurement
+@property (nonatomic, strong, readonly) NSNumber *ambientTemp;
+
 
 @property (nonatomic, assign) BOOL isCalibrating;
 

@@ -49,7 +49,7 @@
 - (void)configureWithSensorTag:(DEASensorTag *)sensorTag {
     self.service = sensorTag.serviceDict[@"temperature"];
     
-    for (NSString *key in @[@"temperatureValues", @"isOn", @"isEnabled"]) {
+    for (NSString *key in @[@"ambientTemp", @"objectTemp", @"isOn", @"isEnabled"]) {
         [self.service addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
     }
     
@@ -58,7 +58,7 @@
 }
 
 - (void)deconfigure {
-    for (NSString *key in @[@"temperatureValues", @"isOn", @"isEnabled"]) {
+    for (NSString *key in @[@"ambientTemp", @"objectTemp", @"isOn", @"isEnabled"]) {
         [self.service removeObserver:self forKeyPath:key];
     }
 }
@@ -71,16 +71,15 @@
     
     DEATemperatureService *ts = (DEATemperatureService *)object;
     
-    if ([keyPath isEqualToString:@"temperatureValues"]) {
-        NSDictionary *values = ts.temperatureValues;
-
-        double temperatureC = [values[@"ambientTemp"] doubleValue];
+    if ([keyPath isEqualToString:@"ambientTemp"]) {
+        double temperatureC = [ts.ambientTemp doubleValue];
         float temperatureF = (float)temperatureC * 9.0/5.0 + 32.0;
         temperatureF = roundf(100 * temperatureF)/100.0;
         self.ambientTemperatureLabel.text = [NSString stringWithFormat:@"%0.2f ℉", temperatureF];
         
-        temperatureC = [values[@"objectTemp"] doubleValue];
-        temperatureF = (float)temperatureC * 9.0/5.0 + 32.0;
+    } else if ([keyPath isEqualToString:@"objectTemp"]) {
+        double temperatureC = [ts.objectTemp doubleValue];
+        float temperatureF = (float)temperatureC * 9.0/5.0 + 32.0;
         temperatureF = roundf(100 * temperatureF)/100.0;
         self.objectTemperatureLabel.text = [NSString stringWithFormat:@"%0.2f ℉", temperatureF];
         

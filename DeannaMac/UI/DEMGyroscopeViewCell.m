@@ -25,7 +25,7 @@
 - (void)configureWithSensorTag:(DEASensorTag *)sensorTag {
     self.service = sensorTag.serviceDict[@"gyroscope"];
     
-    for (NSString *key in @[@"gyroscopeValues", @"isOn", @"isEnabled"]) {
+    for (NSString *key in @[@"roll", @"pitch", @"yaw", @"isOn", @"isEnabled"]) {
         [self.service addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
     }
     
@@ -38,7 +38,7 @@
 }
 
 - (void)deconfigure {
-    for (NSString *key in @[@"gyroscopeValues", @"isOn", @"isEnabled"]) {
+    for (NSString *key in @[@"roll", @"pitch", @"yaw", @"isOn", @"isEnabled"]) {
         [self.service removeObserver:self forKeyPath:key];
     }
 }
@@ -52,16 +52,16 @@
     
     DEAGyroscopeService *gs = (DEAGyroscopeService *)object;
     
-    if ([keyPath isEqualToString:@"gyroscopeValues"]) {
-        NSDictionary *values = gs.gyroscopeValues;
-
-        double roll = [values[@"roll"] doubleValue];
+    if ([keyPath isEqualToString:@"roll"]) {
+        double roll = [gs.roll doubleValue];
         self.rollLabel.stringValue = [NSString stringWithFormat:@"%0.2f", roll];
-        
-        double pitch = [values[@"pitch"] doubleValue];
+
+    } else if ([keyPath isEqualToString:@"pitch"]) {
+        double pitch = [gs.pitch doubleValue];
         self.pitchLabel.stringValue = [NSString stringWithFormat:@"%0.2f", pitch];
-        
-        double yaw = [values[@"yaw"] doubleValue];
+
+    } else if ([keyPath isEqualToString:@"yaw"]) {
+        double yaw = [gs.yaw doubleValue];
         self.yawLabel.stringValue = [NSString stringWithFormat:@"%0.2f", yaw];
 
     } else if ([keyPath isEqualToString:@"isOn"]) {

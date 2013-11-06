@@ -28,7 +28,9 @@ float calcAccel(int16_t rawV) {
 
 @interface DEAAccelerometerService ()
 
-@property (nonatomic, strong) NSDictionary *accelerometerValues;
+@property (nonatomic, strong) NSNumber *x;
+@property (nonatomic, strong) NSNumber *y;
+@property (nonatomic, strong) NSNumber *z;
 @property (nonatomic, strong) NSNumber *period;
 
 @end
@@ -73,14 +75,14 @@ float calcAccel(int16_t rawV) {
         int16_t xx = val[0];
         int16_t yy = val[1];
         int16_t zz = val[2];
-        
-        __block NSDictionary *accelerometerValues = @{ @"x": @(calcAccel(xx)),
-                                                       @"y": @(calcAccel(yy)),
-                                                       @"z": @(calcAccel(zz)) };
-        
+
         __weak DEAAccelerometerService *this = self;
         _YMS_PERFORM_ON_MAIN_THREAD(^{
-            this.accelerometerValues = accelerometerValues;
+            [self willChangeValueForKey:@"sensorValues"];
+            this.x = @(calcAccel(xx));
+            this.y = @(calcAccel(yy));
+            this.z = @(calcAccel(zz));
+            [self didChangeValueForKey:@"sensorValues"];
         });
     }
 }
@@ -115,6 +117,13 @@ float calcAccel(int16_t rawV) {
             this.period = @(periodValue);
         });
     }];
+}
+
+- (NSDictionary *)sensorValues
+{
+    return @{ @"x": self.x,
+              @"y": self.y,
+              @"z": self.z };
 }
 
 @end

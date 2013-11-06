@@ -23,8 +23,16 @@
  */
 @interface DEATemperatureService : DEABaseService
 
-/// Dictionary containing data values.
-/// keys: @"ambientTemp", @"objectTemp".
-@property (nonatomic, strong, readonly) NSDictionary *temperatureValues;
+/**
+ Inherited property of DEABaseService.
+ Keys: @"ambientTemp", @"objectTemp".
+ */
+@property (nonatomic, strong, readonly) NSDictionary *sensorValues;
+
+/// Ambient temperature
+@property (nonatomic, strong, readonly) NSNumber *ambientTemp;
+
+/// Object temperature
+@property (nonatomic, strong, readonly) NSNumber *objectTemp;
 
 @end

@@ -33,7 +33,8 @@ double calcHumRel(uint16_t rawH) {
 
 @interface DEAHumidityService ()
 
-@property (nonatomic, strong) NSDictionary *humidityValues;
+@property (nonatomic, strong) NSNumber *ambientTemp;
+@property (nonatomic, strong) NSNumber *relativeHumidity;
 
 @end
 
@@ -80,16 +81,21 @@ double calcHumRel(uint16_t rawH) {
         
         uint16_t rawTemperature = yms_u16_build(v0, v1);
         uint16_t rawHumidity = yms_u16_build(v2, v3);
-        
-        __block NSDictionary *humidityValues = @{ @"ambientTemp": @(calcHumTmp(rawTemperature)),
-                                                  @"relativeHumidity": @(calcHumRel(rawHumidity)) };
 
         __weak DEAHumidityService *this = self;
         _YMS_PERFORM_ON_MAIN_THREAD(^{
-            this.humidityValues = humidityValues;
+            [self willChangeValueForKey:@"sensorValues"];
+            this.ambientTemp = @(calcHumTmp(rawTemperature));
+            this.relativeHumidity = @(calcHumRel(rawHumidity));
+            [self didChangeValueForKey:@"sensorValues"];
         });
     }
 }
 
+- (NSDictionary *)sensorValues
+{
+    return @{ @"ambientTemp": self.ambientTemp,
+              @"relativeHumidity": self.relativeHumidity };
+}
 
 @end

@@ -23,9 +23,15 @@
  */
 @interface DEAGyroscopeService : DEABaseService
 
-/// Dictionary containing data values.
-/// keys: @"roll", @"pitch" and @"yaw".
-@property (nonatomic, strong, readonly) NSDictionary *gyroscopeValues;
+/**
+ Inherited property of DEABaseService.
+ Keys: @"roll", @"pitch" and @"yaw".
+ */
+@property (nonatomic, strong, readonly) NSDictionary *sensorValues;
+
+@property (nonatomic, strong, readonly) NSNumber *roll;
+@property (nonatomic, strong, readonly) NSNumber *pitch;
+@property (nonatomic, strong, readonly) NSNumber *yaw;
 
 - (void)calibrate;
 

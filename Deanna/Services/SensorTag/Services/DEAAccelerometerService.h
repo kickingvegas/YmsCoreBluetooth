@@ -24,9 +24,18 @@
  */
 @interface DEAAccelerometerService : DEABaseService
 
-/// Dictionary containing data values.
-/// keys: @"x", @"y" and @"z".
-@property (nonatomic, strong, readonly) NSDictionary *accelerometerValues;
+/**
+ Inherited property of DEABaseService.
+ Keys: @"x", @"y" and @"z".
+ */
+@property (nonatomic, readonly) NSDictionary *sensorValues;
+
+/// x value
+@property (nonatomic, strong, readonly) NSNumber *x;
+/// y value
+@property (nonatomic, strong, readonly) NSNumber *y;
+/// z value
+@property (nonatomic, strong, readonly) NSNumber *z;
 
 /// Period
 @property (nonatomic, strong, readonly) NSNumber *period;

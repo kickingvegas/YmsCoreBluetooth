@@ -58,7 +58,7 @@
 - (void)configureWithSensorTag:(DEASensorTag *)sensorTag {
     self.service = sensorTag.serviceDict[@"accelerometer"];
     
-    for (NSString *key in @[@"accelerometerValues", @"isOn", @"isEnabled", @"period"]) {
+    for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled", @"period"]) {
         [self.service addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
     }
     
@@ -75,7 +75,7 @@
 }
 
 - (void)deconfigure {
-    for (NSString *key in @[@"accelerometerValues", @"isOn", @"isEnabled", @"period"]) {
+    for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled", @"period"]) {
         [self.service removeObserver:self forKeyPath:key];
     }
 }
@@ -88,11 +88,12 @@
     
     DEAAccelerometerService *as = (DEAAccelerometerService *)object;
     
-    if ([keyPath isEqualToString:@"accelerometerValues"]) {
-        NSDictionary *values = as.accelerometerValues;
-        self.accelXLabel.text = [NSString stringWithFormat:@"%0.2f", [values[@"x"] floatValue]];
-        self.accelYLabel.text = [NSString stringWithFormat:@"%0.2f", [values[@"y"] floatValue]];
-        self.accelZLabel.text = [NSString stringWithFormat:@"%0.2f", [values[@"z"] floatValue]];
+    if ([keyPath isEqualToString:@"x"]) {
+        self.accelXLabel.text = [NSString stringWithFormat:@"%0.2f", [as.x floatValue]];
+    } else if ([keyPath isEqualToString:@"y"]) {
+        self.accelYLabel.text = [NSString stringWithFormat:@"%0.2f", [as.y floatValue]];
+    } else if ([keyPath isEqualToString:@"z"]) {
+        self.accelZLabel.text = [NSString stringWithFormat:@"%0.2f", [as.z floatValue]];
     } else if ([keyPath isEqualToString:@"isOn"]) {
         [self.notifySwitch setOn:as.isOn animated:YES];
     } else if ([keyPath isEqualToString:@"isEnabled"]) {

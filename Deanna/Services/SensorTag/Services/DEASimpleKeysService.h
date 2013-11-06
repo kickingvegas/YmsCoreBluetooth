@@ -23,6 +23,12 @@
  */
 @interface DEASimpleKeysService : DEABaseService
 
-@property (nonatomic, strong) NSNumber *keyValue;
+/**
+ Inherited property of DEABaseService.
+ Keys: @"keyValue".
+ */
+@property (nonatomic, strong, readonly) NSDictionary *sensorValues;
+
+@property (nonatomic, strong, readonly) NSNumber *keyValue;
 
 @end

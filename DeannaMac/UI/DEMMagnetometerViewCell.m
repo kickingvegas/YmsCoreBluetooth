@@ -26,7 +26,7 @@
 - (void)configureWithSensorTag:(DEASensorTag *)sensorTag {
     self.service = sensorTag.serviceDict[@"magnetometer"];
     
-    for (NSString *key in @[@"magnetometerValues", @"isOn", @"isEnabled"]) {
+    for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled"]) {
         [self.service addObserver:self forKeyPath:key options:NSKeyValueObservingOptionNew context:NULL];
     }
     
@@ -40,7 +40,7 @@
 }
 
 - (void)deconfigure {
-    for (NSString *key in @[@"magnetometerValues", @"isOn", @"isEnabled"]) {
+    for (NSString *key in @[@"x", @"y", @"z", @"isOn", @"isEnabled"]) {
         [self.service removeObserver:self forKeyPath:key];
     }
 }
@@ -54,16 +54,16 @@
     
     DEAMagnetometerService *ms = (DEAMagnetometerService *)object;
     
-    if ([keyPath isEqualToString:@"magnetometerValues"]) {
-        NSDictionary *values = ms.magnetometerValues;
-        
-        float x = [values[@"x"] floatValue];
+    if ([keyPath isEqualToString:@"x"]) {
+        float x = [ms.x floatValue];
         self.xLabel.stringValue = [NSString stringWithFormat:@"%0.2f", x];
-        
-        float y = [values[@"y"] floatValue];
+
+    } else if ([keyPath isEqualToString:@"y"]) {
+        float y = [ms.y floatValue];
         self.yLabel.stringValue = [NSString stringWithFormat:@"%0.2f", y];
-        
-        float z = [values[@"z"] floatValue];
+
+    } else if ([keyPath isEqualToString:@"z"]) {
+        float z = [ms.z floatValue];
         self.zLabel.stringValue = [NSString stringWithFormat:@"%0.2f", z];
         
     } else if ([keyPath isEqualToString:@"isOn"]) {

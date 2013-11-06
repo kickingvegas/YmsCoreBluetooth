@@ -22,7 +22,8 @@
 
 @interface DEABarometerService ()
 
-@property (nonatomic, strong, readwrite) NSDictionary *barometerValues;
+@property (nonatomic, strong) NSNumber *pressure;
+@property (nonatomic, strong) NSNumber *ambientTemp;
 
 /// Calibration point
 @property (nonatomic, assign) uint16_t c1;
@@ -126,13 +127,13 @@ double calcBarPress(int16_t t_r,
         
         int16_t p_r = ((v2 & 0xff)| ((v3 << 8) & 0xff00));
         int16_t t_r = ((v0 & 0xff)| ((v1 << 8) & 0xff00));
-        
-        __block NSDictionary *barometerValues = @{ @"pressure": @(calcBarPress(t_r, p_r, _c3, _c4, _c5, _c6, _c7, _c8)),
-                                                   @"ambientTemp": @(calcBarTmp(t_r, _c1, _c2)) };
 
         __weak DEABarometerService *this = self;
         _YMS_PERFORM_ON_MAIN_THREAD(^{
-            this.barometerValues = barometerValues;
+            [self willChangeValueForKey:@"sensorValues"];
+            this.pressure = @(calcBarPress(t_r, p_r, _c3, _c4, _c5, _c6, _c7, _c8));
+            this.ambientTemp = @(calcBarTmp(t_r, _c1, _c2));
+            [self didChangeValueForKey:@"sensorValues"];
         });
     }
 }
@@ -188,5 +189,10 @@ double calcBarPress(int16_t t_r,
     }
 }
 
+- (NSDictionary *)sensorValues
+{
+    return @{ @"pressure": self.pressure,
+              @"ambientTemp": self.ambientTemp };
+}
 
 @end

@@ -23,9 +23,15 @@
  */
 @interface DEAMagnetometerService : DEABaseService
 
-/// Dictionary containing data values.
-/// keys: @"x", @"y" and @"z".
-@property (nonatomic, strong, readonly) NSDictionary *magnetometerValues;
+/**
+ Inherited property of DEABaseService.
+ Keys: @"x", @"y" and @"z".
+ */
+@property (nonatomic, strong, readonly) NSDictionary *sensorValues;
+
+@property (nonatomic, strong, readonly) NSNumber *x;
+@property (nonatomic, strong, readonly) NSNumber *y;
+@property (nonatomic, strong, readonly) NSNumber *z;
 
 - (void)calibrate;
 

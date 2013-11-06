@@ -23,6 +23,14 @@
 #import "DEMPeripheralViewCell.h"
 #import "DEASimpleKeysService.h"
 #import "DEASensorTagWindow.h"
+#import "DEAOSCManager.h"
+
+
+@interface DEMAppDelegate ()
+
+@property (nonatomic, strong) DEAOSCManager *OSCManager;
+
+@end
 
 @implementation DEMAppDelegate
 
@@ -33,6 +41,8 @@
     if (self) {
         DEACentralManager *centralManager = [DEACentralManager initSharedServiceWithDelegate:self];
         centralManager.delegate = self;
+        
+        _OSCManager = [[DEAOSCManager alloc] init];
     }
     
     return self;
