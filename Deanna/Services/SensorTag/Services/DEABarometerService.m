@@ -20,6 +20,32 @@
 #import "DEABarometerService.h"
 #import "YMSCBCharacteristic.h"
 
+@interface DEABarometerService ()
+
+@property (nonatomic, strong) NSNumber *pressure;
+@property (nonatomic, strong) NSNumber *ambientTemp;
+
+/// Calibration point
+@property (nonatomic, assign) uint16_t c1;
+/// Calibration point
+@property (nonatomic, assign) uint16_t c2;
+/// Calibration point
+@property (nonatomic, assign) uint16_t c3;
+/// Calibration point
+@property (nonatomic, assign) uint16_t c4;
+/// Calibration point
+@property (nonatomic, assign) int16_t c5;
+/// Calibration point
+@property (nonatomic, assign) int16_t c6;
+/// Calibration point
+@property (nonatomic, assign) int16_t c7;
+/// Calibration point
+@property (nonatomic, assign) int16_t c8;
+
+
+@end
+
+
 @implementation DEABarometerService
 
 double calcBarTmp(int16_t t_r, uint16_t c1, uint16_t c2) {
@@ -104,15 +130,10 @@ double calcBarPress(int16_t t_r,
 
         __weak DEABarometerService *this = self;
         _YMS_PERFORM_ON_MAIN_THREAD(^{
-            this.ambientTemp = [NSNumber numberWithDouble:calcBarTmp(t_r, _c1, _c2)];
-            this.pressure = [NSNumber numberWithDouble:calcBarPress(t_r,
-                                                                    p_r,
-                                                                    _c3,
-                                                                    _c4,
-                                                                    _c5,
-                                                                    _c6,
-                                                                    _c7,
-                                                                    _c8)];
+            [self willChangeValueForKey:@"sensorValues"];
+            this.pressure = @(calcBarPress(t_r, p_r, _c3, _c4, _c5, _c6, _c7, _c8));
+            this.ambientTemp = @(calcBarTmp(t_r, _c1, _c2));
+            [self didChangeValueForKey:@"sensorValues"];
         });
     }
 }
@@ -168,5 +189,10 @@ double calcBarPress(int16_t t_r,
     }
 }
 
+- (NSDictionary *)sensorValues
+{
+    return @{ @"pressure": self.pressure,
+              @"ambientTemp": self.ambientTemp };
+}
 
 @end

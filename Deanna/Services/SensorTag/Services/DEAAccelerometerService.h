@@ -24,14 +24,21 @@
  */
 @interface DEAAccelerometerService : DEABaseService
 
+/**
+ Inherited property of DEABaseService.
+ Keys: @"x", @"y" and @"z".
+ */
+@property (nonatomic, readonly) NSDictionary *sensorValues;
+
 /// x value
-@property (nonatomic, strong) NSNumber *x;
+@property (nonatomic, strong, readonly) NSNumber *x;
 /// y value
-@property (nonatomic, strong) NSNumber *y;
+@property (nonatomic, strong, readonly) NSNumber *y;
 /// z value
-@property (nonatomic, strong) NSNumber *z;
+@property (nonatomic, strong, readonly) NSNumber *z;
+
 /// Period
-@property (nonatomic, strong) NSNumber *period;
+@property (nonatomic, strong, readonly) NSNumber *period;
 
 /**
  Configure accelerometer period.
@@ -43,7 +50,6 @@
 /**
  Read accelerometer period.
  */
-- (void)readPeriod;
-
+- (void)requestReadPeriod;
 
 @end

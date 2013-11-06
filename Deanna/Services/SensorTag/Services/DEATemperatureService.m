@@ -48,6 +48,14 @@ double calcTmpTarget(int16_t objT, double m_tempAmb) {
     
 }
 
+@interface DEATemperatureService ()
+
+@property (nonatomic, strong) NSNumber *ambientTemp;
+@property (nonatomic, strong) NSNumber *objectTemp;
+
+@end
+
+
 @implementation DEATemperatureService
 
 - (instancetype)initWithName:(NSString *)oName
@@ -92,11 +100,18 @@ double calcTmpTarget(int16_t objT, double m_tempAmb) {
 
         __weak DEATemperatureService *this = self;
         _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [self willChangeValueForKey:@"sensorValues"];
             this.ambientTemp = @(tempAmb);
             this.objectTemp = @(calcTmpTarget(objT, tempAmb));
+            [self didChangeValueForKey:@"sensorValues"];
         });
     }
 }
 
+- (NSDictionary *)sensorValues
+{
+    return @{ @"ambientTemp": self.ambientTemp,
+              @"objectTemp": self.objectTemp };
+}
 
 @end

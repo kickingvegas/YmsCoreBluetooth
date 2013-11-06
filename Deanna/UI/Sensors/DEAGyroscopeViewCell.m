@@ -74,11 +74,11 @@
     if ([keyPath isEqualToString:@"roll"]) {
         double roll = [gs.roll doubleValue];
         self.rollLabel.text = [NSString stringWithFormat:@"%0.2f", roll];
- 
+
     } else if ([keyPath isEqualToString:@"pitch"]) {
         double pitch = [gs.pitch doubleValue];
         self.pitchLabel.text = [NSString stringWithFormat:@"%0.2f", pitch];
-        
+
     } else if ([keyPath isEqualToString:@"yaw"]) {
         double yaw = [gs.yaw doubleValue];
         self.yawLabel.text = [NSString stringWithFormat:@"%0.2f", yaw];

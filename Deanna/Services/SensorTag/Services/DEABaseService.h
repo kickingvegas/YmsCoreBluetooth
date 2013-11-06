@@ -25,6 +25,13 @@
 
 
 /**
+ Dictionary containing the values measured by the sensor.
+ 
+ This is an abstract propery.
+ */
+@property (nonatomic, readonly) NSDictionary *sensorValues;
+
+/**
  Turn on CoreBluetooth peripheral service.
  
  This method turns on the service by:

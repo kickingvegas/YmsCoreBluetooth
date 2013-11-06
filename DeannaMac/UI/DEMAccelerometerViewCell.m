@@ -42,7 +42,7 @@
     
     DEAAccelerometerService *as = (DEAAccelerometerService *)self.service;
     if (as.isEnabled) {
-        [as readPeriod];
+        [as requestReadPeriod];
     }
 
 }
@@ -91,19 +91,15 @@
         [self.notifySwitch setEnabled:as.isEnabled];
         if (as.isEnabled) {
             self.periodSlider.enabled = as.isEnabled;
-            [as readPeriod];
+            [as requestReadPeriod];
         }
     
     } else if ([keyPath isEqualToString:@"period"]) {
         
         int pvalue = (int)([as.period floatValue] * 10.0);
-
-        self.periodLabel.stringValue = [NSString stringWithFormat:@"%d ms", pvalue];
-        if (!self.hasReadPeriod) {
-            [self.periodSlider setFloatValue:[as.period floatValue]];
-            self.hasReadPeriod = YES;
-        }
         
+        self.periodLabel.stringValue = [NSString stringWithFormat:@"%d ms", pvalue];
+        [self.periodSlider setFloatValue:[as.period floatValue]];
     }
 }
 

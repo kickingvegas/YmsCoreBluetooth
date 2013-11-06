@@ -55,15 +55,15 @@
     if ([keyPath isEqualToString:@"roll"]) {
         double roll = [gs.roll doubleValue];
         self.rollLabel.stringValue = [NSString stringWithFormat:@"%0.2f", roll];
-        
+
     } else if ([keyPath isEqualToString:@"pitch"]) {
         double pitch = [gs.pitch doubleValue];
         self.pitchLabel.stringValue = [NSString stringWithFormat:@"%0.2f", pitch];
-        
+
     } else if ([keyPath isEqualToString:@"yaw"]) {
         double yaw = [gs.yaw doubleValue];
         self.yawLabel.stringValue = [NSString stringWithFormat:@"%0.2f", yaw];
-        
+
     } else if ([keyPath isEqualToString:@"isOn"]) {
         if (gs.isOn) {
             [self.notifySwitch setState:NSOnState];

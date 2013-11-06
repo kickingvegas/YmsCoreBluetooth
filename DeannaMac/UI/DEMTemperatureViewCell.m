@@ -58,7 +58,7 @@
         float temperatureF = (float)temperatureC * 9.0/5.0 + 32.0;
         temperatureF = roundf(100 * temperatureF)/100.0;
         self.ambientTemperatureLabel.stringValue = [NSString stringWithFormat:@"%0.2f ℉", temperatureF];
-        
+
     } else if ([keyPath isEqualToString:@"objectTemp"]) {
         double temperatureC = [ts.objectTemp doubleValue];
         float temperatureF = (float)temperatureC * 9.0/5.0 + 32.0;

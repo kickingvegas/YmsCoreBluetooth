@@ -19,6 +19,12 @@
 #import "DEASimpleKeysService.h"
 #import "YMSCBCharacteristic.h"
 
+@interface DEASimpleKeysService ()
+
+@property (nonatomic, strong) NSNumber *keyValue;
+
+@end
+
 @implementation DEASimpleKeysService
 
 
@@ -59,7 +65,9 @@
         
         __weak DEASimpleKeysService *this = self;
         _YMS_PERFORM_ON_MAIN_THREAD(^{
+            [self willChangeValueForKey:@"sensorValues"];
             this.keyValue = [NSNumber numberWithInt:value];
+            [self didChangeValueForKey:@"sensorValues"];
         });
     }
 }
@@ -95,5 +103,9 @@
     });
 }
 
+- (NSDictionary *)sensorValues
+{
+    return @{ @"keyValue": self.keyValue };
+}
 
 @end
