@@ -56,11 +56,11 @@
         float temperatureF = (float)temperatureC * 9.0/5.0 + 32.0;
         temperatureF = roundf(100 * temperatureF)/100.0;
         self.ambientTemperatureLabel.stringValue = [NSString stringWithFormat:@"%0.2f ℉", temperatureF];
-        
+
     } else if ([keyPath isEqualToString:@"relativeHumidity"]) {
         double relativeHumidity = [hs.relativeHumidity doubleValue];
         self.relativeHumidityLabel.stringValue = [NSString stringWithFormat:@"%0.2f", relativeHumidity];
-        
+
     } else if ([keyPath isEqualToString:@"isOn"]) {
         if (hs.isOn) {
             [self.notifySwitch setState:NSOnState];

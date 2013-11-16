@@ -83,7 +83,7 @@
         float temperatureF = (float)temperatureC * 9.0/5.0 + 32.0;
         temperatureF = roundf(100 * temperatureF)/100.0;
         self.ambientTemperatureLabel.text = [NSString stringWithFormat:@"%0.2f ℉", temperatureF];
-        
+
     } else if ([keyPath isEqualToString:@"pressure"]) {
         double pressure = [bs.pressure doubleValue];
         double pressureRound = pressure/1.01325E5;

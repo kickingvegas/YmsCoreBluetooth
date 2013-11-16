@@ -23,18 +23,15 @@
  */
 @interface DEAGyroscopeService : DEABaseService
 
-@property (nonatomic, strong) NSNumber *roll;
-@property (nonatomic, strong) NSNumber *pitch;
-@property (nonatomic, strong) NSNumber *yaw;
+/**
+ Inherited property of DEABaseService.
+ Keys: @"roll", @"pitch" and @"yaw".
+ */
+@property (nonatomic, strong, readonly) NSDictionary *sensorValues;
 
-@property (nonatomic, assign) float lastRoll;
-@property (nonatomic, assign) float lastPitch;
-@property (nonatomic, assign) float lastYaw;
-
-@property (nonatomic, assign) float cRoll;
-@property (nonatomic, assign) float cPitch;
-@property (nonatomic, assign) float cYaw;
-
+@property (nonatomic, strong, readonly) NSNumber *roll;
+@property (nonatomic, strong, readonly) NSNumber *pitch;
+@property (nonatomic, strong, readonly) NSNumber *yaw;
 
 - (void)calibrate;
 

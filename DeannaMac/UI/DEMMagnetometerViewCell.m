@@ -57,11 +57,11 @@
     if ([keyPath isEqualToString:@"x"]) {
         float x = [ms.x floatValue];
         self.xLabel.stringValue = [NSString stringWithFormat:@"%0.2f", x];
-        
+
     } else if ([keyPath isEqualToString:@"y"]) {
         float y = [ms.y floatValue];
         self.yLabel.stringValue = [NSString stringWithFormat:@"%0.2f", y];
-        
+
     } else if ([keyPath isEqualToString:@"z"]) {
         float z = [ms.z floatValue];
         self.zLabel.stringValue = [NSString stringWithFormat:@"%0.2f", z];

@@ -29,9 +29,6 @@
 
 @property (strong) IBOutlet NSSlider *periodSlider;
 
-/// hasReadPeriod
-@property (nonatomic, assign) BOOL hasReadPeriod;
-
 /**
  Action method for periodSlider
  

@@ -68,7 +68,7 @@
     
     DEAAccelerometerService *as = (DEAAccelerometerService *)self.service;
     if (as.isEnabled) {
-        [as readPeriod];
+        [as requestReadPeriod];
     }
     
     
@@ -100,7 +100,7 @@
         [self.notifySwitch setEnabled:as.isEnabled];
         if (as.isEnabled) {
             self.periodSlider.enabled = as.isEnabled;
-            [as readPeriod];
+            [as requestReadPeriod];
         }
         
     } else if ([keyPath isEqualToString:@"period"]) {

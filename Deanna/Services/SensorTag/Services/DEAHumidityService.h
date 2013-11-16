@@ -23,10 +23,16 @@
  */
 @interface DEAHumidityService : DEABaseService
 
+/**
+ Inherited property of DEABaseService.
+ Keys: @"ambientTemp", @"relativeHumidity".
+ */
+@property (nonatomic, strong, readonly) NSDictionary *sensorValues;
+
 /// Ambient temperature
-@property (nonatomic, strong) NSNumber *ambientTemp;
+@property (nonatomic, strong, readonly) NSNumber *ambientTemp;
 
 /// Relative humidity
-@property (nonatomic, strong) NSNumber *relativeHumidity;
+@property (nonatomic, strong, readonly) NSNumber *relativeHumidity;
 
 @end

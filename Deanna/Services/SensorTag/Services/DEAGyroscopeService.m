@@ -27,6 +27,22 @@ float calcGyro(int16_t v, float c, int16_t d) {
     return result;
 }
 
+@interface DEAGyroscopeService ()
+
+@property (nonatomic, strong) NSNumber *roll;
+@property (nonatomic, strong) NSNumber *pitch;
+@property (nonatomic, strong) NSNumber *yaw;
+
+@property (nonatomic, assign) float lastRoll;
+@property (nonatomic, assign) float lastPitch;
+@property (nonatomic, assign) float lastYaw;
+
+@property (nonatomic, assign) float cRoll;
+@property (nonatomic, assign) float cPitch;
+@property (nonatomic, assign) float cYaw;
+
+@end
+
 @implementation DEAGyroscopeService
 
 - (instancetype)initWithName:(NSString *)oName
@@ -82,9 +98,11 @@ float calcGyro(int16_t v, float c, int16_t d) {
         
         __weak DEAGyroscopeService *this = self;
         _YMS_PERFORM_ON_MAIN_THREAD(^{
-            this.roll = [NSNumber numberWithFloat:this.lastRoll];
-            this.pitch = [NSNumber numberWithFloat:this.lastPitch];
-            this.yaw = [NSNumber numberWithFloat:this.lastYaw];
+            [self willChangeValueForKey:@"sensorValues"];
+            this.roll = @(self.lastRoll);
+            this.pitch = @(self.lastPitch);
+            this.yaw = @(self.lastYaw);
+            [self didChangeValueForKey:@"sensorValues"];
         });
         
         
@@ -127,6 +145,11 @@ float calcGyro(int16_t v, float c, int16_t d) {
 
 }
 
-
+- (NSDictionary *)sensorValues
+{
+    return @{ @"roll": self.roll,
+              @"pitch": self.pitch,
+              @"yaw": self.yaw };
+}
 
 @end
