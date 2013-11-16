@@ -23,32 +23,15 @@
 #import "DEMPeripheralViewCell.h"
 #import "DEASimpleKeysService.h"
 #import "DEASensorTagWindow.h"
-#import "DEAOSCManager.h"
-
-
-@interface DEMAppDelegate ()
-
-@property (nonatomic, strong) DEAOSCManager *OSCManager;
-
-@end
 
 @implementation DEMAppDelegate
 
-- (id)init
-{
-    self = [super init];
-    
-    if (self) {
-        DEACentralManager *centralManager = [DEACentralManager initSharedServiceWithDelegate:self];
-        centralManager.delegate = self;
-        
-        _OSCManager = [[DEAOSCManager alloc] init];
-    }
-    
-    return self;
-}
-
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    // Insert code here to initialize your application
+    
+    
+    DEACentralManager *centralManager = [DEACentralManager initSharedServiceWithDelegate:self];
+    centralManager.delegate = self;
     [self.peripheralTableView reloadData];
     
 }
