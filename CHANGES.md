@@ -1,7 +1,8 @@
 # YmsCoreBluetooth Changes
 
 ### Sat Nov 16 2013
-* #89 - Partial pull request accept from @tuscland. 
+
+* Partial pull request accept from @tuscland #89. 
   - Group SensorTag service properties so that KVO changes for the properties within each service can be temporally coherent.
   
   - `[YMSCBCentralManager ymsPeripherals]` is now KVO compliant using mutable accessor methods described in:
