@@ -1,5 +1,12 @@
 # YmsCoreBluetooth Changes
 
+### Sat Nov 16 2013
+* #89 - Partial pull request accept from @tuscland. 
+  - Group SensorTag service properties so that KVO changes for the properties within each service can be temporally coherent.
+  - API Change:
+
+        [DEAAccelerometerService readPeriod] is now [DEAAccelerometerService requestReadPeriod]
+
 ### Tue Nov 5 2013
 * #87 - Calculate 128-bit address offset to comply to BLE spec.
 
