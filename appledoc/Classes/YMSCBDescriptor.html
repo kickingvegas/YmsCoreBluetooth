@@ -40,6 +40,8 @@
 	
 	<option value="properties">Properties</option>
 	
+	<option value="//api/name/UUID">&nbsp;&nbsp;&nbsp;&nbsp;UUID</option>
+	
 	<option value="//api/name/cbDescriptor">&nbsp;&nbsp;&nbsp;&nbsp;cbDescriptor</option>
 	
 	<option value="//api/name/parent">&nbsp;&nbsp;&nbsp;&nbsp;parent</option>
@@ -54,8 +56,6 @@
 	
 	
 	<option value="instance_methods">Instance Methods</option>
-	
-	<option value="//api/name/UUID">&nbsp;&nbsp;&nbsp;&nbsp;- UUID</option>
 	
 	<option value="//api/name/executeReadCallback:error:">&nbsp;&nbsp;&nbsp;&nbsp;- executeReadCallback:error:</option>
 	
@@ -83,6 +83,12 @@
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Issuing a Write Request">Issuing a Write Request</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Issuing a Read Request">Issuing a Read Request</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Callback Handler Methods">Callback Handler Methods</a></span></li>
+	
 </ul></li>
 
 
@@ -90,6 +96,8 @@
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/UUID">UUID</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/cbDescriptor">cbDescriptor</a></span></li>
 	
@@ -106,8 +114,6 @@
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/UUID">UUID</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/executeReadCallback:error:">executeReadCallback:error:</a></span></li>
 	
@@ -178,58 +184,15 @@
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/UUID">&ndash;&nbsp;UUID</a></code>
-		<span class="tooltip"><p>Descriptor UUID</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/writeValue:withBlock:">&ndash;&nbsp;writeValue:withBlock:</a></code>
-		<span class="tooltip"><p>Issue write with value data and execute callback block writeCallback upon response.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/writeByte:withBlock:">&ndash;&nbsp;writeByte:withBlock:</a></code>
-		<span class="tooltip"><p>Issue write with byte val and execute callback block writeCallback upon response.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/readValueWithBlock:">&ndash;&nbsp;readValueWithBlock:</a></code>
-		<span class="tooltip"><p>Issue read and execute callback block readCallback upon response.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/executeReadCallback:error:">&ndash;&nbsp;executeReadCallback:error:</a></code>
-		<span class="tooltip"><p>Handler method to process first callback in <a href="#//api/name/readCallbacks">readCallbacks</a>.</p></span>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
-		<code><a href="#//api/name/executeWriteCallback:">&ndash;&nbsp;executeWriteCallback:</a></code>
-		<span class="tooltip"><p>Handler method to process first callback in <a href="#//api/name/writeCallbacks">writeCallbacks</a>.</p></span>
-	</span>
-	
-	
-</li>
-						</ul>
-						
-						
-						
-						<h3 class="subsubtitle task-title">Other Methods</h3>
-
-						<ul class="task-list">
-							<li>
-	<span class="tooltip">
 		<code><a href="#//api/name/cbDescriptor">&nbsp;&nbsp;cbDescriptor</a></code>
 		<span class="tooltip"><p>Pointer to actual CBDescriptor</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/UUID">&nbsp;&nbsp;UUID</a></code>
+		<span class="tooltip"><p>Descriptor UUID</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
@@ -257,6 +220,65 @@
 </li>
 						</ul>
 						
+						
+						<a title="Issuing a Write Request" name="task_Issuing a Write Request"></a>
+						<h3 class="subsubtitle task-title">Issuing a Write Request</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/writeValue:withBlock:">&ndash;&nbsp;writeValue:withBlock:</a></code>
+		<span class="tooltip"><p>Issue write with value data and execute callback block writeCallback upon response.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/writeByte:withBlock:">&ndash;&nbsp;writeByte:withBlock:</a></code>
+		<span class="tooltip"><p>Issue write with byte val and execute callback block writeCallback upon response.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Issuing a Read Request" name="task_Issuing a Read Request"></a>
+						<h3 class="subsubtitle task-title">Issuing a Read Request</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/readValueWithBlock:">&ndash;&nbsp;readValueWithBlock:</a></code>
+		<span class="tooltip"><p>Issue read and execute callback block readCallback upon response.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Callback Handler Methods" name="task_Callback Handler Methods"></a>
+						<h3 class="subsubtitle task-title">Callback Handler Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/executeReadCallback:error:">&ndash;&nbsp;executeReadCallback:error:</a></code>
+		<span class="tooltip"><p>Handler method to process first callback in <a href="#//api/name/readCallbacks">readCallbacks</a>.</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/executeWriteCallback:">&ndash;&nbsp;executeWriteCallback:</a></code>
+		<span class="tooltip"><p>Handler method to process first callback in <a href="#//api/name/writeCallbacks">writeCallbacks</a>.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
 					</div>
 					
 					
@@ -266,6 +288,47 @@
 					<div class="section section-methods">
 						<a title="Properties" name="properties"></a>
 						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/UUID" title="UUID"></a>
+	<h3 class="subsubtitle method-title">UUID</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Descriptor UUID</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>@property (atomic, readonly) CBUUID *UUID</code></div>
+
+    
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Descriptor UUID</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">YMSCBDescriptor.h</code><br />
+	</div>				
+	
+	
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/cbDescriptor" title="cbDescriptor"></a>
@@ -446,47 +509,6 @@
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/UUID" title="UUID"></a>
-	<h3 class="subsubtitle method-title">UUID</h3>
-	
-	
-	
-	<div class="method-subsection brief-description">
-		<p>Descriptor UUID</p>
-	</div>		
-	
-    
-
-	<div class="method-subsection method-declaration"><code>- (CBUUID *)UUID</code></div>
-
-    
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection discussion-section">
-		<h4 class="method-subtitle">Discussion</h4>
-		<p>Descriptor UUID</p>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	<div class="method-subsection declared-in-section">
-		<h4 class="method-subtitle">Declared In</h4>
-		<code class="declared-in-ref">YMSCBDescriptor.h</code><br />
-	</div>				
-	
-	
-</div>
-						
-						<div class="section-method">
 	<a name="//api/name/executeReadCallback:error:" title="executeReadCallback:error:"></a>
 	<h3 class="subsubtitle method-title">executeReadCallback:error:</h3>
 	
@@ -605,7 +627,7 @@
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)readValueWithBlock:(void ( ^ ) ( NSData *, NSError *))<em>readCallback</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)readValueWithBlock:(void ( ^ ) ( NSData *data , NSError *error ))<em>readCallback</em></code></div>
 
     
 	
@@ -664,7 +686,7 @@
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)writeByte:(int8_t)<em>val</em> withBlock:(void ( ^ ) ( NSError *))<em>writeCallback</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)writeByte:(int8_t)<em>val</em> withBlock:(void ( ^ ) ( NSError *error ))<em>writeCallback</em></code></div>
 
     
 	
@@ -728,7 +750,7 @@ peripheral:didWriteValueForCharacteristic:error: implemented in <a href="../Clas
 	
     
 
-	<div class="method-subsection method-declaration"><code>- (void)writeValue:(NSData *)<em>data</em> withBlock:(void ( ^ ) ( NSError *))<em>writeCallback</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)writeValue:(NSData *)<em>data</em> withBlock:(void ( ^ ) ( NSError *error ))<em>writeCallback</em></code></div>
 
     
 	
@@ -793,7 +815,7 @@ peripheral:didWriteValueForCharacteristic:error: implemented in <a href="../Clas
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-11-16)</span><br />
+						<p><span class="copyright">&copy; 2013 Yummy Melon Software LLC. All rights reserved. (Last updated: 2013-12-02)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 961)</a>.</span></p>
 						
