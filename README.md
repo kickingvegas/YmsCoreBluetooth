@@ -384,6 +384,11 @@ Code tested on:
 * Use this code only on iOS or Mac hardware that supports CoreBluetooth. The iOS Simulator is not supported.
 
 ## Latest Changes
+
+### Mon Dec 2 2013
+* #92 - Reimplement [YMSCBCentralManager count] to use KVO collection method.
+* #94 - Implement [YMSCBCentralManager removeAllPeripherals] method.
+
 ### Sat Nov 16 2013
 * Partial pull request accept from @tuscland #89. 
   - Group SensorTag service properties so that KVO changes for the properties within each service can be temporally coherent.

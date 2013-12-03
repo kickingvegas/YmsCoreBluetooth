@@ -1,4 +1,7 @@
 # YmsCoreBluetooth Changes
+### Mon Dec 2 2013
+* #92 - Reimplement [YMSCBCentralManager count] to use KVO collection method.
+* #94 - Implement [YMSCBCentralManager removeAllPeripherals] method.
 
 ### Sat Nov 16 2013
 
