@@ -84,9 +84,8 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 #pragma mark - Peripheral Management
 
 - (NSUInteger)count {
-    return  [self.ymsPeripherals count];
+    return  [self countOfYmsPeripherals];
 }
-
 
 - (YMSCBPeripheral *)peripheralAtIndex:(NSUInteger)index {
     return [self objectInYmsPeripheralsAtIndex:index];
@@ -110,8 +109,7 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     return _ymsPeripherals.count;
 }
 
-- (id)objectInYmsPeripheralsAtIndex:(NSUInteger)index
-{
+- (id)objectInYmsPeripheralsAtIndex:(NSUInteger)index {
     return [_ymsPeripherals objectAtIndex:index];
 }
 
