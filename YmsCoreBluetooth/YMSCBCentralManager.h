@@ -177,6 +177,10 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
  */
 - (void)removePeripheralAtIndex:(NSUInteger)index;
 
+/**
+ Remove all YMSCBPeripheral instances
+ */
+- (void)removeAllPeripherals;
 
 /**
  Find YMSCBPeripheral instance matching peripheral

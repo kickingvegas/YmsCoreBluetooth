@@ -104,6 +104,11 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     [self removeObjectFromYmsPeripheralsAtIndex:index];
 }
 
+- (void)removeAllPeripherals {
+    while ([self countOfYmsPeripherals] > 0) {
+        [self removePeripheralAtIndex:0];
+    }
+}
 
 - (NSUInteger)countOfYmsPeripherals {
     return _ymsPeripherals.count;
