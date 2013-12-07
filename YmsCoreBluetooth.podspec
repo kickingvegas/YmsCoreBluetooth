@@ -12,6 +12,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/kickingvegas/YmsCoreBluetooth.git", :tag => "v1.071" }
   s.source_files  = 'YmsCoreBluetooth', 'YmsCoreBluetooth/**/*.{h,m,c}'
   s.public_header_files = 'YmsCoreBluetooth/**/*.h'
-  s.frameworks = 'CoreBluetooth', 'IOBluetooth', 'IOBluetoothUI'
+  s.ios.framework = 'CoreBluetooth'
+  s.osx.frameworks = 'IOBluetooth', 'IOBluetoothUI'
   s.requires_arc = true
 end
