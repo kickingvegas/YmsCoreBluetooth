@@ -207,7 +207,7 @@
     DEASensorTag *sensorTag = (DEASensorTag *)[centralManager findPeripheral:peripheral];
     
     sensorTag.delegate = self;
-    [sensorTag.cbPeripheral readRSSI];
+    [sensorTag readRSSI];
     
     [self.peripheralTableView enumerateAvailableRowViewsUsingBlock:^(NSTableRowView *rowView, NSInteger row) {
         DEMPeripheralViewCell *pvc = [rowView viewAtColumn:0];

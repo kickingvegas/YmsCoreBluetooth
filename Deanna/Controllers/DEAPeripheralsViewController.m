@@ -190,7 +190,7 @@
     YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
     yp.delegate = self;
     
-    [yp.cbPeripheral readRSSI];
+    [yp readRSSI];
     
     for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
         if (cell.yperipheral == yp) {
