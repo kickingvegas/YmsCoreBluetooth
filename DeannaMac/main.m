@@ -3,7 +3,7 @@
 //  DeannaMac
 //
 //  Created by Charles Choi on 6/1/13.
-//  Copyright (c) 2013 Yummy Melon Software. All rights reserved.
+//  Copyright (c) 2013-2014 Yummy Melon Software. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>

@@ -3,7 +3,7 @@
 //  Deanna
 //
 //  Created by Charles Choi on 6/2/13.
-//  Copyright (c) 2013 Yummy Melon Software. All rights reserved.
+//  Copyright (c) 2013-2014 Yummy Melon Software. All rights reserved.
 //
 
 #import "DEMBaseViewCell.h"

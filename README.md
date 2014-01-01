@@ -406,7 +406,7 @@ View [Prior Change List](https://github.com/kickingvegas/YmsCoreBluetooth/blob/m
 
 ### License
 
-    Copyright 2013 Yummy Melon Software LLC
+    Copyright 2013-2014 Yummy Melon Software LLC
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
