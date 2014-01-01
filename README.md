@@ -385,62 +385,21 @@ Code tested on:
 
 ## Latest Changes
 
+### Wed Jan  1 2014
+* #97 - Add [YMSCBPeripheral readRSSI] method
+* #98 - Make objectForKeyedSubscript: a public method for YMSCBPeripheral and YMSCBService
+* #96 - Add [YMSCBPeripheral name] convenience accessor to cbPeripheral.name
+
+
 ### Mon Dec 2 2013
 * #92 - Reimplement [YMSCBCentralManager count] to use KVO collection method.
 * #94 - Implement [YMSCBCentralManager removeAllPeripherals] method.
 
-### Sat Nov 16 2013
-* Partial pull request accept from @tuscland #89. 
-  - Group SensorTag service properties so that KVO changes for the properties within each service can be temporally coherent.
-  
-  - `[YMSCBCentralManager ymsPeripherals]` is now KVO compliant using mutable accessor methods described in:
-     <https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/KeyValueCoding/Articles/AccessorConventions.html>
-     
-     - Note that interface to `ymsPeripherals` is now read-only.
-
-
-  - API Change:
-
-        [DEAAccelerometerService readPeriod] is now [DEAAccelerometerService requestReadPeriod]
-
-### Tue Nov 5 2013
-* #87 - Calculate 128-bit address offset to comply to BLE spec.
-
-API changes related to this issue:
-
-YMSCBUtils:
-
-        + (NSString *)genCBUUID:(yms_u128_t *)base withIntBLEOffset:(int)addrOffset;
-        + (CBUUID *)createCBUUID:(yms_u128_t *)base withIntBLEOffset:(int)addrOffset;
-
-YMS128.c:
-
-        yms_u128_t yms_u128_genBLEOffset(int value);
-        
-Removed files:
-        DEASensorTagUtils.h, DEASensorTagUtils.m, TISensorTag.c
-
-* #73 - Fixed assignment of connectCallback property to not use extraneous copy.
-
-
-### Sat Oct 26 2013 - Pull Request Accepted from @coupgar
-
-* Fix reset of watchdog timer for conditions when a peripheral connection has either succeeded or failed.
-
-### Sat Oct 12 2013 - Pull Request Accepted from @coupgar
-
-* Fix centralManager:didRetrieveConnectedPeripherals won't be called when you call retrieveConnectedPeripheralsWithServices
-
-### Wed Sep 25 2013 - Interim Release (ver 1.02)
-* Fixed handling of callback properties so that they are set to nil after execution in a thread-safe manner.
-* Added #define kYMSCBVersionNumber
 
 Tested Mac Environment:
 
 * OS X 10.8.3
-* Cirago Bluetooth 4.0 USB Adapter
 * iMac 27 Mid-2010
-
 
 View [Prior Change List](https://github.com/kickingvegas/YmsCoreBluetooth/blob/master/CHANGES.md)
 
