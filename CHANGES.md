@@ -1,4 +1,9 @@
 # YmsCoreBluetooth Changes
+### Wed Jan  1 2014
+* #97 - Add [YMSCBPeripheral readRSSI] method
+* #98 - Make objectForKeyedSubscript: a public method for YMSCBPeripheral and YMSCBService
+* #96 - Add [YMSCBPeripheral name] convenience accessor to cbPeripheral.name
+
 ### Mon Dec 2 2013
 * #92 - Reimplement [YMSCBCentralManager count] to use KVO collection method.
 * #94 - Implement [YMSCBCentralManager removeAllPeripherals] method.
