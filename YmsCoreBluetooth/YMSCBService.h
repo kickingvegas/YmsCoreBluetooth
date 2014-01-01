@@ -77,7 +77,7 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
 /** CoreBluetooth characteristics are synchronized */
 @property (atomic, assign) BOOL isEnabled;
 
-/// Holds (key, value pairs of (NSString, YMSCBCharacteristic) instances
+/// Dictionary of (`key`, `value`) pairs of (NSString, YMSCBCharacteristic) instances
 @property (atomic, strong) NSMutableDictionary *characteristicDict;
 
 /// Callback for characteristics that are discovered.
@@ -179,6 +179,14 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
  @param error Error object, if failure.
  */
 - (void)handleDiscoveredCharacteristicsResponse:(NSDictionary *)chDict withError:(NSError *)error;
+
+/**
+ Add dictionary style subscripting to YMSCBService instance to access objects in characteristicDict with key.
+ 
+ @param key The key for which to return the corresponding value in characteristicDict.
+ @return object in characteristicDict.
+ */
+- (id)objectForKeyedSubscript:(id)key;
 
 //- (void)defaultDiscoveredCharacteristicsHandler:(NSDictionary *)chDict withError:(NSError *)error;
 

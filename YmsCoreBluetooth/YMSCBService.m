@@ -22,7 +22,6 @@
 #import "YMSCBCharacteristic.h"
 
 @interface YMSCBService ()
-- (id)objectForKeyedSubscript:(id)key;
 @end
 
 @implementation YMSCBService
