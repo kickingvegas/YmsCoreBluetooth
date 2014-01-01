@@ -56,7 +56,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = self.sensorTag.cbPeripheral.name;
+    self.title = self.sensorTag.name;
     
     self.rssiButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     

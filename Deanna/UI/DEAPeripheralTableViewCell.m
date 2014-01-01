@@ -66,8 +66,8 @@
 - (void)updateDisplay {
     NSString *buttonLabel;
     
-    if (self.yperipheral.cbPeripheral.name) {
-        self.nameLabel.text = self.yperipheral.cbPeripheral.name;
+    if (self.yperipheral.name) {
+        self.nameLabel.text = self.yperipheral.name;
     } else {
         self.nameLabel.text = @"Undisclosed Name";
     }
