@@ -23,7 +23,6 @@
 #import "YMSCBDescriptor.h"
 
 @interface YMSCBPeripheral ()
-- (id)objectForKeyedSubscript:(id)key;
 @end
 
 @implementation YMSCBPeripheral

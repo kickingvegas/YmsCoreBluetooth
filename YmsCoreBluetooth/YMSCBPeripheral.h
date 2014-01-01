@@ -82,9 +82,8 @@ typedef void (^YMSCBPeripheralDiscoverServicesBlockType)(NSArray *, NSError *);
 
 /**
  Time period between RSSI pings. (Default: 2 seconds)
- 
- This property is used by updateRSSI to determine the period between requests for the RSSI.
- This property is only used when willPingRSSI is set to YES.
+
+ This is a convenience property to hold a ping period for RSSI updates. No policy or mechanism for invoking readRSSI is provided for by YMSCBPeripheral or YMSCoreBluetooth.
  */
 @property (nonatomic, assign) NSTimeInterval rssiPingPeriod;
 
@@ -238,5 +237,13 @@ typedef void (^YMSCBPeripheralDiscoverServicesBlockType)(NSArray *, NSError *);
  */
 - (void)discoverServices:(NSArray *)serviceUUIDs withBlock:(void (^)(NSArray *services, NSError *error))callback;
 
+
+/**
+ Add dictionary style subscripting to YMSCBPeripheral instance to access objects in serviceDict with key.
+ 
+ @param key The key for which to return the corresponding value in serviceDict.
+ @return object in serviceDict.
+ */
+- (id)objectForKeyedSubscript:(id)key;
 @end
 
