@@ -32,7 +32,7 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h1>
-<a name="ymscorebluetooth-v107" class="anchor" href="#ymscorebluetooth-v107"><span class="octicon octicon-link"></span></a>YmsCoreBluetooth v1.07</h1>
+<a name="ymscorebluetooth-v108" class="anchor" href="#ymscorebluetooth-v108"><span class="octicon octicon-link"></span></a>YmsCoreBluetooth v1.08</h1>
 
 <p>A block-based framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS 7 or OS X 10.9 applications using the CoreBluetooth API. Includes <em>Deanna</em> and <em>DeannaMac</em>, applications to communicate with a <a href="http://processors.wiki.ti.com/index.php/Bluetooth_SensorTag">TI SensorTag</a> for iOS and OS X respectively.</p>
 
@@ -498,88 +498,29 @@ __weak DEACentralManager *this = self;
 <a name="latest-changes" class="anchor" href="#latest-changes"><span class="octicon octicon-link"></span></a>Latest Changes</h2>
 
 <h3>
+<a name="wed-jan--1-2014" class="anchor" href="#wed-jan--1-2014"><span class="octicon octicon-link"></span></a>Wed Jan  1 2014</h3>
+
+<ul>
+<li>#97 - Add [YMSCBPeripheral readRSSI] method</li>
+<li>#98 - Make objectForKeyedSubscript: a public method for YMSCBPeripheral and YMSCBService</li>
+<li>#96 - Add [YMSCBPeripheral name] convenience accessor to cbPeripheral.name</li>
+</ul><h3>
 <a name="mon-dec-2-2013" class="anchor" href="#mon-dec-2-2013"><span class="octicon octicon-link"></span></a>Mon Dec 2 2013</h3>
 
 <ul>
 <li>#92 - Reimplement [YMSCBCentralManager count] to use KVO collection method.</li>
 <li>#94 - Implement [YMSCBCentralManager removeAllPeripherals] method.</li>
-</ul><h3>
-<a name="sat-nov-16-2013" class="anchor" href="#sat-nov-16-2013"><span class="octicon octicon-link"></span></a>Sat Nov 16 2013</h3>
-
-<ul>
-<li>
-<p>Partial pull request accept from <a href="https://github.com/tuscland" class="user-mention">@tuscland</a> #89. </p>
-
-<ul>
-<li><p>Group SensorTag service properties so that KVO changes for the properties within each service can be temporally coherent.</p></li>
-<li>
-<p><code>[YMSCBCentralManager ymsPeripherals]</code> is now KVO compliant using mutable accessor methods described in:
-<a href="https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/KeyValueCoding/Articles/AccessorConventions.html">https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/KeyValueCoding/Articles/AccessorConventions.html</a></p>
-
-<ul>
-<li>Note that interface to <code>ymsPeripherals</code> is now read-only.</li>
-</ul>
-</li>
-<li>
-<p>API Change:</p>
-
-<p>[DEAAccelerometerService readPeriod] is now [DEAAccelerometerService requestReadPeriod]</p>
-</li>
-</ul>
-</li>
-</ul><h3>
-<a name="tue-nov-5-2013" class="anchor" href="#tue-nov-5-2013"><span class="octicon octicon-link"></span></a>Tue Nov 5 2013</h3>
-
-<ul>
-<li>#87 - Calculate 128-bit address offset to comply to BLE spec.</li>
-</ul><p>API changes related to this issue:</p>
-
-<p>YMSCBUtils:</p>
-
-<pre><code>    + (NSString *)genCBUUID:(yms_u128_t *)base withIntBLEOffset:(int)addrOffset;
-    + (CBUUID *)createCBUUID:(yms_u128_t *)base withIntBLEOffset:(int)addrOffset;
-</code></pre>
-
-<p>YMS128.c:</p>
-
-<pre><code>    yms_u128_t yms_u128_genBLEOffset(int value);
-</code></pre>
-
-<p>Removed files:
-        DEASensorTagUtils.h, DEASensorTagUtils.m, TISensorTag.c</p>
-
-<ul>
-<li>#73 - Fixed assignment of connectCallback property to not use extraneous copy.</li>
-</ul><h3>
-<a name="sat-oct-26-2013---pull-request-accepted-from-coupgar" class="anchor" href="#sat-oct-26-2013---pull-request-accepted-from-coupgar"><span class="octicon octicon-link"></span></a>Sat Oct 26 2013 - Pull Request Accepted from <a href="https://github.com/coupgar" class="user-mention">@coupgar</a>
-</h3>
-
-<ul>
-<li>Fix reset of watchdog timer for conditions when a peripheral connection has either succeeded or failed.</li>
-</ul><h3>
-<a name="sat-oct-12-2013---pull-request-accepted-from-coupgar" class="anchor" href="#sat-oct-12-2013---pull-request-accepted-from-coupgar"><span class="octicon octicon-link"></span></a>Sat Oct 12 2013 - Pull Request Accepted from <a href="https://github.com/coupgar" class="user-mention">@coupgar</a>
-</h3>
-
-<ul>
-<li>Fix centralManager:didRetrieveConnectedPeripherals won't be called when you call retrieveConnectedPeripheralsWithServices</li>
-</ul><h3>
-<a name="wed-sep-25-2013---interim-release-ver-102" class="anchor" href="#wed-sep-25-2013---interim-release-ver-102"><span class="octicon octicon-link"></span></a>Wed Sep 25 2013 - Interim Release (ver 1.02)</h3>
-
-<ul>
-<li>Fixed handling of callback properties so that they are set to nil after execution in a thread-safe manner.</li>
-<li>Added #define kYMSCBVersionNumber</li>
 </ul><p>Tested Mac Environment:</p>
 
 <ul>
 <li>OS X 10.8.3</li>
-<li>Cirago Bluetooth 4.0 USB Adapter</li>
 <li>iMac 27 Mid-2010</li>
 </ul><p>View <a href="https://github.com/kickingvegas/YmsCoreBluetooth/blob/master/CHANGES.md">Prior Change List</a></p>
 
 <h3>
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h3>
 
-<pre><code>Copyright 2013 Yummy Melon Software LLC
+<pre><code>Copyright 2013-2014 Yummy Melon Software LLC
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
