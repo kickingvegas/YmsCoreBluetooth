@@ -137,8 +137,8 @@
             [result.detailButton setHidden:YES];
         }
         
-        if (yp.cbPeripheral.name != nil) {
-            result.nameLabel.stringValue = yp.cbPeripheral.name;
+        if (yp.name != nil) {
+            result.nameLabel.stringValue = yp.name;
         } else {
             result.nameLabel.stringValue = @"Unknown";
         }
