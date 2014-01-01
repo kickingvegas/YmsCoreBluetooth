@@ -54,6 +54,15 @@
 
 #pragma mark - Peripheral Methods
 
+- (NSString *)name {
+    NSString *result = nil;
+    if (self.cbPeripheral) {
+        result = self.cbPeripheral.name;
+    }
+    
+    return result;
+}
+
 - (BOOL)isConnected {
     
     BOOL result = NO;

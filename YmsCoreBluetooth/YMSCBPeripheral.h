@@ -49,7 +49,11 @@ typedef void (^YMSCBPeripheralDiscoverServicesBlockType)(NSArray *, NSError *);
 /// 128 bit address base
 @property (nonatomic, assign) yms_u128_t base;
 
-/** @name Properties */
+/**
+ Convenience accessor for cbPeripheral.name.
+ */
+@property (nonatomic, readonly) NSString *name;
+
 /**
  Pointer to delegate.
  
