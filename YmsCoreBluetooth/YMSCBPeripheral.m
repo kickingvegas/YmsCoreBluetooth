@@ -235,6 +235,10 @@
     NSAssert(NO, @"[YMSCBPeripheral defaultConnectionHandler] must be overridden if connectCallback is nil.");
 }
 
+- (void)readRSSI {
+    [self.cbPeripheral readRSSI];
+}
+
 #pragma mark - Services Discovery
 
 - (void)discoverServices:(NSArray *)serviceUUIDs withBlock:(void (^)(NSArray *, NSError *))callback {

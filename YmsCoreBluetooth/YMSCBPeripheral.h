@@ -181,6 +181,10 @@ typedef void (^YMSCBPeripheralDiscoverServicesBlockType)(NSArray *, NSError *);
  */
 - (void)disconnect;
 
+/**
+ Invokes [CBPeripheral readRSSI] method to retrieve current RSSI value for cbPeripheral.
+ */
+- (void)readRSSI;
 
 /**
  Initialize or reset watchdog timer.
