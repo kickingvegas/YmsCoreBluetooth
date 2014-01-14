@@ -53,6 +53,33 @@
 }
 
 
+- (instancetype)initWithName:(NSString *)oName
+                      parent:(YMSCBPeripheral *)pObj
+                      baseHi:(int64_t)hi
+                      baseLo:(int64_t)lo
+            serviceBLEOffset:(int)serviceOffset {
+
+    
+    self = [super init];
+    if (self) {
+        _name = oName;
+        _parent = pObj;
+        _base.hi = hi;
+        _base.lo = lo;
+        _characteristicDict = [[NSMutableDictionary alloc] init];
+        
+        if ((hi == 0) && (lo == 0)) {
+            NSString *addrString = [NSString stringWithFormat:@"%x", serviceOffset];
+            _uuid = [CBUUID UUIDWithString:addrString];
+            
+        } else {
+            _uuid = [YMSCBUtils createCBUUID:&_base withIntBLEOffset:serviceOffset];
+        }
+    }
+    return self;
+}
+
+
 - (id)objectForKeyedSubscript:(id)key {
     return self.characteristicDict[key];
 }
@@ -69,6 +96,23 @@
                                             parent:self.parent
                                             uuid:uuid
                                           offset:addrOffset];
+    yc.parent = self.parent;
+    
+    self.characteristicDict[cname] = yc;
+}
+
+
+- (void)addCharacteristic:(NSString *)cname withBLEOffset:(int)addrOffset {
+    YMSCBCharacteristic *yc;
+    
+    yms_u128_t pbase = self.base;
+    
+    CBUUID *uuid = [YMSCBUtils createCBUUID:&pbase withIntBLEOffset:addrOffset];
+    
+    yc = [[YMSCBCharacteristic alloc] initWithName:cname
+                                            parent:self.parent
+                                              uuid:uuid
+                                            offset:addrOffset];
     yc.parent = self.parent;
     
     self.characteristicDict[cname] = yc;
