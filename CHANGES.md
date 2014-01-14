@@ -1,4 +1,11 @@
 # YmsCoreBluetooth Changes
+
+### Mon Jan 13 2014
+Added methods to support BLE addressing:
+
+- initWithName:parent:baseHi:baseLo:serviceBLEOffset:
+- addCharacteristic:withBLEOffset:
+
 ### Wed Jan  1 2014
 * #97 - Add [YMSCBPeripheral readRSSI] method
 * #98 - Make objectForKeyedSubscript: a public method for YMSCBPeripheral and YMSCBService
