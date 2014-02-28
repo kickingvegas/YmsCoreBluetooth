@@ -32,6 +32,13 @@
 typedef void (^YMSCBPeripheralConnectCallbackBlockType)(YMSCBPeripheral *, NSError *);
 typedef void (^YMSCBPeripheralDiscoverServicesBlockType)(NSArray *, NSError *);
 
+typedef enum {
+    YMSCBPeripheralConnectionStateUnknown = 0,
+    YMSCBPeripheralConnectionStateDisconnecting,
+    YMSCBPeripheralConnectionStateDisconnected,
+    YMSCBPeripheralConnectionStateConnecting,
+    YMSCBPeripheralConnectionStateConnected,
+} YMSCBPeripheralConnectionState;
 
 /**
  Base class for defining a Bluetooth LE peripheral.
@@ -48,6 +55,11 @@ typedef void (^YMSCBPeripheralDiscoverServicesBlockType)(NSArray *, NSError *);
 /** @name Properties */
 /// 128 bit address base
 @property (nonatomic, assign) yms_u128_t base;
+
+/**
+ YMSPeripheral connection state
+ */
+@property (nonatomic) YMSCBPeripheralConnectionState connectionState;
 
 /**
  Convenience accessor for cbPeripheral.name.

@@ -64,14 +64,18 @@
 
 - (void)writeValue:(NSData *)data withBlock:(void (^)(NSError *))writeCallback {
     if (writeCallback) {
-        [self.writeCallbacks push:[writeCallback copy]];
-        [self.parent.cbPeripheral writeValue:data
-                           forCharacteristic:self.cbCharacteristic
-                                        type:CBCharacteristicWriteWithResponse];
+        if(self.parent.cbPeripheral.state == CBPeripheralStateConnected && self.cbCharacteristic != nil) {
+            [self.writeCallbacks push:[writeCallback copy]];
+            [self.parent.cbPeripheral writeValue:data
+                               forCharacteristic:self.cbCharacteristic
+                                            type:CBCharacteristicWriteWithResponse];
+        }
     } else {
-        [self.parent.cbPeripheral writeValue:data
-                           forCharacteristic:self.cbCharacteristic
-                                        type:CBCharacteristicWriteWithoutResponse];
+        if(self.parent.cbPeripheral.state == CBPeripheralStateConnected && self.cbCharacteristic != nil) {
+            [self.parent.cbPeripheral writeValue:data
+                               forCharacteristic:self.cbCharacteristic
+                                            type:CBCharacteristicWriteWithoutResponse];
+        }
     }
 }
 
@@ -106,7 +110,6 @@
         NSLog(@"WARNING: Attempt to discover descriptors with null cbCharacteristic: '%@' for %@", self.name, self.uuid);
     }
 }
-
 
 - (void)handleDiscoveredDescriptorsResponse:(NSArray *)ydescriptors withError:(NSError *)error {
     YMSCBDiscoverDescriptorsCallbackBlockType callback = [self.discoverDescriptorsCallback copy];
