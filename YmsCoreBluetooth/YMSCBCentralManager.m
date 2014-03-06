@@ -368,7 +368,6 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     });
 }
 
-
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     __weak YMSCBCentralManager *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
@@ -395,6 +394,8 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     __weak YMSCBCentralManager *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
         YMSCBPeripheral *yp = [this findPeripheral:peripheral];
+        
+        NSLog(@"YMSCBCentralManager didFailToConnectPeripheral");
         
         [yp setConnectionState:YMSCBPeripheralConnectionStateDisconnected];
         
