@@ -72,7 +72,7 @@ The apps **Deanna** and **DeannaMac** are demonstration apps intended to illustr
 
 In the following code sample, `self` is an instance of a subclass of YMSCBCentralManager.
 
-    __weak DEACentralManager *this = self;
+    __weak YMSCBCentralManager *this = self;
     [self scanForPeripheralsWithServices:nil
                                  options:options
                                withBlock:^(CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI, NSError *error) {
