@@ -16,7 +16,7 @@
 //  Author: Charles Y. Choi <charles.choi@yummymelon.com>
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 /**
  FIFO queue implementation using NSMutableArray
