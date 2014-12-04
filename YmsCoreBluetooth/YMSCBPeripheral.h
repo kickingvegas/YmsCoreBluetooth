@@ -130,8 +130,11 @@ typedef enum {
  
  */
 @property (nonatomic, assign) BOOL isRenderedInViewCell;
-           
 
+/**
+ Set it to false if speed is critical. Default YES
+ */
+@property (nonatomic, assign) BOOL shouldNotifyInMainThread;
 
 /** @name Initializing a YMSCBPeripheral */
 /**
