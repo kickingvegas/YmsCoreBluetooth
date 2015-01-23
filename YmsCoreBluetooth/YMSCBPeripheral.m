@@ -38,6 +38,7 @@
         _central = owner;
         _base.hi = hi;
         _base.lo = lo;
+        self.shouldNotifyInMainThread = YES;
         
         _cbPeripheral = peripheral;
         peripheral.delegate = self;
@@ -375,7 +376,32 @@
  */
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     __weak YMSCBPeripheral *this = self;
-    _YMS_PERFORM_ON_MAIN_THREAD(^{
+    
+    // Forrest Chan 2-12-2014
+    // Redirecting to main thread is too slow for photo blob process
+    // by the time it is ran, the characteristic data has been updated,
+    // hence lead to duplication of data packets, it is actually data lost.
+    
+    if(_shouldNotifyInMainThread) {
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            YMSCBService *btService = [this findService:characteristic.service];
+            YMSCBCharacteristic *yc = [btService findCharacteristic:characteristic];
+            
+            if (yc.cbCharacteristic.isNotifying) {
+                [btService notifyCharacteristicHandler:yc error:error];
+                
+            } else {
+                if ([yc.readCallbacks count] > 0) {
+                    [yc executeReadCallback:characteristic.value error:error];
+                }
+            }
+            
+            if ([this.delegate respondsToSelector:@selector(peripheral:didUpdateValueForCharacteristic:error:)]) {
+                [this.delegate peripheral:peripheral didUpdateValueForCharacteristic:characteristic error:error];
+            }
+        });
+    }
+    else {
         YMSCBService *btService = [this findService:characteristic.service];
         YMSCBCharacteristic *yc = [btService findCharacteristic:characteristic];
         
@@ -391,7 +417,7 @@
         if ([this.delegate respondsToSelector:@selector(peripheral:didUpdateValueForCharacteristic:error:)]) {
             [this.delegate peripheral:peripheral didUpdateValueForCharacteristic:characteristic error:error];
         }
-    });
+    }
 }
 
 

@@ -16,9 +16,9 @@
 //  Author: Charles Y. Choi <charles.choi@yummymelon.com>
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #if TARGET_OS_IPHONE
-#import <CoreBluetooth/CoreBluetooth.h>
+@import CoreBluetooth;
 #elif TARGET_OS_MAC
 #import <IOBluetooth/IOBluetooth.h>
 #endif
@@ -130,8 +130,11 @@ typedef enum {
  
  */
 @property (nonatomic, assign) BOOL isRenderedInViewCell;
-           
 
+/**
+ Set it to false if speed is critical. Default YES
+ */
+@property (nonatomic, assign) BOOL shouldNotifyInMainThread;
 
 /** @name Initializing a YMSCBPeripheral */
 /**
