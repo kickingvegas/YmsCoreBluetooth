@@ -99,6 +99,11 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
                       baseLo:(int64_t)lo
                serviceOffset:(int)serviceOffset;
 
+- (instancetype)initWithName:(NSString *)oName
+                      parent:(YMSCBPeripheral *)pObj
+                      baseHi:(int64_t)hi
+                      baseLo:(int64_t)lo
+                        UUID:(NSString *)uuidString;
 
 /**
  Initialize class instance.
@@ -123,6 +128,7 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
  @param addrOffset Offset value
  */
 - (void)addCharacteristic:(NSString *)cname withOffset:(int)addrOffset;
+- (void)addCharacteristic:(NSString *)cname UUID:(NSString *)uuidString;
 
 /**
  Add YMSCBCharacteristic instance given BLE address offset
