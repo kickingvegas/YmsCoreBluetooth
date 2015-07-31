@@ -86,8 +86,10 @@
 
 
 - (void)readValueWithBlock:(void (^)(NSData *, NSError *))readCallback {
-    [self.readCallbacks push:[readCallback copy]];
-    [self.parent.cbPeripheral readValueForCharacteristic:self.cbCharacteristic];
+    if(self.parent.cbPeripheral.state == CBPeripheralStateConnected && self.cbCharacteristic != nil) {
+        [self.readCallbacks push:[readCallback copy]];
+        [self.parent.cbPeripheral readValueForCharacteristic:self.cbCharacteristic];
+    }
 }
 
 
