@@ -42,10 +42,12 @@
 
 
 - (void)setNotifyValue:(BOOL)notifyValue withBlock:(void (^)(NSError *))notifyStateCallback {
-    if (notifyStateCallback) {
-        self.notificationStateCallback = [notifyStateCallback copy];
+    if(self.cbCharacteristic != nil) {
+        if (notifyStateCallback) {
+            self.notificationStateCallback = [notifyStateCallback copy];
+        }
+        [self.parent.cbPeripheral setNotifyValue:notifyValue forCharacteristic:self.cbCharacteristic];
     }
-    [self.parent.cbPeripheral setNotifyValue:notifyValue forCharacteristic:self.cbCharacteristic];
 }
 
 - (void)executeNotificationStateCallback:(NSError *)error {
