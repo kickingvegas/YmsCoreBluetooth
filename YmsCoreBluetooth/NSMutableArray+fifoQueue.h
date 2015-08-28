@@ -16,7 +16,7 @@
 //  Author: Charles Y. Choi <charles.choi@yummymelon.com>
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 /**
  FIFO queue implementation using NSMutableArray
@@ -35,4 +35,10 @@
  */
 - (id)pop;
 
+/**
+ Peek object from the front of the queue.
+ @return object from the front of the queue.
+ */
+- (id)peekTail;
+    
 @end

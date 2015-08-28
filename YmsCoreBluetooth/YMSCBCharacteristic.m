@@ -42,10 +42,12 @@
 
 
 - (void)setNotifyValue:(BOOL)notifyValue withBlock:(void (^)(NSError *))notifyStateCallback {
-    if (notifyStateCallback) {
-        self.notificationStateCallback = [notifyStateCallback copy];
+    if(self.cbCharacteristic != nil) {
+        if (notifyStateCallback) {
+            self.notificationStateCallback = [notifyStateCallback copy];
+        }
+        [self.parent.cbPeripheral setNotifyValue:notifyValue forCharacteristic:self.cbCharacteristic];
     }
-    [self.parent.cbPeripheral setNotifyValue:notifyValue forCharacteristic:self.cbCharacteristic];
 }
 
 - (void)executeNotificationStateCallback:(NSError *)error {
@@ -64,14 +66,18 @@
 
 - (void)writeValue:(NSData *)data withBlock:(void (^)(NSError *))writeCallback {
     if (writeCallback) {
-        [self.writeCallbacks push:[writeCallback copy]];
-        [self.parent.cbPeripheral writeValue:data
-                           forCharacteristic:self.cbCharacteristic
-                                        type:CBCharacteristicWriteWithResponse];
+        if(self.parent.cbPeripheral.state == CBPeripheralStateConnected && self.cbCharacteristic != nil) {
+            [self.writeCallbacks push:[writeCallback copy]];
+            [self.parent.cbPeripheral writeValue:data
+                               forCharacteristic:self.cbCharacteristic
+                                            type:CBCharacteristicWriteWithResponse];
+        }
     } else {
-        [self.parent.cbPeripheral writeValue:data
-                           forCharacteristic:self.cbCharacteristic
-                                        type:CBCharacteristicWriteWithoutResponse];
+        if(self.parent.cbPeripheral.state == CBPeripheralStateConnected && self.cbCharacteristic != nil) {
+            [self.parent.cbPeripheral writeValue:data
+                               forCharacteristic:self.cbCharacteristic
+                                            type:CBCharacteristicWriteWithoutResponse];
+        }
     }
 }
 
@@ -82,19 +88,27 @@
 
 
 - (void)readValueWithBlock:(void (^)(NSData *, NSError *))readCallback {
-    [self.readCallbacks push:[readCallback copy]];
-    [self.parent.cbPeripheral readValueForCharacteristic:self.cbCharacteristic];
+    if(self.parent.cbPeripheral.state == CBPeripheralStateConnected && self.cbCharacteristic != nil) {
+        [self.readCallbacks push:[readCallback copy]];
+        [self.parent.cbPeripheral readValueForCharacteristic:self.cbCharacteristic];
+    }
 }
 
 
 - (void)executeReadCallback:(NSData *)data error:(NSError *)error {
-    YMSCBReadCallbackBlockType readCB = [self.readCallbacks pop];
-    readCB(data, error);
+    YMSCBReadCallbackBlockType readCB = [self.readCallbacks peekTail];
+    if(readCB) {
+        readCB(data, error);
+        [self.readCallbacks removeObject:readCB];
+    }
 }
 
 - (void)executeWriteCallback:(NSError *)error {
-    YMSCBWriteCallbackBlockType writeCB = [self.writeCallbacks pop];
-    writeCB(error);
+    YMSCBWriteCallbackBlockType writeCB = [self.writeCallbacks peekTail];
+    if(writeCB) {
+        writeCB(error);
+        [self.writeCallbacks removeObject:writeCB];
+    }
 }
 
 - (void)discoverDescriptorsWithBlock:(void (^)(NSArray *, NSError *))callback {
@@ -106,7 +120,6 @@
         NSLog(@"WARNING: Attempt to discover descriptors with null cbCharacteristic: '%@' for %@", self.name, self.uuid);
     }
 }
-
 
 - (void)handleDiscoveredDescriptorsResponse:(NSArray *)ydescriptors withError:(NSError *)error {
     YMSCBDiscoverDescriptorsCallbackBlockType callback = [self.discoverDescriptorsCallback copy];

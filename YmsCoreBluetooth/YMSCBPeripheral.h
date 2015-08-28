@@ -16,9 +16,9 @@
 //  Author: Charles Y. Choi <charles.choi@yummymelon.com>
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 #if TARGET_OS_IPHONE
-#import <CoreBluetooth/CoreBluetooth.h>
+@import CoreBluetooth;
 #elif TARGET_OS_MAC
 #import <IOBluetooth/IOBluetooth.h>
 #endif
@@ -32,6 +32,13 @@
 typedef void (^YMSCBPeripheralConnectCallbackBlockType)(YMSCBPeripheral *, NSError *);
 typedef void (^YMSCBPeripheralDiscoverServicesBlockType)(NSArray *, NSError *);
 
+typedef enum {
+    YMSCBPeripheralConnectionStateUnknown = 0,
+    YMSCBPeripheralConnectionStateDisconnecting,
+    YMSCBPeripheralConnectionStateDisconnected,
+    YMSCBPeripheralConnectionStateConnecting,
+    YMSCBPeripheralConnectionStateConnected,
+} YMSCBPeripheralConnectionState;
 
 /**
  Base class for defining a Bluetooth LE peripheral.
@@ -48,6 +55,11 @@ typedef void (^YMSCBPeripheralDiscoverServicesBlockType)(NSArray *, NSError *);
 /** @name Properties */
 /// 128 bit address base
 @property (nonatomic, assign) yms_u128_t base;
+
+/**
+ YMSPeripheral connection state
+ */
+@property (nonatomic) YMSCBPeripheralConnectionState connectionState;
 
 /**
  Convenience accessor for cbPeripheral.name.
@@ -118,8 +130,11 @@ typedef void (^YMSCBPeripheralDiscoverServicesBlockType)(NSArray *, NSError *);
  
  */
 @property (nonatomic, assign) BOOL isRenderedInViewCell;
-           
 
+/**
+ Set it to false if speed is critical. Default YES
+ */
+@property (nonatomic, assign) BOOL shouldNotifyInMainThread;
 
 /** @name Initializing a YMSCBPeripheral */
 /**

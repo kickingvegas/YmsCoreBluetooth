@@ -336,7 +336,6 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 - (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals {
     __weak YMSCBCentralManager *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
-        
         for (CBPeripheral *peripheral in peripherals) {
             [this handleFoundPeripheral:peripheral];
         }
@@ -353,19 +352,29 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
         YMSCBPeripheral *yp = [this findPeripheral:peripheral];
         
-        [yp handleConnectionResponse:nil];
-        
-        if ([this.delegate respondsToSelector:@selector(centralManager:didConnectPeripheral:)]) {
-            [this.delegate centralManager:central didConnectPeripheral:peripheral];
+        if(yp.connectionState == YMSCBPeripheralConnectionStateConnecting || yp.connectionState == YMSCBPeripheralConnectionStateConnected) {
+            [yp setConnectionState:YMSCBPeripheralConnectionStateConnected];
+           
+            [yp handleConnectionResponse:nil];
+            
+            if ([this.delegate respondsToSelector:@selector(centralManager:didConnectPeripheral:)]) {
+                [this.delegate centralManager:central didConnectPeripheral:peripheral];
+            }
+        }
+        else {
+            // force disconnect
+            [yp performSelector:@selector(cancelConnection) withObject:nil afterDelay:0.5f];
         }
     });
 }
 
-
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     __weak YMSCBCentralManager *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
+        
         YMSCBPeripheral *yp = [this findPeripheral:peripheral];
+        
+        [yp setConnectionState:YMSCBPeripheralConnectionStateDisconnected];
         
         for (id key in yp.serviceDict) {
             YMSCBService *service = yp.serviceDict[key];
@@ -385,6 +394,11 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
     __weak YMSCBCentralManager *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
         YMSCBPeripheral *yp = [this findPeripheral:peripheral];
+        
+        NSLog(@"YMSCBCentralManager didFailToConnectPeripheral");
+        
+        [yp setConnectionState:YMSCBPeripheralConnectionStateDisconnected];
+        
         [yp handleConnectionResponse:error];
         if ([this.delegate respondsToSelector:@selector(centralManager:didFailToConnectPeripheral:error:)]) {
             [this.delegate centralManager:central didFailToConnectPeripheral:peripheral error:error];

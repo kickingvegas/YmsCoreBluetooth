@@ -38,14 +38,16 @@
         _central = owner;
         _base.hi = hi;
         _base.lo = lo;
+        self.shouldNotifyInMainThread = YES;
         
         _cbPeripheral = peripheral;
         peripheral.delegate = self;
         
         _rssiPingPeriod = 2.0;
 
-        //_peripheralConnectionState = YMSCBPeripheralConnectionStateUnknown;
         _watchdogTimerInterval = 5.0;
+        
+        self.connectionState = YMSCBPeripheralConnectionStateUnknown;
     }
 
     return self;
@@ -134,7 +136,7 @@
 - (void)connect {
     // Watchdog aware method
     [self resetWatchdog];
-
+    
     [self connectWithOptions:nil withBlock:^(YMSCBPeripheral *yp, NSError *error) {
         if (error) {
             return;
@@ -213,6 +215,9 @@
 
 - (void)connectWithOptions:(NSDictionary *)options withBlock:(void (^)(YMSCBPeripheral *, NSError *))connectCallback {
     self.connectCallback = connectCallback;
+    
+    self.connectionState = YMSCBPeripheralConnectionStateConnecting;
+    
     [self.central.manager connectPeripheral:self.cbPeripheral options:options];
 }
 
@@ -221,6 +226,8 @@
     if (self.connectCallback) {
         self.connectCallback = nil;
     }
+    
+    self.connectionState = YMSCBPeripheralConnectionStateDisconnecting;
     [self.central.manager cancelPeripheralConnection:self.cbPeripheral];
 }
 
@@ -240,7 +247,7 @@
 }
 
 - (void)defaultConnectionHandler {
-    NSAssert(NO, @"[YMSCBPeripheral defaultConnectionHandler] must be overridden if connectCallback is nil.");
+//    NSAssert(NO, @"[YMSCBPeripheral defaultConnectionHandler] must be overridden if connectCallback is nil.");
 }
 
 - (void)readRSSI {
@@ -250,9 +257,13 @@
 #pragma mark - Services Discovery
 
 - (void)discoverServices:(NSArray *)serviceUUIDs withBlock:(void (^)(NSArray *, NSError *))callback {
-    self.discoverServicesCallback = callback;
-    
-    [self.cbPeripheral discoverServices:serviceUUIDs];
+    if(self.connectionState == YMSCBPeripheralConnectionStateConnected) {
+        self.discoverServicesCallback = callback;
+        [self.cbPeripheral discoverServices:serviceUUIDs];
+    }
+    else {
+        callback(nil, [NSError errorWithDomain:@"YMSCBPeripheral.FailedToDiscoverService" code:0 userInfo:nil]);
+    }
 }
 
 
@@ -365,7 +376,32 @@
  */
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     __weak YMSCBPeripheral *this = self;
-    _YMS_PERFORM_ON_MAIN_THREAD(^{
+    
+    // Forrest Chan 2-12-2014
+    // Redirecting to main thread is too slow for photo blob process
+    // by the time it is ran, the characteristic data has been updated,
+    // hence lead to duplication of data packets, it is actually data lost.
+    
+    if(_shouldNotifyInMainThread) {
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
+            YMSCBService *btService = [this findService:characteristic.service];
+            YMSCBCharacteristic *yc = [btService findCharacteristic:characteristic];
+            
+            if (yc.cbCharacteristic.isNotifying) {
+                [btService notifyCharacteristicHandler:yc error:error];
+                
+            } else {
+                if ([yc.readCallbacks count] > 0) {
+                    [yc executeReadCallback:characteristic.value error:error];
+                }
+            }
+            
+            if ([this.delegate respondsToSelector:@selector(peripheral:didUpdateValueForCharacteristic:error:)]) {
+                [this.delegate peripheral:peripheral didUpdateValueForCharacteristic:characteristic error:error];
+            }
+        });
+    }
+    else {
         YMSCBService *btService = [this findService:characteristic.service];
         YMSCBCharacteristic *yc = [btService findCharacteristic:characteristic];
         
@@ -381,7 +417,7 @@
         if ([this.delegate respondsToSelector:@selector(peripheral:didUpdateValueForCharacteristic:error:)]) {
             [this.delegate peripheral:peripheral didUpdateValueForCharacteristic:characteristic error:error];
         }
-    });
+    }
 }
 
 

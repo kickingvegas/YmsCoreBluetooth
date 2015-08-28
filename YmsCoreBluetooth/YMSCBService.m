@@ -52,6 +52,26 @@
     return self;
 }
 
+- (instancetype)initWithName:(NSString *)oName
+                      parent:(YMSCBPeripheral *)pObj
+                      baseHi:(int64_t)hi
+                      baseLo:(int64_t)lo
+               UUID:(NSString *)uuidString {
+    
+    self = [super init];
+    if (self) {
+        _name = oName;
+        _parent = pObj;
+        _base.hi = hi;
+        _base.lo = lo;
+        _characteristicDict = [[NSMutableDictionary alloc] init];
+        
+        if(uuidString) {
+            _uuid = [CBUUID UUIDWithString:uuidString];
+        }
+    }
+    return self;
+}
 
 - (instancetype)initWithName:(NSString *)oName
                       parent:(YMSCBPeripheral *)pObj
@@ -132,6 +152,17 @@
     self.characteristicDict[cname] = yc;
 }
 
+- (void)addCharacteristic:(NSString *)cname UUID:(NSString *)uuidString {
+    
+    YMSCBCharacteristic *yc;
+    
+    CBUUID *uuid = [CBUUID UUIDWithString:uuidString];
+    yc = [[YMSCBCharacteristic alloc] initWithName:cname
+                                            parent:self.parent
+                                              uuid:uuid
+                                            offset:0];
+    self.characteristicDict[cname] = yc;
+}
 
 - (NSArray *)characteristics {
     NSArray *tempArray = [self.characteristicDict allValues];

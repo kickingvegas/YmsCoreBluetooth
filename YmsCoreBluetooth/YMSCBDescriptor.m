@@ -52,13 +52,19 @@
 }
 
 - (void)executeReadCallback:(NSData *)data error:(NSError *)error {
-    YMSCBReadCallbackBlockType readCB = [self.readCallbacks pop];
-    readCB(data, error);
+    YMSCBReadCallbackBlockType readCB = [self.readCallbacks peekTail];
+    if(readCB) {
+        readCB(data, error);
+        [self.readCallbacks removeObject:readCB];
+    }
 }
 
 - (void)executeWriteCallback:(NSError *)error {
-    YMSCBWriteCallbackBlockType writeCB = [self.writeCallbacks pop];
-    writeCB(error);
+    YMSCBWriteCallbackBlockType writeCB = [self.writeCallbacks peekTail];
+    if(writeCB) {
+        writeCB(error);
+        [self.writeCallbacks removeObject:writeCB];
+    }
 }
 
 @end
