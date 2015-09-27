@@ -27,7 +27,7 @@
 //#define UUID2STRING(UUID) (NSString *)CFBridgingRelease(CFUUIDCreateString(NULL, UUID))
 
 /**
- Class to manage the storage of discovered UUIDs into [NSUserDefaults standardUserDefaults].
+ Class to manage the storage of discovered UUIDs into NSUserDefaults.standardUserDefaults.
  */
 @interface YMSCBStoredPeripherals : NSObject
 
@@ -38,7 +38,7 @@
 + (void)initializeStorage;
 
 /**
- Generate array of NSUUID objects to feed into [YMSCBCentralManager retrievePeripherals:]
+ Generate array of NSUUID objects to feed into [YMSCBCentralManager retrievePeripheralsWithIdentifiers:]
  */
 + (NSArray *)genIdentifiers;
 

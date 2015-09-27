@@ -185,7 +185,7 @@ typedef void (^YMSCBPeripheralDiscoverServicesBlockType)(NSArray *, NSError *);
 - (void)disconnect;
 
 /**
- Invokes [CBPeripheral readRSSI] method to retrieve current RSSI value for cbPeripheral.
+ Invokes CBPeripheral.readRSSI method to retrieve current RSSI value for cbPeripheral.
  */
 - (void)readRSSI;
 
