@@ -36,16 +36,16 @@
 		D9718B50167F9F9F0001E42C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9718B4E167F9F9F0001E42C /* InfoPlist.strings */; };
 		D9718B52167F9F9F0001E42C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718B51167F9F9F0001E42C /* main.m */; };
 		D9718B56167F9F9F0001E42C /* DEAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718B55167F9F9F0001E42C /* DEAAppDelegate.m */; };
-		D9718B64167F9FA00001E42C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B63167F9FA00001E42C /* SenTestingKit.framework */; };
-		D9718B65167F9FA00001E42C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B45167F9F9F0001E42C /* UIKit.framework */; };
-		D9718B66167F9FA00001E42C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B47167F9F9F0001E42C /* Foundation.framework */; };
-		D9718B6E167F9FA00001E42C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D9718B6C167F9FA00001E42C /* InfoPlist.strings */; };
-		D9718B71167F9FA00001E42C /* DeannaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D9718B70167F9FA00001E42C /* DeannaTests.m */; };
 		D9718B8F167FA5140001E42C /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9718B8E167FA5140001E42C /* CoreBluetooth.framework */; };
 		D97EC6D0172B08AB00CAECFC /* DEABaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = D97EC6CF172B08AB00CAECFC /* DEABaseService.m */; };
 		D97EC6D2172B1B8C00CAECFC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D97EC6D1172B1B8C00CAECFC /* README.md */; };
 		D9812904173F3804008EA8D5 /* YMSCBStoredPeripherals.m in Sources */ = {isa = PBXBuildFile; fileRef = D9812903173F3804008EA8D5 /* YMSCBStoredPeripherals.m */; };
 		D988A5C616DD26A100D7D392 /* DEASensorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = D988A5C516DD26A100D7D392 /* DEASensorTag.m */; };
+		D98D66611BB8CE7600E82BE4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D98D66601BB8CE7600E82BE4 /* Foundation.framework */; };
+		D98D66631BB8CE9600E82BE4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D98D66621BB8CE9500E82BE4 /* Cocoa.framework */; };
+		D98D66671BB8CEAA00E82BE4 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D98D66641BB8CEAA00E82BE4 /* AppKit.framework */; };
+		D98D66681BB8CEAA00E82BE4 /* IOBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D98D66651BB8CEAA00E82BE4 /* IOBluetooth.framework */; };
+		D98D66691BB8CEAA00E82BE4 /* IOBluetoothUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D98D66661BB8CEAA00E82BE4 /* IOBluetoothUI.framework */; };
 		D9960A54173B0A1B0013C8E7 /* DEADeviceInfoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9960A53173B0A1B0013C8E7 /* DEADeviceInfoViewCell.m */; };
 		D9971AEA1720A9A100B1A068 /* DEAPeripheralTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9971AE91720A9A100B1A068 /* DEAPeripheralTableViewCell.xib */; };
 		D9971AEE1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9971AED1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m */; };
@@ -53,10 +53,6 @@
 		D997AC9E175B245800C91B0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D997AC9D175B245800C91B0D /* main.m */; };
 		D997ACA2175B245800C91B0D /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D997ACA0175B245800C91B0D /* Credits.rtf */; };
 		D997ACA5175B245800C91B0D /* DEMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D997ACA4175B245800C91B0D /* DEMAppDelegate.m */; };
-		D997ACAE175B24AB00C91B0D /* IOBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D997ACAC175B24AB00C91B0D /* IOBluetooth.framework */; };
-		D997ACAF175B24AB00C91B0D /* IOBluetoothUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D997ACAD175B24AB00C91B0D /* IOBluetoothUI.framework */; };
-		D997ACB1175B24B700C91B0D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D997ACB0175B24B700C91B0D /* Cocoa.framework */; };
-		D997ACB3175B24C800C91B0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D997ACB2175B24C800C91B0D /* Foundation.framework */; };
 		D997ACB6175B254500C91B0D /* YMS128.c in Sources */ = {isa = PBXBuildFile; fileRef = D933CEC316DDAFA700EDDAD6 /* YMS128.c */; };
 		D997ACB7175B254500C91B0D /* YMSCBCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D933CEC616DDAFA700EDDAD6 /* YMSCBCentralManager.m */; };
 		D997ACB8175B254500C91B0D /* YMSCBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = D933CECA16DDAFA700EDDAD6 /* YMSCBPeripheral.m */; };
@@ -102,16 +98,6 @@
 		D9F412FA16DEF6140094FEFA /* DEAHumidityViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F412F916DEF6130094FEFA /* DEAHumidityViewCell.m */; };
 		D9F412FD16DEFA510094FEFA /* DEASimpleKeysViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9F412FC16DEFA510094FEFA /* DEASimpleKeysViewCell.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		D9718B67167F9FA00001E42C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D9718B38167F9F9F0001E42C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D9718B40167F9F9F0001E42C;
-			remoteInfo = Deanna;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		D906E5EF16DCAC55001D7932 /* DEACentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEACentralManager.h; sourceTree = "<group>"; };
@@ -169,12 +155,6 @@
 		D9718B53167F9F9F0001E42C /* Deanna-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Deanna-Prefix.pch"; sourceTree = "<group>"; };
 		D9718B54167F9F9F0001E42C /* DEAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DEAAppDelegate.h; sourceTree = "<group>"; };
 		D9718B55167F9F9F0001E42C /* DEAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DEAAppDelegate.m; sourceTree = "<group>"; };
-		D9718B62167F9FA00001E42C /* DeannaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DeannaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D9718B63167F9FA00001E42C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		D9718B6B167F9FA00001E42C /* DeannaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DeannaTests-Info.plist"; sourceTree = "<group>"; };
-		D9718B6D167F9FA00001E42C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D9718B6F167F9FA00001E42C /* DeannaTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeannaTests.h; sourceTree = "<group>"; };
-		D9718B70167F9FA00001E42C /* DeannaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeannaTests.m; sourceTree = "<group>"; };
 		D9718B8E167FA5140001E42C /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D9718B94167FA91F0001E42C /* TISensorTag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TISensorTag.h; sourceTree = "<group>"; };
 		D97EC6CE172B08AB00CAECFC /* DEABaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEABaseService.h; sourceTree = "<group>"; };
@@ -184,15 +164,17 @@
 		D9812903173F3804008EA8D5 /* YMSCBStoredPeripherals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBStoredPeripherals.m; sourceTree = "<group>"; };
 		D988A5C416DD26A100D7D392 /* DEASensorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASensorTag.h; sourceTree = "<group>"; };
 		D988A5C516DD26A100D7D392 /* DEASensorTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASensorTag.m; sourceTree = "<group>"; };
+		D98D66601BB8CE7600E82BE4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		D98D66621BB8CE9500E82BE4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		D98D66641BB8CEAA00E82BE4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
+		D98D66651BB8CEAA00E82BE4 /* IOBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOBluetooth.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/IOBluetooth.framework; sourceTree = DEVELOPER_DIR; };
+		D98D66661BB8CEAA00E82BE4 /* IOBluetoothUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOBluetoothUI.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/IOBluetoothUI.framework; sourceTree = DEVELOPER_DIR; };
 		D9960A52173B0A1B0013C8E7 /* DEADeviceInfoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEADeviceInfoViewCell.h; sourceTree = "<group>"; };
 		D9960A53173B0A1B0013C8E7 /* DEADeviceInfoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEADeviceInfoViewCell.m; sourceTree = "<group>"; };
 		D9971AE91720A9A100B1A068 /* DEAPeripheralTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEAPeripheralTableViewCell.xib; sourceTree = "<group>"; };
 		D9971AEC1720AA7E00B1A068 /* DEAPeripheralTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAPeripheralTableViewCell.h; sourceTree = "<group>"; };
 		D9971AED1720AA7E00B1A068 /* DEAPeripheralTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAPeripheralTableViewCell.m; sourceTree = "<group>"; };
 		D997AC90175B245800C91B0D /* DeannaMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeannaMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D997AC94175B245800C91B0D /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		D997AC95175B245800C91B0D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		D997AC96175B245800C91B0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D997AC99175B245800C91B0D /* DeannaMac-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DeannaMac-Info.plist"; sourceTree = "<group>"; };
 		D997AC9B175B245800C91B0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D997AC9D175B245800C91B0D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -200,10 +182,6 @@
 		D997ACA1175B245800C91B0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		D997ACA3175B245800C91B0D /* DEMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DEMAppDelegate.h; sourceTree = "<group>"; };
 		D997ACA4175B245800C91B0D /* DEMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DEMAppDelegate.m; sourceTree = "<group>"; };
-		D997ACAC175B24AB00C91B0D /* IOBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOBluetooth.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/IOBluetooth.framework; sourceTree = DEVELOPER_DIR; };
-		D997ACAD175B24AB00C91B0D /* IOBluetoothUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOBluetoothUI.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/IOBluetoothUI.framework; sourceTree = DEVELOPER_DIR; };
-		D997ACB0175B24B700C91B0D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		D997ACB2175B24C800C91B0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		D997ACCC175B27C000C91B0D /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainMenu.xib; path = ../en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		D997ACD0175B287200C91B0D /* DEASensorTagWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEASensorTagWindow.xib; sourceTree = "<group>"; };
 		D997ACD2175B288900C91B0D /* DEMPeripheralViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMPeripheralViewCell.h; sourceTree = "<group>"; };
@@ -262,24 +240,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D9718B5E167F9FA00001E42C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D9718B64167F9FA00001E42C /* SenTestingKit.framework in Frameworks */,
-				D9718B65167F9FA00001E42C /* UIKit.framework in Frameworks */,
-				D9718B66167F9FA00001E42C /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D997AC8D175B245800C91B0D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D997ACB3175B24C800C91B0D /* Foundation.framework in Frameworks */,
-				D997ACB1175B24B700C91B0D /* Cocoa.framework in Frameworks */,
-				D997ACAE175B24AB00C91B0D /* IOBluetooth.framework in Frameworks */,
-				D997ACAF175B24AB00C91B0D /* IOBluetoothUI.framework in Frameworks */,
+				D98D66671BB8CEAA00E82BE4 /* AppKit.framework in Frameworks */,
+				D98D66681BB8CEAA00E82BE4 /* IOBluetooth.framework in Frameworks */,
+				D98D66691BB8CEAA00E82BE4 /* IOBluetoothUI.framework in Frameworks */,
+				D98D66631BB8CE9600E82BE4 /* Cocoa.framework in Frameworks */,
+				D98D66611BB8CE7600E82BE4 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,7 +287,6 @@
 				D97EC6D1172B1B8C00CAECFC /* README.md */,
 				D933CEC216DDAFA700EDDAD6 /* YmsCoreBluetooth */,
 				D9718B4B167F9F9F0001E42C /* Deanna */,
-				D9718B69167F9FA00001E42C /* DeannaTests */,
 				D997AC97175B245800C91B0D /* DeannaMac */,
 				D9718B44167F9F9F0001E42C /* Frameworks */,
 				D9718B42167F9F9F0001E42C /* Products */,
@@ -329,7 +297,6 @@
 			isa = PBXGroup;
 			children = (
 				D9718B41167F9F9F0001E42C /* Deanna.app */,
-				D9718B62167F9FA00001E42C /* DeannaTests.octest */,
 				D997AC90175B245800C91B0D /* DeannaMac.app */,
 			);
 			name = Products;
@@ -340,7 +307,6 @@
 			children = (
 				D997ACB4175B24DF00C91B0D /* iOS */,
 				D997ACB5175B250800C91B0D /* OSX */,
-				D9718B63167F9FA00001E42C /* SenTestingKit.framework */,
 				D997AC93175B245800C91B0D /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -368,25 +334,6 @@
 				D9718B4E167F9F9F0001E42C /* InfoPlist.strings */,
 				D9718B51167F9F9F0001E42C /* main.m */,
 				D9718B53167F9F9F0001E42C /* Deanna-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		D9718B69167F9FA00001E42C /* DeannaTests */ = {
-			isa = PBXGroup;
-			children = (
-				D9718B6F167F9FA00001E42C /* DeannaTests.h */,
-				D9718B70167F9FA00001E42C /* DeannaTests.m */,
-				D9718B6A167F9FA00001E42C /* Supporting Files */,
-			);
-			path = DeannaTests;
-			sourceTree = "<group>";
-		};
-		D9718B6A167F9FA00001E42C /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				D9718B6B167F9FA00001E42C /* DeannaTests-Info.plist */,
-				D9718B6C167F9FA00001E42C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -439,9 +386,6 @@
 		D997AC93175B245800C91B0D /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D997AC94175B245800C91B0D /* AppKit.framework */,
-				D997AC95175B245800C91B0D /* CoreData.framework */,
-				D997AC96175B245800C91B0D /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
 			sourceTree = "<group>";
@@ -487,10 +431,11 @@
 		D997ACB5175B250800C91B0D /* OSX */ = {
 			isa = PBXGroup;
 			children = (
-				D997ACB2175B24C800C91B0D /* Foundation.framework */,
-				D997ACB0175B24B700C91B0D /* Cocoa.framework */,
-				D997ACAC175B24AB00C91B0D /* IOBluetooth.framework */,
-				D997ACAD175B24AB00C91B0D /* IOBluetoothUI.framework */,
+				D98D66641BB8CEAA00E82BE4 /* AppKit.framework */,
+				D98D66651BB8CEAA00E82BE4 /* IOBluetooth.framework */,
+				D98D66661BB8CEAA00E82BE4 /* IOBluetoothUI.framework */,
+				D98D66621BB8CE9500E82BE4 /* Cocoa.framework */,
+				D98D66601BB8CE7600E82BE4 /* Foundation.framework */,
 			);
 			name = OSX;
 			sourceTree = "<group>";
@@ -621,25 +566,6 @@
 			productReference = D9718B41167F9F9F0001E42C /* Deanna.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D9718B61167F9FA00001E42C /* DeannaTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D9718B77167F9FA00001E42C /* Build configuration list for PBXNativeTarget "DeannaTests" */;
-			buildPhases = (
-				D9718B5D167F9FA00001E42C /* Sources */,
-				D9718B5E167F9FA00001E42C /* Frameworks */,
-				D9718B5F167F9FA00001E42C /* Resources */,
-				D9718B60167F9FA00001E42C /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D9718B68167F9FA00001E42C /* PBXTargetDependency */,
-			);
-			name = DeannaTests;
-			productName = DeannaTests;
-			productReference = D9718B62167F9FA00001E42C /* DeannaTests.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
 		D997AC8F175B245800C91B0D /* DeannaMac */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D997ACAB175B245800C91B0D /* Build configuration list for PBXNativeTarget "DeannaMac" */;
@@ -664,8 +590,14 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = DEA;
-				LastUpgradeCheck = 0500;
+				LastTestingUpgradeCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Yummy Melon Software";
+				TargetAttributes = {
+					D997AC8F175B245800C91B0D = {
+						DevelopmentTeam = N5X6YV9N92;
+					};
+				};
 			};
 			buildConfigurationList = D9718B3B167F9F9F0001E42C /* Build configuration list for PBXProject "Deanna" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -680,7 +612,6 @@
 			projectRoot = "";
 			targets = (
 				D9718B40167F9F9F0001E42C /* Deanna */,
-				D9718B61167F9FA00001E42C /* DeannaTests */,
 				D997AC8F175B245800C91B0D /* DeannaMac */,
 			);
 		};
@@ -701,14 +632,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D9718B5F167F9FA00001E42C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D9718B6E167F9FA00001E42C /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D997AC8E175B245800C91B0D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -721,22 +644,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		D9718B60167F9FA00001E42C /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D9718B3D167F9F9F0001E42C /* Sources */ = {
@@ -782,14 +689,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D9718B5D167F9FA00001E42C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D9718B71167F9FA00001E42C /* DeannaTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D997AC8C175B245800C91B0D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -832,27 +731,11 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		D9718B68167F9FA00001E42C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D9718B40167F9F9F0001E42C /* Deanna */;
-			targetProxy = D9718B67167F9FA00001E42C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
 		D9718B4E167F9F9F0001E42C /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D9718B4F167F9F9F0001E42C /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		D9718B6C167F9FA00001E42C /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D9718B6D167F9FA00001E42C /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -887,6 +770,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -898,7 +782,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -921,7 +805,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
@@ -936,11 +820,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Deanna/Deanna-Prefix.pch";
 				INFOPLIST_FILE = "Deanna/Deanna-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yummymelon.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -952,50 +837,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Deanna/Deanna-Prefix.pch";
 				INFOPLIST_FILE = "Deanna/Deanna-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yummymelon.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		D9718B78167F9FA00001E42C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Deanna.app/Deanna";
-				CURRENT_PROJECT_VERSION = 3;
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Deanna/Deanna-Prefix.pch";
-				INFOPLIST_FILE = "DeannaTests/DeannaTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		D9718B79167F9FA00001E42C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Deanna.app/Deanna";
-				CURRENT_PROJECT_VERSION = 3;
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Deanna/Deanna-Prefix.pch";
-				INFOPLIST_FILE = "DeannaTests/DeannaTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
@@ -1016,6 +866,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "DeannaMac/DeannaMac-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yummymelon.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
@@ -1040,6 +891,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "DeannaMac/DeannaMac-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yummymelon.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
@@ -1063,15 +915,6 @@
 			buildConfigurations = (
 				D9718B75167F9FA00001E42C /* Debug */,
 				D9718B76167F9FA00001E42C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D9718B77167F9FA00001E42C /* Build configuration list for PBXNativeTarget "DeannaTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D9718B78167F9FA00001E42C /* Debug */,
-				D9718B79167F9FA00001E42C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

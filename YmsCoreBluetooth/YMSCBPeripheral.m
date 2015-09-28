@@ -1,5 +1,5 @@
 // 
-// Copyright 2013-2014 Yummy Melon Software LLC
+// Copyright 2013-2015 Yummy Melon Software LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -507,29 +507,5 @@
     });
 #endif
 }
-
-
-
-/**
- CBPeripheralDelegate implementation. Not yet supported.
- 
- iOS only.
- 
- @param peripheral The peripheral providing this information.
- */
-- (void)peripheralDidInvalidateServices:(CBPeripheral *)peripheral {
-#if TARGET_OS_IPHONE
-    // TBD
-    __weak YMSCBPeripheral *this = self;
-    _YMS_PERFORM_ON_MAIN_THREAD(^{
-
-        if ([this.delegate respondsToSelector:@selector(peripheralDidInvalidateServices:)]) {
-            [this.delegate peripheralDidInvalidateServices:peripheral];
-        }
-    });
-#endif
-}
-
-
 
 @end

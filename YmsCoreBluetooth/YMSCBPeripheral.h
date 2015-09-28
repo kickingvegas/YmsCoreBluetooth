@@ -1,5 +1,5 @@
 // 
-// Copyright 2013-2014 Yummy Melon Software LLC
+// Copyright 2013-2015 Yummy Melon Software LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -185,7 +185,7 @@ typedef void (^YMSCBPeripheralDiscoverServicesBlockType)(NSArray *, NSError *);
 - (void)disconnect;
 
 /**
- Invokes [CBPeripheral readRSSI] method to retrieve current RSSI value for cbPeripheral.
+ Invokes CBPeripheral.readRSSI method to retrieve current RSSI value for cbPeripheral.
  */
 - (void)readRSSI;
 

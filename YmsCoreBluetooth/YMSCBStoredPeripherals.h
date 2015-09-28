@@ -1,5 +1,5 @@
 //
-// Copyright 2013-2014 Yummy Melon Software LLC
+// Copyright 2013-2015 Yummy Melon Software LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@
 //#define UUID2STRING(UUID) (NSString *)CFBridgingRelease(CFUUIDCreateString(NULL, UUID))
 
 /**
- Class to manage the storage of discovered UUIDs into [NSUserDefaults standardUserDefaults].
+ Class to manage the storage of discovered UUIDs into NSUserDefaults.standardUserDefaults.
  */
 @interface YMSCBStoredPeripherals : NSObject
 
@@ -38,7 +38,7 @@
 + (void)initializeStorage;
 
 /**
- Generate array of NSUUID objects to feed into [YMSCBCentralManager retrievePeripherals:]
+ Generate array of NSUUID objects to feed into [YMSCBCentralManager retrievePeripheralsWithIdentifiers:]
  */
 + (NSArray *)genIdentifiers;
 

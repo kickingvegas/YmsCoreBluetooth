@@ -1,5 +1,15 @@
 # YmsCoreBluetooth Changes
 
+### Sun Sep 27 2015
+Removed support for now obsolete iOS 9 CoreBluetooth delegate methods:
+* [CBPeripheralDelegate peripheralDidInvalidateServices:]
+* [CBCentralManagerDelegate centralManager:didRetrievePeripherals:]
+* [CBCentralManagerDelegate centralManager:didRetrieveConnectedPeripherals:]
+
+Administrative changes:
+* Updated copyright to 2015
+* Use semantic versioning; version is now set to 1.1.0 (4)
+
 ### Mon Jan 13 2014
 Added methods to support BLE addressing:
 

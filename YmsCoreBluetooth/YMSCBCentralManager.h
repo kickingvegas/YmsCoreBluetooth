@@ -1,5 +1,5 @@
 //
-// Copyright 2013-2014 Yummy Melon Software LLC
+// Copyright 2013-2015 Yummy Melon Software LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -242,7 +242,6 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
  
  @param identifiers A list of NSUUID objects.
  @return A list of peripherals.
-
  */
 - (NSArray *)retrievePeripheralsWithIdentifiers:(NSArray *)identifiers;
 
@@ -257,7 +256,7 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
  applications, which will need to be connected locally
  via connectPeripheral:options: before they can be used.
 
- @param identifiers A list of NSUUID services
+ @param serviceUUIDS A list of NSUUID services
  @return A list of CBPeripheral objects.
  */
 - (NSArray *)retrieveConnectedPeripheralsWithServices:(NSArray *)serviceUUIDS;

@@ -1,5 +1,5 @@
 // 
-// Copyright 2013-2014 Yummy Melon Software LLC
+// Copyright 2013-2015 Yummy Melon Software LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -210,14 +210,11 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 - (NSArray *)retrieveConnectedPeripheralsWithServices:(NSArray *)serviceUUIDs {
     NSArray *result = [self.manager retrieveConnectedPeripheralsWithServices:serviceUUIDs];
-    [self centralManager:self.manager didRetrieveConnectedPeripherals:result];
     return result;
 }
 
-
 - (NSArray *)retrievePeripheralsWithIdentifiers:(NSArray *)identifiers {
     NSArray *result = [self.manager retrievePeripheralsWithIdentifiers:identifiers];
-    [self centralManager:self.manager didRetrievePeripherals:result];
     return result;
 }
 
@@ -314,35 +311,6 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
                     didDiscoverPeripheral:peripheral
                         advertisementData:advertisementData
                                      RSSI:RSSI];
-        }
-    });
-}
-
-
-- (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals {
-    __weak YMSCBCentralManager *this = self;
-    _YMS_PERFORM_ON_MAIN_THREAD(^{
-        for (CBPeripheral *peripheral in peripherals) {
-            [this handleFoundPeripheral:peripheral];
-        }
-        
-        if ([this.delegate respondsToSelector:@selector(centralManager:didRetrievePeripherals:)]) {
-            [this.delegate centralManager:central didRetrievePeripherals:peripherals];
-        }
-    });
-}
-
-
-- (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals {
-    __weak YMSCBCentralManager *this = self;
-    _YMS_PERFORM_ON_MAIN_THREAD(^{
-        
-        for (CBPeripheral *peripheral in peripherals) {
-            [this handleFoundPeripheral:peripheral];
-        }
-        
-        if ([this.delegate respondsToSelector:@selector(centralManager:didRetrieveConnectedPeripherals:)]) {
-            [this.delegate centralManager:central didRetrieveConnectedPeripherals:peripherals];
         }
     });
 }

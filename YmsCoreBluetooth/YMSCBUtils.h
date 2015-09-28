@@ -1,5 +1,5 @@
 // 
-// Copyright 2013-2014 Yummy Melon Software LLC
+// Copyright 2013-2015 Yummy Melon Software LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -74,7 +74,7 @@
 /**
  Generate CBUUID string given base of type yms_u128_t and BLE offset of type int
  
- This is written to comply with the Bluetooth Specification Version 4.0 [Vol. 3] Section 3.2.1 where:
+ This is written to comply with the Bluetooth Specification Version 4.0, Vol. 3 Section 3.2.1 where:
  
      128-Bit UUID = 16-bit Attribute UUID * pow(2,96) + Bluetooth_Base_UUID
 
@@ -89,13 +89,13 @@
 /**
  Generate CBUUID given base and BLE offset of type yms_u128_t
  
- This is written to comply with the Bluetooth Specification Version 4.0 [Vol. 3] Section 3.2.1 where:
+ This is written to comply with the Bluetooth Specification Version 4.0, Vol. 3 Section 3.2.1 where:
  
     128-Bit UUID = 16-bit Attribute UUID * pow(2,96) + Bluetooth_Base_UUID
 
  
  @param base base address
- @param offset offset value
+ @param addrOffset offset value
  @return CBUUID
  */
 + (CBUUID *)createCBUUID:(yms_u128_t *)base withIntBLEOffset:(int)addrOffset;
