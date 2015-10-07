@@ -326,9 +326,9 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
             [this handleFoundPeripheral:peripheral];
         }
         
-        if ([this.delegate respondsToSelector:@selector(centralManager:didRetrievePeripherals:)]) {
-            [this.delegate centralManager:central didRetrievePeripherals:peripherals];
-        }
+//        if ([this.delegate respondsToSelector:@selector(centralManager:didRetrievePeripherals:)]) {
+//            [this.delegate centralManager:central didRetrievePeripherals:peripherals];
+//        }
     });
 }
 
@@ -340,9 +340,9 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
             [this handleFoundPeripheral:peripheral];
         }
         
-        if ([this.delegate respondsToSelector:@selector(centralManager:didRetrieveConnectedPeripherals:)]) {
-            [this.delegate centralManager:central didRetrieveConnectedPeripherals:peripherals];
-        }
+//        if ([this.delegate respondsToSelector:@selector(centralManager:didRetrieveConnectedPeripherals:)]) {
+//            [this.delegate centralManager:central didRetrieveConnectedPeripherals:peripherals];
+//        }
     });
 }
 

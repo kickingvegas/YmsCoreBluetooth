@@ -559,9 +559,9 @@
     __weak YMSCBPeripheral *this = self;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
 
-        if ([this.delegate respondsToSelector:@selector(peripheralDidInvalidateServices:)]) {
-            [this.delegate peripheralDidInvalidateServices:peripheral];
-        }
+//        if ([this.delegate respondsToSelector:@selector(peripheralDidInvalidateServices:)]) {
+//            [this.delegate peripheralDidInvalidateServices:peripheral];
+//        }
     });
 #endif
 }
