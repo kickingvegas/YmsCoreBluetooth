@@ -1,4 +1,4 @@
-# YmsCoreBluetooth v1.09
+# YmsCoreBluetooth v1.10.0
 A block-based framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS 7 or OS X 10.9 applications using the CoreBluetooth API. Includes *Deanna* and *DeannaMac*, applications to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth%5FSensorTag) for iOS and OS X respectively.
 
 * [YmsCoreBluetooth API Reference](hierarchy.html)
