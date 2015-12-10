@@ -97,7 +97,9 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 }
 
 - (void)removePeripheral:(YMSCBPeripheral *)yperipheral {
-    [self removeObjectFromYmsPeripheralsAtIndex:[self.ymsPeripherals indexOfObject:yperipheral]];
+    if([self.ymsPeripherals containsObject:yperipheral]) {
+        [self removeObjectFromYmsPeripheralsAtIndex:[self.ymsPeripherals indexOfObject:yperipheral]];
+    }
 }
 
 - (void)removePeripheralAtIndex:(NSUInteger)index {
@@ -123,7 +125,7 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 }
 
 - (void)removeObjectFromYmsPeripheralsAtIndex:(NSUInteger)index {
-    if (self.useStoredPeripherals) {
+    if (self.useStoredPeripherals && index < [self.ymsPeripherals count]) {
         YMSCBPeripheral *yperipheral = [self.ymsPeripherals objectAtIndex:index];
         if (yperipheral.cbPeripheral.identifier != nil) {
             [YMSCBStoredPeripherals deleteUUID:yperipheral.cbPeripheral.identifier];
