@@ -131,7 +131,9 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
             [YMSCBStoredPeripherals deleteUUID:yperipheral.cbPeripheral.identifier];
         }
     }
-    [_ymsPeripherals removeObjectAtIndex:index];
+    if(index < [self.ymsPeripherals count]) {
+        [_ymsPeripherals removeObjectAtIndex:index];
+    }
 }
 
 
