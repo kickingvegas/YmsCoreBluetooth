@@ -96,7 +96,7 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
-    
+    [super viewWillAppear:animated];
     DEACentralManager *centralManager = [DEACentralManager sharedService];
     centralManager.delegate = self;
     
@@ -114,7 +114,6 @@
 
 
 - (void)viewWillDisappear:(BOOL)animated {
-
     for (NSString *prefix in self.cbServiceCells) {
         NSString *key = [[NSString alloc] initWithFormat:@"%@ViewCell", prefix];
         UITableViewCell *cell = (UITableViewCell *)[self valueForKey:key];
@@ -122,6 +121,7 @@
             [cell performSelector:@selector(deconfigure)];
         }
     }
+    [super viewWillDisappear:animated];
 }
 
 
@@ -191,11 +191,7 @@
     
 }
 
-
-
-- (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {
-    //NSLog(@"HEY got here");
-    
+- (void)peripheral:(CBPeripheral *)peripheral didReadRSSI:(NSNumber *)RSSI error:(NSError *)error {
     if (error) {
         NSLog(@"ERROR: readRSSI failed, retrying. %@", error.description);
         
@@ -207,14 +203,13 @@
         return;
     }
     
-    self.rssiButton.title = [NSString stringWithFormat:@"%@ db", peripheral.RSSI];
+    self.rssiButton.title = [NSString stringWithFormat:@"%@ db", RSSI];
     
     DEACentralManager *centralManager = [DEACentralManager sharedService];
     YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
     
     NSArray *args = @[peripheral];
     [self performSelector:@selector(performUpdateRSSI:) withObject:args afterDelay:yp.rssiPingPeriod];
-
 }
 
 /*
