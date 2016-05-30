@@ -1,7 +1,15 @@
 # YmsCoreBluetooth Changes
 
+### Mon May 30 2016
+* Support only CoreBluetooth API for iOS 8.x or greater
+    - Removed support for iOS 7.x or lower
+* Removed unused constants:
+    - kYMSCBVersionNumber
+    - kYMSCBVersion
+    - [YMSCBCentralManager version]
+
 ### Sun Sep 27 2015
-Removed support for now obsolete iOS 9 CoreBluetooth delegate methods:
+Removed support for now obsolete CoreBluetooth delegate methods:
 * [CBPeripheralDelegate peripheralDidInvalidateServices:]
 * [CBCentralManagerDelegate centralManager:didRetrievePeripherals:]
 * [CBCentralManagerDelegate centralManager:didRetrieveConnectedPeripherals:]
