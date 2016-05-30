@@ -61,7 +61,8 @@
     [system_idCt readValueWithBlock:^(NSData *data, NSError *error) {
         NSMutableString *tmpString = [NSMutableString stringWithFormat:@""];
         unsigned char bytes[data.length];
-        [data getBytes:bytes];
+
+        [data getBytes:bytes length:data.length];
         for (int ii = (int)data.length; ii >= 0;ii--) {
             [tmpString appendFormat:@"%02hhx",bytes[ii]];
             if (ii) {
