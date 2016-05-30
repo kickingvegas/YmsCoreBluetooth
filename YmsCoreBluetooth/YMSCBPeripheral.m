@@ -471,6 +471,23 @@
     });
 }
 
+#if TARGET_OS_IPHONE
+/**
+ CBPeripheralDelegate implementation.
+ 
+ @param peripheral The peripheral providing this information.
+ @param RSSI The RSSI value.
+ @param error If an error occured, the cause of the failure.
+ */
+- (void)peripheral:(CBPeripheral *)peripheral didReadRSSI:(NSNumber *)RSSI error:(NSError *)error {
+    __weak YMSCBPeripheral *this = self;
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        if ([this.delegate respondsToSelector:@selector(peripheral:didReadRSSI:error:)]) {
+            [this.delegate peripheral:peripheral didReadRSSI:RSSI error:error];
+        }
+    });
+}
+#elif TARGET_OS_MAC
 /**
  CBPeripheralDelegate implementation.
  
@@ -485,8 +502,7 @@
         }
     });
 }
-
-
+#endif
 
 /**
  CBPeripheralDelegate implementation. Not yet supported.
