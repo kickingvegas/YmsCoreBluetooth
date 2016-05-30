@@ -25,11 +25,6 @@
 
 #import "YMSCBUtils.h"
 
-// iOS7
-#define kYMSCBVersionNumber 1090
-#define kYMSCBVersion "1.090"
-extern NSString *const YMSCBVersion;
-
 @class YMSCBPeripheral;
 @class YMSCBCentralManager;
 
@@ -93,10 +88,6 @@ typedef void (^YMSCBRetrieveCallbackBlockType)(CBPeripheral *);
 
 /// Count of ymsPeripherals.
 @property (atomic, readonly, assign) NSUInteger count;
-
-/// API version.
-@property (atomic, readonly, assign) NSString *version;
-
 
 /// Peripheral Discovered Callback
 @property (atomic, copy) YMSCBDiscoverCallbackBlockType discoveredCallback;

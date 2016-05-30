@@ -23,10 +23,7 @@
 #import "YMSCBStoredPeripherals.h"
 
 
-NSString *const YMSCBVersion = @"" kYMSCBVersion;
-
-@interface YMSCBCentralManager ()
-{
+@interface YMSCBCentralManager () {
     NSMutableArray *_ymsPeripherals;
 }
 
@@ -36,11 +33,6 @@ NSString *const YMSCBVersion = @"" kYMSCBVersion;
 
 
 @implementation YMSCBCentralManager
-
-- (NSString *)version {
-    return YMSCBVersion;
-}
-
 
 #pragma mark - Constructors
 
