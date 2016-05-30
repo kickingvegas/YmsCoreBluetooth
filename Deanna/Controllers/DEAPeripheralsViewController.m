@@ -53,7 +53,7 @@
     [self.navigationController setToolbarHidden:NO];
 
 
-    self.scanButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Scanning" style:UIBarButtonItemStyleBordered target:self action:@selector(scanButtonAction:)];
+    self.scanButton = [[UIBarButtonItem alloc] initWithTitle:@"Start Scanning" style:UIBarButtonItemStylePlain target:self action:@selector(scanButtonAction:)];
     
     self.toolbarItems = @[self.scanButton];
     
@@ -73,6 +73,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     DEACentralManager *centralManager = [DEACentralManager sharedService];
     centralManager.delegate = self;
     
@@ -82,9 +84,6 @@
     [self.peripheralsTableView reloadData];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    
-}
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     
@@ -222,7 +221,7 @@
         for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
             if (cell.yperipheral.cbPeripheral == peripheral) {
                 if (peripheral.state == CBPeripheralStateDisconnected) {
-                    cell.rssiLabel.text = [NSString stringWithFormat:@"%d", [RSSI integerValue]];
+                    cell.rssiLabel.text = [NSString stringWithFormat:@"%ld", (long)[RSSI integerValue]];
                     cell.peripheralStatusLabel.text = @"ADVERTISING";
                     [cell.peripheralStatusLabel setTextColor:[[DEATheme sharedTheme] advertisingColor]];
                 } else {
@@ -271,9 +270,7 @@
 
 }
 
-
-- (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {
-
+- (void)peripheral:(CBPeripheral *)peripheral didReadRSSI:(NSNumber *)RSSI error:(NSError *)error {
     if (error) {
         NSLog(@"ERROR: readRSSI failed, retrying. %@", error.description);
         
@@ -289,7 +286,7 @@
         if (cell.yperipheral) {
             if (cell.yperipheral.isConnected) {
                 if (cell.yperipheral.cbPeripheral == peripheral) {
-                    cell.rssiLabel.text = [NSString stringWithFormat:@"%@", peripheral.RSSI];
+                    cell.rssiLabel.text = [NSString stringWithFormat:@"%@", RSSI];
                     break;
                 }
             }
