@@ -1,5 +1,5 @@
-# YmsCoreBluetooth v1.10.0
-A block-based framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS 7 or OS X 10.9 applications using the CoreBluetooth API. Includes *Deanna* and *DeannaMac*, applications to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth%5FSensorTag) for iOS and OS X respectively.
+# YmsCoreBluetooth v1.11.0
+A block-based framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) iOS 8 or OS X 10.9 applications using the CoreBluetooth API. Includes *Deanna* and *DeannaMac*, applications to communicate with a [TI SensorTag](http://processors.wiki.ti.com/index.php/Bluetooth%5FSensorTag) for iOS and OS X respectively.
 
 * [YmsCoreBluetooth API Reference](hierarchy.html)
 
@@ -14,7 +14,7 @@ A block-based framework for building Bluetooth 4.0 Low Energy (aka Smart or LE) 
 #### Blocks are cool.
 Transactions in Bluetooth LE (BLE) are two-phase (request-response) in nature: CoreBluetooth abstracts this protocol so that request behavior is separated from response behavior. The two phases are reconciled using a delegation pattern: the object initiating the request phase has a delegate object with a delegate method to handle the corresponding response phase. While functional, the delegation pattern can be cumbersome to use because the behavior for a two-phase transaction is split into two different locations in code.
 
-A more convenient programming pattern is to use a callback block which is defined with the request. When the response is received, the callback block can be executed to handle it. *The design intent of YmsCoreBluetooth is use Objective-C blocks to define response behavior to BLE requests*. Such requests include:
+A more convenient programming pattern is to use a callback block which is defined with the request. When the response is received, the callback block can be executed to handle it. *The design intent of YmsCoreBluetooth is to use Objective-C blocks to define response behavior to BLE requests*. Such requests include:
 
 * scanning and/or retrieving peripheral(s)
 * connecting to a peripheral
