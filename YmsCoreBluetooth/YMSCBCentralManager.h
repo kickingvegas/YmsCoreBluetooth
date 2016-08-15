@@ -16,9 +16,9 @@
 //  Author: Charles Y. Choi <charles.choi@yummymelon.com>
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 #if TARGET_OS_IPHONE
-@import CoreBluetooth;
+#import <CoreBluetooth/CoreBluetooth.h>
 #elif TARGET_OS_MAC
 #import <IOBluetooth/IOBluetooth.h>
 #endif
