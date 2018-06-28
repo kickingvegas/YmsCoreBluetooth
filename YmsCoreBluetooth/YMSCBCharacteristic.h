@@ -134,8 +134,8 @@ typedef void (^YMSCBWriteCallbackBlockType)(NSError *);
  When notifyValue is YES, then cbCharacterisic is set to notify upon any changes to its value. 
  When notifyValue is NO, then no notifications are sent.
  
- An implementation of the method [YMSCBService notifyCharacteristicHandler:error:] is used to handle
- updates to cbCharacteristic. Note that notification handling is done at the YMSCBService level via 
+ An implementation of the method [YMSCBService notifyCharacteristicHandler:value:error:] is used to handle
+ updates to cbCharacteristic. Note that notification handling is done at the YMSCBService level via
  method handler and not by callback blocks. The reason for this is opinion: It is more convenient to
  write a method handler to deal with non-deterministic, asynchronous notification events than it is with blocks.
  

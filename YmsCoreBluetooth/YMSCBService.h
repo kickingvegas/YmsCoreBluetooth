@@ -45,8 +45,8 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
  YMSCBService holds an instance of CBService (cbService).
  
  This class is typically subclassed to map to a service in a BLE peripheral. The subclass
- typically implements notifyCharacteristicHandler:error: to handle characteristics whose
- BLE notification has been enabled. 
+ typically implements notifyCharacteristicHandler:value:error: to handle characteristics whose
+ BLE notification has been enabled.
  */
 
 @interface YMSCBService : NSObject
@@ -183,10 +183,10 @@ typedef NS_ENUM(NSInteger, YMSCBCallbackTransactionType) {
  This method is typically overridden to handle characteristics whose notification has been turned on.
  
  @param yc Characteristic receiving update.
+ @param value The value of the characteristic
  @param error Error object.
  */
-- (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc error:(NSError *)error;
-
+- (void)notifyCharacteristicHandler:(YMSCBCharacteristic *)yc value:(NSData *)value error:(NSError *)error;
 
 /**
  Discover characteristics for this service.
