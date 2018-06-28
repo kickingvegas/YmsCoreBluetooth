@@ -365,13 +365,13 @@
  */
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     __weak YMSCBPeripheral *this = self;
+    NSData *value = characteristic.value.copy;
     _YMS_PERFORM_ON_MAIN_THREAD(^{
         YMSCBService *btService = [this findService:characteristic.service];
         YMSCBCharacteristic *yc = [btService findCharacteristic:characteristic];
         
         if (yc.cbCharacteristic.isNotifying) {
-            [btService notifyCharacteristicHandler:yc error:error];
-            
+            [btService notifyCharacteristicHandler:yc value:value error:error];
         } else {
             if ([yc.readCallbacks count] > 0) {
                 [yc executeReadCallback:characteristic.value error:error];
@@ -434,6 +434,8 @@
  */
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     __weak YMSCBPeripheral *this = self;
+    NSData *value = characteristic.value.copy;
+
     _YMS_PERFORM_ON_MAIN_THREAD(^{
         
         YMSCBService *btService = [this findService:characteristic.service];
@@ -443,7 +445,7 @@
             [yc executeWriteCallback:error];
         } else {
             // TODO is this dangerous?
-            [btService notifyCharacteristicHandler:yc error:error];
+            [btService notifyCharacteristicHandler:yc value:value error:error];
         }
         
         if ([this.delegate respondsToSelector:@selector(peripheral:didWriteValueForCharacteristic:error:)]) {
